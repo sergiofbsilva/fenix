@@ -7,6 +7,7 @@ import java.util.List;
 import pt.utl.ist.fenix.tools.file.FilesetMetadataQuery.MetadataQuery;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class SearchDSpaceBean implements Serializable {
@@ -38,6 +39,14 @@ public class SearchDSpaceBean implements Serializable {
 
     public List<SearchElement> getSearchElements() {
         return searchElements;
+    }
+
+    public String getSearchElementsAsJson() {
+        JsonArray searchJson = new JsonArray();
+        for (SearchElement searchElement : searchElements) {
+            searchJson.add(searchElement.json());
+        }
+        return searchJson.toString();
     }
 
     public void setSearchElements(List<SearchElement> searchElements) {
@@ -169,6 +178,14 @@ public class SearchDSpaceBean implements Serializable {
 
         public void setConjunction(ConjunctionType type) {
             this.conjunction = type;
+        }
+
+        public JsonObject json() {
+            JsonObject json = new JsonObject();
+            json.addProperty("conjuntion", conjunction.toString());
+            json.addProperty("field", field.name());
+            json.addProperty("value", getQueryValue());
+            return json;
         }
     }
 
