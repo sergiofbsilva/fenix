@@ -1,6 +1,5 @@
 package net.sourceforge.fenixedu.dataTransferObject;
 
-import pt.utl.ist.fenix.tools.file.VirtualPathNode;
 
 public class SearchDSpacePublicationBean extends SearchDSpaceBean {
 
@@ -34,17 +33,6 @@ public class SearchDSpacePublicationBean extends SearchDSpaceBean {
         String parameters = super.getSearchElementsAsParameters();
         parameters += "&searchPublications=" + getSearchPublications() + "&searchPatents=" + getSearchPatents();
         return parameters;
-    }
-
-    public VirtualPathNode getSearchNode() {
-        VirtualPathNode node = null;
-        if (this.getSearchPatents() && !this.getSearchPublications()) {
-            node = new VirtualPathNode("Patents", "Patents");
-        }
-        if (!this.getSearchPatents() && this.getSearchPublications()) {
-            node = new VirtualPathNode("Publications", "Publications");
-        }
-        return node;
     }
 
 }

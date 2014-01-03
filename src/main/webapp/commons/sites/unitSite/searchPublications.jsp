@@ -110,8 +110,8 @@
 			<html:submit><bean:message key="label.search" /></html:submit>
 	</fr:form>
 
-<logic:present name="bean" property="results">
-<logic:notEmpty name="bean" property="results">
+<logic:present name="bean" property="searchElementsAsParameters">
+<logic:notEmpty name="bean" property="searchElementsAsParameters">
 
 <p><bean:message key="label.hitCount" />: <strong><fr:view name="bean" property="totalItems"/></strong></p>
 <logic:notEqual name="numberOfPages" value="1">
@@ -121,48 +121,6 @@
 	pageNumberAttributeName="pageNumber" numberOfPagesAttributeName="numberOfPages" numberOfVisualizedPages="11"/>
 </p>
 </logic:notEqual>
-
-
-<ul>
-<logic:iterate id="result" name="bean" property="results" type="net.sourceforge.fenixedu.domain.research.result.ResearchResult">
-	<logic:present name="result">
-	<bean:define id="resultId" name="result" property="externalId"/>
-	<bean:define id="schema" name="result" property="schema" type="java.lang.String"/>
-	
-	<li class="mtop1">
-	
-		<fr:view name="result" layout="nonNullValues" schema="<%= schema %>">
-			<fr:layout>
-				<fr:property name="classes" value="mbottom025"/>
-				<fr:property name="htmlSeparator" value=", "/>
-				<fr:property name="indentation" value="false"/>
-			</fr:layout>
-																
-			<fr:destination name="view.publication" path="<%="/showResearchResult.do?resultId=" + resultId + "&method=showPublication" %>"/>
-		</fr:view>
-		
-        		<logic:notEqual name="result" property="class.simpleName" value="Unstructured">
-        		(<html:link target="_blank" page="<%="/bibtexExport.do?method=exportPublicationToBibtex&publicationId=" + resultId%>"><bean:message bundle="RESEARCHER_RESOURCES" key="researcher.result.publication.exportToBibTeX" /></html:link>)
-        		</logic:notEqual> 
-	
-			<%-- <p class="mvert0" style="color: #777;"><bean:message key="label.files" bundle="RESEARCHER_RESOURCES"/>:</p> --%>
-			<ul class="nobullet mvert05" style="color: #777;">						
-				<logic:iterate id="file" name="result" property="resultDocumentFiles">
-					<li class="mvert025"><img src="<%= request.getContextPath() %>/images/dotist_post.gif" alt="<bean:message key="icon_file" bundle="IMAGE_RESOURCES"/>">
-						<fr:view name="file" property="displayName"/> 
- 
-		(<a href="<fr:view name="file" property="downloadUrl"/>"><fr:view name="file" property="filename"/></a>),  
-						<fr:view name="file" property="size" layout="fileSize"/>, 
-						<bean:message key="label.fileAvailableFor" bundle="RESEARCHER_RESOURCES"/>:
-						<em><fr:view name="file" property="fileResultPermittedGroupType"/></em>
-					</li>
-				</logic:iterate>
-			</ul>
-	</li>
-	</logic:present> 
-</logic:iterate>
-
-</ul>
 
 
 <logic:notEqual name="numberOfPages" value="1">
@@ -176,7 +134,7 @@
 
 </logic:notEmpty>
 
-<logic:empty name="bean" property="results">
+<logic:empty name="bean" property="searchElementsAsParameters">
 	<bean:message key="label.search.noResultsFound" /> 
 </logic:empty>
 </logic:present>

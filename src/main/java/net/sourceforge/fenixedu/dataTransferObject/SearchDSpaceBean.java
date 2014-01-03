@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.ist.fenixframework.DomainObject;
-import pt.utl.ist.fenix.tools.file.FileSearchCriteria;
-import pt.utl.ist.fenix.tools.file.FileSearchCriteria.SearchField;
-import pt.utl.ist.fenix.tools.file.FilesetMetadataQuery.ConjunctionType;
+import pt.utl.ist.fenix.tools.file.FilesetMetadataQuery.MetadataQuery;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 public class SearchDSpaceBean implements Serializable {
 
     protected static final int pageSize = 15;
 
     List<SearchElement> searchElements;
-    List<DomainObject> results;
+    transient JsonArray results;
 
     private int page;
     private int totalItems;
@@ -22,7 +22,7 @@ public class SearchDSpaceBean implements Serializable {
 
     public SearchDSpaceBean() {
         this.searchElements = new ArrayList<SearchElement>();
-        this.results = null;
+        this.results = new JsonArray();
         this.page = 1;
         this.totalItems = 0;
         this.numberOfPages = 1;
@@ -70,24 +70,6 @@ public class SearchDSpaceBean implements Serializable {
         return parameters;
     }
 
-    public FileSearchCriteria getSearchCriteria(int start) {
-        FileSearchCriteria criteria = new FileSearchCriteria(start, pageSize);
-        List<SearchElement> elements = getSearchElements();
-
-        if (hasSearchElements()) {
-
-            for (SearchElement element : elements) {
-                if (element.getConjunction().equals(ConjunctionType.AND)) {
-                    criteria.addAndCriteria(element.getSearchField(), element.getQueryValue());
-                }
-                if (element.getConjunction().equals(ConjunctionType.OR)) {
-                    criteria.addOrCriteria(element.getSearchField(), element.getQueryValue());
-                }
-            }
-        }
-        return criteria;
-    }
-
     protected boolean hasSearchElements() {
         for (SearchElement element : getSearchElements()) {
             if (element.queryValue.length() > 0) {
@@ -97,25 +79,55 @@ public class SearchDSpaceBean implements Serializable {
         return false;
     }
 
-    public void setResults(List<DomainObject> results) {
-        this.results = new ArrayList<DomainObject>();
-        for (DomainObject result : results) {
-            this.results.add(result);
-        }
+    public void setResults(JsonArray results) {
+        this.results = results;
     }
 
-    public List<DomainObject> getResults() {
-        if (this.results == null) {
-            return null;
-        }
-        List<DomainObject> objects = new ArrayList<DomainObject>();
-        for (DomainObject reference : this.results) {
-            objects.add(reference);
-        }
-        return objects;
+    public void setResults(String results) {
+        JsonParser p = new JsonParser();
+        this.results = (JsonArray) p.parse(results);
+    }
+
+    public String getResults() {
+        return this.results.toString();
     }
 
     public static class SearchElement implements Serializable {
+
+        public static enum SearchField {
+            AUTHOR("author"),
+            COURSE("author"), // on executionCourses the author of the file is the course
+            TITLE("title"), KEYWORD("keyword"), DATE("date"), PUBLISHER("publisher"), DESCRIPTION("description"), TYPE("type"),
+            INFORMATIONS("informations"), UNIT("unit"), ANY(MetadataQuery.ANY_FIELD);
+
+            private String field;
+
+            private SearchField(String name) {
+                field = name;
+            }
+
+            public String fieldName() {
+                return field;
+            }
+
+            public static List<SearchField> getSearchFieldsInResearchPublications() {
+                List<SearchField> fields = new ArrayList<SearchField>();
+                fields.add(SearchField.AUTHOR);
+                fields.add(SearchField.TITLE);
+                fields.add(SearchField.DATE);
+                fields.add(SearchField.PUBLISHER);
+                fields.add(SearchField.DESCRIPTION);
+                fields.add(SearchField.ANY);
+                return fields;
+            }
+
+        }
+
+        public static enum ConjunctionType {
+            OR, AND;
+
+        }
+
         private SearchField field;
         private String queryValue;
         private ConjunctionType conjunction;

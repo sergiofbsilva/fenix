@@ -17,7 +17,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import pt.ist.fenixframework.FenixFramework;
-import pt.utl.ist.fenix.tools.file.FileSearchCriteria.SearchField;
 
 public class SearchPublicationsDA extends SearchPublicationsAction {
 
@@ -29,7 +28,7 @@ public class SearchPublicationsDA extends SearchPublicationsAction {
         bean.addSearchElement();
 
         SearchElement searchElement = bean.getSearchElements().iterator().next();
-        searchElement.setSearchField(SearchField.ANY);
+        searchElement.setSearchField(SearchElement.SearchField.ANY);
 
         request.setAttribute("bean", bean);
 
