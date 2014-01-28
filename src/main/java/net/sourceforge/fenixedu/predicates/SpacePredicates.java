@@ -5,7 +5,6 @@ import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.ResourceAllocationRole;
 import net.sourceforge.fenixedu.domain.person.RoleType;
 import net.sourceforge.fenixedu.domain.space.Blueprint;
-import net.sourceforge.fenixedu.domain.space.ExtensionSpaceOccupation;
 import net.sourceforge.fenixedu.domain.space.GenericEventSpaceOccupation;
 import net.sourceforge.fenixedu.domain.space.LessonInstanceSpaceOccupation;
 import net.sourceforge.fenixedu.domain.space.LessonSpaceOccupation;
@@ -27,7 +26,7 @@ public class SpacePredicates {
     public static final AccessControlPredicate<Space> checkPermissionsToManageSpace = new AccessControlPredicate<Space>() {
         @Override
         public boolean evaluate(Space space) {
-            space.checkIfLoggedPersonHasPermissionsToManageSpace(AccessControl.getPerson());
+            space.checkIfLoggedPersonHasPermissionsToManageSpace(AccessControl.getPerson().getUser());
             return true;
         }
     };
@@ -36,7 +35,7 @@ public class SpacePredicates {
             new AccessControlPredicate<Space>() {
                 @Override
                 public boolean evaluate(Space space) {
-                    space.checkIfLoggedPersonIsSpacesAdministrator(AccessControl.getPerson());
+                    space.checkIfLoggedPersonIsSpacesAdministrator(AccessControl.getPerson().getUser());
                     return true;
                 }
             };
@@ -47,7 +46,7 @@ public class SpacePredicates {
             new AccessControlPredicate<RoomClassification>() {
                 @Override
                 public boolean evaluate(RoomClassification roomClassification) {
-                    return Space.personIsSpacesAdministrator(AccessControl.getPerson());
+                    return Space.personIsSpacesAdministrator(AccessControl.getPerson().getUser());
                 }
             };
 
@@ -87,14 +86,6 @@ public class SpacePredicates {
                 @Override
                 public boolean evaluate(GenericEventSpaceOccupation spaceOccupation) {
                     ResourceAllocationRole.checkIfPersonHasPermissionToManageSpacesAllocation(AccessControl.getPerson());
-                    return checkPermissionsToManageOccupations.evaluate(spaceOccupation);
-                }
-            };
-
-    public static final AccessControlPredicate<ExtensionSpaceOccupation> checkPermissionsToManageExtensionSpaceOccupations =
-            new AccessControlPredicate<ExtensionSpaceOccupation>() {
-                @Override
-                public boolean evaluate(ExtensionSpaceOccupation spaceOccupation) {
                     return checkPermissionsToManageOccupations.evaluate(spaceOccupation);
                 }
             };

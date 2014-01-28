@@ -15,12 +15,4 @@
 		<put name="body" value="/resourceManager/materialManagement/editMaterial.jsp" />
 	</definition>
 	
-	<!-- =================== Vehicle Management  =================== -->
-	<definition name="prepare-vehicle-manage" extends="resourceManager.masterPage" >
-		<put name="body" value="/resourceManager/vehicleManagement/vehicleManagement.jsp" />
-	</definition>
-	<definition name="edit-vehicle" extends="resourceManager.masterPage" >
-		<put name="body" value="/resourceManager/vehicleManagement/editVehicle.jsp" />
-	</definition>
-			
 </tiles-definitions>

@@ -1312,8 +1312,6 @@ public class Person extends Person_Base {
     private boolean canBeDeleted() {
         return !hasAnyPartyContacts() && !hasAnyChilds() && !hasAnyParents() && !hasAnyDomainObjectActionLogs()
                 && !hasAnyExportGroupingReceivers() && !hasAnyPersistentGroups() && !hasAnyPersonSpaceOccupations()
-                && !hasAnyPunctualRoomsOccupationComments() && !hasAnyVehicleAllocations()
-                && !hasAnyPunctualRoomsOccupationRequests() && !hasAnyPunctualRoomsOccupationRequestsToProcess()
                 && !hasAnyAssociatedQualifications() && !hasAnyAssociatedAlteredCurriculums() && !hasAnyEnrolmentEvaluations()
                 && !hasAnyExportGroupingSenders() && !hasAnyResponsabilityTransactions() && !hasAnyMasterDegreeCandidates()
                 && !hasAnyGuides() && !hasEmployee() && !hasTeacher() && !hasAnyPayedGuides() && !hasAnyPayedReceipts()
@@ -2762,7 +2760,7 @@ public class Person extends Person_Base {
 
     public List<PunctualRoomsOccupationRequest> getPunctualRoomsOccupationRequestsOrderByMoreRecentComment() {
         final List<PunctualRoomsOccupationRequest> result = new ArrayList<PunctualRoomsOccupationRequest>();
-        result.addAll(getPunctualRoomsOccupationRequests());
+        result.addAll(getUser().getPunctualRoomsOccupationRequestsSet());
         if (!result.isEmpty()) {
             Collections.sort(result, PunctualRoomsOccupationRequest.COMPARATOR_BY_MORE_RECENT_COMMENT_INSTANT);
         }
@@ -2771,7 +2769,7 @@ public class Person extends Person_Base {
 
     public List<PunctualRoomsOccupationRequest> getPunctualRoomsOccupationRequestsToProcessOrderByDate(Campus campus) {
         final List<PunctualRoomsOccupationRequest> result = new ArrayList<PunctualRoomsOccupationRequest>();
-        for (final PunctualRoomsOccupationRequest request : getPunctualRoomsOccupationRequestsToProcess()) {
+        for (final PunctualRoomsOccupationRequest request : getUser().getPunctualRoomsOccupationRequestsToProcessSet()) {
             if (!request.getCurrentState().equals(RequestState.RESOLVED)
                     && (request.getCampus() == null || request.getCampus().equals(campus))) {
                 result.add(request);
@@ -4812,16 +4810,6 @@ public class Person extends Person_Base {
     }
 
     @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.PunctualRoomsOccupationComment> getPunctualRoomsOccupationComments() {
-        return getPunctualRoomsOccupationCommentsSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyPunctualRoomsOccupationComments() {
-        return !getPunctualRoomsOccupationCommentsSet().isEmpty();
-    }
-
-    @Deprecated
     public java.util.Set<net.sourceforge.fenixedu.domain.Qualification> getCreatedQualifications() {
         return getCreatedQualificationsSet();
     }
@@ -4969,16 +4957,6 @@ public class Person extends Person_Base {
     @Deprecated
     public boolean hasAnyPreferredPublication() {
         return !getPreferredPublicationSet().isEmpty();
-    }
-
-    @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.PunctualRoomsOccupationRequest> getPunctualRoomsOccupationRequests() {
-        return getPunctualRoomsOccupationRequestsSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyPunctualRoomsOccupationRequests() {
-        return !getPunctualRoomsOccupationRequestsSet().isEmpty();
     }
 
     @Deprecated
@@ -5192,16 +5170,6 @@ public class Person extends Person_Base {
     }
 
     @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.material.PersonExtension> getExtensions() {
-        return getExtensionsSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyExtensions() {
-        return !getExtensionsSet().isEmpty();
-    }
-
-    @Deprecated
     public java.util.Set<net.sourceforge.fenixedu.domain.RoleOperationLog> getGivenRoleOperationLog() {
         return getGivenRoleOperationLogSet();
     }
@@ -5359,26 +5327,6 @@ public class Person extends Person_Base {
     @Deprecated
     public boolean hasAnyCardGenerationRegister() {
         return !getCardGenerationRegisterSet().isEmpty();
-    }
-
-    @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.PunctualRoomsOccupationRequest> getPunctualRoomsOccupationRequestsToProcess() {
-        return getPunctualRoomsOccupationRequestsToProcessSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyPunctualRoomsOccupationRequestsToProcess() {
-        return !getPunctualRoomsOccupationRequestsToProcessSet().isEmpty();
-    }
-
-    @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.space.Blueprint> getBlueprints() {
-        return getBlueprintsSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyBlueprints() {
-        return !getBlueprintsSet().isEmpty();
     }
 
     @Deprecated

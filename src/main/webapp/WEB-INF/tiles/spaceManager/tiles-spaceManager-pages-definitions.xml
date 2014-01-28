@@ -42,9 +42,6 @@
     <definition name="create-new-blueprint-version" extends="spaceManager.masterPage">
         <put name="body" value="/spaceManager/addNewBlueprintVersion.jsp"></put>
     </definition>   
-    <definition name="show-material-space-occupations" extends="spaceManager.masterPage">
-        <put name="body" value="/spaceManager/manageMaterialSpaceOccupations.jsp"></put>
-    </definition>       
     <definition name="insert-material-occupation" extends="spaceManager.masterPage">
         <put name="body" value="/spaceManager/insertNewMaterialOccupation.jsp"></put>
     </definition> 

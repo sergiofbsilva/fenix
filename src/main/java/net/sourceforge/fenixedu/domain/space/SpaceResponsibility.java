@@ -120,7 +120,7 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
 
     private void checkSpaceResponsabilityIntersection(final YearMonthDay begin, final YearMonthDay end, Unit unit, Space space) {
         checkBeginDateAndEndDate(begin, end);
-        for (ResourceResponsibility resourceResponsibility : space.getResourceResponsibility()) {
+        for (ResourceResponsibility resourceResponsibility : space.getResourceResponsibilitySet()) {
             if (resourceResponsibility.isSpaceResponsibility() && !resourceResponsibility.equals(this)
                     && resourceResponsibility.getParty().equals(unit)
                     && ((SpaceResponsibility) resourceResponsibility).checkIntersections(begin, end)) {

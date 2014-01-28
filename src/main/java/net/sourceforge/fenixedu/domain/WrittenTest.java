@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.person.RoleType;
 import net.sourceforge.fenixedu.domain.resource.ResourceAllocation;
@@ -255,7 +256,7 @@ public class WrittenTest extends WrittenTest_Base {
     }
 
     public boolean canTeacherRemoveRoom(ExecutionSemester executionSemester, Teacher teacher, AllocatableSpace room) {
-        for (Lesson lesson : room.getAssociatedLessons(executionSemester)) {
+        for (Lesson lesson : SpaceBridge.getAssociatedLessons(room, executionSemester)) {
             if (lesson.isAllIntervalIn(new Interval(getBeginningDateTime(), getEndDateTime()))) {
                 if (lesson.getExecutionCourse().teacherLecturesExecutionCourse(teacher)) {
                     return true;

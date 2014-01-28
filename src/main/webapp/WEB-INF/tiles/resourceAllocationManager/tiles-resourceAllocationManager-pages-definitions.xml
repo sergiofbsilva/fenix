@@ -150,28 +150,6 @@
 		<put name="body" value="/resourceAllocationManager/roomsPunctualScheduling/seeRoomsPunctualSchedulingHistory.jsp" />
 	</definition>
 
-	<!-- =================== Vehicle Management  =================== -->	
-	<definition name="prepare-vehicle-management" extends="definition.resourceAllocationManager.otherResourcesManagement" >
-		<put name="bundle" value="TITLES_RESOURCES"/>
-		<put name="title" value="private.resourcemanagement.vehicles"/>
-		<put name="body" value="/resourceAllocationManager/vehicleManagement/vehicleManagement.jsp" />
-	</definition>	
-	<definition name="prepare-create-vehicle-allocation" extends="definition.resourceAllocationManager.otherResourcesManagement" >
-		<put name="bundle" value="TITLES_RESOURCES"/>
-		<put name="title" value="private.resourcemanagement.vehicles"/>
-		<put name="body" value="/resourceAllocationManager/vehicleManagement/editVehicleAllocation.jsp" />
-	</definition>
-	<definition name="see-vehicle-allocation-history" extends="definition.resourceAllocationManager.otherResourcesManagement" >
-		<put name="bundle" value="TITLES_RESOURCES"/>
-		<put name="title" value="private.resourcemanagement.vehicles"/>
-		<put name="body" value="/resourceAllocationManager/vehicleManagement/seeVehicleAllocationHistory.jsp" />
-	</definition>
-	<definition name="see-vehicle-allocation" extends="definition.resourceAllocationManager.otherResourcesManagement" >
-		<put name="bundle" value="TITLES_RESOURCES"/>
-		<put name="title" value="private.resourcemanagement.vehicles"/>
-		<put name="body" value="/resourceAllocationManager/vehicleManagement/seeVehicleAllocation.jsp" />
-	</definition>
-
 	<!-- =================== Lesson Management  =================== -->
 	<definition name="view.all.lesson.dates" extends="definition.sop.schedules" >
 		<put name="title" value="private.resourcemanagement.schedules.shifts.lessonOcurrences"/>

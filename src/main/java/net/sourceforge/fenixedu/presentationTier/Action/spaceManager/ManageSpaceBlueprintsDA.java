@@ -186,7 +186,7 @@ public class ManageSpaceBlueprintsDA extends FenixDispatchAction {
             throws IOException {
 
         final BlueprintFile blueprintFile = blueprint.getBlueprintFile();
-        final byte[] blueprintBytes = blueprintFile.getContentFile().getBytes();
+        final byte[] blueprintBytes = blueprintFile.getContentFile();
         final InputStream inputStream = new ByteArrayInputStream(blueprintBytes);
 
         SpaceBlueprintsDWGProcessor processor = null;

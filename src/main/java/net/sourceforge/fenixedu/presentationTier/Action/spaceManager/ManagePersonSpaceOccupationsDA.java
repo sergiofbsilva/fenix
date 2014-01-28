@@ -38,8 +38,8 @@ public class ManagePersonSpaceOccupationsDA extends FenixDispatchAction {
 
         final SpaceInformation spaceInformation = getSpaceInformationFromParameter(request);
         Person loggedPerson = AccessControl.getPerson();
-        if (spaceInformation.getSpace().personHasPermissionsToManageSpace(loggedPerson)
-                || spaceInformation.getSpace().personHasPermissionToManagePersonOccupations(loggedPerson)) {
+        if (spaceInformation.getSpace().personHasPermissionsToManageSpace(loggedPerson.getUser())
+                || spaceInformation.getSpace().personHasPermissionToManagePersonOccupations(loggedPerson.getUser())) {
             return super.execute(mapping, actionForm, request, response);
         } else {
             final ActionMessages actionMessages = new ActionMessages();

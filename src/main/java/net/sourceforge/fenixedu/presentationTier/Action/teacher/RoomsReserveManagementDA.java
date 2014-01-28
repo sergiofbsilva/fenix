@@ -14,6 +14,7 @@ import net.sourceforge.fenixedu.applicationTier.Servico.teacher.CreateNewRoomsRe
 import net.sourceforge.fenixedu.applicationTier.Servico.teacher.CreateNewRoomsReserveComment;
 import net.sourceforge.fenixedu.dataTransferObject.InfoGenericEvent;
 import net.sourceforge.fenixedu.dataTransferObject.teacher.RoomsReserveBean;
+import net.sourceforge.fenixedu.domain.GenericEvent;
 import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.PunctualRoomsOccupationRequest;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
@@ -36,6 +37,9 @@ import pt.ist.fenixWebFramework.struts.annotations.Forwards;
 import pt.ist.fenixWebFramework.struts.annotations.Mapping;
 import pt.ist.fenixframework.FenixFramework;
 import pt.utl.ist.fenix.tools.util.CollectionPager;
+
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 
 @Mapping(module = "teacher", path = "/roomsReserveManagement", scope = "request", parameter = "method")
 @Forwards(value = { @Forward(name = "viewRoomsReserves", path = "view-rooms-reserves"),
@@ -176,7 +180,14 @@ public class RoomsReserveManagementDA extends FenixDispatchAction {
     private Set<InfoGenericEvent> getInfoGenericEvents(List<PunctualRoomsOccupationRequest> requests) {
         Set<InfoGenericEvent> result = new HashSet<InfoGenericEvent>();
         for (PunctualRoomsOccupationRequest occupationRequest : requests) {
-            result.addAll(occupationRequest.getActiveGenericEvents());
+            result.addAll(FluentIterable.from(occupationRequest.getActiveGenericEvents())
+                    .transform(new Function<GenericEvent, InfoGenericEvent>() {
+
+                        @Override
+                        public InfoGenericEvent apply(GenericEvent input) {
+                            return new InfoGenericEvent(input);
+                        }
+                    }).toSet());
         }
         return result;
     }

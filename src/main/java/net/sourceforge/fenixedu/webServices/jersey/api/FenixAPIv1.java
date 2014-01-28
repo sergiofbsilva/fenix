@@ -1321,7 +1321,7 @@ public class FenixAPIv1 {
         if (mostRecentBlueprint != null) {
             if (isDwgFormat) {
                 final BlueprintFile blueprintFile = mostRecentBlueprint.getBlueprintFile();
-                final InputStream inputStream = new ByteArrayInputStream(blueprintFile.getContentFile().getBytes());
+                final InputStream inputStream = new ByteArrayInputStream(blueprintFile.getContentFile());
                 stream = new StreamingOutput() {
 
                     @Override

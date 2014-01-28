@@ -25,11 +25,8 @@ public class ClosePunctualRoomsOccupationRequest {
     public static void run(PunctualRoomsOccupationRequest request, Person person) {
         check(RolePredicates.RESOURCE_ALLOCATION_MANAGER_PREDICATE);
         if (request != null) {
-            request.closeRequestAndAssociateOwnerOnlyForEmployees(new DateTime(), person);
+            request.closeRequestAndAssociateOwnerOnlyForEmployees(new DateTime(), person.getUser());
             sendCloseRequestMessage(request);
-            final Person requestor = request.getRequestor();
-            final String personName = requestor.getName();
-            final String contactString = requestor.getDefaultPhoneNumber() + "/" + requestor.getDefaultEmailAddressValue();
         }
     }
 
@@ -67,7 +64,7 @@ public class ClosePunctualRoomsOccupationRequest {
         } else {
             body += "-";
         }
-        GOPSendMessageService.sendMessage(Collections.EMPTY_LIST, roomsReserveRequest.getRequestor()
+        GOPSendMessageService.sendMessage(Collections.EMPTY_LIST, roomsReserveRequest.getRequestor().getPerson()
                 .getDefaultEmailAddressValue(), messages.getMessage("message.room.reservation"), body);
     }
 

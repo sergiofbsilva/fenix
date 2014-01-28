@@ -10,6 +10,7 @@ import java.util.Set;
 import net.sourceforge.fenixedu.applicationTier.Servico.person.SearchPerson;
 import net.sourceforge.fenixedu.applicationTier.Servico.person.SearchPerson.SearchParameters;
 import net.sourceforge.fenixedu.applicationTier.Servico.person.SearchPerson.SearchPersonPredicate;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.ExecutionSemester;
 import net.sourceforge.fenixedu.domain.ExternalTeacherAuthorization;
 import net.sourceforge.fenixedu.domain.Person;
@@ -44,7 +45,7 @@ public class LibraryAttendance implements Serializable {
             LibraryAttendance attendance = (LibraryAttendance) source;
             Set<Space> availableSpaces = new HashSet<Space>();
             for (Space space : attendance.getLibrary().getActiveContainedSpaces()) {
-                if (space.canAddAttendance()) {
+                if (SpaceBridge.canAddAttendance(space)) {
                     availableSpaces.add(space);
                 }
             }
@@ -311,15 +312,16 @@ public class LibraryAttendance implements Serializable {
 
     public Set<SpaceAttendances> getLibraryAttendances() {
         Set<SpaceAttendances> attendances = new HashSet<SpaceAttendances>();
-        attendances.addAll(library.getCurrentAttendance());
+        attendances.addAll(library.getCurrentAttendanceSet());
         for (Space space : library.getActiveContainedSpaces()) {
-            attendances.addAll(space.getCurrentAttendance());
+            attendances.addAll(space.getCurrentAttendanceSet());
         }
         return attendances;
     }
 
     public boolean isFull() {
-        return !getLibrary().canAddAttendance();
+//        return !getLibrary().canAddAttendance();
+        return SpaceBridge.canAddAttendance(getLibrary());
     }
 
     public void search() {
@@ -365,7 +367,7 @@ public class LibraryAttendance implements Serializable {
     @Atomic
     public void enterSpace() {
         Space space = getSelectedSpace() != null ? getSelectedSpace() : library;
-        setPersonAttendance(space.addAttendance(getPerson(), AccessControl.getPerson().getIstUsername()));
+        setPersonAttendance(SpaceBridge.addAttendance(space, getPerson(), AccessControl.getPerson().getIstUsername()));
     }
 
     @Atomic

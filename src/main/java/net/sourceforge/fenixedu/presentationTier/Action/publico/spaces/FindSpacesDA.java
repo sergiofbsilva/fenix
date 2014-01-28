@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.spaceManager.FindSpacesBean;
 import net.sourceforge.fenixedu.domain.space.Blueprint;
 import net.sourceforge.fenixedu.domain.space.Blueprint.BlueprintTextRectangles;
@@ -81,7 +82,7 @@ public class FindSpacesDA extends FenixDispatchAction {
             }
 
             List<FindSpacesBean> result = new ArrayList<FindSpacesBean>();
-            Set<Space> resultSpaces = Space.findSpaces(labelToSearch, campus, building, bean.getSearchType());
+            Set<Space> resultSpaces = SpaceBridge.findSpaces(labelToSearch, campus, building, bean.getSearchType());
             for (Space space : resultSpaces) {
                 result.add(new FindSpacesBean(space, bean.getSearchType(), AcademicInterval
                         .readDefaultAcademicInterval(AcademicPeriod.SEMESTER)));
@@ -153,7 +154,7 @@ public class FindSpacesDA extends FenixDispatchAction {
         if (mostRecentBlueprint != null) {
 
             final BlueprintFile blueprintFile = mostRecentBlueprint.getBlueprintFile();
-            final byte[] blueprintBytes = blueprintFile.getContentFile().getBytes();
+            final byte[] blueprintBytes = blueprintFile.getContentFile();
             final InputStream inputStream = new ByteArrayInputStream(blueprintBytes);
             BlueprintTextRectangles blueprintTextRectangles =
                     SpaceBlueprintsDWGProcessor.getBlueprintTextRectangles(inputStream, mostRecentBlueprint.getSpace(), false,

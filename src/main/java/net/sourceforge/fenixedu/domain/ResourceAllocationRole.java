@@ -69,18 +69,6 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
         return personIsResourceAllocationSuperUser(person) || (accessGroup != null && accessGroup.isMember(person));
     }
 
-    public static boolean personHasPermissionToManageMaterialsAllocation(Person person) {
-        ResourceAllocationRole role = (ResourceAllocationRole) getRoleByRoleType(ROLE_TYPE);
-        Group accessGroup = role.getMaterialsAccessGroup();
-        return personIsResourceAllocationSuperUser(person) || (accessGroup != null && accessGroup.isMember(person));
-    }
-
-    public static boolean personHasPermissionToManageVehiclesAllocation(Person person) {
-        ResourceAllocationRole role = (ResourceAllocationRole) getRoleByRoleType(ROLE_TYPE);
-        Group accessGroup = role.getVehiclesAccessGroup();
-        return personIsResourceAllocationSuperUser(person) || (accessGroup != null && accessGroup.isMember(person));
-    }
-
     public static boolean personHasPermissionToManageSpacesAllocation(Person person) {
         ResourceAllocationRole role = (ResourceAllocationRole) getRoleByRoleType(ROLE_TYPE);
         Group accessGroup = role.getSpacesAccessGroup();
@@ -107,8 +95,7 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
 
     public static enum ResourceAllocationAccessGroupType {
 
-        SCHEDULES_ACCESS_GROUP("schedulesAccessGroup"), SPACES_ACCESS_GROUP("spacesAccessGroup"), MATERIALS_ACCESS_GROUP(
-                "materialsAccessGroup"), VEHICLES_ACCESS_GROUP("vehiclesAccessGroup");
+        SCHEDULES_ACCESS_GROUP("schedulesAccessGroup"), SPACES_ACCESS_GROUP("spacesAccessGroup");
 
         private String accessGroupSlotName;
 
@@ -150,14 +137,6 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
 
         switch (accessGroupType) {
 
-        case MATERIALS_ACCESS_GROUP:
-
-            existentGroup = getMaterialsAccessGroup();
-            newGroupUnion = manageGroups(toAdd, groupToAddOrRemove, existentGroup);
-            setMaterialsAccessGroup(newGroupUnion);
-            resourceAllocationRoleManagement(newGroupUnion, toAdd, elementsToAddOrRemove);
-            break;
-
         case SCHEDULES_ACCESS_GROUP:
 
             existentGroup = getSchedulesAccessGroup();
@@ -171,14 +150,6 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
             existentGroup = getSpacesAccessGroup();
             newGroupUnion = manageGroups(toAdd, groupToAddOrRemove, existentGroup);
             setSpacesAccessGroup(newGroupUnion);
-            resourceAllocationRoleManagement(newGroupUnion, toAdd, elementsToAddOrRemove);
-            break;
-
-        case VEHICLES_ACCESS_GROUP:
-
-            existentGroup = getVehiclesAccessGroup();
-            newGroupUnion = manageGroups(toAdd, groupToAddOrRemove, existentGroup);
-            setVehiclesAccessGroup(newGroupUnion);
             resourceAllocationRoleManagement(newGroupUnion, toAdd, elementsToAddOrRemove);
             break;
 
@@ -232,10 +203,8 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
             }
         } else {
             for (Person person : elementsToAddOrRemove) {
-                if (!personHasPermissionToManageMaterialsAllocation(person)
-                        && !personHasPermissionToManageSchedulesAllocation(person)
-                        && !personHasPermissionToManageSpacesAllocation(person)
-                        && !personHasPermissionToManageVehiclesAllocation(person)) {
+                if (!personHasPermissionToManageSchedulesAllocation(person)
+                        && !personHasPermissionToManageSpacesAllocation(person)) {
                     person.removeRoleByType(ROLE_TYPE);
                 }
             }
@@ -245,21 +214,6 @@ public class ResourceAllocationRole extends ResourceAllocationRole_Base {
     @Deprecated
     public boolean hasSpacesAccessGroup() {
         return getSpacesAccessGroup() != null;
-    }
-
-    @Deprecated
-    public boolean hasVehiclesAccessGroup() {
-        return getVehiclesAccessGroup() != null;
-    }
-
-    @Deprecated
-    public boolean hasSchedulesAccessGroup() {
-        return getSchedulesAccessGroup() != null;
-    }
-
-    @Deprecated
-    public boolean hasMaterialsAccessGroup() {
-        return getMaterialsAccessGroup() != null;
     }
 
 }

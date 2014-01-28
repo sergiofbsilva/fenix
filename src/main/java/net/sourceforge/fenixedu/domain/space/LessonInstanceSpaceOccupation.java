@@ -10,7 +10,6 @@ import net.sourceforge.fenixedu.domain.ExecutionCourse;
 import net.sourceforge.fenixedu.domain.FrequencyType;
 import net.sourceforge.fenixedu.domain.Lesson;
 import net.sourceforge.fenixedu.domain.LessonInstance;
-import net.sourceforge.fenixedu.domain.accessControl.Group;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.resource.ResourceAllocation;
 import net.sourceforge.fenixedu.predicates.SpacePredicates;
@@ -142,11 +141,10 @@ public class LessonInstanceSpaceOccupation extends LessonInstanceSpaceOccupation
     }
 
     @Override
-    public Group getAccessGroup() {
+    public org.fenixedu.bennu.core.domain.groups.Group getAccessGroup() {
         return null;
     }
 
-    @Override
     public boolean isOccupiedByExecutionCourse(final ExecutionCourse executionCourse, final DateTime start, final DateTime end) {
         for (final LessonInstance lessonInstance : getLessonInstancesSet()) {
             final Lesson lesson = lessonInstance.getLesson();

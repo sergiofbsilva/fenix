@@ -78,7 +78,8 @@ public class RoomsReservesManagementDA extends RoomsPunctualSchedulingDA {
         List<PunctualRoomsOccupationRequest> personRequests =
                 person.getPunctualRoomsOccupationRequestsToProcessOrderByDate(campus);
         Set<PunctualRoomsOccupationRequest> openedRequests =
-                PunctualRoomsOccupationRequest.getRequestsByTypeAndDiferentOwnerOrderByDate(RequestState.OPEN, person, campus);
+                PunctualRoomsOccupationRequest.getRequestsByTypeAndDiferentOwnerOrderByDate(RequestState.OPEN, person.getUser(),
+                        campus);
         Set<PunctualRoomsOccupationRequest> newRequests =
                 PunctualRoomsOccupationRequest.getRequestsByTypeOrderByDate(RequestState.NEW, campus);
 

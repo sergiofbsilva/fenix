@@ -264,11 +264,9 @@ public class CreateTestData {
     public static class CreateResources extends AtomicAction {
         private int roomCounter = 0;
 
-        Group managersGroup = null;
-
         @Override
         public void doIt() {
-            managersGroup = getRoleGroup(RoleType.MANAGER);
+//            managersGroup = getRoleGroup(RoleType.MANAGER);
             createCampi(1);
             createCampi(2);
         }
@@ -299,6 +297,8 @@ public class CreateTestData {
                     new Room(floor, null, getRoomName(), "", /* RoomClassification */null, new BigDecimal(30), Boolean.TRUE,
                             Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, "", new YearMonthDay(), null,
                             Integer.toString(roomCounter - 1), null, null);
+            final org.fenixedu.bennu.core.domain.groups.Group managersGroup =
+                    org.fenixedu.bennu.core.domain.groups.Group.parse("role(MANAGER)");
             room.setExtensionOccupationsAccessGroup(managersGroup);
             room.setGenericEventOccupationsAccessGroup(managersGroup);
             room.setLessonOccupationsAccessGroup(managersGroup);

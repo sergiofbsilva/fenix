@@ -44,15 +44,6 @@
 		}
 	%>
 	
-	<%	
-		if(ResourceAllocationRole.personHasPermissionToManageVehiclesAllocation(loggedPerson)) { 
-	%>	
-		<li class="navheader"><bean:message key="link.vehicle.management" bundle="SOP_RESOURCES"/></li>
-		<li><html:link page="/vehicleManagement.do?method=prepare"><bean:message key="link.management" bundle="SOP_RESOURCES"/></html:link></li>
-	<%
-		}	
-	%>
-	
 		<br/>
 			
 	<% 	

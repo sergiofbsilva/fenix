@@ -9,6 +9,7 @@ import java.util.TreeSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.LibraryCardSystem;
 import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.accessControl.FixedSetGroup;
@@ -133,7 +134,7 @@ public class LibraryOperatorDispatchAction extends FenixDispatchAction {
             HttpServletResponse response) {
         Space library = getDomainObject(request, "library");
 
-        int occupation = library.currentAttendaceCount();
+        int occupation = SpaceBridge.currentAttendaceCount(library);
 
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(occupation, "Alunos", "Ocupação");

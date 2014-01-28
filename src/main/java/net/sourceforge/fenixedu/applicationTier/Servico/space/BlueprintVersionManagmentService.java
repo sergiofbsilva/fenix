@@ -7,9 +7,6 @@ import java.io.InputStream;
 import net.sourceforge.fenixedu.applicationTier.Servico.exceptions.FenixServiceException;
 import net.sourceforge.fenixedu.dataTransferObject.spaceManager.CreateBlueprintSubmissionBean;
 import net.sourceforge.fenixedu.domain.Person;
-import net.sourceforge.fenixedu.domain.Role;
-import net.sourceforge.fenixedu.domain.accessControl.RoleGroup;
-import net.sourceforge.fenixedu.domain.person.RoleType;
 import net.sourceforge.fenixedu.domain.space.Blueprint;
 import net.sourceforge.fenixedu.domain.space.BlueprintFile;
 import net.sourceforge.fenixedu.domain.space.Space;
@@ -35,10 +32,13 @@ public abstract class BlueprintVersionManagmentService {
         final byte[] contents = readInputStream(blueprintSubmissionBean.getInputStream());
 
         final String displayName = blueprintSubmissionBean.getFilename();
-        final BlueprintFile blueprintFile =
-                new BlueprintFile(blueprint, filename, displayName,
-                        new RoleGroup(Role.getRoleByRoleType(RoleType.SPACE_MANAGER)), contents);
+//        final BlueprintFile blueprintFile =
+//                new BlueprintFile(blueprint, filename, displayName,
+//                        new RoleGroup(Role.getRoleByRoleType(RoleType.SPACE_MANAGER)), contents);
 //        blueprintFile.setContent(new ByteArray(contents));
+
+        final BlueprintFile blueprintFile = new BlueprintFile(blueprint, filename, displayName, null, contents);
+        blueprint.setBlueprintFile(blueprintFile);
     }
 
     private byte[] readInputStream(final InputStream inputStream) throws IOException {

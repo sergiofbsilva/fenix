@@ -20,7 +20,7 @@ public class CreateNewBlueprintVersion extends BlueprintVersionManagmentService 
 
         final Person person = AccessControl.getPerson();
 
-        final Blueprint blueprint = new Blueprint(space, person);
+        final Blueprint blueprint = new Blueprint(space, person.getUser());
 
         editBlueprintVersion(blueprintSubmissionBean, space, person, blueprint);
 

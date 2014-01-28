@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.InfoLesson;
 import net.sourceforge.fenixedu.dataTransferObject.InfoRoom;
 import net.sourceforge.fenixedu.dataTransferObject.InfoViewRoomSchedule;
@@ -44,7 +45,7 @@ public class ReadPavillionsRoomsLessons {
                 final InfoRoom infoRoom = InfoRoom.newInfoFromDomain(room);
                 infoViewRoomSchedule.setInfoRoom(infoRoom);
 
-                final List lessons = room.getAssociatedLessons(academicInterval);
+                final List lessons = SpaceBridge.getAssociatedLessons(room, academicInterval);
                 final List infoLessons = new ArrayList(lessons.size());
                 for (final Iterator iterator2 = lessons.iterator(); iterator2.hasNext();) {
                     final Lesson lesson = (Lesson) iterator2.next();

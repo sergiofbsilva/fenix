@@ -18,14 +18,14 @@ public class CreateNewRoomsReserveComment {
             PunctualRoomsOccupationRequest reserveRequest = bean.getReserveRequest();
 
             if (reOpenRequest) {
-                reserveRequest.createNewTeacherCommentAndOpenRequest(bean.getDescription(), bean.getRequestor(), now);
+                reserveRequest.createNewTeacherCommentAndOpenRequest(bean.getDescription(), bean.getRequestor().getUser(), now);
 
             } else if (resolveRequest) {
-                reserveRequest.createNewEmployeeCommentAndCloseRequest(bean.getDescription(), bean.getRequestor(), now);
+                reserveRequest.createNewEmployeeCommentAndCloseRequest(bean.getDescription(), bean.getRequestor().getUser(), now);
                 ClosePunctualRoomsOccupationRequest.run(reserveRequest, bean.getRequestor());
 
             } else {
-                reserveRequest.createNewTeacherOrEmployeeComment(bean.getDescription(), bean.getRequestor(), now);
+                reserveRequest.createNewTeacherOrEmployeeComment(bean.getDescription(), bean.getRequestor().getUser(), now);
             }
         }
     }

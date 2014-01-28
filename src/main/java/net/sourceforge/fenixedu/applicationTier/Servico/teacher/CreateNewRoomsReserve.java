@@ -14,7 +14,7 @@ public class CreateNewRoomsReserve {
         if (AccessControl.getPerson().hasRole(RoleType.TEACHER) || AccessControl.getPerson().hasAnyProfessorships()) {
 
             if (bean != null) {
-                return new PunctualRoomsOccupationRequest(bean.getRequestor(), bean.getSubject(), bean.getCampus(),
+                return new PunctualRoomsOccupationRequest(bean.getRequestor().getUser(), bean.getSubject(), bean.getCampus(),
                         bean.getDescription());
             }
             return null;

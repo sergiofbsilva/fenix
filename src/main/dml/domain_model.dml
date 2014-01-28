@@ -1643,8 +1643,6 @@ valueType net.sourceforge.fenixedu.domain.accounting.events.export.PrintedPaymen
         class ResourceAllocationRole extends Role {
             Group schedulesAccessGroup;     
             Group spacesAccessGroup;
-            Group materialsAccessGroup;
-            Group vehiclesAccessGroup;          
         }
 
 
@@ -4631,15 +4629,6 @@ valueType net.sourceforge.fenixedu.domain.accounting.events.export.PrintedPaymen
                 YearMonthDay begin;
                 YearMonthDay end;
             }           
-
-        class resource.Vehicle extends resource.Resource {
-            YearMonthDay acquisition;
-            YearMonthDay cease;
-            String make;
-            String model;
-            String numberPlate;
-            BigDecimal allocationCostMultiplier;            
-        }
 
     class resource.ResourceResponsibility  {
         YearMonthDay begin;

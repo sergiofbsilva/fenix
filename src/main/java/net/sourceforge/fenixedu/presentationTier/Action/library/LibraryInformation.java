@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.person.RoleType;
 import net.sourceforge.fenixedu.domain.space.Space;
 import net.sourceforge.fenixedu.presentationTier.renderers.providers.AbstractDomainObjectProvider;
@@ -20,7 +21,7 @@ public class LibraryInformation implements Serializable {
             LibraryInformation attendance = (LibraryInformation) source;
             Set<Space> availableSpaces = new HashSet<Space>();
             for (Space space : attendance.getLibrary().getActiveContainedSpaces()) {
-                if (space.canAddAttendance()) {
+                if (SpaceBridge.canAddAttendance(space)) {
                     availableSpaces.add(space);
                 }
             }

@@ -15,7 +15,7 @@ public class OpenPunctualRoomsOccupationRequest {
     public static void run(PunctualRoomsOccupationRequest request, Person person) {
         check(RolePredicates.RESOURCE_ALLOCATION_MANAGER_PREDICATE);
         if (request != null) {
-            request.openRequestAndAssociateOwnerOnlyForEmployess(new DateTime(), person);
+            request.openRequestAndAssociateOwnerOnlyForEmployess(new DateTime(), person.getUser());
         }
     }
 }

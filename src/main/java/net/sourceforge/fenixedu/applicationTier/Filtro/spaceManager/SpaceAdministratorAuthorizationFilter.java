@@ -3,6 +3,7 @@ package net.sourceforge.fenixedu.applicationTier.Filtro.spaceManager;
 import net.sourceforge.fenixedu.applicationTier.Servico.exceptions.NotAuthorizedException;
 import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.space.AllocatableSpace;
+import net.sourceforge.fenixedu.domain.space.Space;
 
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.security.Authenticate;
@@ -15,7 +16,7 @@ public class SpaceAdministratorAuthorizationFilter {
         User userView = Authenticate.getUser();
         if (userView != null) {
             Person person = userView.getPerson();
-            if (!AllocatableSpace.personIsSpacesAdministrator(person)) {
+            if (!Space.personIsSpacesAdministrator(person.getUser())) {
                 throw new NotAuthorizedException();
             }
         } else {

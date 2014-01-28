@@ -22,6 +22,7 @@ import net.sourceforge.fenixedu.applicationTier.Servico.space.DeleteSpaceInforma
 import net.sourceforge.fenixedu.applicationTier.Servico.space.MergeRooms;
 import net.sourceforge.fenixedu.applicationTier.Servico.space.MoveSpace;
 import net.sourceforge.fenixedu.applicationTier.Servico.space.SpaceAccessGroupsManagement;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.InfoObject;
 import net.sourceforge.fenixedu.dataTransferObject.spaceManager.AccessGroupPersonBean;
 import net.sourceforge.fenixedu.dataTransferObject.spaceManager.MoveSpaceBean;
@@ -41,6 +42,7 @@ import net.sourceforge.fenixedu.domain.space.Blueprint;
 import net.sourceforge.fenixedu.domain.space.Blueprint.BlueprintTextRectangles;
 import net.sourceforge.fenixedu.domain.space.BlueprintFile;
 import net.sourceforge.fenixedu.domain.space.Building;
+import net.sourceforge.fenixedu.domain.space.Building.SpaceFactoryExecutor;
 import net.sourceforge.fenixedu.domain.space.Floor;
 import net.sourceforge.fenixedu.domain.space.PersonSpaceOccupation;
 import net.sourceforge.fenixedu.domain.space.Room;
@@ -50,7 +52,6 @@ import net.sourceforge.fenixedu.domain.space.SpaceComparator;
 import net.sourceforge.fenixedu.domain.space.SpaceInformation;
 import net.sourceforge.fenixedu.domain.space.SpaceResponsibility;
 import net.sourceforge.fenixedu.domain.space.UnitSpaceOccupation;
-import net.sourceforge.fenixedu.domain.util.FactoryExecutor;
 import net.sourceforge.fenixedu.presentationTier.Action.base.FenixDispatchAction;
 import net.sourceforge.fenixedu.presentationTier.Action.resourceAllocationManager.utils.PresentationConstants;
 import net.sourceforge.fenixedu.util.spaceBlueprints.SpaceBlueprintsDWGProcessor;
@@ -207,7 +208,7 @@ public class ManageSpacesDA extends FenixDispatchAction {
     public ActionForward prepareCreateSpaceInformation(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         final SpaceInformation spaceInformation = getSpaceInformationFromParameter(request);
-        final FactoryExecutor factoryExecutor = spaceInformation.getSpaceFactoryEditor();
+        final SpaceFactoryExecutor factoryExecutor = spaceInformation.getSpaceFactoryEditor();
         request.setAttribute("SpaceFactoryEditor", factoryExecutor);
         return mapping.findForward("CreateSpaceInformation");
     }
@@ -510,7 +511,7 @@ public class ManageSpacesDA extends FenixDispatchAction {
                         .toString() : "--");
 
                 StringBuilder builder = new StringBuilder();
-                for (ResourceResponsibility responsibility : room.getResourceResponsibility()) {
+                for (ResourceResponsibility responsibility : room.getResourceResponsibilitySet()) {
                     if (responsibility.isSpaceResponsibility()) {
                         Unit unit = ((SpaceResponsibility) responsibility).getUnit();
                         builder.append(unit.getPresentationName()).append("; ");
@@ -519,14 +520,14 @@ public class ManageSpacesDA extends FenixDispatchAction {
                 row.setCell(builder.toString());
 
                 builder = new StringBuilder();
-                for (UnitSpaceOccupation occupation : room.getUnitSpaceOccupations()) {
+                for (UnitSpaceOccupation occupation : SpaceBridge.getUnitSpaceOccupations(room)) {
                     Unit unit = occupation.getUnit();
                     builder.append(unit.getPresentationName()).append("; ");
                 }
                 row.setCell(builder.toString());
 
                 builder = new StringBuilder();
-                for (PersonSpaceOccupation occupation : room.getPersonSpaceOccupations()) {
+                for (PersonSpaceOccupation occupation : SpaceBridge.getPersonSpaceOccupations(room)) {
                     Person person = occupation.getPerson();
                     builder.append(person.getName() + " (" + person.getUsername() + "); ");
                 }
@@ -587,7 +588,7 @@ public class ManageSpacesDA extends FenixDispatchAction {
             }
 
             final BlueprintFile blueprintFile = mostRecentBlueprint.getBlueprintFile();
-            final byte[] blueprintBytes = blueprintFile.getContentFile().getBytes();
+            final byte[] blueprintBytes = blueprintFile.getContentFile();
             final InputStream inputStream = new ByteArrayInputStream(blueprintBytes);
             try {
                 BlueprintTextRectangles blueprintTextRectangles =
