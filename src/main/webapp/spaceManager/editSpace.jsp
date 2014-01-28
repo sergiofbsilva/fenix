@@ -94,7 +94,7 @@
 		
 		<bean:define id="person" name="LOGGED_USER_ATTRIBUTE" property="person" type="net.sourceforge.fenixedu.domain.Person"/>
 		<%
-			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 		%>
 		<fr:edit id="editRoom" name="selectedSpaceInformation" schema="EditRoomInformation" action="<%= url %>">
 			<fr:destination name="invalid" path="<%= invalidLink %>"/>

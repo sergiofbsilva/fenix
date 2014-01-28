@@ -18,7 +18,7 @@
 
 <bean:define id="person" name="LOGGED_USER_ATTRIBUTE" property="person" type="net.sourceforge.fenixedu.domain.Person"/>
 <%
-	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 %>
 <ul>
 	<li><html:link page="/showCreateSpaceForm.do"><bean:message bundle="SPACE_RESOURCES" key="link.create.space"/></html:link></li>
@@ -74,7 +74,7 @@
 					<td>
 						<bean:define id="thisSpace" name="space" type="net.sourceforge.fenixedu.domain.space.Space"/>					
 						<%
-							if(!thisSpace.personHasPermissionsToManageSpace(person)){
+							if(!thisSpace.personHasPermissionsToManageSpace(person.getUser())){
 						%>
 						<html:link page="<%= urlToManage %>">
 							<logic:equal name="space" property="class.name" value="net.sourceforge.fenixedu.domain.space.Campus">

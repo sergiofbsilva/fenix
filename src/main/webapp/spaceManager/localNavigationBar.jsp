@@ -19,7 +19,7 @@
 			</html:link>
 		</li>
 		<%
-			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 		%>	
 		<li>		
 			<html:link page="/listChangesInTheSpaces.do?method=changesList">

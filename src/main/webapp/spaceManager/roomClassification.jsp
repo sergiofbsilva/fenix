@@ -21,7 +21,7 @@
 </logic:messagesPresent>
 
 <%
-	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 %>
 <logic:notPresent name="roomClassificationEditor">
 	
@@ -51,7 +51,7 @@
 <%
 	}
 
-	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+	if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 %>
 <logic:present name="roomClassificationEditor">
 
@@ -89,7 +89,7 @@
         <fr:property name="columnClasses" value="aleft,aleft,aleft"/>
 		
 		<%
-			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person)){
+			if(net.sourceforge.fenixedu.domain.space.Space.personIsSpacesAdministrator(person.getUser())){
 		%>
 		<fr:property name="link(edit)" value="/roomClassification.do?method=prepareRoomClassification"/>
 		<fr:property name="param(edit)" value="externalId/roomClassificationID"/>

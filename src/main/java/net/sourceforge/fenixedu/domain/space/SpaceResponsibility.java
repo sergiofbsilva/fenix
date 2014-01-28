@@ -1,18 +1,14 @@
 package net.sourceforge.fenixedu.domain.space;
 
-import static net.sourceforge.fenixedu.injectionCode.AccessControl.check;
-
 import java.text.Collator;
 import java.util.Comparator;
 
-import net.sourceforge.fenixedu.domain.DomainObjectUtil;
-import net.sourceforge.fenixedu.domain.exceptions.DomainException;
+import net.sourceforge.fenixedu.domain.exception.SpaceDomainException;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Party;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Unit;
 import net.sourceforge.fenixedu.domain.resource.Resource;
 import net.sourceforge.fenixedu.domain.resource.ResourceResponsibility;
-import net.sourceforge.fenixedu.injectionCode.FenixDomainObjectActionLogAnnotation;
-import net.sourceforge.fenixedu.predicates.SpacePredicates;
+import net.sourceforge.fenixedu.util.DomainObjectUtil;
 
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -31,8 +27,8 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
         ((ComparatorChain) COMPARATOR_BY_UNIT_NAME_AND_RESPONSIBILITY_INTERVAL).addComparator(DomainObjectUtil.COMPARATOR_BY_ID);
     }
 
-    @FenixDomainObjectActionLogAnnotation(actionName = "Created space responsibility", parameters = { "space", "unit", "begin",
-            "end" })
+//    @FenixDomainObjectActionLogAnnotation(actionName = "Created space responsibility", parameters = { "space", "unit", "begin",
+//            "end" })
     public SpaceResponsibility(final Space space, final Unit unit, final YearMonthDay begin, final YearMonthDay end) {
 
         super();
@@ -43,18 +39,18 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
         super.setEnd(end);
     }
 
-    @FenixDomainObjectActionLogAnnotation(actionName = "Edited space responsibility", parameters = { "begin", "end" })
+//    @FenixDomainObjectActionLogAnnotation(actionName = "Edited space responsibility", parameters = { "begin", "end" })
     public void setSpaceResponsibilityInterval(final YearMonthDay begin, final YearMonthDay end) {
-        check(this, SpacePredicates.checkIfLoggedPersonHasPermissionsToManageResponsabilityUnits);
+//        check(this, SpacePredicates.checkIfLoggedPersonHasPermissionsToManageResponsabilityUnits);
         checkSpaceResponsabilityIntersection(begin, end, getUnit(), getSpace());
         super.setBegin(begin);
         super.setEnd(end);
     }
 
     @Override
-    @FenixDomainObjectActionLogAnnotation(actionName = "Deleted space responsibility", parameters = {})
+//    @FenixDomainObjectActionLogAnnotation(actionName = "Deleted space responsibility", parameters = {})
     public void delete() {
-        check(this, SpacePredicates.checkIfLoggedPersonHasPermissionsToManageResponsabilityUnits);
+//        check(this, SpacePredicates.checkIfLoggedPersonHasPermissionsToManageResponsabilityUnits);
         super.delete();
     }
 
@@ -65,18 +61,18 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
 
     @Override
     public void setBegin(YearMonthDay begin) {
-        throw new DomainException("error.invalid.operation");
+        throw new SpaceDomainException("error.invalid.operation");
     }
 
     @Override
     public void setEnd(YearMonthDay end) {
-        throw new DomainException("error.invalid.operation");
+        throw new SpaceDomainException("error.invalid.operation");
     }
 
     @Override
     public void setResource(Resource resource) {
         if (resource == null || !resource.isSpace()) {
-            throw new DomainException("error.space.responsability.no.space");
+            throw new SpaceDomainException("error.space.responsability.no.space");
         }
         super.setResource(resource);
     }
@@ -84,7 +80,7 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
     @Override
     public void setParty(Party party) {
         if (party == null || !party.isUnit() || party.isAggregateUnit()) {
-            throw new DomainException("error.space.responsability.no.unit");
+            throw new SpaceDomainException("error.space.responsability.no.unit");
         }
         super.setParty(party);
     }
@@ -111,10 +107,10 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
 
     private void checkBeginDateAndEndDate(YearMonthDay beginDate, YearMonthDay endDate) {
         if (beginDate == null) {
-            throw new DomainException("error.spaceResponsability.no.begin");
+            throw new SpaceDomainException("error.spaceResponsability.no.begin");
         }
         if (endDate != null && endDate.isBefore(beginDate)) {
-            throw new DomainException("error.begin.after.end");
+            throw new SpaceDomainException("error.begin.after.end");
         }
     }
 
@@ -124,7 +120,7 @@ public class SpaceResponsibility extends SpaceResponsibility_Base {
             if (resourceResponsibility.isSpaceResponsibility() && !resourceResponsibility.equals(this)
                     && resourceResponsibility.getParty().equals(unit)
                     && ((SpaceResponsibility) resourceResponsibility).checkIntersections(begin, end)) {
-                throw new DomainException("error.spaceResponsibility.unit.intersection");
+                throw new SpaceDomainException("error.spaceResponsibility.unit.intersection");
             }
         }
     }
