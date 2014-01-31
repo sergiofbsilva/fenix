@@ -73,11 +73,6 @@ public class PersonSpaceOccupation extends PersonSpaceOccupation_Base {
     }
 
     @Override
-    public boolean isPersonSpaceOccupation() {
-        return true;
-    }
-
-    @Override
     public void setPerson(Person person) {
         if (person == null) {
             throw new DomainException("error.inexistente.person");

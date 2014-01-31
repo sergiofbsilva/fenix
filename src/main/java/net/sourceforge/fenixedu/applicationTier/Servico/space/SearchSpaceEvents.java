@@ -14,6 +14,9 @@ import net.sourceforge.fenixedu.domain.WrittenTest;
 import net.sourceforge.fenixedu.domain.space.AllocatableSpace;
 import net.sourceforge.fenixedu.domain.space.Building;
 import net.sourceforge.fenixedu.domain.space.EventSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.GenericEventSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.LessonInstanceSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.LessonSpaceOccupation;
 import net.sourceforge.fenixedu.domain.space.WrittenEvaluationSpaceOccupation;
 
 import org.joda.time.DateTime;
@@ -29,13 +32,13 @@ public class SearchSpaceEvents {
     }
 
     private static OccupationType getType(EventSpaceOccupation occupation) {
-        if (occupation.isLessonSpaceOccupation() || occupation.isLessonInstanceSpaceOccupation()) {
+        if (occupation instanceof LessonSpaceOccupation || occupation instanceof LessonInstanceSpaceOccupation) {
             return OccupationType.LESSON;
         }
-        if (occupation.isGenericEventSpaceOccupation()) {
+        if (occupation instanceof GenericEventSpaceOccupation) {
             return OccupationType.GENERIC;
         }
-        if (occupation.isWrittenEvaluationSpaceOccupation()) {
+        if (occupation instanceof WrittenEvaluationSpaceOccupation) {
             return OccupationType.EVALUATION;
         }
         return null;
@@ -58,7 +61,7 @@ public class SearchSpaceEvents {
                 if (!types.contains(occupationType)) {
                     continue;
                 }
-                if (occupation.isWrittenEvaluationSpaceOccupation()) {
+                if (occupation instanceof WrittenEvaluationSpaceOccupation) {
                     WrittenEvaluationSpaceOccupation evalOccupation = (WrittenEvaluationSpaceOccupation) occupation;
                     for (WrittenEvaluation eval : evalOccupation.getWrittenEvaluations()) {
                         final Interval durationInterval = eval.getDurationInterval();

@@ -1,7 +1,6 @@
 <%@page import="net.sourceforge.fenixedu.domain.accounting.events.MicroPaymentEvent"%>
 <%@page import="pt.utl.ist.fenix.tools.resources.IMessageResourceProvider"%>
 <%@page import="java.util.Properties"%>
-<%@page import="net.sourceforge.fenixedu.presentationTier.renderers.LabelFormatterRenderer"%>
 <%@page import="net.sourceforge.fenixedu.presentationTier.renderers.util.RendererMessageResourceProvider"%>
 <%@page import="net.sourceforge.fenixedu.util.Money"%>
 <%@page import="java.util.ArrayList"%>

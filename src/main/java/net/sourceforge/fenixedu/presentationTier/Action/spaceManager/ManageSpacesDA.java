@@ -76,6 +76,8 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.utl.ist.fenix.tools.util.excel.Spreadsheet;
 import pt.utl.ist.fenix.tools.util.excel.Spreadsheet.Row;
 
+import com.google.common.collect.FluentIterable;
+
 @Mapping(module = "SpaceManager", path = "/manageSpaces", attribute = "spaceContextForm", formBean = "spaceContextForm",
         scope = "request", parameter = "method")
 @Forwards(value = {
@@ -456,8 +458,15 @@ public class ManageSpacesDA extends FenixDispatchAction {
         request.setAttribute("selectedSpace", space);
         request.setAttribute("spaces", spaces);
         request.setAttribute("selectedSpaceInformation", spaceInformation);
-
+        request.setAttribute("activeUnitSpaceOccupations", SpaceBridge.getUnitSpaceOccupations(space));
+        request.setAttribute("activePersonSpaceOccupations", SpaceBridge.getPersonSpaceOccupations(space));
+        request.setAttribute("activeSpaceResponsibility", getActiveSpaceResponsibility(space));
         return mapping.findForward("ManageSpace");
+    }
+
+    private SortedSet<SpaceResponsibility> getActiveSpaceResponsibility(Space space) {
+        return FluentIterable.from(space.getActiveResourceResponsibility()).filter(SpaceResponsibility.class)
+                .toSortedSet(SpaceResponsibility.COMPARATOR_BY_UNIT_NAME_AND_RESPONSIBILITY_INTERVAL);
     }
 
     private void exportToXls(Space space, OutputStream outputStream) throws IOException {

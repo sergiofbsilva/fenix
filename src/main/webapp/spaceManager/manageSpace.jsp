@@ -397,14 +397,14 @@
 
 	<%-- Responsability --%>	
 	<h3 class="mtop2 mbottom05"><bean:message bundle="SPACE_RESOURCES" key="label.active.responsible.units"/></h3>
-	<logic:notEmpty name="selectedSpaceInformation" property="space.activeSpaceResponsibility">
-		<fr:view schema="ViewSpaceResponsibleUnits" name="selectedSpaceInformation" property="space.activeSpaceResponsibility">
+	<logic:notEmpty name="activeSpaceResponsibility">
+		<fr:view schema="ViewSpaceResponsibleUnits" name="activeSpaceResponsibility">
 			<fr:layout name="tabular">      			
 	   			<fr:property name="classes" value="tstyle4 thlight tdcenter mvert0"/>
 	   		</fr:layout>	
 		</fr:view>
 	</logic:notEmpty>
-	<logic:empty name="selectedSpaceInformation" property="space.activeSpaceResponsibility">
+	<logic:empty name="activeSpaceResponsibility">
 		<p class="mtop05 mbottom025"><em><bean:message key="label.empty.responsibility" bundle="SPACE_RESOURCES"/>.</em></p>		
 	</logic:empty>
 	<%
@@ -421,14 +421,14 @@
 	
 	<%-- Unit Occupations --%>	
 	<h3 class="mtop2 mbottom05"><bean:message bundle="SPACE_RESOURCES" key="label.active.unit.occupations"/></h3>
-	<logic:notEmpty name="selectedSpaceInformation" property="space.activeUnitSpaceOccupations">
-		<fr:view schema="ViewUnitSpaceOccupations" name="selectedSpaceInformation" property="space.activeUnitSpaceOccupations">
+	<logic:notEmpty name="activeUnitSpaceOccupations">
+		<fr:view schema="ViewUnitSpaceOccupations" name="activeUnitSpaceOccupations">
 			<fr:layout name="tabular">      			
 	   			<fr:property name="classes" value="tstyle4 thlight tdcenter mvert0"/>
 	   		</fr:layout>	
 		</fr:view>
 	</logic:notEmpty>
-	<logic:empty name="selectedSpaceInformation" property="space.activeUnitSpaceOccupations">
+	<logic:empty name="activeUnitSpaceOccupations">
 		<p class="mtop05 mbottom025"><em><bean:message key="label.empty.unitSpaceOccupations" bundle="SPACE_RESOURCES"/>.</em></p>		
 	</logic:empty>
 	<%
@@ -445,14 +445,14 @@
 	
 	<%-- Person Occupations --%>	
 	<h3 class="mtop2 mbottom05"><bean:message bundle="SPACE_RESOURCES" key="label.active.person.occupations"/></h3>
-	<logic:notEmpty name="selectedSpaceInformation" property="space.activePersonSpaceOccupations">
-		<fr:view schema="PersonSpaceOccupationsWithUsername" name="selectedSpaceInformation" property="space.activePersonSpaceOccupations">
+	<logic:notEmpty name="activePersonSpaceOccupations">
+		<fr:view schema="PersonSpaceOccupationsWithUsername" name="activePersonSpaceOccupations">
 			<fr:layout name="tabular">      			
 	   			<fr:property name="classes" value="tstyle4 thlight tdcenter mvert0"/>
 	   		</fr:layout>	
 		</fr:view>	
 	</logic:notEmpty>
-	<logic:empty name="selectedSpaceInformation" property="space.activePersonSpaceOccupations">
+	<logic:empty name="activePersonSpaceOccupations">
 		<p class="mtop05 mbottom025"><em><bean:message key="label.empty.person.occupations" bundle="SPACE_RESOURCES"/>.</em></p>		
 	</logic:empty>
 	<%

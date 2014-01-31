@@ -78,7 +78,7 @@ public class ReadExamsMapByRooms {
         final List<InfoExam> result = new ArrayList<InfoExam>();
         final AllocatableSpace oldRoom = (AllocatableSpace) FenixFramework.getDomainObject(infoRoom.getExternalId());
         for (final ResourceAllocation roomOccupation : oldRoom.getResourceAllocationsSet()) {
-            if (roomOccupation.isWrittenEvaluationSpaceOccupation()) {
+            if (roomOccupation instanceof WrittenEvaluationSpaceOccupation) {
                 Collection<WrittenEvaluation> writtenEvaluations =
                         ((WrittenEvaluationSpaceOccupation) roomOccupation).getWrittenEvaluationsSet();
                 for (WrittenEvaluation writtenEvaluation : writtenEvaluations) {

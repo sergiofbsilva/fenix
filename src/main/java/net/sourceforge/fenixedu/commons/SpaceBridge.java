@@ -197,7 +197,7 @@ public class SpaceBridge {
     public static List<UnitSpaceOccupation> getUnitSpaceOccupations(Space space) {
         List<UnitSpaceOccupation> unitSpaceOccupations = new ArrayList<UnitSpaceOccupation>();
         for (ResourceAllocation allocation : space.getResourceAllocationsSet()) {
-            if (allocation.isUnitSpaceOccupation()) {
+            if (allocation instanceof UnitSpaceOccupation) {
                 unitSpaceOccupations.add((UnitSpaceOccupation) allocation);
             }
         }
@@ -207,7 +207,7 @@ public class SpaceBridge {
     public static List<PersonSpaceOccupation> getPersonSpaceOccupations(Space space) {
         List<PersonSpaceOccupation> personSpaceOccupations = new ArrayList<PersonSpaceOccupation>();
         for (ResourceAllocation allocation : space.getResourceAllocationsSet()) {
-            if (allocation.isPersonSpaceOccupation()) {
+            if (allocation instanceof PersonSpaceOccupation) {
                 personSpaceOccupations.add((PersonSpaceOccupation) allocation);
             }
         }
@@ -243,7 +243,7 @@ public class SpaceBridge {
     public static List<Lesson> getAssociatedLessons(final Space space, final ExecutionSemester executionSemester) {
         final List<Lesson> lessons = new ArrayList<Lesson>();
         for (ResourceAllocation spaceOccupation : space.getResourceAllocations()) {
-            if (spaceOccupation.isLessonSpaceOccupation()) {
+            if (spaceOccupation instanceof LessonSpaceOccupation) {
                 LessonSpaceOccupation roomOccupation = (LessonSpaceOccupation) spaceOccupation;
                 final Lesson lesson = roomOccupation.getLesson();
                 if (lesson.getExecutionPeriod() == executionSemester) {
@@ -257,7 +257,7 @@ public class SpaceBridge {
     public static List<Lesson> getAssociatedLessons(final Space space, AcademicInterval academicInterval) {
         final List<Lesson> lessons = new ArrayList<Lesson>();
         for (ResourceAllocation spaceOccupation : space.getResourceAllocations()) {
-            if (spaceOccupation.isLessonSpaceOccupation()) {
+            if (spaceOccupation instanceof LessonSpaceOccupation) {
                 LessonSpaceOccupation roomOccupation = (LessonSpaceOccupation) spaceOccupation;
                 final Lesson lesson = roomOccupation.getLesson();
                 if (lesson.getAcademicInterval().equals(academicInterval)) {

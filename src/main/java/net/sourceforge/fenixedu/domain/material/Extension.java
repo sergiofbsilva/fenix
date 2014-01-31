@@ -4,7 +4,7 @@ import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Unit;
 import net.sourceforge.fenixedu.domain.resource.Resource;
 import net.sourceforge.fenixedu.domain.space.ExtensionSpaceOccupation;
-import net.sourceforge.fenixedu.domain.space.MaterialSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.SpaceOccupation;
 
 import org.apache.commons.lang.StringUtils;
 import org.fenixedu.bennu.core.domain.Bennu;
@@ -40,7 +40,7 @@ public class Extension extends Extension_Base {
     }
 
     @Override
-    public Class<? extends MaterialSpaceOccupation> getMaterialSpaceOccupationSubClass() {
+    public Class<? extends SpaceOccupation> getMaterialSpaceOccupationSubClass() {
         return ExtensionSpaceOccupation.class;
     }
 
@@ -57,14 +57,9 @@ public class Extension extends Extension_Base {
         super.setIdentification(identification);
     }
 
-    @Override
-    public boolean isExtension() {
-        return true;
-    }
-
     public static Extension readByNumber(Integer number) {
         for (Resource resource : Bennu.getInstance().getResourcesSet()) {
-            if (resource.isExtension() && ((Extension) resource).getIdentification() != null
+            if (resource instanceof Extension && ((Extension) resource).getIdentification() != null
                     && ((Extension) resource).getIdentification().equals(number)) {
                 return (Extension) resource;
             }

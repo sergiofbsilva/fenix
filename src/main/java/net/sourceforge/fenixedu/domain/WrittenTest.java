@@ -17,6 +17,8 @@ import net.sourceforge.fenixedu.domain.person.RoleType;
 import net.sourceforge.fenixedu.domain.resource.ResourceAllocation;
 import net.sourceforge.fenixedu.domain.space.AllocatableSpace;
 import net.sourceforge.fenixedu.domain.space.EventSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.LessonInstanceSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.LessonSpaceOccupation;
 import net.sourceforge.fenixedu.domain.student.Registration;
 import net.sourceforge.fenixedu.domain.util.icalendar.EvaluationEventBean;
 import net.sourceforge.fenixedu.predicates.WrittenTestPredicates;
@@ -243,7 +245,7 @@ public class WrittenTest extends WrittenTest_Base {
         for (ResourceAllocation resourceAllocation : room.getResourceAllocationsForCheck()) {
             if (resourceAllocation.isEventSpaceOccupation()) {
                 EventSpaceOccupation eventSpaceOccupation = (EventSpaceOccupation) resourceAllocation;
-                if (!eventSpaceOccupation.isLessonInstanceSpaceOccupation() && !eventSpaceOccupation.isLessonSpaceOccupation()) {
+                if (!(eventSpaceOccupation instanceof LessonInstanceSpaceOccupation) && !(eventSpaceOccupation instanceof LessonSpaceOccupation)) {
                     if (eventSpaceOccupation.alreadyWasOccupiedIn(getBeginningDateTime().toYearMonthDay(), getEndDateTime()
                             .toYearMonthDay(), getBeginningDateHourMinuteSecond(), getEndDateHourMinuteSecond(), getDayOfWeek(),
                             null, null, null)) {

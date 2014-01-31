@@ -12,7 +12,7 @@ import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Unit;
 import net.sourceforge.fenixedu.domain.resource.Resource;
 import net.sourceforge.fenixedu.domain.resource.ResourceResponsibility;
-import net.sourceforge.fenixedu.domain.space.MaterialSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.SpaceOccupation;
 
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections.comparators.ComparatorChain;
@@ -35,7 +35,7 @@ public abstract class Material extends Material_Base {
 
     public abstract String getMaterialSpaceOccupationSlotName();
 
-    public abstract Class<? extends MaterialSpaceOccupation> getMaterialSpaceOccupationSubClass();
+    public abstract Class<? extends SpaceOccupation> getMaterialSpaceOccupationSubClass();
 
     public abstract String getPresentationDetails();
 
@@ -64,7 +64,7 @@ public abstract class Material extends Material_Base {
     public void setOwner(Unit owner) {
         // Each material only have one owner
         deleteOwner();
-        new MaterialResponsibility(owner, this);
+//        new MaterialResponsibility(owner, this);
     }
 
     public Unit getOwner() {
@@ -166,16 +166,6 @@ public abstract class Material extends Material_Base {
         }
         Collections.sort(result, COMPARATOR_BY_IDENTIFICATION);
         return result;
-    }
-
-    @Deprecated
-    public java.util.Set<net.sourceforge.fenixedu.domain.space.MaterialSpaceOccupation> getMaterialSpaceOccupations() {
-        return getMaterialSpaceOccupationsSet();
-    }
-
-    @Deprecated
-    public boolean hasAnyMaterialSpaceOccupations() {
-        return !getMaterialSpaceOccupationsSet().isEmpty();
     }
 
     @Deprecated

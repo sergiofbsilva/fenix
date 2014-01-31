@@ -86,12 +86,7 @@ public class WrittenEvaluationSpaceOccupation extends WrittenEvaluationSpaceOccu
     }
 
     @Override
-    public boolean isWrittenEvaluationSpaceOccupation() {
-        return true;
-    }
-
-    @Override
-    protected boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
+    public boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
         return true;
     }
 

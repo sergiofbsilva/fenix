@@ -53,24 +53,24 @@ public class ReadLessonsExamsAndPunctualRoomsOccupationsInWeekAndRoom {
 
         for (final ResourceAllocation roomOccupation : room.getResourceAllocationsSet()) {
 
-            if (roomOccupation.isWrittenEvaluationSpaceOccupation()) {
+            if (roomOccupation instanceof WrittenEvaluationSpaceOccupation) {
                 Collection<WrittenEvaluation> writtenEvaluations =
                         ((WrittenEvaluationSpaceOccupation) roomOccupation).getWrittenEvaluationsSet();
                 getWrittenEvaluationRoomOccupations(infoShowOccupations, weekStartYearMonthDay, weekEndYearMonthDay,
                         writtenEvaluations);
             }
 
-            if (roomOccupation.isGenericEventSpaceOccupation()) {
+            if (roomOccupation instanceof GenericEventSpaceOccupation) {
                 final GenericEvent genericEvent = ((GenericEventSpaceOccupation) roomOccupation).getGenericEvent();
                 getGenericEventRoomOccupations(infoShowOccupations, weekStartYearMonthDay, weekEndYearMonthDay, genericEvent);
             }
 
-            if (roomOccupation.isLessonSpaceOccupation()) {
+            if (roomOccupation instanceof LessonSpaceOccupation) {
                 final Lesson lesson = ((LessonSpaceOccupation) roomOccupation).getLesson();
                 getLessonOccupations(infoShowOccupations, weekStartYearMonthDay, weekEndYearMonthDay.plusDays(1), lesson);
             }
 
-            if (roomOccupation.isLessonInstanceSpaceOccupation()) {
+            if (roomOccupation instanceof LessonInstanceSpaceOccupation) {
                 Collection<LessonInstance> lessonInstances =
                         ((LessonInstanceSpaceOccupation) roomOccupation).getLessonInstancesSet();
                 getLessonInstanceOccupations(infoShowOccupations, weekStartYearMonthDay, weekEndYearMonthDay, lessonInstances);

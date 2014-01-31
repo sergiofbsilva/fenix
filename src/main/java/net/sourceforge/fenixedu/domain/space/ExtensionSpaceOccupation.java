@@ -2,7 +2,6 @@ package net.sourceforge.fenixedu.domain.space;
 
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.material.Extension;
-import net.sourceforge.fenixedu.domain.material.Material;
 import net.sourceforge.fenixedu.injectionCode.FenixDomainObjectActionLogAnnotation;
 
 import org.fenixedu.bennu.core.domain.groups.Group;
@@ -37,13 +36,8 @@ public class ExtensionSpaceOccupation extends ExtensionSpaceOccupation_Base {
     }
 
     @Override
-    public boolean isExtensionSpaceOccupation() {
-        return true;
-    }
-
-    @Override
-    public void setMaterial(Material material) {
-        if (material == null || !material.isExtension()) {
+    public void setMaterial(Extension material) {
+        if (material == null || !(material instanceof Extension)) {
             throw new DomainException("error.extensionSpaceOccupation.no.extension");
         }
         super.setMaterial(material);
@@ -74,9 +68,8 @@ public class ExtensionSpaceOccupation extends ExtensionSpaceOccupation_Base {
 
     private void checkExtensionSpaceOccupationIntersection(YearMonthDay begin, YearMonthDay end, Extension extension) {
         checkBeginDateAndEndDate(begin, end);
-        for (MaterialSpaceOccupation materialSpaceOccupation : extension.getMaterialSpaceOccupations()) {
-            if (materialSpaceOccupation.isExtensionSpaceOccupation() && !materialSpaceOccupation.equals(this)
-                    && materialSpaceOccupation.getSpace().equals(getSpace())
+        for (ExtensionSpaceOccupation materialSpaceOccupation : extension.getMaterialSpaceOccupationsSet()) {
+            if (!materialSpaceOccupation.equals(this) && materialSpaceOccupation.getSpace().equals(getSpace())
                     && ((ExtensionSpaceOccupation) materialSpaceOccupation).occupationsIntersection(begin, end)) {
                 throw new DomainException("error.extensionSpaceOccupation.intersection");
             }

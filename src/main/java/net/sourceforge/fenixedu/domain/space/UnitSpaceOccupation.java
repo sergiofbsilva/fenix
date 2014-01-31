@@ -55,11 +55,6 @@ public class UnitSpaceOccupation extends UnitSpaceOccupation_Base {
     }
 
     @Override
-    public boolean isUnitSpaceOccupation() {
-        return true;
-    }
-
-    @Override
     public void setUnit(Unit unit) {
         if (unit == null) {
             throw new DomainException("error.unitSpaceOccupation.empty.unit");

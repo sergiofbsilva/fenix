@@ -4620,12 +4620,9 @@ valueType net.sourceforge.fenixedu.domain.accounting.events.export.PrintedPaymen
                 class space.WrittenEvaluationSpaceOccupation extends space.EventSpaceOccupation {
                 }
                 
-                class space.MaterialSpaceOccupation extends space.SpaceOccupation {
-                YearMonthDay begin;
-                YearMonthDay end;
-            }
-
-                class space.ExtensionSpaceOccupation extends space.MaterialSpaceOccupation {
+                class space.ExtensionSpaceOccupation extends space.SpaceOccupation {
+                  YearMonthDay begin;
+                	YearMonthDay end;
                 }
                 
 
@@ -4654,12 +4651,12 @@ valueType net.sourceforge.fenixedu.domain.accounting.events.export.PrintedPaymen
         		YearMonthDay begin;
         		YearMonthDay end;
     		}
-
-        class material.MaterialResponsibility extends resource.ResourceResponsibility {
-        }
-        
+	
         class space.SpaceResponsibility extends resource.ResourceResponsibility {
 		}
+		
+		class material.MaterialResponsibility extends resource.ResourceResponsibility {
+        }
 
     class serviceRequests.InstitutionRegistryCodeGenerator  {
         Integer currentFirstCycle;
@@ -12348,8 +12345,8 @@ relation MasterDegreeThesisStudentCurricularPlan {
 }
 
 relation MaterialSpaceOccupationMaterial {
-    material.Material playsRole material;
-    space.MaterialSpaceOccupation playsRole materialSpaceOccupations {
+    material.Extension playsRole material;
+    space.ExtensionSpaceOccupation playsRole materialSpaceOccupations {
         multiplicity *;
     }
 }

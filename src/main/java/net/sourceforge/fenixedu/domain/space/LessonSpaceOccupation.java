@@ -75,7 +75,7 @@ public class LessonSpaceOccupation extends LessonSpaceOccupation_Base {
     }
 
     @Override
-    protected boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
+    public boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
         return getPeriod() != null && getPeriod().nestedOccupationPeriodsIntersectDates(startDate, endDate);
     }
 
@@ -103,11 +103,6 @@ public class LessonSpaceOccupation extends LessonSpaceOccupation_Base {
         }
 
         return result;
-    }
-
-    @Override
-    public boolean isLessonSpaceOccupation() {
-        return true;
     }
 
     @Override

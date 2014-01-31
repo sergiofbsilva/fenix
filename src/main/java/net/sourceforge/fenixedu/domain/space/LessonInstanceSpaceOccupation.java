@@ -71,12 +71,7 @@ public class LessonInstanceSpaceOccupation extends LessonInstanceSpaceOccupation
     }
 
     @Override
-    public boolean isLessonInstanceSpaceOccupation() {
-        return true;
-    }
-
-    @Override
-    protected boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
+    public boolean intersects(YearMonthDay startDate, YearMonthDay endDate) {
         return true;
     }
 

@@ -28,7 +28,7 @@ public class WrittenEvaluationsByRoomBackingBean extends
             for (final AllocatableSpace room : rooms) {
                 final List<CalendarLink> calendarLinks = new ArrayList<CalendarLink>();
                 for (final ResourceAllocation roomOccupation : room.getResourceAllocationsSet()) {
-                    if (roomOccupation.isWrittenEvaluationSpaceOccupation()) {
+                    if (roomOccupation instanceof WrittenEvaluationSpaceOccupation) {
                         Collection<WrittenEvaluation> writtenEvaluations =
                                 ((WrittenEvaluationSpaceOccupation) roomOccupation).getWrittenEvaluationsSet();
                         for (WrittenEvaluation writtenEvaluation : writtenEvaluations) {
