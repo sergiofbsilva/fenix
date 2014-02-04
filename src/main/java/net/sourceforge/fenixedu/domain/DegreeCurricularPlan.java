@@ -19,6 +19,7 @@ import java.util.TreeSet;
 import net.sourceforge.fenixedu.applicationTier.strategy.degreeCurricularPlan.DegreeCurricularPlanStrategyFactory;
 import net.sourceforge.fenixedu.applicationTier.strategy.degreeCurricularPlan.IDegreeCurricularPlanStrategyFactory;
 import net.sourceforge.fenixedu.applicationTier.strategy.degreeCurricularPlan.strategys.IDegreeCurricularPlanStrategy;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.CurricularPeriodInfoDTO;
 import net.sourceforge.fenixedu.dataTransferObject.ExecutionCourseView;
 import net.sourceforge.fenixedu.domain.accessControl.FixedSetGroup;
@@ -1576,7 +1577,7 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         if (hasAnyExecutionDegrees()) {
             return getMostRecentExecutionDegree().getCampus().getSpaceCampus();
         }
-        return Campus.getDefaultCampus();
+        return SpaceBridge.getDefaultCampus();
     }
 
     @Override

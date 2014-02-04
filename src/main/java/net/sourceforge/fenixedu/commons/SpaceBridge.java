@@ -48,6 +48,8 @@ import org.joda.time.DateTime;
 
 import pt.ist.fenixframework.DomainObject;
 
+import com.google.common.collect.Ordering;
+
 public class SpaceBridge {
 
     public static String[] getIdentificationWords(String name) {
@@ -266,6 +268,13 @@ public class SpaceBridge {
             }
         }
         return lessons;
+    }
+
+    public static Campus getDefaultCampus() {
+        if (Bennu.getInstance().getDefaultCampus() == null) {
+            return Ordering.from(Space.COMPARATOR_BY_PRESENTATION_NAME).min(Space.getAllActiveCampus());
+        }
+        return Bennu.getInstance().getDefaultCampus();
     }
 
 }

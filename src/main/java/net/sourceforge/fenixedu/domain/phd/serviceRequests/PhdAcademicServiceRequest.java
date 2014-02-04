@@ -1,5 +1,6 @@
 package net.sourceforge.fenixedu.domain.phd.serviceRequests;
 
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.AcademicProgram;
 import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
@@ -52,7 +53,7 @@ abstract public class PhdAcademicServiceRequest extends PhdAcademicServiceReques
 
     public Campus getCampus() {
 //        return Campus.readActiveCampusByName("Alameda");
-        return Campus.getDefaultCampus();
+        return SpaceBridge.getDefaultCampus();
     }
 
     @Deprecated
