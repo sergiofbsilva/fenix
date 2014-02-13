@@ -35,13 +35,13 @@
 	</logic:messagesPresent>
 
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.active.responsible.units" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="activeSize" name="selectedSpaceInformation" property="space.activeSpaceResponsibility"/>
+	<bean:size id="activeSize" name="activeSpaceResponsibility"/>
 	<logic:equal name="activeSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.current.responsible.units" bundle="SPACE_RESOURCES"/>
 		</em>	
 	</logic:equal>
-	<fr:view schema="ViewSpaceResponsibleUnitsWithInterval" name="selectedSpaceInformation" property="space.activeSpaceResponsibility">
+	<fr:view schema="ViewSpaceResponsibleUnitsWithInterval" name="activeSpaceResponsibility">
 		<fr:layout name="tabular">      			
    			<fr:property name="classes" value="tstyle4 thlight tdcenter mtop05"/>
    			<fr:property name="columnClasses" value="aleft,,,,"/>
@@ -91,7 +91,7 @@
 
 			
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.other.responsible.units" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="inactiveSize" name="selectedSpaceInformation" property="space.inactiveSpaceResponsibility"/>
+	<bean:size id="inactiveSize" name="inactiveSpaceResponsibility"/>
 	<logic:equal name="inactiveSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.other.responsible.units" bundle="SPACE_RESOURCES"/>

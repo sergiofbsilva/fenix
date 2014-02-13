@@ -49,13 +49,13 @@
 	</logic:messagesPresent>
 
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.active.unit.occupations" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="activeSize" name="selectedSpaceInformation" property="space.activeUnitSpaceOccupations"/>
+	<bean:size id="activeSize" name="activeUnitSpaceOccupations"/>
 	<logic:equal name="activeSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.current.unit.occupations" bundle="SPACE_RESOURCES"/>
 		</em>	
 	</logic:equal>
-	<fr:view schema="ViewUnitSpaceOccupationsWithInterval" name="selectedSpaceInformation" property="space.activeUnitSpaceOccupations">
+	<fr:view schema="ViewUnitSpaceOccupationsWithInterval" name="activeUnitSpaceOccupations">
 		<fr:layout name="tabular">      			
    			<fr:property name="classes" value="tstyle4 thlight tdcenter mtop05"/>
    			<fr:property name="columnClasses" value="aleft,,,,"/>
@@ -96,13 +96,13 @@
 
 			
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.other.unit.space.occupations" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="inactiveSize" name="selectedSpaceInformation" property="space.inactiveUnitSpaceOccupations"/>
+	<bean:size id="inactiveSize" name="inactiveUnitSpaceOccupations"/>
 	<logic:equal name="inactiveSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.other.unit.occupations" bundle="SPACE_RESOURCES"/>
 		</em>	
 	</logic:equal>
-	<fr:view schema="ViewUnitSpaceOccupationsWithInterval" name="selectedSpaceInformation" property="space.inactiveUnitSpaceOccupations">
+	<fr:view schema="ViewUnitSpaceOccupationsWithInterval" name="inactiveUnitSpaceOccupations">
 		<fr:layout name="tabular">      			
    			<fr:property name="classes" value="tstyle4 thlight tdcenter mtop05"/>
    			<fr:property name="columnClasses" value="aleft,,,,"/>

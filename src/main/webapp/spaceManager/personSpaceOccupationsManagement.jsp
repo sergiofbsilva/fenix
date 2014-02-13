@@ -34,13 +34,13 @@
 	</logic:messagesPresent>
 	
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.active.person.occupations" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="activeSize" name="selectedSpaceInformation" property="space.activePersonSpaceOccupations"/>
+	<bean:size id="activeSize" name="activePersonSpaceOccupations"/>
 	<logic:equal name="activeSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.current.personOccupations" bundle="SPACE_RESOURCES"/>
 		</em>	
 	</logic:equal>
-	<fr:view schema="PersonSpaceOccupations" name="selectedSpaceInformation" property="space.activePersonSpaceOccupations">
+	<fr:view schema="PersonSpaceOccupations" name="activePersonSpaceOccupations">
 		<fr:layout name="tabular">      			
    			<fr:property name="classes" value="tstyle4 thlight tdcenter mtop05"/>
    			   			
@@ -102,13 +102,13 @@
 	</logic:notEmpty>
 		
 	<p class="mtop2 mbottom05"><strong><bean:message key="label.inactive.person.occupations" bundle="SPACE_RESOURCES"/></strong></p>
-	<bean:size id="inactiveSize" name="selectedSpaceInformation" property="space.inactivePersonSpaceOccupations"/>
+	<bean:size id="inactiveSize" name="inactivePersonSpaceOccupations"/>
 	<logic:equal name="inactiveSize" value="0">
 		<em><!-- Error messages go here -->
 			<bean:message key="label.space.no.other.personOccupations" bundle="SPACE_RESOURCES"/>
 		</em>
 	</logic:equal>
-	<fr:view schema="PersonSpaceOccupations" name="selectedSpaceInformation" property="space.inactivePersonSpaceOccupations">
+	<fr:view schema="PersonSpaceOccupations" name="inactivePersonSpaceOccupations">
 		<fr:layout name="tabular">      			
    			<fr:property name="classes" value="tstyle4 thlight tdcenter mtop05"/>
    			   			   			

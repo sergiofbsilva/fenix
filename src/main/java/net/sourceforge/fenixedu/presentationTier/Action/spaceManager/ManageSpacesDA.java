@@ -459,13 +459,13 @@ public class ManageSpacesDA extends FenixDispatchAction {
         request.setAttribute("spaces", spaces);
         request.setAttribute("selectedSpaceInformation", spaceInformation);
         request.setAttribute("activeUnitSpaceOccupations", SpaceBridge.getUnitSpaceOccupations(space));
-        request.setAttribute("activePersonSpaceOccupations", SpaceBridge.getPersonSpaceOccupations(space));
+        request.setAttribute("activePersonSpaceOccupations", SpaceBridge.getActivePersonSpaceOccupations(space));
         request.setAttribute("activeSpaceResponsibility", getActiveSpaceResponsibility(space));
         return mapping.findForward("ManageSpace");
     }
 
     private SortedSet<SpaceResponsibility> getActiveSpaceResponsibility(Space space) {
-        return FluentIterable.from(space.getActiveResourceResponsibility()).filter(SpaceResponsibility.class)
+        return FluentIterable.from(space.getResourceResponsibility(true)).filter(SpaceResponsibility.class)
                 .toSortedSet(SpaceResponsibility.COMPARATOR_BY_UNIT_NAME_AND_RESPONSIBILITY_INTERVAL);
     }
 

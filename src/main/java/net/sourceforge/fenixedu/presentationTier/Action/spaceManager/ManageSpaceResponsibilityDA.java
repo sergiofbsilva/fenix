@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.fenixedu.applicationTier.Servico.exceptions.FenixServiceException;
 import net.sourceforge.fenixedu.applicationTier.Servico.space.DeleteSpaceResponsibility;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.parking.SearchPartyBean;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Unit;
@@ -62,6 +63,9 @@ public class ManageSpaceResponsibilityDA extends FenixDispatchAction {
         setSpaceInformation(request, spaceInformation);
         request.setAttribute("possibleInternalUnits", UnitUtils.readAllInternalActiveUnitsThatCanBeResponsibleOfSpaces());
         request.setAttribute("searchExternalPartyBean", new SearchPartyBean());
+        request.setAttribute("activeSpaceResponsibility", SpaceBridge.getActiveSpaceResponsibility(spaceInformation.getSpace()));
+        request.setAttribute("inactiveSpaceResponsibility",
+                SpaceBridge.getInactiveSpaceResponsibility(spaceInformation.getSpace()));
     }
 
     public ActionForward prepareEditSpaceResponsibility(ActionMapping mapping, ActionForm form, HttpServletRequest request,

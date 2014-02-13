@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.fenixedu.applicationTier.Servico.exceptions.FenixServiceException;
 import net.sourceforge.fenixedu.applicationTier.Servico.space.DeleteUnitSpaceOccupation;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.dataTransferObject.parking.SearchPartyBean;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.organizationalStructure.Unit;
@@ -107,6 +108,9 @@ public class ManageUnitSpaceOccupationsDA extends FenixDispatchAction {
         request.setAttribute("selectedSpace", spaceInformation.getSpace());
         request.setAttribute("initialUnit", UnitUtils.readInstitutionUnit());
         request.setAttribute("searchExternalPartyBean", new SearchPartyBean());
+        request.setAttribute("activeUnitSpaceOccupations", SpaceBridge.getActiveUnitSpaceOccupations(spaceInformation.getSpace()));
+        request.setAttribute("inactiveUnitSpaceOccupations",
+                SpaceBridge.getInactiveUnitSpaceOccupations(spaceInformation.getSpace()));
     }
 
     private Unit getUnit(final HttpServletRequest request) {

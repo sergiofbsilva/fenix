@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sourceforge.fenixedu.applicationTier.Servico.exceptions.FenixServiceException;
 import net.sourceforge.fenixedu.applicationTier.Servico.space.DeletePersonSpaceOccupation;
+import net.sourceforge.fenixedu.commons.SpaceBridge;
 import net.sourceforge.fenixedu.domain.Person;
 import net.sourceforge.fenixedu.domain.exceptions.DomainException;
 import net.sourceforge.fenixedu.domain.space.PersonSpaceOccupation;
@@ -87,6 +88,10 @@ public class ManagePersonSpaceOccupationsDA extends FenixDispatchAction {
     private void setSpaceAndSpaceInfo(HttpServletRequest request, final SpaceInformation spaceInformation) {
         request.setAttribute("selectedSpaceInformation", spaceInformation);
         request.setAttribute("selectedSpace", spaceInformation.getSpace());
+        request.setAttribute("activePersonSpaceOccupations",
+                SpaceBridge.getActivePersonSpaceOccupations(spaceInformation.getSpace()));
+        request.setAttribute("inactivePersonSpaceOccupations",
+                SpaceBridge.getInactivePersonSpaceOccupations(spaceInformation.getSpace()));
     }
 
     private SpaceInformation getSpaceInformationFromParameter(final HttpServletRequest request) {

@@ -109,6 +109,7 @@
     			</executions>
     			<configuration>
     				<includeInProject>false</includeInProject>
+					<skip>true</skip>
     			</configuration>
     			
 			    <!-- Use the Tomcat 6 JSP compiler -->

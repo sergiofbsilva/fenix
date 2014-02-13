@@ -128,7 +128,8 @@ public class FindSpacesDA extends FenixDispatchAction {
             request.setAttribute("selectedSpace",
                     new FindSpacesBean(space, AcademicInterval.readDefaultAcademicInterval(AcademicPeriod.SEMESTER)));
         }
-
+        request.setAttribute("activePersonSpaceOccupations", SpaceBridge.getActivePersonSpaceOccupations(space));
+        request.setAttribute("writtenEvaluationSpaceOccupations", SpaceBridge.getWrittenEvaluationSpaceOccupations(space));
         return mapping.findForward("viewSelectedSpace");
     }
 

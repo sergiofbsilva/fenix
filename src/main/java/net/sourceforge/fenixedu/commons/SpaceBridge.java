@@ -19,6 +19,7 @@ import net.sourceforge.fenixedu.domain.WrittenEvaluation;
 import net.sourceforge.fenixedu.domain.exception.SpaceDomainException;
 import net.sourceforge.fenixedu.domain.resource.Resource;
 import net.sourceforge.fenixedu.domain.resource.ResourceAllocation;
+import net.sourceforge.fenixedu.domain.resource.ResourceResponsibility;
 import net.sourceforge.fenixedu.domain.space.Blueprint;
 import net.sourceforge.fenixedu.domain.space.Building;
 import net.sourceforge.fenixedu.domain.space.BuildingInformation;
@@ -37,6 +38,7 @@ import net.sourceforge.fenixedu.domain.space.Space;
 import net.sourceforge.fenixedu.domain.space.SpaceAttendances;
 import net.sourceforge.fenixedu.domain.space.SpaceResponsibility;
 import net.sourceforge.fenixedu.domain.space.UnitSpaceOccupation;
+import net.sourceforge.fenixedu.domain.space.WrittenEvaluationSpaceOccupation;
 import net.sourceforge.fenixedu.domain.time.calendarStructure.AcademicInterval;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,9 +47,12 @@ import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.security.Authenticate;
 import org.fenixedu.commons.StringNormalizer;
 import org.joda.time.DateTime;
+import org.joda.time.YearMonthDay;
 
 import pt.ist.fenixframework.DomainObject;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
 
 public class SpaceBridge {
@@ -197,23 +202,84 @@ public class SpaceBridge {
     }
 
     public static List<UnitSpaceOccupation> getUnitSpaceOccupations(Space space) {
-        List<UnitSpaceOccupation> unitSpaceOccupations = new ArrayList<UnitSpaceOccupation>();
-        for (ResourceAllocation allocation : space.getResourceAllocationsSet()) {
-            if (allocation instanceof UnitSpaceOccupation) {
-                unitSpaceOccupations.add((UnitSpaceOccupation) allocation);
+        return FluentIterable.from(space.getResourceAllocationsSet()).filter(UnitSpaceOccupation.class).toList();
+    }
+
+    private static List<UnitSpaceOccupation> getUnitSpaceOccupations(Space space, final boolean isActive) {
+        return FluentIterable.from(getUnitSpaceOccupations(space)).filter(new Predicate<UnitSpaceOccupation>() {
+
+            private final YearMonthDay now = new YearMonthDay();
+
+            @Override
+            public boolean apply(UnitSpaceOccupation input) {
+                return input.isActive(now) == isActive;
+
             }
-        }
-        return unitSpaceOccupations;
+        }).toList();
+    }
+
+    public static List<UnitSpaceOccupation> getActiveUnitSpaceOccupations(Space space) {
+        return getUnitSpaceOccupations(space, true);
+    }
+
+    public static List<UnitSpaceOccupation> getInactiveUnitSpaceOccupations(Space space) {
+        return getUnitSpaceOccupations(space, false);
     }
 
     public static List<PersonSpaceOccupation> getPersonSpaceOccupations(Space space) {
-        List<PersonSpaceOccupation> personSpaceOccupations = new ArrayList<PersonSpaceOccupation>();
+        return FluentIterable.from(space.getResourceAllocationsSet()).filter(PersonSpaceOccupation.class)
+                .toSortedList(PersonSpaceOccupation.COMPARATOR_BY_PERSON_NAME_AND_OCCUPATION_INTERVAL);
+    }
+
+    public static List<PersonSpaceOccupation> getActivePersonSpaceOccupations(Space space) {
+        return getPersonSpaceOccupations(space, true);
+    }
+
+    private static List<PersonSpaceOccupation> getPersonSpaceOccupations(Space space, final boolean isActive) {
+        return FluentIterable.from(getPersonSpaceOccupations(space)).filter(new Predicate<PersonSpaceOccupation>() {
+
+            private final YearMonthDay now = new YearMonthDay();
+
+            @Override
+            public boolean apply(PersonSpaceOccupation input) {
+                return input.contains(now) == isActive;
+
+            }
+        }).toList();
+    }
+
+    public static List<PersonSpaceOccupation> getInactivePersonSpaceOccupations(Space space) {
+        return getPersonSpaceOccupations(space, false);
+    }
+
+    public static SortedSet<SpaceResponsibility> getActiveSpaceResponsibility(Space space) {
+        return getSpaceResponsabilityByState(space, true);
+    }
+
+    public static SortedSet<SpaceResponsibility> getInactiveSpaceResponsibility(Space space) {
+        return getSpaceResponsabilityByState(space, false);
+    }
+
+    public static List<WrittenEvaluationSpaceOccupation> getWrittenEvaluationSpaceOccupations(Space space) {
+        List<WrittenEvaluationSpaceOccupation> occupations = new ArrayList<WrittenEvaluationSpaceOccupation>();
         for (ResourceAllocation allocation : space.getResourceAllocationsSet()) {
-            if (allocation instanceof PersonSpaceOccupation) {
-                personSpaceOccupations.add((PersonSpaceOccupation) allocation);
+            if (allocation.isWrittenEvaluationSpaceOccupation()) {
+                occupations.add((WrittenEvaluationSpaceOccupation) allocation);
             }
         }
-        return personSpaceOccupations;
+        return occupations;
+    }
+
+    private static SortedSet<SpaceResponsibility> getSpaceResponsabilityByState(Space space, boolean state) {
+        SortedSet<SpaceResponsibility> spaceResponsibility =
+                new TreeSet<SpaceResponsibility>(SpaceResponsibility.COMPARATOR_BY_UNIT_NAME_AND_RESPONSIBILITY_INTERVAL);
+        YearMonthDay current = new YearMonthDay();
+        for (ResourceResponsibility responsibility : space.getResourceResponsibility(state)) {
+            if (responsibility.isSpaceResponsibility() && responsibility.isActive(current) == state) {
+                spaceResponsibility.add((SpaceResponsibility) responsibility);
+            }
+        }
+        return spaceResponsibility;
     }
 
     public static int currentAttendaceCount(Space space) {
