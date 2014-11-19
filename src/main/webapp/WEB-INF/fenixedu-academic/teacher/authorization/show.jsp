@@ -8,10 +8,12 @@
 <spring:url var="createUrl" value="/teacher/authorizations/create"></spring:url>
 <spring:url var="searchUrl" value="/teacher/authorizations"></spring:url>
 <spring:url var="downloadUrl" value="/teacher/authorizations/download"></spring:url>
-<spring:url var="showRevokedUrl" value="/teacher/authorizations/revoked"></spring:url>
-<spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
 <spring:url var="revokeUrl" value="/teacher/authorizations"></spring:url>
 
+<spring:url var="showActiveAuthorizationsUrl" value="/teacher/authorizations"></spring:url>
+<spring:url var="showRevokedUrl" value="/teacher/authorizations/revoked"></spring:url>
+<spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
+<spring:url var="uploadUrl" value="/teacher/authorizations/upload"></spring:url>
 
 <script type='text/javascript'>
 
@@ -22,9 +24,13 @@ $(document).ready(function() {
 	$("button#search").click(function(el) {
 		$("form#search").attr('action', "${searchUrl}");
 	});
+	$("button#download").click(function(el) {
+		$("form#search").attr('action', "${downloadUrl}");
+	});
 });
 
 </script>
+
 <div class="page-header">
 	<h1>
 		<spring:message code="teacher.authorizations.title" />
@@ -32,8 +38,12 @@ $(document).ready(function() {
 	</h1>
 </div>
 <section>
-	<a class="btn btn-default" href="${showRevokedUrl}"><spring:message code="teacher.authorizations.view.revoked"/></a>
-	<a class="btn btn-default" href="${showCategoriesUrl}"><spring:message code="teacher.categories"/></a>
+	<div class="btn-group" role="group">
+		<a class="btn btn-default active" href="${showActiveAuthorizationsUrl}"><spring:message code="teacher.authorizations.view.current"/></a>
+		<a class="btn btn-default" href="${showRevokedUrl}"><spring:message code="teacher.authorizations.view.revoked"/></a>
+		<a class="btn btn-default" href="${uploadUrl}"><spring:message code="teacher.authorizations.upload"/></a>
+		<a class="btn btn-default" href="${showCategoriesUrl}"><spring:message code="teacher.categories"/></a>
+	</div>
 </section>
 <hr />
 <section>
@@ -56,6 +66,7 @@ $(document).ready(function() {
 		<div class="form-group">
 			<div class="col-sm-push-1 col-sm-11">
 				<button type="submit" class="btn btn-default" id="search"><spring:message code="teacher.authorizations.search" /></button>
+				<button type="submit" class="btn btn-default" id="download"><spring:message code="teacher.authorizations.download" /></button>
 				<button type="submit" class="btn btn-primary" id="create"><spring:message code="label.create" /></button>
 			</div>				
 		</div>
@@ -70,7 +81,7 @@ $(document).ready(function() {
 			<spring:message code="teacher.authorizations.empty" ></spring:message>
 		</c:when>
 		<c:otherwise>
-			<table class="table">
+			<table class="table table-condensed">
 				<thead>
 					<th><spring:message code="teacher.authorizations.username" ></spring:message></th>
 					<th><spring:message code="teacher.authorizations.displayname" ></spring:message></th>
@@ -108,7 +119,7 @@ $(document).ready(function() {
 								<form:form method="POST" action="${revokeUrl}/${auth.externalId}/revoke" modelAttribute="search">
 									<form:hidden path="department"/>
 									<form:hidden path="period"/>
-									<button type="submit" class="btn btn-danger"><spring:message code="teacher.authorizations.revoke" /></button>
+									<button type="submit" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-remove-sign"></i> <spring:message code="teacher.authorizations.revoke" /></button>
 								</form:form>
 							</td>
 						</tr>
@@ -118,3 +129,13 @@ $(document).ready(function() {
 		</c:otherwise>		
 	</c:choose>
 </section>
+
+<style>
+	.table th {
+		text-align: center;
+	}
+	.table td {
+		vertical-align: middle !important;
+		text-align: center;
+	}
+</style>

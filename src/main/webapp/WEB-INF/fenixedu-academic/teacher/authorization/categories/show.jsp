@@ -1,10 +1,13 @@
-<%@ taglib uri="http://fenix-ashes.ist.utl.pt/fenix-renderers" prefix="fr"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <spring:url var="createUrl" value="/teacher/authorizations/categories/create"></spring:url>
 <spring:url var="editUrl" value="/teacher/authorizations/categories"></spring:url>
+
+<spring:url var="showActiveAuthorizationsUrl" value="/teacher/authorizations"></spring:url>
+<spring:url var="showRevokedUrl" value="/teacher/authorizations/revoked"></spring:url>
+<spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
+<spring:url var="uploadUrl" value="/teacher/authorizations/upload"></spring:url>
 
 ${portal.toolkit()}
 
@@ -13,9 +16,20 @@ ${portal.toolkit()}
 		<spring:message code="teacher.categories"/>
 	</h1>
 </div>
+
 <section>
-	<a class="btn btn-primary" href="${createUrl}"><spring:message code="label.create"/></a>
-	<table class="table">
+	<div class="btn-group" role="group">
+		<a class="btn btn-default" href="${showActiveAuthorizationsUrl}"><spring:message code="teacher.authorizations.view.current"/></a>
+		<a class="btn btn-default" href="${showRevokedUrl}"><spring:message code="teacher.authorizations.view.revoked"/></a>
+		<a class="btn btn-default" href="${uploadUrl}"><spring:message code="teacher.authorizations.upload"/></a>
+		<a class="btn btn-default active" href="${showCategoriesUrl}"><spring:message code="teacher.categories"/></a>
+	</div>
+</section>
+<hr />
+<section>
+	<a class="btn btn-primary" href="${createUrl}"><i class="glyphicon glyphicon-plus-sign"></i> <spring:message code="label.create.category"/></a>
+	<hr />
+	<table class="table table-condensed">
 		<thead>
 			<th><spring:message code="teacher.categories.code" /></th>
 			<th><spring:message code="teacher.categories.name" /></th>

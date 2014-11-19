@@ -4,7 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 ${portal.toolkit()}	
+
+<spring:url var="authorizationsUrl" value="/teacher/authorizations"></spring:url>
 <spring:url var="createUrl" value="/teacher/authorizations/create"></spring:url>
+
 <div class="page-header">
 	<h1>
 		<spring:message code="teacher.authorizations.title" />
@@ -12,7 +15,7 @@ ${portal.toolkit()}
 	</h1>
 </div>
 <section>
-	<form:form role="form" modelAttribute="form" method="POST" class="form-horizontal">
+	<form:form role="form" modelAttribute="formBean" method="POST" class="form-horizontal" action="${createUrl}">
 	
 		<div class="form-group">
 			<form:label for="selectDepartment" path="department" class="col-sm-1 control-label"><spring:message code="teacher.authorizations.department" /></form:label>
@@ -45,20 +48,28 @@ ${portal.toolkit()}
 		<div class="form-group">
 			<form:label for="lessonHours" path="lessonHours" class="col-sm-1 control-label"><spring:message code="teacher.authorizations.lessonHours" /></form:label>
 			<div class="col-sm-11">
-				<form:input id="lessonHours" path="lessonHours" class="form-control" required="required"/>
+				<input id="lessonHours" name="lessonHours" class="form-control" type="number" step="any" min="0" required/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<form:label for="contracted" path="contracted" class="col-sm-1 control-label"><spring:message code="teacher.authorizations.contracted" /></form:label>
 			<div class="col-sm-11">
-				<form:checkbox id="contracted" path="contracted" class="form-control" />
+				<div class="checkbox">
+					<form:checkbox id="contracted" path="contracted" />
+				</div>
 			</div>
 		</div>
 		
 		<form:hidden path="user" class="form-control user-search"/>
 		
-		<button type="submit" class="btn btn-default"><spring:message code="label.create"/></button>
+		<div class="form-group">
+			<div class="col-sm-push-1 col-sm-11">
+				<a class="btn btn-default" href="${authorizationsUrl}"><spring:message code="label.cancel"/></a>
+				<button type="submit" class="btn btn-primary"><spring:message code="label.create"/></button>
+			</div>
+		</div>
+		
 	</form:form>
 </section>
 
@@ -69,6 +80,7 @@ ${portal.toolkit()}
 	        return Bloodhound.tokenizers.whitespace(d.value);
 	    },
 	    queryTokenizer: Bloodhound.tokenizers.whitespace,
+	    limit:10,
 	    remote: {
 	        url: Bennu.contextPath + "/api/bennu-core/users/find",
 	

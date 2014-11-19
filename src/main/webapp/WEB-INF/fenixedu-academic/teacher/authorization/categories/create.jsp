@@ -3,13 +3,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<spring:url var="authorizationsUrl" value="/teacher/authorizations"></spring:url>
+
+
 ${portal.toolkit()}
 <div class="page-header">
 	<h1>
 		<spring:message code="teacher.categories"/>
 		<small><spring:message code="teacher.categories.create.or.edit"/></small>
 	</h1>
-</div>	
+</div>
 <section>
 	<form:form role="form" modelAttribute="form" method="POST" class="form-horizontal">
 	
@@ -36,8 +39,10 @@ ${portal.toolkit()}
 		
 		<div class="form-group">
 			<div class="col-sm-push-1 col-sm-11">
-				<button type="submit" class="btn btn-default"><spring:message code="label.save" /></button>
+				<a class="btn btn-default" href="${authorizationsUrl}"><spring:message code="label.cancel"/></a>
+				<button type="submit" class="btn btn-primary"><spring:message code="label.save" /></button>
 			</div>
 		</div>
+		
 	</form:form>
 </section>

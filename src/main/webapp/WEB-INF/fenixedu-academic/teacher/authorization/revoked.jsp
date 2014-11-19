@@ -4,8 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<%-- ${org.joda.time.format.DateTimeFormat.patternForStyle("M", )} --%>
-${org.fenixedu.commons.i18n.I18N.getLocale()}
+<spring:url var="showActiveAuthorizationsUrl" value="/teacher/authorizations"></spring:url>
+<spring:url var="showRevokedUrl" value="/teacher/authorizations/revoked"></spring:url>
+<spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
+<spring:url var="uploadUrl" value="/teacher/authorizations/upload"></spring:url>
+
 <div class="page-header">
 	<h1>
 		<spring:message code="teacher.authorizations.title" />
@@ -13,7 +16,16 @@ ${org.fenixedu.commons.i18n.I18N.getLocale()}
 	</h1>
 </div>
 <section>
-	<table class="table">
+	<div class="btn-group" role="group">
+		<a class="btn btn-default" href="${showActiveAuthorizationsUrl}"><spring:message code="teacher.authorizations.view.current"/></a>
+		<a class="btn btn-default active" href="${showRevokedUrl}"><spring:message code="teacher.authorizations.view.revoked"/></a>
+		<a class="btn btn-default" href="${uploadUrl}"><spring:message code="teacher.authorizations.upload"/></a>
+		<a class="btn btn-default" href="${showCategoriesUrl}"><spring:message code="teacher.categories"/></a>
+	</div>
+</section>
+<hr />
+<section>
+	<table class="table table-condensed">
 		<thead>
 			<th><spring:message code="teacher.authorizations.username" ></spring:message></th>
 			<th><spring:message code="teacher.authorizations.displayname" ></spring:message></th>
@@ -54,3 +66,13 @@ ${org.fenixedu.commons.i18n.I18N.getLocale()}
 		</tbody>
 	</table>
 </section>
+
+<style>
+	.table th {
+		text-align: center;
+	}
+	.table td {
+		vertical-align: middle !important;
+		text-align: center;
+	}
+</style>
