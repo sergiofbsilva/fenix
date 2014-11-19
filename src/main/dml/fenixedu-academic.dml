@@ -1242,6 +1242,7 @@ valueType org.fenixedu.academic.domain.accessControl.rules.AccessOperation as Ac
 	}
 
 	class TeacherCategory {
+	    String code (REQUIRED);
 	    LocalizedString name (REQUIRED);
 	    Integer weight (REQUIRED);
 	}
