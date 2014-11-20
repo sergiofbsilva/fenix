@@ -35,13 +35,14 @@ $(document).ready(function() {
 	$("button#search").click(function(el) {
 		$("form#search").attr('action', "${searchUrl}");
 	});
-	$("button#download").click(function(el) {
-		$("form#search").attr('action', "${downloadUrl}");
+
+	$("button#download").click(function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		var params = $.param({department : $("#selectDepartment").val(), period: $("#selectPeriod").val()}); 
+		window.open("${downloadUrl}?" + params, "_blank");
+// 		$("form#search").attr('action', "${downloadUrl}");
 	});
-	
-// 	$("#selectDepartment").change(function(e){
-// 		$("form.revoke [name=department]").val($(e.target).val());	
-// 	});
 	
 });
 
@@ -76,13 +77,13 @@ $(document).ready(function() {
 		<div class="form-group">
 			<label for="selectPeriod" class="col-sm-1 control-label"><spring:message code="teacher.authorizations.period" /></label>
 			<div class="col-sm-11">
-				<form:select path="period" items="${periods}" class="form-control" itemLabel="qualifiedName" itemValue="externalId"/>
+				<form:select path="period" id="selectPeriod" items="${periods}" class="form-control" itemLabel="qualifiedName" itemValue="externalId"/>
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-sm-push-1 col-sm-11">
 				<button type="submit" class="btn btn-default" id="search"><spring:message code="teacher.authorizations.search" /></button>
-				<button type="submit" class="btn btn-default" id="download"><spring:message code="teacher.authorizations.download" /></button>
+				<button class="btn btn-default" id="download"><spring:message code="teacher.authorizations.download" /></button>
 				<button type="submit" class="btn btn-primary" id="create"><spring:message code="label.create" /></button>
 			</div>				
 		</div>
