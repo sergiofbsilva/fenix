@@ -14,12 +14,18 @@ ${portal.toolkit()}
 	</h1>
 </div>
 <section>
-	<form:form role="form" modelAttribute="form" method="POST" class="form-horizontal">
+	<c:if test="${not empty error}">
+		<div class="alert alert-danger">
+			${error}
+		</div>	
+	</c:if>
 	
+	<form:form role="form" modelAttribute="form" method="POST" class="form-horizontal">
+		
 		<div class="form-group">
 			<label for="code" class="col-sm-1 control-label"><spring:message code="teacher.categories.code" /></label>
 			<div class="col-sm-11">
-				<input type="text" class="form-control" name="code" id="code"/>
+				<form:input class="form-control" path="code" id="code"/>
 			</div>
 		</div>
 		
@@ -43,6 +49,5 @@ ${portal.toolkit()}
 				<button type="submit" class="btn btn-primary"><spring:message code="label.save" /></button>
 			</div>
 		</div>
-		
 	</form:form>
 </section>

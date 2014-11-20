@@ -9,6 +9,17 @@
 <spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
 <spring:url var="uploadUrl" value="/teacher/authorizations/upload"></spring:url>
 
+<style>
+	.table th {
+text-align: center;
+	}
+	.table td {
+		vertical-align: middle !important;
+		text-align: center;
+	}
+</style>
+
+
 <div class="page-header">
 	<h1>
 		<spring:message code="teacher.authorizations.title" />
@@ -25,7 +36,7 @@
 </section>
 <hr />
 <section>
-	<table class="table table-condensed">
+	<table class="table">
 		<thead>
 			<th><spring:message code="teacher.authorizations.username" ></spring:message></th>
 			<th><spring:message code="teacher.authorizations.displayname" ></spring:message></th>
@@ -36,6 +47,7 @@
 			<th><spring:message code="teacher.authorizations.category" ></spring:message></th>
 			<th><spring:message code="teacher.authorizations.lessonHours" ></spring:message></th>
 			<th><spring:message code="teacher.authorizations.authorized" ></spring:message></th>
+			<th><spring:message code="teacher.authorizations.revoked" ></spring:message></th>
 		</thead>
 		<tbody>
 			<c:forEach var="auth" items="${authorizations}">
@@ -60,19 +72,20 @@
 					<td>${auth.executionSemester.qualifiedName}</td>
 					<td>${auth.teacherCategory.name.content}</td>
 					<td>${auth.lessonHours}</td>
-					<td>${auth.authorizer.name} (${auth.authorizer.username})</td>
+					<c:if test="${not empty auth.authorizer}">
+						<td>${auth.authorizer.profile.displayName} (${auth.authorizer.username})</td>
+					</c:if>
+					<c:if test="${empty auth.authorizer}">
+						<td>-</td>
+					</c:if>
+					<c:if test="${not empty auth.revoker}">
+						<td>${auth.revoker.profile.displayName} (${auth.revoker.username})</td>
+					</c:if>
+					<c:if test="${empty auth.revoker}">
+						<td>-</td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </section>
-
-<style>
-	.table th {
-		text-align: center;
-	}
-	.table td {
-		vertical-align: middle !important;
-		text-align: center;
-	}
-</style>

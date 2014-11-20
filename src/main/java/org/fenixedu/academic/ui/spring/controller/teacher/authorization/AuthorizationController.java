@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @SpringFunctionality(app = AcademicAdministrationSpringApplication.class, title = "teacher.authorizations.title",
         accessGroup = "academic(MANAGE_TEACHER_AUTHORIZATIONS)")
@@ -56,20 +57,29 @@ public class AuthorizationController {
     @RequestMapping(method = POST, value = "categories/{category}")
     public String createOrEdit(Model model, @Value("null") @PathVariable TeacherCategory category,
             @ModelAttribute CategoryBean form) {
-        if (category != null) {
-            service.editCategory(category, form);
-        } else {
-            service.createCategory(form);
+        try {
+            if (category != null) {
+                service.editCategory(category, form);
+            } else {
+                service.createCategory(form);
+            }
+        } catch (Exception e) {
+            model.addAttribute("error", e.getLocalizedMessage());
+            model.addAttribute("form", form);
+            return view("categories/create");
         }
+
         return "redirect:/teacher/authorizations/categories";
     }
 
     @RequestMapping(method = GET, value = "download")
-    public void download(Model model, @ModelAttribute FormBean search, HttpServletResponse response) throws IOException {
+    public String download(Model model, @ModelAttribute FormBean search, RedirectAttributes attrs, HttpServletResponse response)
+            throws IOException {
         response.setContentType("text/csv");
         response.setHeader("Content-Disposition", "filename=" + service.getCsvFilename(search));
         service.dumpCSV(search, response.getOutputStream());
         response.flushBuffer();
+        return redirectHome(search, attrs);
     }
 
     @RequestMapping(method = GET, value = "upload")
@@ -117,9 +127,9 @@ public class AuthorizationController {
     }
 
     @RequestMapping(method = POST, value = "create")
-    public String create(Model model, @ModelAttribute FormBean form) {
+    public String create(Model model, @ModelAttribute FormBean form, final RedirectAttributes attrs) {
         service.createTeacherAuthorization(form);
-        return home(model, form);
+        return redirectHome(form, attrs);
     }
 
     @RequestMapping(method = GET, value = "revoked")
@@ -130,9 +140,14 @@ public class AuthorizationController {
 
     @RequestMapping(method = POST, value = "{authorization}/revoke")
     public String revoke(Model model, @PathVariable TeacherAuthorization authorization,
-            @Value("null") @ModelAttribute FormBean search) {
+            @Value("null") @ModelAttribute FormBean search, final RedirectAttributes attrs) {
         service.revoke(authorization);
-        return home(model, search);
+        return redirectHome(search, attrs);
     }
 
+    private String redirectHome(FormBean search, RedirectAttributes attrs) {
+        attrs.addAttribute("department", search.getDepartment() == null ? null : search.getDepartment().getExternalId());
+        attrs.addAttribute("period", search.getPeriod().getExternalId());
+        return "redirect:/teacher/authorizations";
+    }
 }

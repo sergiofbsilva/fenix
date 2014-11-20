@@ -15,9 +15,20 @@
 <spring:url var="showCategoriesUrl" value="/teacher/authorizations/categories"></spring:url>
 <spring:url var="uploadUrl" value="/teacher/authorizations/upload"></spring:url>
 
+<style>
+	.table th {
+		text-align: center;
+	}
+	.table td {
+		vertical-align: middle !important;
+		text-align: center;
+	}
+</style>
+
 <script type='text/javascript'>
 
 $(document).ready(function() {
+	
 	$("button#create").click(function(el) {
 		$("form#search").attr('action', "${createUrl}");
 	});
@@ -27,6 +38,11 @@ $(document).ready(function() {
 	$("button#download").click(function(el) {
 		$("form#search").attr('action', "${downloadUrl}");
 	});
+	
+// 	$("#selectDepartment").change(function(e){
+// 		$("form.revoke [name=department]").val($(e.target).val());	
+// 	});
+	
 });
 
 </script>
@@ -51,7 +67,7 @@ $(document).ready(function() {
 		<div class="form-group">
 			<label for="selectDepartment" class="col-sm-1 control-label"><spring:message code="teacher.authorizations.department" /></label>
 			<div class="col-sm-11">
-				<form:select path="department" class="form-control">
+				<form:select path="department" id="selectDepartment" class="form-control">
 					<form:option label="${i18n.message('teacher.authorizations.department.all')}" value="null"/>
 					<form:options items="${departments}" itemLabel="nameI18n.content" itemValue="externalId"/>
 				</form:select>
@@ -116,9 +132,9 @@ $(document).ready(function() {
 							<td>${auth.lessonHours}</td>
 							<td>${auth.authorizer.name} (${auth.authorizer.username})</td>
 							<td>
-								<form:form method="POST" action="${revokeUrl}/${auth.externalId}/revoke" modelAttribute="search">
-									<form:hidden path="department"/>
-									<form:hidden path="period"/>
+								<form:form class="revoke" role="form" method="POST" action="${revokeUrl}/${auth.externalId}/revoke" modelAttribute="search">
+									<input type="hidden" name="department" value="${search.department == null ? null : search.department.externalId}"/>
+									<input type="hidden" name="period" value="${search.period.externalId}"/>
 									<button type="submit" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-remove-sign"></i> <spring:message code="teacher.authorizations.revoke" /></button>
 								</form:form>
 							</td>
@@ -129,13 +145,3 @@ $(document).ready(function() {
 		</c:otherwise>		
 	</c:choose>
 </section>
-
-<style>
-	.table th {
-		text-align: center;
-	}
-	.table td {
-		vertical-align: middle !important;
-		text-align: center;
-	}
-</style>
