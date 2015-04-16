@@ -206,7 +206,7 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
                 RegistrationConclusionBean conclusionBean;
                 if (registration.isBolonha()) {
                     conclusionBean = new RegistrationConclusionBean(registration, cycleType);
-                    if (conclusionBean.getCycleCurriculumGroup() == null || !conclusionBean.isConcluded()) {
+                    if (conclusionBean.getCurriculumGroup() == null || !conclusionBean.isConcluded()) {
                         continue;
                     }
                 } else {

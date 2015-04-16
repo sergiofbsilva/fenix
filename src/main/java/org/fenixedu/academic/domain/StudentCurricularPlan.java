@@ -416,9 +416,6 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     final public boolean isConclusionProcessed() {
-        if (!isBolonhaDegree()) {
-            return getRegistration().getConclusionProcess() != null;
-        }
 
         if (isEmptyDegree()) {
             return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateType.CONCLUDED);
@@ -429,12 +426,8 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
                 return false;
             }
         }
-        return true;
-    }
 
-    final public boolean isConclusionProcessed(final CycleType cycleType) {
-        final CycleCurriculumGroup cycleCurriculumGroup = getCycle(cycleType);
-        return cycleCurriculumGroup != null && cycleCurriculumGroup.isConclusionProcessed();
+        return true;
     }
 
     final public Curriculum getCurriculum(final DateTime when, final ExecutionYear executionYear) {

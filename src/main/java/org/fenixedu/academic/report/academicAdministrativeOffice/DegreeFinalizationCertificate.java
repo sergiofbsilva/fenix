@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.accounting.postingRules.serviceRequests.CertificateRequestPR;
 import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.CertificateRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.DegreeFinalizationCertificateRequest;
@@ -102,7 +103,7 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         }
 
         result.append(getDegreeFinalizationEcts(req));
-        result.append(getGraduateTitle(getDocumentRequest().getRegistration(), req.getWhatShouldBeRequestedCycle()));
+        result.append(req.getGraduateTitle(req.getLanguage()));
         result.append(getDiplomaDescription());
         result.append(getDetailedInfoIntro(req));
 
@@ -144,22 +145,40 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         addParameter("branch", SINGLE_SPACE + getDocumentRequest().getBranch());
     }
 
-    @Override
-    protected String getDegreeDescription() {
-        final DegreeFinalizationCertificateRequest request = getDocumentRequest();
-
-        CycleType cycleType = request.getWhatShouldBeRequestedCycle();
-
-        ExecutionYear conclusionYear = null;
-        if (cycleType == null) {
-            conclusionYear = getDocumentRequest().getRegistration().getConclusionYear();
-        } else {
-            conclusionYear =
-                    getDocumentRequest().getRegistration().getLastStudentCurricularPlan().getCycle(cycleType).getConclusionYear();
+    //TODO: program conclusion
+    final private String getDegreeDescription(ExecutionYear executionYear, final ProgramConclusion programConclusion,
+            final Locale locale) {
+        final Registration registration = getDocumentRequest().getRegistration();
+        final CycleType cycle = getDocumentRequest().getRequestedCycle();
+        if (cycle != null) {
+            return registration.getDegreeDescription(executionYear, cycle, locale);
         }
 
-        return getDocumentRequest().getRegistration().getDegreeDescription(conclusionYear,
-                request.getWhatShouldBeRequestedCycle(), getLocale());
+        final StringBuilder res = new StringBuilder();
+
+        final Degree degree = registration.getDegree();
+        final DegreeType degreeType = degree.getDegreeType();
+        res.append(programConclusion.getName().getContent(locale)).append(",");
+        res.append(" ").append(BundleUtil.getString(Bundle.ACADEMIC, locale, "label.of.the.male")).append(" ");
+
+        if (!degree.isEmpty() && !degreeType.isEmpty()) {
+            res.append(degreeType.getPrefix(locale));
+            res.append(degreeType.getName().getContent(locale).toUpperCase());
+
+            if (degreeType.isAdvancedFormationDiploma() && programConclusion != null) {
+                res.append(" (").append(programConclusion.getName().getContent(locale)).append(")");
+            }
+            res.append(" ").append(BundleUtil.getString(Bundle.ACADEMIC, locale, "label.in")).append(" ");
+        }
+
+        res.append(degree.getFilteredName(executionYear, locale).toUpperCase());
+        return res.toString();
+    }
+
+    @Override
+    protected String getDegreeDescription() {
+        return getDegreeDescription(getDocumentRequest().getConclusionYear(), getDocumentRequest().getProgramConclusion(),
+                getDocumentRequest().getLanguage());
     }
 
     private String getDegreeFinalizationDate(final DegreeFinalizationCertificateRequest request) {
@@ -242,26 +261,12 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         return res.toString();
     }
 
-    final private String getGraduateTitle(final Registration registration, final CycleType requestedCycle) {
-        final StringBuilder res = new StringBuilder();
-
-        final DegreeType degreeType = getDocumentRequest().getDegreeType();
-        if (degreeType.qualifiesForGraduateTitle()) {
-            res.append(", ").append(
-                    BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
-                            "documents.DegreeFinalizationCertificate.graduateTitleInfo"));
-            res.append(SINGLE_SPACE).append(registration.getGraduateTitle(requestedCycle, getLocale()));
-        }
-
-        return res.toString();
-    }
-
     final private String getDiplomaDescription() {
         final StringBuilder res = new StringBuilder();
 
         final Degree degree = getDocumentRequest().getDegree();
         final DegreeType degreeType = degree.getDegreeType();
-        if (degreeType.qualifiesForGraduateTitle()) {
+        if (!getDocumentRequest().getProgramConclusion().getGraduationTitle(getDocumentRequest().getLanguage()).isEmpty()) {
             res.append(", ");
             if (getDocumentRequest().getRegistryCode() != null) {
                 res.append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),

@@ -24,36 +24,55 @@
 <%@ taglib uri="http://fenix-ashes.ist.utl.pt/fenix-renderers" prefix="fr" %>
 
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#revert").click(function(e) {
+			if (confirm('<bean:message key="label.program.conclusion.confirm.revert" bundle="APPLICATION_RESOURCES"/>') === false) {
+				e.preventDefault();
+			}
+		});	
+	});
+</script>
+
 <%@page import="org.apache.struts.action.ActionMessages"%><html:xhtml/>
 
 <h2><bean:message key="student.registrationConclusionProcess" bundle="ACADEMIC_OFFICE_RESOURCES"/></h2>
 	
-
 <p>
 	<html:link page="/student.do?method=visualizeRegistration" paramId="registrationID" paramName="registrationConclusionBean" paramProperty="registration.externalId">
 		<bean:message key="link.student.back" bundle="ACADEMIC_OFFICE_RESOURCES"/>
 	</html:link>
 </p>
 
-
-<logic:equal name="registrationConclusionBean" property="conclusionProcessed" value="true">
-	<br/>
-	<div class="error0"><strong><bean:message  key="message.conclusion.process.already.performed" bundle="ACADEMIC_OFFICE_RESOURCES"/></strong></div>
-	<br/>
-</logic:equal>
-
-<html:messages id="message" message="true" bundle="APPLICATION_RESOURCES" property="<%= ActionMessages.GLOBAL_MESSAGE %>" >
-	<p>
-		<span class="error0"><!-- Error messages go here --><bean:write name="message" /></span>
-	</p>
-</html:messages>
-<html:messages id="message" message="true" bundle="ACADEMIC_OFFICE_RESOURCES" property="illegal.access">
-	<p>
-		<span class="error0"><!-- Error messages go here --><bean:write name="message" /></span>
-	</p>
-</html:messages>
-
 <logic:equal name="registrationConclusionBean" property="hasAccessToRegistrationConclusionProcess" value="true">
+
+	<logic:equal name="registrationConclusionBean" property="conclusionProcessed" value="true">
+		<br/>
+		<div class="error0"><strong><bean:message  key="message.conclusion.process.already.performed" bundle="ACADEMIC_OFFICE_RESOURCES"/></strong></div>
+		<br/>
+		<logic:present name="registrationConclusionBean" property="conclusionProcess">
+			<logic:equal name="registrationConclusionBean" property="canRepeatConclusionProcess" value="true">
+				<fr:form action="/registration.do?method=revertRegistrationConclusionLastVersion">
+					<fr:edit id="registrationConclusionBean" name="registrationConclusionBean" visible="false" />
+					<button class="btn btn-danger" id="revert" title="<bean:message key="label.program.conclusion.confirm.revert" bundle="APPLICATION_RESOURCES"/>">
+							<bean:message bundle="APPLICATION_RESOURCES" key="label.revert"/>
+					</button>
+				</fr:form>
+			</logic:equal>
+		</logic:present>
+	</logic:equal>
+	
+	<html:messages id="message" message="true" bundle="APPLICATION_RESOURCES" property="<%= ActionMessages.GLOBAL_MESSAGE %>" >
+		<p>
+			<span class="error0"><!-- Error messages go here --><bean:write name="message" /></span>
+		</p>
+	</html:messages>
+	<html:messages id="message" message="true" bundle="ACADEMIC_OFFICE_RESOURCES" property="illegal.access">
+		<p>
+			<span class="error0"><!-- Error messages go here --><bean:write name="message" /></span>
+		</p>
+	</html:messages>
+
 
 	<div style="float: right;">
 		<bean:define id="personID" name="registrationConclusionBean" property="registration.student.person.username"/>
@@ -106,7 +125,7 @@
 			<span class="error0"><bean:message key="registration.not.concluded" bundle="ACADEMIC_OFFICE_RESOURCES"/></span>
 		</p>
 		<strong><bean:message  key="student.registrationConclusionProcess.data" bundle="ACADEMIC_OFFICE_RESOURCES" /></strong>
-		<logic:equal name="registrationConclusionBean" property="byCycle" value="true" >
+		<logic:equal name="registrationConclusionBean" property="byGroup" value="true" >
 			<%-- Conclusion Process For Cycle  --%>
 			<fr:view name="registrationConclusionBean" schema="RegistrationConclusionBean.viewForCycle">
 				<fr:layout name="tabular">
@@ -115,7 +134,7 @@
 				</fr:layout>
 			</fr:view>
 		</logic:equal>
-		<logic:equal name="registrationConclusionBean" property="byCycle" value="false" >
+		<logic:equal name="registrationConclusionBean" property="byGroup" value="false" >
 			<%-- Conclusion Process For Registration  --%>
 			<fr:view name="registrationConclusionBean" schema="RegistrationConclusionBean.viewForRegistration">
 				<fr:layout name="tabular">
@@ -132,8 +151,8 @@
 		
 		<%-- Conclusion Processed  --%>
 		<logic:equal name="registrationConclusionBean" property="conclusionProcessed" value="true">
-			<logic:equal name="registrationConclusionBean" property="byCycle" value="true" >
-			
+			<logic:equal name="registrationConclusionBean" property="byGroup" value="true" >
+
 				<%-- Conclusion Process For Cycle  --%>
 				<div style="float: left;">
 					<strong><bean:message  key="student.registrationConclusionProcess.data" bundle="ACADEMIC_OFFICE_RESOURCES" /></strong>
@@ -160,8 +179,7 @@
 
 				<div style="clear: both;"></div>
 			</logic:equal>
-
-			<logic:equal name="registrationConclusionBean" property="byCycle" value="false" >
+			<logic:equal name="registrationConclusionBean" property="byGroup" value="false" >
 			
 				<%-- Conclusion Process For Registration  --%>
 				<div style="float: left;">
@@ -199,7 +217,7 @@
 				</p>
 			</logic:iterate>
 			
-			<logic:equal name="registrationConclusionBean" property="byCycle" value="true" >
+			<logic:equal name="registrationConclusionBean" property="byGroup" value="true" >
 				<%-- Conclusion Process For Cycle  --%>
 				<strong><bean:message  key="student.registrationConclusionProcess.data" bundle="ACADEMIC_OFFICE_RESOURCES" /></strong>
 				<fr:view name="registrationConclusionBean" schema="RegistrationConclusionBean.viewConclusionPreviewForCycle">
@@ -209,7 +227,7 @@
 					</fr:layout>
 				</fr:view>
 			</logic:equal>
-			<logic:equal name="registrationConclusionBean" property="byCycle" value="false" >
+			<logic:equal name="registrationConclusionBean" property="byGroup" value="false" >
 				<%-- Conclusion Process For Registration  --%>
 				<strong><bean:message  key="student.registrationConclusionProcess.data" bundle="ACADEMIC_OFFICE_RESOURCES" /></strong>
 				<fr:view name="registrationConclusionBean" schema="RegistrationConclusionBean.viewConclusionPreviewForRegistration">
@@ -223,13 +241,13 @@
 	
 		<p class="mtop05">
 			<bean:define id="registrationId" name="registrationConclusionBean" property="registration.externalId" />		
-			<logic:empty name="registrationConclusionBean" property="cycleCurriculumGroup">
+			<logic:empty name="registrationConclusionBean" property="curriculumGroup">
 				<html:link action="<%="/registration.do?method=prepareRegistrationConclusionDocument&amp;registrationId=" + registrationId %>" target="_blank">
 					Folha de <bean:message key="student.registrationConclusionProcess" bundle="ACADEMIC_OFFICE_RESOURCES"/>
 				</html:link>
 			</logic:empty>
-			<logic:notEmpty name="registrationConclusionBean" property="cycleCurriculumGroup">
-				<bean:define id="cycleCurriculumGroupId" name="registrationConclusionBean" property="cycleCurriculumGroup.externalId" />
+			<logic:notEmpty name="registrationConclusionBean" property="curriculumGroup">
+				<bean:define id="cycleCurriculumGroupId" name="registrationConclusionBean" property="curriculumGroup.externalId" />
 				<html:link action="<%="/registration.do?method=prepareRegistrationConclusionDocument&amp;registrationId=" + registrationId + "&amp;cycleCurriculumGroupId=" + cycleCurriculumGroupId %>" target="_blank">
 					Folha de <bean:message key="student.registrationConclusionProcess" bundle="ACADEMIC_OFFICE_RESOURCES"/>
 				</html:link>
@@ -338,9 +356,10 @@
 			</table>
 		</logic:equal>	
 
+	<%-- Form used to concluded process or to repeat --%>
 	
-	<%-- Form used to concluded process or to repeat --%>		
 	<logic:equal name="registrationConclusionBean" property="canBeConclusionProcessed" value="true">
+		
 		<fr:form action="/registration.do?method=doRegistrationConclusion">
 		
 			<fr:edit id="registrationConclusionBean" name="registrationConclusionBean" visible="false" />
@@ -356,9 +375,12 @@
 						<fr:property name="comment" value="label.registrationConclusionProcess.enteredConclusionDate.comment"/>
 						<fr:property name="commentLocation" value="right" />
 					</fr:slot>
+					<logic:equal name="registrationConclusionBean" property="programConclusion.averageEditable" value="true">
+						<fr:slot name="enteredAverageGrade"/>
+						<fr:slot name="enteredFinalAverageGrade"/>
+					</logic:equal>
 					<fr:slot name="observations" key="label.anotation" bundle="ACADEMIC_OFFICE_RESOURCES">
 					</fr:slot>
-
 				</fr:schema>
 				<fr:layout name="tabular-editable">
 					<fr:property name="classes" value="tstyle4 thright thlight mvert05"/>
@@ -373,8 +395,9 @@
 			</p>
 		
 		</fr:form>
+		
 	</logic:equal>
-
+	
 </logic:equal>
 
 <logic:equal name="registrationConclusionBean" property="hasAccessToRegistrationConclusionProcess" value="false">

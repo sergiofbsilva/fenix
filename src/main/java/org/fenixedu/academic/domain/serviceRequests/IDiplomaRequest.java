@@ -20,13 +20,9 @@ package org.fenixedu.academic.domain.serviceRequests;
 
 import java.util.Locale;
 
-import org.fenixedu.academic.domain.degreeStructure.CycleType;
-import org.fenixedu.academic.domain.serviceRequests.documentRequests.IDocumentRequest;
 import org.joda.time.LocalDate;
 
-public interface IDiplomaRequest extends IDocumentRequest {
-    public CycleType getWhatShouldBeRequestedCycle();
-
+public interface IDiplomaRequest extends IProgramConclusionRequest {
     @Override
     public boolean hasRegistryCode();
 
@@ -42,4 +38,5 @@ public interface IDiplomaRequest extends IDocumentRequest {
     public String getDissertationThesisTitle();
 
     public String getGraduateTitle(final Locale locale);
+
 }

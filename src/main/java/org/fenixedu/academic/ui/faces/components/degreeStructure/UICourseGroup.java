@@ -27,6 +27,7 @@ import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.degreeStructure.Context;
 import org.fenixedu.academic.domain.degreeStructure.CourseGroup;
 import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 
@@ -276,10 +277,10 @@ public class UICourseGroup extends UIDegreeModule {
 //            encodeLink(module + "/associateCourseGroup.faces", createAssociateAditionalParameters, false,
 //                    "associate.course.group");
 
-            if (!this.courseGroup.isRoot()) {
-                writer.append(" , ");
-                encodeLink(module + "/editCourseGroup.faces", editAndDeleteAditionalParameters, false, "edit");
-            }
+//            if (!this.courseGroup.isRoot()) {
+            writer.append(" , ");
+            encodeLink(module + "/editCourseGroup.faces", editAndDeleteAditionalParameters, false, "edit");
+//            }
 
             if (!this.courseGroup.isRoot() /* && this.executionYear == null */) {
                 writer.append(" , ");
@@ -363,6 +364,17 @@ public class UICourseGroup extends UIDegreeModule {
     @Override
     protected void appendCodeAndName() throws IOException {
         super.appendCodeAndName();
+
+        if (degreeModule.isCourseGroup()) {
+            final ProgramConclusion programConclusion = ((CourseGroup) degreeModule).getProgramConclusion();
+            if (programConclusion != null) {
+                writer.startElement("strong", this);
+                writer.append(" [");
+                writer.append(programConclusion.getName().getContent());
+                writer.append("]");
+                writer.endElement("strong");
+            }
+        }
 
         if (this.toEdit) {
 

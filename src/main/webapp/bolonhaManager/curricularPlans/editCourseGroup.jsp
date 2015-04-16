@@ -42,6 +42,19 @@
 		<h:outputText escape="false" value="<input alt='input.organizeBy' id='organizeBy' name='organizeBy' type='hidden' value='#{CurricularCourseManagement.organizeBy}'/>"/>
 		<h:outputText escape="false" value="<input alt='input.toOrder' id='toOrder' name='toOrder' type='hidden' value='#{CurricularCourseManagement.toOrder}'/>"/>
 
+		
+		<h:outputText value="<div class='simpleblock4'>" escape="false"/>
+		<h:outputText value="<fieldset class='lfloat'>" escape="false"/>
+		
+		<h:outputText value="<p><label>#{applicationBundle['programConclusion']}:</label> " escape="false"/>
+			<h:selectOneMenu value="#{CourseGroupManagement.programConclusionID}">
+			    <f:selectItem itemLabel="-" itemValue=""/>
+			    <f:selectItems value="#{CourseGroupManagement.programConclusionItems}" />
+			</h:selectOneMenu>
+		<h:outputText value="</p>" escape="false"/>
+		<h:outputText value="</fieldset></div>" escape="false"/>
+		
+		
 		<h:outputText value="<div class='simpleblock4'>" escape="false"/>
 		<h:outputText value="<fieldset class='lfloat'>" escape="false"/>
 		
@@ -66,8 +79,17 @@
 		<h:outputText value="#{CourseGroupManagement.ifBranchShowType}" escape="false"/>
 		
 		<h:outputText value="</fieldset></div>" escape="false"/>
-		
-		<h:outputText value="<br/><p>" escape="false"/>
+
+		<h:outputText value="</br>" escape="false"/>
+
+		<h:outputText value="<p><label>#{applicationBundle['programConclusion']}:</label> " escape="false"/>
+			<h:selectOneMenu value="#{CourseGroupanagement.programConclusionID}">
+			    <f:selectItem itemLabel="-" itemValue=""/>
+			    <f:selectItems value="#{CourseGroupanagement.programConclusionItems}" />
+			</h:selectOneMenu>
+		<h:outputText value="</p>" escape="false"/>
+
+		<h:outputText value="<p>" escape="false"/>
 		<h:commandButton alt="#{htmlAltBundle['commandButton.save']}" styleClass="inputbutton" value="#{bolonhaBundle['save']}"
 			action="#{CourseGroupManagement.editCourseGroup}"/>
 		<h:commandButton alt="#{htmlAltBundle['commandButton.cancel']}" immediate="true" styleClass="inputbutton" value="#{bolonhaBundle['cancel']}"

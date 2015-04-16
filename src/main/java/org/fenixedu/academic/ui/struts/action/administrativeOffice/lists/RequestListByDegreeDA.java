@@ -305,7 +305,7 @@ public class RequestListByDegreeDA extends FenixDispatchAction {
             spreadsheet.addCell(request.getStudent().getName());
             spreadsheet.addCell(request.getRegistration().getDegree().getPresentationName());
             //TO DO
-            if (!registrationConclusionBean.isByCycle() && registrationConclusionBean.getRegistration().isBolonha()) {
+            if (!registrationConclusionBean.isByGroup() && registrationConclusionBean.getRegistration().isBolonha()) {
                 spreadsheet.addCell("-");
             } else {
                 YearMonthDay conclusionDate = registrationConclusionBean.getConclusionDate();

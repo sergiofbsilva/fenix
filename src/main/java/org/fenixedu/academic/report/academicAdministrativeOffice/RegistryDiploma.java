@@ -77,13 +77,6 @@ public class RegistryDiploma extends AdministrativeOfficeDocument {
 
         String graduateTitle = request.getGraduateTitle(getLocale());
 
-        if (graduateTitle.contains("Graduated")) {
-            graduateTitle = graduateTitle.replace("Graduated", "Licenciado");
-        }
-
-        if (graduateTitle.contains("Master")) {
-            graduateTitle = graduateTitle.replace("Master", "Mestre");
-        }
         addParameter("graduateTitle", graduateTitle);
         setFooter();
     }
