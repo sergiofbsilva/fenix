@@ -45,6 +45,7 @@ import org.fenixedu.academic.domain.degreeStructure.BranchType;
 import org.fenixedu.academic.domain.degreeStructure.Context;
 import org.fenixedu.academic.domain.degreeStructure.CourseGroup;
 import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.enrolment.EnroledCurriculumModuleWrapper;
 import org.fenixedu.academic.domain.enrolment.IDegreeModuleToEvaluate;
 import org.fenixedu.academic.domain.exceptions.DomainException;
@@ -1197,6 +1198,12 @@ public class CurriculumGroup extends CurriculumGroup_Base {
             if (!getRegistration().canRepeatConclusionProcess(AccessControl.getPerson())) {
                 throw new DomainException("error.CycleCurriculumGroup.cycle.is.already.concluded", getDegreeModule().getName());
             }
+        }
+
+        ProgramConclusion conclusion = getDegreeModule().getProgramConclusion();
+
+        if (conclusion == null) {
+            throw new DomainException("error.program.conclusion.empty");
         }
 
         if (!isConcluded()) {

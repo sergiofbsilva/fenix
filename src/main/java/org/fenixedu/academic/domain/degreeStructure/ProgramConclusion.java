@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
-import org.fenixedu.academic.domain.ExecutionYear;
+import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.accounting.EventTypes;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.Registration;
@@ -67,9 +67,13 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         super.setAlumniProvider(alumniProvider);
     }
 
-    public static Stream<ProgramConclusion> conclusionsFor(Registration registration) {
-        return curriculumGroups(registration).map(CurriculumGroup::getDegreeModule).filter(Objects::nonNull)
+    public static Stream<ProgramConclusion> conclusionsFor(StudentCurricularPlan studentCurricularPlan) {
+        return curriculumGroups(studentCurricularPlan).map(CurriculumGroup::getDegreeModule).filter(Objects::nonNull)
                 .map(CourseGroup::getProgramConclusion).filter(Objects::nonNull);
+    }
+
+    public static Stream<ProgramConclusion> conclusionsFor(Registration registration) {
+        return conclusionsFor(registration.getLastStudentCurricularPlan());
     }
 
     public static Stream<ProgramConclusion> conclusionsFor(DegreeCurricularPlan degreeCurricularPlan) {
@@ -77,17 +81,23 @@ public class ProgramConclusion extends ProgramConclusion_Base {
                 .filter(Objects::nonNull);
     }
 
-    private static Stream<CurriculumGroup> curriculumGroups(Registration registration) {
-        return Stream.concat(Stream.of(registration.getLastStudentCurricularPlan().getRoot()), registration
-                .getLastStudentCurricularPlan().getAllCurriculumGroups().stream());
+    private static Stream<CurriculumGroup> curriculumGroups(StudentCurricularPlan studentCurricularPlan) {
+        return Stream.concat(Stream.of(studentCurricularPlan.getRoot()), studentCurricularPlan.getAllCurriculumGroups().stream());
+    }
+
+    public Optional<CurriculumGroup> groupFor(StudentCurricularPlan studentCurricularPlan) {
+        if (studentCurricularPlan == null) {
+            return Optional.empty();
+        }
+        return curriculumGroups(studentCurricularPlan).filter(
+                cg -> cg.getDegreeModule() != null && this.equals(cg.getDegreeModule().getProgramConclusion())).findAny();
     }
 
     public Optional<CurriculumGroup> groupFor(Registration registration) {
         if (registration == null) {
             return Optional.empty();
         }
-        return curriculumGroups(registration).filter(
-                cg -> cg.getDegreeModule() != null && this.equals(cg.getDegreeModule().getProgramConclusion())).findAny();
+        return groupFor(registration.getLastStudentCurricularPlan());
     }
 
     public Optional<CourseGroup> groupFor(DegreeCurricularPlan degreeCurricularPlan) {
@@ -97,13 +107,12 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         return degreeCurricularPlan.getAllCoursesGroups().stream().filter(cg -> this.equals(cg.getProgramConclusion())).findAny();
     }
 
-    public boolean isConclusionProcessed(Registration registration) {
-        final Optional<CurriculumGroup> curriculumGroup = groupFor(registration);
-        return curriculumGroup.isPresent() ? curriculumGroup.get().isConcluded() : false;
+    public boolean isTerminal() {
+        return RegistrationStateType.CONCLUDED.equals(getTargetState());
     }
 
-    public boolean hasConcluded(Registration registration) {
-        return groupFor(registration).filter(CurriculumGroup::isConcluded).isPresent();
+    public boolean isConclusionProcessed(Registration registration) {
+        return groupFor(registration).map(CurriculumGroup::isConclusionProcessed).orElse(false);
     }
 
     public String getGraduationTitle(Locale locale) {
@@ -122,10 +131,6 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         }
 
         return graduationTitle;
-    }
-
-    public ExecutionYear getConclusionYear(Registration registration) {
-        return groupFor(registration).map(CurriculumGroup::getConclusionYear).orElse(null);
     }
 
     @Override

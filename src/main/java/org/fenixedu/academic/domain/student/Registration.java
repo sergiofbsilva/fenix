@@ -2397,9 +2397,10 @@ public class Registration extends Registration_Base {
     }
 
     final public String getGraduateTitle(final ProgramConclusion programConclusion, final Locale locale) {
-        if (programConclusion.hasConcluded(this)) {
-            return getLastDegreeCurricularPlan().getGraduateTitle(programConclusion.getConclusionYear(this), programConclusion,
-                    locale);
+        if (programConclusion.isConclusionProcessed(this)) {
+            final ExecutionYear conclusionYear =
+                    programConclusion.groupFor(this).map(CurriculumGroup::getConclusionYear).orElse(null);
+            return getLastDegreeCurricularPlan().getGraduateTitle(conclusionYear, programConclusion, locale);
         }
         throw new DomainException("Registration.hasnt.concluded.requested.cycle");
     }
@@ -2581,19 +2582,16 @@ public class Registration extends Registration_Base {
             throw new DomainException("error.Registration.invalid.cycleCurriculumGroup");
         }
 
-        ProgramConclusion conclusion = curriculumGroup.getDegreeModule().getProgramConclusion();
-
-        if (conclusion == null) {
-            throw new DomainException("error.program.conclusion.empty");
-        }
-
         curriculumGroup.conclude();
+
+        ProgramConclusion conclusion = curriculumGroup.getDegreeModule().getProgramConclusion();
 
         if (conclusion != null && conclusion.getTargetState() != null
                 && !conclusion.getTargetState().equals(getActiveStateType())) {
             RegistrationState.createRegistrationState(this, AccessControl.getPerson(), new DateTime(),
                     conclusion.getTargetState());
         }
+
     }
 
     final public boolean hasApprovement(ExecutionYear executionYear) {

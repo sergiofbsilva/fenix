@@ -60,6 +60,7 @@ import org.fenixedu.academic.domain.degreeStructure.CycleCourseGroup;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 import org.fenixedu.academic.domain.degreeStructure.OptionalCurricularCourse;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.enrolment.EnrolmentContext;
 import org.fenixedu.academic.domain.enrolment.IDegreeModuleToEvaluate;
 import org.fenixedu.academic.domain.exceptions.DomainException;
@@ -421,13 +422,8 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
             return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateType.CONCLUDED);
         }
 
-        for (final CycleCurriculumGroup cycleCurriculumGroup : getInternalCycleCurriculumGrops()) {
-            if (!cycleCurriculumGroup.isConclusionProcessed()) {
-                return false;
-            }
-        }
-
-        return true;
+        return ProgramConclusion.conclusionsFor(this).filter(ProgramConclusion::isTerminal).anyMatch(
+        pc -> pc.groupFor(this).map(CurriculumGroup::isConclusionProcessed).orElse(false));
     }
 
     final public Curriculum getCurriculum(final DateTime when, final ExecutionYear executionYear) {

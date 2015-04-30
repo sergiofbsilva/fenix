@@ -360,7 +360,7 @@ public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCert
             res.append(", ").append(
                     BundleUtil.getString(Bundle.ACADEMIC, getLanguage(),
                             "documents.DegreeFinalizationCertificate.graduateTitleInfo"));
-            res.append(" ").append(getRegistration().getGraduateTitle(getProgramConclusion(), getLocale()));
+            res.append(" ").append(getRegistration().getGraduateTitle(getProgramConclusion(), getLanguage()));
         }
 
         return res.toString();
