@@ -107,7 +107,7 @@ abstract public class ConclusionProcess extends ConclusionProcess_Base {
 
     final private void updateLastVersion() {
         super.setLastVersion(versions().max(ConclusionProcessVersion.COMPARATOR_BY_CREATION_DATE_TIME_AND_ID).orElse(null));
-        super.setConclusionYear(getLastVersion().getConclusionYear());
+        super.setConclusionYear(getLastVersion() == null ? null : getLastVersion().getConclusionYear());
     }
 
     abstract protected void addSpecificVersionInfo();

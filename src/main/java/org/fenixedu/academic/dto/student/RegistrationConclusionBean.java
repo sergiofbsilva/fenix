@@ -295,22 +295,6 @@ public class RegistrationConclusionBean implements Serializable, IRegistrationBe
         return isByGroup() ? getCurriculumGroup().getConclusionProcess() : getRegistration().getConclusionProcess();
     }
 
-    // private boolean groupStructureIsValid() {
-    // final Collection<CurriculumGroup> groups =
-    // getCurriculumGroupsNotVerifyingStructure();
-    // if (groups.isEmpty()) {
-    // return true;
-    // } else {
-    // for (final CurriculumGroup group : groups) {
-    // if (group.hasInsufficientCredits()) {
-    // return false;
-    // }
-    // }
-    //
-    // return true;
-    // }
-    // }
-
     public boolean isByGroup() {
         return hasCurriculumGroup();
     }
@@ -337,6 +321,10 @@ public class RegistrationConclusionBean implements Serializable, IRegistrationBe
     public DateTime getConclusionProcessLastModificationDateTime() {
         return isByGroup() ? getCurriculumGroup().getConclusionProcessLastModificationDateTime() : getRegistration()
                 .getConclusionProcessLastModificationDateTime();
+    }
+
+    public boolean isSkipValidation() {
+        return getProgramConclusion() != null && getProgramConclusion().isSkipValidation();
     }
 
     public Boolean getHasAccessToRegistrationConclusionProcess() {

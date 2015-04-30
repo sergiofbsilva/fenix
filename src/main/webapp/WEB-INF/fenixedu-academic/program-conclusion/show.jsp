@@ -69,13 +69,15 @@
 			<spring:message code="program.conclusion.empty" ></spring:message>
 		</c:when>
 		<c:otherwise>
-			<table class="table dataTable table-condensed">
+			<table class="table table-condensed">
 				<thead>
 					<tr>
 						<th><spring:message code="label.name" /></th>
 						<th><spring:message code="program.conclusion.graduation.title" /></th>
+						<th><spring:message code="program.conclusion.graduation.level" /></th>
 						<th><spring:message code="program.conclusion.editable.average" /></th>
 						<th><spring:message code="program.conclusion.provides.alumni" /></th>
+						<th><spring:message code="program.conclusion.skip.validation" /></th>
 						<th><spring:message code="program.conclusion.target.state" /></th>
 						<th></th>
 					</tr>
@@ -84,12 +86,16 @@
 					<c:forEach var="conclusion" items="${conclusions}">
 						<tr>
 							<td><c:out value="${conclusion.name.content}"/></td>
-							<td><c:out value="${conclusion.graduationTitle.content}"/></td>  
+							<td><c:out value="${conclusion.graduationTitle.content}"/></td>
+							<td><c:out value="${conclusion.graduationLevel.content}"/></td>  
 							<td>
 								<spring:message code="label.${conclusion.averageEditable ? 'yes' : 'no'}"></spring:message>
 							</td>
 							<td>
 								<spring:message code="label.${conclusion.alumniProvider ? 'yes' : 'no'}"></spring:message>
+							</td>
+							<td>
+								<spring:message code="label.${conclusion.skipValidation ? 'yes' : 'no'}"></spring:message>
 							</td>
 							<td>${empty conclusion.targetState ? '-' : conclusion.targetState.description}</td>
 							<td>

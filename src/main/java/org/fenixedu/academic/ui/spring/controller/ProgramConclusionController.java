@@ -59,12 +59,15 @@ public class ProgramConclusionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public String create(Model model, @RequestParam LocalizedString name, @RequestParam LocalizedString graduationTitle,
+    public String create(Model model, @RequestParam LocalizedString name,
+            @RequestParam(defaultValue = "{}") LocalizedString graduationTitle,
+            @RequestParam(defaultValue = "{}") LocalizedString graduationLevel,
             @RequestParam(defaultValue = "false") boolean isAverageEditable,
-            @RequestParam(defaultValue = "false") boolean isAlumniProvider, @RequestParam(defaultValue = "") String targetState) {
+            @RequestParam(defaultValue = "false") boolean isAlumniProvider,
+            @RequestParam(defaultValue = "false") boolean isSkipValidation, @RequestParam(defaultValue = "") String targetState) {
         try {
-            service.createProgramConclusion(name, graduationTitle, isAverageEditable, isAlumniProvider,
-                    getRegistrationStateType(targetState), new EventTypes());
+            service.createProgramConclusion(name, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider,
+                    isSkipValidation, getRegistrationStateType(targetState), new EventTypes());
             return "redirect:/program-conclusion-management";
         } catch (DomainException de) {
             model.addAttribute("error", de.getLocalizedMessage());
@@ -80,12 +83,15 @@ public class ProgramConclusionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/{programConclusion}")
-    public String edit(Model model, @PathVariable ProgramConclusion programConclusion, @RequestParam LocalizedString name,
-            @RequestParam LocalizedString graduationTitle, @RequestParam(defaultValue = "false") boolean isAverageEditable,
-            @RequestParam(defaultValue = "false") boolean isAlumniProvider, @RequestParam(defaultValue = "") String targetState) {
+    public String edit(Model model, @PathVariable ProgramConclusion programConclusion,
+            @RequestParam(defaultValue = "{}") LocalizedString name,
+            @RequestParam(defaultValue = "{}") LocalizedString graduationTitle, @RequestParam LocalizedString graduationLevel,
+            @RequestParam(defaultValue = "false") boolean isAverageEditable,
+            @RequestParam(defaultValue = "false") boolean isAlumniProvider,
+            @RequestParam(defaultValue = "false") boolean isSkipValidation, @RequestParam(defaultValue = "") String targetState) {
         try {
-            service.editProgramConclusion(programConclusion, name, graduationTitle, isAverageEditable, isAlumniProvider,
-                    getRegistrationStateType(targetState));
+            service.editProgramConclusion(programConclusion, name, graduationTitle, graduationLevel, isAverageEditable,
+                    isAlumniProvider, isSkipValidation, getRegistrationStateType(targetState));
             return "redirect:/program-conclusion-management";
         } catch (DomainException de) {
             model.addAttribute("error", de.getLocalizedMessage());

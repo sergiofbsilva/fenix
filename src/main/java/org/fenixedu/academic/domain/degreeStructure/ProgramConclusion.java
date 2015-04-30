@@ -38,13 +38,23 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         setRoot(Bennu.getInstance());
     }
 
-    public ProgramConclusion(LocalizedString name, LocalizedString graduationTitle, boolean isAverageEditable,
-            boolean isAlumniProvider, RegistrationStateType targetState, EventTypes eventTypes) {
+    public ProgramConclusion(LocalizedString name, LocalizedString graduationTitle, LocalizedString graduationLevel,
+            boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState,
+            EventTypes eventTypes) {
         this();
+        edit(name, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider, isSkipValidation, targetState,
+                eventTypes);
+    }
+
+    public void edit(LocalizedString name, LocalizedString graduationTitle, LocalizedString graduationLevel,
+            boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState,
+            EventTypes eventTypes) {
         setName(name);
         setGraduationTitle(graduationTitle);
+        setGraduationLevel(graduationLevel);
         setAverageEditable(isAverageEditable);
         setAlumniProvider(isAlumniProvider);
+        setSkipValidation(isSkipValidation);
         setTargetState(targetState);
         setEventTypes(eventTypes);
     }
@@ -57,6 +67,10 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         return getAlumniProvider();
     }
 
+    public boolean isSkipValidation() {
+        return getSkipValidation();
+    }
+
     @Override
     public void setAverageEditable(boolean averageEditable) {
         super.setAverageEditable(averageEditable);
@@ -65,6 +79,11 @@ public class ProgramConclusion extends ProgramConclusion_Base {
     @Override
     public void setAlumniProvider(boolean alumniProvider) {
         super.setAlumniProvider(alumniProvider);
+    }
+
+    @Override
+    public void setSkipValidation(boolean skipValidation) {
+        super.setSkipValidation(skipValidation);
     }
 
     public static Stream<ProgramConclusion> conclusionsFor(StudentCurricularPlan studentCurricularPlan) {

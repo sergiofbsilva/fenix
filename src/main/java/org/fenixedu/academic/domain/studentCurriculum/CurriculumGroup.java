@@ -866,6 +866,11 @@ public class CurriculumGroup extends CurriculumGroup_Base {
     }
 
     public void assertCorrectStructure(final Collection<CurriculumGroup> result, ExecutionYear lastApprovedYear) {
+
+        if (isSkipConcluded()) {
+            return;
+        }
+
         for (final CurriculumGroup curriculumGroup : getCurriculumGroups()) {
             if (curriculumGroup.getCurriculumGroups().isEmpty() && curriculumGroup.hasUnexpectedCredits(lastApprovedYear)) {
                 result.add(curriculumGroup);
@@ -1218,9 +1223,13 @@ public class CurriculumGroup extends CurriculumGroup_Base {
         }
     }
 
+    private boolean isSkipConcluded() {
+        return getDegreeModule().getProgramConclusion() != null && getDegreeModule().getProgramConclusion().isSkipValidation();
+    }
+
     @Override
     public boolean isConcluded() {
-        return isConclusionProcessed() || super.isConcluded();
+        return isConclusionProcessed() || isSkipConcluded() || super.isConcluded();
     }
 
     public boolean isConclusionProcessed() {

@@ -49,12 +49,19 @@ ${portal.toolkit()}
 		<div class="form-group">
 			<label for="graduationTitle" class="col-sm-1 control-label"><spring:message code="program.conclusion.graduation.title" /></label>
 			<div class="col-sm-11">
-				<input name="graduationTitle" bennu-localized-string class="form-control col-sm-11" required value='${programConclusion.graduationTitle.json()}' />
+				<input name="graduationTitle" bennu-localized-string class="form-control col-sm-11" value='${programConclusion.graduationTitle.json()}' />
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label for="editableAverage" class="col-sm-1 control-label"><spring:message code="program.conclusion.editable.average" /></label>
+			<label for="graduationLevel" class="col-sm-1 control-label"><spring:message code="program.conclusion.graduation.level" /></label>
+			<div class="col-sm-11">
+				<input name="graduationLevel" bennu-localized-string class="form-control col-sm-11" value='${programConclusion.graduationLevel.json()}' />
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="isAverageEditable" class="col-sm-1 control-label"><spring:message code="program.conclusion.editable.average" /></label>
 			<div class="col-sm-11">
 				<div class="checkbox">
 					<input type="checkbox" name="isAverageEditable" id="isAverageEditable" ${programConclusion.averageEditable ? 'checked' : ''}/>
@@ -63,10 +70,19 @@ ${portal.toolkit()}
 		</div>
 		
 		<div class="form-group">
-			<label for="providesAlumni" class="col-sm-1 control-label"><spring:message code="program.conclusion.provides.alumni" /></label>
+			<label for="isAlumniProvider" class="col-sm-1 control-label"><spring:message code="program.conclusion.provides.alumni" /></label>
 			<div class="col-sm-11">
 				<div class="checkbox">
 					<input type="checkbox" name="isAlumniProvider" id="isAlumniProvider" ${programConclusion.alumniProvider ? 'checked' : ''}/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="isSkipValidation" class="col-sm-1 control-label"><spring:message code="program.conclusion.skip.validation" /></label>
+			<div class="col-sm-11">
+				<div class="checkbox">
+					<input type="checkbox" name="isSkipValidation" id="isSkipValidation" ${programConclusion.skipValidation ? 'checked' : ''}/>
 				</div>
 			</div>
 		</div>
