@@ -229,9 +229,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
 
         final StudentCurricularPlan result = new StudentCurricularPlan(registration, degreeCurricularPlan, startDate);
 
-        if (degreeCurricularPlan.isBoxStructure()) {
-            CurriculumGroupFactory.createRoot(result, degreeCurricularPlan.getRoot(), null);
-        }
+        CurriculumGroupFactory.createRoot(result, degreeCurricularPlan.getRoot(), null);
 
         return result;
     }
@@ -241,9 +239,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
 
         final StudentCurricularPlan result = new StudentCurricularPlan(registration, degreeCurricularPlan, startDate);
 
-        if (degreeCurricularPlan.isBoxStructure()) {
-            CurriculumGroupFactory.createRoot(result, degreeCurricularPlan.getRoot(), cycleType);
-        }
+        CurriculumGroupFactory.createRoot(result, degreeCurricularPlan.getRoot(), cycleType);
 
         return result;
     }
@@ -268,9 +264,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     private void createStructure(final ExecutionSemester executionSemester, CycleType cycleType) {
-        if (getDegreeCurricularPlan().isBoxStructure()) {
-            CurriculumGroupFactory.createRoot(this, getDegreeCurricularPlan().getRoot(), executionSemester, cycleType);
-        }
+        CurriculumGroupFactory.createRoot(this, getDegreeCurricularPlan().getRoot(), executionSemester, cycleType);
     }
 
     private void init(Registration registration, DegreeCurricularPlan degreeCurricularPlan, YearMonthDay startDate) {
@@ -468,18 +462,6 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         return getDegreeCurricularPlan().isBolonhaDegree();
     }
 
-    /**
-     * Temporary method, after all degrees migration this is no longer necessary
-     * 
-     */
-    final public boolean isBoxStructure() {
-        return getRoot() != null;
-    }
-
-    final public boolean isEnrolable() {
-        return isBoxStructure() && getRegistration().isActive() && getRegistration().getLastStudentCurricularPlan().equals(this);
-    }
-
     final public Person getPerson() {
         return getRegistration().getPerson();
     }
@@ -543,28 +525,28 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public Set<CurriculumLine> getAllCurriculumLines() {
-        return isBoxStructure() ? getRoot().getAllCurriculumLines() : new HashSet<CurriculumLine>(super.getEnrolmentsSet());
+        return getRoot().getAllCurriculumLines();
     }
 
     public Set<CurriculumGroup> getAllCurriculumGroups() {
-        return isBoxStructure() ? getRoot().getAllCurriculumGroups() : Collections.EMPTY_SET;
+        return getRoot().getAllCurriculumGroups();
     }
 
     public Set<CurriculumGroup> getAllCurriculumGroupsWithoutNoCourseGroupCurriculumGroups() {
-        return isBoxStructure() ? getRoot().getAllCurriculumGroupsWithoutNoCourseGroupCurriculumGroups() : Collections.EMPTY_SET;
+        return getRoot().getAllCurriculumGroupsWithoutNoCourseGroupCurriculumGroups();
     }
 
     @Override
     final public Set<Enrolment> getEnrolmentsSet() {
-        return getRoot() != null ? getRoot().getEnrolmentsSet() : super.getEnrolmentsSet();
+        return getRoot().getEnrolmentsSet();
     }
 
     final public boolean hasAnyEnrolments() {
-        return getRoot() != null ? getRoot().hasAnyEnrolments() : !getEnrolmentsSet().isEmpty();
+        return getRoot().hasAnyEnrolments();
     }
 
     final public boolean hasAnyCurriculumLines() {
-        return getRoot() != null ? hasAnyCurriculumModules(new CurriculumModulePredicateByType(CurriculumLine.class)) : hasAnyEnrolments();
+        return hasAnyCurriculumModules(new CurriculumModulePredicateByType(CurriculumLine.class));
     }
 
     final public boolean hasAnyCurriculumLines(final ExecutionYear executionYear) {
@@ -986,8 +968,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     final public Enrolment findEnrolmentFor(final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
-        return isBoxStructure() ? getRoot().findEnrolmentFor(curricularCourse, executionSemester) : getEnrolmentByCurricularCourseAndExecutionPeriod(
-                curricularCourse, executionSemester);
+        return getRoot().findEnrolmentFor(curricularCourse, executionSemester);
     }
 
     final public Enrolment getEnrolmentByCurricularCourseAndExecutionPeriod(final CurricularCourse curricularCourse,
@@ -1199,28 +1180,12 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         return result;
     }
 
-    final public boolean isCurricularCourseApprovedInCurrentOrPreviousPeriod(final CurricularCourse course,
-            final ExecutionSemester executionSemester) {
-        final List studentApprovedEnrollments = getStudentEnrollmentsWithApprovedState();
-        final List<CurricularCourse> approvedCurricularCourses = new ArrayList<CurricularCourse>();
-
-        for (Iterator iter = studentApprovedEnrollments.iterator(); iter.hasNext();) {
-            Enrolment enrolment = (Enrolment) iter.next();
-            if (enrolment.getExecutionPeriod().compareTo(executionSemester) <= 0) {
-                approvedCurricularCourses.add(enrolment.getCurricularCourse());
-            }
-        }
-
-        return isApproved(course, approvedCurricularCourses);
-    }
-
     final protected boolean isApproved(CurricularCourse curricularCourse, List<CurricularCourse> approvedCourses) {
         return hasEquivalenceIn(curricularCourse, approvedCourses) || hasEquivalenceInNotNeedToEnroll(curricularCourse);
     }
 
     final public boolean isApproved(final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
-        return isBoxStructure() ? getRoot().isApproved(curricularCourse, executionSemester) : isCurricularCourseApprovedInCurrentOrPreviousPeriod(
-                curricularCourse, executionSemester);
+        return getRoot().isApproved(curricularCourse, executionSemester);
     }
 
     final public boolean isCurricularCourseApproved(CurricularCourse curricularCourse) {
@@ -1241,7 +1206,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     final public boolean isApproved(final CurricularCourse curricularCourse) {
-        return isBoxStructure() ? getRoot().isApproved(curricularCourse) : isCurricularCourseApproved(curricularCourse);
+        return getRoot().isApproved(curricularCourse);
     }
 
     public int getNumberOfApprovedCurricularCourses() {
@@ -1375,25 +1340,12 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     final public boolean isEnroledInExecutionPeriod(final CurricularCourse curricularCourse) {
-        return isBoxStructure() ? isEnroledInExecutionPeriod(curricularCourse, ExecutionSemester.readActualExecutionSemester()) : isCurricularCourseEnrolled(curricularCourse);
-    }
-
-    final public boolean isCurricularCourseEnrolledInExecutionPeriod(CurricularCourse curricularCourse,
-            ExecutionSemester executionSemester) {
-
-        List<Enrolment> studentEnrolledEnrollments = getAllStudentEnrolledEnrollmentsInExecutionPeriod(executionSemester);
-        for (Enrolment enrolment : studentEnrolledEnrollments) {
-            if (enrolment.getCurricularCourse().equals(curricularCourse)) {
-                return true;
-            }
-        }
-        return false;
+        return isEnroledInExecutionPeriod(curricularCourse, ExecutionSemester.readActualExecutionSemester());
     }
 
     final public boolean isEnroledInExecutionPeriod(final CurricularCourse curricularCourse,
             final ExecutionSemester executionSemester) {
-        return isBoxStructure() ? getRoot().isEnroledInExecutionPeriod(curricularCourse, executionSemester) : isCurricularCourseEnrolledInExecutionPeriod(
-                curricularCourse, executionSemester);
+        return getRoot().isEnroledInExecutionPeriod(curricularCourse, executionSemester);
     }
 
     final public Integer getCurricularCourseAcumulatedEnrollments(CurricularCourse curricularCourse,
@@ -1790,23 +1742,6 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         return false;
     }
 
-    final public boolean approvedInAllCurricularCoursesUntilInclusiveCurricularYear(final Integer curricularYearInteger) {
-        final DegreeCurricularPlan degreeCurricularPlan = getDegreeCurricularPlan();
-        for (final CurricularCourse curricularCourse : degreeCurricularPlan.getCurricularCoursesSet()) {
-            final Collection<CurricularCourseScope> activeCurricularCourseScopes = curricularCourse.getActiveScopes();
-            for (final CurricularCourseScope curricularCourseScope : activeCurricularCourseScopes) {
-                final CurricularSemester curricularSemester = curricularCourseScope.getCurricularSemester();
-                final CurricularYear curricularYear = curricularSemester.getCurricularYear();
-                if (curricularYearInteger == null || curricularYear.getYear().intValue() <= curricularYearInteger.intValue()) {
-                    if (!isCurricularCourseApproved(curricularCourse)) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
     public int numberCompletedCoursesForSpecifiedDegrees(final Set<Degree> degrees) {
         int numberCompletedCourses = 0;
         for (final StudentCurricularPlan studentCurricularPlan : getRegistration().getStudentCurricularPlansSet()) {
@@ -1842,8 +1777,8 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         Map<CurricularCourse, Enrolment> result = new HashMap<CurricularCourse, Enrolment>();
 
         for (Enrolment enrolment : getEnrolmentsSet()) {
-            if (!enrolment.getEvaluationSeason().isSpecial() && enrolment.getExecutionPeriod().getExecutionYear().equals(executionYear)
-                    && !enrolment.isApproved()) {
+            if (!enrolment.getEvaluationSeason().isSpecial()
+                    && enrolment.getExecutionPeriod().getExecutionYear().equals(executionYear) && !enrolment.isApproved()) {
                 if (result.get(enrolment.getCurricularCourse()) != null) {
                     Enrolment enrolmentMap = result.get(enrolment.getCurricularCourse());
                     if (enrolment.getExecutionPeriod().compareTo(enrolmentMap.getExecutionPeriod()) > 0) {
@@ -1864,7 +1799,8 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
 
         final Set<Enrolment> result = new HashSet<Enrolment>();
         for (Enrolment enrolment : getEnrolmentsSet()) {
-            if (enrolment.getEvaluationSeason().isSpecial() && enrolment.getExecutionPeriod().getExecutionYear().equals(executionYear)) {
+            if (enrolment.getEvaluationSeason().isSpecial()
+                    && enrolment.getExecutionPeriod().getExecutionYear().equals(executionYear)) {
                 result.add(enrolment);
             }
         }
@@ -2250,14 +2186,12 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
 
     public List<Dismissal> getDismissals() {
         final List<Dismissal> result = new ArrayList<Dismissal>();
-        if (isBoxStructure()) {
-            getRoot().collectDismissals(result);
-        }
+        getRoot().collectDismissals(result);
         return result;
     }
 
     public Dismissal getDismissal(final CurricularCourse curricularCourse) {
-        return isBoxStructure() ? getRoot().getDismissal(curricularCourse) : null;
+        return getRoot().getDismissal(curricularCourse);
     }
 
     public Substitution getSubstitution(final IEnrolment iEnrolment) {
@@ -2349,19 +2283,19 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public boolean hasDegreeModule(final DegreeModule degreeModule) {
-        return isBoxStructure() ? getRoot().hasDegreeModule(degreeModule) : false;
+        return getRoot().hasDegreeModule(degreeModule);
     }
 
     public boolean hasCurriculumModule(final CurriculumModule curriculumModule) {
-        return isBoxStructure() ? getRoot().hasCurriculumModule(curriculumModule) : false;
+        return getRoot().hasCurriculumModule(curriculumModule);
     }
 
     public CurriculumGroup findCurriculumGroupFor(final CourseGroup courseGroup) {
-        return isBoxStructure() ? getRoot().findCurriculumGroupFor(courseGroup) : null;
+        return getRoot().findCurriculumGroupFor(courseGroup);
     }
 
     public boolean isConcluded(final DegreeModule degreeModule, final ExecutionYear executionYear) {
-        return isBoxStructure() ? getRoot().hasConcluded(degreeModule, executionYear) : false;
+        return getRoot().hasConcluded(degreeModule, executionYear);
     }
 
     final public Double getCreditsConcludedForCourseGroup(final CourseGroup courseGroup) {
@@ -2542,7 +2476,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public CycleCurriculumGroup getCycle(final CycleType cycleType) {
-        return isBoxStructure() ? getRoot().getCycleCurriculumGroup(cycleType) : null;
+        return getRoot().getCycleCurriculumGroup(cycleType);
     }
 
     public boolean hasCycleCurriculumGroup(final CycleType cycleType) {
@@ -2550,7 +2484,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public CycleCourseGroup getCycleCourseGroup(final CycleType cycleType) {
-        return isBoxStructure() ? getDegreeCurricularPlan().getCycleCourseGroup(cycleType) : null;
+        return getDegreeCurricularPlan().getCycleCourseGroup(cycleType);
     }
 
     public Collection<CurriculumGroup> getCurricularCoursePossibleGroups(final CurricularCourse curricularCourse) {
@@ -2563,43 +2497,43 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public CycleCurriculumGroup getFirstCycle() {
-        return isBoxStructure() ? getRoot().getCycleCurriculumGroup(CycleType.FIRST_CYCLE) : null;
+        return getRoot().getCycleCurriculumGroup(CycleType.FIRST_CYCLE);
     }
 
     public CycleCurriculumGroup getSecondCycle() {
-        return isBoxStructure() ? getRoot().getCycleCurriculumGroup(CycleType.SECOND_CYCLE) : null;
+        return getRoot().getCycleCurriculumGroup(CycleType.SECOND_CYCLE);
     }
 
     public CycleCurriculumGroup getThirdCycle() {
-        return isBoxStructure() ? getRoot().getCycleCurriculumGroup(CycleType.THIRD_CYCLE) : null;
+        return getRoot().getCycleCurriculumGroup(CycleType.THIRD_CYCLE);
     }
 
     public CycleCurriculumGroup getFirstOrderedCycleCurriculumGroup() {
-        return isBoxStructure() ? getRoot().getFirstOrderedCycleCurriculumGroup() : null;
+        return getRoot().getFirstOrderedCycleCurriculumGroup();
     }
 
     public CycleCurriculumGroup getLastOrderedCycleCurriculumGroup() {
-        return isBoxStructure() ? getRoot().getLastOrderedCycleCurriculumGroup() : null;
+        return getRoot().getLastOrderedCycleCurriculumGroup();
     }
 
     public CycleCurriculumGroup getLastConcludedCycleCurriculumGroup() {
-        return isBoxStructure() ? getRoot().getLastConcludedCycleCurriculumGroup() : null;
+        return getRoot().getLastConcludedCycleCurriculumGroup();
     }
 
     public Collection<CycleCurriculumGroup> getCycleCurriculumGroups() {
-        return getRoot() != null ? getRoot().getCycleCurriculumGroups() : Collections.<CycleCurriculumGroup> emptySet();
+        return getRoot().getCycleCurriculumGroups();
     }
 
     public List<CycleCurriculumGroup> getInternalCycleCurriculumGrops() {
-        return getRoot() != null ? getRoot().getInternalCycleCurriculumGroups() : Collections.<CycleCurriculumGroup> emptyList();
+        return getRoot().getInternalCycleCurriculumGroups();
     }
 
     public Collection<ExternalCurriculumGroup> getExternalCurriculumGroups() {
-        return getRoot() != null ? getRoot().getExternalCycleCurriculumGroups() : Collections.EMPTY_LIST;
+        return getRoot().getExternalCycleCurriculumGroups();
     }
 
     public boolean hasExternalCycleCurriculumGroups() {
-        return getRoot() != null ? getRoot().hasExternalCycles() : false;
+        return getRoot().hasExternalCycles();
     }
 
     public Integer getInternalCycleCurriculumGroupsSize() {
@@ -2649,7 +2583,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public Collection<NoCourseGroupCurriculumGroup> getNoCourseGroupCurriculumGroups() {
-        return isBoxStructure() ? getRoot().getNoCourseGroupCurriculumGroups() : new HashSet<NoCourseGroupCurriculumGroup>();
+        return getRoot().getNoCourseGroupCurriculumGroups();
     }
 
     public boolean hasAnyActiveRegistrationWithFirstCycleAffinity() {
@@ -2671,7 +2605,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     public CurriculumLine getApprovedCurriculumLine(final CurricularCourse curricularCourse) {
-        return isBoxStructure() ? getRoot().getApprovedCurriculumLine(curricularCourse) : null;
+        return getRoot().getApprovedCurriculumLine(curricularCourse);
     }
 
     @Override

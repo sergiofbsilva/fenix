@@ -42,7 +42,7 @@ public class ProgramConclusion extends ProgramConclusion_Base {
             LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation,
             RegistrationStateType targetState, EventTypes eventTypes) {
         this();
-        edit(name, graduationTitle, description, graduationLevel, isAverageEditable, isAlumniProvider, isSkipValidation,
+        edit(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider, isSkipValidation,
                 targetState, eventTypes);
     }
 

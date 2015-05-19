@@ -1223,7 +1223,7 @@ public class CurriculumGroup extends CurriculumGroup_Base {
         }
     }
 
-    private boolean isSkipConcluded() {
+    public boolean isSkipConcluded() {
         return getDegreeModule() != null && getDegreeModule().getProgramConclusion() != null
                 && getDegreeModule().getProgramConclusion().isSkipValidation();
     }

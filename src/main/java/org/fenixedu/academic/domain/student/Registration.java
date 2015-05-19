@@ -565,23 +565,17 @@ public class Registration extends Registration_Base {
             final StudentCurricularPlan lastStudentCurricularPlan = sortedSCPsIterator.previous();
 
             final ICurriculum curriculum;
-            if (lastStudentCurricularPlan.isBoxStructure()) {
-                curriculum = lastStudentCurricularPlan.getCurriculum(when, executionYear);
+            curriculum = lastStudentCurricularPlan.getCurriculum(when, executionYear);
 
-                for (; sortedSCPsIterator.hasPrevious();) {
-                    final StudentCurricularPlan studentCurricularPlan = sortedSCPsIterator.previous();
-                    if (executionYear == null || studentCurricularPlan.getStartExecutionYear().isBeforeOrEquals(executionYear)) {
-                        ((Curriculum) curriculum).add(studentCurricularPlan.getCurriculum(when, executionYear));
-                    }
+            for (; sortedSCPsIterator.hasPrevious();) {
+                final StudentCurricularPlan studentCurricularPlan = sortedSCPsIterator.previous();
+                if (executionYear == null || studentCurricularPlan.getStartExecutionYear().isBeforeOrEquals(executionYear)) {
+                    ((Curriculum) curriculum).add(studentCurricularPlan.getCurriculum(when, executionYear));
                 }
-
-                return curriculum;
-
-            } else {
-                curriculum = new StudentCurriculum(this, executionYear);
             }
 
             return curriculum;
+
         }
     }
 
@@ -1405,16 +1399,6 @@ public class Registration extends Registration_Base {
             }
         }
         return null;
-    }
-
-    final public List<Enrolment> getEnroledImprovements() {
-        final List<Enrolment> enroledImprovements = new ArrayList<Enrolment>();
-        for (final StudentCurricularPlan scp : getStudentCurricularPlansSet()) {
-            if (!scp.isBoxStructure() && scp.getDegreeCurricularPlan().getDegree().getDegreeType().isPreBolonhaDegree()) {
-                enroledImprovements.addAll(scp.getEnroledImprovements());
-            }
-        }
-        return enroledImprovements;
     }
 
     final public Set<ExecutionCourse> getAttendingExecutionCoursesForCurrentExecutionPeriod() {

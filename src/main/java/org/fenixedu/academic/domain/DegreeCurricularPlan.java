@@ -346,13 +346,6 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         return false;
     }
 
-    /**
-     * Temporary method, after all degrees migration this is no longer necessary
-     */
-    public boolean isBoxStructure() {
-        return !getCurricularStage().equals(CurricularStage.OLD);
-    }
-
     public boolean isApproved() {
         return getCurricularStage() == CurricularStage.APPROVED;
     }
@@ -924,7 +917,7 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
 
     @Override
     public Set<CurricularCourse> getCurricularCoursesSet() {
-        if (isBoxStructure()) {
+        if (getRoot() != null) {
             return this.getCurricularCourses((ExecutionYear) null);
         } else {
             return super.getCurricularCoursesSet();
@@ -963,32 +956,14 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
      */
     private Set<CurricularCourse> getCurricularCourses(final ExecutionYear executionYear) {
         final Set<CurricularCourse> result = new HashSet<CurricularCourse>();
-        if (isBoxStructure()) {
-            for (final DegreeModule degreeModule : getDcpDegreeModules(CurricularCourse.class, executionYear)) {
-                result.add((CurricularCourse) degreeModule);
-            }
-        } else {
-            for (CurricularCourse curricularCourse : getCurricularCoursesSet()) {
-                if (curricularCourse.hasAnyActiveDegreModuleScope(executionYear)) {
-                    result.add(curricularCourse);
-                }
-            }
+        for (final DegreeModule degreeModule : getDcpDegreeModules(CurricularCourse.class, executionYear)) {
+            result.add((CurricularCourse) degreeModule);
         }
         return result;
     }
 
     public void applyToCurricularCourses(final ExecutionYear executionYear, final Predicate predicate) {
-        if (isBoxStructure()) {
-            if (getRoot() != null) {
-                getRoot().applyToCurricularCourses(executionYear, predicate);
-            }
-        } else {
-            for (final CurricularCourse curricularCourse : super.getCurricularCoursesSet()) {
-                if (curricularCourse.hasAnyActiveDegreModuleScope(executionYear)) {
-                    curricularCourse.applyToCurricularCourses(executionYear, predicate);
-                }
-            }
-        }
+        getRoot().applyToCurricularCourses(executionYear, predicate);
     }
 
     /**
@@ -1880,7 +1855,7 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     }
 
     public Set<ExecutionYear> getBeginContextExecutionYears() {
-        return isBoxStructure() ? getRoot().getBeginContextExecutionYears() : Collections.EMPTY_SET;
+        return getRoot().getBeginContextExecutionYears();
     }
 
     public ExecutionYear getOldestContextExecutionYear() {
@@ -2065,10 +2040,6 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
 
     @Atomic
     public void editDuration(AcademicPeriod duration) {
-
-        if (!isBoxStructure()) {
-            throw new DomainException("error.degreeCurricularPlan.duration.can.only.be.modified.in.box.structured.plans");
-        }
 
         if (duration == null) {
             throw new DomainException("error.degreeCurricularPlan.duration.cannot.be.null");
