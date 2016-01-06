@@ -130,9 +130,9 @@ import org.joda.time.YearMonthDay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.Atomic;
 
 public class Registration extends Registration_Base {
 
@@ -2105,7 +2105,7 @@ public class Registration extends Registration_Base {
     }
 
     public boolean isQualifiedToRegistrationConclusionProcess() {
-        return isActive() || isConcluded();
+        return isActive() || isConcluded() || isSchoolPartConcluded();
     }
 
     public ExecutionYear calculateConclusionYear() {
