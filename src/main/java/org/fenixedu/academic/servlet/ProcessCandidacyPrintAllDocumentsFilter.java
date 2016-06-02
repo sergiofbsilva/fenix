@@ -44,6 +44,7 @@ import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.candidacy.CandidacySummaryFile;
+import org.fenixedu.academic.domain.candidacy.FirstTimeDocumentsConfiguration;
 import org.fenixedu.academic.domain.candidacy.StudentCandidacy;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.Student;
@@ -64,14 +65,16 @@ import org.w3c.dom.NodeList;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.SAXException;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PdfCopyFields;
+import com.lowagie.text.pdf.PdfReader;
+
 import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
 import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.ResponseWrapper;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.pdf.PdfCopyFields;
-import com.lowagie.text.pdf.PdfReader;
 
 public class ProcessCandidacyPrintAllDocumentsFilter implements Filter {
 
@@ -206,9 +209,8 @@ public class ProcessCandidacyPrintAllDocumentsFilter implements Filter {
             try {
                 String realPath = null;
                 if (src.startsWith("api/bennu-portal/configuration/logo")) {
-                    realPath =
-                            "data:" + PortalConfiguration.getInstance().getLogoType() + ";base64,"
-                                    + Base64.getEncoder().encodeToString(PortalConfiguration.getInstance().getLogo());
+                    realPath = "data:" + PortalConfiguration.getInstance().getLogoType() + ";base64,"
+                            + Base64.getEncoder().encodeToString(PortalConfiguration.getInstance().getLogo());
                 } else {
                     realPath = servletContext.getResource(src).toString();
                 }
@@ -224,18 +226,35 @@ public class ProcessCandidacyPrintAllDocumentsFilter implements Filter {
         ByteArrayOutputStream concatenatedPdf = new ByteArrayOutputStream();
         PdfCopyFields copy = new PdfCopyFields(concatenatedPdf);
 
-        try {
-            copy.addDocument(new PdfReader(createAcademicAdminProcessSheet(person)));
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+        if (!FirstTimeDocumentsConfiguration.getInstance().isToExclude("adminProcessSheet")) {
+            try {
+                copy.addDocument(new PdfReader(createAcademicAdminProcessSheet(person)));
+            } catch (Exception e) {
+                logger.error(e.getMessage(), e);
+            }
         }
         copy.addDocument(new PdfReader(originalDoc));
         for (PdfFiller pdfFiller : pdfFillersSet) {
-            copy.addDocument(new PdfReader(pdfFiller.getFilledPdf(person).toByteArray()));
+            if (!isPdfFillerToExclude(pdfFiller.getClass().getName())) {
+                copy.addDocument(new PdfReader(pdfFiller.getFilledPdf(person).toByteArray()));
+            }
         }
         copy.close();
 
         return concatenatedPdf;
+    }
+
+    public static boolean isPdfFillerToExclude(String filterClass) {
+        JsonArray filters =
+                FirstTimeDocumentsConfiguration.getInstance().getConfigurationProperties().getAsJsonArray("classFilters");
+        if (filters != null) {
+            for (JsonElement jsonElement : filters) {
+                if (jsonElement.getAsString().equals(filterClass)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static void registerFiller(PdfFiller pdfFiller) {
@@ -298,8 +317,9 @@ public class ProcessCandidacyPrintAllDocumentsFilter implements Filter {
             map.put("cellphoneNumber", person.getDefaultMobilePhoneNumber());
             map.put("telephoneNumber", person.getDefaultPhoneNumber());
             map.put("emailAddress", getMail(person));
-            map.put("currentDate", new java.text.SimpleDateFormat("'Lisboa, 'dd' de 'MMMM' de 'yyyy", new java.util.Locale("PT",
-                    "pt")).format(new java.util.Date()));
+            map.put("currentDate",
+                    new java.text.SimpleDateFormat("'Lisboa, 'dd' de 'MMMM' de 'yyyy", new java.util.Locale("PT", "pt"))
+                            .format(new java.util.Date()));
         } catch (NullPointerException e) {
             // nothing; will cause printing of incomplete form
             // better than no form at all
