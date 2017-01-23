@@ -33,14 +33,8 @@ import org.apache.commons.collections.comparators.ReverseComparator;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.fenixedu.academic.domain.Attends;
-import org.fenixedu.academic.domain.Degree;
-import org.fenixedu.academic.domain.DegreeCurricularPlan;
-import org.fenixedu.academic.domain.ExecutionCourse;
-import org.fenixedu.academic.domain.ExecutionDegree;
-import org.fenixedu.academic.domain.ExecutionSemester;
-import org.fenixedu.academic.domain.ExecutionYear;
-import org.fenixedu.academic.domain.Person;
+import org.fenixedu.academic.domain.*;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.RegistrationRegime;
@@ -205,12 +199,22 @@ public class RegistrationDA extends StudentRegistrationDA {
     }
 
     public ActionForward chooseProgramConclusion(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) {
+                                                 HttpServletResponse response) {
 
         final RegistrationConclusionBean registrationConclusionBean = getRegistrationConclusionBeanFromViewState();
         request.setAttribute("registrationConclusionBean", registrationConclusionBean);
         request.setAttribute("registration", registrationConclusionBean.getRegistration());
 
+        return mapping.findForward("registrationConclusion");
+    }
+
+    public ActionForward selectProgramConclusion(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                                 HttpServletResponse response) {
+        Registration registration = getDomainObject(request, "registration");
+        ProgramConclusion programConclusion = getDomainObject(request, "programConclusion");
+        RegistrationConclusionBean registrationConclusionBean = new RegistrationConclusionBean(registration, programConclusion);
+        request.setAttribute("registrationConclusionBean", registrationConclusionBean);
+        request.setAttribute("registration", registrationConclusionBean.getRegistration());
         return mapping.findForward("registrationConclusion");
     }
 
