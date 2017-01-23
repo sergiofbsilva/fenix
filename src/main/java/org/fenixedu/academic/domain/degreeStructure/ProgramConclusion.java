@@ -40,11 +40,11 @@ import org.fenixedu.commons.i18n.LocalizedString;
 import com.google.common.base.Strings;
 
 /***
- * 
+ *
  * Program Conclusion
- * 
+ *
  * A program conclusion defines properties used in the conclusion process.
- * 
+ *
  * @author Sérgio Silva (sergio.silva@tecnico.ulisboa.pt)
  *
  */
@@ -112,7 +112,7 @@ public class ProgramConclusion extends ProgramConclusion_Base {
     }
 
     public static Stream<ProgramConclusion> conclusionsFor(Registration registration) {
-        return conclusionsFor(registration.getLastStudentCurricularPlan());
+        return registration.getStudentCurricularPlansSet().stream().flatMap(ProgramConclusion::conclusionsFor).distinct();
     }
 
     public static Stream<ProgramConclusion> conclusionsFor(DegreeCurricularPlan degreeCurricularPlan) {
@@ -136,7 +136,10 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         if (registration == null) {
             return Optional.empty();
         }
-        return groupFor(registration.getLastStudentCurricularPlan());
+        return registration.getStudentCurricularPlansSet().stream().sorted(StudentCurricularPlan
+                .STUDENT_CURRICULAR_PLAN_COMPARATOR_BY_START_DATE.reversed()).map(this::groupFor).filter(Optional::isPresent).findFirst()
+                .orElse(Optional
+                        .empty());
     }
 
     public Optional<CourseGroup> groupFor(DegreeCurricularPlan degreeCurricularPlan) {
