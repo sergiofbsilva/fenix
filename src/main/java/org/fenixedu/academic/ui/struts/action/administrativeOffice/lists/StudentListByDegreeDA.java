@@ -196,18 +196,11 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             if ((searchBean.isIngressedInChosenYear()) && (registration.getIngressionYear() != executionYear)) {
                 continue;
             }
-
-            if (searchBean.isConcludedInChosenYear()) {
-                Stream<ProgramConclusion> conclusions =
-                        ProgramConclusion.conclusionsFor(registration).filter(ProgramConclusion::isTerminal);
-
-                if (conclusions.allMatch(programConclusion -> {
-                    RegistrationConclusionBean conclusionBean = new RegistrationConclusionBean(registration, programConclusion);
-                    return conclusionBean.getCurriculumGroup() == null || !conclusionBean.isConcluded()
-                            || conclusionBean.getConclusionYear() != executionYear;
-                })) {
-                    continue;
-                }
+            
+            if ((searchBean.hasAnyProgramConclusion())
+            		&& !(ProgramConclusion.conclusionsFor(registration)
+            				.anyMatch(pC -> searchBean.getProgramConclusions().contains(pC)))) {
+            	continue;
             }
 
             if (searchBean.getActiveEnrolments() && !registration.hasAnyEnrolmentsIn(executionYear)) {
@@ -297,10 +290,6 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             spreadsheet.addHeader(getResourceMessage("label.ingressedInChosenYear"));
         }
         spreadsheet.newHeaderRow();
-        if (searchBean.isConcludedInChosenYear()) {
-            spreadsheet.addHeader(getResourceMessage("label.concludedInChosenYear"));
-        }
-        spreadsheet.newHeaderRow();
         if (searchBean.getActiveEnrolments()) {
             spreadsheet.addHeader(getResourceMessage("label.activeEnrolments.capitalized"));
         }
@@ -341,6 +330,13 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             spreadsheet.addHeader(getResourceMessage("label.statutes") + ":");
             for (StatuteType statute : searchBean.getStudentStatuteTypes()) {
                 spreadsheet.addHeader(statute.getName().getContent());
+            }
+        }
+        spreadsheet.newHeaderRow();
+        if (searchBean.hasAnyProgramConclusion()) {
+            spreadsheet.addHeader(getResourceMessage("label.programConclusions") + ":");
+            for (ProgramConclusion programConclusion : searchBean.getProgramConclusions()) {
+                spreadsheet.addHeader(programConclusion.getName().getContent());
             }
         }
     }
