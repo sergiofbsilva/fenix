@@ -45,12 +45,9 @@ public class ActiveStudentsGroup extends GroupStrategy {
 
     @Override
     public Set<User> getMembers() {
-        return Stream
-                .concat(Bennu.getInstance().getPhdProgramsSet().stream()
-                        .flatMap(program -> program.getIndividualProgramProcessesSet().stream())
-                        .filter(PhdIndividualProgramProcess::isProcessActive).map(PhdIndividualProgramProcess::getPerson),
-                        Bennu.getInstance().getStudentsSet().stream().filter(Student::hasActiveRegistrations)
-                                .map(Student::getPerson)).map(Person::getUser).collect(Collectors.toSet());
+        return Stream.concat(new ActivePhdStudentsGroup().getMembers().stream(), Bennu.getInstance().getStudentsSet().stream().filter
+                (Student::hasActiveRegistrations)
+                .map(Student::getPerson).map(Person::getUser)).collect(Collectors.toSet());
     }
 
     @Override
@@ -63,9 +60,9 @@ public class ActiveStudentsGroup extends GroupStrategy {
         if (user == null || user.getPerson() == null) {
             return false;
         }
-        return (user.getPerson().getStudent() != null && user.getPerson().getStudent().hasActiveRegistrations())
-                || user.getPerson().getPhdIndividualProgramProcessesSet().stream()
-                        .anyMatch(PhdIndividualProgramProcess::isProcessActive);
+        return new ActivePhdStudentsGroup().isMember(user) || (user.getPerson().getStudent() != null && user.getPerson()
+                .getStudent()
+                .hasActiveRegistrations());
     }
 
     @Override
