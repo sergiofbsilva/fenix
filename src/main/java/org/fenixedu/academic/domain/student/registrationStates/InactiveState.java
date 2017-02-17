@@ -38,8 +38,8 @@ public class InactiveState extends InactiveState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.INACTIVE;
+    public RegistrationStateTypeNew getStateType() {
+        return null;
     }
 
 }

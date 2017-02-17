@@ -20,6 +20,7 @@ package org.fenixedu.academic.domain.serviceRequests;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
 import org.fenixedu.academic.domain.ExecutionSemester;
@@ -31,20 +32,19 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.AcademicServiceRequestType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.dto.serviceRequests.AcademicServiceRequestBean;
 import org.fenixedu.academic.dto.serviceRequests.RegistrationAcademicServiceRequestCreateBean;
 import org.joda.time.DateTime;
 
 public class StudentReingressionRequest extends StudentReingressionRequest_Base {
 
-    static final public List<RegistrationStateType> ALLOWED_TYPES = Arrays.asList(
-
-    RegistrationStateType.FLUNKED,
-
-    RegistrationStateType.INTERRUPTED,
-
-    RegistrationStateType.EXTERNAL_ABANDON);
+    static final public List<RegistrationStateTypeNew> ALLOWED_TYPES = RegistrationStateSystem.getInstance().getRegistrationStateTypeSet()
+            .stream()
+            .filter(stateType -> stateType.isReingressable())
+            .collect(Collectors.toList());
 
     protected StudentReingressionRequest() {
         super();
@@ -160,7 +160,7 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
         } else if (academicServiceRequestBean.isToConclude() && hasExecutionDegree()) {
             final RegistrationState state =
                     RegistrationState.createRegistrationState(getRegistration(), academicServiceRequestBean.getResponsible(),
-                            academicServiceRequestBean.getFinalSituationDate(), RegistrationStateType.REGISTERED);
+                            academicServiceRequestBean.getFinalSituationDate(), RegistrationStateSystem.getInstance().getInitialState());
 
             if (getRegistration().getActiveState() != state) {
                 throw new DomainException("StudentReingressionRequest.reingression.must.be.active.state.after.request.conclusion");

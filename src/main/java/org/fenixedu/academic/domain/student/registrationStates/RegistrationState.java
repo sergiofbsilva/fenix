@@ -20,13 +20,8 @@ package org.fenixedu.academic.domain.student.registrationStates;
 
 import static org.fenixedu.academic.predicate.AccessControl.check;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.Person;
@@ -42,9 +37,11 @@ import org.fenixedu.academic.predicate.RegistrationStatePredicates;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.EnrolmentAction;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.joda.time.DateTime;
 import org.joda.time.YearMonthDay;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 
 /**
@@ -52,7 +49,7 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
  * 
  */
-public abstract class RegistrationState extends RegistrationState_Base implements IState {
+public class RegistrationState extends RegistrationState_Base implements IState {
 
     static {
         getRelationRegistrationStateRegistration().addListener(new RelationAdapter<RegistrationState, Registration>() {
@@ -86,6 +83,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         }
     };
 
+    // TODO: ACDM-1113
     public static Comparator<RegistrationState> DATE_AND_STATE_TYPE_COMPARATOR = new Comparator<RegistrationState>() {
         @Override
         public int compare(RegistrationState leftState, RegistrationState rightState) {
@@ -93,7 +91,8 @@ public abstract class RegistrationState extends RegistrationState_Base implement
             if (comparationResult != 0) {
                 return comparationResult;
             }
-            comparationResult = leftState.getStateType().compareTo(rightState.getStateType());
+            // TODO the new classe is not comparable
+            comparationResult = leftState.getStateType().getOid().compareTo(rightState.getStateType().getOid());
             return (comparationResult == 0) ? leftState.getExternalId().compareTo(rightState.getExternalId()) : comparationResult;
         }
     };
@@ -103,54 +102,61 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         setRootDomainObject(Bennu.getInstance());
     }
 
+    public RegistrationState(Registration registration, Person person, DateTime dateTime, RegistrationStateTypeNew stateType) {
+        this.setRegistration(registration);
+        this.setResponsiblePerson(person);
+        this.setStateDate(dateTime);
+        this.setRegistrationStateType(stateType);
+    }
+
+    @Deprecated
     private static RegistrationState createState(Registration registration, Person person, DateTime dateTime,
-            RegistrationStateType stateType) {
-
-        RegistrationState newState = null;
-        switch (stateType) {
-        case REGISTERED:
-            newState = new RegisteredState(registration, person, dateTime);
-            break;
-        case CANCELED:
-            newState = new CanceledState(registration, person, dateTime);
-            break;
-        case CONCLUDED:
-            newState = new ConcludedState(registration, person, dateTime);
-            break;
-        case FLUNKED:
-            newState = new FlunkedState(registration, person, dateTime);
-            break;
-        case INTERRUPTED:
-            newState = new InterruptedState(registration, person, dateTime);
-            break;
-        case SCHOOLPARTCONCLUDED:
-            newState = new SchoolPartConcludedState(registration, person, dateTime);
-            break;
-        case STUDYPLANCONCLUDED:
-            newState = new StudyPlanConcludedState(registration, person, dateTime);
-            break;
-        case INTERNAL_ABANDON:
-            newState = new InternalAbandonState(registration, person, dateTime);
-            break;
-        case EXTERNAL_ABANDON:
-            newState = new ExternalAbandonState(registration, person, dateTime);
-            break;
-        case MOBILITY:
-            newState = new MobilityState(registration, person, dateTime);
-            break;
-        case TRANSITION:
-            newState = new TransitionalState(registration, person, dateTime);
-            break;
-        case TRANSITED:
-            newState = new TransitedState(registration, person, dateTime);
-            break;
-        case INACTIVE:
-            newState = new InactiveState(registration, person, dateTime);
-            break;
-        }
-        registration.getStudent().updateStudentRole();
-
-        return newState;
+            RegistrationStateTypeNew stateType) {
+        return new RegistrationState(registration, person, dateTime, stateType);
+//        switch (stateType) {
+//        case REGISTERED:
+//            newState = new RegisteredState(registration, person, dateTime);
+//            break;
+//        case CANCELED:
+//            newState = new CanceledState(registration, person, dateTime);
+//            break;
+//        case CONCLUDED:
+//            newState = new ConcludedState(registration, person, dateTime);
+//            break;
+//        case FLUNKED:
+//            newState = new FlunkedState(registration, person, dateTime);
+//            break;
+//        case INTERRUPTED:
+//            newState = new InterruptedState(registration, person, dateTime);
+//            break;
+//        case SCHOOLPARTCONCLUDED:
+//            newState = new SchoolPartConcludedState(registration, person, dateTime);
+//            break;
+//        case STUDYPLANCONCLUDED:
+//            newState = new StudyPlanConcludedState(registration, person, dateTime);
+//            break;
+//        case INTERNAL_ABANDON:
+//            newState = new InternalAbandonState(registration, person, dateTime);
+//            break;
+//        case EXTERNAL_ABANDON:
+//            newState = new ExternalAbandonState(registration, person, dateTime);
+//            break;
+//        case MOBILITY:
+//            newState = new MobilityState(registration, person, dateTime);
+//            break;
+//        case TRANSITION:
+//            newState = new TransitionalState(registration, person, dateTime);
+//            break;
+//        case TRANSITED:
+//            newState = new TransitedState(registration, person, dateTime);
+//            break;
+//        case INACTIVE:
+//            newState = new InactiveState(registration, person, dateTime);
+//            break;
+//        }
+//        registration.getStudent().updateStudentRole();
+//
+//        return newState;
     }
 
     protected void init(Registration registration, Person responsiblePerson, DateTime stateDate) {
@@ -168,14 +174,14 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         return nextState(new StateBean(defaultNextStateType().toString()));
     }
 
-    protected RegistrationStateType defaultNextStateType() {
+    protected RegistrationStateTypeNew defaultNextStateType() {
         throw new DomainException("error.no.default.nextState.defined");
     }
 
     @Override
     public IState nextState(final StateBean bean) {
         return createState(getRegistration(), bean.getResponsible(), bean.getStateDateTime(),
-                RegistrationStateType.valueOf(bean.getNextState()));
+                FenixFramework.getDomainObject(bean.getNextState()));
     }
 
     @Override
@@ -190,7 +196,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
 
     private void checkCurriculumLinesForStateDate(final StateBean bean) {
         final ExecutionYear year = ExecutionYear.readByDateTime(bean.getStateDateTime());
-        final RegistrationStateType nextStateType = RegistrationStateType.valueOf(bean.getNextState());
+        final RegistrationStateTypeNew nextStateType = FenixFramework.getDomainObject(bean.getNextState());
 
         if (nextStateType.canHaveCurriculumLinesOnCreation()) {
             return;
@@ -202,12 +208,15 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         }
     }
 
-    @Override
-    public Set<String> getValidNextStates() {
-        return Collections.emptySet();
-    }
+//    @Override
+//    public Set<String> getValidNextStates() {
+//    	return getStateType().getValidNextStates();
+//    }
 
-    public abstract RegistrationStateType getStateType();
+
+    public RegistrationStateTypeNew getStateType() {
+        return getStateType();
+    }
 
     public ExecutionYear getExecutionYear() {
         return ExecutionYear.readByDateTime(getStateDate());
@@ -218,9 +227,9 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         RegistrationState nextState = getNext();
         RegistrationState previousState = getPrevious();
         if (nextState != null && previousState != null
-                && !previousState.getValidNextStates().contains(nextState.getStateType().name())) {
+                && !previousState.getValidNextStates().contains(nextState.getStateType().getCode())) {
             throw new DomainException("error.cannot.delete.registrationState.incoherentState: "
-                    + previousState.getStateType().name() + " -> " + nextState.getStateType().name());
+                    + previousState.getStateType().getCode() + " -> " + nextState.getStateType().getCode());
         }
         deleteWithoutCheckRules();
     }
@@ -237,7 +246,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
 
             org.fenixedu.academic.domain.student.RegistrationStateLog
                     .createRegistrationStateLog(getRegistration(), Bundle.MESSAGING,
-                            "log.registration.registrationstate.removed", getStateType().getDescription(), getRemarks());
+                            "log.registration.registrationstate.removed", getStateType().getDescription().getContent(), getRemarks());
             setRegistration(null);
             setResponsiblePerson(null);
             setRootDomainObject(null);
@@ -290,7 +299,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
     }
 
     public static RegistrationState createRegistrationState(Registration registration, Person responsible, DateTime creation,
-            RegistrationStateType stateType) {
+            RegistrationStateTypeNew stateType) {
         RegistrationStateBean bean = new RegistrationStateBean(registration);
         bean.setResponsible(responsible);
         bean.setStateDateTime(creation);
@@ -298,6 +307,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         return createRegistrationState(bean);
     }
 
+    @Deprecated
     public static RegistrationState createRegistrationState(RegistrationStateBean bean) {
         RegistrationState createdState = null;
 
@@ -311,11 +321,11 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         createdState.setRemarks(bean.getRemarks());
 
         final RegistrationState nextState = createdState.getNext();
-        if (nextState != null && !createdState.getValidNextStates().contains(nextState.getStateType().name())) {
+        if (nextState != null && !createdState.getValidNextStates().contains(nextState.getStateType().getCode())) {
             throw new DomainException("error.cannot.add.registrationState.incoherentState");
         }
         org.fenixedu.academic.domain.student.RegistrationStateLog.createRegistrationStateLog(bean.getRegistration(),
-                Bundle.MESSAGING, "log.registration.registrationstate.added", bean.getStateType().getDescription(),
+                Bundle.MESSAGING, "log.registration.registrationstate.added", bean.getStateType().getDescription().getContent(),
                 bean.getRemarks());
         return createdState;
     }
@@ -325,7 +335,7 @@ public abstract class RegistrationState extends RegistrationState_Base implement
     }
 
     public boolean includes(final ExternalEnrolment externalEnrolment) {
-        if (getStateType() == RegistrationStateType.MOBILITY) {
+        if (getStateType().equals(RegistrationStateSystem.getInstance().getMobilityState())) {
             final DateTime mobilityDate = getStateDate();
             return externalEnrolment.hasExecutionPeriod() && externalEnrolment.getExecutionYear().containsDate(mobilityDate);
         }
@@ -333,14 +343,12 @@ public abstract class RegistrationState extends RegistrationState_Base implement
         throw new DomainException("RegistrationState.external.enrolments.only.included.in.mobility.states");
     }
 
-    static public boolean hasAnyState(final Collection<RegistrationState> states, final Collection<RegistrationStateType> types) {
-        for (final RegistrationState state : states) {
-            if (types.contains(state.getStateType())) {
-                return true;
-            }
-        }
-
-        return false;
+    static public boolean hasAnyState(final Collection<RegistrationState> states, final Collection<RegistrationStateTypeNew> types) {
+        return states.stream().anyMatch(state -> types.contains(state.getStateType()));
     }
 
+    @Override
+    public Set<String> getValidNextStates() {
+        return new HashSet<>();
+    }
 }

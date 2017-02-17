@@ -30,7 +30,9 @@ import org.fenixedu.academic.domain.accounting.EventTypes;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.curriculum.ConclusionProcess;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.domain.Bennu;
@@ -59,15 +61,15 @@ public class ProgramConclusion extends ProgramConclusion_Base {
 
     public ProgramConclusion(LocalizedString name, LocalizedString description, LocalizedString graduationTitle,
             LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation,
-            RegistrationStateType targetState, EventTypes eventTypes) {
+            RegistrationStateTypeNew targetState, EventTypes eventTypes) {
         this();
         edit(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider, isSkipValidation,
                 targetState, eventTypes);
     }
 
     public void edit(LocalizedString name, LocalizedString description, LocalizedString graduationTitle,
-            LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation,
-            RegistrationStateType targetState, EventTypes eventTypes) {
+                     LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider, boolean isSkipValidation,
+                     RegistrationStateTypeNew targetState, EventTypes eventTypes) {
         setName(name);
         setDescription(description);
         setGraduationTitle(graduationTitle);
@@ -147,7 +149,7 @@ public class ProgramConclusion extends ProgramConclusion_Base {
     }
 
     public boolean isTerminal() {
-        return RegistrationStateType.CONCLUDED.equals(getTargetState());
+        return getTargetState().equals(RegistrationStateSystem.getInstance().getConcludedState());
     }
 
     public boolean isConclusionProcessed(Registration registration) {

@@ -22,6 +22,7 @@ import org.fenixedu.academic.domain.Grade;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.dto.student.RegistrationConclusionBean;
 import org.joda.time.YearMonthDay;
 
@@ -34,7 +35,7 @@ public class PhdRegistrationConclusionBean extends RegistrationConclusionBean {
         setCurriculumGroup(registration.getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE));
     }
 
-    public RegistrationStateType getActiveStateType() {
+    public RegistrationStateTypeNew getActiveStateType() {
         return getRegistration().getActiveStateType();
     }
 

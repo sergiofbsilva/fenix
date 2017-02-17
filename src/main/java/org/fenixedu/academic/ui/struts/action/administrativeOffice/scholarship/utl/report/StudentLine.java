@@ -51,6 +51,7 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.RegistrationRegimeType;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumLine;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
@@ -518,23 +519,14 @@ public class StudentLine implements java.io.Serializable {
     }
 
     public Integer getCountNumberOfDegreeChanges() {
-        int numberOfDegreeChanges = 0;
-
         if (student == null) {
             return 0;
         }
 
-        List<Registration> registrations = new ArrayList<Registration>(student.getRegistrationsSet());
-        Collections.sort(registrations, Registration.COMPARATOR_BY_START_DATE);
-        for (final Registration iter : registrations) {
-            final SortedSet<RegistrationState> states = new TreeSet<RegistrationState>(RegistrationState.DATE_COMPARATOR);
-            states.addAll(iter.getRegistrationStates(RegistrationStateType.INTERNAL_ABANDON));
-            if (!states.isEmpty()) {
-                numberOfDegreeChanges++;
-            }
-        }
-
-        return numberOfDegreeChanges;
+        return (int) student.getRegistrationsSet()
+                .stream()
+                .filter(r -> !r.getRegistrationStates(RegistrationStateSystem.getInstance().getInternalAbandonState()).isEmpty())
+                .count();
     }
 
     public boolean hasMadeDegreeChange() {
@@ -788,11 +780,8 @@ public class StudentLine implements java.io.Serializable {
     public static Collection<ExecutionYear> getEnrolmentsExecutionYears(final Student student) {
         Set<ExecutionYear> executionYears = new HashSet<ExecutionYear>();
         for (final Registration registration : student.getRegistrationsSet()) {
-            if (RegistrationStateType.CANCELED.equals(registration.getLastActiveState())) {
-                continue;
-            }
-
-            if (RegistrationStateType.TRANSITION.equals(registration.getLastActiveState())) {
+            if (registration.getLastActiveState().equals(RegistrationStateSystem.getInstance().getCanceledState())
+                    || registration.getLastActiveState().equals(RegistrationStateSystem.getInstance().getTransitionState())) {
                 continue;
             }
 

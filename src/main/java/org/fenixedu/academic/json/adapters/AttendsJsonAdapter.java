@@ -49,7 +49,7 @@ public class AttendsJsonAdapter implements JsonViewer<Attends> {
         }
         RegistrationState registrationState = attends.getRegistration().getLastRegistrationState(attends.getExecutionYear());
         object.addProperty("registrationState", registrationState == null ? "" : registrationState.getStateType()
-                .getDescription());
+                .getDescription().getContent());
 
         object.addProperty("enrolmentType",
                 BundleUtil.getString(Bundle.ENUMERATION, attends.getAttendsStateType().getQualifiedName()));

@@ -618,10 +618,10 @@ public class RaidesCommonReportFieldsWrapper {
 
         // Estado da matrícula no ano lectivo anterior ao que se referem os
         // dados
-        row.setCell(previousYearState != null ? previousYearState.getStateType().getDescription() : "n/a");
+        row.setCell(previousYearState != null ? previousYearState.getStateType().getDescription().getContent() : "n/a");
 
         // Estado (da matrícula) no ano a que se referem os dados
-        row.setCell(currentYearState != null ? currentYearState.getStateType().getDescription() : "n/a");
+        row.setCell(currentYearState != null ? currentYearState.getStateType().getDescription().getContent() : "n/a");
 
         // Data do estado de matrícula
         row.setCell(currentYearState != null ? currentYearState.getStateDate().toString("dd-MM-yyyy") : "n/a");

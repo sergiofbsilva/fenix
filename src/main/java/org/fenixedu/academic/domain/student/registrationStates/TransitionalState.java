@@ -37,8 +37,8 @@ public class TransitionalState extends TransitionalState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.TRANSITION;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getTransitionState();
     }
 
     @Override

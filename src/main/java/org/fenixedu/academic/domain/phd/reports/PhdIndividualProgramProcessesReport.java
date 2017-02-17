@@ -89,7 +89,7 @@ public class PhdIndividualProgramProcessesReport extends PhdReport {
         String caseCatState =
                 process.getSeminarProcess() != null ? process.getSeminarProcess().getActiveState().getLocalizedName() : "";
         String syllabusState =
-                process.getRegistration() != null ? process.getRegistration().getActiveStateType().getDescription() : "";
+                process.getRegistration() != null ? process.getRegistration().getActiveStateType().getDescription().getContent() : "";
         String applicationProcessState =
                 process.getCandidacyProcess() != null ? process.getCandidacyProcess().getActiveState().getLocalizedName() : "";
 

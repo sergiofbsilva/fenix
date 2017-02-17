@@ -24,7 +24,9 @@ import org.fenixedu.academic.domain.accounting.EventType;
 import org.fenixedu.academic.domain.accounting.EventTypes;
 import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.exceptions.DomainException;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.ui.spring.service.ProgramConclusionService;
 import org.fenixedu.bennu.spring.portal.SpringFunctionality;
 import org.fenixedu.commons.i18n.LocalizedString;
@@ -39,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Strings;
+import pt.ist.fenixframework.FenixFramework;
 
 /**
  * Program Conclusion Management Functionality
@@ -72,12 +75,12 @@ public class ProgramConclusionController {
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("allEventTypes", service.getEventTypes());
-        model.addAttribute("registrationStates", RegistrationStateType.values());
+        model.addAttribute("registrationStates", RegistrationStateSystem.getInstance().getRegistrationStateTypeSet());
         return view("create");
     }
 
-    private RegistrationStateType getRegistrationStateType(String targetState) {
-        return Strings.isNullOrEmpty(targetState) ? null : RegistrationStateType.valueOf(targetState);
+    private RegistrationStateTypeNew getRegistrationStateType(String targetState) {
+        return Strings.isNullOrEmpty(targetState) ? null : FenixFramework.getDomainObject(targetState);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
@@ -102,7 +105,7 @@ public class ProgramConclusionController {
     @RequestMapping(value = "/{programConclusion}", method = RequestMethod.GET)
     public String edit(Model model, @PathVariable ProgramConclusion programConclusion) {
         model.addAttribute("allEventTypes", service.getEventTypes());
-        model.addAttribute("registrationStates", RegistrationStateType.values());
+        model.addAttribute("registrationStates", RegistrationStateSystem.getInstance().getRegistrationStateTypeSet());
         model.addAttribute("programConclusion", programConclusion);
         return view("create");
     }

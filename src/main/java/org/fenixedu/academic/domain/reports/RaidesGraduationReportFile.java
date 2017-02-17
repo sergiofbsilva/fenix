@@ -26,6 +26,7 @@ import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule.ConclusionValue;
 import org.fenixedu.academic.domain.studentCurriculum.CycleCurriculumGroup;
@@ -84,7 +85,10 @@ public class RaidesGraduationReportFile extends RaidesGraduationReportFile_Base 
 
                         boolean isToAddRegistration = false;
                         for (RegistrationState state : registration.getRegistrationStates(executionYear)) {
-                            if (state.isActive() || state.getStateType() == RegistrationStateType.CONCLUDED) {
+                            // TODO: SERGIOTALK
+                            // Penso que a segunda parte pode ser substituída pelo check do ConclusionProcess
+                            // A primeira parte, acho que deve ser um dos booleans do novo RegistrationStateType
+                            if (state.isActive() || state.getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState())) {
                                 isToAddRegistration = true;
                                 break;
                             }

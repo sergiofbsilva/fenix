@@ -42,6 +42,7 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.SeniorStatute;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.StudentStatute;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.StudentCurricularPlanEnrolmentPreConditions.EnrolmentPreConditionResult;
 
@@ -53,7 +54,7 @@ public class StudentCurricularPlanEnrolmentInSpecialSeasonEvaluationManager exte
 
     @Override
     protected void assertEnrolmentPreConditions() {
-        if (!getRegistration().hasStateType(getExecutionYear(), RegistrationStateType.REGISTERED)) {
+        if (!getRegistration().hasStateType(getExecutionYear(), RegistrationStateSystem.getInstance().getInitialState())) {
             throw new DomainException("error.StudentCurricularPlan.cannot.enrol.with.registration.inactive");
         }
 

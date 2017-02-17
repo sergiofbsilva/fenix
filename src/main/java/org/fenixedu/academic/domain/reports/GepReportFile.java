@@ -40,6 +40,8 @@ import org.fenixedu.academic.domain.WrittenEvaluation;
 import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.curriculum.ConclusionProcess;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.util.HtmlToTextConverterUtil;
 import org.fenixedu.commons.spreadsheet.Spreadsheet;
@@ -242,11 +244,7 @@ public abstract class GepReportFile extends GepReportFile_Base {
     }
 
     protected static boolean isValidSourceLink(Registration source) {
-        return source.getActiveStateType().equals(RegistrationStateType.TRANSITED)
-                || source.getActiveStateType().equals(RegistrationStateType.FLUNKED)
-                || source.getActiveStateType().equals(RegistrationStateType.INTERNAL_ABANDON)
-                || source.getActiveStateType().equals(RegistrationStateType.EXTERNAL_ABANDON)
-                || source.getActiveStateType().equals(RegistrationStateType.INTERRUPTED);
+        return RegistrationStateSystem.getInstance().getValidSourceLinkSet().contains(source.getActiveStateType());
     }
 
     private static Registration findSourceRegistrationByEquivalencePlan(Registration targetRegistration) {
@@ -255,7 +253,7 @@ public abstract class GepReportFile extends GepReportFile_Base {
             for (Registration sourceRegistration : targetRegistration.getStudent().getRegistrationsSet()) {
                 final DegreeCurricularPlan sourceDegreeCurricularPlan = sourceRegistration.getLastDegreeCurricularPlan();
                 if (sourceRegistration != targetRegistration
-                        && sourceRegistration.getActiveStateType() == RegistrationStateType.TRANSITED
+                        && sourceRegistration.getActiveStateType().equals(RegistrationStateSystem.getInstance().getTransitedState())
                         && targetDegreeCurricularPlan.getEquivalencePlan().getSourceDegreeCurricularPlan()
                                 .equals(sourceDegreeCurricularPlan)) {
                     return sourceRegistration;

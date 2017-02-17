@@ -17,7 +17,7 @@
  * along with FenixEdu Academic.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * 
+ *
  */
 package org.fenixedu.academic.domain.student.registrationStates;
 
@@ -26,33 +26,35 @@ import org.fenixedu.bennu.core.i18n.BundleUtil;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
- * 
+ *
  */
+
+@Deprecated
 public enum RegistrationStateType {
 
-    REGISTERED(true, true),
+    REGISTERED(true, true), // Este estado faz sentido ser representado por um boolean, para saber se o registo está activo ou não
 
-    MOBILITY(true, true),
+    MOBILITY(true, true), // Se houver alguma forma de perceber se um registo é de Mobilidade, não há necessidade deste estado
 
-    CANCELED(false, false),
+    CANCELED(false, false), // Um registo não activo, sem processo de conclusão por substituir este estado
 
-    CONCLUDED(false, true),
+    CONCLUDED(false, true), // Conclusion Process... Cada caso está já visto e comentado
 
-    FLUNKED(false, false),
+    FLUNKED(false, false), // Relacionado com prescrições / alunos prescritos
 
-    INTERRUPTED(false, false),
+    INTERRUPTED(false, false), // Comentado caso a caso
 
-    SCHOOLPARTCONCLUDED(false, true),
+    SCHOOLPARTCONCLUDED(false, true), // Comentado caso a caso
 
-    INTERNAL_ABANDON(false, false),
+    INTERNAL_ABANDON(false, false), // É usado para representar as trocas de curso
 
-    EXTERNAL_ABANDON(false, false),
+    EXTERNAL_ABANDON(false, false), // Comentado caso a caso
 
-    TRANSITION(false, true),
+    TRANSITION(false, true), // Este é usado para representar as Registration que estão em transição de Pré-bolonha para Pós-bolonha
 
-    TRANSITED(false, true),
+    TRANSITED(false, true), // Este é usado para representar as Registration que foram transitadas de Pré-bolonha para Pós-bolonha
 
-    STUDYPLANCONCLUDED(false, true),
+    STUDYPLANCONCLUDED(false, true), // Este só é usado nas implementações de RegistrationState
 
     INACTIVE(false, false); //Closed state for the registrations regarding the AFA & MA protocols
 
@@ -82,20 +84,15 @@ public enum RegistrationStateType {
     }
 
     public String getQualifiedName() {
-        return RegistrationStateType.class.getSimpleName() + "." + name();
+        return RegistrationStateTypeNew.class.getSimpleName() + "." + name();
     }
 
     public String getFullyQualifiedName() {
-        return RegistrationStateType.class.getName() + "." + name();
+        return RegistrationStateTypeNew.class.getName() + "." + name();
     }
 
     public String getDescription() {
         return BundleUtil.getString(Bundle.ENUMERATION, getQualifiedName());
-    }
-
-    public boolean canReingress() {
-        return this == FLUNKED || this == INTERRUPTED || this == INTERNAL_ABANDON || this == EXTERNAL_ABANDON || this == CANCELED
-                || this == INACTIVE;
     }
 
 }

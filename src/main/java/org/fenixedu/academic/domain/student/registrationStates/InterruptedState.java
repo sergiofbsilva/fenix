@@ -38,8 +38,8 @@ public class InterruptedState extends InterruptedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.INTERRUPTED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getInterruptedState();
     }
 
     @Override

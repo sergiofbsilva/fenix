@@ -38,8 +38,8 @@ public class RegisteredState extends RegisteredState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.REGISTERED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getInitialState();
     }
 
     @Override

@@ -24,6 +24,7 @@ import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessBean;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
 import org.fenixedu.academic.domain.phd.PhdProgramProcessState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.bennu.core.domain.User;
 import org.joda.time.DateTime;
@@ -55,7 +56,7 @@ public class SuspendPhdProgramProcess extends PhdIndividualProgramProcessActivit
 
         if (process.getRegistration() != null && process.getRegistration().isActive()) {
             RegistrationState.createRegistrationState(process.getRegistration(), userView.getPerson(), stateDate,
-                    RegistrationStateType.INTERRUPTED);
+                    RegistrationStateSystem.getInstance().getInterruptedState());
         }
 
         return process;

@@ -43,8 +43,8 @@ public class CanceledState extends CanceledState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.CANCELED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getCanceledState();
     }
 
 }

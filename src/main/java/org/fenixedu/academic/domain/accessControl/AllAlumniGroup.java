@@ -18,7 +18,8 @@
  */
 package org.fenixedu.academic.domain.accessControl;
 
-import java.util.stream.Stream;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.student.Student;
@@ -64,19 +65,23 @@ public class AllAlumniGroup extends GroupStrategy {
     }
 
     @Override
-    public Stream<User> getMembers() {
+    public Set<User> getMembers() {
         return Bennu
                 .getInstance()
                 .getStudentsSet()
                 .stream()
                 .filter(student -> student.getAlumni() != null
-                        || student.hasAnyRegistrationInState(RegistrationStateType.CONCLUDED)
-                        || student.hasAnyRegistrationInState(RegistrationStateType.STUDYPLANCONCLUDED) || isAlumni(student))
-                .map(student -> student.getPerson().getUser());
+                        || student.getAllStudentCurricularPlans()
+                            .stream()
+                            .anyMatch(plan -> plan.getAllCurriculumGroups()
+                                    .stream()
+                                    .anyMatch(group -> group.getConclusionProcess() != null))
+                        || isAlumni(student))
+                .map(student -> student.getPerson().getUser()).collect(Collectors.toSet());
     }
 
     @Override
-    public Stream<User> getMembers(DateTime when) {
+    public Set<User> getMembers(DateTime when) {
         return getMembers();
     }
 
@@ -86,9 +91,12 @@ public class AllAlumniGroup extends GroupStrategy {
                 && user.getPerson() != null
                 && user.getPerson().getStudent() != null
                 && (user.getPerson().getStudent().getAlumni() != null
-                        || user.getPerson().getStudent().hasAnyRegistrationInState(RegistrationStateType.CONCLUDED)
-                        || user.getPerson().getStudent().hasAnyRegistrationInState(RegistrationStateType.STUDYPLANCONCLUDED) || isAlumni(user
-                        .getPerson().getStudent()));
+                || user.getPerson().getStudent().getAllStudentCurricularPlans()
+                        .stream()
+                        .anyMatch(plan -> plan.getAllCurriculumGroups()
+                                .stream()
+                                .anyMatch(group -> group.getConclusionProcess() != null))
+                || isAlumni(user.getPerson().getStudent()));
     }
 
     @Override

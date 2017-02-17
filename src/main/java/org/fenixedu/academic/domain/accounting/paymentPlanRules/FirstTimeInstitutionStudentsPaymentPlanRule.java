@@ -22,6 +22,7 @@ import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.Student;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 public class FirstTimeInstitutionStudentsPaymentPlanRule implements PaymentPlanRule {
@@ -53,7 +54,7 @@ public class FirstTimeInstitutionStudentsPaymentPlanRule implements PaymentPlanR
 
                 if (registration != current) {
 
-                    if (registration.getActiveStateType() != RegistrationStateType.CANCELED) {
+                    if (!registration.getActiveStateType().equals(RegistrationStateSystem.getInstance().getCanceledState())) {
                         return false;
                     }
                 }

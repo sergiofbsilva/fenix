@@ -26,6 +26,7 @@ import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.CycleCurriculumGroup;
 import org.fenixedu.academic.dto.student.RegistrationConclusionBean;
@@ -90,7 +91,7 @@ public class RaidesDfaReportFile extends RaidesDfaReportFile_Base {
                         boolean isToAddRegistration = false;
                         boolean isActive = false;
                         for (RegistrationState state : registration.getRegistrationStates(executionYear)) {
-                            if (state.isActive() || state.getStateType() == RegistrationStateType.CONCLUDED) {
+                            if (state.isActive() || state.getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState())) {
                                 isToAddRegistration = true;
                             }
                             isActive |= state.isActive();

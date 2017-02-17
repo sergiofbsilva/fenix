@@ -62,6 +62,7 @@ import org.fenixedu.academic.domain.student.RegistrationProtocol;
 import org.fenixedu.academic.domain.student.StatuteType;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.domain.studentCurriculum.BranchCurriculumGroup;
 import org.fenixedu.academic.domain.studentCurriculum.CycleCurriculumGroup;
 import org.fenixedu.academic.dto.academicAdministration.SearchStudentsByDegreeParametersBean;
@@ -339,8 +340,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         spreadsheet.newHeaderRow();
         if (searchBean.hasAnyRegistrationStateTypes()) {
             spreadsheet.addHeader(getResourceMessage("label.registrationState") + ":");
-            for (RegistrationStateType state : searchBean.getRegistrationStateTypes()) {
-                spreadsheet.addHeader(state.getDescription());
+            for (RegistrationStateTypeNew state : searchBean.getRegistrationStateTypes()) {
+                spreadsheet.addHeader(state.getDescription().getContent());
             }
         }
         spreadsheet.newHeaderRow();

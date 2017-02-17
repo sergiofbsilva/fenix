@@ -38,8 +38,8 @@ public class MobilityState extends MobilityState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.MOBILITY;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getMobilityState();
     }
 
     @Override

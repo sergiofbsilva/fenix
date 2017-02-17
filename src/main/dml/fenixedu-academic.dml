@@ -148,7 +148,7 @@ enum org.fenixedu.academic.domain.contacts.PartyContactValidationState 									
 enum org.fenixedu.academic.domain.SchoolPeriodDuration																  as SchoolPeriodDuration;
 enum org.fenixedu.academic.domain.candidacyProcess.mobility.MobilityEmailTemplateType                                  as MobilityEmailTemplateType;
 enum org.fenixedu.academic.domain.candidacyProcess.IndividualCandidacySeriesGradeState                                 as IndividualCandidacySeriesGradeState;
-enum org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType                                     as RegistrationStateType;
+//enum org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType                                     as RegistrationStateType;
 /*
  * Value types that need special externalization
  */
@@ -2393,7 +2393,6 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
         protected boolean averageEditable;
         protected boolean alumniProvider;
         protected boolean skipValidation;
-        public RegistrationStateType targetState;
         public EventTypes eventTypes;
     }
 	
@@ -3097,6 +3096,20 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
 
         class student.registrationStates.InactiveState extends student.registrationStates.RegistrationState {
         }
+
+    class student.registrationStates.RegistrationStateTypeNew {
+        Boolean active;
+        Boolean mobility;
+        Boolean student;
+        Boolean terminal;
+        String code (REQUIRED);
+        LocalizedString name (REQUIRED);
+        LocalizedString description (REQUIRED);
+    }
+
+    class student.registrationStates.RegistrationStateSystem {
+
+    }
 
     class student.registrationStates.RegistrationStateLog  {
         DateTime whenCreated;
@@ -8325,6 +8338,167 @@ relation RegistrationStateRegistration {
     student.Registration playsRole registration;
     student.registrationStates.RegistrationState playsRole registrationStates {
         multiplicity *;
+    }
+}
+
+relation ProgramConclusionHasTargetState {
+    protected degreeStructure.ProgramConclusion playsRole programConclusion;
+	student.registrationStates.RegistrationStateTypeNew playsRole targetState {
+		multiplicity 1..1;
+	}
+}
+
+relation RegistrationStateTypeRoot {
+    protected student.registrationStates.RegistrationStateSystem playsRole registrationStateSystem {
+        multiplicity 1..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole registrationStateType {
+        multiplicity *;
+    }
+}
+
+relation RegistrationStateHasRegistrationStateType {
+	student.registrationStates.RegistrationStateTypeNew playsRole registrationStateType {
+		multiplicity 1..1;
+	}
+	student.registrationStates.RegistrationState playsRole registrationStates {
+		multiplicity *;
+	}
+}
+
+relation RegistrationStateTypeNextValidStates {
+	student.registrationStates.RegistrationStateTypeNew playsRole currentStateType {
+		multiplicity *;
+	}
+	student.registrationStates.RegistrationStateTypeNew playsRole validNextStatesTypes {
+		multiplicity *;
+	}
+}
+
+relation RegistrationStateTypeDefaultNextStates {
+	student.registrationStates.RegistrationStateTypeNew playsRole previousStateTypes {
+		multiplicity *;
+	}
+	student.registrationStates.RegistrationStateTypeNew playsRole defaultNextStateType {
+		multiplicity 0..1;
+	}
+}
+
+
+relation RegistrationStateTypeSystemRoot {
+    student.registrationStates.RegistrationStateSystem playsRole registrationStateSystem {
+        multiplicity 1..1;
+    }
+    .org.fenixedu.bennu.core.domain.Bennu playsRole root {
+        multiplicity 1..1;
+    }
+}
+
+relation MobilityRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole mobilityRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole mobilityState {
+        multiplicity 0..1;
+    }
+}
+
+relation InternalAbandonRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole internalAbandonRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole internalAbandonState {
+        multiplicity 0..1;
+    }
+}
+
+relation ExternalAbandonRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole externalAbandonRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole externalAbandonState {
+        multiplicity 0..1;
+    }
+}
+
+relation TransitedRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole transitedRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole transitedState {
+        multiplicity 0..1;
+    }
+}
+
+relation TransitionRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole transitionRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole transitionState {
+        multiplicity 0..1;
+    }
+}
+
+relation InterruptedRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole interruptedRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole interruptedState {
+        multiplicity 0..1;
+    }
+}
+
+relation FlunkedRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole flunkedRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole flunkedState {
+        multiplicity 0..1;
+    }
+}
+
+relation CanceledRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole canceledRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole canceledState {
+        multiplicity 0..1;
+    }
+}
+
+relation SchoolPartConcludedRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole schoolPartConcludedRoot{
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole schoolPartConcludedState {
+        multiplicity 0..1;
+    }
+}
+
+relation ConcludedRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole concludedRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole concludedState {
+        multiplicity 0..1;
+    }
+}
+
+relation InitialRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole initialRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole initialState {
+        multiplicity 0..1;
+    }
+}
+
+relation ValidSourceLinkRegistrationStateTypes {
+    protected student.registrationStates.RegistrationStateSystem playsRole validSourceLinkRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateTypeNew playsRole validSourceLink {
+        multiplicity 0..*;
     }
 }
 

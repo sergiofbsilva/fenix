@@ -43,8 +43,8 @@ public class InternalAbandonState extends InternalAbandonState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.INTERNAL_ABANDON;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getInternalAbandonState();
     }
 
 }

@@ -69,6 +69,7 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.RegistrationProtocol;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.curriculum.Curriculum;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurricularPlan.Specialization;
 import org.fenixedu.academic.domain.studentCurricularPlan.StudentCurricularPlanState;
@@ -393,9 +394,17 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     final public boolean isConcluded() {
 
         if (isEmptyDegree()) {
-            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateType.CONCLUDED);
+            // TODO: SERGIOTALK
+            // Aqui ele vai ver se há alguma registration concluída, porque é no caso em que o plano curricular é vazio.
+            // Como é que se conclui um plano curricular vazio? no idea...
+            // Sugestão:
+//            return getAllCurriculumGroups().stream()
+//                    .anyMatch(plan -> plan.getAllCurriculumGroups()
+//                            .stream()
+//                            .anyMatch(group -> group.getConclusionProcess() != null));
+            // Estava:
+            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState());
         }
-
         return ProgramConclusion.isConcluded(this);
 
     }
@@ -403,9 +412,17 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     final public boolean isConclusionProcessed() {
 
         if (isEmptyDegree()) {
-            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateType.CONCLUDED);
+            // TODO: SERGIOTALK
+            // Aqui ele vai ver se há alguma registration concluída, porque é no caso em que o plano curricular é vazio.
+            // Como é que se conclui um plano curricular vazio? no idea...
+            // Sugestão:
+//            return getAllCurriculumGroups().stream()
+//                    .anyMatch(plan -> plan.getAllCurriculumGroups()
+//                            .stream()
+//                            .anyMatch(group -> group.getConclusionProcess() != null));
+            // Estava:
+            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState());
         }
-
         return ProgramConclusion.isConclusionProcessed(this);
     }
 

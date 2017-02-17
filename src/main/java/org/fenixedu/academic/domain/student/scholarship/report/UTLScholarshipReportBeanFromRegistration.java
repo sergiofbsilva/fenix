@@ -42,6 +42,7 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.RegistrationRegimeType;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumLine;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
@@ -125,19 +126,10 @@ public class UTLScholarshipReportBeanFromRegistration implements Serializable, I
 
     @Override
     public Integer getNumberOfDegreeChanges() {
-        int numberOfDegreeChanges = 0;
-
-        List<Registration> registrations = new ArrayList<Registration>(readStudent().getRegistrationsSet());
-        Collections.sort(registrations, Registration.COMPARATOR_BY_START_DATE);
-        for (final Registration iter : registrations) {
-            final SortedSet<RegistrationState> states = new TreeSet<RegistrationState>(RegistrationState.DATE_COMPARATOR);
-            states.addAll(iter.getRegistrationStates(RegistrationStateType.INTERNAL_ABANDON));
-            if (!states.isEmpty()) {
-                numberOfDegreeChanges++;
-            }
-        }
-
-        return numberOfDegreeChanges;
+        return (int) readStudent().getRegistrationsSet()
+                .stream()
+                .filter(r -> !r.getRegistrationStates(RegistrationStateSystem.getInstance().getInternalAbandonState()).isEmpty())
+                .count();
     }
 
     @Override

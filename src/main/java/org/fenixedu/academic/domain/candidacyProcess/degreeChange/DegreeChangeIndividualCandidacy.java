@@ -40,6 +40,7 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.PrecedentDegreeInformation;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.dto.candidacy.PrecedentDegreeInformationBean;
 import org.fenixedu.academic.predicate.AccessControl;
@@ -195,7 +196,7 @@ public class DegreeChangeIndividualCandidacy extends DegreeChangeIndividualCandi
 
             if (!registration.isActive()) {
                 RegistrationState.createRegistrationState(registration, AccessControl.getPerson(), new DateTime(),
-                        RegistrationStateType.REGISTERED);
+                        RegistrationStateSystem.getInstance().getInitialState());
             }
 
             createInternalAbandonStateInPreviousRegistration();
@@ -240,7 +241,7 @@ public class DegreeChangeIndividualCandidacy extends DegreeChangeIndividualCandi
                 }
 
                 RegistrationState.createRegistrationState(previousRegistration, AccessControl.getPerson(), now,
-                        RegistrationStateType.INTERNAL_ABANDON);
+                        RegistrationStateSystem.getInstance().getInternalAbandonState());
             }
         }
     }

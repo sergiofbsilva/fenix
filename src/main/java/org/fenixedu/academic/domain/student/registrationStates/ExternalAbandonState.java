@@ -43,8 +43,8 @@ public class ExternalAbandonState extends ExternalAbandonState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.EXTERNAL_ABANDON;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getExternalAbandonState();
     }
 
 }

@@ -34,8 +34,8 @@ public class TransitedState extends TransitedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.TRANSITED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getTransitedState();
     }
 
 }

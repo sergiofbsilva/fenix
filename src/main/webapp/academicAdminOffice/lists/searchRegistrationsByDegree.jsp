@@ -98,6 +98,7 @@
 				<fr:property name="eachSchema" value="RegistrationProtocol.view.name.only"/>
 				<fr:property name="eachLayout" value="values"/>
 			</fr:slot>
+			<!-- TODO: ACDM-1113 -->
 			<fr:slot name="registrationStateTypes" key="label.registrationState" layout="option-select">
 				<fr:property name="providerClass"
 					value="org.fenixedu.academic.ui.renderers.providers.choiceType.replacement.multiple.RegistrationStateTypeProvider" />

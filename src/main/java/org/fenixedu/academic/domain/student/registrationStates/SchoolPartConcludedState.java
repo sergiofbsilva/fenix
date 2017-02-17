@@ -38,8 +38,8 @@ public class SchoolPartConcludedState extends SchoolPartConcludedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.SCHOOLPARTCONCLUDED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getSchoolPartConcludedState();
     }
 
     @Override
@@ -56,8 +56,8 @@ public class SchoolPartConcludedState extends SchoolPartConcludedState_Base {
     }
 
     @Override
-    protected RegistrationStateType defaultNextStateType() {
-        return RegistrationStateType.CONCLUDED;
+    protected RegistrationStateTypeNew defaultNextStateType() {
+        return RegistrationStateSystem.getInstance().getConcludedState();
     }
 
 }

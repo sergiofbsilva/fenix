@@ -29,6 +29,7 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.StudentDataShareAuthorization;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
@@ -41,7 +42,7 @@ public class RegistrationWithStateForExecutionYearBean implements Serializable {
 
     private final ExecutionYear executionYear;
 
-    private RegistrationStateType registrationState;
+    private RegistrationStateTypeNew registrationState;
 
     public RegistrationWithStateForExecutionYearBean(Registration registration, ExecutionYear executionYear) {
         super();
@@ -49,14 +50,14 @@ public class RegistrationWithStateForExecutionYearBean implements Serializable {
         this.executionYear = executionYear;
     }
 
-    public RegistrationWithStateForExecutionYearBean(Registration registration, RegistrationStateType registrationState,
+    public RegistrationWithStateForExecutionYearBean(Registration registration, RegistrationStateTypeNew registrationState,
             ExecutionYear executionYear) {
         this.registration = registration;
         this.registrationState = registrationState;
         this.executionYear = executionYear;
     }
 
-    public RegistrationStateType getActiveStateType() {
+    public RegistrationStateTypeNew getActiveStateType() {
         return registrationState != null ? registrationState : getRegistration().getLastRegistrationState(getExecutionYear())
                 .getStateType();
     }

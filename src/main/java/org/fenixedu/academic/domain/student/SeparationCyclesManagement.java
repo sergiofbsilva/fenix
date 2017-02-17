@@ -51,6 +51,7 @@ import org.fenixedu.academic.domain.degreeStructure.OptionalCurricularCourse;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.exceptions.DomainExceptionWithInvocationResult;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.Credits;
 import org.fenixedu.academic.domain.studentCurriculum.CreditsDismissal;
@@ -560,7 +561,7 @@ public class SeparationCyclesManagement {
     }
 
     private void markOldRegistrationWithConcludedState(final StudentCurricularPlan oldStudentCurricularPlan) {
-        if (oldStudentCurricularPlan.getRegistration().hasState(RegistrationStateType.CONCLUDED)) {
+        if (oldStudentCurricularPlan.getRegistration().hasState(RegistrationStateSystem.getInstance().getConcludedState())) {
             return;
         }
 
@@ -571,7 +572,7 @@ public class SeparationCyclesManagement {
 
         final RegistrationState state =
                 RegistrationState.createRegistrationState(oldStudentCurricularPlan.getRegistration(), null,
-                        stateDate.toDateTimeAtStartOfDay(), RegistrationStateType.CONCLUDED);
+                        stateDate.toDateTimeAtStartOfDay(), RegistrationStateSystem.getInstance().getConcludedState());
         state.setResponsiblePerson(null);
     }
 

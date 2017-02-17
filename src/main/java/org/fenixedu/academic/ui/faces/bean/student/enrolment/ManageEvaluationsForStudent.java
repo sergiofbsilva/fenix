@@ -36,6 +36,7 @@ import org.fenixedu.academic.domain.Exam;
 import org.fenixedu.academic.domain.WrittenEvaluation;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.service.services.exceptions.NotAuthorizedException;
@@ -80,7 +81,7 @@ public class ManageEvaluationsForStudent extends DisplayEvaluationsForStudentToE
         final String evaluationType = getEvaluationTypeString();
         for (final Registration registration : getStudent().getStudent().getRegistrationsSet()) {
 
-            if (!registration.hasStateType(getExecutionPeriod(), RegistrationStateType.REGISTERED)) {
+            if (!registration.hasStateType(getExecutionPeriod(), RegistrationStateSystem.getInstance().getInitialState())) {
                 continue;
             }
 

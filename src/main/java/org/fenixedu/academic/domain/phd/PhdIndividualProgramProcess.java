@@ -126,6 +126,7 @@ import org.fenixedu.academic.domain.phd.thesis.PhdThesisFinalGrade;
 import org.fenixedu.academic.domain.student.PrecedentDegreeInformation;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.predicate.AccessControl;
 import org.fenixedu.academic.util.Bundle;
@@ -1170,7 +1171,7 @@ public class PhdIndividualProgramProcess extends PhdIndividualProgramProcess_Bas
 
         if (getRegistration() != null && getRegistration().isActive()) {
             RegistrationState.createRegistrationState(getRegistration(), responsible, new DateTime(),
-                    RegistrationStateType.INTERNAL_ABANDON);
+                    RegistrationStateSystem.getInstance().getInternalAbandonState());
         }
 
         super.setDestiny(destiny);

@@ -27,6 +27,7 @@ import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.commons.spreadsheet.Spreadsheet;
 import org.fenixedu.commons.spreadsheet.Spreadsheet.Row;
@@ -66,7 +67,7 @@ public class FlunkedReportFile extends FlunkedReportFile_Base {
                         }
                     });
                     Collections.sort(states, RegistrationState.DATE_COMPARATOR);
-                    if (!states.isEmpty() && states.getLast().getStateType().equals(RegistrationStateType.FLUNKED)) {
+                    if (!states.isEmpty() && states.getLast().getStateType().equals(RegistrationStateSystem.getInstance().getFlunkedState())) {
                         final Row row = spreadsheet.addRow();
                         row.setCell(registration.getNumber());
                         CycleType cycleType = registration.getCycleType(states.getLast().getExecutionYear());

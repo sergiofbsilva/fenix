@@ -49,8 +49,8 @@ public class FlunkedState extends FlunkedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.FLUNKED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getFlunkedState();
     }
 
 }

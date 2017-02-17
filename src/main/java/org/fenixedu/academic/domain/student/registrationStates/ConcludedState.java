@@ -81,8 +81,8 @@ public class ConcludedState extends ConcludedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.CONCLUDED;
+    public RegistrationStateTypeNew getStateType() {
+        return RegistrationStateSystem.getInstance().getConcludedState();
     }
 
 }

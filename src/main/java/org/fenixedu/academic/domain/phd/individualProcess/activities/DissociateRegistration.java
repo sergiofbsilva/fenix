@@ -20,6 +20,7 @@ package org.fenixedu.academic.domain.phd.individualProcess.activities;
 
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.bennu.core.domain.User;
 
@@ -43,7 +44,7 @@ public class DissociateRegistration extends PhdIndividualProgramProcessActivity 
             throw new PreConditionNotValidException();
         }
 
-        if (!RegistrationStateType.CANCELED.equals(process.getRegistration().getActiveStateType())) {
+        if (!process.getRegistration().getActiveStateType().equals(RegistrationStateSystem.getInstance().getCanceledState())) {
             throw new PreConditionNotValidException();
         }
     }

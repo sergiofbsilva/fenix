@@ -33,8 +33,8 @@ public class StudyPlanConcludedState extends StudyPlanConcludedState_Base {
     }
 
     @Override
-    public RegistrationStateType getStateType() {
-        return RegistrationStateType.STUDYPLANCONCLUDED;
+    public RegistrationStateTypeNew getStateType() {
+        return null;
     }
 
     @Override

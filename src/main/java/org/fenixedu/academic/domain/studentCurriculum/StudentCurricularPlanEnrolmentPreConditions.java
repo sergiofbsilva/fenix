@@ -26,6 +26,7 @@ import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 public class StudentCurricularPlanEnrolmentPreConditions {
@@ -176,7 +177,7 @@ public class StudentCurricularPlanEnrolmentPreConditions {
     private static boolean hasPrescribed(StudentCurricularPlan scp, ExecutionSemester semester) {
         for (RegistrationState state : scp.getRegistration().getRegistrationStates(semester.getExecutionYear())) {
             if (state.getExecutionYear().equals(semester.getExecutionYear())
-                    && RegistrationStateType.FLUNKED.equals(state.getStateType())) {
+                    && state.getStateType().equals(RegistrationStateSystem.getInstance().getFlunkedState())) {
                 return scp.getRegistration().hasRegisteredActiveState();
             }
         }

@@ -37,6 +37,7 @@ import org.fenixedu.academic.domain.degreeStructure.RegimeType;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.thesis.Thesis;
 import org.fenixedu.academic.predicate.AccessControl;
@@ -283,7 +284,7 @@ public class ExternalEnrolment extends ExternalEnrolment_Base implements IEnrolm
             return false;
         }
 
-        return getRegistration().getRegistrationStatesTypes(getExecutionYear()).contains(RegistrationStateType.MOBILITY);
+        return getRegistration().getRegistrationStatesTypes(getExecutionYear()).contains(RegistrationStateSystem.getInstance().getMobilityState());
     }
 
     @Override
