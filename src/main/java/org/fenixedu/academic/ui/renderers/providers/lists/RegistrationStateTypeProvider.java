@@ -18,40 +18,15 @@
  */
 package org.fenixedu.academic.ui.renderers.providers.lists;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyArrayConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
 import pt.ist.fenixWebFramework.renderers.components.converters.Converter;
 
 public class RegistrationStateTypeProvider implements DataProvider {
-
-//    @Override
-//    public Object provide(Object source, Object currentValue) {
-//        return Arrays.asList(RegistrationStateType.values());
-//    }
-//
-//    @Override
-//    public Converter getConverter() {
-//        return new Converter() {
-//            @Override
-//            public Object convert(Class type, Object value) {
-//                final List<RegistrationStateType> registrationStateTypes = new ArrayList<RegistrationStateType>();
-//                for (final String o : (String[]) value) {
-//                    registrationStateTypes.add(RegistrationStateType.valueOf(o));
-//                }
-//                return registrationStateTypes;
-//            }
-//        };
-//    }
-
-    // TODO: ACDM-1113 Activate New Providers
 
     @Override
     public Object provide(Object source, Object currentValue) {

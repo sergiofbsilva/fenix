@@ -24,7 +24,6 @@ package org.fenixedu.academic.dto.student;
 import java.io.Serializable;
 
 import org.fenixedu.academic.domain.student.Registration;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
 import pt.ist.fenixframework.FenixFramework;

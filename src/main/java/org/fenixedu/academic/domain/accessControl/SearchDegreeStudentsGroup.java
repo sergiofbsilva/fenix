@@ -24,7 +24,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -35,9 +34,10 @@ import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.contacts.EmailAddress;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.bennu.core.groups.Group;
+import org.fenixedu.bennu.core.domain.User;
+import org.fenixedu.bennu.core.groups.UserGroup;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 
 import pt.ist.fenixframework.FenixFramework;
@@ -54,7 +54,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
 
     private String sortBy = null;
 
-    private RegistrationStateType registrationStateType;
+    private RegistrationStateTypeNew registrationStateType;
 
     private Double minGrade;
 
@@ -73,7 +73,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
     private Integer maximumYear;
 
     public SearchDegreeStudentsGroup(final DegreeCurricularPlan degreeCurricularPlan, final ExecutionYear executionYear,
-            final String sortBy, final RegistrationStateType registrationStateType, final Double minGrade, final Double maxGrade,
+            final String sortBy, final RegistrationStateTypeNew registrationStateType, final Double minGrade, final Double maxGrade,
             final Double minNumberApproved, final Double maxNumberApproved, final Double minStudentNumber,
             final Double maxStudentNumber, final Integer minimumYear, final Integer maximumYear) {
         this.degreeCurricularPlan = degreeCurricularPlan;
@@ -90,11 +90,11 @@ public class SearchDegreeStudentsGroup implements Serializable {
         this.maximumYear = maximumYear;
     }
 
-    public RegistrationStateType getRegistrationStateType() {
+    public RegistrationStateTypeNew getRegistrationStateType() {
         return registrationStateType;
     }
 
-    public void setRegistrationStateType(RegistrationStateType state) {
+    public void setRegistrationStateType(RegistrationStateTypeNew state) {
         this.registrationStateType = state;
     }
 
@@ -220,16 +220,23 @@ public class SearchDegreeStudentsGroup implements Serializable {
 
     public Set<Person> getElements() {
         final Set<Person> elements = new HashSet<>();
-        final Map<StudentCurricularPlan, RegistrationStateType> students = searchStudentCurricularPlans(null, null);
+        final Map<StudentCurricularPlan, RegistrationStateTypeNew> students = searchStudentCurricularPlans(null, null);
         for (StudentCurricularPlan student : students.keySet()) {
             elements.add(student.getPerson());
         }
         return elements;
     }
 
-    public Group getUserGroup() {
-        final Map<StudentCurricularPlan, RegistrationStateType> students = searchStudentCurricularPlans(null, null);
-        return Group.users(students.keySet().stream().map(scp -> scp.getPerson().getUser()).filter(Objects::nonNull));
+    public org.fenixedu.bennu.core.groups.Group getUserGroup() {
+        Set<User> users = new HashSet<>();
+        final Map<StudentCurricularPlan, RegistrationStateTypeNew> students = searchStudentCurricularPlans(null, null);
+        for (StudentCurricularPlan student : students.keySet()) {
+            User user = student.getPerson().getUser();
+            if (user != null) {
+                users.add(user);
+            }
+        }
+        return UserGroup.of(users);
     }
 
     private Comparator<StudentCurricularPlan> determineComparatorKind() {
@@ -393,7 +400,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
         return null;
     }
 
-    public Map<StudentCurricularPlan, RegistrationStateType> searchStudentCurricularPlans(Integer minIndex, Integer maxIndex) {
+    public Map<StudentCurricularPlan, RegistrationStateTypeNew> searchStudentCurricularPlans(Integer minIndex, Integer maxIndex) {
         final DegreeCurricularPlan degreeCurricularPlan = getDegreeCurricularPlan();
         final List<StudentCurricularPlan> studentCurricularPlans = new ArrayList<StudentCurricularPlan>();
         for (final StudentCurricularPlan studentCurricularPlan : degreeCurricularPlan.getStudentCurricularPlansSet()) {
@@ -403,8 +410,8 @@ public class SearchDegreeStudentsGroup implements Serializable {
         }
 
         Comparator<StudentCurricularPlan> comparator = determineComparatorKind();
-        Map<StudentCurricularPlan, RegistrationStateType> map =
-                new TreeMap<StudentCurricularPlan, RegistrationStateType>(comparator);
+        Map<StudentCurricularPlan, RegistrationStateTypeNew> map =
+                new TreeMap<StudentCurricularPlan, RegistrationStateTypeNew>(comparator);
 
         if (minIndex != null || maxIndex != null) {
             for (final StudentCurricularPlan studentCurricularPlan : studentCurricularPlans.subList(minIndex - 1,
@@ -430,7 +437,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
 
         final RegistrationState lastRegistrationState =
                 studentCurricularPlan.getRegistration().getLastRegistrationState(executionYear);
-        if (lastRegistrationState == null || lastRegistrationState.getStateType() != registrationStateType) {
+        if (lastRegistrationState == null || !lastRegistrationState.getStateType().equals(registrationStateType)) {
             return false;
         }
 
@@ -502,7 +509,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
         DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(parts[0]);
         ExecutionYear executionYear = FenixFramework.getDomainObject(parts[1]);
         String sortBy = parts[2];
-        RegistrationStateType registrationStateType = parts[3].equals("ND") ? null : RegistrationStateType.valueOf(parts[3]);
+        RegistrationStateTypeNew registrationStateType = parts[3].equals("ND") ? null : FenixFramework.getDomainObject(parts[3]);
         Double minGrade = parts[4].equals("ND") ? null : Double.valueOf(parts[4]);
         Double maxGrade = parts[5].equals("ND") ? null : Double.valueOf(parts[5]);
         Double minNumberApproved = parts[6].equals("ND") ? null : Double.valueOf(parts[6]);
@@ -520,7 +527,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
         parts.add(getDegreeCurricularPlan().getExternalId());
         parts.add(getExecutionYear().getExternalId());
         parts.add(getSortBy());
-        parts.add(getRegistrationStateType() != null ? getRegistrationStateType().getName() : "ND");
+        parts.add(getRegistrationStateType() != null ? getRegistrationStateType().getExternalId() : "ND");
         parts.add(getMinGradeString());
         parts.add(getMaxGradeString());
         parts.add(getMinNumberApprovedString());

@@ -22,28 +22,14 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyArrayConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
 import pt.ist.fenixWebFramework.renderers.components.converters.Converter;
-import pt.ist.fenixWebFramework.renderers.converters.EnumArrayConverter;
 
 public class RegistrationStateTypeProvider implements DataProvider {
 
-//    @Override
-//    public Object provide(Object source, Object currentValue) {
-//        return Arrays.asList(RegistrationStateType.values());
-//    }
-//
-//    @Override
-//    public Converter getConverter() {
-//        return new EnumArrayConverter();
-//    }
-
-    // TODO: ACDM-1113 Activate New Providers
-//
-//    @Override
+    @Override
     public Object provide(Object source, Object currentValue) {
         return RegistrationStateSystem.getInstance().getRegistrationStateTypeSet().stream().collect(Collectors.toList());
     }

@@ -34,6 +34,7 @@ import org.joda.time.DateTime;
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
  * 
  */
+@Deprecated
 public class ConcludedState extends ConcludedState_Base {
 
     protected ConcludedState(Registration registration, Person person, DateTime dateTime) {
@@ -78,11 +79,6 @@ public class ConcludedState extends ConcludedState_Base {
     @Override
     public IState nextState(final StateBean bean) {
         throw new DomainException("error.impossible.to.forward.from.concluded");
-    }
-
-    @Override
-    public RegistrationStateTypeNew getStateType() {
-        return RegistrationStateSystem.getInstance().getConcludedState();
     }
 
 }

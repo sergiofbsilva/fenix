@@ -21,7 +21,6 @@ package org.fenixedu.academic.ui.struts.action.phd.academicAdminOffice;
 import org.fenixedu.academic.domain.Grade;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
 import org.fenixedu.academic.dto.student.RegistrationConclusionBean;
 import org.joda.time.YearMonthDay;

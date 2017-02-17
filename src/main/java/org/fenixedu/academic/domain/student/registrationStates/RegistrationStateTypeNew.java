@@ -84,8 +84,4 @@ public class RegistrationStateTypeNew extends RegistrationStateTypeNew_Base impl
         return true;
     }
 
-
-//    public boolean isMobility() {
-//        return Optional.ofNullable(getActive()).orElse(false);
-//    }
 }
