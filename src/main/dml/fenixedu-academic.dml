@@ -3098,7 +3098,6 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
 
     class student.registrationStates.RegistrationStateTypeNew {
         Boolean active;
-        Boolean mobility;
         Boolean student;
         Boolean terminal;
         String code (REQUIRED);
@@ -8335,7 +8334,7 @@ relation RegistrationRegistrationNumber {
 
 relation RegistrationStateRegistration {
     student.Registration playsRole registration;
-    student.registrationStates.RegistrationState playsRole registrationStates {
+    student.registrationStates.RegistrationState playsRole registrationState {
         multiplicity *;
     }
 }
@@ -8360,7 +8359,7 @@ relation RegistrationStateHasRegistrationStateType {
 	student.registrationStates.RegistrationStateTypeNew playsRole registrationStateType {
 		multiplicity 1..1;
 	}
-	student.registrationStates.RegistrationState playsRole registrationStates {
+	student.registrationStates.RegistrationState playsRole registrationState {
 		multiplicity *;
 	}
 }
@@ -8369,7 +8368,7 @@ relation RegistrationStateTypeNextValidStates {
 	student.registrationStates.RegistrationStateTypeNew playsRole currentStateType {
 		multiplicity *;
 	}
-	student.registrationStates.RegistrationStateTypeNew playsRole validNextStatesTypes {
+	student.registrationStates.RegistrationStateTypeNew playsRole validNextStateType {
 		multiplicity *;
 	}
 }
@@ -8466,13 +8465,31 @@ relation CanceledRegistrationStateType {
 }
 
 relation SchoolPartConcludedRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole schoolPartConcludedRoot{
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateTypeNew playsRole schoolPartConcludedState {
-        multiplicity 0..1;
-    }
-}
+     protected student.registrationStates.RegistrationStateSystem playsRole schoolPartConcludedRoot{
+         multiplicity 0..1;
+     }
+     student.registrationStates.RegistrationStateTypeNew playsRole schoolPartConcludedState {
+         multiplicity 0..1;
+     }
+ }
+
+ relation StudyPlanConcludedRegistrationStateType {
+     protected student.registrationStates.RegistrationStateSystem playsRole studyPlanConcludedRoot{
+         multiplicity 0..1;
+     }
+     student.registrationStates.RegistrationStateTypeNew playsRole studyPlanConcludedState {
+         multiplicity 0..1;
+     }
+ }
+
+ relation InactiveRegistrationStateType {
+     protected student.registrationStates.RegistrationStateSystem playsRole inactiveRoot {
+         multiplicity 0..1;
+     }
+     student.registrationStates.RegistrationStateTypeNew playsRole inactiveState {
+         multiplicity 0..1;
+     }
+ }
 
 relation ConcludedRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole concludedRoot {

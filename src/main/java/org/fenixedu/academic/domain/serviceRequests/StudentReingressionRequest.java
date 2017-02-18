@@ -40,10 +40,10 @@ import org.joda.time.DateTime;
 
 public class StudentReingressionRequest extends StudentReingressionRequest_Base {
 
-    static final public List<RegistrationStateTypeNew> ALLOWED_TYPES = RegistrationStateSystem.getInstance().getRegistrationStateTypeSet()
-            .stream()
-            .filter(stateType -> stateType.isReingressable())
-            .collect(Collectors.toList());
+//    static final public List<RegistrationStateTypeNew> ALLOWED_TYPES = RegistrationStateSystem.getInstance().getRegistrationStateTypeSet()
+//            .stream()
+//            .filter(stateType -> stateType.isReingressable())
+//            .collect(Collectors.toList());
 
     protected StudentReingressionRequest() {
         super();
@@ -100,7 +100,10 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
     }
 
     private boolean hasValidState(final Registration registration) {
-        return registration.hasAnyState(ALLOWED_TYPES);
+        return registration.hasAnyState(RegistrationStateSystem.getInstance().getRegistrationStateTypeSet()
+                .stream()
+                .filter(stateType -> stateType.isReingressable())
+                .collect(Collectors.toList()));
     }
 
     private boolean isEnrolmentPeriodOpen(final Registration registration, final ExecutionYear executionYear,

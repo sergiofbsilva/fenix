@@ -1841,6 +1841,8 @@ public class Registration extends Registration_Base {
     }
 
     final public boolean isActive() {
+        //TODO ACDM-1113 Remove Hack
+        if (getActiveStateType() == null) return true;
         return getActiveStateType().isActive();
     }
 
@@ -1938,7 +1940,9 @@ public class Registration extends Registration_Base {
     }
 
     final public boolean isTransition() {
-        return getActiveStateType().equals(RegistrationStateSystem.getInstance().getTransitionState());
+        RegistrationStateTypeNew transitionState = RegistrationStateSystem.getInstance().getTransitionState();
+        if (transitionState == null) return false;
+        return getActiveStateType().equals(transitionState);
     }
 
     final public boolean isTransition(final ExecutionYear executionYear) {

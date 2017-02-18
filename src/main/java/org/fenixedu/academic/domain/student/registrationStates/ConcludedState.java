@@ -81,4 +81,9 @@ public class ConcludedState extends ConcludedState_Base {
         throw new DomainException("error.impossible.to.forward.from.concluded");
     }
 
+    @Override
+    public RegistrationStateType getOldStateType() {
+        return RegistrationStateType.CONCLUDED;
+    }
+
 }

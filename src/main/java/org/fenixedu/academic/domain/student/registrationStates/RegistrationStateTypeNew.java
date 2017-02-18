@@ -21,10 +21,12 @@
  */
 package org.fenixedu.academic.domain.student.registrationStates;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.fenixedu.academic.domain.util.workflow.IState;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 import java.util.Optional;
 import java.util.Set;
@@ -37,9 +39,17 @@ import java.util.stream.Collectors;
 
 public class RegistrationStateTypeNew extends RegistrationStateTypeNew_Base implements IState {
 
+    public RegistrationStateTypeNew(String code, LocalizedString name, LocalizedString description, Boolean active, Boolean student, Boolean terminal) {
+        setCode(code);
+        setName(name);
+        setDescription(description);
+        setActive(active);
+        setStudent(student);
+        setTerminal(terminal);
+    }
 
     public Set<String> getValidNextStates() {
-        return getValidNextStatesTypesSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
+        return getValidNextStatesTypeSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
     }
 
     @Override
@@ -75,7 +85,7 @@ public class RegistrationStateTypeNew extends RegistrationStateTypeNew_Base impl
 
     public boolean isReingressable() {
         final RegistrationStateTypeNew initialState = RegistrationStateSystem.getInstance().getInitialState();
-        return getValidNextStatesTypesSet().stream().anyMatch(s -> s.equals(initialState));
+        return getValidNextStatesTypeSet().stream().anyMatch(s -> s.equals(initialState));
     }
 
     public boolean canHaveCurriculumLinesOnCreation() {

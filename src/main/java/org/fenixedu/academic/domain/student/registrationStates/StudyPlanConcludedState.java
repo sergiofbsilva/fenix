@@ -42,4 +42,9 @@ public class StudyPlanConcludedState extends StudyPlanConcludedState_Base {
         throw new DomainException("error.impossible.to.forward.from.studyPlanConcluded");
     }
 
+    @Override
+    public RegistrationStateType getOldStateType() {
+        return RegistrationStateType.STUDYPLANCONCLUDED;
+    }
+
 }

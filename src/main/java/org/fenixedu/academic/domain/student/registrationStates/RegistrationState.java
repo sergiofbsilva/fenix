@@ -1,18 +1,18 @@
 /**
  * Copyright © 2002 Instituto Superior Técnico
- *
+ * <p>
  * This file is part of FenixEdu Academic.
- *
+ * <p>
  * FenixEdu Academic is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * FenixEdu Academic is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU Lesser General Public License
  * along with FenixEdu Academic.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -45,9 +45,9 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 
 /**
- * 
+ *
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
- * 
+ *
  */
 public class RegistrationState extends RegistrationState_Base implements IState {
 
@@ -111,7 +111,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     @Deprecated
     private static RegistrationState createState(Registration registration, Person person, DateTime dateTime,
-            RegistrationStateTypeNew stateType) {
+                                                 RegistrationStateTypeNew stateType) {
         return new RegistrationState(registration, person, dateTime, stateType);
     }
 
@@ -169,7 +169,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
     }
 
     public RegistrationStateTypeNew getStateType() {
-        return getStateType();
+        return super.getRegistrationStateType();
     }
 
     public ExecutionYear getExecutionYear() {
@@ -212,9 +212,9 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     public RegistrationState getNext() {
         List<RegistrationState> sortedRegistrationsStates =
-                new ArrayList<RegistrationState>(getRegistration().getRegistrationStatesSet());
+                new ArrayList<RegistrationState>(getRegistration().getRegistrationStateSet());
         Collections.sort(sortedRegistrationsStates, DATE_COMPARATOR);
-        for (ListIterator<RegistrationState> iter = sortedRegistrationsStates.listIterator(); iter.hasNext();) {
+        for (ListIterator<RegistrationState> iter = sortedRegistrationsStates.listIterator(); iter.hasNext(); ) {
             RegistrationState state = iter.next();
             if (state.equals(this)) {
                 if (iter.hasNext()) {
@@ -228,10 +228,10 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     public RegistrationState getPrevious() {
         List<RegistrationState> sortedRegistrationsStates =
-                new ArrayList<RegistrationState>(getRegistration().getRegistrationStatesSet());
+                new ArrayList<RegistrationState>(getRegistration().getRegistrationStateSet());
         Collections.sort(sortedRegistrationsStates, DATE_COMPARATOR);
         for (ListIterator<RegistrationState> iter = sortedRegistrationsStates.listIterator(sortedRegistrationsStates.size()); iter
-                .hasPrevious();) {
+                .hasPrevious(); ) {
             RegistrationState state = iter.previous();
             if (state.equals(this)) {
                 if (iter.hasPrevious()) {
@@ -253,7 +253,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
     }
 
     public static RegistrationState createRegistrationState(Registration registration, Person responsible, DateTime creation,
-            RegistrationStateTypeNew stateType) {
+                                                            RegistrationStateTypeNew stateType) {
         RegistrationStateBean bean = new RegistrationStateBean(registration);
         bean.setResponsible(responsible);
         bean.setStateDateTime(creation);
@@ -285,7 +285,13 @@ public class RegistrationState extends RegistrationState_Base implements IState 
     }
 
     public boolean isActive() {
+        //TODO ACDM-1113 Remove Hack
+        if (getStateType() == null) return true;
         return getStateType().isActive();
+    }
+
+    public RegistrationStateType getOldStateType() {
+        return null;
     }
 
     public boolean includes(final ExternalEnrolment externalEnrolment) {

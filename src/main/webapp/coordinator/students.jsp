@@ -49,6 +49,11 @@
 
 		<h:panelGrid columns="2" styleClass="infoop">
 			<h:outputText value="#{bundle['label.student.curricular.plan.state']}: " id="studentCurricularPlanState" />
+			<fr:slot name="registrationStateTypes" key="label.registrationState" layout="option-select">
+				<fr:property name="providerClass"
+							 value="org.fenixedu.academic.ui.renderers.providers.choiceType.replacement.single.RegistrationStateTypeProvider" />
+				<fr:property name="classes" value="list2" />
+			</fr:slot>
 			<h:selectOneMenu id="registrationStateTypeString" value="#{CoordinatorStudentsBackingBean.registrationStateTypeString}">
 				<f:selectItem itemLabel="#{bundle['message.all']}" itemValue="SHOWALL"/>
 				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.REGISTERED']}" itemValue="REGISTERED"/>
