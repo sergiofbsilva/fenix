@@ -8334,7 +8334,7 @@ relation RegistrationRegistrationNumber {
 
 relation RegistrationStateRegistration {
     student.Registration playsRole registration;
-    student.registrationStates.RegistrationState playsRole registrationState {
+    student.registrationStates.RegistrationState playsRole registrationStates {
         multiplicity *;
     }
 }

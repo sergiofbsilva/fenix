@@ -21,7 +21,6 @@
  */
 package org.fenixedu.academic.domain.student.registrationStates;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.fenixedu.academic.domain.util.workflow.IState;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
 import org.fenixedu.academic.util.Bundle;
@@ -49,7 +48,7 @@ public class RegistrationStateTypeNew extends RegistrationStateTypeNew_Base impl
     }
 
     public Set<String> getValidNextStates() {
-        return getValidNextStatesTypeSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
+        return getValidNextStateTypeSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
     }
 
     @Override
@@ -85,7 +84,7 @@ public class RegistrationStateTypeNew extends RegistrationStateTypeNew_Base impl
 
     public boolean isReingressable() {
         final RegistrationStateTypeNew initialState = RegistrationStateSystem.getInstance().getInitialState();
-        return getValidNextStatesTypeSet().stream().anyMatch(s -> s.equals(initialState));
+        return getValidNextStateTypeSet().stream().anyMatch(s -> s.equals(initialState));
     }
 
     public boolean canHaveCurriculumLinesOnCreation() {

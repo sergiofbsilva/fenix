@@ -2,6 +2,7 @@ package org.fenixedu.academic.domain.student.registrationStates;
 
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.scheduler.custom.CustomTask;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 /**
  * Created by Fernando on 18/02/2017.
@@ -21,6 +22,7 @@ public class MigrateRegistrationStateTypesTask extends CustomTask {
     private RegistrationStateTypeNew studyPlanConcluded;
     private RegistrationStateTypeNew transited;
     private RegistrationStateTypeNew transition;
+    private RegistrationStateSystem system;
 
     @Override
     public void runTask() throws Exception {
@@ -30,7 +32,7 @@ public class MigrateRegistrationStateTypesTask extends CustomTask {
 
     private void transitionAllRegistrationStateTypes() {
         Bennu.getInstance().getRegistrationsSet()
-            .forEach(registration -> registration.getRegistrationStateSet()
+            .forEach(registration -> registration.getRegistrationStatesSet()
                 .forEach(registrationState -> {
                     RegistrationStateType type = registrationState.getOldStateType();
                     switch (type) {
@@ -77,86 +79,130 @@ public class MigrateRegistrationStateTypesTask extends CustomTask {
     }
 
     private void configureNewRegistrationStateTypes() {
-        RegistrationStateSystem system = RegistrationStateSystem.getInstance();
+        system = RegistrationStateSystem.getInstance();
 
         createNewStateTypes();
         configureNextStateTypes();
     }
 
     private void createNewStateTypes() {
-        canceled = new RegistrationStateTypeNew("CANCELED", null, null, null, null, null);
-        concluded = new RegistrationStateTypeNew("CONCLUDED", null, null, null, null, null);
-        externalAbandon = new RegistrationStateTypeNew("EXTERNAL_ABANDON", null, null, null, null, null);
-        flunked = new RegistrationStateTypeNew("FLUNKED", null, null, null, null, null);
-        inactive = new RegistrationStateTypeNew("INACTIVE", null, null, null, null, null);
-        internalAbandon = new RegistrationStateTypeNew("INTERNAL_ABANDON", null, null, null, null, null);
-        interrupted = new RegistrationStateTypeNew("INTERRUPTED", null, null, null, null, null);
-        mobility = new RegistrationStateTypeNew("MOBILITY", null, null, null, null, null);
-        registered = new RegistrationStateTypeNew("REGISTERED", null, null, null, null, null);
-        schoolPartConcluded = new RegistrationStateTypeNew("SCHOOLPARTCONCLUDED", null, null, null, null, null);
-        studyPlanConcluded = new RegistrationStateTypeNew("STUDYPLANCONCLUDED", null, null, null, null, null);
-        transited = new RegistrationStateTypeNew("TRANSITED", null, null, null, null, null);
-        transition = new RegistrationStateTypeNew("TRANSITION", null, null, null, null, null);
+        canceled = new RegistrationStateTypeNew("CANCELED", new LocalizedString(), new LocalizedString(), null, null, null);
+        concluded = new RegistrationStateTypeNew("CONCLUDED", new LocalizedString(), new LocalizedString(), null, null, null);
+        externalAbandon = new RegistrationStateTypeNew("EXTERNAL_ABANDON", new LocalizedString(), new LocalizedString(), null, null, null);
+        flunked = new RegistrationStateTypeNew("FLUNKED", new LocalizedString(), new LocalizedString(), null, null, null);
+        inactive = new RegistrationStateTypeNew("INACTIVE", new LocalizedString(), new LocalizedString(), null, null, null);
+        internalAbandon = new RegistrationStateTypeNew("INTERNAL_ABANDON", new LocalizedString(), new LocalizedString(), null, null, null);
+        interrupted = new RegistrationStateTypeNew("INTERRUPTED", new LocalizedString(), new LocalizedString(), null, null, null);
+        mobility = new RegistrationStateTypeNew("MOBILITY", new LocalizedString(), new LocalizedString(), null, null, null);
+        registered = new RegistrationStateTypeNew("REGISTERED", new LocalizedString(), new LocalizedString(), null, null, null);
+        schoolPartConcluded = new RegistrationStateTypeNew("SCHOOLPARTCONCLUDED", new LocalizedString(), new LocalizedString(), null, null, null);
+        studyPlanConcluded = new RegistrationStateTypeNew("STUDYPLANCONCLUDED", new LocalizedString(), new LocalizedString(), null, null, null);
+        transited = new RegistrationStateTypeNew("TRANSITED", new LocalizedString(), new LocalizedString(), null, null, null);
+        transition = new RegistrationStateTypeNew("TRANSITION", new LocalizedString(), new LocalizedString(), null, null, null);
+
+        system.addRegistrationStateType(canceled);
+        system.addRegistrationStateType(registered);
+        system.addRegistrationStateType(concluded);
+        system.addRegistrationStateType(externalAbandon);
+        system.addRegistrationStateType(flunked);
+        system.addRegistrationStateType(inactive);
+        system.addRegistrationStateType(internalAbandon);
+        system.addRegistrationStateType(interrupted);
+        system.addRegistrationStateType(mobility);
+        system.addRegistrationStateType(transited);
+        system.addRegistrationStateType(transition);
+        system.addRegistrationStateType(schoolPartConcluded);
+        system.addRegistrationStateType(studyPlanConcluded);
+
+        system.setCanceledState(canceled);
+        system.setInitialState(registered);
+        system.setConcludedState(concluded);
+        system.setExternalAbandonState(externalAbandon);
+        system.setFlunkedState(flunked);
+        system.setInactiveState(inactive);
+        system.setInternalAbandonState(internalAbandon);
+        system.setInterruptedState(interrupted);
+        system.setMobilityState(mobility);
+        system.setTransitedState(transited);
+        system.setTransitionState(transition);
+        system.setSchoolPartConcludedState(schoolPartConcluded);
+        system.setStudyPlanConcludedState(studyPlanConcluded);
     }
 
     private void configureNextStateTypes() {
-        canceled.addValidNextStatesType(registered);
 
-        externalAbandon.addValidNextStatesType(registered);
+        canceled = system.getCanceledState();
+        registered = system.getInitialState();
+        concluded = system.getConcludedState();
+        externalAbandon = system.getExternalAbandonState();
+        flunked = system.getFlunkedState();
+        inactive = system.getInactiveState();
+        internalAbandon = system.getInternalAbandonState();
+        interrupted = system.getInterruptedState();
+        mobility = system.getMobilityState();
+        transited = system.getTransitedState();
+        transition = system.getTransitionState();
+        schoolPartConcluded = system.getSchoolPartConcludedState();
+        studyPlanConcluded = system.getStudyPlanConcludedState();
 
-        flunked.addValidNextStatesType(canceled);
-        flunked.addValidNextStatesType(registered);
-        flunked.addValidNextStatesType(internalAbandon);
-        flunked.addValidNextStatesType(externalAbandon);
-        flunked.addValidNextStatesType(mobility);
 
-        inactive.addValidNextStatesType(registered);
+        canceled.addValidNextStateType(registered);
 
-        internalAbandon.addValidNextStatesType(registered);
+        externalAbandon.addValidNextStateType(registered);
 
-        interrupted.addValidNextStatesType(canceled);
-        interrupted.addValidNextStatesType(registered);
-        interrupted.addValidNextStatesType(internalAbandon);
-        interrupted.addValidNextStatesType(externalAbandon);
-        interrupted.addValidNextStatesType(mobility);
-        interrupted.addValidNextStatesType(schoolPartConcluded);
+        flunked.addValidNextStateType(canceled);
+//        flunked.addValidNextStateType(mobility);
+//        flunked.addValidNextStateType(internalAbandon);
+//        flunked.addValidNextStateType(registered);
+//        flunked.addValidNextStateType(externalAbandon);
 
-        mobility.addValidNextStatesType(concluded);
-        mobility.addValidNextStatesType(studyPlanConcluded);
-        mobility.addValidNextStatesType(schoolPartConcluded);
-        mobility.addValidNextStatesType(registered);
-        mobility.addValidNextStatesType(canceled);
-        mobility.addValidNextStatesType(interrupted);
-        mobility.addValidNextStatesType(flunked);
-        mobility.addValidNextStatesType(internalAbandon);
-        mobility.addValidNextStatesType(externalAbandon);
+        inactive.addValidNextStateType(registered);
 
-        registered.addValidNextStatesType(concluded);
-        registered.addValidNextStatesType(studyPlanConcluded);
-        registered.addValidNextStatesType(schoolPartConcluded);
-        registered.addValidNextStatesType(canceled);
-        registered.addValidNextStatesType(interrupted);
-        registered.addValidNextStatesType(flunked);
-        registered.addValidNextStatesType(internalAbandon);
-        registered.addValidNextStatesType(externalAbandon);
-        registered.addValidNextStatesType(mobility);
-        registered.addValidNextStatesType(transition);
-        registered.addValidNextStatesType(transited);
-        registered.addValidNextStatesType(inactive);
+        internalAbandon.addValidNextStateType(registered);
+
+        interrupted.addValidNextStateType(canceled);
+//        interrupted.addValidNextStateType(registered);
+//        interrupted.addValidNextStateType(internalAbandon);
+//        interrupted.addValidNextStateType(externalAbandon);
+//        interrupted.addValidNextStateType(mobility);
+//        interrupted.addValidNextStateType(schoolPartConcluded);
+
+        mobility.addValidNextStateType(concluded);
+//        mobility.addValidNextStateType(studyPlanConcluded);
+//        mobility.addValidNextStateType(schoolPartConcluded);
+//        mobility.addValidNextStateType(registered);
+//        mobility.addValidNextStateType(canceled);
+//        mobility.addValidNextStateType(interrupted);
+//        mobility.addValidNextStateType(flunked);
+//        mobility.addValidNextStateType(internalAbandon);
+//        mobility.addValidNextStateType(externalAbandon);
+
+        registered.addValidNextStateType(concluded);
+//        registered.addValidNextStateType(studyPlanConcluded);
+//        registered.addValidNextStateType(schoolPartConcluded);
+//        registered.addValidNextStateType(canceled);
+//        registered.addValidNextStateType(interrupted);
+//        registered.addValidNextStateType(flunked);
+//        registered.addValidNextStateType(internalAbandon);
+//        registered.addValidNextStateType(externalAbandon);
+//        registered.addValidNextStateType(mobility);
+//        registered.addValidNextStateType(transition);
+//        registered.addValidNextStateType(transited);
+//        registered.addValidNextStateType(inactive);
 
         schoolPartConcluded.setDefaultNextStateType(concluded);
-        schoolPartConcluded.addValidNextStatesType(concluded);
-        schoolPartConcluded.addValidNextStatesType(studyPlanConcluded);
-        schoolPartConcluded.addValidNextStatesType(canceled);
-        schoolPartConcluded.addValidNextStatesType(internalAbandon);
-        schoolPartConcluded.addValidNextStatesType(externalAbandon);
-        schoolPartConcluded.addValidNextStatesType(mobility);
-        schoolPartConcluded.addValidNextStatesType(interrupted);
+//        schoolPartConcluded.addValidNextStateType(concluded);
+//        schoolPartConcluded.addValidNextStateType(studyPlanConcluded);
+//        schoolPartConcluded.addValidNextStateType(canceled);
+//        schoolPartConcluded.addValidNextStateType(internalAbandon);
+//        schoolPartConcluded.addValidNextStateType(externalAbandon);
+//        schoolPartConcluded.addValidNextStateType(mobility);
+//        schoolPartConcluded.addValidNextStateType(interrupted);
 
-        transition.addValidNextStatesType(transited);
-        transition.addValidNextStatesType(canceled);
-        transition.addValidNextStatesType(registered);
-        transition.addValidNextStatesType(concluded);
+        transition.addValidNextStateType(transited);
+//        transition.addValidNextStateType(canceled);
+//        transition.addValidNextStateType(registered);
+//        transition.addValidNextStateType(concluded);
     }
 
 

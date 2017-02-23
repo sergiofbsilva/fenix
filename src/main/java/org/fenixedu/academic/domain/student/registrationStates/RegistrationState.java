@@ -212,7 +212,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     public RegistrationState getNext() {
         List<RegistrationState> sortedRegistrationsStates =
-                new ArrayList<RegistrationState>(getRegistration().getRegistrationStateSet());
+                new ArrayList<RegistrationState>(getRegistration().getRegistrationStatesSet());
         Collections.sort(sortedRegistrationsStates, DATE_COMPARATOR);
         for (ListIterator<RegistrationState> iter = sortedRegistrationsStates.listIterator(); iter.hasNext(); ) {
             RegistrationState state = iter.next();
@@ -228,7 +228,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     public RegistrationState getPrevious() {
         List<RegistrationState> sortedRegistrationsStates =
-                new ArrayList<RegistrationState>(getRegistration().getRegistrationStateSet());
+                new ArrayList<RegistrationState>(getRegistration().getRegistrationStatesSet());
         Collections.sort(sortedRegistrationsStates, DATE_COMPARATOR);
         for (ListIterator<RegistrationState> iter = sortedRegistrationsStates.listIterator(sortedRegistrationsStates.size()); iter
                 .hasPrevious(); ) {
@@ -286,7 +286,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     public boolean isActive() {
         //TODO ACDM-1113 Remove Hack
-        if (getStateType() == null) return true;
+//        if (getStateType() == null) return true;
         return getStateType().isActive();
     }
 

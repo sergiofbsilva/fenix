@@ -904,7 +904,7 @@ public class Student extends Student_Base {
             if (registrationState != null) {
                 final RegistrationStateTypeNew registrationStateType = registrationState.getStateType();
                 // TODO ACDM-1113 remove hack
-                if (registrationStateType == null) return true;
+//                if (registrationStateType == null) return true;
                 if (registrationStateType.isActive()) {
                     return true;
                 }

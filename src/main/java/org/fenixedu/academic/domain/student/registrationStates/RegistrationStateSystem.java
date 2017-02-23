@@ -12,7 +12,7 @@ public class RegistrationStateSystem extends RegistrationStateSystem_Base {
     }
 
 
-    @Atomic
+//    @Atomic
     public static RegistrationStateSystem getInstance() {
         if (Bennu.getInstance().getRegistrationStateSystem() == null) {
             return new RegistrationStateSystem();
