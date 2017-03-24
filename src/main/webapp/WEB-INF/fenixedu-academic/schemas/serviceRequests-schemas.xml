@@ -667,15 +667,6 @@
     bundle="ACADEMIC_OFFICE_RESOURCES">
     <slot name="givenNames" key="label.givenNames" validator="pt.ist.fenixWebFramework.renderers.validators.RequiredValidator" />
     <slot name="familyNames" key="label.familyNames" />
-	<slot name="associateCodes" key="label.documentRequestsManagement.searchDocumentRequests.registry.certificate.codes"
-		  layout="option-select">
-		<property name="saveOptions" value="true"/>
-		<property name="providerClass" value="org.fenixedu.academic.ui.renderers.providers.documentRequests.AssociateDegreeFinalizationCertificateCodesProvider"/>
-		<property name="eachSchema" value="registryCodeDescription"/>
-		<property name="eachLayout" value="values"/>
-		<property name="sortBy" value="code"/>
-		<property name="selectAllShown" value="true" />
-	</slot>
 </schema>
 
 <schema name="registryCodeDescription" type="org.fenixedu.academic.domain.serviceRequests.RegistryCode">
@@ -688,11 +679,6 @@
     bundle="ACADEMIC_OFFICE_RESOURCES">
     <slot name="givenNames" key="label.givenNames" />
     <slot name="familyNames" key="label.familyNames" />
-	<slot name="associateCodes" key="label.documentRequestsManagement.searchDocumentRequests.registry.certificate.codes" layout="values">
-		<property name="htmlSeparator" value=", "/>
-		<property name="style" value="list-style: none; padding: 0; margin: 0;" />
-		<property name="format" value="${description}"/>
-	</slot>
 </schema>
 
 <schema

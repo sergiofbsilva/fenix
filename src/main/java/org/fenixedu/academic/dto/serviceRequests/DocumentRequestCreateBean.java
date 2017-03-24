@@ -126,8 +126,6 @@ public class DocumentRequestCreateBean extends RegistrationAcademicServiceReques
 
     private RegistryCode registryCode;
 
-    private List<RegistryCode> associateCodes;
-
     private Integer numberOfPrograms;
 
     private Money pastPaymentAmount;
@@ -146,7 +144,6 @@ public class DocumentRequestCreateBean extends RegistrationAcademicServiceReques
         super(registration);
         this.enrolments = new ArrayList<Enrolment>();
         this.exams = new ArrayList<Exam>();
-        this.associateCodes = new ArrayList<>();
         pastRequestDate = new LocalDate();
         this.registrationProtocol = registration.getRegistrationProtocol();
 
@@ -459,14 +456,6 @@ public class DocumentRequestCreateBean extends RegistrationAcademicServiceReques
         }
 
         this.exams = result;
-    }
-
-    public List<RegistryCode> getAssociateCodes() {
-        return associateCodes;
-    }
-
-    public void setAssociateCodes(List<RegistryCode> associateCodes) {
-        this.associateCodes =  associateCodes != null ? associateCodes : new ArrayList<>();
     }
 
     public ExecutionSemester getExecutionPeriod() {

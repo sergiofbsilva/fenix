@@ -36,8 +36,8 @@ import org.fenixedu.academic.domain.serviceRequests.documentRequests.RegistryDip
 import org.fenixedu.bennu.core.domain.Bennu;
 
 public class RegistryCode extends RegistryCode_Base {
-    public static Comparator<RegistryCode> COMPARATOR_BY_CODE =
-            Comparator.comparing(RegistryCode::getCode).thenComparing(DomainObjectUtil.COMPARATOR_BY_ID);
+    public static Comparator<RegistryCode> COMPARATOR_BY_CODE = Comparator
+                .nullsLast(Comparator.comparing(RegistryCode::getCode).thenComparing(DomainObjectUtil.COMPARATOR_BY_ID));
 
     protected RegistryCode(InstitutionRegistryCodeGenerator generator, AcademicServiceRequest request) {
         setRegistryCodeGenerator(generator);

@@ -83,8 +83,6 @@ public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCert
         RegistryCode code = bean.getRegistryCode();
         if (code != null) {
             setRegistryCode(code);
-        } else {
-            getRootDomainObject().getInstitutionUnit().getRegistryCodeGenerator().createRegistryFor(this);
         }
 
     }

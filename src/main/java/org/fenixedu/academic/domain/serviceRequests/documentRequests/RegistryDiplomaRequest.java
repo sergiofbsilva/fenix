@@ -19,7 +19,6 @@
 package org.fenixedu.academic.domain.serviceRequests.documentRequests;
 
 import java.util.Locale;
-import java.util.Optional;
 import java.util.Set;
 
 import org.fenixedu.academic.domain.ExecutionYear;
@@ -57,11 +56,6 @@ public class RegistryDiplomaRequest extends RegistryDiplomaRequest_Base implemen
 
         RegistryCode code = getRootDomainObject().getInstitutionUnit().getRegistryCodeGenerator().createRegistryFor(this);
         setRegistryCode(code);
-        bean.getAssociateCodes().stream().flatMap(rc -> rc.getDegreeFinalizationCertificates().stream()).forEach(dfcr -> {
-            RegistryCode originalCode = dfcr.getRegistryCode();
-            dfcr.setRegistryCode(code);
-            originalCode.safeDelete();
-        });
 
         if (isPayedUponCreation() && !isFree()) {
             RegistryDiplomaRequestEvent.create(getAdministrativeOffice(), getRegistration().getPerson(), this);
@@ -93,11 +87,6 @@ public class RegistryDiplomaRequest extends RegistryDiplomaRequest_Base implemen
 
         if (hasPersonalInfo() && hasMissingPersonalInfo()) {
             throw new DomainException("AcademicServiceRequest.has.missing.personal.info");
-        }
-        Optional<RegistryCode> invalidCode = bean.getAssociateCodes().stream()
-                .filter(rc -> rc.getRegistryDiploma() != null || rc.getDegreeFinalizationCertificates().isEmpty()).findAny();
-        if (invalidCode.isPresent()) {
-            throw new DomainException("error.registryDiploma.codeAlreadyHasRegistryDiploma", invalidCode.get().getCode());
         }
     }
 

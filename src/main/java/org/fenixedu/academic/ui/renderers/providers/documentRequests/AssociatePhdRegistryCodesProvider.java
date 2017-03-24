@@ -42,7 +42,7 @@ public class AssociatePhdRegistryCodesProvider implements DataProvider {
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        PhdDocumentRequestCreateBean bean = ((PhdDocumentRequestCreateBean) source);
+        PhdDocumentRequestCreateBean bean = (PhdDocumentRequestCreateBean) source;
         switch (bean.getDocumentRequestType()) {
         case PHD_FINALIZATION_CERTIFICATE:
             return getRegistryDiplomaCodes(bean);
