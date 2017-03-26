@@ -24,7 +24,7 @@ package org.fenixedu.academic.dto.student;
 import java.io.Serializable;
 
 import org.fenixedu.academic.domain.student.Registration;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
 import pt.ist.fenixframework.FenixFramework;
 
@@ -44,7 +44,7 @@ public class RegistrationStateBean extends StateBean implements Serializable {
         setStateDate(null);
     }
 
-    public RegistrationStateBean(final RegistrationStateTypeNew type) {
+    public RegistrationStateBean(final RegistrationStateType type) {
         super(type.getExternalId());
     }
 
@@ -56,7 +56,7 @@ public class RegistrationStateBean extends StateBean implements Serializable {
         return remarks;
     }
 
-    public RegistrationStateTypeNew getStateType() {
+    public RegistrationStateType getStateType() {
         return getNextState() == null ? null : FenixFramework.getDomainObject(getNextState());
     }
 
@@ -68,7 +68,7 @@ public class RegistrationStateBean extends StateBean implements Serializable {
         this.remarks = remarks;
     }
 
-    public void setStateType(final RegistrationStateTypeNew stateType) {
+    public void setStateType(final RegistrationStateType stateType) {
         setNextState(stateType == null ? null : stateType.getExternalId());
     }
 

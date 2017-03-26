@@ -242,7 +242,7 @@ public abstract class GepReportFile extends GepReportFile_Base {
     }
 
     protected static boolean isValidSourceLink(Registration source) {
-        return RegistrationStateSystem.getInstance().getValidSourceLinkSet().contains(source.getActiveStateType());
+        return source.getActiveStateType().isValidSourceLink();
     }
 
     private static Registration findSourceRegistrationByEquivalencePlan(Registration targetRegistration) {

@@ -59,7 +59,7 @@ import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
 import org.fenixedu.academic.domain.serviceRequests.AcademicServiceRequest;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.CycleCurriculumGroup;
 import org.fenixedu.academic.domain.studentCurriculum.ExternalEnrolment;
 import org.fenixedu.academic.dto.student.StudentStatuteBean;
@@ -267,7 +267,7 @@ public class Student extends Student_Base {
         return false;
     }
 
-    public boolean hasAnyRegistrationInState(final RegistrationStateTypeNew stateType) {
+    public boolean hasAnyRegistrationInState(final RegistrationStateType stateType) {
         return getRegistrationsSet().stream().anyMatch(r -> r.getActiveStateType().equals(stateType));
     }
 
@@ -902,7 +902,7 @@ public class Student extends Student_Base {
         for (final Registration registration : super.getRegistrationsSet()) {
             final RegistrationState registrationState = registration.getActiveState();
             if (registrationState != null) {
-                final RegistrationStateTypeNew registrationStateType = registrationState.getStateType();
+                final RegistrationStateType registrationStateType = registrationState.getStateType();
                 // TODO ACDM-1113 remove hack
 //                if (registrationStateType == null) return true;
                 if (registrationStateType.isActive()) {
@@ -1164,7 +1164,7 @@ public class Student extends Student_Base {
 
     public boolean shouldHaveStudentRole() {
         for (final Registration registration : getRegistrationsSet()) {
-            final RegistrationStateTypeNew stateType = registration.getLastStateType();
+            final RegistrationStateType stateType = registration.getLastStateType();
             if (stateType != null && stateType.isStudent()) {
                 return true;
             }

@@ -30,7 +30,7 @@ import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.student.RegistrationProtocol;
 import org.fenixedu.academic.domain.student.RegistrationRegimeType;
 import org.fenixedu.academic.domain.student.StatuteType;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 /**
  *
@@ -42,7 +42,7 @@ public class SearchStudentsByDegreeParametersBean extends DegreeByExecutionYearB
 
     private List<RegistrationProtocol> registrationProtocols = new ArrayList<RegistrationProtocol>();
 
-    private List<RegistrationStateTypeNew> registrationStateTypes = new ArrayList<RegistrationStateTypeNew>();
+    private List<RegistrationStateType> registrationStateTypes = new ArrayList<RegistrationStateType>();
 
     private List<StatuteType> statuteTypes = new ArrayList<StatuteType>();
 
@@ -82,11 +82,11 @@ public class SearchStudentsByDegreeParametersBean extends DegreeByExecutionYearB
         this.registrationProtocols = registrationProtocols;
     }
 
-    public List<RegistrationStateTypeNew> getRegistrationStateTypes() {
+    public List<RegistrationStateType> getRegistrationStateTypes() {
         return registrationStateTypes;
     }
 
-    public void setRegistrationStateTypes(List<RegistrationStateTypeNew> registrationStateTypes) {
+    public void setRegistrationStateTypes(List<RegistrationStateType> registrationStateTypes) {
         this.registrationStateTypes = registrationStateTypes;
     }
 

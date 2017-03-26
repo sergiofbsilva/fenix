@@ -29,7 +29,7 @@ import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.DegreeFinalizationCertificateRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.DiplomaRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.RegistryDiplomaRequest;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.commons.i18n.LocalizedString;
 import org.springframework.stereotype.Service;
@@ -64,7 +64,7 @@ public class ProgramConclusionService {
     @Atomic
     public ProgramConclusion createProgramConclusion(LocalizedString name, LocalizedString description,
                                                      LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable,
-                                                     boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateTypeNew targetState, EventTypes eventTypes) {
+                                                     boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
         return new ProgramConclusion(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider,
                 isSkipValidation, targetState, eventTypes);
     }
@@ -72,7 +72,7 @@ public class ProgramConclusionService {
     @Atomic
     public void editProgramConclusion(ProgramConclusion programConclusion, LocalizedString name, LocalizedString description,
             LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable,
-            boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateTypeNew targetState, EventTypes eventTypes) {
+            boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
         programConclusion.edit(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider,
                 isSkipValidation, targetState, eventTypes);
     }

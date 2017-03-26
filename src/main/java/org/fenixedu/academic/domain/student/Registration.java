@@ -20,7 +20,7 @@ package org.fenixedu.academic.domain.student;
 
 import static org.fenixedu.academic.predicate.AccessControl.check;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import pt.ist.fenixframework.Atomic;
 
 import java.math.BigDecimal;
@@ -1767,8 +1767,8 @@ public class Registration extends Registration_Base {
         return false;
     }
 
-    final public Set<RegistrationStateTypeNew> getRegistrationStatesTypes(final ExecutionYear executionYear) {
-        final Set<RegistrationStateTypeNew> result = new HashSet<RegistrationStateTypeNew>();
+    final public Set<RegistrationStateType> getRegistrationStatesTypes(final ExecutionYear executionYear) {
+        final Set<RegistrationStateType> result = new HashSet<RegistrationStateType>();
 
         for (final RegistrationState registrationState : getRegistrationStates(executionYear)) {
             result.add(registrationState.getStateType());
@@ -1777,8 +1777,8 @@ public class Registration extends Registration_Base {
         return result;
     }
 
-    final public Set<RegistrationStateTypeNew> getRegistrationStatesTypes(final ExecutionSemester executionSemester) {
-        final Set<RegistrationStateTypeNew> result = new HashSet<RegistrationStateTypeNew>();
+    final public Set<RegistrationStateType> getRegistrationStatesTypes(final ExecutionSemester executionSemester) {
+        final Set<RegistrationStateType> result = new HashSet<RegistrationStateType>();
 
         for (final RegistrationState registrationState : getRegistrationStates(executionSemester)) {
             result.add(registrationState.getStateType());
@@ -1826,7 +1826,7 @@ public class Registration extends Registration_Base {
         return result;
     }
 
-    public RegistrationStateTypeNew getLastStateType() {
+    public RegistrationStateType getLastStateType() {
         final RegistrationState registrationState = getLastState();
         return registrationState == null ? null : registrationState.getStateType();
     }
@@ -1835,7 +1835,7 @@ public class Registration extends Registration_Base {
         return getFirstRegistrationState();
     }
 
-    final public RegistrationStateTypeNew getActiveStateType() {
+    final public RegistrationStateType getActiveStateType() {
         final RegistrationState activeState = getActiveState();
         return activeState != null ? activeState.getStateType() : RegistrationStateSystem.getInstance().getInitialState();
     }
@@ -1874,7 +1874,7 @@ public class Registration extends Registration_Base {
         return states.isEmpty() ? false : Collections.max(states, RegistrationState.DATE_COMPARATOR).isActive();
     }
 
-    public boolean hasRegistrationState(final RegistrationStateTypeNew stateType) {
+    public boolean hasRegistrationState(final RegistrationStateType stateType) {
         for (final RegistrationState state : getRegistrationStatesSet()) {
             if (state.getStateType().equals(stateType)) {
                 return true;
@@ -1910,11 +1910,11 @@ public class Registration extends Registration_Base {
     }
 
     final public boolean isInMobilityState() {
-        return getActiveStateType().equals(RegistrationStateSystem.getInstance().getMobilityState());
+        return getActiveStateType().isMobility();
     }
 
     public boolean isSchoolPartConcluded() {
-        return getActiveStateType().equals(RegistrationStateSystem.getInstance().getSchoolPartConcludedState());
+        return getActiveStateType().isSchoolPartConcluded();
     }
 
     public boolean isConcluded() {
@@ -1940,7 +1940,7 @@ public class Registration extends Registration_Base {
     }
 
     final public boolean isTransition() {
-        RegistrationStateTypeNew transitionState = RegistrationStateSystem.getInstance().getTransitionState();
+        RegistrationStateType transitionState = RegistrationStateSystem.getInstance().getTransitionState();
 //        if (transitionState == null) return false;
         return getActiveStateType().equals(transitionState);
     }
@@ -2051,20 +2051,20 @@ public class Registration extends Registration_Base {
                 .isAfter(executionYear.getEndDateYearMonthDay().toDateTimeAtMidnight())).findFirst().orElse(null);
     }
 
-    public boolean hasState(final RegistrationStateTypeNew stateType) {
+    public boolean hasState(final RegistrationStateType stateType) {
         return hasAnyState(Collections.singletonList(stateType));
     }
 
-    public boolean hasAnyState(final Collection<RegistrationStateTypeNew> stateTypes) {
+    public boolean hasAnyState(final Collection<RegistrationStateType> stateTypes) {
         return getRegistrationStatesSet().stream()
                 .anyMatch(registrationState -> stateTypes.contains(registrationState.getStateType()));
     }
 
-    final public boolean hasStateType(final ExecutionSemester executionSemester, final RegistrationStateTypeNew registrationStateType) {
+    final public boolean hasStateType(final ExecutionSemester executionSemester, final RegistrationStateType registrationStateType) {
         return getRegistrationStatesTypes(executionSemester).contains(registrationStateType);
     }
 
-    final public boolean hasStateType(final ExecutionYear executionYear, final RegistrationStateTypeNew registrationStateType) {
+    final public boolean hasStateType(final ExecutionYear executionYear, final RegistrationStateType registrationStateType) {
         return getRegistrationStatesTypes(executionYear).contains(registrationStateType);
     }
 
@@ -2076,11 +2076,11 @@ public class Registration extends Registration_Base {
         return getActiveStateType().equals(RegistrationStateSystem.getInstance().getInitialState());
     }
 
-    public Collection<RegistrationState> getRegistrationStates(final RegistrationStateTypeNew registrationStateType) {
+    public Collection<RegistrationState> getRegistrationStates(final RegistrationStateType registrationStateType) {
         return getRegistrationStates(Collections.singletonList(registrationStateType));
     }
 
-    public Collection<RegistrationState> getRegistrationStates(final Collection<RegistrationStateTypeNew> registrationStateTypes) {
+    public Collection<RegistrationState> getRegistrationStates(final Collection<RegistrationStateType> registrationStateTypes) {
         final Collection<RegistrationState> result = new HashSet<RegistrationState>();
         for (final RegistrationState registrationState : getRegistrationStatesSet()) {
             if (registrationStateTypes.contains(registrationState.getStateType())) {
@@ -2139,7 +2139,7 @@ public class Registration extends Registration_Base {
                 .map(ConclusionProcess::getConclusionYear).orElse(null);
     }
 
-    private RegistrationState getFirstRegistrationState(final RegistrationStateTypeNew stateType) {
+    private RegistrationState getFirstRegistrationState(final RegistrationStateType stateType) {
         final SortedSet<RegistrationState> states = new TreeSet<RegistrationState>(RegistrationState.DATE_COMPARATOR);
         states.addAll(getRegistrationStates(stateType));
         return states.first();

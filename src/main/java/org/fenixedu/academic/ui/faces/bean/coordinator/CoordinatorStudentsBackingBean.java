@@ -33,7 +33,7 @@ import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.accessControl.SearchDegreeStudentsGroup;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurricularPlan.StudentCurricularPlanState;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.ui.faces.bean.base.FenixBackingBean;
@@ -265,10 +265,10 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
         this.maximumYearString = maximumYearString;
     }
 
-    public List<Entry<StudentCurricularPlan, RegistrationStateTypeNew>> getStudentCurricularPlans() throws FenixServiceException {
-        Map<StudentCurricularPlan, RegistrationStateTypeNew> studentCurricularPlans = filterPageStudentCurricularPlans();
+    public List<Entry<StudentCurricularPlan, RegistrationStateType>> getStudentCurricularPlans() throws FenixServiceException {
+        Map<StudentCurricularPlan, RegistrationStateType> studentCurricularPlans = filterPageStudentCurricularPlans();
 
-        RegistrationStateTypeNew registrationState;
+        RegistrationStateType registrationState;
 
         for (StudentCurricularPlan studentCurricularPlan : studentCurricularPlans.keySet()) {
             if (studentCurricularPlan.getRegistration() == null) {
@@ -282,7 +282,7 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
             studentCurricularPlans.put(studentCurricularPlan, registrationState);
         }
 
-        return new ArrayList<Entry<StudentCurricularPlan, RegistrationStateTypeNew>>(studentCurricularPlans.entrySet());
+        return new ArrayList<Entry<StudentCurricularPlan, RegistrationStateType>>(studentCurricularPlans.entrySet());
 
     }
 
@@ -300,17 +300,17 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
                 getMinStudentNumber(), getMaxStudentNumber(), getMinimumYear(), getMaximumYear());
     }
 
-    private Map<StudentCurricularPlan, RegistrationStateTypeNew> filterAllStudentCurricularPlans() {
+    private Map<StudentCurricularPlan, RegistrationStateType> filterAllStudentCurricularPlans() {
         SearchDegreeStudentsGroup searchGroup = getSearchCriteriaGroup();
 
-        final Map<StudentCurricularPlan, RegistrationStateTypeNew> map = searchGroup.searchStudentCurricularPlans(null, null);
+        final Map<StudentCurricularPlan, RegistrationStateType> map = searchGroup.searchStudentCurricularPlans(null, null);
         return map;
     }
 
-    private Map<StudentCurricularPlan, RegistrationStateTypeNew> filterPageStudentCurricularPlans() {
+    private Map<StudentCurricularPlan, RegistrationStateType> filterPageStudentCurricularPlans() {
         SearchDegreeStudentsGroup searchGroup = getSearchCriteriaGroup();
 
-        final Map<StudentCurricularPlan, RegistrationStateTypeNew> map =
+        final Map<StudentCurricularPlan, RegistrationStateType> map =
                 searchGroup.searchStudentCurricularPlans(getMinIndex(), getMaxIndex());
 
         return map;
@@ -331,7 +331,7 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
                 .valueOf(studentCurricularPlanStateString) : null;
     }
 
-    public RegistrationStateTypeNew getRegistrationStateType() {
+    public RegistrationStateType getRegistrationStateType() {
         final String registrationStateTypeString = getRegistrationStateTypeString();
         return (registrationStateTypeString != null && registrationStateTypeString.length() > 0 && !registrationStateTypeString
                 .equals("SHOWALL")) ? FenixFramework.getDomainObject(registrationStateTypeString) : null;

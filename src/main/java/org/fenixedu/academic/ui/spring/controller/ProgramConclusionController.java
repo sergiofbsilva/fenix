@@ -25,7 +25,7 @@ import org.fenixedu.academic.domain.accounting.EventTypes;
 import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateTypeNew;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.ui.spring.service.ProgramConclusionService;
 import org.fenixedu.bennu.spring.portal.SpringFunctionality;
 import org.fenixedu.commons.i18n.LocalizedString;
@@ -78,7 +78,7 @@ public class ProgramConclusionController {
         return view("create");
     }
 
-    private RegistrationStateTypeNew getRegistrationStateType(String targetState) {
+    private RegistrationStateType getRegistrationStateType(String targetState) {
         return Strings.isNullOrEmpty(targetState) ? null : FenixFramework.getDomainObject(targetState);
     }
 

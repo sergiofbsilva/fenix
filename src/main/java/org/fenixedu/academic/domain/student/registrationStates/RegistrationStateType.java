@@ -21,78 +21,103 @@
  */
 package org.fenixedu.academic.domain.student.registrationStates;
 
+import org.fenixedu.academic.domain.util.workflow.IState;
+import org.fenixedu.academic.domain.util.workflow.StateBean;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
+
+import javax.swing.text.html.Option;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
  *
  */
 
-@Deprecated
-public enum RegistrationStateType {
+public class RegistrationStateType extends RegistrationStateType_Base implements IState {
 
-    REGISTERED(true, true), // Este estado faz sentido ser representado por um boolean, para saber se o registo está activo ou não
-
-    MOBILITY(true, true), // Se houver alguma forma de perceber se um registo é de Mobilidade, não há necessidade deste estado
-
-    CANCELED(false, false), // Um registo não activo, sem processo de conclusão por substituir este estado
-
-    CONCLUDED(false, true), // Conclusion Process... Cada caso está já visto e comentado
-
-    FLUNKED(false, false), // Relacionado com prescrições / alunos prescritos
-
-    INTERRUPTED(false, false), // Comentado caso a caso
-
-    SCHOOLPARTCONCLUDED(false, true), // Comentado caso a caso
-
-    INTERNAL_ABANDON(false, false), // É usado para representar as trocas de curso
-
-    EXTERNAL_ABANDON(false, false), // Comentado caso a caso
-
-    TRANSITION(false, true), // Este é usado para representar as Registration que estão em transição de Pré-bolonha para Pós-bolonha
-
-    TRANSITED(false, true), // Este é usado para representar as Registration que foram transitadas de Pré-bolonha para Pós-bolonha
-
-    STUDYPLANCONCLUDED(false, true), // Este só é usado nas implementações de RegistrationState
-
-    INACTIVE(false, false); //Closed state for the registrations regarding the AFA & MA protocols
-
-    private RegistrationStateType(final boolean active, final boolean canHaveCurriculumLinesOnCreation) {
-        this.active = active;
-        this.canHaveCurriculumLinesOnCreation = canHaveCurriculumLinesOnCreation;
+    public RegistrationStateType(String code, LocalizedString name, LocalizedString description, Boolean active, Boolean student, Boolean terminal) {
+        setCode(code);
+        setName(name);
+        setDescription(description);
+        setActive(active);
+        setStudent(student);
+        setTerminal(terminal);
     }
 
-    private boolean active;
+    public Set<String> getValidNextStates() {
+        return getValidNextStateTypeSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
+    }
 
-    private boolean canHaveCurriculumLinesOnCreation;
+    @Override
+    public IState nextState() {
+        return null;
+    }
 
-    public String getName() {
-        return name();
+    @Override
+    public IState nextState(StateBean bean) {
+        return null;
+    }
+
+    @Override
+    public void checkConditionsToForward() {}
+
+    @Override
+    public void checkConditionsToForward(StateBean bean) {
+
+    }
+
+
+    public boolean isStudent() {
+        return Optional.ofNullable(getStudent()).orElse(false);
+    }
+
+    public boolean isTerminal() {
+        return getValidNextStates().isEmpty();
+//        return Optional.ofNullable(getTerminal()).orElse(false);
     }
 
     public boolean isActive() {
-        return active;
+        return Optional.ofNullable(getActive()).orElse(false);
     }
 
-    public boolean isInactive() {
-        return !active;
+
+    public boolean isReingressable() {
+        final RegistrationStateType initialState = RegistrationStateSystem.getInstance().getInitialState();
+        return getValidNextStateTypeSet().stream().anyMatch(s -> s.equals(initialState));
     }
 
     public boolean canHaveCurriculumLinesOnCreation() {
-        return canHaveCurriculumLinesOnCreation;
+        // TODO ACDM-1113
+        // Isto é suposto representar o quê?
+        return true;
+    }
+
+    public boolean isValidSourceLink() {
+        return Optional.ofNullable(getValidSource()).orElse(false);
+    }
+
+    public boolean isMobility() {
+        return Optional.ofNullable(getMobility()).orElse(false);
+    }
+
+    public boolean isSchoolPartConcluded() {
+        return Optional.ofNullable(getSchoolPartConcluded()).orElse(false);
+    }
+
+    public boolean isInactive() {
+        return !isActive();
     }
 
     public String getQualifiedName() {
-        return RegistrationStateTypeNew.class.getSimpleName() + "." + name();
+        return RegistrationStateType.class.getSimpleName() + "." + getName().getContent();
     }
 
     public String getFullyQualifiedName() {
-        return RegistrationStateTypeNew.class.getName() + "." + name();
-    }
-
-    public String getDescription() {
-        return BundleUtil.getString(Bundle.ENUMERATION, getQualifiedName());
+        return RegistrationStateType.class.getName() + "." + getName().getContent();
     }
 
 }

@@ -102,7 +102,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public RegistrationState(Registration registration, Person person, DateTime dateTime, RegistrationStateTypeNew stateType) {
+    public RegistrationState(Registration registration, Person person, DateTime dateTime, RegistrationStateType stateType) {
         this.setRegistration(registration);
         this.setResponsiblePerson(person);
         this.setStateDate(dateTime);
@@ -111,7 +111,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     @Deprecated
     private static RegistrationState createState(Registration registration, Person person, DateTime dateTime,
-                                                 RegistrationStateTypeNew stateType) {
+                                                 RegistrationStateType stateType) {
         return new RegistrationState(registration, person, dateTime, stateType);
     }
 
@@ -119,6 +119,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         setStateDate(stateDate != null ? stateDate : new DateTime());
         setRegistration(registration);
         setResponsiblePerson(responsiblePerson != null ? responsiblePerson : AccessControl.getPerson());
+        RegistrationStateSystem.getInstance().getInterface(this).init(this);
     }
 
     protected void init(Registration registration) {
@@ -130,12 +131,19 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         return nextState(new StateBean(defaultNextStateType().toString()));
     }
 
-    protected RegistrationStateTypeNew defaultNextStateType() {
+    protected RegistrationStateType defaultNextStateType() {
+        final RegistrationStateType defaultNextStateType = getStateType().getDefaultNextStateType();
+        if (defaultNextStateType != null) {
+            return defaultNextStateType;
+        }
         throw new DomainException("error.no.default.nextState.defined");
     }
 
     @Override
     public IState nextState(final StateBean bean) {
+        if (getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState())) {
+            throw new DomainException("error.impossible.to.forward.from.concluded");
+        }
         return createState(getRegistration(), bean.getResponsible(), bean.getStateDateTime(),
                 FenixFramework.getDomainObject(bean.getNextState()));
     }
@@ -156,7 +164,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
 
     private void checkCurriculumLinesForStateDate(final StateBean bean) {
         final ExecutionYear year = ExecutionYear.readByDateTime(bean.getStateDateTime());
-        final RegistrationStateTypeNew nextStateType = FenixFramework.getDomainObject(bean.getNextState());
+        final RegistrationStateType nextStateType = FenixFramework.getDomainObject(bean.getNextState());
 
         if (nextStateType.canHaveCurriculumLinesOnCreation()) {
             return;
@@ -168,7 +176,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         }
     }
 
-    public RegistrationStateTypeNew getStateType() {
+    public RegistrationStateType getStateType() {
         return super.getRegistrationStateType();
     }
 
@@ -185,6 +193,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
             throw new DomainException("error.cannot.delete.registrationState.incoherentState: "
                     + previousState.getStateType().getCode() + " -> " + nextState.getStateType().getCode());
         }
+        RegistrationStateSystem.getInstance().getInterface(this).checkRulesToDelete(this);
         deleteWithoutCheckRules();
     }
 
@@ -253,7 +262,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
     }
 
     public static RegistrationState createRegistrationState(Registration registration, Person responsible, DateTime creation,
-                                                            RegistrationStateTypeNew stateType) {
+                                                            RegistrationStateType stateType) {
         RegistrationStateBean bean = new RegistrationStateBean(registration);
         bean.setResponsible(responsible);
         bean.setStateDateTime(creation);
@@ -290,12 +299,8 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         return getStateType().isActive();
     }
 
-    public RegistrationStateType getOldStateType() {
-        return null;
-    }
-
     public boolean includes(final ExternalEnrolment externalEnrolment) {
-        if (getStateType().equals(RegistrationStateSystem.getInstance().getMobilityState())) {
+        if (getStateType().isMobility()) {
             final DateTime mobilityDate = getStateDate();
             return externalEnrolment.hasExecutionPeriod() && externalEnrolment.getExecutionYear().containsDate(mobilityDate);
         }
@@ -303,7 +308,7 @@ public class RegistrationState extends RegistrationState_Base implements IState 
         throw new DomainException("RegistrationState.external.enrolments.only.included.in.mobility.states");
     }
 
-    static public boolean hasAnyState(final Collection<RegistrationState> states, final Collection<RegistrationStateTypeNew> types) {
+    static public boolean hasAnyState(final Collection<RegistrationState> states, final Collection<RegistrationStateType> types) {
         return states.stream().anyMatch(state -> types.contains(state.getStateType()));
     }
 
