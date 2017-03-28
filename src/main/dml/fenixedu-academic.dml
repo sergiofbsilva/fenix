@@ -3057,45 +3057,6 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
         DateTime stateDate;
     }
 
-//        class student.registrationStates.CanceledState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.ConcludedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.ExternalAbandonState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.FlunkedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.InternalAbandonState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.InterruptedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.MobilityState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.RegisteredState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.SchoolPartConcludedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.StudyPlanConcludedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.TransitionalState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.TransitedState extends student.registrationStates.RegistrationState {
-//        }
-//
-//        class student.registrationStates.InactiveState extends student.registrationStates.RegistrationState {
-//        }
-
     class student.registrationStates.RegistrationStateType {
         Boolean active;
         Boolean student;
@@ -8343,7 +8304,9 @@ relation RegistrationStateRegistration {
 }
 
 relation ProgramConclusionHasTargetState {
-    protected degreeStructure.ProgramConclusion playsRole programConclusion;
+    protected degreeStructure.ProgramConclusion playsRole programConclusion {
+        multiplicity *;
+    }
 	student.registrationStates.RegistrationStateType playsRole targetState {
 		multiplicity 1..1;
 	}
@@ -8395,15 +8358,6 @@ relation RegistrationStateTypeSystemRoot {
     }
 }
 
-//relation MobilityRegistrationStateType {
-//    protected student.registrationStates.RegistrationStateSystem playsRole mobilityRoot {
-//        multiplicity 0..1;
-//    }
-//    student.registrationStates.RegistrationStateType playsRole mobilityState {
-//        multiplicity 0..1;
-//    }
-//}
-//
 relation InternalAbandonRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole internalAbandonRoot {
         multiplicity 0..1;
@@ -8421,7 +8375,7 @@ relation ExternalAbandonRegistrationStateType {
         multiplicity 0..1;
     }
 }
-//
+
 relation TransitedRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole transitedRoot {
         multiplicity 0..1;
@@ -8448,7 +8402,7 @@ relation InterruptedRegistrationStateType {
         multiplicity 0..1;
     }
 }
-//
+
 relation FlunkedRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole flunkedRoot {
         multiplicity 0..1;
@@ -8457,7 +8411,7 @@ relation FlunkedRegistrationStateType {
         multiplicity 0..1;
     }
 }
-//
+
 relation CanceledRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole canceledRoot {
         multiplicity 0..1;
@@ -8467,33 +8421,6 @@ relation CanceledRegistrationStateType {
     }
 }
 
-//relation SchoolPartConcludedRegistrationStateType {
-//     protected student.registrationStates.RegistrationStateSystem playsRole schoolPartConcludedRoot{
-//         multiplicity 0..1;
-//     }
-//     student.registrationStates.RegistrationStateType playsRole schoolPartConcludedState {
-//         multiplicity 0..1;
-//     }
-// }
-//
-// relation StudyPlanConcludedRegistrationStateType {
-//     protected student.registrationStates.RegistrationStateSystem playsRole studyPlanConcludedRoot{
-//         multiplicity 0..1;
-//     }
-//     student.registrationStates.RegistrationStateType playsRole studyPlanConcludedState {
-//         multiplicity 0..1;
-//     }
-// }
-
-// relation InactiveRegistrationStateType {
-//     protected student.registrationStates.RegistrationStateSystem playsRole inactiveRoot {
-//         multiplicity 0..1;
-//     }
-//     student.registrationStates.RegistrationStateType playsRole inactiveState {
-//         multiplicity 0..1;
-//     }
-// }
-//
 relation ConcludedRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole concludedRoot {
         multiplicity 0..1;
@@ -8511,15 +8438,6 @@ relation InitialRegistrationStateType {
         multiplicity 0..1;
     }
 }
-
-//relation ValidSourceLinkRegistrationStateTypes {
-//    protected student.registrationStates.RegistrationStateSystem playsRole validSourceLinkRoot {
-//        multiplicity 0..1;
-//    }
-//    student.registrationStates.RegistrationStateType playsRole validSourceLink {
-//        multiplicity 0..*;
-//    }
-//}
 
 relation RegistrationStateResponsiblePerson {
     student.registrationStates.RegistrationState playsRole registrationStates {

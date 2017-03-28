@@ -17,11 +17,11 @@ import java.util.Map;
 
 public class RegistrationStateSystem extends RegistrationStateSystem_Base {
 
-    private Map<String, RegistrationStateTypeInterface> interfaceMap;
+    private static Map<String, RegistrationStateTypeInterface> interfaceMap;
 
-    {
+    public static void initialize() {
         interfaceMap = new HashMap<>();
-        interfaceMap.put(this.getConcludedState().getCode(), new RegistrationStateTypeInterface() {
+        interfaceMap.put(getInstance().getConcludedState().getCode(), new RegistrationStateTypeInterface() {
             @Override
             public void checkRulesToDelete(RegistrationState state) {
                 final Person person = AccessControl.getPerson();
@@ -45,13 +45,13 @@ public class RegistrationStateSystem extends RegistrationStateSystem_Base {
                 if (state.getRegistration().isBolonha() && !state.getRegistration().hasConcluded()) {
                     throw new DomainException("error.registration.is.not.concluded");
                 }
-                UserLoginPeriod.createOpenPeriod(state.getRegistration().getPerson().getUser());
+                state.getRegistration().getPerson().getUser().openLoginPeriod();
             }
         });
         interfaceMap.put("STUDYPLANCONCLUDED", new RegistrationStateTypeInterface() {
             @Override
             public void init(RegistrationState state) {
-                UserLoginPeriod.createOpenPeriod(state.getRegistration().getPerson().getUser());
+                state.getRegistration().getPerson().getUser().openLoginPeriod();
             }
         });
     }

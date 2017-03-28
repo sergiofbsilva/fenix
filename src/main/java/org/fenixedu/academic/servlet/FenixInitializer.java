@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.fenixedu.academic.FenixEduAcademicConfiguration;
 import org.fenixedu.academic.domain.Installation;
 import org.fenixedu.academic.domain.organizationalStructure.UnitNamePart;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.service.StudentWarningsDefaultCheckers;
 import org.fenixedu.academic.service.StudentWarningsService;
 import org.fenixedu.academic.service.services.commons.ReadCurrentExecutionPeriod;
@@ -64,6 +65,12 @@ public class FenixInitializer implements ServletContextListener {
 
         registerHealthchecks();
         registerDefaultStudentWarningCheckers();
+
+        registerRegistrationStateSystem();
+    }
+
+    private void registerRegistrationStateSystem() {
+        RegistrationStateSystem.initialize();
     }
 
     private void registerDefaultStudentWarningCheckers() {
