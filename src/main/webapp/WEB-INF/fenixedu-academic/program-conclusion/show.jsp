@@ -99,7 +99,7 @@
 							<td>
 								<spring:message code="label.${conclusion.skipValidation ? 'yes' : 'no'}"></spring:message>
 							</td>
-							<td>${empty conclusion.targetState ? '-' : conclusion.targetState.description}</td>
+							<td>${empty conclusion.targetState ? '-' : conclusion.targetState.name.content}</td>
 							<td>
 								<a href="${baseUrl}${conclusion.externalId}" class="btn btn-default"><spring:message code="label.edit"/></a>
 								<btn class="delete btn btn-default" data-program-conclusion="${conclusion.externalId}"><spring:message code="label.delete"/></btn>

@@ -18,8 +18,6 @@
  */
 package org.fenixedu.academic.domain.serviceRequests;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
@@ -102,8 +100,8 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
     private boolean hasValidState(final Registration registration) {
         return registration.hasAnyState(RegistrationStateSystem.getInstance().getRegistrationStateTypeSet()
                 .stream()
-                .filter(stateType -> stateType.isReingressable())
-                .collect(Collectors.toList()));
+                .filter(RegistrationStateType::isReingressable)
+                .collect(Collectors.toSet()));
     }
 
     private boolean isEnrolmentPeriodOpen(final Registration registration, final ExecutionYear executionYear,
@@ -164,7 +162,7 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
                     RegistrationState.createRegistrationState(getRegistration(), academicServiceRequestBean.getResponsible(),
                             academicServiceRequestBean.getFinalSituationDate(), RegistrationStateSystem.getInstance().getInitialState());
 
-            if (getRegistration().getActiveState() != state) {
+            if (getRegistration().getCurrentState() != state) {
                 throw new DomainException("StudentReingressionRequest.reingression.must.be.active.state.after.request.conclusion");
             }
         }

@@ -479,7 +479,7 @@
 	<slot name="registration.number" key="label.coordinator.studentNumber"/>
 	<slot name="registration.degree.name" key="label.degreeCurricularPlan.degree.sigla"/>
 	<slot name="registration.startExecutionYear.year" key="label.entryYear"/>
-	<slot name="registration.activeStateType" key="label.coordinator.registrationStateType"/>
+	<slot name="registration.activeStateType.name" key="label.coordinator.registrationStateType"/>
 </schema>
 
 <!-- Over23 -->

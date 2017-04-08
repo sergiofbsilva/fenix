@@ -148,7 +148,7 @@ public class ProgramConclusion extends ProgramConclusion_Base {
     }
 
     public boolean isTerminal() {
-        return getTargetState().equals(RegistrationStateSystem.getInstance().getConcludedState());
+        return Optional.ofNullable(getTargetState()).map(RegistrationStateType::isTerminal).orElse(false);
     }
 
     public boolean isConclusionProcessed(Registration registration) {

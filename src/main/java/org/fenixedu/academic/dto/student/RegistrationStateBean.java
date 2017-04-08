@@ -23,29 +23,47 @@ package org.fenixedu.academic.dto.student;
 
 import java.io.Serializable;
 
+import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
+import org.joda.time.DateTime;
+
 import pt.ist.fenixframework.FenixFramework;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
  * 
  */
-public class RegistrationStateBean extends StateBean implements Serializable {
+public class RegistrationStateBean implements Serializable {
 
-    Registration registration;
+    private Person responsible;
 
-    String remarks;
+    private DateTime created;
 
+    private Registration registration;
+
+    private RegistrationStateType stateType;
+
+    private String remarks;
+
+
+    public RegistrationStateBean(RegistrationState state) {
+        responsible = state.getResponsiblePerson();
+        created = state.getStateDate();
+        registration = state.getRegistration();
+        stateType = state.getStateType();
+        remarks = state.getRemarks();
+    }
+    
     public RegistrationStateBean(Registration registration) {
         super();
-        this.registration = registration;
-        setStateDate(null);
+        setRegistration(registration);
     }
 
     public RegistrationStateBean(final RegistrationStateType type) {
-        super(type.getExternalId());
+        setStateType(type);
     }
 
     public Registration getRegistration() {
@@ -54,10 +72,6 @@ public class RegistrationStateBean extends StateBean implements Serializable {
 
     public String getRemarks() {
         return remarks;
-    }
-
-    public RegistrationStateType getStateType() {
-        return getNextState() == null ? null : FenixFramework.getDomainObject(getNextState());
     }
 
     public void setRegistration(Registration registration) {
@@ -69,7 +83,26 @@ public class RegistrationStateBean extends StateBean implements Serializable {
     }
 
     public void setStateType(final RegistrationStateType stateType) {
-        setNextState(stateType == null ? null : stateType.getExternalId());
+        this.stateType = stateType;
     }
 
+    public RegistrationStateType getStateType() {
+        return stateType;
+    }
+
+    public Person getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(Person responsible) {
+        this.responsible = responsible;
+    }
+
+    public DateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(DateTime created) {
+        this.created = created;
+    }
 }

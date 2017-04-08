@@ -35,7 +35,7 @@ public class PhdRegistrationConclusionBean extends RegistrationConclusionBean {
     }
 
     public RegistrationStateType getActiveStateType() {
-        return getRegistration().getActiveStateType();
+        return getRegistration().getCurrentStateType();
     }
 
     public YearMonthDay getStartDate() {

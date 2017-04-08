@@ -98,7 +98,7 @@
 								<bean:write name="registration" property="registrationProtocol.description.content"/>
 							</td>
 							<td>
-								<bean:write name="registration" property="activeStateType.description"/>
+								<bean:write name="registration" property="activeStateType.name"/>
 							</td>
 						</tr>
 					</logic:iterate>

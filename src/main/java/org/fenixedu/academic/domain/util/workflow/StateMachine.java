@@ -18,7 +18,10 @@
  */
 package org.fenixedu.academic.domain.util.workflow;
 
+import java.util.Optional;
+
 import org.fenixedu.academic.domain.exceptions.DomainException;
+import org.fenixedu.academic.util.Bundle;
 
 public class StateMachine {
 
@@ -33,7 +36,7 @@ public class StateMachine {
             state.checkConditionsToForward(bean);
             return state.nextState(bean);
         } else {
-            throw new DomainException("error.invalid.next.state");
+            throw new DomainException(Optional.of(Bundle.ACADEMIC),"error.invalid.next.state", state.toString(), nextState);
         }
     }
 

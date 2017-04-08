@@ -97,7 +97,7 @@ public class EnrolInAffinityCycle {
                                 RegistrationProtocol.getDefault(), cycleCourseGroupToEnrol.getCycleType());
 
                 newRegistration.setSourceRegistration(studentCurricularPlan.getRegistration());
-                newRegistration.getActiveState().setResponsiblePerson(null);
+                newRegistration.getCurrentState().setResponsiblePerson(null);
                 newRegistration.setIngressionType(IngressionType.findByPredicate(IngressionType::isDirectAccessFrom1stCycle)
                         .orElse(null));
 

@@ -18,10 +18,12 @@
  */
 package org.fenixedu.academic.ui.renderers.providers.choiceType.replacement.multiple;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyArrayConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
@@ -44,7 +46,7 @@ public class RegistrationStateTypeProvider implements DataProvider {
 //
     @Override
     public Object provide(Object source, Object currentValue) {
-        return RegistrationStateSystem.getInstance().getRegistrationStateTypeSet().stream().collect(Collectors.toList());
+        return new ArrayList<>(RegistrationStateSystem.getInstance().getRegistrationStateTypeSet());
     }
 
     @Override

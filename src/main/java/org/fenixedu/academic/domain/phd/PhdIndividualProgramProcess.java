@@ -800,7 +800,7 @@ public class PhdIndividualProgramProcess extends PhdIndividualProgramProcess_Bas
 
     public boolean hasSchoolPartConcluded() {
         boolean concluded =
-                getRegistration() != null && (getRegistration().isSchoolPartConcluded() || getRegistration().isConcluded());
+                getRegistration() != null && (getRegistration().getCurrentStateType().isTerminal());
         return (getStudyPlan() != null && getStudyPlan().isExempted()) || concluded;
     }
 

@@ -63,7 +63,7 @@
 			<br/>
 
 			<logic:empty name="registration" property="lastStudentCurricularPlan" >
-				<strong><bean:write name="registration" property="degreeName" /></strong> (<bean:message name="registration" property="activeStateType.qualifiedName" bundle="ENUMERATION_RESOURCES" />)
+				<strong><bean:write name="registration" property="degreeName" /></strong> (<bean:message name="registration" property="activeStateType.name.content" />)
 			</logic:empty>
 
 			<%-- show operations   --%>

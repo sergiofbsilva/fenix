@@ -52,12 +52,12 @@ public class ReadShiftsToEnroll {
         }
 
         if (registration.getPayedTuition() == null || registration.getPayedTuition().equals(Boolean.FALSE)) {
-            if (!registration.getInterruptedStudies()) {
+            if (!registration.isActive()) {
                 throw new FenixServiceException("error.exception.notAuthorized.student.warningTuition");
             }
         }
 
-        if (registration.getFlunked()) {
+        if (!registration.isActive()) {
             throw new FenixServiceException("error.exception.notAuthorized.student.warningTuition");
         }
     }

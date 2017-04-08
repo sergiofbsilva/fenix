@@ -257,8 +257,7 @@ public class StudentLine implements java.io.Serializable {
             return false;
         }
 
-        return getRegistration().getLastStudentCurricularPlan().hasAnyEnrolmentForExecutionYear(getForExecutionYear())
-                || getRegistration().isInMobilityState();
+        return true;
     }
 
     public boolean isLastRegistrationEqualToSpecifiedDegree() {
@@ -317,16 +316,7 @@ public class StudentLine implements java.io.Serializable {
             return null;
         }
 
-        if (getRegistration().isInMobilityState()) {
-            return getForExecutionYear().getBeginDateYearMonthDay().toLocalDate();
-        }
-
-        TreeSet<Enrolment> orderedEnrolmentSet =
-                new TreeSet<Enrolment>(Collections.reverseOrder(CurriculumModule.COMPARATOR_BY_CREATION_DATE));
-        orderedEnrolmentSet.addAll(getStudentCurricularPlan().getEnrolmentsByExecutionYear(getForExecutionYear()));
-
-        return orderedEnrolmentSet.isEmpty() ? null : orderedEnrolmentSet.iterator().next().getCreationDateDateTime()
-                .toLocalDate();
+        return getForExecutionYear().getBeginDateYearMonthDay().toLocalDate();
     }
 
     public LocalDate getEnrolmentDateTime() {
@@ -342,10 +332,6 @@ public class StudentLine implements java.io.Serializable {
             return Money.ZERO;
         }
 
-        if (!getRegistration().hasToPayGratuityOrInsurance()) {
-            return Money.ZERO;
-        }
-
         GratuityEventWithPaymentPlan event =
                 getStudentCurricularPlan().getGratuityEvent(getForExecutionYear(), GratuityEventWithPaymentPlan.class);
 
@@ -357,13 +343,14 @@ public class StudentLine implements java.io.Serializable {
     }
 
     public LocalDate getFirstInstallmentPaymentLocalDate() {
-        if (!getRegistration().hasToPayGratuityOrInsurance()) {
-            return null;
-        }
 
         GratuityEventWithPaymentPlan gratuityEventWithPaymentPlan =
                 getStudentCurricularPlan().getGratuityEvent(getForExecutionYear(), GratuityEventWithPaymentPlan.class);
 
+        if (gratuityEventWithPaymentPlan == null) {
+            return null;
+        }
+        
         Installment firstInstallment = gratuityEventWithPaymentPlan.getInstallments().iterator().next();
 
         /*

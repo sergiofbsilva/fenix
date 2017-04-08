@@ -634,7 +634,7 @@ public class ManageAssociatedObjects extends FenixDispatchAction {
             d.setName(bean.getName());
             d.setRealName(bean.getRealName());
             d.setRealNameEn(bean.getRealNameEn());
-            d.setCompetenceCourseMembersGroup(User.findByUsername(bean.getUsername()).groupOf());
+            d.setCompetenceCourseMembersGroup(Group.parse(bean.getUsername()));
         });
 
         return list(mapping, form, request, response);

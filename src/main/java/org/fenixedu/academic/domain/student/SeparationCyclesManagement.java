@@ -213,7 +213,7 @@ public class SeparationCyclesManagement {
         registration.addPrecedentDegreesInformations(studentCandidacy.getPrecedentDegreeInformation());
 
         registration.setStartDate(getBeginDate(sourceStudentCurricularPlan, getExecutionPeriod()));
-        RegistrationState activeState = registration.getActiveState();
+        RegistrationState activeState = registration.getCurrentState();
         activeState.setStateDate(getBeginDate(sourceStudentCurricularPlan, getExecutionPeriod()));
         activeState.setResponsiblePerson(null);
         registration.setSourceRegistration(sourceStudentCurricularPlan.getRegistration());

@@ -141,17 +141,7 @@ public class UTLScholarshipReportBeanFromRegistration implements Serializable, I
 
     @Override
     public String getCurrentExecutionYearBeginDate() {
-        if (registration.isInMobilityState()) {
             return readCurrentExecutionYear().getBeginDateYearMonthDay().toLocalDate().toString("dd-MM-yyyy");
-        }
-
-        StudentCurricularPlan lastStudentCurricularPlan = registration.getLastStudentCurricularPlan();
-        TreeSet<Enrolment> orderedEnrolmentSet =
-                new TreeSet<Enrolment>(Collections.reverseOrder(CurriculumModule.COMPARATOR_BY_CREATION_DATE));
-        orderedEnrolmentSet.addAll(lastStudentCurricularPlan.getEnrolmentsByExecutionYear(readCurrentExecutionYear()));
-
-        return orderedEnrolmentSet.isEmpty() ? "" : orderedEnrolmentSet.iterator().next().getCreationDateDateTime().toLocalDate()
-                .toString("dd-MM-yyyy");
     }
 
     @Override
@@ -294,10 +284,6 @@ public class UTLScholarshipReportBeanFromRegistration implements Serializable, I
 
     @Override
     public Money getGratuityAmount() {
-        if (!registration.hasToPayGratuityOrInsurance()) {
-            return Money.ZERO;
-        }
-
         StudentCurricularPlan lastStudentCurricularPlan = registration.getLastStudentCurricularPlan();
 
         GratuityEventWithPaymentPlan event =

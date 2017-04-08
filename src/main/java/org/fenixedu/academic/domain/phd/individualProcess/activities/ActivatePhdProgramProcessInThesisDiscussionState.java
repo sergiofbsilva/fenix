@@ -57,7 +57,7 @@ public class ActivatePhdProgramProcessInThesisDiscussionState extends PhdIndivid
             return process;
         }
 
-        if (!process.getRegistration().isConcluded() && !process.getRegistration().isSchoolPartConcluded()) {
+        if (!process.getRegistration().getCurrentStateType().isTerminal()) {
             throw new DomainException(
                     "error.PhdIndividualProgramProcess.set.thesis.discussion.state.registration.is.not.concluded");
         }

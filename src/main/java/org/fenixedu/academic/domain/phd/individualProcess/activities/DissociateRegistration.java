@@ -43,7 +43,7 @@ public class DissociateRegistration extends PhdIndividualProgramProcessActivity 
             throw new PreConditionNotValidException();
         }
 
-        if (!process.getRegistration().getActiveStateType().equals(RegistrationStateSystem.getInstance().getCanceledState())) {
+        if (!process.getRegistration().getCurrentStateType().equals(RegistrationStateSystem.getInstance().getCanceledState())) {
             throw new PreConditionNotValidException();
         }
     }

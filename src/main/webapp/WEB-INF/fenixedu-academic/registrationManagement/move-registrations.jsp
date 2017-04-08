@@ -100,7 +100,7 @@ ${portal.toolkit()}
                         <td><c:out value="${registration.startDate}"/></td>
                         <td><c:out value="${registration.number}"/></td>
                         <td><c:out value="${registration.degreeNameWithDescription}"/></td>
-                        <td><spring:message code="RegistrationStateType.${registration.activeStateType}" /></td>
+                        <td><c:out value="${registration.activeStateType.name.content}" /></td>
                         <td><c:out value="${registration.registrationProtocol.description.content}"/></td>
                         <td><c:out value="${registration.numberEnroledCurricularCoursesInCurrentYear}"/></td>
                         <td>
@@ -207,7 +207,7 @@ ${portal.toolkit()}
                                 <td><c:out value="${registration.startDate}"/></td>
                                 <td><c:out value="${registration.number}"/></td>
                                 <td><c:out value="${registration.degreeNameWithDescription}"/></td>
-                                <td><spring:message code="RegistrationStateType.${registration.activeStateType}" /></td>
+                                <td><c:out value="${registration.activeStateType.name.content}" /></td>
                                 <td><c:out value="${registration.registrationProtocol.description.content}"/></td>
                                 <td><c:out value="${registration.numberEnroledCurricularCoursesInCurrentYear}"/></td>
                                 <td>
@@ -336,7 +336,7 @@ ${portal.toolkit()}
                                 <td><c:out value="${registration.startDate}"/></td>
                                 <td><c:out value="${registration.number}"/></td>
                                 <td><c:out value="${registration.degreeNameWithDescription}"/></td>
-                                <td><spring:message code="RegistrationStateType.${registration.activeStateType}" /></td>
+                                <td><c:out value="${registration.activeStateType.name.content}" /></td>
                                 <td><c:out value="${registration.registrationProtocol.description.content}"/></td>
                                 <td><c:out value="${registration.numberEnroledCurricularCoursesInCurrentYear}"/></td>
                                 <td>

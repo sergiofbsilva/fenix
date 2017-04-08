@@ -193,7 +193,7 @@
 								<bean:write name="registration" property="registrationProtocol.description.content"/>
 							</td>
 							<td>
-								<bean:write name="registration" property="activeStateType.description"/>
+								<bean:write name="registration" property="activeStateType.name.content"/>
 							</td>
 							<td>
 								<html:link href="<%= request.getContextPath() + "/academicAdministration/viewStudentCurriculum.do?method=prepare&registrationOID=" + registration.getExternalId() %>">

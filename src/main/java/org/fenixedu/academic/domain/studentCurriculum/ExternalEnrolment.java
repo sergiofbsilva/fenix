@@ -279,16 +279,6 @@ public class ExternalEnrolment extends ExternalEnrolment_Base implements IEnrolm
         return null;
     }
 
-    public boolean isResultOfMobility() {
-        if (!hasExecutionPeriod()) {
-            return false;
-        }
-
-        return getRegistration().getRegistrationStatesTypes(getExecutionYear())
-                .stream()
-                .anyMatch(RegistrationStateType::isMobility);
-    }
-
     @Override
     public boolean isAnual() {
         return getRegime() != null ? getRegime() == RegimeType.ANUAL : false;

@@ -97,12 +97,13 @@ public class RegistryCode extends RegistryCode_Base {
 
     public String getDescription() {
         String code = getCode();
-        Optional<String> mainRequestDescription =
-                Stream.of(RegistryDiplomaRequest.class, PhdRegistryDiplomaRequest.class, DiplomaRequest.class,
-                        PhdDiplomaRequest.class, DegreeFinalizationCertificateRequest.class,
-                        PhdFinalizationCertificateRequest.class).flatMap(c -> getRequestsOfClass(c)).findFirst()
-                        .map(asr -> asr.getDescription() + " (" + asr.getLanguage().getLanguage().toUpperCase() + ")");
-        return mainRequestDescription.isPresent() ? code + " - " + mainRequestDescription.get() : code;
+//        Optional<String> mainRequestDescription =
+//                Stream.of(RegistryDiplomaRequest.class, PhdRegistryDiplomaRequest.class, DiplomaRequest.class,
+//                        PhdDiplomaRequest.class, DegreeFinalizationCertificateRequest.class,
+//                        PhdFinalizationCertificateRequest.class).flatMap(c -> getRequestsOfClass(c)).findFirst()
+//                        .map(asr -> asr.getDescription() + " (" + asr.getLanguage().getLanguage().toUpperCase() + ")");
+//        return mainRequestDescription.isPresent() ? code + " - " + mainRequestDescription.get() : code;
+        return code;
     }
 
     private <T extends AcademicServiceRequest> Stream<T> getRequestsOfClass(Class<T> c) {

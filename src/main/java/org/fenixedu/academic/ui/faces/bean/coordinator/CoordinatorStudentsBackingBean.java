@@ -23,8 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
 import org.fenixedu.academic.domain.ExecutionDegree;
@@ -32,12 +35,13 @@ import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.accessControl.SearchDegreeStudentsGroup;
 import org.fenixedu.academic.domain.student.Registration;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
+import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurricularPlan.StudentCurricularPlanState;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.ui.faces.bean.base.FenixBackingBean;
 import org.fenixedu.academic.util.Bundle;
+import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.commons.spreadsheet.Spreadsheet;
 import org.fenixedu.commons.spreadsheet.Spreadsheet.Row;
@@ -123,12 +127,23 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
             registrationStateTypeString = getAndHoldStringParameter("registrationStateTypeString");
         }
         return (registrationStateTypeString == null) ?
-                BundleUtil.getString(Bundle.ENUMERATION, "RegistrationStateType.REGISTERED") :
+                null :
                 registrationStateTypeString;
     }
 
     public void setRegistrationStateTypeString(String registrationStateTypeString) {
         this.registrationStateTypeString = registrationStateTypeString;
+    }
+
+    public List<SelectItem> getRegistrationStateTypes() {
+        SelectItem allOption = new SelectItem("SHOWALL", BundleUtil.getString(Bundle.APPLICATION, "label.showBy.all"));
+
+        return Stream.concat(
+                    Stream.of(allOption),
+                    RegistrationStateSystem.getInstance().getRegistrationStateTypeSet().stream()
+                            .map(state -> new SelectItem(state.getExternalId(), state.getName().getContent()))
+                )
+                .collect(Collectors.toList());
     }
 
     public String getMaxGradeString() {
@@ -400,8 +415,8 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
             row.setCell(studentCurricularPlan.getRegistration().getNumber());
             row.setCell(studentCurricularPlan.getPerson().getName());
             row.setCell(studentCurricularPlan.getPerson().getInstitutionalOrDefaultEmailAddressValue());
-            row.setCell(studentCurricularPlan.getRegistration().getLastRegistrationState(getExecutionYear()).getStateType()
-                    .getDescription().getContent());
+            row.setCell(
+                    studentCurricularPlan.getRegistration().getLastRegistrationState(getExecutionYear()).getStateType().getName().getContent());
             row.setCell(studentCurricularPlan.getRegistration().getNumberOfCurriculumEntries());
             row.setCell(studentCurricularPlan.getRegistration().getEctsCredits());
             row.setCell(getAverageInformation(studentCurricularPlan));

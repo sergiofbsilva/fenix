@@ -271,10 +271,11 @@ public class AccountingEventsManager {
 
     private boolean verifyCommonConditionsToCreateGratuityAndAdministrativeOfficeEvents(final ExecutionYear executionYear,
             final StudentCurricularPlan studentCurricularPlan, final Registration registration) {
-        return registration.hasToPayGratuityOrInsurance()
-                && registration.isActive()
+        return  registration.getRegistrationProtocol().isToPayGratuity() && registration.isActive()
                 && studentCurricularPlan.getDegreeCurricularPlan().hasExecutionDegreeFor(executionYear)
-                && (registration.isInMobilityState() || registration.hasAnyEnrolmentsIn(executionYear) || isSecondCycleInternalCandidacyAndStartedOn(
+                && (registration.getLastRegistrationState(executionYear).getStateType().isToForceGratuityCreation() || registration.hasAnyEnrolmentsIn
+                (executionYear) ||
+                isSecondCycleInternalCandidacyAndStartedOn(
                         registration, executionYear));
 
     }

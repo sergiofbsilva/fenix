@@ -278,13 +278,9 @@ public class SearchDegreeStudentsGroup implements Serializable {
                 @Override
                 public int compare(StudentCurricularPlan left, StudentCurricularPlan right) {
                     int result =
-                            left.getRegistration()
-                                    .getLastRegistrationState(getExecutionYear())
-                                    .getStateType()
-                                    .getDescription()
-                                    .compareTo(
-                                            right.getRegistration().getLastRegistrationState(getExecutionYear()).getStateType()
-                                                    .getDescription());
+                            left.getRegistration().getLastRegistrationState(getExecutionYear()).getStateType().getName()
+                                    .compareTo(right.getRegistration().getLastRegistrationState(getExecutionYear()).getStateType()
+                                            .getName());
                     return result == 0 ? left.getRegistration().getStudent().getNumber()
                             .compareTo(right.getRegistration().getStudent().getNumber()) : result;
                 }
@@ -479,7 +475,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
         String label = new String();
         label =
                 String.format("%s : %s \n%s : %s \n%s : %s \n%s : %s \n%s : %s",
-                        getApplicationResourcesString("label.selectStudents"), getRegistrationStateType().getDescription(),
+                        getApplicationResourcesString("label.selectStudents"), getRegistrationStateType().getName(),
                         getApplicationResourcesString("label.student.number"), getMinStudentNumberString() + " - "
                                 + getMaxStudentNumberString(), getApplicationResourcesString("label.average"),
                         getMinGradeString() + " - " + getMaxGradeString(),

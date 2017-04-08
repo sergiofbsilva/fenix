@@ -64,7 +64,7 @@ public class ActivatePhdProgramProcessInWorkDevelopmentState extends PhdIndividu
         /*
          * The registration is concluded so we skip
          */
-        if (process.getRegistration().isConcluded() || process.getRegistration().isSchoolPartConcluded()) {
+        if (process.getRegistration().getCurrentStateType().isTerminal()) {
             return process;
         }
 

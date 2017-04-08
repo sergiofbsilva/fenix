@@ -385,14 +385,9 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
         if (studentCurricularPlan == null) {
             addActionMessage("candidacyMessages", request, "error.public.candidacies.message.no.student.curricular.plan", null);
         } else {
-            if (studentCurricularPlan.getRegistration().isTransited()) {
-                addActionMessage("candidacyMessages", request, "error.public.candidacies.message.no.student.curricular.plan",
-                        null);
-            } else {
                 bean.setPrecedentDegreeType(PrecedentDegreeType.INSTITUTION_DEGREE);
                 bean.setPrecedentStudentCurricularPlan(studentCurricularPlan);
                 createCandidacyPrecedentDegreeInformation(bean, bean.getPrecedentStudentCurricularPlan());
-            }
         }
 
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);

@@ -46,29 +46,10 @@
 		<h:outputText escape="false" value="<input alt='input.degreeCurricularPlanID' id='degreeCurricularPlanID' name='degreeCurricularPlanID' type='hidden' value='#{CoordinatorStudentsBackingBean.degreeCurricularPlanID}'/>"/>
 		<h:outputText escape="false" value="<input alt='input.sortBy' id='sortBy' name='sortBy' type='hidden' value='#{CoordinatorStudentsBackingBean.sortBy}'/>"/>
 		<h:outputText escape="false" value="<input alt='input.executionDegreeId' id='executionDegreeId' name='executionDegreeId' type='hidden' value='#{CoordinatorStudentsBackingBean.executionDegreeId}'/>"/>
-
 		<h:panelGrid columns="2" styleClass="infoop">
 			<h:outputText value="#{bundle['label.student.curricular.plan.state']}: " id="studentCurricularPlanState" />
-			<fr:slot name="registrationStateTypes" key="label.registrationState" layout="option-select">
-				<fr:property name="providerClass"
-							 value="org.fenixedu.academic.ui.renderers.providers.choiceType.replacement.single.RegistrationStateTypeProvider" />
-				<fr:property name="classes" value="list2" />
-			</fr:slot>
-			<h:selectOneMenu id="registrationStateTypeString" value="#{CoordinatorStudentsBackingBean.registrationStateTypeString}">
-				<f:selectItem itemLabel="#{bundle['message.all']}" itemValue="SHOWALL"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.REGISTERED']}" itemValue="REGISTERED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.MOBILITY']}" itemValue="MOBILITY"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.CANCELED']}" itemValue="CANCELED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.CONCLUDED']}" itemValue="CONCLUDED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.FLUNKED']}" itemValue="FLUNKED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.INTERRUPTED']}" itemValue="INTERRUPTED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.SCHOOLPARTCONCLUDED']}" itemValue="SCHOOLPARTCONCLUDED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.INTERNAL_ABANDON']}" itemValue="INTERNAL_ABANDON"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.EXTERNAL_ABANDON']}" itemValue="EXTERNAL_ABANDON"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.TRANSITION']}" itemValue="TRANSITION"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.TRANSITED']}" itemValue="TRANSITED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.STUDYPLANCONCLUDED']}" itemValue="STUDYPLANCONCLUDED"/>
-				<f:selectItem itemLabel="#{bundleEnum['RegistrationStateType.INACTIVE']}" itemValue="INACTIVE"/>
+			<h:selectOneMenu id="registrationStateTypeString" value="#{CoordinatorStudentsBackingBean.registrationStateTypeString}" >
+				<f:selectItems value="#{CoordinatorStudentsBackingBean.registrationStateTypes}"/>
 			</h:selectOneMenu>
 
 			<h:outputText value="#{bundle['label.student.number']}: " id="studentNumber" />

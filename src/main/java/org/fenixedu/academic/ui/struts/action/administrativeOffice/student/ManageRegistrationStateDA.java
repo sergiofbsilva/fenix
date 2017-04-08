@@ -81,7 +81,7 @@ public class ManageRegistrationStateDA extends FenixDispatchAction {
         private RegistrationStateCreator(Registration reg, Person responsible, DateTime creation, RegistrationStateType stateType) {
             this(reg);
             setResponsible(responsible);
-            setStateDateTime(creation);
+            setCreated(creation);
             setStateType(stateType);
         }
 

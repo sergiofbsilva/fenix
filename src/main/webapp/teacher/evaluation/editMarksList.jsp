@@ -140,7 +140,7 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header"><h:outputText value="#{bundle['label.registration.state']}"/></f:facet>
-					<h:outputText value="#{attends.registration.activeStateType.description}" />
+					<h:outputText value="#{attends.registration.activeStateType.name}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header"><h:outputText value="#{bundle['label.mark']}"/></f:facet>
@@ -168,7 +168,7 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header"><h:outputText value="#{bundle['label.registration.state']}"/></f:facet>
-						<h:outputText value="#{attends.registration.activeStateType.description}" />
+						<h:outputText value="#{attends.registration.activeStateType.name}" />
 					</h:column>
 				</h:dataTable>
 			</h:panelGroup>

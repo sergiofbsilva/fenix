@@ -441,10 +441,6 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         return getCurrentState().equals(StudentCurricularPlanState.INCOMPLETE);
     }
 
-    public boolean isTransition() {
-        return getRegistration().isTransition();
-    }
-
     final public boolean isBolonhaDegree() {
         return getDegreeCurricularPlan().isBolonhaDegree();
     }
@@ -958,7 +954,7 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
         if (nextStudentCurricularPlan != null) {
             return nextStudentCurricularPlan.getStartDateYearMonthDay().minusDays(1);
         } else if (getRegistration() != null && !getRegistration().isActive()) {
-            return getRegistration().getActiveState().getStateDate().toYearMonthDay();
+            return getRegistration().getCurrentState().getStateDate().toYearMonthDay();
         }
 
         return null;

@@ -21,103 +21,112 @@
  */
 package org.fenixedu.academic.domain.student.registrationStates;
 
+import org.apache.noggit.JSONUtil;
+import org.fenixedu.academic.domain.student.registrationStates.conditions.RegistrationStateCondition;
 import org.fenixedu.academic.domain.util.workflow.IState;
 import org.fenixedu.academic.domain.util.workflow.StateBean;
-import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.commons.i18n.LocalizedString;
+import org.fenixedu.commons.stream.StreamUtils;
 
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)
  *
  */
 
-public class RegistrationStateType extends RegistrationStateType_Base implements IState {
+public class RegistrationStateType extends RegistrationStateType_Base {
 
-    public RegistrationStateType(String code, LocalizedString name, LocalizedString description, Boolean active, Boolean student, Boolean terminal) {
+    public RegistrationStateType(String code, LocalizedString name, boolean active, boolean student, boolean terminal) {
         setCode(code);
         setName(name);
-        setDescription(description);
         setActive(active);
         setStudent(student);
         setTerminal(terminal);
+        setPreConditions(new JsonArray());
+        setPostConditions(new JsonArray());
     }
 
     public Set<String> getValidNextStates() {
-        return getValidNextStateTypeSet().stream().map(stateType -> stateType.getCode()).collect(Collectors.toSet());
-    }
-
-    @Override
-    public IState nextState() {
-        return null;
-    }
-
-    @Override
-    public IState nextState(StateBean bean) {
-        return null;
-    }
-
-    @Override
-    public void checkConditionsToForward() {}
-
-    @Override
-    public void checkConditionsToForward(StateBean bean) {
-
-    }
-
-
-    public boolean isStudent() {
-        return Optional.ofNullable(getStudent()).orElse(false);
-    }
-
-    public boolean isTerminal() {
-        return getValidNextStates().isEmpty();
-//        return Optional.ofNullable(getTerminal()).orElse(false);
+        return getValidNextStateTypeSet().stream().map(RegistrationStateType::getCode).collect(Collectors.toSet());
     }
 
     public boolean isActive() {
-        return Optional.ofNullable(getActive()).orElse(false);
+        return getActive();
     }
 
+    public boolean isStudent() {
+        return getStudent();
+    }
+
+    public boolean isTerminal() {
+        return getTerminal();
+    }
 
     public boolean isReingressable() {
         final RegistrationStateType initialState = RegistrationStateSystem.getInstance().getInitialState();
         return getValidNextStateTypeSet().stream().anyMatch(s -> s.equals(initialState));
     }
 
-    public boolean canHaveCurriculumLinesOnCreation() {
-        // TODO ACDM-1113
-        // Isto é suposto representar o quê?
-        return true;
-    }
-
     public boolean isValidSourceLink() {
-        return Optional.ofNullable(getValidSource()).orElse(false);
+        return getValidSource();
     }
 
-    public boolean isMobility() {
-        return Optional.ofNullable(getMobility()).orElse(false);
-    }
-
-    public boolean isSchoolPartConcluded() {
-        return Optional.ofNullable(getSchoolPartConcluded()).orElse(false);
+    public boolean isToForceGratuityCreation() {
+        return getForceGratuityCreation();
     }
 
     public boolean isInactive() {
-        return !isActive();
+        return !getActive();
     }
 
     public String getQualifiedName() {
-        return RegistrationStateType.class.getSimpleName() + "." + getName().getContent();
+        return getName().getContent();
     }
 
     public String getFullyQualifiedName() {
-        return RegistrationStateType.class.getName() + "." + getName().getContent();
+       return getName().getContent();
     }
 
+    public List<Class<? extends RegistrationStateCondition>> getPreConditionClasses() {
+        return parseConditionClasses(super::getPreConditions);
+    }
+
+    public void setPreConditionClasses(List<Class<? extends RegistrationStateCondition>> classes) {
+        setPreConditions(serializeConditionClasses(classes));
+    }
+
+    public List<Class<? extends RegistrationStateCondition>> getPostConditionClasses() {
+        return parseConditionClasses(super::getPostConditions);
+    }
+
+    public void setPostConditionClasses(List<Class<? extends RegistrationStateCondition>> classes) {
+        setPostConditions(serializeConditionClasses(classes));
+    }
+
+    private Class<? extends RegistrationStateCondition> forName(String className) {
+        try {
+            return (Class<? extends RegistrationStateCondition>) Class.forName(className);
+        }catch(ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private List<Class<? extends RegistrationStateCondition>> parseConditionClasses(Supplier<JsonElement> supplier) {
+        return StreamUtils.of(supplier.get().getAsJsonArray()).map(JsonElement::getAsString).map(this::forName).collect(Collectors
+                .toList());
+    }
+
+    private JsonElement serializeConditionClasses(List<Class<? extends RegistrationStateCondition>> classes) {
+        return classes.stream().map(Class::getName).map(JsonPrimitive::new).collect(StreamUtils.toJsonArray());
+    }
 }

@@ -6,20 +6,47 @@ import org.fenixedu.academic.domain.accessControl.academicAdministration.Academi
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.DocumentRequestType;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.registrationStates.conditions.RegistrationStateCondition;
 import org.fenixedu.academic.predicate.AccessControl;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.domain.UserLoginPeriod;
 import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class RegistrationStateSystem extends RegistrationStateSystem_Base {
 
     private static Map<String, RegistrationStateTypeInterface> interfaceMap;
 
-    public static void initialize() {
+    private static final Map<Class<? extends RegistrationStateCondition>, RegistrationStateCondition> conditionsMap = new
+            HashMap<>();
+
+    @Atomic(mode = TxMode.READ)
+    private static synchronized void initConditionsMap() {
+        if (!conditionsMap.isEmpty()) {
+            return;
+        }
+        
+        getInstance().getRegistrationStateTypeSet().stream().flatMap(stateType -> Stream.concat(stateType.getPreConditionClasses()
+                .stream(), stateType.getPostConditionClasses().stream())).distinct().forEach(conditionClass -> {
+            try {
+                conditionsMap.put(conditionClass, conditionClass.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public static synchronized void initialize() {
+        initInterfaceMap();
+        initConditionsMap();
+    }
+
+    protected static void initInterfaceMap() {
         interfaceMap = new HashMap<>();
         interfaceMap.put(getInstance().getConcludedState().getCode(), new RegistrationStateTypeInterface() {
             @Override
@@ -42,9 +69,6 @@ public class RegistrationStateSystem extends RegistrationStateSystem_Base {
 
             @Override
             public void init(RegistrationState state) {
-                if (state.getRegistration().isBolonha() && !state.getRegistration().hasConcluded()) {
-                    throw new DomainException("error.registration.is.not.concluded");
-                }
                 state.getRegistration().getPerson().getUser().openLoginPeriod();
             }
         });
@@ -57,7 +81,6 @@ public class RegistrationStateSystem extends RegistrationStateSystem_Base {
     }
 
     private RegistrationStateSystem() {
-        super();
         setRoot(Bennu.getInstance());
     }
 
@@ -66,12 +89,22 @@ public class RegistrationStateSystem extends RegistrationStateSystem_Base {
         return interfaceMap.getOrDefault(state.getStateType().getCode(), new RegistrationStateTypeInterface() {});
     }
 
-//    @Atomic
+    @Atomic(mode = TxMode.WRITE)
+    private static synchronized void init() {
+        if (Bennu.getInstance().getRegistrationStateSystem() == null) {
+            new RegistrationStateSystem();
+        }
+    }
+
     public static RegistrationStateSystem getInstance() {
         if (Bennu.getInstance().getRegistrationStateSystem() == null) {
-            return new RegistrationStateSystem();
+            init();
         }
         return Bennu.getInstance().getRegistrationStateSystem();
+    }
+
+    public static RegistrationStateCondition getCondition(Class<? extends RegistrationStateCondition> stateConditionClass) {
+        return conditionsMap.get(stateConditionClass);
     }
 
 }

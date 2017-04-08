@@ -75,9 +75,10 @@ abstract public class RegistrationAcademicServiceRequest extends RegistrationAca
     }
 
     protected void checkRegistrationIsNotTransited(RegistrationAcademicServiceRequestCreateBean bean) {
-        if (!isAvailableForTransitedRegistrations() && bean.getRegistration().isTransited()) {
-            throw new DomainException("RegistrationAcademicServiceRequest.registration.cannot.be.transited");
-        }
+        //TODO ACDM-1113
+//        if (!isAvailableForTransitedRegistrations() && bean.getRegistration().isTransited()) {
+//            throw new DomainException("RegistrationAcademicServiceRequest.registration.cannot.be.transited");
+//        }
     }
 
     protected void checkRegistration(final RegistrationAcademicServiceRequestCreateBean bean) {
@@ -134,6 +135,7 @@ abstract public class RegistrationAcademicServiceRequest extends RegistrationAca
         return getRegistration().getStudent();
     }
 
+    // TODO Delete ACDM-1113
     abstract public boolean isAvailableForTransitedRegistrations();
 
     public boolean hasRegistration() {

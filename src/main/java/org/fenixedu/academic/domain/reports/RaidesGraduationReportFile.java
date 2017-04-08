@@ -63,48 +63,40 @@ public class RaidesGraduationReportFile extends RaidesGraduationReportFile_Base 
         for (final Registration registration : RaidesCommonReportFieldsWrapper.getRegistrationsToProcess(executionYear,
                 this.getDegreeType())) {
 
-            if (registration != null && !registration.isTransition() && !registration.isSchoolPartConcluded()) {
+            for (final CycleType cycleType : registration.getDegreeType().getCycleTypes()) {
+                final StudentCurricularPlan studentCurricularPlan =
+                        RaidesCommonReportFieldsWrapper.getStudentCurricularPlan(registration, cycleType);
+                final CycleCurriculumGroup cycleCGroup = studentCurricularPlan.getRoot().getCycleCurriculumGroup(cycleType);
+                if (cycleCGroup != null && !cycleCGroup.isExternal()) {
+                    final RegistrationConclusionBean registrationConclusionBean =
+                            new RegistrationConclusionBean(registration, cycleCGroup);
 
-                for (final CycleType cycleType : registration.getDegreeType().getCycleTypes()) {
-                    final StudentCurricularPlan studentCurricularPlan = registration.getStudentCurricularPlan(cycleType);
-                    final CycleCurriculumGroup cycleCGroup = studentCurricularPlan.getRoot().getCycleCurriculumGroup(cycleType);
-                    if (cycleCGroup != null && !cycleCGroup.isExternal()) {
+                    boolean isToAddRegistration = false;
 
-                        final RegistrationConclusionBean registrationConclusionBean =
-                                new RegistrationConclusionBean(registration, cycleCGroup);
+                    if (cycleCGroup.isConcluded()) {
+                        final ExecutionYear conclusionYear = registrationConclusionBean.getConclusionYear();
 
-                        if (cycleCGroup.isConcluded()) {
-                            final ExecutionYear conclusionYear = registrationConclusionBean.getConclusionYear();
-
-                            if (conclusionYear != executionYear && conclusionYear != executionYear.getPreviousExecutionYear()) {
-                                continue;
-                            }
-
+                        if (conclusionYear != executionYear && conclusionYear != executionYear.getPreviousExecutionYear()) {
+                            continue;
                         }
+                        isToAddRegistration = true;
+                    }
 
-                        boolean isToAddRegistration = false;
-                        for (RegistrationState state : registration.getRegistrationStates(executionYear)) {
-                            // TODO: SERGIOTALK
-                            // Penso que a segunda parte pode ser substituída pelo check do ConclusionProcess
-                            // A primeira parte, acho que deve ser um dos booleans do novo RegistrationStateType
-                            if (state.isActive() || state.getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState())) {
-                                isToAddRegistration = true;
-                                break;
-                            }
-                        }
-                        if (isToAddRegistration
-                                && (cycleCGroup.isConcluded(executionYear.getPreviousExecutionYear()) == ConclusionValue.CONCLUDED)) {
-                            reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
-                                    getFullRegistrationPath(registration), executionYear,
-                                    cycleType, true, registrationConclusionBean.getConclusionDate(), registrationConclusionBean
-                                            .getRawGrade().getNumericValue());
-                        } else if (isToAddRegistration
-                                && (registration.getLastDegreeCurricularPlan().hasExecutionDegreeFor(executionYear) || registration
-                                        .hasAnyCurriculumLines(executionYear))) {
-                            reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
-                                    getFullRegistrationPath(registration), executionYear,
-                                    cycleType, false, null, registrationConclusionBean.getRawGrade().getNumericValue());
-                        }
+                    isToAddRegistration = isToAddRegistration || registration.getRegistrationStates(executionYear).stream()
+                            .anyMatch(RegistrationState::isActive);
+                    
+                    if (isToAddRegistration
+                            && (cycleCGroup.isConcluded(executionYear.getPreviousExecutionYear()) == ConclusionValue.CONCLUDED)) {
+                        reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
+                                getFullRegistrationPath(registration), executionYear,
+                                cycleType, true, registrationConclusionBean.getConclusionDate(), registrationConclusionBean
+                                        .getRawGrade().getNumericValue());
+                    } else if (isToAddRegistration
+                            && (registration.getLastDegreeCurricularPlan().hasExecutionDegreeFor(executionYear) || registration
+                                    .hasAnyCurriculumLines(executionYear))) {
+                        reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
+                                getFullRegistrationPath(registration), executionYear,
+                                cycleType, false, null, registrationConclusionBean.getRawGrade().getNumericValue());
                     }
                 }
             }

@@ -55,7 +55,7 @@ public abstract class StudentCandidacy extends StudentCandidacy_Base {
         if (person.hasStudentCandidacyForExecutionDegree(executionDegree)) {
             StudentCandidacy existentCandidacy = person.getStudentCandidacyForExecutionDegree(executionDegree);
             if (existentCandidacy.getRegistration() == null
-                    || existentCandidacy.getRegistration().getActiveStateType().isActive()) {
+                    || existentCandidacy.getRegistration().getCurrentStateType().isActive()) {
                 throw new DomainException("error.candidacy.already.created");
             }
         }

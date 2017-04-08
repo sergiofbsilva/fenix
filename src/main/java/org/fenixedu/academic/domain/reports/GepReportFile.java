@@ -242,7 +242,7 @@ public abstract class GepReportFile extends GepReportFile_Base {
     }
 
     protected static boolean isValidSourceLink(Registration source) {
-        return source.getActiveStateType().isValidSourceLink();
+        return source.getCurrentStateType().isValidSourceLink();
     }
 
     private static Registration findSourceRegistrationByEquivalencePlan(Registration targetRegistration) {
@@ -251,7 +251,7 @@ public abstract class GepReportFile extends GepReportFile_Base {
             for (Registration sourceRegistration : targetRegistration.getStudent().getRegistrationsSet()) {
                 final DegreeCurricularPlan sourceDegreeCurricularPlan = sourceRegistration.getLastDegreeCurricularPlan();
                 if (sourceRegistration != targetRegistration
-                        && sourceRegistration.getActiveStateType().equals(RegistrationStateSystem.getInstance().getTransitedState())
+                        && sourceRegistration.getCurrentStateType().equals(RegistrationStateSystem.getInstance().getTransitedState())
                         && targetDegreeCurricularPlan.getEquivalencePlan().getSourceDegreeCurricularPlan()
                                 .equals(sourceDegreeCurricularPlan)) {
                     return sourceRegistration;

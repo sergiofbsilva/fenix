@@ -100,7 +100,7 @@ ${portal.toolkit()}
 				<select class="form-control" name="targetState" id="targetState">
 					<option value="">-</option>
 					<c:forEach var="state" items="${registrationStates}">
-						<option value="${state}" ${state == programConclusion.targetState ?  'selected' : '' }><c:out value="${state.description}"/></option>
+						<option value="${state.externalId}" ${state == programConclusion.targetState ?  'selected' : '' }><c:out value="${state.name.content}"/></option>
 					</c:forEach>
 				</select>
 			</div>

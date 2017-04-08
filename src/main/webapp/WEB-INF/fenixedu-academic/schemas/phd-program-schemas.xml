@@ -1195,7 +1195,7 @@
 
 <schema name="PhdIndividualProgramProcess.view.registration.conclusion.bean" type="org.fenixedu.academic.ui.struts.action.phd.academicAdminOffice.PhdRegistrationConclusionBean" bundle="PHD_RESOURCES">
 	<slot name="degreeNameWithDescription" />
-	<slot name="activeStateType">
+	<slot name="activeStateType.name">
 		<property name="classes" value="bold" />
 	</slot>
 	<slot name="startDate" layout="null-as-label">
@@ -1317,7 +1317,7 @@
 <schema name="Registration.degreeNameWithDegreeCurricularPlanName" type="org.fenixedu.academic.domain.student.Registration" bundle="PHD_RESOURCES">
 	<slot name="degreeNameWithDegreeCurricularPlanName" />
 	<slot name="startDate" layout="null-as-label"/>
-	<slot name="activeStateType" />
+	<slot name="activeStateType.name" />
 </schema>
 
 <schema name="phd.show.permissions.member" type="org.fenixedu.academic.domain.Person" bundle="PHD_RESOURCES">

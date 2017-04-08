@@ -268,7 +268,7 @@ public class Student extends Student_Base {
     }
 
     public boolean hasAnyRegistrationInState(final RegistrationStateType stateType) {
-        return getRegistrationsSet().stream().anyMatch(r -> r.getActiveStateType().equals(stateType));
+        return getRegistrationsSet().stream().anyMatch(r -> r.getCurrentStateType().equals(stateType));
     }
 
     /**
@@ -678,7 +678,7 @@ public class Student extends Student_Base {
 
     public boolean isCurrentlyEnroled(DegreeCurricularPlan degreeCurricularPlan) {
         for (Registration registration : getRegistrationsSet()) {
-            final RegistrationState registrationState = registration.getActiveState();
+            final RegistrationState registrationState = registration.getCurrentState();
             if (!registration.isActive()) {
                 continue;
             }
@@ -795,16 +795,6 @@ public class Student extends Student_Base {
         return result;
     }
 
-    public List<Registration> getTransitedRegistrations() {
-        List<Registration> result = new ArrayList<Registration>();
-        for (Registration registration : super.getRegistrationsSet()) {
-            if (registration.isTransited()) {
-                result.add(registration);
-            }
-        }
-        return result;
-    }
-
     private boolean isAnyTuitionInDebt(final ExecutionYear executionYear) {
         for (final Registration registration : super.getRegistrationsSet()) {
             if (registration.hasAnyNotPayedGratuityEventsForPreviousYears(executionYear)) {
@@ -900,7 +890,7 @@ public class Student extends Student_Base {
 
     public boolean hasActiveRegistrations() {
         for (final Registration registration : super.getRegistrationsSet()) {
-            final RegistrationState registrationState = registration.getActiveState();
+            final RegistrationState registrationState = registration.getCurrentState();
             if (registrationState != null) {
                 final RegistrationStateType registrationStateType = registrationState.getStateType();
                 // TODO ACDM-1113 remove hack

@@ -28,10 +28,7 @@ public class RegistrationStateLog extends RegistrationStateLog_Base {
     }
 
     public RegistrationStateLog(Registration registration, String description) {
-        super();
-        if (getRegistration() == null) {
-            setRegistration(registration);
-        }
+        setRegistration(registration);
         setDescription(description);
     }
 

@@ -190,23 +190,6 @@ public class CycleCurriculumGroup extends CycleCurriculumGroup_Base {
         return false;
     }
 
-    @Override
-    public YearMonthDay calculateConclusionDate() {
-        YearMonthDay result = super.calculateConclusionDate();
-
-        if (getRegistration().getWasTransition()) {
-            final ExecutionSemester firstBolonhaTransitionExecutionPeriod =
-                    ExecutionSemester.readFirstBolonhaTransitionExecutionPeriod();
-            final YearMonthDay begin = firstBolonhaTransitionExecutionPeriod.getBeginDateYearMonthDay();
-
-            if (result == null || result.isBefore(begin)) {
-                result = begin;
-            }
-        }
-
-        return result;
-    }
-
     public Double getCurrentDefaultEcts() {
         return getDegreeModule().getCurrentDefaultEcts();
     }

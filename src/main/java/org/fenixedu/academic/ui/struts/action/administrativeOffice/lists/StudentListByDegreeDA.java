@@ -340,7 +340,7 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         if (searchBean.hasAnyRegistrationStateTypes()) {
             spreadsheet.addHeader(getResourceMessage("label.registrationState") + ":");
             for (RegistrationStateType state : searchBean.getRegistrationStateTypes()) {
-                spreadsheet.addHeader(state.getDescription().getContent());
+                spreadsheet.addHeader(state.getName().getContent());
             }
         }
         spreadsheet.newHeaderRow();
@@ -383,7 +383,7 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             spreadsheet.addCell(person.getDocumentIdNumber());
 
             final RegistrationState lastRegistrationState = registration.getLastRegistrationState(executionYear);
-            spreadsheet.addCell(lastRegistrationState.getStateType().getDescription());
+            spreadsheet.addCell(lastRegistrationState.getStateType().getName());
             spreadsheet.addCell(lastRegistrationState.getStateDate().toString("yyyy-MM-dd"));
             spreadsheet.addCell(registration.getRegistrationProtocol().getCode());
 

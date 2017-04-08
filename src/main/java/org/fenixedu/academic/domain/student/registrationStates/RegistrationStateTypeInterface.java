@@ -5,9 +5,9 @@ package org.fenixedu.academic.domain.student.registrationStates;
  */
 public interface RegistrationStateTypeInterface {
     default void checkRulesToDelete(RegistrationState state) {
-        // Default implementations are NOPS
+
     }
     default void init(RegistrationState state) {
-        // Default implementations are NOPS
+
     }
 }

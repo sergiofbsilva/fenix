@@ -2979,7 +2979,7 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
         RegistrationRegimeType regimeType;
     }
     
-    class  student.RegistrationStateLog extends DomainOperationLog {
+    class student.RegistrationStateLog extends DomainOperationLog {
     }
 
     class student.ResidenceCandidacies  {
@@ -3058,27 +3058,20 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
     }
 
     class student.registrationStates.RegistrationStateType {
-        Boolean active;
-        Boolean student;
-        Boolean terminal;
-        Boolean validSource;
-        Boolean mobility;
-        Boolean schoolPartConcluded;
+        boolean active;
+        boolean student;
+        boolean terminal;
+        boolean validSource;
+        boolean mobility;
+        boolean forceGratuityCreation;
         String code (REQUIRED);
         LocalizedString name (REQUIRED);
-        LocalizedString description (REQUIRED);
+        protected JsonElement preConditions;
+        protected JsonElement postConditions;
     }
 
     class student.registrationStates.RegistrationStateSystem {
 
-    }
-
-    class student.registrationStates.RegistrationStateLog  {
-        DateTime whenCreated;
-        DateTime stateDate;
-        String stateType; 
-        EnrolmentAction action;
-        String who;
     }
 
     class studentCurriculum.Credits  {
@@ -8297,9 +8290,11 @@ relation RegistrationRegistrationNumber {
 }
 
 relation RegistrationStateRegistration {
-    student.Registration playsRole registration;
+    student.Registration playsRole registration {
+        multiplicity 1..1;
+    }
     student.registrationStates.RegistrationState playsRole registrationStates {
-        multiplicity *;
+        multiplicity 1..*;
     }
 }
 
@@ -8444,13 +8439,6 @@ relation RegistrationStateResponsiblePerson {
         multiplicity *;
     }
     Person playsRole responsiblePerson;
-}
-
-relation RegistrationStateLogRegistration {
-    student.registrationStates.RegistrationStateLog playsRole registrationStateLogs {
-        multiplicity *;
-    }
-    student.Registration playsRole registration;
 }
 
 relation RegistrationStateLog {
@@ -9363,13 +9351,6 @@ relation RootDomainObjectRegistrationNumber {
 relation RootDomainObjectRegistrationState {
     .org.fenixedu.bennu.core.domain.Bennu playsRole rootDomainObject;
     student.registrationStates.RegistrationState playsRole registrationStates {
-        multiplicity *;
-    }
-}
-
-relation RootDomainObjectRegistrationStateLog {
-    .org.fenixedu.bennu.core.domain.Bennu playsRole rootDomainObject;
-    student.registrationStates.RegistrationStateLog playsRole registrationStateLogs {
         multiplicity *;
     }
 }

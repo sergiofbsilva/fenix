@@ -98,11 +98,11 @@
 				<fr:property name="eachSchema" value="RegistrationProtocol.view.name.only"/>
 				<fr:property name="eachLayout" value="values"/>
 			</fr:slot>
-			<!-- TODO: ACDM-1113 -->
 			<fr:slot name="registrationStateTypes" key="label.registrationState" layout="option-select">
 				<fr:property name="providerClass"
 					value="org.fenixedu.academic.ui.renderers.providers.choiceType.replacement.multiple.RegistrationStateTypeProvider" />
 				<fr:property name="classes" value="list2" />
+				<fr:property name="format" value="${name.content}" />
 			</fr:slot>
 			<fr:slot name="studentStatuteTypes" key="label.statutes" layout="option-select">
 				<fr:property name="providerClass"
@@ -179,7 +179,7 @@
 				</fr:slot>
 				<fr:slot name="registration.person.name" key="label.name" />
 				<fr:slot name="registration.degree.sigla" key="label.degree" />
-				<fr:slot name="activeStateType" key="label.registration.state" />
+				<fr:slot name="activeStateType.name" key="label.registration.state" />
 				<fr:slot name="registration.registrationProtocol.description.content" key="label.registrationAgreement" />
 			</fr:schema>
 			<fr:layout name="tabular">
