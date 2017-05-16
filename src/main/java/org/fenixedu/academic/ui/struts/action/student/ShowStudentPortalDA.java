@@ -67,9 +67,9 @@ public class ShowStudentPortalDA extends Action {
 
         final Student student = AccessControl.getPerson().getStudent();
         if (student != null) {
-            for (Registration registration : student.getAllRegistrations()) {
+            for (Registration registration : student.getRegistrationsSet()) {
                 DegreeCurricularPlan degreeCurricularPlan = registration.getLastDegreeCurricularPlan();
-                if (registration.getAttendingExecutionCoursesForCurrentExecutionPeriod().isEmpty() == false) {
+                if (!registration.getAttendingExecutionCoursesForCurrentExecutionPeriod().isEmpty()) {
                     studentPortalBeans.add(new StudentPortalBean(registration.getDegree(), student, registration
                             .getAttendingExecutionCoursesForCurrentExecutionPeriod(), degreeCurricularPlan));
                 }

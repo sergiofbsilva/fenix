@@ -3896,6 +3896,10 @@ class PublicCandidacyHashCode  {
 
 /* Phd Module */
 
+class phd.PhdConfiguration {
+
+}
+
 class phd.PhdProgram extends AcademicProgram {
     DateTime whenCreated;
     String creator;
@@ -5025,6 +5029,66 @@ relation RootDomainObjectDefaultCampus {
 
 /* Phd Module */
 
+relation PhdConfigurationRoot {
+    .org.fenixedu.bennu.core.domain.Bennu playsRole bennu;
+    phd.PhdConfiguration playsRole phdConfiguration {
+        multiplicity 1..1;
+    }
+}
+
+relation ExternalAbandonRegistrationStateType {
+    protected phd.PhdConfiguration playsRole externalAbandonRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole externalAbandonState {
+        multiplicity 0..1;
+    }
+}
+
+relation TransitedRegistrationStateType {
+    protected phd.PhdConfiguration playsRole transitedRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole transitedState {
+        multiplicity 0..1;
+    }
+}
+
+relation TransitionRegistrationStateType {
+    protected phd.PhdConfiguration playsRole transitionPhdConfiguration {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole transitionState {
+        multiplicity 0..1;
+    }
+}
+
+relation InterruptedRegistrationStateType {
+    protected phd.PhdConfiguration  playsRole interruptedPhdConfiguration {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole interruptedState {
+        multiplicity 0..1;
+    }
+}
+
+relation PhdFlunkedRegistrationStateType {
+    protected phd.PhdConfiguration playsRole flunkedPhdConfiguration {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole flunkedState {
+        multiplicity 0..1;
+    }
+}
+
+relation CanceledRegistrationStateType {
+    protected phd.PhdConfiguration playsRole cancelledPhdConfiguration {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole canceledState {
+        multiplicity 0..1;
+    }
+}
 
 relation PhdProgramRootDomainObject {
     .org.fenixedu.bennu.core.domain.Bennu playsRole rootDomainObject;
@@ -8354,47 +8418,20 @@ relation RegistrationStateTypeSystemRoot {
     }
 }
 
+relation InitialRegistrationStateType {
+    protected student.registrationStates.RegistrationStateSystem playsRole initialRoot {
+        multiplicity 0..1;
+    }
+    student.registrationStates.RegistrationStateType playsRole initialState {
+        multiplicity 0..1;
+    }
+}
+
 relation InternalAbandonRegistrationStateType {
     protected student.registrationStates.RegistrationStateSystem playsRole internalAbandonRoot {
         multiplicity 0..1;
     }
     student.registrationStates.RegistrationStateType playsRole internalAbandonState {
-        multiplicity 0..1;
-    }
-}
-
-relation ExternalAbandonRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole externalAbandonRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole externalAbandonState {
-        multiplicity 0..1;
-    }
-}
-
-relation TransitedRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole transitedRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole transitedState {
-        multiplicity 0..1;
-    }
-}
-
-relation TransitionRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole transitionRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole transitionState {
-        multiplicity 0..1;
-    }
-}
-
-relation InterruptedRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole interruptedRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole interruptedState {
         multiplicity 0..1;
     }
 }
@@ -8408,32 +8445,6 @@ relation FlunkedRegistrationStateType {
     }
 }
 
-relation CanceledRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole canceledRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole canceledState {
-        multiplicity 0..1;
-    }
-}
-
-relation ConcludedRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole concludedRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole concludedState {
-        multiplicity 0..1;
-    }
-}
-
-relation InitialRegistrationStateType {
-    protected student.registrationStates.RegistrationStateSystem playsRole initialRoot {
-        multiplicity 0..1;
-    }
-    student.registrationStates.RegistrationStateType playsRole initialState {
-        multiplicity 0..1;
-    }
-}
 
 relation RegistrationStateResponsiblePerson {
     student.registrationStates.RegistrationState playsRole registrationStates {

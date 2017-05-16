@@ -64,11 +64,6 @@ public class ExtraCurricularCertificateRequest extends ExtraCurricularCertificat
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return true;
-    }
-
-    @Override
     protected void internalChangeState(AcademicServiceRequestBean academicServiceRequestBean) {
         super.internalChangeState(academicServiceRequestBean);
 

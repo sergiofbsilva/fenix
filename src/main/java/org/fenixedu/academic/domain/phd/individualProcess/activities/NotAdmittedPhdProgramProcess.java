@@ -19,6 +19,7 @@
 package org.fenixedu.academic.domain.phd.individualProcess.activities;
 
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
+import org.fenixedu.academic.domain.phd.PhdConfiguration;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessBean;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
@@ -55,8 +56,8 @@ public class NotAdmittedPhdProgramProcess extends PhdIndividualProgramProcessAct
 
         if (process.getRegistration() != null && process.getRegistration().isActive()) {
             RegistrationState.createRegistrationState(process.getRegistration(), userView.getPerson(), stateDate,
-                    RegistrationStateSystem.getInstance().getCanceledState());
-        }
+                    PhdConfiguration.getInstance().getCanceledState());
+        }                           
 
         return process;
     }

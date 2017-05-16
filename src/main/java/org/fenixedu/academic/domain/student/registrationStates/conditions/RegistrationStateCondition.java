@@ -9,8 +9,8 @@ import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.commons.i18n.LocalizedString;
 
 /***
- * This abstract class is used when transiting to a
- * {@link org.fenixedu.academic.domain.student.registrationStates.RegistrationState} if it configured as a pre or post condition.
+ * Subclasses can be used as pre or post conditions when transiting from and to
+ * {@link org.fenixedu.academic.domain.student.registrationStates.RegistrationState}.
  *
  * Created by Sérgio Silva (hello@fenixedu.org).
  */

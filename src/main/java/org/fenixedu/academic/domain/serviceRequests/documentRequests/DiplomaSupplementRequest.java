@@ -113,11 +113,6 @@ public class DiplomaSupplementRequest extends DiplomaSupplementRequest_Base impl
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public EventType getEventType() {
         return null;
     }

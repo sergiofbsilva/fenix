@@ -288,11 +288,6 @@ public class DiplomaRequest extends DiplomaRequest_Base implements IDiplomaReque
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return !getDegreeType().isAdvancedFormationDiploma();
     }

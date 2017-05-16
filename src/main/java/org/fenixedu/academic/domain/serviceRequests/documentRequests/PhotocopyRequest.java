@@ -95,11 +95,6 @@ public class PhotocopyRequest extends PhotocopyRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return false;
     }

@@ -53,7 +53,7 @@ public class FirstTimeInstitutionStudentsPaymentPlanRule implements PaymentPlanR
 
                 if (registration != current) {
 
-                    if (!registration.getCurrentStateType().equals(RegistrationStateSystem.getInstance().getCanceledState())) {
+                    if (!registration.isCanceled()) {
                         return false;
                     }
                 }

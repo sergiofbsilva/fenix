@@ -192,11 +192,6 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return true;
     }

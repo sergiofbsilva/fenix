@@ -101,9 +101,6 @@ public class EnrolInAffinityCycle {
                 newRegistration.setIngressionType(IngressionType.findByPredicate(IngressionType::isDirectAccessFrom1stCycle)
                         .orElse(null));
 
-                // TODO delete
-                markOldRegistrationWithConcludedState(studentCurricularPlan);
-
                 return newRegistration;
             }
 
@@ -112,18 +109,6 @@ public class EnrolInAffinityCycle {
         } else {
             return studentCurricularPlan.getRegistration();
         }
-    }
-
-    private static void markOldRegistrationWithConcludedState(final StudentCurricularPlan studentCurricularPlan) {
-
-        if (studentCurricularPlan.getRegistration().hasState(RegistrationStateSystem.getInstance().getConcludedState())) {
-            return;
-        }
-
-        final Registration registration = studentCurricularPlan.getRegistration();
-        final RegistrationState state =
-                RegistrationState.createRegistrationState(registration, null, new DateTime(), RegistrationStateSystem.getInstance().getConcludedState());
-        state.setResponsiblePerson(null);
     }
 
     private static boolean studentCurricularPlanAllowAffinityCycle(final StudentCurricularPlan studentCurricularPlan,

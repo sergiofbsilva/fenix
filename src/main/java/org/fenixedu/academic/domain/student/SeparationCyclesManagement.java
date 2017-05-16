@@ -146,7 +146,7 @@ public class SeparationCyclesManagement {
         moveGratuityEventsInformation(oldStudentCurricularPlan, newStudentCurricularPlan);
         createAdministrativeOfficeFeeAndInsurance(newStudentCurricularPlan);
 
-        markOldRegistrationWithConcludedState(oldStudentCurricularPlan);
+        //markOldRegistrationWithConcludedState(oldStudentCurricularPlan);
 
         return newRegistration;
     }
@@ -559,21 +559,21 @@ public class SeparationCyclesManagement {
         return true;
     }
 
-    private void markOldRegistrationWithConcludedState(final StudentCurricularPlan oldStudentCurricularPlan) {
-        if (oldStudentCurricularPlan.getRegistration().hasState(RegistrationStateSystem.getInstance().getConcludedState())) {
-            return;
-        }
-
-        LocalDate stateDate = new LocalDate();
-        if (stateDate.isAfter(getExecutionYear().getEndDateYearMonthDay())) {
-            stateDate = getExecutionYear().getEndDateYearMonthDay().toLocalDate();
-        }
-
-        final RegistrationState state =
-                RegistrationState.createRegistrationState(oldStudentCurricularPlan.getRegistration(), null,
-                        stateDate.toDateTimeAtStartOfDay(), RegistrationStateSystem.getInstance().getConcludedState());
-        state.setResponsiblePerson(null);
-    }
+//    private void markOldRegistrationWithConcludedState(final StudentCurricularPlan oldStudentCurricularPlan) {
+//        if (oldStudentCurricularPlan.getRegistration().hasState(RegistrationStateSystem.getInstance().getConcludedState())) {
+//            return;
+//        }
+//
+//        LocalDate stateDate = new LocalDate();
+//        if (stateDate.isAfter(getExecutionYear().getEndDateYearMonthDay())) {
+//            stateDate = getExecutionYear().getEndDateYearMonthDay().toLocalDate();
+//        }
+//
+//        final RegistrationState state =
+//                RegistrationState.createRegistrationState(oldStudentCurricularPlan.getRegistration(), null,
+//                        stateDate.toDateTimeAtStartOfDay(), RegistrationStateSystem.getInstance().getConcludedState());
+//        state.setResponsiblePerson(null);
+//    }
 
     private void moveGratuityEventsInformation(final StudentCurricularPlan oldStudentCurricularPlan,
             final StudentCurricularPlan newStudentCurricularPlan) {

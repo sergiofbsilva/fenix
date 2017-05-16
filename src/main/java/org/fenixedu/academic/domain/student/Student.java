@@ -745,40 +745,6 @@ public class Student extends Student_Base {
         return super.getRegistrationsSet().stream();
     }
 
-   
-    public boolean hasTransitionRegistrations() {
-        for (final Registration registration : super.getRegistrationsSet()) {
-            if (registration.isTransition()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public List<Registration> getTransitionRegistrations() {
-        final List<Registration> result = new ArrayList<Registration>();
-        for (final Registration registration : super.getRegistrationsSet()) {
-            if (registration.isTransition()) {
-                result.add(registration);
-            }
-        }
-        return result;
-    }
-
-    public List<Registration> getTransitionRegistrationsForDegreeCurricularPlansManagedByCoordinator(final Person coordinator) {
-        check(this, StudentPredicates.checkIfLoggedPersonIsCoordinator);
-        final List<Registration> result = new ArrayList<Registration>();
-        for (final Registration registration : super.getRegistrationsSet()) {
-            if (registration.isTransition()
-                    && coordinator.isCoordinatorFor(registration.getLastDegreeCurricularPlan(),
-                            ExecutionYear.readCurrentExecutionYear())) {
-                result.add(registration);
-            }
-        }
-        return result;
-    }
-
     private boolean isAnyTuitionInDebt(final ExecutionYear executionYear) {
         for (final Registration registration : super.getRegistrationsSet()) {
             if (registration.hasAnyNotPayedGratuityEventsForPreviousYears(executionYear)) {
@@ -873,28 +839,7 @@ public class Student extends Student_Base {
     }
 
     public boolean hasActiveRegistrations() {
-        for (final Registration registration : super.getRegistrationsSet()) {
-            final RegistrationState registrationState = registration.getCurrentState();
-            if (registrationState != null) {
-                final RegistrationStateType registrationStateType = registrationState.getStateType();
-                // TODO ACDM-1113 remove hack
-//                if (registrationStateType == null) return true;
-                if (registrationStateType.isActive()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public Registration getTransitionRegistrationFor(DegreeCurricularPlan degreeCurricularPlan) {
-        for (final Registration registration : getTransitionRegistrations()) {
-            if (registration.getLastDegreeCurricularPlan() == degreeCurricularPlan) {
-                return registration;
-            }
-        }
-
-        return null;
+        return super.getRegistrationsSet().stream().anyMatch(Registration::isActive);
     }
 
     public boolean isGrantOwner(final ExecutionYear executionYear) {

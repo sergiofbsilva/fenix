@@ -54,11 +54,6 @@ public class DuplicateRequest extends DuplicateRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return true;
     }

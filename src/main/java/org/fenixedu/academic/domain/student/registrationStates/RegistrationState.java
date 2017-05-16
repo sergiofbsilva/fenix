@@ -20,7 +20,10 @@ package org.fenixedu.academic.domain.student.registrationStates;
 
 import static org.fenixedu.academic.predicate.AccessControl.check;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import org.fenixedu.academic.domain.ExecutionYear;
@@ -53,18 +56,6 @@ public class RegistrationState extends RegistrationState_Base {
             return (comparationResult == 0) ? leftState.getExternalId().compareTo(rightState.getExternalId()) : comparationResult;
         }
     };
-
-    // TODO: ACDM-1113
-//    public static Comparator<RegistrationState> DATE_AND_STATE_TYPE_COMPARATOR = new Comparator<RegistrationState>() {
-//        @Override
-//        public int compare(RegistrationState leftState, RegistrationState rightState) {
-//            int comparationResult = DATE_COMPARATOR.compare(leftState, rightState);
-//            if (comparationResult != 0) {
-//                return comparationResult;
-//            }
-//            return leftState.getStateType().equals(rightState.getStateType()) ? 0 : -1;
-//        }
-//    };
 
     private RegistrationState(Registration registration, Person responsiblePerson, DateTime stateDate, RegistrationStateType
             stateType, String remarks) {
@@ -163,27 +154,34 @@ public class RegistrationState extends RegistrationState_Base {
         return new RegistrationState(registration, responsible, creation, stateType, null);
     }
 
-    private static void checkTransitionConditions(RegistrationState from, RegistrationStateBean to, Supplier<List<Class<?
-            extends RegistrationStateCondition>>> conditionsSupplier) {
+    private static void checkTransitionConditions(RegistrationState from, RegistrationStateBean to,
+            Supplier<List<Class<? extends RegistrationStateCondition>>> conditionsSupplier) {
 
         List<String> blockers = new ArrayList<>();
 
-        for (Class<? extends RegistrationStateCondition> aClazz : conditionsSupplier.get()) {
-            try {
-                RegistrationStateCondition registrationStateCondition = aClazz.newInstance();
-                blockers.addAll(registrationStateCondition.getTransitionBlockers(from , to));
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new RuntimeException(e);
-            }
+        for (Class<? extends RegistrationStateCondition> conditionClass : conditionsSupplier.get()) {
+            RegistrationStateCondition registrationStateCondition = RegistrationStateSystem.getCondition(conditionClass);
+            blockers.addAll(registrationStateCondition.getTransitionBlockers(from, to));
         }
-        
+
         DomainException.throwWhenDeleteBlocked(blockers);
     }
+
+    /**
+     * Check {@link to} pre conditions when arriving at state
+     * @param from the origin state
+     * @param to the destination state
+     */
 
     private static void checkTransitionPreConditions(RegistrationState from, RegistrationStateBean to) {
         checkTransitionConditions(from, to, () -> to.getStateType().getPreConditionClasses());
     }
 
+    /**
+     * Check {@link from} post conditions when leaving the state
+     * @param from the origin state
+     * @param to the destination state
+     */
     private static void checkTransitionPostConditions(RegistrationState from, RegistrationStateBean to) {
         checkTransitionConditions(from, to, () -> from.getStateType().getPostConditionClasses());
     }

@@ -186,11 +186,6 @@ abstract public class CertificateRequest extends CertificateRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean hasPersonalInfo() {
         return false;
     }

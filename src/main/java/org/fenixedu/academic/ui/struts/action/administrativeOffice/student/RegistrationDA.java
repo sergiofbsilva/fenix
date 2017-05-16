@@ -33,6 +33,7 @@ import org.apache.commons.collections.comparators.ReverseComparator;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.Attends;
 import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
@@ -57,7 +58,6 @@ import org.fenixedu.academic.dto.student.RegistrationCurriculumBean;
 import org.fenixedu.academic.predicate.IllegalDataAccessException;
 import org.fenixedu.academic.service.services.administrativeOffice.student.RegistrationConclusionProcess;
 import org.fenixedu.academic.service.services.enrollment.shift.WriteStudentAttendingCourse;
-import org.fenixedu.academic.service.services.registration.DeleteRegistrationRegime;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.bennu.struts.annotations.Forward;
@@ -387,7 +387,7 @@ public class RegistrationDA extends StudentRegistrationDA {
             HttpServletResponse response) {
         try {
             final RegistrationRegime regime = getRegistrationRegime(request);
-            DeleteRegistrationRegime.run(regime);
+            FenixFramework.atomic(regime::delete);
         } catch (DomainException e) {
             addActionMessage(request, e.getMessage(), e.getArgs());
         }

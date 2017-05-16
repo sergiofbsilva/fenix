@@ -32,18 +32,6 @@ import pt.ist.fenixWebFramework.renderers.converters.EnumArrayConverter;
 
 public class RegistrationStateTypeProvider implements DataProvider {
 
-//    @Override
-//    public Object provide(Object source, Object currentValue) {
-//        return Arrays.asList(RegistrationStateType.values());
-//    }
-//
-//    @Override
-//    public Converter getConverter() {
-//        return new EnumArrayConverter(RegistrationStateType.class);
-//    }
-
-    // TODO: ACDM-1113 Activate New Providers
-//
     @Override
     public Object provide(Object source, Object currentValue) {
         return new ArrayList<>(RegistrationStateSystem.getInstance().getRegistrationStateTypeSet());

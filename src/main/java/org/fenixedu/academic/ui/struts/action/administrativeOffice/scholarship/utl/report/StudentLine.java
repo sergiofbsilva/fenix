@@ -766,8 +766,7 @@ public class StudentLine implements java.io.Serializable {
     public static Collection<ExecutionYear> getEnrolmentsExecutionYears(final Student student) {
         Set<ExecutionYear> executionYears = new HashSet<ExecutionYear>();
         for (final Registration registration : student.getRegistrationsSet()) {
-            if (registration.getLastActiveState().equals(RegistrationStateSystem.getInstance().getCanceledState())
-                    || registration.getLastActiveState().equals(RegistrationStateSystem.getInstance().getTransitionState())) {
+            if (registration.getLastStateType().isCanceled()) {
                 continue;
             }
 

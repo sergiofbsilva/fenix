@@ -174,8 +174,7 @@ public class EnrolmentDeclaration extends AdministrativeOfficeDocument {
                 result.append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                         "message.academicDocument.enrolment.declaration.approvement.firstTime"));
             } else {
-                final Registration registrationToInspect = transition ? registration.getSourceRegistration() : registration;
-                if (registrationToInspect.hasApprovement(executionYear.getPreviousExecutionYear())) {
+                if (registration.hasApprovement(executionYear.getPreviousExecutionYear())) {
                     result.append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                             "message.academicDocument.enrolment.declaration.approvement.have")
                             + executionYear.getPreviousExecutionYear().getYear());

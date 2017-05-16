@@ -67,22 +67,6 @@ public class ViewStudentCurriculumDA extends FenixDispatchAction {
             return mapping.findForward("chooseStudent");
         }
 
-        if (!getDegreeCurricularPlan(actionForm).isBolonhaDegree()) {
-
-            if (!student.hasTransitionRegistrations()) {
-                return getOldCurriculumRedirect(actionForm, student);
-            }
-
-            request.setAttribute("student", student);
-
-            return mapping.findForward("chooseCurriculumType");
-        } else {
-            return getOldCurriculumRedirect(actionForm, student);
-        }
-
-    }
-
-    private ActionForward getOldCurriculumRedirect(final ActionForm actionForm, final Student student) {
         final ActionForward actionForward = new ActionForward();
         actionForward.setPath("/viewStudentCurriculum.do?method=prepareReadByStudentNumber&studentNumber=" + student.getNumber()
                 + "&executionDegreeId=" + getExecutionDegreeId(actionForm) + "&degreeCurricularPlanID="

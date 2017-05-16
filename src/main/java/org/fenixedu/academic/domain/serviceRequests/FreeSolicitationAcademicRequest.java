@@ -96,11 +96,6 @@ public class FreeSolicitationAcademicRequest extends FreeSolicitationAcademicReq
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return false;
     }

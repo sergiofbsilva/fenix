@@ -135,11 +135,6 @@ abstract public class DeclarationRequest extends DeclarationRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean hasPersonalInfo() {
         return false;
     }

@@ -90,11 +90,6 @@ public class SpecialSeasonRequest extends SpecialSeasonRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public AcademicServiceRequestType getAcademicServiceRequestType() {
         return AcademicServiceRequestType.SPECIAL_SEASON_REQUEST;
     }

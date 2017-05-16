@@ -52,11 +52,6 @@ public class PastDiplomaRequest extends PastDiplomaRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return true;
     }

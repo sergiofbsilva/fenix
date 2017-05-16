@@ -90,7 +90,7 @@ public class RaidesDfaReportFile extends RaidesDfaReportFile_Base {
                         boolean isToAddRegistration = false;
                         boolean isActive = false;
                         for (RegistrationState state : registration.getRegistrationStates(executionYear)) {
-                            if (state.isActive() || state.getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState())) {
+                            if (state.isActive() || registration.isConcluded()) {
                                 isToAddRegistration = true;
                             }
                             isActive |= state.isActive();

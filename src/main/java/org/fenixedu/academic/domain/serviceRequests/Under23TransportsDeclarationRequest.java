@@ -61,11 +61,6 @@ public class Under23TransportsDeclarationRequest extends Under23TransportsDeclar
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public EventType getEventType() {
         return null;
     }

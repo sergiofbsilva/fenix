@@ -105,11 +105,6 @@ public class EnrolmentCertificateRequest extends EnrolmentCertificateRequest_Bas
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return true;
-    }
-
-    @Override
     public boolean hasPersonalInfo() {
         return true;
     }

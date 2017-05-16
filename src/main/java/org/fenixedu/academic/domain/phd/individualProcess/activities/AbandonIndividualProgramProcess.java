@@ -19,12 +19,12 @@
 package org.fenixedu.academic.domain.phd.individualProcess.activities;
 
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
+import org.fenixedu.academic.domain.phd.PhdConfiguration;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessBean;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
 import org.fenixedu.academic.domain.phd.PhdProgramProcessState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
-import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 import org.fenixedu.bennu.core.domain.User;
 import org.joda.time.DateTime;
 
@@ -48,7 +48,7 @@ public class AbandonIndividualProgramProcess extends PhdIndividualProgramProcess
 
         if (process.getRegistration() != null && process.getRegistration().isActive()) {
             RegistrationState.createRegistrationState(process.getRegistration(), userView.getPerson(), stateDate,
-                    RegistrationStateSystem.getInstance().getExternalAbandonState());
+                    PhdConfiguration.getInstance().getExternalAbandonState());
         }
 
         return process;

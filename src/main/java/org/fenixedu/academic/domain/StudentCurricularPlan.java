@@ -391,36 +391,15 @@ public class StudentCurricularPlan extends StudentCurricularPlan_Base {
     }
 
     final public boolean isConcluded() {
-
         if (isEmptyDegree()) {
-            // TODO: SERGIOTALK
-            // Aqui ele vai ver se há alguma registration concluída, porque é no caso em que o plano curricular é vazio.
-            // Como é que se conclui um plano curricular vazio? no idea...
-            // Sugestão:
-//            return getAllCurriculumGroups().stream()
-//                    .anyMatch(plan -> plan.getAllCurriculumGroups()
-//                            .stream()
-//                            .anyMatch(group -> group.getConclusionProcess() != null));
-            // Estava:
-            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState());
+            return getRegistration().getLastActiveState().getStateType().isTerminal();
         }
         return ProgramConclusion.isConcluded(this);
-
     }
 
     final public boolean isConclusionProcessed() {
-
         if (isEmptyDegree()) {
-            // TODO: SERGIOTALK
-            // Aqui ele vai ver se há alguma registration concluída, porque é no caso em que o plano curricular é vazio.
-            // Como é que se conclui um plano curricular vazio? no idea...
-            // Sugestão:
-//            return getAllCurriculumGroups().stream()
-//                    .anyMatch(plan -> plan.getAllCurriculumGroups()
-//                            .stream()
-//                            .anyMatch(group -> group.getConclusionProcess() != null));
-            // Estava:
-            return getRegistration().getLastActiveState().getStateType().equals(RegistrationStateSystem.getInstance().getConcludedState());
+            return getRegistration().getCurrentStateType().isTerminal();
         }
         return ProgramConclusion.isConclusionProcessed(this);
     }

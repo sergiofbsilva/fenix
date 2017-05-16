@@ -141,11 +141,6 @@ public class CourseGroupChangeRequest extends CourseGroupChangeRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return false;
     }

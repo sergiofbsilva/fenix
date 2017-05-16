@@ -117,11 +117,6 @@ public class EquivalencePlanRequest extends EquivalencePlanRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return true;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return true;
     }

@@ -1624,15 +1624,6 @@ public class Registration extends Registration_Base {
 						.anyMatch(ap -> ap == degree);
     }
 
-    public boolean isCurricularCourseApproved(final CurricularCourse curricularCourse) {
-        for (final StudentCurricularPlan studentCurricularPlan : getStudentCurricularPlansSet()) {
-            if (studentCurricularPlan.isCurricularCourseApproved(curricularCourse)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     final public Set<RegistrationStateType> getRegistrationStatesTypes(final ExecutionYear executionYear) {
         return getRegistrationStates(executionYear).stream().map(RegistrationState::getStateType).collect(Collectors.toSet());
     }
@@ -1671,7 +1662,7 @@ public class Registration extends Registration_Base {
     }
 
     final public boolean isActive() {
-        return getCurrentStateType().getActive();
+        return getCurrentStateType().isActive();
     }
 
     public boolean hasAnyActiveState(final ExecutionInterval executionInterval) {
@@ -1689,15 +1680,6 @@ public class Registration extends Registration_Base {
 
     public boolean isCanceled() {
         return getCurrentStateType().isCanceled();
-    }
-
-    final public boolean isTransition() {
-        RegistrationStateType transitionState = RegistrationStateSystem.getInstance().getTransitionState();
-        return getCurrentStateType().equals(transitionState);
-    }
-    
-    final public boolean isTransition(final ExecutionYear executionYear) {
-        return hasStateType(executionYear, RegistrationStateSystem.getInstance().getTransitionState());
     }
 
     final public RegistrationState getStateInDate(DateTime instant) {
@@ -1807,21 +1789,6 @@ public class Registration extends Registration_Base {
         return isActive() || getCurrentStateType().isTerminal();
     }
 
-    public ExecutionYear calculateConclusionYear() {
-        return ProgramConclusion.getConclusionProcess(getLastStudentCurricularPlan())
-                .map(ConclusionProcess::getConclusionYear).orElse(null);
-    }
-
-    private RegistrationState getFirstRegistrationState(final RegistrationStateType stateType) {
-        final SortedSet<RegistrationState> states = new TreeSet<RegistrationState>(RegistrationState.DATE_COMPARATOR);
-        states.addAll(getRegistrationStates(stateType));
-        return states.first();
-    }
-
-    private boolean isOldMasterDegree() {
-        return getDegreeType().isPreBolonhaMasterDegree();
-    }
-
     public YearMonthDay getConclusionDate() {
         return ProgramConclusion.getConclusionProcess(getLastStudentCurricularPlan())
                 .map(ConclusionProcess::getConclusionYearMonthDay).orElse(null);
@@ -1870,17 +1837,6 @@ public class Registration extends Registration_Base {
         return lastStudentCurricularPlan.calculateConclusionDate(cycleType);
     }
 
-    final public String getConclusionProcessNotes() {
-        return isRegistrationConclusionProcessed() ? getConclusionProcess().getNotes() : null;
-    }
-
-    final public DateTime getConclusionProcessCreationDateTime() {
-        return isRegistrationConclusionProcessed() ? getConclusionProcess().getCreationDateTime() : null;
-    }
-
-    final public DateTime getConclusionProcessLastModificationDateTime() {
-        return isRegistrationConclusionProcessed() ? getConclusionProcess().getLastModificationDateTime() : null;
-    }
 
     final public String getGraduateTitle(final ProgramConclusion programConclusion, final Locale locale) {
         if (programConclusion.isConclusionProcessed(this)) {
@@ -2659,49 +2615,6 @@ public class Registration extends Registration_Base {
         return registrations.isEmpty() ? null : registrations.iterator().next();
     }
 
-    public List<Registration> getTargetTransitionRegistrations() {
-        final List<Registration> result = new ArrayList<Registration>();
-
-        for (final DegreeCurricularPlanEquivalencePlan equivalencePlan : getLastDegreeCurricularPlan()
-                .getTargetEquivalencePlans()) {
-            final Registration transitionRegistration =
-                    getStudent().getTransitionRegistrationFor(equivalencePlan.getDegreeCurricularPlan());
-            if (transitionRegistration != null) {
-                result.add(transitionRegistration);
-            }
-        }
-
-        return result;
-
-    }
-
-    public void transitToBolonha(final Person person, final DateTime when) {
-        if (!isActive()) {
-            throw new DomainException("error.student.Registration.cannot.transit.non.active.registrations");
-        }
-
-        RegistrationState.createRegistrationState(this, person, when, RegistrationStateSystem.getInstance().getTransitedState());
-
-        for (final Registration registration : getTargetTransitionRegistrations()) {
-            if (registration.getDegreeType().isBolonhaDegree()) {
-                RegistrationState.createRegistrationState(registration, person, when,
-                        registration.hasConcluded() ? RegistrationStateSystem.getInstance().getConcludedState() : RegistrationStateSystem.getInstance().getInitialState());
-            } else {
-                RegistrationState.createRegistrationState(registration, person, when, RegistrationStateSystem.getInstance().getInitialState());
-            }
-
-            registration.setRegistrationProtocol(getRegistrationProtocol());
-            registration.setSourceRegistration(this);
-
-            changeAttends(registration, when);
-        }
-
-        if (!getTargetTransitionRegistrations().isEmpty()) {
-            // change remaining attends to any target transition registration
-            changeAttends(getTargetTransitionRegistrations().iterator().next(), when);
-        }
-    }
-
     private void changeAttends(final Registration newRegistration, final DateTime when) {
         final ExecutionSemester executionSemester = ExecutionSemester.readByDateTime(when);
         if (executionSemester == null) {
@@ -3027,11 +2940,7 @@ public class Registration extends Registration_Base {
     }
 
     public RegistrationState getLastActiveState() {
-        List<RegistrationState> activeStateList = new ArrayList<RegistrationState>();
-
-        CollectionUtils.select(getRegistrationStatesSet(),arg0->((RegistrationState) arg0).getStateType().isActive(), activeStateList);
-
-        return !activeStateList.isEmpty() ? Collections.max(activeStateList, RegistrationState.DATE_COMPARATOR) : null;
+        return getRegistrationStatesSet().stream().filter(RegistrationState::isActive).max(RegistrationState.DATE_COMPARATOR).orElse(null);
     }
 
     public boolean hasDissertationEnrolment(final ExecutionDegree executionDegree) {

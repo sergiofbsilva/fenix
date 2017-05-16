@@ -64,11 +64,6 @@ public class StandaloneEnrolmentCertificateRequest extends StandaloneEnrolmentCe
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return true;
-    }
-
-    @Override
     public boolean hasPersonalInfo() {
         return true;
     }

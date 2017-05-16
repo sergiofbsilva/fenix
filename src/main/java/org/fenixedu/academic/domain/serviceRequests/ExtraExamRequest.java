@@ -161,11 +161,6 @@ public class ExtraExamRequest extends ExtraExamRequest_Base {
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPayedUponCreation() {
         return false;
     }

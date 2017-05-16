@@ -111,11 +111,6 @@ public class PartialRegistrationRegimeRequest extends PartialRegistrationRegimeR
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public AcademicServiceRequestType getAcademicServiceRequestType() {
         return AcademicServiceRequestType.PARTIAL_REGIME_REQUEST;
     }

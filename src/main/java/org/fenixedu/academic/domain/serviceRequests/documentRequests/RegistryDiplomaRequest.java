@@ -176,11 +176,6 @@ public class RegistryDiplomaRequest extends RegistryDiplomaRequest_Base implemen
     }
 
     @Override
-    public boolean isAvailableForTransitedRegistrations() {
-        return false;
-    }
-
-    @Override
     public boolean isPagedDocument() {
         return false;
     }
