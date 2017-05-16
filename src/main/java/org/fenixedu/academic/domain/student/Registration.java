@@ -1688,7 +1688,7 @@ public class Registration extends Registration_Base {
     }
 
     public boolean isCanceled() {
-        return getCurrentStateType().equals(RegistrationStateSystem.getInstance().getCanceledState());
+        return getCurrentStateType().isCanceled();
     }
 
     final public boolean isTransition() {

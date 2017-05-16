@@ -409,7 +409,7 @@ public class SearchDegreeStudentsGroup implements Serializable {
     }
 
     public boolean matchesSelectCriteria(final StudentCurricularPlan studentCurricularPlan) {
-        if (!studentCurricularPlan.hasRegistration() || studentCurricularPlan.getRegistration().isTransition()) {
+        if (!studentCurricularPlan.hasRegistration()) {
             return false;
         }
 

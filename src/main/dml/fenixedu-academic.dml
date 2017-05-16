@@ -3058,12 +3058,13 @@ valueType org.fenixedu.academic.domain.accounting.EventTypes as EventTypes {
     }
 
     class student.registrationStates.RegistrationStateType {
-        boolean active;
-        boolean student;
-        boolean terminal;
-        boolean validSource;
-        boolean mobility;
-        boolean forceGratuityCreation;
+        protected boolean canceled;
+        protected boolean active;
+        protected boolean student;
+        protected boolean terminal;
+        protected boolean validSource;
+        protected boolean mobility;
+        protected boolean forceGratuityCreation;
         String code (REQUIRED);
         LocalizedString name (REQUIRED);
         protected JsonElement preConditions;

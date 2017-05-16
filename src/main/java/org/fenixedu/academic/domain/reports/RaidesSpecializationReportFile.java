@@ -72,7 +72,7 @@ public class RaidesSpecializationReportFile extends RaidesSpecializationReportFi
         for (final Registration registration : RaidesCommonReportFieldsWrapper.getRegistrationsToProcess(executionYear,
                 this.getDegreeType())) {
 
-            if (registration != null && !registration.isTransition()) {
+            if (registration != null) {
                 for (final CycleType cycleType : registration.getDegreeType().getCycleTypes()) {
                     final StudentCurricularPlan studentCurricularPlan = registration.getStudentCurricularPlan(cycleType);
                     final CycleCurriculumGroup cycleCGroup = studentCurricularPlan.getRoot().getCycleCurriculumGroup(cycleType);

@@ -742,26 +742,10 @@ public class Student extends Student_Base {
     }
 
     public Stream<Registration> getRegistrationStream() {
-        return super.getRegistrationsSet().stream()
-                .filter(r -> !r.isTransition());
+        return super.getRegistrationsSet().stream();
     }
 
-    /**
-     * -&gt; Temporary overrides due migrations - Filter 'InTransition'
-     * registrations &gt; Do not use this method to add new registrations directly
-     * (use {@link addRegistrations} method)
-     */
-    @Override
-    public Set<Registration> getRegistrationsSet() {
-        final Set<Registration> result = new HashSet<Registration>();
-        for (final Registration registration : super.getRegistrationsSet()) {
-            if (!registration.isTransition()) {
-                result.add(registration);
-            }
-        }
-        return Collections.unmodifiableSet(result);
-    }
-
+   
     public boolean hasTransitionRegistrations() {
         for (final Registration registration : super.getRegistrationsSet()) {
             if (registration.isTransition()) {

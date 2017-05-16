@@ -169,9 +169,8 @@ public class EnrolmentDeclaration extends AdministrativeOfficeDocument {
         if (enrolmentDeclarationRequest.getDocumentPurposeType() == DocumentPurposeType.PPRE) {
             final Registration registration = getDocumentRequest().getRegistration();
             final ExecutionYear executionYear = enrolmentDeclarationRequest.getExecutionYear();
-            final boolean transition = registration.isTransition(executionYear);
 
-            if (registration.isFirstTime(executionYear) && !transition) {
+            if (registration.isFirstTime(executionYear)) {
                 result.append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                         "message.academicDocument.enrolment.declaration.approvement.firstTime"));
             } else {

@@ -60,6 +60,10 @@ public class RegistrationStateType extends RegistrationStateType_Base {
         return getValidNextStateTypeSet().stream().map(RegistrationStateType::getCode).collect(Collectors.toSet());
     }
 
+    public boolean isCanceled() {
+        return getCanceled();
+    }
+    
     public boolean isActive() {
         return getActive();
     }

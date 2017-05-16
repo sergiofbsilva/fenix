@@ -68,7 +68,7 @@ public class RaidesDfaReportFile extends RaidesDfaReportFile_Base {
         for (final Registration registration : RaidesCommonReportFieldsWrapper.getRegistrationsToProcess(executionYear,
                 this.getDegreeType())) {
 
-            if (registration != null && !registration.isTransition()) {
+            if (registration != null) {
 
                 for (final CycleType cycleType : registration.getDegreeType().getCycleTypes()) {
                     final StudentCurricularPlan studentCurricularPlan =
