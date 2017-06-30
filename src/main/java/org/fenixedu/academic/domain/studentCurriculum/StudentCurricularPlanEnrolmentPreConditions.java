@@ -21,6 +21,13 @@ package org.fenixedu.academic.domain.studentCurriculum;
 import static org.fenixedu.academic.domain.studentCurriculum.StudentCurricularPlanEnrolmentPreConditions.EnrolmentPreConditionResult.createFalse;
 import static org.fenixedu.academic.domain.studentCurriculum.StudentCurricularPlanEnrolmentPreConditions.EnrolmentPreConditionResult.createTrue;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.fenixedu.academic.domain.EnrolmentPeriod;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
@@ -28,7 +35,48 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateSystem;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 public class StudentCurricularPlanEnrolmentPreConditions {
+
+    public static final Integer HIGHEST_PRIORITY = 0;
+
+    public static final Integer LOWEST_PRIORITY = 10000;
+
+    public interface StudentCurricularPlanEnrolmentPreCondition {
+
+        // should return empty optional if it is to continue on the chain
+        Optional<EnrolmentPreConditionResult> checkEnrolmentPeriods(StudentCurricularPlan scp, ExecutionSemester semester);
+    }
+
+    private static final Multimap<Integer, StudentCurricularPlanEnrolmentPreCondition> enrolmentPreconditions = HashMultimap.create();
+
+
+    public synchronized static void registrationEnrolmentPreCondition(Integer priority,
+            StudentCurricularPlanEnrolmentPreCondition preCondition) {
+        enrolmentPreconditions.put(priority,preCondition);
+    }
+
+    static {
+        registrationEnrolmentPreCondition(HIGHEST_PRIORITY, (scp, semester) -> {
+            if (semester.isFirstOfYear() && hasSpecialSeason(scp, semester)) {
+                if (!scp.getDegreeCurricularPlan().getActiveEnrolmentPeriodInCurricularCoursesSpecialSeason(semester).isPresent()) {
+                    return Optional.of(outOfPeriodResult("specialSeason", scp.getDegreeCurricularPlan()
+                            .getNextEnrolmentPeriodInCurricularCoursesSpecialSeason()));
+                }
+                return Optional.of(createTrue());
+            }
+            return Optional.empty();
+        });
+
+        registrationEnrolmentPreCondition(LOWEST_PRIORITY, (scp, semester) -> {
+            if (!scp.getDegreeCurricularPlan().getActiveCurricularCourseEnrolmentPeriod(semester).isPresent()) {
+                return Optional.of(outOfPeriodResult("normal", scp.getDegreeCurricularPlan().getNextEnrolmentPeriod()));
+            }
+            return Optional.of(createTrue());
+        });
+    }
 
     static public class EnrolmentPreConditionResult {
         private boolean valid = false;
@@ -80,7 +128,7 @@ public class StudentCurricularPlanEnrolmentPreConditions {
     /*
      * Change? If next period is not defined then we should use last? Or previous of given semester?
      */
-    static private EnrolmentPreConditionResult outOfPeriodResult(final String periodType, final EnrolmentPeriod nextPeriod) {
+    static public EnrolmentPreConditionResult outOfPeriodResult(final String periodType, final EnrolmentPeriod nextPeriod) {
         if (nextPeriod != null) {
             return createFalse("message.out.curricular.course.enrolment.period." + periodType,
                     nextPeriod.getStartDateDateTime().toString("dd/MM/yyyy"),
@@ -140,23 +188,15 @@ public class StudentCurricularPlanEnrolmentPreConditions {
      * @return EnrolmentPreConditionResult
      */
     static EnrolmentPreConditionResult checkEnrolmentPeriods(StudentCurricularPlan scp, ExecutionSemester semester) {
+        List<StudentCurricularPlanEnrolmentPreCondition> sortedPreConditions =
+                enrolmentPreconditions.keySet().stream().sorted(Comparator.naturalOrder())
+                        .flatMap(priority -> enrolmentPreconditions.get(priority).stream()).collect(Collectors.toList());
 
-        if (semester.isFirstOfYear() && hasSpecialSeason(scp, semester)) {
-
-            if (!scp.getDegreeCurricularPlan().getActiveEnrolmentPeriodInCurricularCoursesSpecialSeason(semester).isPresent()) {
-                return outOfPeriodResult("specialSeason", scp.getDegreeCurricularPlan()
-                        .getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
+        for(StudentCurricularPlanEnrolmentPreCondition preCondition : sortedPreConditions) {
+            Optional<EnrolmentPreConditionResult> result = preCondition.checkEnrolmentPeriods(scp, semester);
+            if (result.isPresent()) {
+                return result.get();
             }
-
-        } else if (semester.isFirstOfYear() && hasPrescribed(scp, semester)) {
-
-            if (!scp.getDegreeCurricularPlan().getActiveEnrolmentPeriodInCurricularCoursesFlunkedSeason(semester).isPresent()) {
-                return outOfPeriodResult("flunked", scp.getDegreeCurricularPlan()
-                        .getNextEnrolmentPeriodInCurricularCoursesFlunkedSeason());
-            }
-
-        } else if (!scp.getDegreeCurricularPlan().getActiveCurricularCourseEnrolmentPeriod(semester).isPresent()) {
-            return outOfPeriodResult("normal", scp.getDegreeCurricularPlan().getNextEnrolmentPeriod());
         }
 
         return createTrue();
@@ -168,20 +208,6 @@ public class StudentCurricularPlanEnrolmentPreConditions {
                     .getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
         }
         return createTrue();
-    }
-
-    /*
-     * Student must have flunked state and then registered (in same year), otherwise is not considered to be prescribed
-     */
-    private static boolean hasPrescribed(StudentCurricularPlan scp, ExecutionSemester semester) {
-        for (RegistrationState state : scp.getRegistration().getRegistrationStates(semester.getExecutionYear())) {
-            if (state.getExecutionYear().equals(semester.getExecutionYear())
-                    && state.getStateType().equals(RegistrationStateSystem.getInstance().getFlunkedState())) {
-                return scp.getRegistration().hasRegisteredActiveState();
-            }
-        }
-
-        return false;
     }
 
 }

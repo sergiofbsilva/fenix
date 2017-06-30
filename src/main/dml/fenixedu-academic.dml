@@ -3859,7 +3859,6 @@ class reports.StatusAndApprovalReportFile extends reports.GepReportFile {}
 class reports.EtiReportFile extends reports.GepReportFile {}
 class reports.CourseLoadAndResponsiblesReportFile extends reports.GepReportFile {}
 class reports.RegistrationReportFile extends reports.GepReportFile {}
-class reports.FlunkedReportFile extends reports.GepReportFile {}
 class reports.CourseLoadReportFile extends reports.GepReportFile {}
 class reports.DissertationsProposalsReportFile extends reports.GepReportFile {}
 class reports.DissertationsWithExternalAffiliationsReportFile extends reports.GepReportFile {}
