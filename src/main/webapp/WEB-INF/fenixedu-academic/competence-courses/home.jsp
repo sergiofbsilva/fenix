@@ -23,7 +23,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page import="org.fenixedu.academic.domain.degreeStructure.CurricularStage" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 
 <style>
     .table th {
@@ -59,7 +59,7 @@
     <form role="form" method="GET" class="form-inline">
         <div class="form-group">
             <label for="departmentUnit"><spring:message code="label.department" text="Departamento"/></label>
-            <select name="departmentUnit" id="departmentUnit">
+            <select name="departmentUnit" id="departmentUnit" onchange="this.form.submit()">
                 <c:forEach var="department" items="${departmentUnits}">
                     <option value="${department.externalId}" <c:if test="${department == departmentUnit}"> selected="selected"</c:if>>
                         <c:out value="${department.nameI18n.content}"/>
@@ -67,7 +67,7 @@
                 </c:forEach>
             </select>
         </div>
-        <button type="submit" class="btn btn-small btn-primary"><spring:message code="label.submit"/></button>
+        <%--<button type="submit" class="btn btn-small btn-primary"><spring:message code="label.submit"/></button>--%>
     </form>
     <hr/>
     <c:if test="${ not empty groupMembers}">
