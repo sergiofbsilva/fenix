@@ -49,11 +49,9 @@
 
 <div class="page-header">
     <h1>
-        <spring:message code="competence.courses.title" text="Aprovação de Disciplinas Competência"/>
-        <small><spring:message code="label.listing" text="Listing" /></small>
+        <spring:message code="competence.courses.title" text="Gestão de Disciplinas Competência"/>
     </h1>
 </div>
-
 
 <section>
     <form role="form" method="GET" class="form-inline">
@@ -137,7 +135,7 @@
             </li>
             
         </ul>
-        <table>
+        <table style="width: 100%">
             <tbody>
             <c:forEach var="scientificAreaUnit" items="${scientificAreaUnits}">
                     <tr>
@@ -151,46 +149,32 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <li class="tree_label" style="background-position: 0em 0.5em;"><c:out value="${competenceCourseGroupUnit.name}"/>
-                                                    <table class="showinfo1 smallmargin mtop05" style="width: 100%;">
-                                                        <tbody>
-                                                            <c:forEach var="competenceCourse" items="${competenceCourseGroupUnit.competenceCourses}">
-                                                                <tr class="color2">
-                                                                    <td>
-                                                                        <c:if test="${empty competenceCourse.code}">
-                                                                            <c:out value="${competenceCourse.name}"/>
-                                                                        </c:if>
-                                                                        <c:if test="${not empty competenceCourse.code}">
-                                                                            <c:out value='${competenceCourse.code} - ${competenceCourse.name}'/>
-                                                                        </c:if>
-                                                                        <span><em class="${fn:toLowerCase(competenceCourse.curricularStage)}">${fr:message('resources/EnumerationResources', competenceCourse.curricularStage)}</em></span>
+                                                    <li class="tree_label" style="background-position: 0em 0.5em;">
+                                                        <table style="width: 100%; background-color: #fff;">
+                                                            <tr>
+                                                                <td><c:out value="${competenceCourseGroupUnit.name}"/></td>
+                                                                <c:if test="${isBolonhaManager}">
+                                                                    <td class="aright">
+                                                                        <spring:url context="" var="createCourseUrl" value="/bolonhaManager/competenceCourses/createCompetenceCourse.faces?competenceCourseGroupUnitID={competenceCourseGroupUnit}">
+                                                                            <spring:param name="competenceCourseGroupUnit" value="${competenceCourseGroupUnit.externalId}"/>
+                                                                        </spring:url>
+                                                                        <a href="${fr:checksumLink(pageContext.request,createCourseUrl)}">Criar  Disciplina</a>
                                                                     </td>
-                                                                    <td class="aright nowrap">
-                                                                        <spring:url var="showCompetenceUrl" context="" value="/scientificCouncil/competenceCourses/showCompetenceCourse.faces?action=ccm&competenceCourseID={competenceCourse}&selectedDepartmentUnitID={departmentUnit}">
-                                                                            <spring:param name="competenceCourse" value="${competenceCourse.externalId}"/>
-                                                                            <spring:param name="departmentUnit" value="${departmentUnit.externalId}"/>
-                                                                        </spring:url>
-                                                                        <spring:url var="transferCompetenceUrl" context="" value="/scientificCouncil/competenceCourses/transferCompetenceCourse.faces?competenceCourseID={competenceCourse}&selectedDepartmentUnitID={departmentUnit}">
-                                                                            <spring:param name="competenceCourse" value="${competenceCourse.externalId}"/>
-                                                                            <spring:param name="departmentUnit" value="${departmentUnit.externalId}"/>
-                                                                        </spring:url>
-                                                                        <spring:url var="toggleStateUrl" value="/scientific-council/competence-courses/toggle?competenceCourse={competenceCourse}&departmentUnit={departmentUnit}">
-                                                                            <spring:param name="competenceCourse" value="${competenceCourse.externalId}"/>
-                                                                            <spring:param name="departmentUnit" value="${departmentUnit.externalId}"/>
-                                                                        </spring:url>
-                                                                        <a href="${fr:checksumLink(pageContext.request, showCompetenceUrl)}"><spring:message code="label.show" text="Ver"/></a>
-                                                                        <a href="${fr:checksumLink(pageContext.request, transferCompetenceUrl)}"><spring:message code="label.transfer" text="Transferir"/></a>
-                                                                        <c:if test="${competenceCourse.curricularStage.name == 'APPROVED'}">
-                                                                            <a href="${toggleStateUrl}"><spring:message code="label.approved.toggle" text="Desaprovar"/></a>
-                                                                        </c:if>
-                                                                        <c:if test="${competenceCourse.curricularStage.name == 'PUBLISHED'}">
-                                                                            <a href="${toggleStateUrl}"><spring:message code="label.published.toggle" text="Aprovar"/></a>
-                                                                        </c:if>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                    </table>
+                                                                </c:if>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="showinfo1 smallmargin mtop05" style="width: 100%;">
+                                                            <tbody>
+                                                                <c:set var="showOldCompetenceCourses" value="false"/>
+                                                                <c:forEach var="competenceCourse" items="${competenceCourseGroupUnit.competenceCourses}">
+                                                                    <%@include file="fragments/competenceCourseRow.jsp"%>
+                                                                </c:forEach>
+                                                                <c:set var="showOldCompetenceCourses" value="true"/>
+                                                                <c:forEach var="competenceCourse" items="${competenceCourseGroupUnit.oldCompetenceCourses}">
+                                                                    <%@include file="fragments/competenceCourseRow.jsp"%>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </table>
                                                     </li>
                                                 </td>
                                             </tr>
