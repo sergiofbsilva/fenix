@@ -28,6 +28,7 @@ import org.fenixedu.academic.domain.degreeStructure.EctsGraduationGradeConversio
 import org.fenixedu.academic.domain.degreeStructure.EctsTableIndex;
 import org.fenixedu.academic.domain.degreeStructure.NoEctsComparabilityTableFound;
 import org.fenixedu.academic.domain.exceptions.DomainException;
+import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdProgram;
 import org.fenixedu.academic.domain.phd.PhdProgramInformation;
 import org.fenixedu.academic.domain.phd.conclusion.PhdConclusionProcess;
