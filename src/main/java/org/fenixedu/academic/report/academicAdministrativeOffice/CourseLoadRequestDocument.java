@@ -149,19 +149,11 @@ public class CourseLoadRequestDocument extends AdministrativeOfficeDocument {
         addParameter("dissertationsList", dissertations);
 
         for (final Enrolment enrolment : getDocumentRequest().getEnrolmentsSet()) {
-
-            if (enrolment.isBolonhaDegree()) {
-
                 if (enrolment.isDissertation()) {
                     dissertations.add(new BolonhaCourseLoadEntry(enrolment));
                 } else {
                     bolonha.add(new BolonhaCourseLoadEntry(enrolment));
                 }
-
-            } else {
-                preBolonha.add(new PreBolonhaCourseLoadEntry(enrolment));
-            }
-
         }
 
         Collections.sort(bolonha);
