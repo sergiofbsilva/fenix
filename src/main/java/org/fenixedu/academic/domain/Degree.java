@@ -56,6 +56,7 @@ import org.fenixedu.academic.domain.time.calendarStructure.AcademicInterval;
 import org.fenixedu.academic.domain.time.calendarStructure.AcademicPeriod;
 import org.fenixedu.academic.predicate.AcademicPredicates;
 import org.fenixedu.academic.util.Bundle;
+import org.fenixedu.academic.util.LocaleUtils;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.bennu.core.util.CoreConfiguration;
@@ -153,14 +154,13 @@ public class Degree extends Degree_Base implements Comparable<Degree> {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public Degree(String name, String nameEn, String code, DegreeType degreeType, GradeScale gradeScale) {
-        this(name, nameEn, code, degreeType, gradeScale, ExecutionYear.readCurrentExecutionYear());
+    public Degree(LocalizedString name, String code, DegreeType degreeType, GradeScale gradeScale) {
+        this(name, code, new LocalizedString(), degreeType, gradeScale, ExecutionYear.readCurrentExecutionYear());
     }
 
-    public Degree(String name, String nameEn, String code, DegreeType degreeType, GradeScale gradeScale,
-            ExecutionYear executionYear) {
+    public Degree(LocalizedString name, String code, LocalizedString associatedInstitutions, DegreeType degreeType, GradeScale gradeScale, ExecutionYear executionYear) {
         this();
-        commonFieldsChange(name, nameEn, code, gradeScale, executionYear);
+        commonFieldsChange(name, code, associatedInstitutions, gradeScale, executionYear);
 
         if (degreeType == null) {
             throw new DomainException("degree.degree.type.not.null");
@@ -168,19 +168,17 @@ public class Degree extends Degree_Base implements Comparable<Degree> {
         this.setDegreeType(degreeType);
     }
 
-    public Degree(String name, String nameEn, String acronym, DegreeType degreeType, Double ectsCredits, GradeScale gradeScale,
+    public Degree(LocalizedString name, String acronym, LocalizedString associatedInstitutions, DegreeType degreeType, Double ectsCredits, GradeScale gradeScale,
             String prevailingScientificArea, AdministrativeOffice administrativeOffice) {
         this();
-        commonFieldsChange(name, nameEn, acronym, gradeScale, ExecutionYear.readCurrentExecutionYear());
+        commonFieldsChange(name, acronym, associatedInstitutions, gradeScale, ExecutionYear.readCurrentExecutionYear());
         newStructureFieldsChange(degreeType, ectsCredits, prevailingScientificArea);
         setAdministrativeOffice(administrativeOffice);
     }
 
-    private void commonFieldsChange(String name, String nameEn, String code, GradeScale gradeScale, ExecutionYear executionYear) {
-        if (name == null) {
+    private void commonFieldsChange(LocalizedString name, String code, LocalizedString associatedInstitutions, GradeScale gradeScale, ExecutionYear executionYear) {
+        if (name == null || name.isEmpty()) {
             throw new DomainException("degree.name.not.null");
-        } else if (nameEn == null) {
-            throw new DomainException("degree.name.en.not.null");
         } else if (code == null) {
             throw new DomainException("degree.code.not.null");
         }
@@ -189,11 +187,11 @@ public class Degree extends Degree_Base implements Comparable<Degree> {
         if (degreeInfo == null) {
             degreeInfo = tryCreateUsingMostRecentInfo(executionYear);
         }
-        degreeInfo.setName(new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT, name.trim()).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                nameEn.trim()));
+        degreeInfo.setName(name);
+        degreeInfo.setAssociatedInstitutions(associatedInstitutions);
 
-        this.setNome(name);
-        this.setNameEn(nameEn);
+        this.setNome(name.getContent(LocaleUtils.PT));
+        this.setNameEn(name.getContent(LocaleUtils.EN));
         this.setSigla(code.trim());
         this.setGradeScale(gradeScale);
     }
@@ -210,9 +208,10 @@ public class Degree extends Degree_Base implements Comparable<Degree> {
         this.setPrevailingScientificArea(prevailingScientificArea == null ? null : prevailingScientificArea.trim());
     }
 
-    public void edit(String name, String nameEn, String code, DegreeType degreeType, GradeScale gradeScale,
+    public void edit(LocalizedString name, String code, LocalizedString associatedInstitutions, DegreeType degreeType,
+                        GradeScale gradeScale,
             ExecutionYear executionYear) {
-        commonFieldsChange(name, nameEn, code, gradeScale, executionYear);
+        commonFieldsChange(name, code, associatedInstitutions, gradeScale, executionYear);
 
         if (degreeType == null) {
             throw new DomainException("degree.degree.type.not.null");
@@ -220,10 +219,10 @@ public class Degree extends Degree_Base implements Comparable<Degree> {
         this.setDegreeType(degreeType);
     }
 
-    public void edit(String name, String nameEn, String acronym, DegreeType degreeType, Double ectsCredits,
+    public void edit(LocalizedString name, String acronym, LocalizedString associatedInstitutions, DegreeType degreeType, Double ectsCredits,
             GradeScale gradeScale, String prevailingScientificArea, ExecutionYear executionYear) {
         checkIfCanEdit(degreeType);
-        commonFieldsChange(name, nameEn, acronym, gradeScale, executionYear);
+        commonFieldsChange(name, acronym, associatedInstitutions, gradeScale, executionYear);
         newStructureFieldsChange(degreeType, ectsCredits, prevailingScientificArea);
     }
 
