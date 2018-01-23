@@ -290,9 +290,9 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
     @Override
     protected void checkForDeletionBlockers(Collection<String> blockers) {
         super.checkForDeletionBlockers(blockers);
-        if (!isTemporary() || hasConfirmedMarkSheet()) {
+        if (!isTemporary() || getMarkSheet() != null) {
             blockers.add(BundleUtil.getString(Bundle.APPLICATION,
-                    "error.enrolmentEvaluation.isTemporary.or.hasConfirmedMarksheet"));
+                "error.enrolmentEvaluation.isTemporary.or.hasConfirmedMarksheet"));
         }
         if (getImprovementOfApprovedEnrolmentEvent() != null && getImprovementOfApprovedEnrolmentEvent().isPayed()) {
             blockers.add(BundleUtil.getString(Bundle.APPLICATION, "error.enrolmentEvaluation.has.been.payed"));
