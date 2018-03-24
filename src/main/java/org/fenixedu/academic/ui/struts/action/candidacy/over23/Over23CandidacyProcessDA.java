@@ -329,6 +329,8 @@ public class Over23CandidacyProcessDA extends CandidacyProcessDA {
         result.add(BundleUtil.getString(Bundle.CANDIDATE, "label.spreadsheet.nationality"));
         result.add(BundleUtil.getString(Bundle.CANDIDATE, "label.spreadsheet.state"));
         result.add(BundleUtil.getString(Bundle.CANDIDATE, "label.spreadsheet.verified"));
+        result.add(BundleUtil.getString(Bundle.CANDIDATE, "label.spreadsheet.email"));
+        result.add(BundleUtil.getString(Bundle.CANDIDATE, "label.spreadsheet.access.link"));
 
         return result;
     }
@@ -349,6 +351,8 @@ public class Over23CandidacyProcessDA extends CandidacyProcessDA {
             row.setCell(BundleUtil.getString(Bundle.ENUMERATION, individualCandidacyProcess.getCandidacyState().getQualifiedName()));
             row.setCell(BundleUtil.getString(Bundle.CANDIDATE, over23IndividualCandidacyProcess.getProcessChecked() != null
                     && over23IndividualCandidacyProcess.getProcessChecked() ? MESSAGE_YES : MESSAGE_NO));
+            row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getEmail());
+            row.setCell(over23IndividualCandidacyProcess.getCandidacyHashCode().getDefaultPublicLink());
 
             return spreadsheet;
     }
