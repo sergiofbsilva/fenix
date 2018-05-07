@@ -65,8 +65,8 @@ abstract public class PhdProcessDA extends PhdDA {
         final Person loggedPerson = getLoggedPerson(request);
         if (loggedPerson != null) {
             request.setAttribute("alertMessagesToNotify", loggedPerson.getUnreadedPhdAlertMessages());
-            request.setAttribute("isTeacher", RoleType.TEACHER.isMember(loggedPerson.getUser())
-                    || !loggedPerson.getProfessorshipsSet().isEmpty());
+            request.setAttribute("isTeacher",
+                    RoleType.TEACHER.isMember(loggedPerson.getUser()) || !loggedPerson.getProfessorshipsSet().isEmpty());
         }
 
         return super.execute(mapping, actionForm, request, response);
@@ -78,8 +78,8 @@ abstract public class PhdProcessDA extends PhdDA {
      */
     protected PhdProgramProcess getProcess(HttpServletRequest request) {
         final String processIdAttribute = (String) request.getAttribute("processId");
-        return FenixFramework.getDomainObject(processIdAttribute != null ? processIdAttribute : (String) request
-                .getParameter("processId"));
+        return FenixFramework
+                .getDomainObject(processIdAttribute != null ? processIdAttribute : (String) request.getParameter("processId"));
     }
 
     protected ActionForward executeActivity(Class<? extends Activity<? extends Process>> activity, Object activityParameter,
@@ -143,8 +143,8 @@ abstract public class PhdProcessDA extends PhdDA {
     }
 
     protected byte[] createGuidanceDocumentsZip(HttpServletRequest request) throws IOException {
-        return PhdDocumentsZip.zip(new ArrayList<PhdProgramProcessDocument>(((PhdIndividualProgramProcess) getProcess(request))
-                .getLatestGuidanceDocumentVersions()));
+        return PhdDocumentsZip.zip(new ArrayList<PhdProgramProcessDocument>(
+                ((PhdIndividualProgramProcess) getProcess(request)).getLatestGuidanceDocumentVersions()));
     }
 
     protected void initPersonBeanUglyHack(final PersonBean personBean, Person person) {
@@ -184,8 +184,8 @@ abstract public class PhdProcessDA extends PhdDA {
             personBean.setCountryOfResidence(physicalAddress.getCountryOfResidence());
         }
 
-        personBean.setPhone(pendingPartyContactBean.getDefaultPhone() != null ? pendingPartyContactBean.getDefaultPhone()
-                .getNumber() : null);
+        personBean.setPhone(
+                pendingPartyContactBean.getDefaultPhone() != null ? pendingPartyContactBean.getDefaultPhone().getNumber() : null);
         personBean.setMobile(pendingPartyContactBean.getDefaultMobilePhone() != null ? pendingPartyContactBean
                 .getDefaultMobilePhone().getNumber() : null);
 

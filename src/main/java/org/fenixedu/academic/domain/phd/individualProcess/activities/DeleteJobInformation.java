@@ -53,8 +53,7 @@ public class DeleteJobInformation extends PhdIndividualProgramProcessActivity {
             return false;
         }
 
-        return job.getCreator() == person
-                || AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESS_STATE).isMember(
-                        job.getCreator().getUser());
+        return job.getCreator() == person || AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESS_STATE)
+                .isMember(job.getCreator().getUser());
     }
 }

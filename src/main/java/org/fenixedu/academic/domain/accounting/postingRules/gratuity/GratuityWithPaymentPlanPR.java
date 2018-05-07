@@ -98,15 +98,15 @@ public class GratuityWithPaymentPlanPR extends GratuityWithPaymentPlanPR_Base im
                 continue;
             }
 
-            result.add(new EntryWithInstallmentDTO(EntryType.GRATUITY_FEE, event, installmentAmount, event
-                    .getDescriptionForEntryType(getEntryType()), installment));
+            result.add(new EntryWithInstallmentDTO(EntryType.GRATUITY_FEE, event, installmentAmount,
+                    event.getDescriptionForEntryType(getEntryType()), installment));
 
         }
 
         if (needsTotalAmountEntry(getPaymentPlan(event), result, event, when)) {
             final Money amountToPay = event.calculateAmountToPay(when);
-            result.add(new EntryDTO(EntryType.GRATUITY_FEE, event, amountToPay, event.getPayedAmount(), amountToPay, event
-                    .getDescriptionForEntryType(getEntryType()), amountToPay));
+            result.add(new EntryDTO(EntryType.GRATUITY_FEE, event, amountToPay, event.getPayedAmount(), amountToPay,
+                    event.getDescriptionForEntryType(getEntryType()), amountToPay));
         }
 
         return result;
@@ -146,8 +146,8 @@ public class GratuityWithPaymentPlanPR extends GratuityWithPaymentPlanPR_Base im
                     gratuityEventWithPaymentPlan, transactionDetail));
         }
 
-        return Collections.singleton(internalProcessTotal(user, fromAccount, toAccount, entryDTO, gratuityEventWithPaymentPlan,
-                transactionDetail));
+        return Collections.singleton(
+                internalProcessTotal(user, fromAccount, toAccount, entryDTO, gratuityEventWithPaymentPlan, transactionDetail));
 
     }
 
@@ -165,8 +165,8 @@ public class GratuityWithPaymentPlanPR extends GratuityWithPaymentPlanPR_Base im
 
     }
 
-    private AccountingTransaction internalProcessInstallment(User user, Account fromAccount, Account toAccount,
-            EntryDTO entryDTO, GratuityEventWithPaymentPlan event, AccountingTransactionDetailDTO transactionDetail) {
+    private AccountingTransaction internalProcessInstallment(User user, Account fromAccount, Account toAccount, EntryDTO entryDTO,
+            GratuityEventWithPaymentPlan event, AccountingTransactionDetailDTO transactionDetail) {
 
         final EntryWithInstallmentDTO entryWithInstallmentDTO = (EntryWithInstallmentDTO) entryDTO;
 
@@ -191,9 +191,8 @@ public class GratuityWithPaymentPlanPR extends GratuityWithPaymentPlanPR_Base im
     }
 
     private void checkIfCanAddAmountForInstallment(EntryWithInstallmentDTO entryDTO, DateTime whenRegistered, Event event) {
-        final Money installmentAmount =
-                getPaymentPlan(event).calculateRemainingAmountFor(entryDTO.getInstallment(), event, whenRegistered,
-                        getDiscountPercentage(event));
+        final Money installmentAmount = getPaymentPlan(event).calculateRemainingAmountFor(entryDTO.getInstallment(), event,
+                whenRegistered, getDiscountPercentage(event));
         if (entryDTO.getAmountToPay().compareTo(installmentAmount) < 0) {
             throw new DomainExceptionWithLabelFormatter(
                     "error.accounting.postingRules.gratuity.GratuityWithPaymentPlanPR.amount.to.pay.must.match.value",

@@ -62,10 +62,10 @@ public class ApproveThesisProposal extends ThesisServiceWithMailNotification {
 
     @Override
     protected Collection<String> getReceiversEmails(Thesis thesis) {
-        Set<String> persons =
-                thesis.getAllParticipants(ThesisParticipationType.ORIENTATOR, ThesisParticipationType.COORIENTATOR,
-                        ThesisParticipationType.PRESIDENT, ThesisParticipationType.VOWEL).stream().map(p -> p.getEmail())
-                        .collect(Collectors.toSet());
+        Set<String> persons = thesis
+                .getAllParticipants(ThesisParticipationType.ORIENTATOR, ThesisParticipationType.COORIENTATOR,
+                        ThesisParticipationType.PRESIDENT, ThesisParticipationType.VOWEL)
+                .stream().map(p -> p.getEmail()).collect(Collectors.toSet());
         persons.add(thesis.getStudent().getPerson().getProfile().getEmail());
 
         // also send proposal approval to the contact team
@@ -106,9 +106,8 @@ public class ApproveThesisProposal extends ThesisServiceWithMailNotification {
         String vowel3Affiliation = affiliation(thesis.getVowels(), 2);
         String vowel4Name = name(thesis.getVowels(), 3);
         String vowel4Affiliation = affiliation(thesis.getVowels(), 3);
-        String orientationName =
-                thesis.getOrientation().stream().map(p -> p.getName() + ", " + p.getAffiliation())
-                        .collect(Collectors.joining("\n"));
+        String orientationName = thesis.getOrientation().stream().map(p -> p.getName() + ", " + p.getAffiliation())
+                .collect(Collectors.joining("\n"));
 
         String currentPersonName = currentPerson.getNickname();
 

@@ -79,8 +79,8 @@ public class EPFLCandidatesReport extends PhdReport {
     }
 
     private boolean isProcessFromEPFL(PhdIndividualProgramProcess process) {
-        return (process.getCandidacyProcess().getPublicPhdCandidacyPeriod() != null && process.getCandidacyProcess()
-                .getPublicPhdCandidacyPeriod().isEpflCandidacyPeriod())
+        return (process.getCandidacyProcess().getPublicPhdCandidacyPeriod() != null
+                && process.getCandidacyProcess().getPublicPhdCandidacyPeriod().isEpflCandidacyPeriod())
                 || PhdIndividualProgramCollaborationType.EPFL == process.getCollaborationType();
     }
 
@@ -92,7 +92,8 @@ public class EPFLCandidatesReport extends PhdReport {
         String documentIdNumber = process.getPerson().getDocumentIdNumber();
         String documentIdTypeName = process.getPerson().getIdDocumentType().getLocalizedName();
         final ExecutionYear executionYear = process.getExecutionYear();
-        final String phdProgramName = process.getPhdProgram() != null ? process.getPhdProgram().getName(executionYear).getContent() : "";
+        final String phdProgramName =
+                process.getPhdProgram() != null ? process.getPhdProgram().getName(executionYear).getContent() : "";
         String focusArea =
                 process.getPhdProgramFocusArea() != null ? process.getPhdProgramFocusArea().getName().getContent() : "";
 

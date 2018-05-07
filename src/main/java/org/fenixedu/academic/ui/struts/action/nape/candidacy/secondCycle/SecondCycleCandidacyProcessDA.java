@@ -41,12 +41,11 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = NapeCandidaciesApp.class, path = "second-cycle", titleKey = "title.application.name.secondCycle.short")
 @Mapping(path = "/caseHandlingSecondCycleCandidacyProcess", module = "nape",
         formBeanClass = SecondCycleCandidacyProcessDA.SecondCycleCandidacyProcessForm.class)
-@Forwards({
-        @Forward(name = "intro", path = "/nape/candidacy/secondCycle/mainCandidacyProcess.jsp"),
+@Forwards({ @Forward(name = "intro", path = "/nape/candidacy/secondCycle/mainCandidacyProcess.jsp"),
         @Forward(name = "view-child-process-with-missing-required-documents",
                 path = "/candidacy/secondCycle/viewChildProcessWithMissingRequiredDocuments.jsp") })
-public class SecondCycleCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleCandidacyProcessDA {
+public class SecondCycleCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -72,9 +71,8 @@ public class SecondCycleCandidacyProcessDA extends
         Degree selectedDegree = getChooseDegreeBean(request).getDegree();
 
         for (IndividualCandidacyProcess child : processes) {
-            if ((selectedDegree == null)
-                    || ((SecondCycleIndividualCandidacyProcess) child).getCandidacy().getSelectedDegreesSet()
-                            .contains(selectedDegree)) {
+            if ((selectedDegree == null) || ((SecondCycleIndividualCandidacyProcess) child).getCandidacy().getSelectedDegreesSet()
+                    .contains(selectedDegree)) {
                 selectedDegreesIndividualCandidacyProcesses.add(child);
             }
         }

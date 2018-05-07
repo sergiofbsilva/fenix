@@ -88,8 +88,8 @@ public class OldMarkSheetRectifyDispatchAction extends OldMarkSheetCreateDispatc
                         markSheetManagementCreateBean.getExecutionPeriod(), markSheetManagementCreateBean.getEvaluationSeason());
 
         MarkSheetRectifyBean rectifyBean = new MarkSheetRectifyBean();
-        rectifyBean.setCurricularCourseBean(new CurricularCourseMarksheetManagementBean(markSheetManagementCreateBean
-                .getCurricularCourse(), markSheetManagementCreateBean.getExecutionPeriod()));
+        rectifyBean.setCurricularCourseBean(new CurricularCourseMarksheetManagementBean(
+                markSheetManagementCreateBean.getCurricularCourse(), markSheetManagementCreateBean.getExecutionPeriod()));
         rectifyBean.setDegree(markSheetManagementCreateBean.getDegree());
         rectifyBean.setDegreeCurricularPlan(markSheetManagementCreateBean.getDegreeCurricularPlan());
         rectifyBean.setExecutionPeriod(markSheetManagementCreateBean.getExecutionPeriod());
@@ -170,12 +170,8 @@ public class OldMarkSheetRectifyDispatchAction extends OldMarkSheetCreateDispatc
             return mapping.findForward("searchMarkSheetFilled");
         } catch (DomainException e) {
             addMessage(request, actionMessages, e.getMessage(), e.getArgs());
-            List<EnrolmentEvaluation> enrolmentEvaluations =
-                    rectifyBean
-                            .getCurricularCourseBean()
-                            .getCurricularCourse()
-                            .getEnrolmentEvaluationsForOldMarkSheet(rectifyBean.getExecutionPeriod(),
-                                    rectifyBean.getEvaluationSeason());
+            List<EnrolmentEvaluation> enrolmentEvaluations = rectifyBean.getCurricularCourseBean().getCurricularCourse()
+                    .getEnrolmentEvaluationsForOldMarkSheet(rectifyBean.getExecutionPeriod(), rectifyBean.getEvaluationSeason());
 
             return rectifyMarkSheetStepOne(mapping, actionForm, request, response, rectifyBean, enrolmentEvaluations);
         }

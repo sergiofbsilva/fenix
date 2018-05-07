@@ -79,9 +79,8 @@ public class ChangeStudentsShift {
 
         final String messagePrefix = getString("changeStudentsShift.email.body", oldShift.getNome());
 
-        final String messagePosfix =
-                newShift == null ? getString("changeStudentsShift.email.body.notNewShift") : getString(
-                        "changeStudentsShift.email.body.newShift", oldShift.getNome());
+        final String messagePosfix = newShift == null ? getString("changeStudentsShift.email.body.notNewShift") : getString(
+                "changeStudentsShift.email.body.newShift", oldShift.getNome());
 
         final String message = messagePrefix + messagePosfix;
 

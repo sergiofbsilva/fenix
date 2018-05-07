@@ -29,9 +29,8 @@ public class DayOfAcademicSemesterDateTimeFieldType extends DateTimeFieldType {
 
     private static final DayOfAcademicSemesterDateTimeFieldType DAY_OF_ACADEMIC_SEMESTER_TYPE;
     static {
-        DAY_OF_ACADEMIC_SEMESTER_TYPE =
-                new DayOfAcademicSemesterDateTimeFieldType("dayOfAcademicSemester", DurationFieldType.days(),
-                        AcademicSemestersDurationFieldType.academicSemesters());
+        DAY_OF_ACADEMIC_SEMESTER_TYPE = new DayOfAcademicSemesterDateTimeFieldType("dayOfAcademicSemester",
+                DurationFieldType.days(), AcademicSemestersDurationFieldType.academicSemesters());
     }
 
     private DayOfAcademicSemesterDateTimeFieldType(String name, DurationFieldType unitType, DurationFieldType rangeType) {

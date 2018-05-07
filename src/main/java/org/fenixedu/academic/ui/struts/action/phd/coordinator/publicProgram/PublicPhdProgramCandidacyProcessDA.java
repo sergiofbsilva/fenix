@@ -46,13 +46,13 @@ import org.fenixedu.academic.domain.phd.exceptions.PhdDomainOperationException;
 import org.fenixedu.academic.ui.renderers.providers.AbstractDomainObjectProvider;
 import org.fenixedu.academic.ui.struts.action.coordinator.CoordinatorApplication.CoordinatorPhdApp;
 import org.fenixedu.academic.ui.struts.action.phd.candidacy.academicAdminOffice.PhdProgramCandidacyProcessDA;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
@@ -169,7 +169,7 @@ public class PublicPhdProgramCandidacyProcessDA extends PhdProgramCandidacyProce
             HttpServletResponse response) {
 
         PhdProgramFocusArea focusArea = getDomainObject(request, "focusAreaId");
-        
+
         atomic(() -> {
             focusArea.setActive(!focusArea.getActive());
         });
@@ -373,9 +373,10 @@ public class PublicPhdProgramCandidacyProcessDA extends PhdProgramCandidacyProce
             setName(hashCode.hasCandidacyProcess() ? hashCode.getPerson().getName() : null);
             setPhdFocusArea(hashCode.hasCandidacyProcess()
                     && hashCode.getIndividualProgramProcess().getPhdProgramFocusArea() != null ? hashCode
-                    .getIndividualProgramProcess().getPhdProgramFocusArea().getName().getContent() : null);
+                            .getIndividualProgramProcess().getPhdProgramFocusArea().getName().getContent() : null);
             setCandidate(hashCode.hasCandidacyProcess());
-            setValidated(hashCode.hasCandidacyProcess() ? hashCode.getPhdProgramCandidacyProcess().isValidatedByCandidate() : false);
+            setValidated(
+                    hashCode.hasCandidacyProcess() ? hashCode.getPhdProgramCandidacyProcess().isValidatedByCandidate() : false);
         }
 
         public PhdProgramPublicCandidacyHashCode getHashCode() {

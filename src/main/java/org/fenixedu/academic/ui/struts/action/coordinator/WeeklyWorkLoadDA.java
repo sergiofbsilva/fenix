@@ -72,17 +72,16 @@ public class WeeklyWorkLoadDA extends FenixDispatchAction {
 
         Interval[] intervals;
 
-        final Set<ExecutionCourse> executionCourses = new TreeSet<ExecutionCourse>(
-                ExecutionCourse.EXECUTION_COURSE_NAME_COMPARATOR);
+        final Set<ExecutionCourse> executionCourses =
+                new TreeSet<ExecutionCourse>(ExecutionCourse.EXECUTION_COURSE_NAME_COMPARATOR);
 
         public CurricularYearWeeklyWorkLoadView(final DegreeCurricularPlan degreeCurricularPlan,
                 final ExecutionSemester executionSemester, final Set<ExecutionCourse> executionCourses) {
             final ExecutionDegree executionDegree = findExecutionDegree(executionSemester, degreeCurricularPlan);
 
             if (executionDegree != null) {
-                this.interval =
-                        new Interval(new DateMidnight(getBegginingOfLessonPeriod(executionSemester, executionDegree)),
-                                new DateMidnight(getEndOfExamsPeriod(executionSemester, executionDegree)));
+                this.interval = new Interval(new DateMidnight(getBegginingOfLessonPeriod(executionSemester, executionDegree)),
+                        new DateMidnight(getEndOfExamsPeriod(executionSemester, executionDegree)));
                 final Period period = interval.toPeriod();
                 int extraWeek = period.getDays() > 0 ? 1 : 0;
                 numberOfWeeks = (period.getYears() * 12 + period.getMonths()) * 4 + period.getWeeks() + extraWeek + 1;
@@ -98,8 +97,8 @@ public class WeeklyWorkLoadDA extends FenixDispatchAction {
 
         private ExecutionDegree findExecutionDegree(final ExecutionSemester executionSemester,
                 final DegreeCurricularPlan degreeCurricularPlan) {
-            return degreeCurricularPlan.getExecutionDegreeByAcademicInterval(executionSemester.getExecutionYear()
-                    .getAcademicInterval());
+            return degreeCurricularPlan
+                    .getExecutionDegreeByAcademicInterval(executionSemester.getExecutionYear().getAcademicInterval());
         }
 
         public Date getBegginingOfLessonPeriod(final ExecutionSemester executionSemester, final ExecutionDegree executionDegree) {
@@ -190,8 +189,8 @@ public class WeeklyWorkLoadDA extends FenixDispatchAction {
         }
 
         if (selecctedCurricularYear != null && degreeCurricularPlan != null) {
-            request.setAttribute("curricularYearWeeklyWorkLoadView", new CurricularYearWeeklyWorkLoadView(degreeCurricularPlan,
-                    selectedExecutionPeriod, executionCourses));
+            request.setAttribute("curricularYearWeeklyWorkLoadView",
+                    new CurricularYearWeeklyWorkLoadView(degreeCurricularPlan, selectedExecutionPeriod, executionCourses));
         }
 
         return mapping.findForward("showWeeklyWorkLoad");

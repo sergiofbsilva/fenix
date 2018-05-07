@@ -67,9 +67,8 @@ public class IngressionType extends IngressionType_Base {
 
     //Checks if there is any other objects, besides the one being changed, for which the tested predicate returns true
     private void checkUniqueWithPredicate(Predicate<IngressionType> predicate) {
-        Optional<IngressionType> findAny =
-                Bennu.getInstance().getIngressionTypesSet().stream()
-                        .filter(predicate.and(ingressionType -> ingressionType != this)).findAny();
+        Optional<IngressionType> findAny = Bennu.getInstance().getIngressionTypesSet().stream()
+                .filter(predicate.and(ingressionType -> ingressionType != this)).findAny();
         if (findAny.isPresent()) {
             throw new DomainException("label.error.ingressionTypePredicateIsNotUnique");
         }

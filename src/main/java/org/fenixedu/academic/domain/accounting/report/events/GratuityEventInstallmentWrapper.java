@@ -40,28 +40,22 @@ public class GratuityEventInstallmentWrapper implements InstallmentWrapper {
 
     @Override
     public String getExpirationDateLabel() {
-        String label =
-                BundleUtil
-                        .getString(Bundle.ACADEMIC,
-                                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.date");
+        String label = BundleUtil.getString(Bundle.ACADEMIC,
+                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.date");
         return String.format(label, this.installment.getOrder());
     }
 
     @Override
     public String getAmountToPayLabel() {
-        String label =
-                BundleUtil
-                        .getString(Bundle.ACADEMIC,
-                                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.amountToPay");
+        String label = BundleUtil.getString(Bundle.ACADEMIC,
+                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.amountToPay");
         return String.format(label, this.installment.getOrder());
     }
 
     @Override
     public String getRemainingAmountLabel() {
-        String label =
-                BundleUtil
-                        .getString(Bundle.ACADEMIC,
-                                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.remainingAmount");
+        String label = BundleUtil.getString(Bundle.ACADEMIC,
+                "label.org.fenixedu.academic.domain.accounting.report.events.EventReportQueueJob.installment.expiration.remainingAmount");
         return String.format(label, this.installment.getOrder());
     }
 
@@ -78,9 +72,8 @@ public class GratuityEventInstallmentWrapper implements InstallmentWrapper {
 
     @Override
     public String getRemainingAmount(final DateTime when) {
-        Map<Installment, Money> calculateInstallmentRemainingAmounts =
-                event.getGratuityPaymentPlan().calculateInstallmentRemainingAmounts(event, when,
-                        event.getPostingRule().getDiscountPercentage(event));
+        Map<Installment, Money> calculateInstallmentRemainingAmounts = event.getGratuityPaymentPlan()
+                .calculateInstallmentRemainingAmounts(event, when, event.getPostingRule().getDiscountPercentage(event));
 
         for (Map.Entry<Installment, Money> entry : calculateInstallmentRemainingAmounts.entrySet()) {
             if (entry.getKey() == this.installment) {

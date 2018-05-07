@@ -48,7 +48,8 @@ public class SopClassTimeTableLessonContentRenderer extends LessonSlotContentRen
 
     private InfoExecutionDegree infoExecutionDegree = null;
 
-    public SopClassTimeTableLessonContentRenderer(InfoExecutionDegree infoExecutionDegree, InfoCurricularYear infoCurricularYear) {
+    public SopClassTimeTableLessonContentRenderer(InfoExecutionDegree infoExecutionDegree,
+            InfoCurricularYear infoCurricularYear) {
         super();
         this.infoCurricularYear = infoCurricularYear;
         this.infoExecutionDegree = infoExecutionDegree;

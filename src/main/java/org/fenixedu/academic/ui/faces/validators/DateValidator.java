@@ -52,10 +52,10 @@ public class DateValidator implements Validator, StateHolder {
 
         if (value != null) {
             String val = value.toString();
-            if (org.apache.commons.validator.DateValidator.getInstance().isValid(val, this.getFormat(), this.getStrict()) == false) {
-                String errorMessage =
-                        MessageFormat.format(BundleUtil.getString(Bundle.APPLICATION, INVALID_DATE),
-                                new Object[] { this.getFormat() });
+            if (org.apache.commons.validator.DateValidator.getInstance().isValid(val, this.getFormat(),
+                    this.getStrict()) == false) {
+                String errorMessage = MessageFormat.format(BundleUtil.getString(Bundle.APPLICATION, INVALID_DATE),
+                        new Object[] { this.getFormat() });
 
                 throw new ValidatorException(new FacesMessage(errorMessage));
             }

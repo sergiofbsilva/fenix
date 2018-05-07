@@ -49,8 +49,8 @@ public class EnumTagLib extends BodyTagSupport {
 
     private String includedFields;
 
-    protected static MessageResources messages = MessageResources
-            .getMessageResources("org.apache.struts.taglib.bean.LocalStrings");
+    protected static MessageResources messages =
+            MessageResources.getMessageResources("org.apache.struts.taglib.bean.LocalStrings");
 
     @Override
     public int doStartTag() throws JspException {

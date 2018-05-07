@@ -21,9 +21,9 @@ package org.fenixedu.academic.domain.candidacy.util;
 import java.io.Serializable;
 
 import org.fenixedu.academic.domain.period.GenericApplicationPeriod;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.security.Authenticate;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 import pt.ist.fenixframework.Atomic;

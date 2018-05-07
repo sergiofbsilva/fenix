@@ -55,9 +55,8 @@ public class AutoCompleteInputRendererWithPostBack extends AutoCompleteInputRend
 
     @Override
     public HtmlComponent render(Object object, Class type) {
-        String prefix =
-                HtmlComponent.getValidIdOrName(((MetaSlot) getInputContext().getMetaObject()).getKey().toString()
-                        .replaceAll("\\.", "_").replaceAll("\\:", "_"));
+        String prefix = HtmlComponent.getValidIdOrName(
+                ((MetaSlot) getInputContext().getMetaObject()).getKey().toString().replaceAll("\\.", "_").replaceAll("\\:", "_"));
 
         HtmlHiddenField hidden = new HtmlHiddenField(prefix + HIDDEN_NAME, "");
 

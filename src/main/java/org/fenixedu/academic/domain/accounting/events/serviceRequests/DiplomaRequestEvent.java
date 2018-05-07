@@ -34,8 +34,8 @@ abstract public class DiplomaRequestEvent extends DiplomaRequestEvent_Base {
         super();
     }
 
-    protected DiplomaRequestEvent(final AdministrativeOffice administrativeOffice, final EventType eventType,
-            final Person person, final DiplomaRequest diplomaRequest) {
+    protected DiplomaRequestEvent(final AdministrativeOffice administrativeOffice, final EventType eventType, final Person person,
+            final DiplomaRequest diplomaRequest) {
         this();
         super.init(administrativeOffice, eventType, person, diplomaRequest);
     }

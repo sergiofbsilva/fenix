@@ -19,8 +19,8 @@
 package org.fenixedu.academic.domain.thesis;
 
 public enum ThesisParticipationType {
-    STATE_CREATOR(true), STATE_SUBMITTER(true), STATE_PROPOSAL_APPROVER(true), STATE_CONFIRMER(true), STATE_EVALUATION_APPROVER(
-            true),
+    STATE_CREATOR(true), STATE_SUBMITTER(true), STATE_PROPOSAL_APPROVER(true), STATE_CONFIRMER(true),
+    STATE_EVALUATION_APPROVER(true),
 
     ORIENTATOR(false), COORIENTATOR(false), PRESIDENT(true), VOWEL(false);
 

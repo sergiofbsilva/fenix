@@ -108,7 +108,7 @@ public class UIDegreeModule extends UIInput {
         } else if (!this.degreeModule.isLeaf()) {
             new UICourseGroup(this.degreeModule, null, this.toEdit, this.showRules, this.depth, this.tabs, Boolean.FALSE,
                     Boolean.FALSE, Boolean.FALSE, Boolean.FALSE, null, this.module, this.currentPage, this.expandable)
-                    .encodeBegin(facesContext);
+                            .encodeBegin(facesContext);
         }
     }
 

@@ -26,7 +26,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 @Mapping(path = "/erasmusCandidacyProcessReport", module = "internationalRelatOffice",
         functionality = ErasmusCandidacyProcessDA.class)
 @Forwards({ @Forward(name = "list", path = "/candidacy/erasmus/reports/list.jsp") })
-public class ErasmusCandidacyProcessReportDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.erasmus.report.ErasmusCandidacyProcessReportDA {
+public class ErasmusCandidacyProcessReportDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.report.ErasmusCandidacyProcessReportDA {
 
 }

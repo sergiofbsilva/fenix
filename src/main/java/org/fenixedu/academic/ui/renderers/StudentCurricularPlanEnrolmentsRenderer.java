@@ -270,8 +270,8 @@ public class StudentCurricularPlanEnrolmentsRenderer extends InputRenderer {
                             depth + getWidthDecreasePerLevel());
                     curriculumGroups.remove(0);
                 } else if (curriculumGroups.isEmpty() && !courseGroupsToEnrol.isEmpty()) {
-                    generateCourseGroupToEnroll(blockContainer, courseGroupsToEnrol.iterator().next(), depth
-                            + getWidthDecreasePerLevel());
+                    generateCourseGroupToEnroll(blockContainer, courseGroupsToEnrol.iterator().next(),
+                            depth + getWidthDecreasePerLevel());
                     courseGroupsToEnrol.remove(0);
                 } else {
                     Context context = courseGroupsToEnrol.iterator().next().getContext();
@@ -281,8 +281,8 @@ public class StudentCurricularPlanEnrolmentsRenderer extends InputRenderer {
                                 executionSemester, depth + getWidthDecreasePerLevel());
                         curriculumGroups.remove(0);
                     } else {
-                        generateCourseGroupToEnroll(blockContainer, courseGroupsToEnrol.iterator().next(), depth
-                                + getWidthDecreasePerLevel());
+                        generateCourseGroupToEnroll(blockContainer, courseGroupsToEnrol.iterator().next(),
+                                depth + getWidthDecreasePerLevel());
                         courseGroupsToEnrol.remove(0);
                     }
                 }

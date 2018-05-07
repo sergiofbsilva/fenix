@@ -29,10 +29,10 @@ import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.LocalDate;
 
 public class PhdCustomAlert extends PhdCustomAlert_Base {
@@ -41,20 +41,20 @@ public class PhdCustomAlert extends PhdCustomAlert_Base {
         super();
     }
 
-    public PhdCustomAlert(PhdIndividualProgramProcess process, Group targetGroup, LocalizedString subject,
-            LocalizedString body, Boolean sendMail, LocalDate fireDate, Boolean userDefined, Boolean shared) {
+    public PhdCustomAlert(PhdIndividualProgramProcess process, Group targetGroup, LocalizedString subject, LocalizedString body,
+            Boolean sendMail, LocalDate fireDate, Boolean userDefined, Boolean shared) {
         this();
         init(process, targetGroup, subject, body, sendMail, fireDate, userDefined, shared);
     }
 
     public PhdCustomAlert(PhdCustomAlertBean bean) {
         this(bean.getProcess(), bean.calculateTargetGroup(), new LocalizedString(Locale.getDefault(), bean.getSubject()),
-                new LocalizedString(Locale.getDefault(), bean.getBody()), bean.isToSendEmail(), bean.getFireDate(), bean
-                        .getUserDefined(), bean.getShared());
+                new LocalizedString(Locale.getDefault(), bean.getBody()), bean.isToSendEmail(), bean.getFireDate(),
+                bean.getUserDefined(), bean.getShared());
     }
 
-    protected void init(PhdIndividualProgramProcess process, Group targetGroup, LocalizedString subject,
-            LocalizedString body, Boolean sendEmail, LocalDate whenToFire, Boolean userDefined, Boolean shared) {
+    protected void init(PhdIndividualProgramProcess process, Group targetGroup, LocalizedString subject, LocalizedString body,
+            Boolean sendEmail, LocalDate whenToFire, Boolean userDefined, Boolean shared) {
 
         super.init(process, subject, body);
         String[] args = {};
@@ -141,9 +141,8 @@ public class PhdCustomAlert extends PhdCustomAlert_Base {
         Group targetGroup = getTargetAccessGroup();
 
         StringBuilder builder = new StringBuilder();
-        targetGroup.getMembers().forEach(
-                user -> builder.append(user.getPerson().getName()).append(" (")
-                        .append(user.getPerson().getEmailForSendingEmails()).append(")\n"));
+        targetGroup.getMembers().forEach(user -> builder.append(user.getPerson().getName()).append(" (")
+                .append(user.getPerson().getEmailForSendingEmails()).append(")\n"));
         return builder.toString();
     }
 

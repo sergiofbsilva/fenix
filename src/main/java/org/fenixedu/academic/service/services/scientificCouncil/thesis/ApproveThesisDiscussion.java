@@ -37,9 +37,9 @@ import org.fenixedu.academic.service.services.exceptions.NotAuthorizedException;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.commons.i18n.I18N;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.ByteStreams;
+
+import pt.ist.fenixframework.Atomic;
 
 public class ApproveThesisDiscussion extends ThesisServiceWithMailNotification {
     private static final String SUBJECT_KEY = "thesis.evaluation.approve.subject";
@@ -61,10 +61,10 @@ public class ApproveThesisDiscussion extends ThesisServiceWithMailNotification {
 
     @Override
     protected Collection<String> getReceiversEmails(Thesis thesis) {
-        Set<String> persons =
-                thesis.getAllParticipants(ThesisParticipationType.ORIENTATOR, ThesisParticipationType.COORIENTATOR,
-                        ThesisParticipationType.PRESIDENT, ThesisParticipationType.VOWEL).stream().map(p -> p.getEmail())
-                        .collect(Collectors.toSet());
+        Set<String> persons = thesis
+                .getAllParticipants(ThesisParticipationType.ORIENTATOR, ThesisParticipationType.COORIENTATOR,
+                        ThesisParticipationType.PRESIDENT, ThesisParticipationType.VOWEL)
+                .stream().map(p -> p.getEmail()).collect(Collectors.toSet());
         persons.add(thesis.getStudent().getPerson().getProfile().getEmail());
 
         // also send proposal approval to the contact team

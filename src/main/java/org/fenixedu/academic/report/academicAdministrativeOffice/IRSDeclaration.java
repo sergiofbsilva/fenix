@@ -59,10 +59,8 @@ public class IRSDeclaration extends AdministrativeOfficeDocument {
 
         String stringTemplate1 =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.irs.declaration.firstParagraph");
-        addParameter(
-                "firstParagraph",
-                MessageFormat.format(stringTemplate1, institutionName.toUpperCase(getLocale()),
-                        universityName.toUpperCase(getLocale())));
+        addParameter("firstParagraph", MessageFormat.format(stringTemplate1, institutionName.toUpperCase(getLocale()),
+                universityName.toUpperCase(getLocale())));
 
         String stringTemplate2 =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.irs.declaration.secondParagraph");

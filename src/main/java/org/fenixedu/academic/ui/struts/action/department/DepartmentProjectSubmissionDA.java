@@ -44,8 +44,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = DepartmentMemberMessagingApp.class, path = "project-submission", titleKey = "label.showProjects",
         bundle = "ResearcherResources")
 @Mapping(path = "/projectSubmissionsManagement", module = "departmentMember")
-@Forwards({
-        @Forward(name = "viewProjectSubmissionsByGroup", path = "/teacher/evaluation/viewProjectSubmissionsByGroup.jsp"),
+@Forwards({ @Forward(name = "viewProjectSubmissionsByGroup", path = "/teacher/evaluation/viewProjectSubmissionsByGroup.jsp"),
         @Forward(name = "showProjects", path = "/departmentMember/showProjects.jsp"),
         @Forward(name = "viewLastProjectSubmissionForEachGroup",
                 path = "/teacher/evaluation/viewLastProjectSubmissionForEachGroup.jsp"),

@@ -67,12 +67,12 @@ import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
+import pt.ist.fenixframework.FenixFramework;
 
 /**
  * @author Nuno Nunes (nmsn@rnl.ist.utl.pt) Joana Mota (jccm@rnl.ist.utl.pt)
@@ -96,7 +96,8 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
     }
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         RenderUtils.invalidateViewState();
 
         Registration registration = null;
@@ -159,7 +160,7 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
         DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(degreeCurricularPlanId);
         return student.readRegistrationByDegreeCurricularPlan(degreeCurricularPlan);
     }
-    
+
     public ActionForward prepareReadByStudentNumber(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
         RenderUtils.invalidateViewState();
@@ -234,16 +235,15 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
         }
 
         if (StringUtils.isEmpty(actionForm.getString("select"))) {
-            actionForm
-                    .set("select",
-                            AcademicPredicates.VIEW_FULL_STUDENT_CURRICULUM.evaluate(AccessControl.getPerson()) ? EnrolmentStateFilterType.ALL
+            actionForm.set("select",
+                    AcademicPredicates.VIEW_FULL_STUDENT_CURRICULUM
+                            .evaluate(AccessControl.getPerson()) ? EnrolmentStateFilterType.ALL
                                     .name() : EnrolmentStateFilterType.APPROVED_OR_ENROLED.name());
         }
 
         if (StringUtils.isEmpty(actionForm.getString("organizedBy"))) {
-            String organizedBy =
-                    registration.getDegreeType().isPreBolonhaMasterDegree() ? OrganizationType.EXECUTION_YEARS.name() : OrganizationType.GROUPS
-                            .name();
+            String organizedBy = registration.getDegreeType().isPreBolonhaMasterDegree() ? OrganizationType.EXECUTION_YEARS
+                    .name() : OrganizationType.GROUPS.name();
             actionForm.set("organizedBy", organizedBy);
         }
 
@@ -310,10 +310,10 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
     private List<LabelValueBean> getSCPsLabelValueBeanList(Collection<StudentCurricularPlan> studentCurricularPlans) {
         final List<LabelValueBean> result = new ArrayList<LabelValueBean>();
 
-        result.add(new LabelValueBean(StudentCurricularPlanIDDomainType.NEWEST_STRING, StudentCurricularPlanIDDomainType.NEWEST
-                .toString()));
-        result.add(new LabelValueBean(StudentCurricularPlanIDDomainType.ALL_STRING, StudentCurricularPlanIDDomainType.ALL
-                .toString()));
+        result.add(new LabelValueBean(StudentCurricularPlanIDDomainType.NEWEST_STRING,
+                StudentCurricularPlanIDDomainType.NEWEST.toString()));
+        result.add(new LabelValueBean(StudentCurricularPlanIDDomainType.ALL_STRING,
+                StudentCurricularPlanIDDomainType.ALL.toString()));
 
         for (final StudentCurricularPlan studentCurricularPlan : studentCurricularPlans) {
             final StringBuilder label = new StringBuilder();
@@ -322,8 +322,8 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
             label.append(", ").append(studentCurricularPlan.getDegreeCurricularPlan().getName());
 
             if (studentCurricularPlan.getSpecialization() != null) {
-                label.append(" - ").append(
-                        BundleUtil.getString(Bundle.ENUMERATION, studentCurricularPlan.getSpecialization().name()));
+                label.append(" - ")
+                        .append(BundleUtil.getString(Bundle.ENUMERATION, studentCurricularPlan.getSpecialization().name()));
             }
 
             label.append(" - ").append(studentCurricularPlan.getStartDateYearMonthDay());
@@ -406,14 +406,14 @@ public class CurriculumDispatchAction extends FenixDispatchAction {
                 if (enrolmentsByExecutionPeriod.containsKey(executionSemester)) {
                     ExecutionPeriodStatisticsBean executionPeriodStatisticsBean =
                             enrolmentsByExecutionPeriod.get(executionSemester);
-                    executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(studentCurricularPlan
-                            .getEnrolmentsByExecutionPeriod(executionSemester));
+                    executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(
+                            studentCurricularPlan.getEnrolmentsByExecutionPeriod(executionSemester));
                     enrolmentsByExecutionPeriod.put(executionSemester, executionPeriodStatisticsBean);
                 } else {
                     ExecutionPeriodStatisticsBean executionPeriodStatisticsBean =
                             new ExecutionPeriodStatisticsBean(executionSemester);
-                    executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(studentCurricularPlan
-                            .getEnrolmentsByExecutionPeriod(executionSemester));
+                    executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(
+                            studentCurricularPlan.getEnrolmentsByExecutionPeriod(executionSemester));
                     enrolmentsByExecutionPeriod.put(executionSemester, executionPeriodStatisticsBean);
                 }
             }

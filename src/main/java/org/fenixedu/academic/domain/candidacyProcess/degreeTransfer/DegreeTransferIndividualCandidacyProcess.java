@@ -155,8 +155,8 @@ public class DegreeTransferIndividualCandidacyProcess extends DegreeTransferIndi
             return false;
         }
 
-        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES, process
-                .getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
+        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES,
+                process.getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
     }
 
     @StartActivity
@@ -575,8 +575,8 @@ public class DegreeTransferIndividualCandidacyProcess extends DegreeTransferIndi
             missingDocumentFiles.add(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE);
         }
 
-        if (getCandidacy().getRefactoredPrecedentDegreeInformation().isCandidacyExternal()
-                && getActiveFileForType(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
+        if (getCandidacy().getRefactoredPrecedentDegreeInformation().isCandidacyExternal() && getActiveFileForType(
+                IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
             missingDocumentFiles.add(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE);
         }
 

@@ -57,9 +57,8 @@ public class CoordinatorDegreeManagement extends FenixAction {
     public static Set<DegreeCurricularPlan> readCoordinatedDegrees() throws FenixServiceException {
         final Person person = AccessControl.getPerson();
 
-        final Set<DegreeCurricularPlan> activeDegreeCurricularPlans =
-                new TreeSet<DegreeCurricularPlan>(
-                        DegreeCurricularPlan.DEGREE_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_EXECUTION_DEGREE_AND_DEGREE_CODE);
+        final Set<DegreeCurricularPlan> activeDegreeCurricularPlans = new TreeSet<DegreeCurricularPlan>(
+                DegreeCurricularPlan.DEGREE_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_EXECUTION_DEGREE_AND_DEGREE_CODE);
         for (final Coordinator coordinator : person.getCoordinatorsSet()) {
             final ExecutionDegree executionDegree = coordinator.getExecutionDegree();
             final DegreeCurricularPlan degreeCurricularPlan = executionDegree.getDegreeCurricularPlan();

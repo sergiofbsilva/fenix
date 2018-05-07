@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.bennu.core.domain.Bennu;
 
-public class PhdIndividualProgramProcessNumber extends PhdIndividualProgramProcessNumber_Base implements
-        Comparable<PhdIndividualProgramProcessNumber> {
+public class PhdIndividualProgramProcessNumber extends PhdIndividualProgramProcessNumber_Base
+        implements Comparable<PhdIndividualProgramProcessNumber> {
 
     public static Comparator<PhdIndividualProgramProcessNumber> COMPARATOR_BY_NUMBER =
             new Comparator<PhdIndividualProgramProcessNumber>() {
@@ -63,7 +63,8 @@ public class PhdIndividualProgramProcessNumber extends PhdIndividualProgramProce
 
     @Override
     public void setNumber(Integer number) {
-        throw new DomainException("error.org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessNumber.cannot.modify.number");
+        throw new DomainException(
+                "error.org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessNumber.cannot.modify.number");
     }
 
     @Override

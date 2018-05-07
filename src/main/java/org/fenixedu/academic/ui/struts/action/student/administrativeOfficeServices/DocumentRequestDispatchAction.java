@@ -108,7 +108,8 @@ public class DocumentRequestDispatchAction extends FenixDispatchAction {
         return mapping.findForward("createDocumentRequests");
     }
 
-    private void setAdditionalInformationSchemaName(HttpServletRequest request, final DocumentRequestCreateBean requestCreateBean) {
+    private void setAdditionalInformationSchemaName(HttpServletRequest request,
+            final DocumentRequestCreateBean requestCreateBean) {
         if (requestCreateBean.getHasAdditionalInformation()) {
             request.setAttribute("additionalInformationSchemaName", "DocumentRequestCreateBean."
                     + requestCreateBean.getChosenDocumentRequestType().name() + ".AdditionalInformation");

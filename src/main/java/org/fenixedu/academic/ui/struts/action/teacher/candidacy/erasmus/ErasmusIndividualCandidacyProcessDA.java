@@ -47,8 +47,8 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
         @Forward(name = "set-coordinator-validation", path = "/teacher/candidacy/erasmus/setCoordinatorValidation.jsp"),
         @Forward(name = "visualize-alerts", path = "/candidacy/erasmus/visualizeAlerts.jsp"),
         @Forward(name = "upload-learning-agreement", path = "/candidacy/erasmus/uploadLearningAgreement.jsp") })
-public class ErasmusIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusIndividualCandidacyProcessDA {
+public class ErasmusIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusIndividualCandidacyProcessDA {
 
     @Override
     protected List<Activity> getAllowedActivities(final IndividualCandidacyProcess process) {
@@ -76,8 +76,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
 
     }
 
-    public ActionForward executeSetCoordinatorValidation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeSetCoordinatorValidation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         try {
             MobilityIndividualApplicationProcessBean bean = getIndividualCandidacyProcessBean();
 

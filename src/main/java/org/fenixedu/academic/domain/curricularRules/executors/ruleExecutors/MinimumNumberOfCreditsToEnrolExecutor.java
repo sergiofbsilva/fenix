@@ -41,9 +41,8 @@ public class MinimumNumberOfCreditsToEnrolExecutor extends CurricularRuleExecuto
             return RuleResult.createNA(sourceDegreeModuleToEvaluate.getDegreeModule());
         }
 
-        final Double totalEctsCredits =
-                getTotalEctsCredits(enrolmentContext.getStudentCurricularPlan().getRoot(), enrolmentContext.getExecutionPeriod()
-                        .getExecutionYear());
+        final Double totalEctsCredits = getTotalEctsCredits(enrolmentContext.getStudentCurricularPlan().getRoot(),
+                enrolmentContext.getExecutionPeriod().getExecutionYear());
 
         if (rule.allowCredits(totalEctsCredits)) {
             return RuleResult.createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
@@ -101,9 +100,8 @@ public class MinimumNumberOfCreditsToEnrolExecutor extends CurricularRuleExecuto
         }
 
         final ExecutionSemester previousExecutionPeriod = enrolmentContext.getExecutionPeriod().getPreviousExecutionPeriod();
-        totalEctsCredits =
-                Double.valueOf(totalEctsCredits.doubleValue()
-                        + curriculumGroup.getEnroledEctsCredits(previousExecutionPeriod).doubleValue());
+        totalEctsCredits = Double.valueOf(
+                totalEctsCredits.doubleValue() + curriculumGroup.getEnroledEctsCredits(previousExecutionPeriod).doubleValue());
 
         if (rule.allowCredits(totalEctsCredits)) {
             return RuleResult.createTrue(EnrolmentResultType.TEMPORARY, sourceDegreeModuleToEvaluate.getDegreeModule());

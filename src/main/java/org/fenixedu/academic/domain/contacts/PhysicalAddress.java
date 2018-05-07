@@ -162,8 +162,8 @@ public class PhysicalAddress extends PhysicalAddress_Base {
             final PhysicalAddressValidation physicalAddressValidation = (PhysicalAddressValidation) getPartyContactValidation();
             physicalAddressValidation.setValid();
             final String userName = AccessControl.getPerson() == null ? "-" : AccessControl.getPerson().getUsername();
-            physicalAddressValidation.setDescription(BundleUtil.getString(Bundle.ACADEMIC,
-                    "label.contacts.physicalAddress.validation.description", userName));
+            physicalAddressValidation.setDescription(
+                    BundleUtil.getString(Bundle.ACADEMIC, "label.contacts.physicalAddress.validation.description", userName));
         }
     }
 
@@ -173,7 +173,8 @@ public class PhysicalAddress extends PhysicalAddress_Base {
     }
 
     @Override
-    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact, String newValue) {
+    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
+            String newValue) {
         logEditAux(person, propertiesChanged, valueChanged, createdNewContact, newValue, "label.partyContacts.PhysicalAddress");
     }
 

@@ -42,7 +42,8 @@ public class CreditNote extends CreditNote_Base {
         @Override
         public int compare(CreditNote leftCreditNote, CreditNote rightCreditNote) {
             int comparationResult = leftCreditNote.getNumber().compareTo(rightCreditNote.getNumber());
-            return (comparationResult == 0) ? leftCreditNote.getExternalId().compareTo(rightCreditNote.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftCreditNote.getExternalId()
+                    .compareTo(rightCreditNote.getExternalId()) : comparationResult;
         }
     };
 
@@ -86,8 +87,8 @@ public class CreditNote extends CreditNote_Base {
 
     private Integer generateCreditNoteNumber(final Integer year) {
         final List<CreditNote> creditNotes = getCreditNotesForYear(year);
-        return creditNotes.isEmpty() ? Integer.valueOf(1) : Collections.max(creditNotes, CreditNote.COMPARATOR_BY_NUMBER)
-                .getNumber() + 1;
+        return creditNotes.isEmpty() ? Integer
+                .valueOf(1) : Collections.max(creditNotes, CreditNote.COMPARATOR_BY_NUMBER).getNumber() + 1;
     }
 
     private List<CreditNote> getCreditNotesForYear(final Integer year) {
@@ -201,8 +202,8 @@ public class CreditNote extends CreditNote_Base {
         for (final CreditNoteEntryDTO entryDTO : entryDTOs) {
             if (!entryDTO.getEntry().canApplyReimbursement(entryDTO.getAmountToPay().negate())) {
                 throw new DomainExceptionWithLabelFormatter(
-                        "error.accounting.CreditNoteEntry.amount.to.reimburse.exceeds.entry.amount", entryDTO.getEntry()
-                                .getDescription());
+                        "error.accounting.CreditNoteEntry.amount.to.reimburse.exceeds.entry.amount",
+                        entryDTO.getEntry().getDescription());
             }
 
             new CreditNoteEntry(creditNote, entryDTO.getEntry(), entryDTO.getAmountToPay());
@@ -219,7 +220,8 @@ public class CreditNote extends CreditNote_Base {
             if (!each.getKey().canApplyReimbursement(each.getValue())) {
                 throw new DomainExceptionWithLabelFormatter(
                         "error.accounting.CreditNote.the.sum.credit.notes.in.emitted.state.exceeds.event.reimbursable.amount",
-                        each.getKey().getDescription(), new LabelFormatter(each.getKey().getReimbursableAmount().toPlainString()));
+                        each.getKey().getDescription(),
+                        new LabelFormatter(each.getKey().getReimbursableAmount().toPlainString()));
             }
         }
 

@@ -53,7 +53,8 @@ public class BibliographicReference extends BibliographicReference_Base {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public void edit(final String title, final String authors, final String reference, final String year, final Boolean optional) {
+    public void edit(final String title, final String authors, final String reference, final String year,
+            final Boolean optional) {
         if (title == null || authors == null || reference == null || year == null || optional == null) {
             throw new NullPointerException();
         }
@@ -88,8 +89,8 @@ public class BibliographicReference extends BibliographicReference_Base {
         }
 
         CurricularManagementLog.createLog(executionCourse, Bundle.MESSAGING,
-                "log.executionCourse.curricular.bibliographic.removed", type, blBibliographicReference,
-                executionCourse.getName(), executionCourse.getDegreePresentationString());
+                "log.executionCourse.curricular.bibliographic.removed", type, blBibliographicReference, executionCourse.getName(),
+                executionCourse.getDegreePresentationString());
 
         setExecutionCourse(null);
         setRootDomainObject(null);

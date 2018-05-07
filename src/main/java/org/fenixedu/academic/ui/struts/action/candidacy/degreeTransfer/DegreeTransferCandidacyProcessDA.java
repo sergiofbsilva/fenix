@@ -161,8 +161,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
         }
     }
 
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("send-to-coordinator");
     }
 
@@ -197,8 +197,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename="
-                + getLabel("label.candidacy.degreeTransfer.institution.report.filename") + ".xls");
+        response.setHeader("Content-disposition",
+                "attachment; filename=" + getLabel("label.candidacy.degreeTransfer.institution.report.filename") + ".xls");
         writeReportForInstitutionDegrees(getProcess(request), response.getOutputStream());
         response.getOutputStream().flush();
         response.flushBuffer();
@@ -220,8 +220,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename="
-                + getLabel("label.candidacy.degreeTransfer.external.report.filename") + ".xls");
+        response.setHeader("Content-disposition",
+                "attachment; filename=" + getLabel("label.candidacy.degreeTransfer.external.report.filename") + ".xls");
         writeReportForExternalDegrees(getProcess(request), response.getOutputStream());
         response.getOutputStream().flush();
         response.flushBuffer();
@@ -323,8 +323,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
             excelSpreadsheet.addCell(getValue(calculateB(process, true)));
             excelSpreadsheet.addCell(getValue(calculateC(process)));
             if (process.isCandidacyAccepted() || process.isCandidacyRejected()) {
-                excelSpreadsheet.addCell(BundleUtil.getString(Bundle.ENUMERATION, process.getCandidacyState().getQualifiedName())
-                        .toUpperCase());
+                excelSpreadsheet.addCell(
+                        BundleUtil.getString(Bundle.ENUMERATION, process.getCandidacyState().getQualifiedName()).toUpperCase());
             } else {
                 excelSpreadsheet.addCell("");
             }
@@ -434,8 +434,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
         row.setCell(degreeTransferIndividualCandidacyProcess.getPersonalDetails().getName());
         row.setCell(degreeTransferIndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
         row.setCell(degreeTransferIndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
-        row.setCell(degreeTransferIndividualCandidacyProcess.getPersonalDetails().getCountry().getCountryNationality()
-                .getContent());
+        row.setCell(
+                degreeTransferIndividualCandidacyProcess.getPersonalDetails().getCountry().getCountryNationality().getContent());
         row.setCell(degreeTransferIndividualCandidacyProcess.getPrecedentDegreeInformation().getPrecedentInstitution().getName());
         row.setCell(degreeTransferIndividualCandidacyProcess.getPrecedentDegreeInformation().getPrecedentDegreeDesignation());
         row.setCell(degreeTransferIndividualCandidacyProcess.getCandidacy().getSelectedDegree().getName());
@@ -455,7 +455,8 @@ public class DegreeTransferCandidacyProcessDA extends CandidacyProcessDA {
             return new Predicate<IndividualCandidacyProcess>() {
                 @Override
                 public boolean apply(IndividualCandidacyProcess process) {
-                    return ((DegreeTransferIndividualCandidacyProcess) process).getCandidacy().getSelectedDegree() == selectedDegree;
+                    return ((DegreeTransferIndividualCandidacyProcess) process).getCandidacy()
+                            .getSelectedDegree() == selectedDegree;
                 }
             };
         }

@@ -63,7 +63,8 @@ public enum PublicPresentationSeminarProcessStateType implements PhdProcessState
         return getClass().getSimpleName() + "." + name();
     }
 
-    public static List<PublicPresentationSeminarProcessStateType> getPossibleNextStates(PublicPresentationSeminarProcess process) {
+    public static List<PublicPresentationSeminarProcessStateType> getPossibleNextStates(
+            PublicPresentationSeminarProcess process) {
         PublicPresentationSeminarProcessStateType activeState = process.getActiveState();
 
         return getPossibleNextStates(activeState);

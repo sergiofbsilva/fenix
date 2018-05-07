@@ -41,9 +41,8 @@ public class ExecutionPeriodsForCandidacyRegistrationProvider implements DataPro
     public Object provide(Object source, Object currentValue) {
         final StudentCurricularPlan studentCurricularPlan = ((IStudentCurricularPlanBean) source).getStudentCurricularPlan();
 
-        final List<ExecutionSemester> executionPeriodsInTimePeriod =
-                ExecutionSemester.readExecutionPeriodsInTimePeriod(
-                        studentCurricularPlan.getStartDateYearMonthDay().toLocalDate(), getEndDate());
+        final List<ExecutionSemester> executionPeriodsInTimePeriod = ExecutionSemester
+                .readExecutionPeriodsInTimePeriod(studentCurricularPlan.getStartDateYearMonthDay().toLocalDate(), getEndDate());
 
         Collections.sort(executionPeriodsInTimePeriod, new ReverseComparator(ExecutionSemester.COMPARATOR_BY_SEMESTER_AND_YEAR));
         return executionPeriodsInTimePeriod;

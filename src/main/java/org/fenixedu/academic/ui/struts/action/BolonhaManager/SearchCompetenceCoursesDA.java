@@ -75,7 +75,8 @@ public class SearchCompetenceCoursesDA extends FenixDispatchAction {
     }
 
     @EntryPoint
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         SearchCompetenceCourseBean searchBean = getOrCreateSearchBean(request);
         String searchName = searchBean.getSearchName();
         String searchCode = searchBean.getSearchCode();

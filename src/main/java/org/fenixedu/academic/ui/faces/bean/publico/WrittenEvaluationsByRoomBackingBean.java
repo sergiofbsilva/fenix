@@ -34,8 +34,8 @@ import org.fenixedu.commons.i18n.I18N;
 import org.fenixedu.spaces.domain.Space;
 import org.fenixedu.spaces.domain.occupation.Occupation;
 
-public class WrittenEvaluationsByRoomBackingBean extends
-        org.fenixedu.academic.ui.faces.bean.sop.evaluation.WrittenEvaluationsByRoomBackingBean {
+public class WrittenEvaluationsByRoomBackingBean
+        extends org.fenixedu.academic.ui.faces.bean.sop.evaluation.WrittenEvaluationsByRoomBackingBean {
 
     @Override
     public Map<InfoRoom, List<CalendarLink>> getWrittenEvaluationCalendarLinks() throws FenixServiceException {

@@ -234,8 +234,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
         return result;
     }
 
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("send-to-coordinator");
     }
 
@@ -270,11 +270,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader(
-                "Content-disposition",
-                "attachment; filename="
-                        + BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.degreeChange.institution.report.filename")
-                        + ".xls");
+        response.setHeader("Content-disposition", "attachment; filename="
+                + BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.degreeChange.institution.report.filename") + ".xls");
         writeReportForInstitutionDegrees(getProcess(request), response.getOutputStream());
         response.getOutputStream().flush();
         response.flushBuffer();
@@ -295,11 +292,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader(
-                "Content-disposition",
-                "attachment; filename="
-                        + BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.degreeChange.external.report.filename")
-                        + ".xls");
+        response.setHeader("Content-disposition", "attachment; filename="
+                + BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.degreeChange.external.report.filename") + ".xls");
         writeReportForExternalDegrees(getProcess(request), response.getOutputStream());
         response.getOutputStream().flush();
         response.flushBuffer();
@@ -348,8 +342,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
             excelSpreadsheet.addCell(getValue(calculateB(process, true)));
             excelSpreadsheet.addCell(getValue(calculateC(process)));
             if (process.isCandidacyAccepted() || process.isCandidacyRejected()) {
-                excelSpreadsheet.addCell(BundleUtil.getString(Bundle.ENUMERATION, process.getCandidacyState().getQualifiedName())
-                        .toUpperCase());
+                excelSpreadsheet.addCell(
+                        BundleUtil.getString(Bundle.ENUMERATION, process.getCandidacyState().getQualifiedName()).toUpperCase());
             } else {
                 excelSpreadsheet.addCell("");
             }
@@ -512,7 +506,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
         row.setCell(degreeChangeIndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
         row.setCell(degreeChangeIndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
         if (degreeChangeIndividualCandidacyProcess.getPersonalDetails().getCountry() != null) {
-            row.setCell(degreeChangeIndividualCandidacyProcess.getPersonalDetails().getCountry().getCountryNationality().getContent());
+            row.setCell(degreeChangeIndividualCandidacyProcess.getPersonalDetails().getCountry().getCountryNationality()
+                    .getContent());
         } else {
             row.setCell("-");
         }
@@ -535,7 +530,8 @@ public class DegreeChangeCandidacyProcessDA extends CandidacyProcessDA {
             return new Predicate<IndividualCandidacyProcess>() {
                 @Override
                 public boolean apply(IndividualCandidacyProcess process) {
-                    return ((DegreeChangeIndividualCandidacyProcess) process).getCandidacy().getSelectedDegree() == selectedDegree;
+                    return ((DegreeChangeIndividualCandidacyProcess) process).getCandidacy()
+                            .getSelectedDegree() == selectedDegree;
                 }
             };
         }

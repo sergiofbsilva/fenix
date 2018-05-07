@@ -33,9 +33,8 @@ public class PhdGratuityFineExemption extends PhdGratuityFineExemption_Base {
     }
 
     public PhdGratuityFineExemption(Person responsible, Event event, String justification) {
-        PhdEventExemptionJustification exemptionJustification =
-                new PhdEventExemptionJustification(this, PhdEventExemptionJustificationType.FINE_EXEMPTION, event
-                        .getWhenOccured().toLocalDate(), justification);
+        PhdEventExemptionJustification exemptionJustification = new PhdEventExemptionJustification(this,
+                PhdEventExemptionJustificationType.FINE_EXEMPTION, event.getWhenOccured().toLocalDate(), justification);
         super.init(responsible, event, exemptionJustification);
 
         setRootDomainObject(Bennu.getInstance());

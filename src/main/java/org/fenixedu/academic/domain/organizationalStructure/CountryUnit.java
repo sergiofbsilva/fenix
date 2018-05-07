@@ -30,9 +30,9 @@ import org.fenixedu.academic.domain.ExternalCurricularCourse;
 import org.fenixedu.academic.domain.administrativeOffice.AdministrativeOffice;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.YearMonthDay;
 import org.slf4j.Logger;
@@ -49,9 +49,9 @@ public class CountryUnit extends CountryUnit_Base {
         super.setType(PartyTypeEnum.COUNTRY);
     }
 
-    public static CountryUnit createNewCountryUnit(LocalizedString countryName, String countryNameCard,
-            Integer costCenterCode, String countryAcronym, YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit,
-            String webAddress, UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
+    public static CountryUnit createNewCountryUnit(LocalizedString countryName, String countryNameCard, Integer costCenterCode,
+            String countryAcronym, YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit, String webAddress,
+            UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
 
         CountryUnit countryUnit = new CountryUnit();
         countryUnit.init(countryName, countryNameCard, costCenterCode, countryAcronym, beginDate, endDate, webAddress,
@@ -123,8 +123,8 @@ public class CountryUnit extends CountryUnit_Base {
             for (Unit unit : parentUnit.getAllSubUnits()) {
                 if ((!unit.equals(countryUnit)) && unit.isCountryUnit()) {
                     if (countryUnit.getAcronym().equalsIgnoreCase(unit.getAcronym())) {
-                        throw new DomainException("error.unit.already.exists.unit.with.same.name.or.acronym: "
-                                + countryUnit.getAcronym());
+                        throw new DomainException(
+                                "error.unit.already.exists.unit.with.same.name.or.acronym: " + countryUnit.getAcronym());
                     }
                 }
             }
@@ -137,9 +137,8 @@ public class CountryUnit extends CountryUnit_Base {
         if (defaultCountry != null && defaultCountry.getRootDomainObject() == Bennu.getInstance()) {
             return defaultCountry;
         }
-        defaultCountry =
-                (CountryUnit) Unit.readUnitByAcronymAndType(BundleUtil.getString(Bundle.GLOBAL, "default.country.code"),
-                        PartyTypeEnum.COUNTRY);
+        defaultCountry = (CountryUnit) Unit.readUnitByAcronymAndType(BundleUtil.getString(Bundle.GLOBAL, "default.country.code"),
+                PartyTypeEnum.COUNTRY);
         return defaultCountry;
     }
 

@@ -53,8 +53,8 @@ public class PossibleDatesToSummariesManagementProvider implements DataProvider 
             if (summary != null) {
                 Shift summaryShift = summary.getShift();
                 Lesson summaryLesson = summary.getLesson();
-                if (shift != null && lesson != null && summaryShift != null && summaryShift.equals(shift)
-                        && summaryLesson != null && summaryLesson.equals(lesson)) {
+                if (shift != null && lesson != null && summaryShift != null && summaryShift.equals(shift) && summaryLesson != null
+                        && summaryLesson.equals(lesson)) {
                     possibleSummaryDates.add(0, summary.getSummaryDateYearMonthDay());
                 }
             }

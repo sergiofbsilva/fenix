@@ -37,11 +37,11 @@ public class ThesisEvaluationParticipant extends ThesisEvaluationParticipant_Bas
         getRelationThesisHasParticipations().addListener(KEEP_PARTICIPATION_NUMBER_ADAPTER);
     }
 
-    public final static Comparator<ThesisEvaluationParticipant> COMPARATOR_BY_PERSON_NAME = Comparator.comparing(
-            ThesisEvaluationParticipant::getName).thenComparing(DomainObjectUtil.COMPARATOR_BY_ID);
+    public final static Comparator<ThesisEvaluationParticipant> COMPARATOR_BY_PERSON_NAME =
+            Comparator.comparing(ThesisEvaluationParticipant::getName).thenComparing(DomainObjectUtil.COMPARATOR_BY_ID);
 
-    public final static Comparator<ThesisEvaluationParticipant> COMPARATOR_BY_STUDENT_NUMBER = new BeanComparator(
-            "thesis.student.number");
+    public final static Comparator<ThesisEvaluationParticipant> COMPARATOR_BY_STUDENT_NUMBER =
+            new BeanComparator("thesis.student.number");
 
     public ThesisEvaluationParticipant(Thesis thesis, Person person, ThesisParticipationType type) {
         super();

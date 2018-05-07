@@ -353,13 +353,11 @@ public class ManageShiftDA extends FenixShiftAndExecutionCourseAndExecutionDegre
         InfoCurricularYear infoCurricularYear = (InfoCurricularYear) request.getAttribute(PresentationConstants.CURRICULAR_YEAR);
         InfoExecutionDegree infoExecutionDegree =
                 (InfoExecutionDegree) request.getAttribute(PresentationConstants.EXECUTION_DEGREE);
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString((String) request
-                        .getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString((String) request.getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
 
-        infoCourseList =
-                LerDisciplinasExecucaoDeLicenciaturaExecucaoEAnoCurricular.run(infoExecutionDegree, academicInterval,
-                        infoCurricularYear.getYear());
+        infoCourseList = LerDisciplinasExecucaoDeLicenciaturaExecucaoEAnoCurricular.run(infoExecutionDegree, academicInterval,
+                infoCurricularYear.getYear());
 
         request.setAttribute(PresentationConstants.EXECUTION_COURSE_LIST_KEY, infoCourseList);
 

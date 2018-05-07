@@ -49,7 +49,8 @@ abstract public class AcademicServiceRequestEvent extends AcademicServiceRequest
 
     @Override
     public void setAcademicServiceRequest(final AcademicServiceRequest academicServiceRequest) {
-        throw new DomainException("error.events.serviceRequests.AcademicServiceRequestEvent.cannot.modify.academicServiceRequest");
+        throw new DomainException(
+                "error.events.serviceRequests.AcademicServiceRequestEvent.cannot.modify.academicServiceRequest");
     }
 
     @Override

@@ -88,8 +88,8 @@ public class FenixBootstrapper {
             AdminUserSection adminSection) {
 
         if (Planet.getEarth().getByAlfa3(schoolSetupSection.getCountryCode()) == null
-                || !Planet.getEarth().getByAlfa3(schoolSetupSection.getCountryCode()).alpha3.equals(schoolSetupSection
-                        .getCountryCode())) {
+                || !Planet.getEarth().getByAlfa3(schoolSetupSection.getCountryCode()).alpha3
+                        .equals(schoolSetupSection.getCountryCode())) {
             return singletonList(new BootstrapError(SchoolSetupSection.class, "getCountryCode", "bootstrapper.error.contry",
                     Bundle.APPLICATION));
         }
@@ -166,17 +166,15 @@ public class FenixBootstrapper {
         LocalizedString description =
                 LocalizedString.fromJson(new JsonParser().parse("{\"pt-PT\":\"Normal\",\"en-GB\":\"Normal\"}"));
 
-        RegistrationProtocol registrationProtocol =
-                new RegistrationProtocol("NORMAL", description, true, true, true, false, false, false, false, false, false, true,
-                        false);
+        RegistrationProtocol registrationProtocol = new RegistrationProtocol("NORMAL", description, true, true, true, false,
+                false, false, false, false, false, true, false);
     }
 
     public static class CreateOrganizationalStructure {
         public void doIt(PortalSection portalSection, SchoolSetupSection schoolSetupSection) {
             final CountryUnit countryUnit = getCountryUnit(Country.readDefault().getName());
-            final UniversityUnit universityUnit =
-                    createUniversityUnit(countryUnit, schoolSetupSection.getUniversityName(),
-                            schoolSetupSection.getUniversityAcronym());
+            final UniversityUnit universityUnit = createUniversityUnit(countryUnit, schoolSetupSection.getUniversityName(),
+                    schoolSetupSection.getUniversityAcronym());
             final SchoolUnit institutionUnit =
                     createSchoolUnit(universityUnit, portalSection.getOrganizationName(), schoolSetupSection.getSchoolAcronym());
             Bennu.getInstance().setInstitutionUnit(institutionUnit);
@@ -208,8 +206,8 @@ public class FenixBootstrapper {
 
         private UniversityUnit createUniversityUnit(final CountryUnit countryUnit, final String universityName,
                 final String universityAcronym) {
-            return UniversityUnit.createNewUniversityUnit(new LocalizedString(Locale.getDefault(), universityName), null,
-                    null, universityAcronym, new YearMonthDay(), null, countryUnit, null, null, false, null);
+            return UniversityUnit.createNewUniversityUnit(new LocalizedString(Locale.getDefault(), universityName), null, null,
+                    universityAcronym, new YearMonthDay(), null, countryUnit, null, null, false, null);
         }
 
         private AggregateUnit createAggregateUnit(final Unit parentUnit, final String unitName) {
@@ -302,10 +300,8 @@ public class FenixBootstrapper {
             final String code = metaData.alpha2;
             final String threeLetterCode = metaData.alpha3;
 
-            final Country country =
-                    new Country(countryName,
-                            new LocalizedString(PT, nationalityPT).append(new LocalizedString(
-                                    EN, nationalityEN)), code, threeLetterCode);
+            final Country country = new Country(countryName,
+                    new LocalizedString(PT, nationalityPT).append(new LocalizedString(EN, nationalityEN)), code, threeLetterCode);
             if (StringUtils.equals(threeLetterCode, schoolSection.getCountryCode().toUpperCase())) {
                 defaultCountry = country;
             }
@@ -355,16 +351,15 @@ public class FenixBootstrapper {
 
     private static void createAccountabilityTypeEnums() {
         for (final AccountabilityTypeEnum accountabilityTypeEnum : AccountabilityTypeEnum.values()) {
-            new AccountabilityType(accountabilityTypeEnum, new LocalizedString(Locale.getDefault(),
-                    accountabilityTypeEnum.getName()));
+            new AccountabilityType(accountabilityTypeEnum,
+                    new LocalizedString(Locale.getDefault(), accountabilityTypeEnum.getName()));
         }
     }
 
     private static void createOrganizationalStructure() {
         final Bennu rootDomainObject = Bennu.getInstance();
-        final PlanetUnit planetUnit =
-                PlanetUnit.createNewPlanetUnit(new LocalizedString(Locale.getDefault(), "Earth"), null, null, "E",
-                        new YearMonthDay(), null, null, null, null, false, null);
+        final PlanetUnit planetUnit = PlanetUnit.createNewPlanetUnit(new LocalizedString(Locale.getDefault(), "Earth"), null,
+                null, "E", new YearMonthDay(), null, null, null, null, false, null);
         rootDomainObject.setEarthUnit(planetUnit);
 
         createCountryUnits(rootDomainObject, planetUnit);

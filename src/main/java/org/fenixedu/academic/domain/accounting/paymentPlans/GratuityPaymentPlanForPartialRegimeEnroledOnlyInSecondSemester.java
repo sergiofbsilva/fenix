@@ -28,8 +28,8 @@ import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRule;
 import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRuleFactory;
 import org.fenixedu.academic.domain.accounting.serviceAgreementTemplates.DegreeCurricularPlanServiceAgreementTemplate;
 
-public class GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester extends
-        GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester_Base {
+public class GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester
+        extends GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester_Base {
 
     protected GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester() {
         super();
@@ -45,9 +45,9 @@ public class GratuityPaymentPlanForPartialRegimeEnroledOnlyInSecondSemester exte
     protected Collection<PaymentPlanRule> getSpecificPaymentPlanRules() {
         return Arrays.asList(
 
-        PaymentPlanRuleFactory.create(IsPartialRegimePaymentPlanRule.class),
+                PaymentPlanRuleFactory.create(IsPartialRegimePaymentPlanRule.class),
 
-        PaymentPlanRuleFactory.create(HasEnrolmentsOnlyInSecondSemesterPaymentPlanRule.class)
+                PaymentPlanRuleFactory.create(HasEnrolmentsOnlyInSecondSemesterPaymentPlanRule.class)
 
         );
     }

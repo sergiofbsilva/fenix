@@ -101,9 +101,8 @@ public class RoomSiteViewerDispatchAction extends FenixContextDispatchAction {
                 try {
                     // executionPeriodID = (Integer)
                     // indexForm.get("selectedExecutionPeriodID");
-                    executionPeriodID =
-                            indexForm.get("selectedExecutionPeriodID").equals("") ? null : (String) indexForm
-                                    .get("selectedExecutionPeriodID");
+                    executionPeriodID = indexForm.get("selectedExecutionPeriodID")
+                            .equals("") ? null : (String) indexForm.get("selectedExecutionPeriodID");
                 } catch (IllegalArgumentException ex) {
                 }
             }

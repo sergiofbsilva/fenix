@@ -143,7 +143,8 @@ public class UniqueAcronymCreator<T extends DomainObject> {
         for (int i = 0; i < splitsName.length; i++) {
             if (splitsName[i].indexOf("(") == 0) {
                 int closingBracketsSplit = i;
-                for (; closingBracketsSplit < splitsName.length && !splitsName[closingBracketsSplit].contains(")"); closingBracketsSplit++) {
+                for (; closingBracketsSplit < splitsName.length
+                        && !splitsName[closingBracketsSplit].contains(")"); closingBracketsSplit++) {
                     ;
                 }
 
@@ -185,9 +186,8 @@ public class UniqueAcronymCreator<T extends DomainObject> {
                 if ((i + 1) <= splitsName.length - 1) {
                     if (!isValidRejection(splitsName[i + 1])) {
                         // adding 'And', but limiting it to 4 chars
-                        String toAppend =
-                                (splitsName[i + 1].length() < 4) ? splitsName[i + 1].toUpperCase() : String.valueOf(
-                                        splitsName[i + 1].charAt(0)).toUpperCase();
+                        String toAppend = (splitsName[i + 1].length() < 4) ? splitsName[i + 1].toUpperCase() : String
+                                .valueOf(splitsName[i + 1].charAt(0)).toUpperCase();
 
                         // skipping until this split in next iteration
                         i = i + 1;
@@ -212,9 +212,8 @@ public class UniqueAcronymCreator<T extends DomainObject> {
                 } else {
                     if (!splitsName[i].equals("-")) {
                         String toAppend = splitsName[i].substring(1, splitsName[i].length() - 1);
-                        toAppend =
-                                (toAppend.length() < 4) ? toAppend.toUpperCase() : String.valueOf(toAppend.charAt(0))
-                                        .toUpperCase();
+                        toAppend = (toAppend.length() < 4) ? toAppend.toUpperCase() : String.valueOf(toAppend.charAt(0))
+                                .toUpperCase();
 
                         acronym.append("-").append(toAppend);
                         if (logger.isDebugEnabled()) {
@@ -355,8 +354,8 @@ public class UniqueAcronymCreator<T extends DomainObject> {
                 if (acronym.toString().contains("-")) {
                     int hiffen = acronym.toString().indexOf("-");
                     if ((hiffen + 1 < acronym.toString().length())
-                            && (isValidNumeration(String.valueOf(acronym.charAt(hiffen + 1))) || hasNumber(String.valueOf(acronym
-                                    .charAt(hiffen + 1))))) {
+                            && (isValidNumeration(String.valueOf(acronym.charAt(hiffen + 1)))
+                                    || hasNumber(String.valueOf(acronym.charAt(hiffen + 1))))) {
                         acronym.insert(hiffen, toAppend);
                         if (logger.isDebugEnabled()) {
                             logger.info("appendLast, found a '-', appending before hiffen " + toAppend);

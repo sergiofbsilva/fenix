@@ -32,6 +32,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.fenixedu.academic.domain.DomainOperationLog;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.ExecutionCourseLog;
 import org.fenixedu.academic.domain.ExecutionCourseLog.ExecutionCourseLogTypes;
@@ -60,7 +61,8 @@ public class SearchExecutionCourseLogAction extends ExecutionCourseBaseAction {
         return forward(request, "/teacher/viewLogSearch.jsp");
     }
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         ExecutionCourse executionCourse = getExecutionCourse(request);
         SearchExecutionCourseLogBean seclb = readSearchBean(request, executionCourse);
 
@@ -121,7 +123,7 @@ public class SearchExecutionCourseLogAction extends ExecutionCourseBaseAction {
             ExecutionCourse executionCourse) {
         Collection<ExecutionCourseLog> ecLogs = seclb.getExecutionCourseLogs();
         List<ExecutionCourseLog> listECLogs = new ArrayList<ExecutionCourseLog>(ecLogs);
-        Collections.sort(listECLogs, ExecutionCourseLog.COMPARATOR_BY_WHEN_DATETIME);
+        Collections.sort(listECLogs, DomainOperationLog.COMPARATOR_BY_WHEN_DATETIME);
         int entriesPerPage = 20;
         final CollectionPager<ExecutionCourseLog> pager = new CollectionPager<ExecutionCourseLog>(listECLogs, entriesPerPage);
         request.setAttribute("numberOfPages", (listECLogs.size() / entriesPerPage) + 1);
@@ -153,7 +155,8 @@ public class SearchExecutionCourseLogAction extends ExecutionCourseBaseAction {
         bean.setExecutionCourseLogs(validLogs);
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         SearchExecutionCourseLogBean bean = getRenderedObject();
         RenderUtils.invalidateViewState();
         searchLogs(bean);

@@ -228,9 +228,8 @@ public class PersonBean implements Serializable {
                 setDistrictOfResidence(physicalAddress.getDistrictOfResidence());
             }
 
-            setMobile(
-                    person.hasDefaultMobilePhone() ? person.getDefaultMobilePhone().getNumber() : person.getPendingMobilePhones()
-                            .stream().map(MobilePhone::getNumber).findFirst().orElse(null));
+            setMobile(person.hasDefaultMobilePhone() ? person.getDefaultMobilePhone().getNumber() : person
+                    .getPendingMobilePhones().stream().map(MobilePhone::getNumber).findFirst().orElse(null));
             setWebAddress(person.hasDefaultWebAddress() ? person.getDefaultWebAddress().getUrl() : null);
             setEmailAvailable(person.getAvailableEmail());
             setHomepageAvailable(person.getAvailableWebSite());
@@ -382,7 +381,8 @@ public class PersonBean implements Serializable {
     }
 
     public String getDistrictSubdivisionOfResidence() {
-        return getDistrictSubdivisionOfResidenceObject() != null ? getDistrictSubdivisionOfResidenceObject().getName() : districtSubdivisionOfResidence;
+        return getDistrictSubdivisionOfResidenceObject() != null ? getDistrictSubdivisionOfResidenceObject()
+                .getName() : districtSubdivisionOfResidence;
     }
 
     public void setDistrictSubdivisionOfResidence(String districtSubdivisionOfResidence) {

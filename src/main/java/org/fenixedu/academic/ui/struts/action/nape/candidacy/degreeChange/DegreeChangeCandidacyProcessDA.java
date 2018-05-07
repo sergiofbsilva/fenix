@@ -29,7 +29,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @Mapping(path = "/caseHandlingDegreeChangeCandidacyProcess", module = "nape",
         formBeanClass = CandidacyProcessDA.CandidacyProcessForm.class)
 @Forwards({ @Forward(name = "intro", path = "/scientificCouncil/candidacy/mainCandidacyProcess.jsp") })
-public class DegreeChangeCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeCandidacyProcessDA {
+public class DegreeChangeCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeCandidacyProcessDA {
 
 }

@@ -51,13 +51,13 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.joda.time.YearMonthDay;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
-public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCertificateRequest_Base implements
-        IProgramConclusionRequest {
+import pt.ist.fenixframework.Atomic;
+
+public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCertificateRequest_Base
+        implements IProgramConclusionRequest {
 
     protected DegreeFinalizationCertificateRequest() {
         super();
@@ -157,9 +157,8 @@ public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCert
             }
 
             final RegistryDiplomaRequest registryRequest = getRegistration().getRegistryDiplomaRequest(getProgramConclusion());
-            if (registryRequest != null
-                    && registryRequest.getAcademicServiceRequestSituationType().compareTo(
-                            AcademicServiceRequestSituationType.SENT_TO_EXTERNAL_ENTITY) < 0) {
+            if (registryRequest != null && registryRequest.getAcademicServiceRequestSituationType()
+                    .compareTo(AcademicServiceRequestSituationType.SENT_TO_EXTERNAL_ENTITY) < 0) {
                 throw new DomainException(
                         "DegreeFinalizationCertificateRequest.registration.registryRequestIsNotSentToExternalEntity");
             }
@@ -358,9 +357,8 @@ public class DegreeFinalizationCertificateRequest extends DegreeFinalizationCert
         final StringBuilder res = new StringBuilder();
 
         if (!getProgramConclusion().getGraduationTitle().isEmpty()) {
-            res.append(", ").append(
-                    BundleUtil.getString(Bundle.ACADEMIC, getLanguage(),
-                            "documents.DegreeFinalizationCertificate.graduateTitleInfo"));
+            res.append(", ").append(BundleUtil.getString(Bundle.ACADEMIC, getLanguage(),
+                    "documents.DegreeFinalizationCertificate.graduateTitleInfo"));
             res.append(" ").append(getRegistration().getGraduateTitle(getProgramConclusion(), getLanguage()));
         }
 

@@ -100,8 +100,8 @@ public class SendMailMarkSheetDispatchAction extends MarkSheetDispatchAction {
             Collection<GradesToSubmitExecutionCourseSendMailBean> executionCoursesBean =
                     new ArrayList<GradesToSubmitExecutionCourseSendMailBean>();
             for (ExecutionCourse course : executionCourses) {
-                executionCoursesBean.add(new GradesToSubmitExecutionCourseSendMailBean(bean.getDegreeCurricularPlan(), course,
-                        true));
+                executionCoursesBean
+                        .add(new GradesToSubmitExecutionCourseSendMailBean(bean.getDegreeCurricularPlan(), course, true));
             }
             bean.setGradesToSubmitExecutionCourseSendMailBean(executionCoursesBean);
         }

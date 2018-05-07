@@ -34,8 +34,8 @@ public class PersonUsernameStringInputRenderer extends StringInputRenderer {
         String username = (person != null) ? person.getUsername() : null;
 
         final HtmlComponent container = super.createTextField(username, type);
-        final HtmlFormComponent formComponent = (HtmlFormComponent) container.getChild(
-                input -> input instanceof HtmlFormComponent);
+        final HtmlFormComponent formComponent =
+                (HtmlFormComponent) container.getChild(input -> input instanceof HtmlFormComponent);
         formComponent.setConverter(new PersonUsernameConverter());
 
         return formComponent;

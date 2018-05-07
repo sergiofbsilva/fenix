@@ -56,7 +56,8 @@ public class EmailAddress extends EmailAddress_Base {
 
     public static EmailAddress createEmailAddress(Party party, String email, PartyContactType type, Boolean isDefault,
             Boolean visibleToPublic, Boolean visibleToStudents, Boolean visibleToStaff) {
-        final Supplier<EmailAddress> supplier = () -> new EmailAddress(party, type, visibleToPublic, visibleToStudents, visibleToStaff, isDefault, email);
+        final Supplier<EmailAddress> supplier =
+                () -> new EmailAddress(party, type, visibleToPublic, visibleToStudents, visibleToStaff, isDefault, email);
         return createEmailAddress(supplier, party, email);
     }
 
@@ -67,8 +68,7 @@ public class EmailAddress extends EmailAddress_Base {
 
     private static EmailAddress createEmailAddress(final Supplier<EmailAddress> supplier, final Party party, final String email) {
         return StringUtils.isEmpty(email) ? null : party.getEmailAddressStream()
-                .filter(ea -> email.equalsIgnoreCase(ea.getValue()))
-                .findAny().orElseGet(supplier);
+                .filter(ea -> email.equalsIgnoreCase(ea.getValue())).findAny().orElseGet(supplier);
     }
 
     protected EmailAddress() {
@@ -180,8 +180,7 @@ public class EmailAddress extends EmailAddress_Base {
     }
 
     public static Stream<EmailAddress> findAllActiveAndValid(final String emailAddressString) {
-        return ContactRoot.getInstance().getPartyContactsSet().stream()
-                .filter(partyContact -> partyContact.isEmailAddress())
+        return ContactRoot.getInstance().getPartyContactsSet().stream().filter(partyContact -> partyContact.isEmailAddress())
                 .map(partyContact -> (EmailAddress) partyContact)
                 .filter(emailAddress -> emailAddress.hasValue(emailAddressString))
                 .filter(emailAddress -> emailAddress.isActiveAndValid());
@@ -200,7 +199,8 @@ public class EmailAddress extends EmailAddress_Base {
     }
 
     @Override
-    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact, String newValue) {
+    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
+            String newValue) {
         logEditAux(person, propertiesChanged, valueChanged, createdNewContact, newValue, "label.partyContacts.EmailAddress");
     }
 

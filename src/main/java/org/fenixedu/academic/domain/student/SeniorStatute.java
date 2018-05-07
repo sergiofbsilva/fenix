@@ -38,17 +38,19 @@ public class SeniorStatute extends SeniorStatute_Base {
 
     public SeniorStatute(Student student, Registration registration, StatuteType statuteType,
             ExecutionSemester beginExecutionPeriod, ExecutionSemester endExecutionPeriod, String comment) {
-        this(student, registration, statuteType, beginExecutionPeriod, endExecutionPeriod, beginExecutionPeriod
-                .getBeginLocalDate(), endExecutionPeriod.getEndLocalDate());
+        this(student, registration, statuteType, beginExecutionPeriod, endExecutionPeriod,
+                beginExecutionPeriod.getBeginLocalDate(), endExecutionPeriod.getEndLocalDate());
     }
 
-    public SeniorStatute(Student student, Registration registration, StatuteType statuteType, ExecutionSemester
-            beginExecutionPeriod, ExecutionSemester endExecutionPeriod, LocalDate beginDate, LocalDate endDate) {
+    public SeniorStatute(Student student, Registration registration, StatuteType statuteType,
+            ExecutionSemester beginExecutionPeriod, ExecutionSemester endExecutionPeriod, LocalDate beginDate,
+            LocalDate endDate) {
         this(student, registration, statuteType, beginExecutionPeriod, endExecutionPeriod, beginDate, endDate, "");
     }
 
-    public SeniorStatute(Student student, Registration registration, StatuteType statuteType, ExecutionSemester
-            beginExecutionPeriod, ExecutionSemester endExecutionPeriod, LocalDate beginDate, LocalDate endDate, String comment) {
+    public SeniorStatute(Student student, Registration registration, StatuteType statuteType,
+            ExecutionSemester beginExecutionPeriod, ExecutionSemester endExecutionPeriod, LocalDate beginDate, LocalDate endDate,
+            String comment) {
         this();
         setType(statuteType);
         edit(student, registration, beginExecutionPeriod, endExecutionPeriod, beginDate, endDate, comment);

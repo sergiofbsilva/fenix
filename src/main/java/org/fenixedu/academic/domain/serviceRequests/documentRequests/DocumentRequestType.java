@@ -88,8 +88,8 @@ public enum DocumentRequestType {
             COURSE_LOAD, EXTERNAL_COURSE_LOAD, PROGRAM_CERTIFICATE, EXTERNAL_PROGRAM_CERTIFICATE, EXTRA_CURRICULAR_CERTIFICATE,
             STANDALONE_ENROLMENT_CERTIFICATE);
 
-    static private List<DocumentRequestType> DECLARATIONS = Arrays.asList(SCHOOL_REGISTRATION_DECLARATION, ENROLMENT_DECLARATION,
-            IRS_DECLARATION, GENERIC_DECLARATION);
+    static private List<DocumentRequestType> DECLARATIONS =
+            Arrays.asList(SCHOOL_REGISTRATION_DECLARATION, ENROLMENT_DECLARATION, IRS_DECLARATION, GENERIC_DECLARATION);
 
     private DocumentRequestType(boolean hasAdditionalInformation, boolean allowedToQuickDeliver, boolean studentRequestable,
             boolean withBranch, boolean preBolonha, boolean bolonhaOnly) {

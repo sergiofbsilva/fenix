@@ -26,8 +26,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.fortuna.ical4j.model.Calendar;
-
 import org.apache.commons.lang.CharEncoding;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -52,6 +50,7 @@ import org.fenixedu.bennu.core.util.CoreConfiguration;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.joda.time.DateTime;
 
+import net.fortuna.ical4j.model.Calendar;
 import pt.ist.fenixframework.DomainObject;
 import pt.ist.fenixframework.FenixFramework;
 
@@ -139,13 +138,13 @@ public class ICalendarSyncPoint extends FenixDispatchAction {
                 }
             }
 
-            for (WrittenEvaluation writtenEvaluation : registration.getWrittenEvaluations(currentExecutionSemester
-                    .getPreviousExecutionPeriod())) {
+            for (WrittenEvaluation writtenEvaluation : registration
+                    .getWrittenEvaluations(currentExecutionSemester.getPreviousExecutionPeriod())) {
                 allEvents.addAll(writtenEvaluation.getAllEvents(registration));
             }
 
-            for (Attends attends : registration.getAttendsForExecutionPeriod(currentExecutionSemester
-                    .getPreviousExecutionPeriod())) {
+            for (Attends attends : registration
+                    .getAttendsForExecutionPeriod(currentExecutionSemester.getPreviousExecutionPeriod())) {
                 for (Project project : attends.getExecutionCourse().getAssociatedProjects()) {
                     allEvents.addAll(project.getAllEvents(attends.getExecutionCourse()));
                 }

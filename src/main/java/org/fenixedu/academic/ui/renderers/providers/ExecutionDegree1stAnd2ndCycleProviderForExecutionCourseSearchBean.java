@@ -23,8 +23,8 @@ import java.util.List;
 
 import org.fenixedu.academic.domain.ExecutionDegree;
 
-public class ExecutionDegree1stAnd2ndCycleProviderForExecutionCourseSearchBean extends
-        ExecutionDegreeProviderForExecutionCourseSearchBean {
+public class ExecutionDegree1stAnd2ndCycleProviderForExecutionCourseSearchBean
+        extends ExecutionDegreeProviderForExecutionCourseSearchBean {
 
     @Override
     public Object provide(Object source, Object currentValue) {

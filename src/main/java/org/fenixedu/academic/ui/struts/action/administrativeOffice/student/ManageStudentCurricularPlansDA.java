@@ -44,12 +44,12 @@ import pt.ist.fenixframework.Atomic;
 
 @Mapping(path = "/manageStudentCurricularPlans", module = "academicAdministration", functionality = SearchForStudentsDA.class)
 @Forwards({
-        @Forward(name = "viewRegistrationDetails", path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
+        @Forward(name = "viewRegistrationDetails",
+                path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
         @Forward(name = "create",
                 path = "/academicAdminOffice/student/registration/manageStudentCurricularPlans/createStudentCurricularPlan.jsp"),
         @Forward(name = "edit",
-                path = "/academicAdminOffice/student/registration/manageStudentCurricularPlans/editStudentCurricularPlan.jsp")
-})
+                path = "/academicAdminOffice/student/registration/manageStudentCurricularPlans/editStudentCurricularPlan.jsp") })
 public class ManageStudentCurricularPlansDA extends FenixDispatchAction {
 
     @SuppressWarnings("serial")
@@ -150,7 +150,8 @@ public class ManageStudentCurricularPlansDA extends FenixDispatchAction {
         return mapping.findForward("create");
     }
 
-    public ActionForward create(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward create(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final StudentCurricularPlanBean bean = getRenderedObject("studentCurricularPlanBean");
 
@@ -174,7 +175,8 @@ public class ManageStudentCurricularPlansDA extends FenixDispatchAction {
                 ExecutionInterval.assertExecutionIntervalType(ExecutionYear.class, bean.getExecutionInterval()));
     }
 
-    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final StudentCurricularPlan studentCurricularPlan = getStudentCurricularPlan(request);
         final Registration registration = studentCurricularPlan.getRegistration();

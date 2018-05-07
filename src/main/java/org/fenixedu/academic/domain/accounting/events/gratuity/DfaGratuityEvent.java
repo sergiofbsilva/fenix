@@ -46,8 +46,8 @@ public class DfaGratuityEvent extends DfaGratuityEvent_Base {
         super();
     }
 
-    public DfaGratuityEvent(AdministrativeOffice administrativeOffice, Person person,
-            StudentCurricularPlan studentCurricularPlan, ExecutionYear executionYear) {
+    public DfaGratuityEvent(AdministrativeOffice administrativeOffice, Person person, StudentCurricularPlan studentCurricularPlan,
+            ExecutionYear executionYear) {
 
         this();
 
@@ -78,11 +78,8 @@ public class DfaGratuityEvent extends DfaGratuityEvent_Base {
         final EntryDTO entryDTO = calculateEntries(new DateTime()).iterator().next();
 
         if (!getNonProcessedPaymentCodes().isEmpty()) {
-            getNonProcessedPaymentCodes()
-                    .iterator()
-                    .next()
-                    .update(new YearMonthDay(), calculatePaymentCodeEndDate(), entryDTO.getAmountToPay(),
-                            entryDTO.getAmountToPay());
+            getNonProcessedPaymentCodes().iterator().next().update(new YearMonthDay(), calculatePaymentCodeEndDate(),
+                    entryDTO.getAmountToPay(), entryDTO.getAmountToPay());
         }
 
         return getNonProcessedPaymentCodes();
@@ -94,8 +91,8 @@ public class DfaGratuityEvent extends DfaGratuityEvent_Base {
         final EntryDTO entryDTO = calculateEntries(new DateTime()).iterator().next();
 
         return Collections.singletonList(AccountingEventPaymentCode.create(PaymentCodeType.TOTAL_GRATUITY, new YearMonthDay(),
-                calculatePaymentCodeEndDate(), this, entryDTO.getAmountToPay(), entryDTO.getAmountToPay(), getStudent()
-                        .getPerson()));
+                calculatePaymentCodeEndDate(), this, entryDTO.getAmountToPay(), entryDTO.getAmountToPay(),
+                getStudent().getPerson()));
     }
 
     private Student getStudent() {

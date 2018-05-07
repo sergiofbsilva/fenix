@@ -38,6 +38,7 @@ import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.person.RoleType;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.Registration_Base;
 import org.fenixedu.academic.domain.util.email.ExecutionCourseSender;
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
@@ -83,7 +84,7 @@ public class Shift extends Shift_Base {
     };
 
     static {
-        Registration.getRelationShiftStudent().addListener(new ShiftStudentListener());
+        Registration_Base.getRelationShiftStudent().addListener(new ShiftStudentListener());
     }
 
     public Shift(final ExecutionCourse executionCourse, Collection<ShiftType> types, final Integer lotacao) {
@@ -129,7 +130,7 @@ public class Shift extends Shift_Base {
 
         setComment(comment);
     }
-    
+
     public boolean isCustomName() {
         return StringUtils.isNotBlank(getNome()) && !getNome().matches(getExecutionCourse().getSigla() + "[a-zA-Z]+[0-9]+");
     }
@@ -487,9 +488,8 @@ public class Shift extends Shift_Base {
     }
 
     public int getCapacityBasedOnSmallestRoom() {
-        int capacity =
-                getAssociatedLessonsSet().stream().filter(Lesson::hasSala)
-                        .mapToInt(lesson -> lesson.getSala().getAllocatableCapacity()).min().orElse(0);
+        int capacity = getAssociatedLessonsSet().stream().filter(Lesson::hasSala)
+                .mapToInt(lesson -> lesson.getSala().getAllocatableCapacity()).min().orElse(0);
         return capacity + (capacity / 10);
     }
 
@@ -520,8 +520,7 @@ public class Shift extends Shift_Base {
         registration.removeShifts(this);
 
         ExecutionCourseSender sender = ExecutionCourseSender.newInstance(executionCourse);
-        Collection<Recipient> recipients =
-                Collections.singletonList(new Recipient(registration.getPerson().getUser().groupOf()));
+        Collection<Recipient> recipients = Collections.singletonList(new Recipient(registration.getPerson().getUser().groupOf()));
         final String subject = BundleUtil.getString(Bundle.APPLICATION, "label.shift.remove.subject");
         final String body = BundleUtil.getString(Bundle.APPLICATION, "label.shift.remove.body", getNome());
 

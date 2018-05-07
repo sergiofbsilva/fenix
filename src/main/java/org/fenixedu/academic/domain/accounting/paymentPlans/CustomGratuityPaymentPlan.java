@@ -35,8 +35,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class CustomGratuityPaymentPlan extends CustomGratuityPaymentPlan_Base {
 
     static {
-        getRelationServiceAgreementServiceAgreementPaymentPlan().addListener(
-                new RelationAdapter<ServiceAgreement, ServiceAgreementPaymentPlan>() {
+        getRelationServiceAgreementServiceAgreementPaymentPlan()
+                .addListener(new RelationAdapter<ServiceAgreement, ServiceAgreementPaymentPlan>() {
                     @Override
                     public void beforeAdd(ServiceAgreement serviceAgreement, ServiceAgreementPaymentPlan paymentPlanToAdd) {
 
@@ -51,8 +51,8 @@ public class CustomGratuityPaymentPlan extends CustomGratuityPaymentPlan_Base {
                     }
                 });
 
-        getRelationGratuityPaymentPlanGratuityEventWithPaymentPlan().addListener(
-                new RelationAdapter<PaymentPlan, GratuityEventWithPaymentPlan>() {
+        getRelationGratuityPaymentPlanGratuityEventWithPaymentPlan()
+                .addListener(new RelationAdapter<PaymentPlan, GratuityEventWithPaymentPlan>() {
                     @Override
                     public void beforeAdd(PaymentPlan paymentPlan, GratuityEventWithPaymentPlan event) {
                         if (paymentPlan != null && event != null) {

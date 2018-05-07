@@ -36,8 +36,8 @@ import pt.ist.fenixframework.FenixFramework;
 @Mapping(path = "/caseHandlingDegreeCandidacyForGraduatedPersonProcess", module = "nape",
         formBeanClass = CandidacyProcessDA.CandidacyProcessForm.class)
 @Forwards({ @Forward(name = "intro", path = "/scientificCouncil/candidacy/mainCandidacyProcess.jsp") })
-public class DegreeCandidacyForGraduatedPersonProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.graduatedPerson.DegreeCandidacyForGraduatedPersonProcessDA {
+public class DegreeCandidacyForGraduatedPersonProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.graduatedPerson.DegreeCandidacyForGraduatedPersonProcessDA {
 
     public DegreeCurricularPlan getDegreeCurricularPlan(HttpServletRequest request) {
         final String degreeCurricularPlanOID = DegreeCoordinatorIndex.findDegreeCurricularPlanID(request);

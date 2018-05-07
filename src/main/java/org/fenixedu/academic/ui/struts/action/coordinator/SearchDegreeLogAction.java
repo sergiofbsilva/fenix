@@ -36,6 +36,7 @@ import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
 import org.fenixedu.academic.domain.DegreeLog;
 import org.fenixedu.academic.domain.DegreeLog.DegreeLogTypes;
+import org.fenixedu.academic.domain.DomainOperationLog;
 import org.fenixedu.academic.domain.ExecutionDegree;
 import org.fenixedu.academic.dto.coordinator.SearchDegreeLogBean;
 import org.fenixedu.academic.ui.struts.action.base.FenixDispatchAction;
@@ -83,7 +84,8 @@ public class SearchDegreeLogAction extends FenixDispatchAction {
         return mapping.findForward("search");
     }
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         DegreeCurricularPlan dcp = getDomainObject(request, "degreeCurricularPlanID");
         SearchDegreeLogBean sdlb = readSearchBean(request, dcp.getDegree());
 
@@ -125,7 +127,7 @@ public class SearchDegreeLogAction extends FenixDispatchAction {
     private void prepareAttendsCollectionPages(HttpServletRequest request, SearchDegreeLogBean seclb, Degree degree) {
         Collection<DegreeLog> dLogs = seclb.getDegreeLogs();
         List<DegreeLog> listDLogs = new ArrayList<DegreeLog>(dLogs);
-        Collections.sort(listDLogs, DegreeLog.COMPARATOR_BY_WHEN_DATETIME);
+        Collections.sort(listDLogs, DomainOperationLog.COMPARATOR_BY_WHEN_DATETIME);
         int entriesPerPage = 20;
         final CollectionPager<DegreeLog> pager = new CollectionPager<DegreeLog>(listDLogs, entriesPerPage);
         request.setAttribute("numberOfPages", (listDLogs.size() / entriesPerPage) + 1);
@@ -156,7 +158,8 @@ public class SearchDegreeLogAction extends FenixDispatchAction {
         bean.setDegreeLogs(validLogs);
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         request.setAttribute("degreeCurricularPlanID", request.getAttribute("degreeCurricularPlanID"));
 

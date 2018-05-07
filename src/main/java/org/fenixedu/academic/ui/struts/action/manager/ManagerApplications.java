@@ -57,8 +57,8 @@ public class ManagerApplications extends ForwardAction {
     public static class ManagerPaymentsApp {
     }
 
-    @StrutsApplication(path = "students", titleKey = "label.students", bundle = "AcademicAdminOffice",
-            accessGroup = ACCESS_GROUP, hint = HINT)
+    @StrutsApplication(path = "students", titleKey = "label.students", bundle = "AcademicAdminOffice", accessGroup = ACCESS_GROUP,
+            hint = HINT)
     public static class ManagerStudentsApp {
     }
 

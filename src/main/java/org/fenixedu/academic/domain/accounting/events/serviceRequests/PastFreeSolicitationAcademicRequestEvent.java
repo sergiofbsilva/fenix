@@ -28,8 +28,8 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.LabelFormatter;
 import org.fenixedu.academic.util.Money;
 
-public class PastFreeSolicitationAcademicRequestEvent extends PastFreeSolicitationAcademicRequestEvent_Base implements
-        IPastRequestEvent {
+public class PastFreeSolicitationAcademicRequestEvent extends PastFreeSolicitationAcademicRequestEvent_Base
+        implements IPastRequestEvent {
 
     protected PastFreeSolicitationAcademicRequestEvent() {
         super();

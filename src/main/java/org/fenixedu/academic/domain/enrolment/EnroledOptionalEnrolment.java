@@ -58,8 +58,8 @@ public class EnroledOptionalEnrolment extends EnroledCurriculumModuleWrapper {
     @Override
     public List<CurricularRule> getCurricularRulesFromDegreeModule(ExecutionSemester executionSemester) {
         final OptionalEnrolment optionalEnrolment = (OptionalEnrolment) getCurriculumModule();
-        return optionalEnrolment.isApproved() ? Collections.EMPTY_LIST : getOptionalCurricularCourse().getCurricularRules(
-                getContext(), executionSemester);
+        return optionalEnrolment.isApproved() ? Collections.EMPTY_LIST : getOptionalCurricularCourse()
+                .getCurricularRules(getContext(), executionSemester);
     }
 
     @Override
@@ -67,7 +67,8 @@ public class EnroledOptionalEnrolment extends EnroledCurriculumModuleWrapper {
         if (this.context == null) {
             if (!getCurriculumModule().isRoot()) {
                 final CurriculumGroup parentCurriculumGroup = getCurriculumModule().getCurriculumGroup();
-                for (final Context context : parentCurriculumGroup.getDegreeModule().getValidChildContexts(getExecutionPeriod())) {
+                for (final Context context : parentCurriculumGroup.getDegreeModule()
+                        .getValidChildContexts(getExecutionPeriod())) {
                     if (context.getChildDegreeModule() == getOptionalCurricularCourse()) {
                         setContext(context);
                         break;

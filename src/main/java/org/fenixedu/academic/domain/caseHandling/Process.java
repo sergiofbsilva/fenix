@@ -64,8 +64,8 @@ public abstract class Process extends Process_Base implements Comparable<Process
         }
     }
 
-    public static Activity<? extends Process> getStartActivity(Class<? extends Process> process) throws InstantiationException,
-            IllegalAccessException {
+    public static Activity<? extends Process> getStartActivity(Class<? extends Process> process)
+            throws InstantiationException, IllegalAccessException {
         for (Class<?> clazz : process.getDeclaredClasses()) {
             if (Activity.class.isAssignableFrom(clazz)) {
                 if (clazz.isAnnotationPresent(StartActivity.class)) {

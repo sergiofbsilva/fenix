@@ -46,8 +46,8 @@ public class CreateAcademicCalendarEntry {
                 return new AcademicCalendarRootEntry(bean.getTitle(), bean.getDescription(), bean.getTemplateEntry());
 
             } else if (type.equals(AcademicYearCE.class)) {
-                return new AcademicYearCE(bean.getEntry(), bean.getTitle(), bean.getDescription(), bean.getBegin(),
-                        bean.getEnd(), bean.getRootEntry());
+                return new AcademicYearCE(bean.getEntry(), bean.getTitle(), bean.getDescription(), bean.getBegin(), bean.getEnd(),
+                        bean.getRootEntry());
 
             } else if (type.equals(AcademicSemesterCE.class)) {
                 return new AcademicSemesterCE(bean.getEntry(), bean.getTitle(), bean.getDescription(), bean.getBegin(),

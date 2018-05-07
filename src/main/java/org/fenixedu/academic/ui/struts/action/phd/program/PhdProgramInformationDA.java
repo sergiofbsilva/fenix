@@ -40,8 +40,7 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(path = "/phdProgramInformation", module = "academicAdministration", functionality = PhdIndividualProgramProcessDA.class)
-@Forwards({
-        @Forward(name = "listPhdPrograms", path = "/phd/academicAdminOffice/program/information/listPhdPrograms.jsp"),
+@Forwards({ @Forward(name = "listPhdPrograms", path = "/phd/academicAdminOffice/program/information/listPhdPrograms.jsp"),
         @Forward(name = "listPhdProgramInformations",
                 path = "/phd/academicAdminOffice/program/information/listPhdProgramInformations.jsp"),
         @Forward(name = "createPhdInformation", path = "/phd/academicAdminOffice/program/information/createPhdInformation.jsp"),
@@ -52,10 +51,10 @@ public class PhdProgramInformationDA extends FenixDispatchAction {
     public ActionForward listPhdPrograms(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
 
-        request.setAttribute(
-                "phdPrograms",
-                AcademicAccessRule.getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES,
-                        Authenticate.getUser()).collect(Collectors.toSet()));
+        request.setAttribute("phdPrograms",
+                AcademicAccessRule
+                        .getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES, Authenticate.getUser())
+                        .collect(Collectors.toSet()));
         return mapping.findForward("listPhdPrograms");
     }
 
@@ -83,7 +82,8 @@ public class PhdProgramInformationDA extends FenixDispatchAction {
         return mapping.findForward("createPhdInformation");
     }
 
-    public ActionForward create(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward create(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         PhdProgramInformationBean readPhdInformationBean = readPhdInformationBean();
         try {

@@ -20,9 +20,9 @@ package org.fenixedu.academic.domain.phd;
 
 import java.util.Comparator;
 
-import jvstm.cps.ConsistencyPredicate;
-
 import org.fenixedu.bennu.core.domain.Bennu;
+
+import jvstm.cps.ConsistencyPredicate;
 
 public class ThesisSubjectOrder extends ThesisSubjectOrder_Base {
 

@@ -178,10 +178,8 @@ public class PhdCandidacyFeedbackRequestDA extends CommonPhdCandidacyDA {
         bean.setMailSubject(AlertService.getSubjectPrefixed(bean.getIndividualProgramProcess(),
                 "message.phd.candidacy.feedback.default.subject"));
 
-        bean.setMailBody(AlertService.getBodyText(
-                bean.getIndividualProgramProcess(),
-                AlertMessage.create("message.phd.candidacy.feedback.default.body", bean.getIndividualProgramProcess().getPerson()
-                        .getName())));
+        bean.setMailBody(AlertService.getBodyText(bean.getIndividualProgramProcess(), AlertMessage.create(
+                "message.phd.candidacy.feedback.default.body", bean.getIndividualProgramProcess().getPerson().getName())));
 
     }
 

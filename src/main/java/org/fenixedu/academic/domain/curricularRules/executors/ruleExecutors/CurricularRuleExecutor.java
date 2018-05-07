@@ -97,7 +97,8 @@ abstract public class CurricularRuleExecutor {
             final EnrolmentContext enrolmentContext, final CourseGroup courseGroup) {
         final Collection<IDegreeModuleToEvaluate> result = new ArrayList<IDegreeModuleToEvaluate>();
         for (final IDegreeModuleToEvaluate degreeModuleToEvaluate : enrolmentContext.getDegreeModulesToEvaluate()) {
-            if (!degreeModuleToEvaluate.isEnroled() && degreeModuleToEvaluate.getContext().getParentCourseGroup() == courseGroup) {
+            if (!degreeModuleToEvaluate.isEnroled()
+                    && degreeModuleToEvaluate.getContext().getParentCourseGroup() == courseGroup) {
                 result.add(degreeModuleToEvaluate);
             }
         }
@@ -155,8 +156,8 @@ abstract public class CurricularRuleExecutor {
 
     protected boolean hasEnrolmentWithEnroledState(final EnrolmentContext enrolmentContext,
             final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
-        return enrolmentContext.getStudentCurricularPlan().getRoot()
-                .hasEnrolmentWithEnroledState(curricularCourse, executionSemester);
+        return enrolmentContext.getStudentCurricularPlan().getRoot().hasEnrolmentWithEnroledState(curricularCourse,
+                executionSemester);
     }
 
     protected boolean isEnrolling(final EnrolmentContext enrolmentContext, final DegreeModule degreeModule) {

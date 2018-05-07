@@ -30,10 +30,10 @@ import org.fenixedu.academic.domain.phd.PhdProgramCalendarUtil;
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.LocalDate;
 
 public class PhdRegistrationFormalizationAlert extends PhdRegistrationFormalizationAlert_Base {
@@ -49,13 +49,13 @@ public class PhdRegistrationFormalizationAlert extends PhdRegistrationFormalizat
     }
 
     private LocalizedString buildSubject(final PhdIndividualProgramProcess process) {
-        return new LocalizedString(Locale.getDefault(), AlertService.getSubjectPrefixed(process,
-                "message.phd.alert.registration.formalization.subject"));
+        return new LocalizedString(Locale.getDefault(),
+                AlertService.getSubjectPrefixed(process, "message.phd.alert.registration.formalization.subject"));
     }
 
     private LocalizedString buildBody(final PhdIndividualProgramProcess process) {
-        return new LocalizedString(Locale.getDefault(), AlertService.getBodyText(process,
-                "message.phd.alert.registration.formalization.body"));
+        return new LocalizedString(Locale.getDefault(),
+                AlertService.getBodyText(process, "message.phd.alert.registration.formalization.body"));
     }
 
     @Override

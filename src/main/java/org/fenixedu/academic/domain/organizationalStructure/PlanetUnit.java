@@ -39,8 +39,8 @@ public class PlanetUnit extends PlanetUnit_Base {
             UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
 
         PlanetUnit planetUnit = new PlanetUnit();
-        planetUnit.init(planetName, planetNameCard, costCenterCode, planetAcronym, beginDate, endDate, webAddress,
-                classification, null, canBeResponsibleOfSpaces, campus);
+        planetUnit.init(planetName, planetNameCard, costCenterCode, planetAcronym, beginDate, endDate, webAddress, classification,
+                null, canBeResponsibleOfSpaces, campus);
 
         checkIfAlreadyExistsOnePlanetWithSameAcronymAndName(planetUnit);
 
@@ -84,10 +84,8 @@ public class PlanetUnit extends PlanetUnit_Base {
 
     private static void checkIfAlreadyExistsOnePlanetWithSameAcronymAndName(PlanetUnit planetUnit) {
         for (Unit unit : UnitUtils.readAllUnitsWithoutParents()) {
-            if (!unit.equals(planetUnit)
-                    && unit.isPlanetUnit()
-                    && (planetUnit.getAcronym().equalsIgnoreCase(unit.getAcronym()) || planetUnit.getName().equalsIgnoreCase(
-                            unit.getName()))) {
+            if (!unit.equals(planetUnit) && unit.isPlanetUnit() && (planetUnit.getAcronym().equalsIgnoreCase(unit.getAcronym())
+                    || planetUnit.getName().equalsIgnoreCase(unit.getName()))) {
                 throw new DomainException("error.unit.already.exists.unit.with.same.name.or.acronym");
             }
         }

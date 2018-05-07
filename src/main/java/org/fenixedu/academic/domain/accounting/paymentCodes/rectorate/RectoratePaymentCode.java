@@ -41,7 +41,8 @@ public class RectoratePaymentCode extends RectoratePaymentCode_Base {
     }
 
     @Override
-    protected void internalProcess(Person person, Money amount, DateTime whenRegistered, String sibsTransactionId, String comments) {
+    protected void internalProcess(Person person, Money amount, DateTime whenRegistered, String sibsTransactionId,
+            String comments) {
 
     }
 
@@ -52,8 +53,8 @@ public class RectoratePaymentCode extends RectoratePaymentCode_Base {
 
     public static RectoratePaymentCode create(final LocalDate startDate, final LocalDate endDate, final Money minAmount,
             final Money maxAmount) {
-        return new RectoratePaymentCode(startDate.toDateTimeAtStartOfDay().toYearMonthDay(), endDate.toDateTimeAtStartOfDay()
-                .toYearMonthDay(), minAmount, maxAmount);
+        return new RectoratePaymentCode(startDate.toDateTimeAtStartOfDay().toYearMonthDay(),
+                endDate.toDateTimeAtStartOfDay().toYearMonthDay(), minAmount, maxAmount);
     }
 
     public static List<RectoratePaymentCode> getAllRectoratePaymentCodes() {

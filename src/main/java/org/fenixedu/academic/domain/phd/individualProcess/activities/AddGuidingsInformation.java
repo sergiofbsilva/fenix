@@ -41,8 +41,8 @@ public class AddGuidingsInformation extends PhdIndividualProgramProcessActivity 
             PhdParticipant guiding = process.addGuiding(bean);
             if (bean.getGuidingAcceptanceLetter() != null && bean.getGuidingAcceptanceLetter().getFileContent() != null) {
                 PhdProgramDocumentUploadBean acceptanceLetter = bean.getGuidingAcceptanceLetter();
-                new PhdGuiderAcceptanceLetter(guiding, acceptanceLetter.getType(), "", bean.getGuidingAcceptanceLetter()
-                        .getFileContent(), bean.getGuidingAcceptanceLetter().getFilename(),
+                new PhdGuiderAcceptanceLetter(guiding, acceptanceLetter.getType(), "",
+                        bean.getGuidingAcceptanceLetter().getFileContent(), bean.getGuidingAcceptanceLetter().getFilename(),
                         userView != null ? userView.getPerson() : process.getPerson());
             }
         }

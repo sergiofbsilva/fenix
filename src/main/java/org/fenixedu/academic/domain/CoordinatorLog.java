@@ -30,7 +30,8 @@ public class CoordinatorLog extends CoordinatorLog_Base {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public CoordinatorLog(DateTime time, OperationType operation, Person person, ExecutionDegree executionDegree, Person personWho) {
+    public CoordinatorLog(DateTime time, OperationType operation, Person person, ExecutionDegree executionDegree,
+            Person personWho) {
         super();
         setRootDomainObject(Bennu.getInstance());
         super.setDate(time);

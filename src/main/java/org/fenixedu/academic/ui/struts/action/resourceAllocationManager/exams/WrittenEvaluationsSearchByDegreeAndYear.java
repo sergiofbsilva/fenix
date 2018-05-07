@@ -78,9 +78,8 @@ public class WrittenEvaluationsSearchByDegreeAndYear extends FenixContextDispatc
 
         final List<LabelValueBean> executionDegreeLabelValueBeans = new ArrayList<LabelValueBean>();
         for (final ExecutionDegree executionDegree : ExecutionDegree.filterByAcademicInterval(academicInterval)) {
-            String part =
-                    addAnotherInfoToLabel(executionDegree, academicInterval) ? " - "
-                            + executionDegree.getDegreeCurricularPlan().getName() : "";
+            String part = addAnotherInfoToLabel(executionDegree, academicInterval) ? " - "
+                    + executionDegree.getDegreeCurricularPlan().getName() : "";
             executionDegreeLabelValueBeans.add(new LabelValueBean(executionDegree.getDegree().getPresentationName() + part,
                     executionDegree.getExternalId().toString()));
         }
@@ -130,8 +129,8 @@ public class WrittenEvaluationsSearchByDegreeAndYear extends FenixContextDispatc
                     public int compare(ExecutionDegree executionDegree1, ExecutionDegree executionDegree2) {
                         final Degree degree1 = executionDegree1.getDegreeCurricularPlan().getDegree();
                         final Degree degree2 = executionDegree2.getDegreeCurricularPlan().getDegree();
-                        return (degree1.getDegreeType() == degree2.getDegreeType()) ? degree1.getNome().compareTo(
-                                degree2.getNome()) : degree1.getDegreeType().compareTo(degree2.getDegreeType());
+                        return (degree1.getDegreeType() == degree2.getDegreeType()) ? degree1.getNome()
+                                .compareTo(degree2.getNome()) : degree1.getDegreeType().compareTo(degree2.getDegreeType());
                     }
                 });
         for (final ExecutionDegree executionDegree : ExecutionDegree.filterByAcademicInterval(academicInterval)) {
@@ -168,7 +167,8 @@ public class WrittenEvaluationsSearchByDegreeAndYear extends FenixContextDispatc
                                 } else {
                                     executionCourses = executionCoursesByCurricularYear.get(curricularYear);
                                 }
-                                for (final ExecutionCourse executionCourse : curricularCourse.getAssociatedExecutionCoursesSet()) {
+                                for (final ExecutionCourse executionCourse : curricularCourse
+                                        .getAssociatedExecutionCoursesSet()) {
                                     if (academicInterval.equals(executionCourse.getAcademicInterval())) {
                                         executionCourses.add(executionCourse);
                                     }

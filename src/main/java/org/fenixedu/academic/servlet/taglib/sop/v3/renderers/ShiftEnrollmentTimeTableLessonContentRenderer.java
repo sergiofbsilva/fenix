@@ -35,9 +35,9 @@ import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.LocalDate;
 
-import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
 
 /**
  * @author Ricardo Rodrigues
@@ -234,10 +234,8 @@ public class ShiftEnrollmentTimeTableLessonContentRenderer extends LessonSlotCon
         } else if (getAction().equalsIgnoreCase("addram")) {
             strBuffer.append("<a href=\"" + context + "/resourceAllocationManager/enrollStudentInShifts.do?registrationOID=");
         } else if (getAction().equalsIgnoreCase("removeram")) {
-            strBuffer
-                    .append("<a href=\""
-                            + context
-                            + "/resourceAllocationManager/studentShiftEnrollmentManager.do?method=unEnroleStudentFromShift&registrationOID=");
+            strBuffer.append("<a href=\"" + context
+                    + "/resourceAllocationManager/studentShiftEnrollmentManager.do?method=unEnroleStudentFromShift&registrationOID=");
         }
 
         strBuffer.append(getStudentID()).append("&shiftId=").append(shift.getExternalId());

@@ -116,9 +116,7 @@ public class Alumni extends Alumni_Base {
     }
 
     public EmailAddress getPersonalEmail() {
-        return getStudent().getPerson().getEmailAddressStream()
-            .filter(e -> e.isPersonalType())
-            .findAny().orElse(null);
+        return getStudent().getPerson().getEmailAddressStream().filter(e -> e.isPersonalType()).findAny().orElse(null);
     }
 
     public Boolean hasPersonalEmail() {
@@ -240,8 +238,9 @@ public class Alumni extends Alumni_Base {
             if (person.getStudent() != null) {
 
                 if (bean.getStudentNumber() == null || person.getStudent().getNumber().equals(bean.getStudentNumber())) {
-                    for (Registration registration : (bean.getDegreeType() == null ? person.getStudent().getRegistrationsSet() : person
-                            .getStudent().getRegistrationsMatchingDegreeType(Predicate.isEqual(bean.getDegreeType())))) {
+                    for (Registration registration : (bean.getDegreeType() == null ? person.getStudent()
+                            .getRegistrationsSet() : person.getStudent()
+                                    .getRegistrationsMatchingDegreeType(Predicate.isEqual(bean.getDegreeType())))) {
 
                         if (registration.isConcluded()) {
                             if (bean.getDegree() != null) {

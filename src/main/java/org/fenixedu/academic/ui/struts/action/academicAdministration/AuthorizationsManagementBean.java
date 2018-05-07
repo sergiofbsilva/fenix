@@ -42,9 +42,9 @@ import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.common.base.Splitter;
+
+import pt.ist.fenixframework.FenixFramework;
 
 public class AuthorizationsManagementBean implements Serializable {
     private static final long serialVersionUID = 604369029723208403L;
@@ -60,9 +60,8 @@ public class AuthorizationsManagementBean implements Serializable {
     public AuthorizationsManagementBean(AcademicOperationType operation) {
         this.operation = operation;
         if (operation != null) {
-            groups =
-                    AcademicAccessRule.accessRules().filter(r -> r.getOperation().equals(operation))
-                            .map(AuthorizationGroupBean::new).collect(Collectors.toList());
+            groups = AcademicAccessRule.accessRules().filter(r -> r.getOperation().equals(operation))
+                    .map(AuthorizationGroupBean::new).collect(Collectors.toList());
         }
     }
 

@@ -54,10 +54,12 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
         @Forward(name = "requestScheduleFirstThesisMeeting",
                 path = "/phd/thesis/academicAdminOffice/requestScheduleFirstThesisMeeting.jsp"),
         @Forward(name = "scheduleFirstThesisMeeting", path = "/phd/thesis/academicAdminOffice/scheduleFirstThesisMeeting.jsp"),
-        @Forward(name = "requestScheduleThesisMeeting", path = "/phd/thesis/academicAdminOffice/requestScheduleThesisMeeting.jsp"),
+        @Forward(name = "requestScheduleThesisMeeting",
+                path = "/phd/thesis/academicAdminOffice/requestScheduleThesisMeeting.jsp"),
         @Forward(name = "scheduleThesisMeeting", path = "/phd/thesis/academicAdminOffice/scheduleThesisMeeting.jsp"),
         @Forward(name = "submitThesisMeetingMinutes", path = "/phd/thesis/academicAdminOffice/submitThesisMeetingMinutes.jsp"),
-        @Forward(name = "viewMeetingSchedulingProcess", path = "/phd/thesis/academicAdminOffice/viewMeetingSchedulingProcess.jsp"),
+        @Forward(name = "viewMeetingSchedulingProcess",
+                path = "/phd/thesis/academicAdminOffice/viewMeetingSchedulingProcess.jsp"),
         @Forward(name = "editMeetingAttributes", path = "/phd/thesis/academicAdminOffice/editMeetingAttributes.jsp") })
 public class PhdMeetingSchedulingProcessDA extends CommonPhdThesisProcessDA {
 
@@ -177,8 +179,8 @@ public class PhdMeetingSchedulingProcessDA extends CommonPhdThesisProcessDA {
 
     private void setDefaultMeetingMailInformation(final PhdThesisProcessBean bean, final PhdThesisProcess thesisProcess) {
         final PhdIndividualProgramProcess process = thesisProcess.getIndividualProgramProcess();
-        bean.setMailSubject(AlertService
-                .getSubjectPrefixed(process, "message.phd.thesis.schedule.thesis.meeting.default.subject"));
+        bean.setMailSubject(
+                AlertService.getSubjectPrefixed(process, "message.phd.thesis.schedule.thesis.meeting.default.subject"));
         bean.setMailBody(AlertService.getBodyText(process, "message.phd.thesis.schedule.thesis.meeting.default.body"));
     }
 

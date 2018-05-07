@@ -22,7 +22,8 @@ import org.fenixedu.academic.util.StudentPersonalDataAuthorizationChoice;
 
 public class StudentDataShareStudentsAssociationAuthorization extends StudentDataShareStudentsAssociationAuthorization_Base {
 
-    public StudentDataShareStudentsAssociationAuthorization(Student student, StudentPersonalDataAuthorizationChoice authorization) {
+    public StudentDataShareStudentsAssociationAuthorization(Student student,
+            StudentPersonalDataAuthorizationChoice authorization) {
         super();
         init(student, authorization);
     }

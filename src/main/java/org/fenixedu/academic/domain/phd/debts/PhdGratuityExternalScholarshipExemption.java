@@ -39,10 +39,9 @@ public class PhdGratuityExternalScholarshipExemption extends PhdGratuityExternal
 
     @Deprecated
     public PhdGratuityExternalScholarshipExemption(Person responsible, Event event, Party party, Money value) {
-        PhdEventExemptionJustification exemptionJustification =
-                new PhdEventExemptionJustification(this,
-                        PhdEventExemptionJustificationType.PHD_GRATUITY_FCT_SCHOLARSHIP_EXEMPTION, event.getWhenOccured()
-                                .toLocalDate(), "Criado pela existencia de bolsa de entidade externa.");
+        PhdEventExemptionJustification exemptionJustification = new PhdEventExemptionJustification(this,
+                PhdEventExemptionJustificationType.PHD_GRATUITY_FCT_SCHOLARSHIP_EXEMPTION, event.getWhenOccured().toLocalDate(),
+                "Criado pela existencia de bolsa de entidade externa.");
         super.init(responsible, event, exemptionJustification);
         setParty(party);
         createExternalDebt();
@@ -53,9 +52,8 @@ public class PhdGratuityExternalScholarshipExemption extends PhdGratuityExternal
 
     public PhdGratuityExternalScholarshipExemption(Person responsible, Event event, Party creditor, Money value, String reason,
             String fileName, InputStream file) {
-        PhdEventExemptionJustification exemptionJustification =
-                new PhdEventExemptionJustification(this, PhdEventExemptionJustificationType.THIRD_PARTY_CONTRIBUTION,
-                        event.getWhenOccured().toLocalDate(), reason);
+        PhdEventExemptionJustification exemptionJustification = new PhdEventExemptionJustification(this,
+                PhdEventExemptionJustificationType.THIRD_PARTY_CONTRIBUTION, event.getWhenOccured().toLocalDate(), reason);
         super.init(responsible, event, exemptionJustification);
         setParty(creditor);
         createExternalDebt();
@@ -93,7 +91,7 @@ public class PhdGratuityExternalScholarshipExemption extends PhdGratuityExternal
         if (event.hasExternalScholarshipGratuityExemption()) {
             throw new DomainException("error.already.has.scolarship");
         }
-        return new PhdGratuityExternalScholarshipExemption(responsible, event, party, value,reason,fileName, file);
+        return new PhdGratuityExternalScholarshipExemption(responsible, event, party, value, reason, fileName, file);
     }
 
     @Override
@@ -101,17 +99,17 @@ public class PhdGratuityExternalScholarshipExemption extends PhdGratuityExternal
         PhdGratuityEvent event = (PhdGratuityEvent) getEvent();
         final ExecutionYear executionYear = event.getPhdIndividualProgramProcess().getExecutionYear();
         return new LabelFormatter()
-                .appendLabel(
-                        "Bolsa de entidade externa (" + getParty().getName()
-                                + ") aplicada à Propina do Programa de Doutoramento de ")
-                .appendLabel(event.getPhdProgram().getName(executionYear).getContent()).appendLabel(" referente a " + event.getYear());
+                .appendLabel("Bolsa de entidade externa (" + getParty().getName()
+                        + ") aplicada à Propina do Programa de Doutoramento de ")
+                .appendLabel(event.getPhdProgram().getName(executionYear).getContent())
+                .appendLabel(" referente a " + event.getYear());
     }
 
     public void doDelete() {
         setExternalScholarshipPhdGratuityContribuitionEvent(null);
         setParty(null);
         GratuityContributionFile document = getDocument();
-        if(document != null) {
+        if (document != null) {
             setDocument(null);
             document.delete();
         }

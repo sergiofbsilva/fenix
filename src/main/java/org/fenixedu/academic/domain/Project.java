@@ -140,7 +140,8 @@ public class Project extends Project_Base {
         logEdit();
     }
 
-    private void setOnlineSubmissionProperties(Boolean onlineSubmissionsAllowed, Integer maxSubmissionsToKeep, Grouping grouping) {
+    private void setOnlineSubmissionProperties(Boolean onlineSubmissionsAllowed, Integer maxSubmissionsToKeep,
+            Grouping grouping) {
 
         setOnlineSubmissionsAllowed(onlineSubmissionsAllowed);
 
@@ -340,18 +341,18 @@ public class Project extends Project_Base {
 
     public List<EvaluationEventBean> getAllEvents(ExecutionCourse executionCourse) {
         List<EvaluationEventBean> result = new ArrayList<EvaluationEventBean>();
-        result.add(new EvaluationEventBean("Inicio " + this.getName() + " : " + executionCourse.getNome(), this
-                .getProjectBeginDateTime(), this.getProjectBeginDateTime().plusHours(1), false, null, null,
+        result.add(new EvaluationEventBean("Inicio " + this.getName() + " : " + executionCourse.getNome(),
+                this.getProjectBeginDateTime(), this.getProjectBeginDateTime().plusHours(1), false, null, null,
                 this.getDescription(), Collections.singleton(executionCourse)));
         if (this.getOnlineSubmissionsAllowed()) {
             String url = CoreConfiguration.getConfiguration().applicationUrl() + "/login";
-            result.add(new EvaluationEventBean("Fim " + this.getName() + " : " + executionCourse.getNome(), this
-                    .getProjectEndDateTime().minusHours(1), this.getProjectEndDateTime(), false, null, url,
+            result.add(new EvaluationEventBean("Fim " + this.getName() + " : " + executionCourse.getNome(),
+                    this.getProjectEndDateTime().minusHours(1), this.getProjectEndDateTime(), false, null, url,
                     this.getDescription(), Collections.singleton(executionCourse)));
         } else {
-            result.add(new EvaluationEventBean("Fim " + this.getName() + " : " + executionCourse.getNome(), this
-                    .getProjectEndDateTime().minusHours(1), this.getProjectEndDateTime(), false, null, null, this
-                    .getDescription(), Collections.singleton(executionCourse)));
+            result.add(new EvaluationEventBean("Fim " + this.getName() + " : " + executionCourse.getNome(),
+                    this.getProjectEndDateTime().minusHours(1), this.getProjectEndDateTime(), false, null, null,
+                    this.getDescription(), Collections.singleton(executionCourse)));
         }
         return result;
     }

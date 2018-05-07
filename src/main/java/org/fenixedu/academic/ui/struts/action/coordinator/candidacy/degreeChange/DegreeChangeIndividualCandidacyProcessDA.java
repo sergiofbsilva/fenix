@@ -42,8 +42,8 @@ import pt.ist.fenixframework.FenixFramework;
         @Forward(name = "introduce-candidacy-result", path = "/coordinator/candidacy/degreeChange/introduceCandidacyResult.jsp"),
         @Forward(name = "list-allowed-activities",
                 path = "/coordinator/candidacy/degreeChange/listIndividualCandidacyActivities.jsp") })
-public class DegreeChangeIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeIndividualCandidacyProcessDA {
+public class DegreeChangeIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeIndividualCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -67,8 +67,8 @@ public class DegreeChangeIndividualCandidacyProcessDA extends
             HttpServletRequest request, HttpServletResponse response) {
         final String degreeCurricularPlanOID = DegreeCoordinatorIndex.findDegreeCurricularPlanID(request);
         final DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(degreeCurricularPlanOID);
-        request.setAttribute("individualCandidacyResultBean", new DegreeChangeIndividualCandidacyResultBean(getProcess(request),
-                degreeCurricularPlan.getDegree()));
+        request.setAttribute("individualCandidacyResultBean",
+                new DegreeChangeIndividualCandidacyResultBean(getProcess(request), degreeCurricularPlan.getDegree()));
         return mapping.findForward("introduce-candidacy-result");
     }
 

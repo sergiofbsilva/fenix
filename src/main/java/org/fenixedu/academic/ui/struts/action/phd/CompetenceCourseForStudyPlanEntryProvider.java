@@ -32,7 +32,8 @@ public class CompetenceCourseForStudyPlanEntryProvider implements DataProvider {
     public Object provide(Object source, Object current) {
         final PhdStudyPlanEntryBean bean = (PhdStudyPlanEntryBean) source;
 
-        return bean.getDegree() != null ? bean.getDegree().getLastActiveDegreeCurricularPlan().getCompetenceCourses() : Collections.EMPTY_LIST;
+        return bean.getDegree() != null ? bean.getDegree().getLastActiveDegreeCurricularPlan()
+                .getCompetenceCourses() : Collections.EMPTY_LIST;
 
     }
 

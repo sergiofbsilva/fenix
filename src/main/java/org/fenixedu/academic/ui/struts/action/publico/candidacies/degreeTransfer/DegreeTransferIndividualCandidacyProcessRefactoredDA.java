@@ -63,20 +63,21 @@ import org.slf4j.LoggerFactory;
 @StrutsFunctionality(app = PublicCandidaciesApp.class, path = "degree-transfer",
         titleKey = "title.application.name.degreeTransfer")
 @Mapping(path = "/candidacies/caseHandlingDegreeTransferIndividualCandidacyProcess", module = "publico")
-@Forwards({
-        @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/degreeTransfer/main.jsp"),
+@Forwards({ @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/degreeTransfer/main.jsp"),
         @Forward(name = "begin-candidacy-process-intro-en", path = "/publico/candidacy/degreeTransfer/main.jsp"),
         @Forward(name = "open-candidacy-process-closed", path = "/publico/candidacy/candidacyProcessClosed.jsp"),
         @Forward(name = "show-pre-creation-candidacy-form", path = "/publico/candidacy/preCreationCandidacyForm.jsp"),
         @Forward(name = "show-email-message-sent", path = "/publico/candidacy/showEmailSent.jsp"),
-        @Forward(name = "show-application-submission-conditions", path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
+        @Forward(name = "show-application-submission-conditions",
+                path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
         @Forward(name = "open-candidacy-processes-not-found", path = "/publico/candidacy/individualCandidacyNotFound.jsp"),
         @Forward(name = "show-candidacy-creation-page", path = "/publico/candidacy/degreeTransfer/createCandidacyPartOne.jsp"),
         @Forward(name = "candidacy-continue-creation", path = "/publico/candidacy/degreeTransfer/createCandidacyPartTwo.jsp"),
         @Forward(name = "inform-submited-candidacy", path = "/publico/candidacy/candidacySubmited.jsp"),
         @Forward(name = "show-candidacy-details", path = "/publico/candidacy/degreeTransfer/viewCandidacy.jsp"),
         @Forward(name = "edit-candidacy", path = "/publico/candidacy/degreeTransfer/editCandidacy.jsp"),
-        @Forward(name = "edit-candidacy-habilitations", path = "/publico/candidacy/degreeTransfer/editCandidacyHabilitations.jsp"),
+        @Forward(name = "edit-candidacy-habilitations",
+                path = "/publico/candidacy/degreeTransfer/editCandidacyHabilitations.jsp"),
         @Forward(name = "edit-candidacy-documents", path = "/publico/candidacy/degreeTransfer/editCandidacyDocuments.jsp"),
         @Forward(name = "upload-photo", path = "/publico/candidacy/degreeTransfer/uploadPhoto.jsp") })
 public class DegreeTransferIndividualCandidacyProcessRefactoredDA extends RefactoredIndividualCandidacyProcessPublicDA {
@@ -224,8 +225,8 @@ public class DegreeTransferIndividualCandidacyProcessRefactoredDA extends Refact
             }
 
             if (isOrWasEnrolledInInstitution(bean)) {
-                addActionMessage("error", request, "error.degreeTransfer.is.or.was.enrolled.in.institution", Unit
-                        .getInstitutionName().getContent());
+                addActionMessage("error", request, "error.degreeTransfer.is.or.was.enrolled.in.institution",
+                        Unit.getInstitutionName().getContent());
                 invalidateDocumentFileRelatedViewStates();
                 request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
                 return mapping.findForward("candidacy-continue-creation");
@@ -328,13 +329,13 @@ public class DegreeTransferIndividualCandidacyProcessRefactoredDA extends Refact
             IndividualCandidacyProcess individualCandidacyProcess = bean.getIndividualCandidacyProcess();
 
             if (individualCandidacyProcess.getPersonalDetails().getPerson().getStudent() != null) {
-                bean.setPersonNumber(individualCandidacyProcess.getPersonalDetails().getPerson().getStudent().getNumber()
-                        .toString());
+                bean.setPersonNumber(
+                        individualCandidacyProcess.getPersonalDetails().getPerson().getStudent().getNumber().toString());
             }
 
             if (isOrWasEnrolledInInstitution(bean)) {
-                addActionMessage("error", request, "error.degreeTransfer.is.or.was.enrolled.in.institution", Unit
-                        .getInstitutionName().getContent());
+                addActionMessage("error", request, "error.degreeTransfer.is.or.was.enrolled.in.institution",
+                        Unit.getInstitutionName().getContent());
                 request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
                 return mapping.findForward("edit-candidacy-habilitations");
             }

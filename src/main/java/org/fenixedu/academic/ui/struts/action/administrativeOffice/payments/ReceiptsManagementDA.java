@@ -61,8 +61,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/receipts", module = "academicAdministration", formBeanClass = FenixActionForm.class,
         functionality = SearchForStudentsDA.class)
-@Forwards({
-        @Forward(name = "showReceipts", path = "/academicAdminOffice/payments/receipts/showReceipts.jsp"),
+@Forwards({ @Forward(name = "showReceipts", path = "/academicAdminOffice/payments/receipts/showReceipts.jsp"),
         @Forward(name = "showReceipt", path = "/academicAdminOffice/payments/receipts/showReceipt.jsp"),
         @Forward(name = "showPaymentsWithoutReceipt",
                 path = "/academicAdminOffice/payments/receipts/showPaymentsWithoutReceipt.jsp"),
@@ -108,8 +107,8 @@ public class ReceiptsManagementDA extends PaymentsManagementDispatchAction {
         }
 
         public Party getContributorParty() {
-            return (this.contributorParty != null) ? this.contributorParty : StringUtils.isEmpty(this.contributorNumber) ? null : Party
-                    .readByContributorNumber(this.contributorNumber);
+            return (this.contributorParty != null) ? this.contributorParty : StringUtils
+                    .isEmpty(this.contributorNumber) ? null : Party.readByContributorNumber(this.contributorNumber);
         }
 
         public void setContributorParty(Party contributorParty) {
@@ -117,10 +116,9 @@ public class ReceiptsManagementDA extends PaymentsManagementDispatchAction {
             if (contributorParty != null) {
                 this.contributorName = contributorParty.getName();
                 this.contributorNumber = contributorParty.getSocialSecurityNumber();
-                this.contributorAddress =
-                        contributorParty.getAddress()
-                                + (!StringUtils.isEmpty(contributorParty.getAreaCode()) ? contributorParty.getAreaCode() + " "
-                                        + contributorParty.getAreaOfAreaCode() : null);
+                this.contributorAddress = contributorParty.getAddress()
+                        + (!StringUtils.isEmpty(contributorParty.getAreaCode()) ? contributorParty.getAreaCode() + " "
+                                + contributorParty.getAreaOfAreaCode() : null);
             }
         }
 
@@ -185,9 +183,9 @@ public class ReceiptsManagementDA extends PaymentsManagementDispatchAction {
                 (Collection<Entry>) ((viewState != null) ? viewState.getMetaObject().getObject() : null);
 
         receiptBean.setPerson(person);
-        receiptBean.setEntries(getSelectableEntryBeans(
-                person.getPaymentsWithoutReceiptByAdministrativeOffices(getAdministrativeOffices()),
-                (entriesToSelect != null) ? entriesToSelect : new HashSet<Entry>()));
+        receiptBean.setEntries(
+                getSelectableEntryBeans(person.getPaymentsWithoutReceiptByAdministrativeOffices(getAdministrativeOffices()),
+                        (entriesToSelect != null) ? entriesToSelect : new HashSet<Entry>()));
 
         request.setAttribute("createReceiptBean", receiptBean);
 
@@ -228,11 +226,10 @@ public class ReceiptsManagementDA extends PaymentsManagementDispatchAction {
         //This is here to force the load of the relation to debug a possible bug in FenixFramework
         createReceiptBean.getPerson().getReceiptsSet().size();
         try {
-            final Receipt receipt =
-                    CreateReceipt.run(getUserView(request).getPerson(), createReceiptBean.getPerson(),
-                            createReceiptBean.getContributorName(), createReceiptBean.getContributorNumber(),
-                            createReceiptBean.getContributorAddress(), createReceiptBean.getYear(),
-                            createReceiptBean.getSelectedEntries());
+            final Receipt receipt = CreateReceipt.run(getUserView(request).getPerson(), createReceiptBean.getPerson(),
+                    createReceiptBean.getContributorName(), createReceiptBean.getContributorNumber(),
+                    createReceiptBean.getContributorAddress(), createReceiptBean.getYear(),
+                    createReceiptBean.getSelectedEntries());
 
             request.setAttribute("personId", receipt.getPerson().getExternalId());
             request.setAttribute("receiptID", receipt.getExternalId());
@@ -395,8 +392,9 @@ public class ReceiptsManagementDA extends PaymentsManagementDispatchAction {
     }
 
     protected Set<AdministrativeOffice> getAdministrativeOffices() {
-        return AcademicAccessRule.getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_STUDENT_PAYMENTS,
-                Authenticate.getUser()).collect(Collectors.toSet());
+        return AcademicAccessRule
+                .getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_STUDENT_PAYMENTS, Authenticate.getUser())
+                .collect(Collectors.toSet());
     }
 
 }

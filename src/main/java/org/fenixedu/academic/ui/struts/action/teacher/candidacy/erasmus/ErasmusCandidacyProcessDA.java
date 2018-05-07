@@ -55,7 +55,8 @@ import pt.ist.fenixframework.FenixFramework;
 @Mapping(path = "/caseHandlingMobilityApplicationProcess", module = "teacher",
         formBeanClass = ErasmusCandidacyProcessDA.ErasmusCandidacyProcessForm.class)
 @Forwards({ @Forward(name = "intro", path = "/candidacy/erasmus/mainCandidacyProcess.jsp") })
-public class ErasmusCandidacyProcessDA extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusCandidacyProcessDA {
+public class ErasmusCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -83,8 +84,8 @@ public class ErasmusCandidacyProcessDA extends org.fenixedu.academic.ui.struts.a
             public boolean evaluate(Object arg0) {
                 IndividualCandidacyProcess child = (IndividualCandidacyProcess) arg0;
 
-                return ((MobilityApplicationProcess) process).getDegreesAssociatedToTeacherAsCoordinator(getTeacher()).contains(
-                        ((MobilityIndividualApplicationProcess) child).getCandidacy().getSelectedDegree());
+                return ((MobilityApplicationProcess) process).getDegreesAssociatedToTeacherAsCoordinator(getTeacher())
+                        .contains(((MobilityIndividualApplicationProcess) child).getCandidacy().getSelectedDegree());
             }
 
         }, result);

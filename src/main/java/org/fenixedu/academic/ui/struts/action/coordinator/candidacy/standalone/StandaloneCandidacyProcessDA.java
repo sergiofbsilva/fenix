@@ -43,14 +43,12 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 
 import pt.ist.fenixframework.FenixFramework;
 
-@Mapping(
-        path = "/caseHandlingStandaloneCandidacyProcess",
-        module = "coordinator",
+@Mapping(path = "/caseHandlingStandaloneCandidacyProcess", module = "coordinator",
         formBeanClass = org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneCandidacyProcessDA.StandaloneCandidacyProcessForm.class,
         functionality = DegreeCoordinatorIndex.class)
 @Forwards(@Forward(name = "intro", path = "/coordinator/candidacy/standalone/mainCandidacyProcess.jsp"))
-public class StandaloneCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneCandidacyProcessDA {
+public class StandaloneCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -66,8 +64,8 @@ public class StandaloneCandidacyProcessDA extends
     }
 
     @Override
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         throw new RuntimeException("not allowed");
     }
 

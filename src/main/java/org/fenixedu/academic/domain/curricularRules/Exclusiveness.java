@@ -77,12 +77,10 @@ public class Exclusiveness extends Exclusiveness_Base {
         labelList.add(new GenericPair<Object, Boolean>(" ", false));
 
         // getting full name only for course groups
-        String degreeModuleToApplyRule =
-                (getDegreeModuleToApplyRule().isLeaf()) ? getDegreeModuleToApplyRule().getName() : getDegreeModuleToApplyRule()
-                        .getOneFullName();
-        String exclusiveDegreeModule =
-                (getExclusiveDegreeModule().isLeaf()) ? getExclusiveDegreeModule().getName() : getExclusiveDegreeModule()
-                        .getOneFullName();
+        String degreeModuleToApplyRule = (getDegreeModuleToApplyRule().isLeaf()) ? getDegreeModuleToApplyRule()
+                .getName() : getDegreeModuleToApplyRule().getOneFullName();
+        String exclusiveDegreeModule = (getExclusiveDegreeModule().isLeaf()) ? getExclusiveDegreeModule()
+                .getName() : getExclusiveDegreeModule().getOneFullName();
 
         labelList.add(new GenericPair<Object, Boolean>(degreeModuleToApplyRule, false));
         labelList.add(new GenericPair<Object, Boolean>(" ", false));
@@ -119,8 +117,8 @@ public class Exclusiveness extends Exclusiveness_Base {
         }
     }
 
-    private void removeExclusivenessRule(final Iterator<CurricularRule> curricularRulesIterator, final Exclusiveness exclusiveness)
-            throws DomainException {
+    private void removeExclusivenessRule(final Iterator<CurricularRule> curricularRulesIterator,
+            final Exclusiveness exclusiveness) throws DomainException {
 
         if (exclusiveness.getExclusiveDegreeModule() == getDegreeModuleToApplyRule()) {
             if (exclusiveness.belongsToCompositeRule()) {
@@ -130,8 +128,8 @@ public class Exclusiveness extends Exclusiveness_Base {
                             exclusiveness.getContextCourseGroup(), exclusiveness.getBegin(), exclusiveness.getEnd());
                     return;
                 } else {
-                    throw new DomainException("error.cannot.delete.rule.because.belongs.to.composite.rule", exclusiveness
-                            .getDegreeModuleToApplyRule().getName());
+                    throw new DomainException("error.cannot.delete.rule.because.belongs.to.composite.rule",
+                            exclusiveness.getDegreeModuleToApplyRule().getName());
                 }
             }
             curricularRulesIterator.remove();

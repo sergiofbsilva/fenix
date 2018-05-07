@@ -35,8 +35,9 @@ public class DegreeCurricularPlanForStudentEquivalenciesProvider implements Data
     @Override
     public Object provide(Object source, Object currentValue) {
         final StudentSearchBean studentSearchBean = (StudentSearchBean) source;
-        return studentSearchBean.getDegreeCurricularPlan() == studentSearchBean.getOldDegreeCurricularPlan() ? getAllDegreeCurricularPlans() : getDestinationsDegreeCurricularPlans(studentSearchBean
-                .getOldDegreeCurricularPlan());
+        return studentSearchBean.getDegreeCurricularPlan() == studentSearchBean
+                .getOldDegreeCurricularPlan() ? getAllDegreeCurricularPlans() : getDestinationsDegreeCurricularPlans(
+                        studentSearchBean.getOldDegreeCurricularPlan());
     }
 
     private List<DegreeCurricularPlan> getDestinationsDegreeCurricularPlans(DegreeCurricularPlan oldDegreeCurricularPlan) {
@@ -51,8 +52,8 @@ public class DegreeCurricularPlanForStudentEquivalenciesProvider implements Data
     }
 
     private List<DegreeCurricularPlan> getAllDegreeCurricularPlans() {
-        return new ArrayList<DegreeCurricularPlan>(DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType.oneOf(
-                DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
+        return new ArrayList<DegreeCurricularPlan>(DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType
+                .oneOf(DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
     }
 
     @Override

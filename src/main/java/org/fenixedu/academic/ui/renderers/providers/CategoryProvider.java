@@ -49,7 +49,8 @@ public class CategoryProvider implements DataProvider {
     }
 
     private String hardcoded(String pt, String en) {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, pt).with(org.fenixedu.academic.util.LocaleUtils.EN, en).getContent();
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, pt)
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, en).getContent();
     }
 
     @Override

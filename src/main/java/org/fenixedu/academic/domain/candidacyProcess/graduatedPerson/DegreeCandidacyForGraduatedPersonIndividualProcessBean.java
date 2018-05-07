@@ -29,8 +29,8 @@ import org.fenixedu.academic.domain.candidacyProcess.PrecedentDegreeInformationB
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.joda.time.LocalDate;
 
-public class DegreeCandidacyForGraduatedPersonIndividualProcessBean extends
-        IndividualCandidacyProcessWithPrecedentDegreeInformationBean {
+public class DegreeCandidacyForGraduatedPersonIndividualProcessBean
+        extends IndividualCandidacyProcessWithPrecedentDegreeInformationBean {
 
     private Degree selectedDegree;
 
@@ -42,7 +42,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcessBean extends
         setPrecedentDegreeType(PrecedentDegreeType.EXTERNAL_DEGREE);
     }
 
-    public DegreeCandidacyForGraduatedPersonIndividualProcessBean(final DegreeCandidacyForGraduatedPersonIndividualProcess process) {
+    public DegreeCandidacyForGraduatedPersonIndividualProcessBean(
+            final DegreeCandidacyForGraduatedPersonIndividualProcess process) {
         setIndividualCandidacyProcess(process);
         setCandidacyDate(process.getCandidacyDate());
         setSelectedDegree(process.getCandidacySelectedDegree());

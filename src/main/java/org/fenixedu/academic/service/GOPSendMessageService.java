@@ -46,9 +46,9 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.Atomic;
 
 public class GOPSendMessageService implements NotificationService {
 
@@ -101,9 +101,8 @@ public class GOPSendMessageService implements NotificationService {
         final String subject =
                 BundleUtil.getString(Bundle.APPLICATION, "email.request.room.subject", coursesString, test.getDescription());
 
-        final String body =
-                BundleUtil.getString(Bundle.APPLICATION, "email.request.room.body", test.getDescription(), coursesString, date,
-                        time, degreesString, endTime);
+        final String body = BundleUtil.getString(Bundle.APPLICATION, "email.request.room.body", test.getDescription(),
+                coursesString, date, time, degreesString, endTime);
         for (String email : getGOPEmail(degrees)) {
             new Message(getGOPSender(), email, subject, body);
         }
@@ -139,10 +138,9 @@ public class GOPSendMessageService implements NotificationService {
         // O pedido de requisição de sala para {0} da disciplina {1} do(s)
         // cursos(s) {2} efecuado em {3} para o dia {4} das {5} às {6} foi
         // alterado para o dia {7} das {8} às {9}
-        final String body =
-                BundleUtil.getString(Bundle.APPLICATION, "email.request.room.body.edit", test.getDescription(), coursesString,
-                        degreesString, test.getRequestRoomSentDateString(), oldDate, oldStartTime, oldEndTime, date, startTime,
-                        endTime);
+        final String body = BundleUtil.getString(Bundle.APPLICATION, "email.request.room.body.edit", test.getDescription(),
+                coursesString, degreesString, test.getRequestRoomSentDateString(), oldDate, oldStartTime, oldEndTime, date,
+                startTime, endTime);
         for (String email : getGOPEmail(degrees)) {
             new Message(getGOPSender(), email, subject, body);
         }
@@ -164,10 +162,8 @@ public class GOPSendMessageService implements NotificationService {
     @Override
     public boolean notify(OccupationRequest request) {
         MessageResources messages = MessageResources.getMessageResources("resources/ResourceAllocationManagerResources");
-        String body =
-                messages.getMessage("message.room.reservation.solved") + "\n\n"
-                        + messages.getMessage("message.room.reservation.request.number") + "\n" + request.getIdentification()
-                        + "\n\n";
+        String body = messages.getMessage("message.room.reservation.solved") + "\n\n"
+                + messages.getMessage("message.room.reservation.request.number") + "\n" + request.getIdentification() + "\n\n";
         body += messages.getMessage("message.room.reservation.request") + "\n";
         if (request.getSubject() != null) {
             body += request.getSubject();
@@ -176,9 +172,8 @@ public class GOPSendMessageService implements NotificationService {
         }
         body += "\n\n" + messages.getMessage("label.rooms.reserve.periods") + ":";
         for (Occupation occupation : request.getOccupationSet()) {
-            body +=
-                    "\n\t" + occupation.getSummary() + " - "
-                            + occupation.getSpaces().stream().map(Space::getName).collect(Collectors.joining(" "));
+            body += "\n\t" + occupation.getSummary() + " - "
+                    + occupation.getSpaces().stream().map(Space::getName).collect(Collectors.joining(" "));
         }
         if (request.getOccupationSet().isEmpty()) {
             body += "\n" + messages.getMessage("label.rooms.reserve.periods.none");

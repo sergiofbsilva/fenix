@@ -100,8 +100,8 @@ import pt.ist.fenixframework.FenixFramework;
         @Forward(name = "revert-candidacy-to-standby", path = "/candidacy/erasmus/revertCandidacyToStandby.jsp"),
         @Forward(name = "enrol-student", path = "/candidacy/erasmus/enrolStudent.jsp"),
         @Forward(name = "chooseCycleCourseGroupToEnrol", path = "/candidacy/erasmus/chooseCycleCourseGroupToEnrol.jsp") })
-public class ErasmusIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusIndividualCandidacyProcessDA {
+public class ErasmusIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusIndividualCandidacyProcessDA {
 
     @Override
     protected List<Activity> getAllowedActivities(final IndividualCandidacyProcess process) {
@@ -155,8 +155,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
         return mapping.findForward("set-gri-validation");
     }
 
-    public ActionForward prepareExecuteCreateStudentData(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteCreateStudentData(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         final MobilityIndividualApplicationProcessBean bean = new MobilityIndividualApplicationProcessBean(getProcess(request));
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
 
@@ -205,8 +205,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
         return mapping.findForward("edit-eidentifier");
     }
 
-    public ActionForward executeSetEIdentifierForTesting(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeSetEIdentifierForTesting(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         final MobilityIndividualApplicationProcessBean bean = new MobilityIndividualApplicationProcessBean(getProcess(request));
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
 
@@ -323,9 +323,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
         if (candidacy.getRegistration().getActiveStudentCurricularPlan() != null) {
             restrictEnrollment = true;
             ExecutionSemester semester = ExecutionSemester.readByYearMonthDay(new YearMonthDay());
-            bean =
-                    new ErasmusBolonhaStudentEnrollmentBean(candidacy.getRegistration().getActiveStudentCurricularPlan(),
-                            semester, null, CurricularRuleLevel.ENROLMENT_NO_RULES, candidacy);
+            bean = new ErasmusBolonhaStudentEnrollmentBean(candidacy.getRegistration().getActiveStudentCurricularPlan(), semester,
+                    null, CurricularRuleLevel.ENROLMENT_NO_RULES, candidacy);
         } else {
             restrictEnrollment = false;
             bean = null;
@@ -349,8 +348,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
         return mapping.findForward("enrol-student");
     }
 
-    public ActionForward postBack(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-            throws FenixServiceException {
+    public ActionForward postBack(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         MobilityIndividualApplicationProcess process = getProcess(request);
         MobilityIndividualApplication candidacy = process.getCandidacy();
         ExecutionSemester semester = ((ErasmusBolonhaStudentEnrollmentBean) getRenderedObject()).getExecutionPeriod();
@@ -366,12 +365,11 @@ public class ErasmusIndividualCandidacyProcessDA extends
         ErasmusBolonhaStudentEnrollmentBean erasmusBolonhaStudentEnrollmentBean =
                 (ErasmusBolonhaStudentEnrollmentBean) getRenderedObject();
         try {
-            final RuleResult ruleResults =
-                    EnrolBolonhaStudent.run(erasmusBolonhaStudentEnrollmentBean.getStudentCurricularPlan(),
-                            erasmusBolonhaStudentEnrollmentBean.getExecutionPeriod(),
-                            erasmusBolonhaStudentEnrollmentBean.getDegreeModulesToEvaluate(),
-                            erasmusBolonhaStudentEnrollmentBean.getCurriculumModulesToRemove(),
-                            erasmusBolonhaStudentEnrollmentBean.getCurricularRuleLevel());
+            final RuleResult ruleResults = EnrolBolonhaStudent.run(erasmusBolonhaStudentEnrollmentBean.getStudentCurricularPlan(),
+                    erasmusBolonhaStudentEnrollmentBean.getExecutionPeriod(),
+                    erasmusBolonhaStudentEnrollmentBean.getDegreeModulesToEvaluate(),
+                    erasmusBolonhaStudentEnrollmentBean.getCurriculumModulesToRemove(),
+                    erasmusBolonhaStudentEnrollmentBean.getCurricularRuleLevel());
 
             if (!erasmusBolonhaStudentEnrollmentBean.getDegreeModulesToEvaluate().isEmpty()
                     || !erasmusBolonhaStudentEnrollmentBean.getCurriculumModulesToRemove().isEmpty()) {
@@ -415,8 +413,8 @@ public class ErasmusIndividualCandidacyProcessDA extends
             MobilityExtraEnrolmentBean mobilityExtraEnrolmentBean =
                     new MobilityExtraEnrolmentBean(studentCurricularPlan, executionSemester);
 
-            mobilityExtraEnrolmentBean.setCurriculumGroup(studentCurricularPlan
-                    .getNoCourseGroupCurriculumGroup(NoCourseGroupCurriculumGroupType.STANDALONE));
+            mobilityExtraEnrolmentBean.setCurriculumGroup(
+                    studentCurricularPlan.getNoCourseGroupCurriculumGroup(NoCourseGroupCurriculumGroupType.STANDALONE));
             mobilityExtraEnrolmentBean.setDegree(bean.getCurricularCourse().getDegree());
             mobilityExtraEnrolmentBean.setDegreeType(bean.getCurricularCourse().getDegree().getDegreeType());
             mobilityExtraEnrolmentBean.setDegreeCurricularPlan(bean.getCurricularCourse().getDegreeCurricularPlan());
@@ -480,10 +478,9 @@ public class ErasmusIndividualCandidacyProcessDA extends
         final ErasmusBolonhaStudentEnrollmentBean studentEnrollmentBean =
                 (ErasmusBolonhaStudentEnrollmentBean) getRenderedObject();
 
-        final CycleEnrolmentBean cycleEnrolmentBean =
-                new CycleEnrolmentBean(studentEnrollmentBean.getStudentCurricularPlan(),
-                        studentEnrollmentBean.getExecutionPeriod(), studentEnrollmentBean.getCycleTypeToEnrol()
-                                .getSourceCycleAffinity(), studentEnrollmentBean.getCycleTypeToEnrol());
+        final CycleEnrolmentBean cycleEnrolmentBean = new CycleEnrolmentBean(studentEnrollmentBean.getStudentCurricularPlan(),
+                studentEnrollmentBean.getExecutionPeriod(), studentEnrollmentBean.getCycleTypeToEnrol().getSourceCycleAffinity(),
+                studentEnrollmentBean.getCycleTypeToEnrol());
         request.setAttribute("cycleEnrolmentBean", cycleEnrolmentBean);
         request.setAttribute("withRules", false);
         request.setAttribute("process", studentEnrollmentBean.getCandidacy().getCandidacyProcess());

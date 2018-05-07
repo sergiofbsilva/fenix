@@ -31,7 +31,8 @@ public class ReingressionPeriod extends ReingressionPeriod_Base {
         init(degreeCurricularPlan, executionSemester, startDate, endDate);
     }
 
-    private void checkForExistingPeriod(final DegreeCurricularPlan degreeCurricularPlan, final ExecutionSemester executionSemester) {
+    private void checkForExistingPeriod(final DegreeCurricularPlan degreeCurricularPlan,
+            final ExecutionSemester executionSemester) {
         if (degreeCurricularPlan.getReingressionPeriod(executionSemester) != null) {
             throw new DomainException("error.ReingressionPeriod.period.already.exists.for.dcp.and.semester");
         }

@@ -141,9 +141,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
         CandidacyProcessCandidacyPeriod candidacyPeriod = getParentProcess(request).getCandidacyPeriod();
         List<? extends CandidacyPeriod> cpp = executionInterval.getCandidacyPeriods(candidacyPeriod.getClass());
         request.setAttribute("individualProcess", readProcess(request));
-        request.setAttribute("processes",
-                cpp.stream().map(cp -> (CandidacyProcessCandidacyPeriod) cp)
-                        .flatMap(cp -> cp.getCandidacyProcessesSet().stream()).collect(Collectors.toList()));
+        request.setAttribute("processes", cpp.stream().map(cp -> (CandidacyProcessCandidacyPeriod) cp)
+                .flatMap(cp -> cp.getCandidacyProcessesSet().stream()).collect(Collectors.toList()));
         request.setAttribute("candidacyProcess", getParentProcess(request));
         return mapping.findForward("prepare-move-process");
     }
@@ -391,7 +390,7 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
 
         if (!StringUtils.isEmpty(bean.getPersonBean().getSocialSecurityNumber())) {
             Party existingSocialSecurityNumberParty =
-                    Person.readByContributorNumber(bean.getPersonBean().getSocialSecurityNumber());
+                    Party.readByContributorNumber(bean.getPersonBean().getSocialSecurityNumber());
 
             if (existingSocialSecurityNumberParty != null
                     && existingSocialSecurityNumberParty != bean.getPersonBean().getPerson()) {
@@ -402,9 +401,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
         }
 
         try {
-            DegreeOfficePublicCandidacyHashCode candidacyHashCode =
-                    DegreeOfficePublicCandidacyHashCodeOperations.getUnusedOrCreateNewHashCode(getProcessType(),
-                            getParentProcess(request), bean.getPersonBean().getEmail());
+            DegreeOfficePublicCandidacyHashCode candidacyHashCode = DegreeOfficePublicCandidacyHashCodeOperations
+                    .getUnusedOrCreateNewHashCode(getProcessType(), getParentProcess(request), bean.getPersonBean().getEmail());
             bean.setPublicCandidacyHashCode(candidacyHashCode);
         } catch (HashCodeForEmailAndProcessAlreadyBounded e) {
             addActionMessage(request, "error.candidacy.hash.code.already.bounded");
@@ -414,8 +412,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
         return mapping.findForward("fill-candidacy-information");
     }
 
-    public ActionForward fillCandidacyInformationInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward fillCandidacyInformationInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
         return mapping.findForward("fill-candidacy-information");
     }
@@ -460,7 +458,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
                 cycleType = studentCurricularPlan.getLastOrderedCycleCurriculumGroup().getCycleType();
             }
 
-            bean.setPrecedentDegreeInformation(PrecedentDegreeInformationBeanFactory.createBean(studentCurricularPlan, cycleType));
+            bean.setPrecedentDegreeInformation(
+                    PrecedentDegreeInformationBeanFactory.createBean(studentCurricularPlan, cycleType));
         } else {
             bean.setPrecedentDegreeInformation(PrecedentDegreeInformationBeanFactory.createBean(studentCurricularPlan));
         }
@@ -487,7 +486,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
     public ActionForward createNewProcess(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws FenixServiceException {
         try {
-            request.setAttribute("process", CreateNewProcess.run(getProcessType().getName(), getIndividualCandidacyProcessBean()));
+            request.setAttribute("process",
+                    CreateNewProcess.run(getProcessType().getName(), getIndividualCandidacyProcessBean()));
         } catch (DomainException e) {
             addActionMessage(request, e.getMessage(), e.getArgs());
             request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
@@ -539,9 +539,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
         CandidacyProcessDocumentUploadBean uploadBean =
                 (CandidacyProcessDocumentUploadBean) getObjectFromViewState("individualCandidacyProcessBean.document");
         try {
-            IndividualCandidacyDocumentFile documentFile =
-                    createIndividualCandidacyDocumentFile(uploadBean, uploadBean.getIndividualCandidacyProcess()
-                            .getPersonalDetails().getDocumentIdNumber());
+            IndividualCandidacyDocumentFile documentFile = createIndividualCandidacyDocumentFile(uploadBean,
+                    uploadBean.getIndividualCandidacyProcess().getPersonalDetails().getDocumentIdNumber());
             uploadBean.setDocumentFile(documentFile);
 
             executeActivity(getProcess(request), "EditDocuments", uploadBean);
@@ -562,9 +561,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
     }
 
     protected boolean hasInvalidViewState() {
-        List<IViewState> viewStates =
-                (List<IViewState>) RenderersRequestProcessorImpl.getCurrentRequest().getAttribute(
-                        LifeCycleConstants.VIEWSTATE_PARAM_NAME);
+        List<IViewState> viewStates = (List<IViewState>) RenderersRequestProcessorImpl.getCurrentRequest()
+                .getAttribute(LifeCycleConstants.VIEWSTATE_PARAM_NAME);
         boolean valid = true;
         if (viewStates != null) {
             for (IViewState state : viewStates) {
@@ -629,8 +627,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
         return prepareExecuteCandidacyPayment(mapping, actionForm, request, response);
     }
 
-    protected IndividualCandidacyDocumentFile createIndividualCandidacyDocumentFile(
-            CandidacyProcessDocumentUploadBean uploadBean, String documentIdNumber) throws IOException {
+    protected IndividualCandidacyDocumentFile createIndividualCandidacyDocumentFile(CandidacyProcessDocumentUploadBean uploadBean,
+            String documentIdNumber) throws IOException {
         return uploadBean.createIndividualCandidacyDocumentFile(getParentProcessType(), documentIdNumber);
     }
 
@@ -673,9 +671,8 @@ public abstract class IndividualCandidacyProcessDA extends CaseHandlingDispatchA
     }
 
     protected void invalidateDocumentFileRelatedViewStates() {
-        List<IViewState> viewStates =
-                new ArrayList<IViewState>((List<IViewState>) RenderersRequestProcessorImpl.getCurrentRequest().getAttribute(
-                        LifeCycleConstants.VIEWSTATE_PARAM_NAME));
+        List<IViewState> viewStates = new ArrayList<IViewState>((List<IViewState>) RenderersRequestProcessorImpl
+                .getCurrentRequest().getAttribute(LifeCycleConstants.VIEWSTATE_PARAM_NAME));
         if (viewStates != null) {
             for (IViewState state : viewStates) {
                 if (state.getId().indexOf("individualCandidacyProcessBean.document.file") > -1) {

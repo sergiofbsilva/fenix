@@ -34,9 +34,8 @@ public class CreateConversationThreadAndMessage extends ForumService {
 
         Person creator = createConversationThreadAndMessageBean.getCreator();
 
-        ConversationThread conversationThread =
-                createConversationThreadAndMessageBean.getForum().createConversationThread(creator,
-                        createConversationThreadAndMessageBean.getSubject());
+        ConversationThread conversationThread = createConversationThreadAndMessageBean.getForum()
+                .createConversationThread(creator, createConversationThreadAndMessageBean.getSubject());
 
         ConversationMessage conversationMessage =
                 conversationThread.createConversationMessage(creator, createConversationThreadAndMessageBean.getBody());

@@ -71,8 +71,7 @@ public class RaidesDfaReportFile extends RaidesDfaReportFile_Base {
             if (registration != null && !registration.isTransition()) {
 
                 for (final CycleType cycleType : registration.getDegreeType().getCycleTypes()) {
-                    final StudentCurricularPlan studentCurricularPlan =
-                            registration.getStudentCurricularPlan(cycleType);
+                    final StudentCurricularPlan studentCurricularPlan = registration.getStudentCurricularPlan(cycleType);
                     final CycleCurriculumGroup cycleCGroup = studentCurricularPlan.getRoot().getCycleCurriculumGroup(cycleType);
                     if (cycleCGroup != null && !cycleCGroup.isExternal()) {
                         final RegistrationConclusionBean registrationConclusionBean =
@@ -114,12 +113,11 @@ public class RaidesDfaReportFile extends RaidesDfaReportFile_Base {
     }
 
     private void reportRaides(final Spreadsheet sheet, final Registration registration,
-            StudentCurricularPlan studentCurricularPlan, List<Registration> registrationPath,
-            ExecutionYear executionYear, final CycleType cycleType, final boolean concluded, final YearMonthDay conclusionDate) {
+            StudentCurricularPlan studentCurricularPlan, List<Registration> registrationPath, ExecutionYear executionYear,
+            final CycleType cycleType, final boolean concluded, final YearMonthDay conclusionDate) {
 
-        final Row row =
-                RaidesCommonReportFieldsWrapper.reportRaidesFields(sheet, registration, studentCurricularPlan, registrationPath,
-                        executionYear, cycleType, concluded, conclusionDate, null, false);
+        final Row row = RaidesCommonReportFieldsWrapper.reportRaidesFields(sheet, registration, studentCurricularPlan,
+                registrationPath, executionYear, cycleType, concluded, conclusionDate, null, false);
 
         // Total de ECTS concluídos até ao fim do ano lectivo anterior ao que se referem os dados  no curso actual
         double totalEctsConcludedUntilPreviousYear = 0d;

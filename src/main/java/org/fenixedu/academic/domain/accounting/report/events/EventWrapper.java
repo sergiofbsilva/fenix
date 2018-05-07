@@ -112,8 +112,8 @@ public class EventWrapper implements Wrapper {
     @Override
     public String getEnrolledECTS() {
         if (hasRegistration()) {
-            return new BigDecimal(getRegistration().getLastStudentCurricularPlan()
-                    .getEnrolmentsEctsCredits(getForExecutionYear())).toString();
+            return new BigDecimal(
+                    getRegistration().getLastStudentCurricularPlan().getEnrolmentsEctsCredits(getForExecutionYear())).toString();
         }
 
         return "--";

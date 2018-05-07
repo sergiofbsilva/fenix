@@ -77,25 +77,23 @@ public class ManageExecutionCoursesDA extends FenixExecutionDegreeAndCurricularY
         ContextSelectionBean contextSelectionBean =
                 (ContextSelectionBean) request.getAttribute(PresentationConstants.CONTEXT_SELECTION_BEAN);
 
-        request.setAttribute(
-                PresentationConstants.CURRICULAR_YEAR_OID,
-                contextSelectionBean.getCurricularYear() != null ? contextSelectionBean.getCurricularYear().getExternalId() : null);
-        request.setAttribute(PresentationConstants.EXECUTION_DEGREE_OID, contextSelectionBean.getExecutionDegree()
-                .getExternalId());
+        request.setAttribute(PresentationConstants.CURRICULAR_YEAR_OID,
+                contextSelectionBean.getCurricularYear() != null ? contextSelectionBean.getCurricularYear()
+                        .getExternalId() : null);
+        request.setAttribute(PresentationConstants.EXECUTION_DEGREE_OID,
+                contextSelectionBean.getExecutionDegree().getExternalId());
 
         request.setAttribute("execution_course_name", contextSelectionBean.getCourseName().replaceAll("%", "%25"));
 
         List<InfoExecutionCourse> infoExecutionCourses = null;
 
         if (contextSelectionBean.getCurricularYear() == null) {
-            infoExecutionCourses =
-                    SearchExecutionCourses.runSearchExecutionCourses(contextSelectionBean.getAcademicInterval(),
-                            contextSelectionBean.getExecutionDegree(), contextSelectionBean.getCourseName());
+            infoExecutionCourses = SearchExecutionCourses.runSearchExecutionCourses(contextSelectionBean.getAcademicInterval(),
+                    contextSelectionBean.getExecutionDegree(), contextSelectionBean.getCourseName());
         } else {
-            infoExecutionCourses =
-                    SearchExecutionCourses.runSearchExecutionCourses(contextSelectionBean.getAcademicInterval(),
-                            contextSelectionBean.getExecutionDegree(), contextSelectionBean.getCurricularYear(),
-                            contextSelectionBean.getCourseName());
+            infoExecutionCourses = SearchExecutionCourses.runSearchExecutionCourses(contextSelectionBean.getAcademicInterval(),
+                    contextSelectionBean.getExecutionDegree(), contextSelectionBean.getCurricularYear(),
+                    contextSelectionBean.getCourseName());
         }
 
         if (infoExecutionCourses != null) {

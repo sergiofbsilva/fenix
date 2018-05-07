@@ -73,11 +73,11 @@ import pt.ist.fenixframework.FenixFramework;
 
 @StrutsFunctionality(app = ScientificDisserationsApp.class, path = "list-new", titleKey = "navigation.list.jury.proposals.new")
 @Mapping(path = "/manageSecondCycleThesis", module = "scientificCouncil")
-@Forwards({
-        @Forward(name = "firstPage", path = "/scientificCouncil/thesis/firstPage.jsp"),
+@Forwards({ @Forward(name = "firstPage", path = "/scientificCouncil/thesis/firstPage.jsp"),
         @Forward(name = "showPersonThesisDetails", path = "/scientificCouncil/thesis/showPersonThesisDetails.jsp"),
         @Forward(name = "showThesisDetails", path = "/scientificCouncil/thesis/showThesisDetails.jsp"),
-        @Forward(name = "editThesisEvaluationParticipant", path = "/scientificCouncil/thesis/editThesisEvaluationParticipant.jsp"),
+        @Forward(name = "editThesisEvaluationParticipant",
+                path = "/scientificCouncil/thesis/editThesisEvaluationParticipant.jsp"),
         @Forward(name = "editThesisDetails", path = "/scientificCouncil/thesis/editThesisDetails.jsp"),
         @Forward(name = "addJuryMember", path = "/scientificCouncil/thesis/addJuryMember.jsp"),
         @Forward(name = "addExternalOrientationMember", path = "/scientificCouncil/thesis/addExternalOrientationMember.jsp"),
@@ -288,8 +288,8 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
         request.setAttribute("thesis", thesis);
         EvaluationMemberBean evaluationMemberBean = getRenderedObject();
         if (evaluationMemberBean == null) {
-            evaluationMemberBean =
-                    request.getParameter("external") == null ? new InternalEvaluationMemberBean() : new ExternalEvaluationMemberBean();
+            evaluationMemberBean = request
+                    .getParameter("external") == null ? new InternalEvaluationMemberBean() : new ExternalEvaluationMemberBean();
         }
         request.setAttribute("evaluationMemberBean", evaluationMemberBean);
         return mapping.findForward("addJuryMember");
@@ -301,8 +301,8 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
         request.setAttribute("thesis", thesis);
         EvaluationMemberBean evaluationMemberBean = getRenderedObject();
         if (evaluationMemberBean == null) {
-            evaluationMemberBean =
-                    request.getParameter("external") == null ? new InternalEvaluationMemberBean() : new ExternalEvaluationMemberBean();
+            evaluationMemberBean = request
+                    .getParameter("external") == null ? new InternalEvaluationMemberBean() : new ExternalEvaluationMemberBean();
         }
         request.setAttribute("evaluationMemberBean", evaluationMemberBean);
         return mapping.findForward("addOrientationMember");
@@ -382,8 +382,8 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
         return showThesisDetails(mapping, request, thesis);
     }
 
-    public ActionForward approveThesis(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+    public ActionForward approveThesis(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) throws Exception {
         final Thesis thesis = getDomainObject(request, "thesisOid");
         try {
             ApproveThesisDiscussion.runApproveThesisDiscussion(thesis);
@@ -453,7 +453,8 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
         final ExecutionYear executionYear = getDomainObject(request, "executionYearOid");
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename=dissertacoes" + executionYear.getYear().replace("/", "") + ".xls");
+        response.setHeader("Content-disposition",
+                "attachment; filename=dissertacoes" + executionYear.getYear().replace("/", "") + ".xls");
         final ServletOutputStream writer = response.getOutputStream();
 
         exportDissertations(writer, executionYear);
@@ -468,14 +469,12 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
     }
 
     private Iterable<Thesis> iteratableOfThesis(final ExecutionYear executionYear) {
-        return toIterable(rootDomainObject.getThesesSet().stream()
-                .filter(t -> t.getEnrolment() != null)
+        return toIterable(rootDomainObject.getThesesSet().stream().filter(t -> t.getEnrolment() != null)
                 .filter(t -> t.getEnrolment().getExecutionYear() == executionYear));
     }
 
     private Iterable<ThesisEvaluationParticipant> iteratableOfThesisParticipation(final ExecutionYear executionYear) {
-        return toIterable(rootDomainObject.getThesesSet().stream()
-                .filter(t -> t.getEnrolment() != null)
+        return toIterable(rootDomainObject.getThesesSet().stream().filter(t -> t.getEnrolment() != null)
                 .filter(t -> t.getEnrolment().getExecutionYear() == executionYear)
                 .flatMap(t -> t.getParticipationsSet().stream()));
     }
@@ -513,21 +512,22 @@ public class ManageSecondCycleThesisDA extends FenixDispatchAction {
             }
         };
 
-        final SheetData<ThesisEvaluationParticipant> participantSheetData = new SheetData<ThesisEvaluationParticipant>(iteratableOfThesisParticipation(executionYear)) {
-            @Override
-            protected void makeLine(final ThesisEvaluationParticipant participant) {
-                final Thesis thesis = participant.getThesis();
-                final Person person = participant.getPerson();
+        final SheetData<ThesisEvaluationParticipant> participantSheetData =
+                new SheetData<ThesisEvaluationParticipant>(iteratableOfThesisParticipation(executionYear)) {
+                    @Override
+                    protected void makeLine(final ThesisEvaluationParticipant participant) {
+                        final Thesis thesis = participant.getThesis();
+                        final Person person = participant.getPerson();
 
-                addCell("ThesisId", thesis.getExternalId());
-                addCell("Type", participant.getType());
-                addCell("PercentageDistribution", participant.getPercentageDistribution());
-                addCell("Username", person == null ? "" : person.getUsername());
-                addCell("Name", participant.getName());
-                addCell("Affiliation", participant.getAffiliation());
-                addCell("Category", participant.getCategory());
-            }
-        };
+                        addCell("ThesisId", thesis.getExternalId());
+                        addCell("Type", participant.getType());
+                        addCell("PercentageDistribution", participant.getPercentageDistribution());
+                        addCell("Username", person == null ? "" : person.getUsername());
+                        addCell("Name", participant.getName());
+                        addCell("Affiliation", participant.getAffiliation());
+                        addCell("Category", participant.getCategory());
+                    }
+                };
 
         builder.addSheet("Dissertations", thesisSheetData);
         builder.addSheet("EvaluationParticipants", participantSheetData);

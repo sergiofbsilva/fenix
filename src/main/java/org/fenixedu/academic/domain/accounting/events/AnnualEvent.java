@@ -47,7 +47,8 @@ public abstract class AnnualEvent extends AnnualEvent_Base {
         init(null, eventType, person, executionYear);
     }
 
-    protected void init(AdministrativeOffice administrativeOffice, EventType eventType, Person person, ExecutionYear executionYear) {
+    protected void init(AdministrativeOffice administrativeOffice, EventType eventType, Person person,
+            ExecutionYear executionYear) {
         super.init(administrativeOffice, eventType, person);
         checkParameters(executionYear);
         super.setExecutionYear(executionYear);

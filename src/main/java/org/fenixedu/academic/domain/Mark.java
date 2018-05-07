@@ -43,7 +43,8 @@ public class Mark extends Mark_Base {
         if (validateMark(mark)) {
             super.setMark(mark);
         } else {
-            throw new InvalidMarkDomainException("errors.invalidMark", mark, getAttend().getRegistration().getNumber().toString());
+            throw new InvalidMarkDomainException("errors.invalidMark", mark,
+                    getAttend().getRegistration().getNumber().toString());
         }
     }
 

@@ -34,14 +34,14 @@ public class MeasurementTestShift extends MeasurementTestShift_Base {
         @Override
         public int compare(MeasurementTestShift leftMeasurementTestShift, MeasurementTestShift rightMeasurementTestShift) {
             int comparationResult = leftMeasurementTestShift.getName().compareTo(rightMeasurementTestShift.getName());
-            return (comparationResult == 0) ? leftMeasurementTestShift.getExternalId().compareTo(
-                    rightMeasurementTestShift.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftMeasurementTestShift.getExternalId()
+                    .compareTo(rightMeasurementTestShift.getExternalId()) : comparationResult;
         }
     };
 
     static {
-        getRelationMeasurementTestShiftMeasurementTest().addListener(
-                new RelationAdapter<MeasurementTest, MeasurementTestShift>() {
+        getRelationMeasurementTestShiftMeasurementTest()
+                .addListener(new RelationAdapter<MeasurementTest, MeasurementTestShift>() {
 
                     @Override
                     public void beforeAdd(MeasurementTest test, MeasurementTestShift toAdd) {

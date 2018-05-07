@@ -56,8 +56,8 @@ public class CreditNotesManagementDA extends PaymentsManagementDispatchAction {
     public static class CreditNotesActionForm extends FenixActionForm {
 
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 1L;
 
         private String creditNoteState;

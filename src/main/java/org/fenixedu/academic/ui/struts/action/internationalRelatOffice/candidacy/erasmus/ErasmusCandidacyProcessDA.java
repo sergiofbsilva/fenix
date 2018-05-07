@@ -71,8 +71,7 @@ import pt.ist.fenixframework.FenixFramework;
 @StrutsFunctionality(app = InternRelationsMobilityApp.class, path = "incoming", titleKey = "title.mobility.incoming")
 @Mapping(path = "/caseHandlingMobilityApplicationProcess", module = "internationalRelatOffice",
         formBeanClass = ErasmusCandidacyProcessDA.ErasmusCandidacyProcessForm.class)
-@Forwards({
-        @Forward(name = "intro", path = "/candidacy/erasmus/mainCandidacyProcess.jsp"),
+@Forwards({ @Forward(name = "intro", path = "/candidacy/erasmus/mainCandidacyProcess.jsp"),
         @Forward(name = "prepare-create-new-process", path = "/candidacy/createCandidacyPeriod.jsp"),
         @Forward(name = "prepare-edit-candidacy-period", path = "/candidacy/editCandidacyPeriod.jsp"),
         @Forward(name = "view-university-agreements", path = "/candidacy/erasmus/viewErasmusVacancies.jsp"),
@@ -88,7 +87,8 @@ import pt.ist.fenixframework.FenixFramework;
         @Forward(name = "email-sent-with-success", path = "/candidacy/erasmus/reception/emailSentWithSuccess.jsp"),
         @Forward(name = "manageEmailTemplates", path = "/candidacy/erasmus/emailTemplates/manageEmailTemplates.jsp"),
         @Forward(name = "previewEmailTemplate", path = "/candidacy/erasmus/emailTemplates/previewEmailTemplate.jsp") })
-public class ErasmusCandidacyProcessDA extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusCandidacyProcessDA {
+public class ErasmusCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.erasmus.ErasmusCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -223,8 +223,8 @@ public class ErasmusCandidacyProcessDA extends org.fenixedu.academic.ui.struts.a
         return prepareExecuteViewMobilityQuota(mapping, form, request, response);
     }
 
-    public ActionForward prepareExecuteViewErasmusCoordinators(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteViewErasmusCoordinators(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         return mapping.findForward("view-erasmus-coordinators");
     }

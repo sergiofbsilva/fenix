@@ -61,8 +61,8 @@ public class PhdCandidacyDeclarationDocument extends FenixReport {
     protected void fillReport() {
         addParameter("name", getCandidacyProcess().getPerson().getName());
         final ExecutionYear executionYear = getCandidacyProcess().getIndividualProgramProcess().getExecutionYear();
-        addParameter("programName",
-                getCandidacyProcess().getIndividualProgramProcess().getPhdProgram().getName(executionYear).getContent(getLanguage()));
+        addParameter("programName", getCandidacyProcess().getIndividualProgramProcess().getPhdProgram().getName(executionYear)
+                .getContent(getLanguage()));
         addParameter("candidacyDate", getCandidacyProcess().getCandidacyDate());
         addParameter("currentDate", new LocalDate());
         addParameter("documentIdNumber", getCandidacyProcess().getPerson().getDocumentIdNumber());

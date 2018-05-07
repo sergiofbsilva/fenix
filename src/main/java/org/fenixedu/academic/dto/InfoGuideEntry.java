@@ -63,11 +63,10 @@ public class InfoGuideEntry extends InfoObject {
         if (obj instanceof InfoGuideEntry) {
             InfoGuideEntry infoGuideEntry = (InfoGuideEntry) obj;
 
-            resultado =
-                    getInfoGuide().equals(infoGuideEntry.getInfoGuide())
-                            && getGraduationType().equals(infoGuideEntry.getGraduationType())
-                            && getDocumentType().equals(infoGuideEntry.getDocumentType())
-                            && getDescription().equals(infoGuideEntry.getDescription());
+            resultado = getInfoGuide().equals(infoGuideEntry.getInfoGuide())
+                    && getGraduationType().equals(infoGuideEntry.getGraduationType())
+                    && getDocumentType().equals(infoGuideEntry.getDocumentType())
+                    && getDescription().equals(infoGuideEntry.getDescription());
         }
         return resultado;
     }

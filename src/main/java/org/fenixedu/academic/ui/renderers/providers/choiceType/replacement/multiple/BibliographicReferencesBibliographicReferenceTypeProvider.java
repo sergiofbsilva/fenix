@@ -28,8 +28,8 @@ public class BibliographicReferencesBibliographicReferenceTypeProvider implement
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        return Arrays.asList(org.fenixedu.academic.domain.degreeStructure.BibliographicReferences.BibliographicReferenceType
-                .values());
+        return Arrays
+                .asList(org.fenixedu.academic.domain.degreeStructure.BibliographicReferences.BibliographicReferenceType.values());
     }
 
     @Override

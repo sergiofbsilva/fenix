@@ -76,8 +76,9 @@ public class StatuteTypeController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@RequestParam String code, @RequestParam LocalizedString name,
-            @RequestParam(required = false) boolean active, @RequestParam(required = false) boolean visible, @RequestParam(
-                    required = false) boolean specialSeasonGranted, @RequestParam(required = false) boolean explicitCreation,
+            @RequestParam(required = false) boolean active, @RequestParam(required = false) boolean visible,
+            @RequestParam(required = false) boolean specialSeasonGranted,
+            @RequestParam(required = false) boolean explicitCreation,
             @RequestParam(required = false) boolean workingStudentStatute,
             @RequestParam(required = false) boolean associativeLeaderStatute,
             @RequestParam(required = false) boolean specialSeasonGrantedByRequest,
@@ -85,10 +86,9 @@ public class StatuteTypeController {
             @RequestParam(required = false) boolean handicappedStatute, Model model) throws Exception {
 
         try {
-            StatuteType statuteType =
-                    atomic(() -> new StatuteType(code, name, workingStudentStatute, associativeLeaderStatute,
-                            specialSeasonGrantedByRequest, grantOwnerStatute, seniorStatute, handicappedStatute, active,
-                            explicitCreation, visible, specialSeasonGranted));
+            StatuteType statuteType = atomic(() -> new StatuteType(code, name, workingStudentStatute, associativeLeaderStatute,
+                    specialSeasonGrantedByRequest, grantOwnerStatute, seniorStatute, handicappedStatute, active, explicitCreation,
+                    visible, specialSeasonGranted));
             return "redirect:/academic/configuration/statutes/" + statuteType.getExternalId();
         } catch (DomainException ex) {
             ControllerHelper.addErrorMessage(ex.getLocalizedMessage(), model);
@@ -104,8 +104,9 @@ public class StatuteTypeController {
 
     @RequestMapping(value = "/{statuteType}/edit", method = RequestMethod.POST)
     public String edit(@PathVariable StatuteType statuteType, @RequestParam String code, @RequestParam LocalizedString name,
-            @RequestParam(required = false) boolean active, @RequestParam(required = false) boolean visible, @RequestParam(
-                    required = false) boolean specialSeasonGranted, @RequestParam(required = false) boolean explicitCreation,
+            @RequestParam(required = false) boolean active, @RequestParam(required = false) boolean visible,
+            @RequestParam(required = false) boolean specialSeasonGranted,
+            @RequestParam(required = false) boolean explicitCreation,
             @RequestParam(required = false) boolean workingStudentStatute,
             @RequestParam(required = false) boolean associativeLeaderStatute,
             @RequestParam(required = false) boolean specialSeasonGrantedByRequest,

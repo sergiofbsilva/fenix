@@ -141,9 +141,10 @@ public class EctsTableIndex extends EctsTableIndex_Base {
         return null;
     }
 
-    public static EctsConversionTable getEctsConversionTable(final CurricularCourse curricularCourse, final CurriculumLine curriculumLine,
-            final Grade grade, final DateTime processingDate) {
-        final EctsTableIndex index = readByYearProcessable(curriculumLine.getExecutionYear().getAcademicInterval(), processingDate);
+    public static EctsConversionTable getEctsConversionTable(final CurricularCourse curricularCourse,
+            final CurriculumLine curriculumLine, final Grade grade, final DateTime processingDate) {
+        final EctsTableIndex index =
+                readByYearProcessable(curriculumLine.getExecutionYear().getAcademicInterval(), processingDate);
         return index.getEctsConversionTable(curricularCourse, curriculumLine, grade);
     }
 
@@ -155,8 +156,9 @@ public class EctsTableIndex extends EctsTableIndex_Base {
 
     public static EctsConversionTable getEctsConversionTable(final Degree degree, final CurriculumLine curriculumLine,
             final Grade grade, final DateTime processingDate) {
-        final EctsTableIndex index = readByYearProcessable(curriculumLine.getExecutionYear().getAcademicInterval(), processingDate);
-        return index.getEctsConversionTable(degree, curriculumLine, grade);        
+        final EctsTableIndex index =
+                readByYearProcessable(curriculumLine.getExecutionYear().getAcademicInterval(), processingDate);
+        return index.getEctsConversionTable(degree, curriculumLine, grade);
     }
 
     public static Grade convertGradeToEcts(Degree degree, CurriculumLine curriculumLine, Grade grade, DateTime processingDate) {
@@ -164,7 +166,8 @@ public class EctsTableIndex extends EctsTableIndex_Base {
         return index.convertGradeToEcts(degree, curriculumLine, grade);
     }
 
-    protected EctsConversionTable getEctsConversionTable(final CurricularCourse curricularCourse, final CurriculumLine curriculumLine, final Grade grade) {
+    protected EctsConversionTable getEctsConversionTable(final CurricularCourse curricularCourse,
+            final CurriculumLine curriculumLine, final Grade grade) {
         final CompetenceCourse competenceCourse = curricularCourse.getCompetenceCourse();
         if (competenceCourse != null) {
             final EctsConversionTable table = getEnrolmentTableBy(competenceCourse);
@@ -172,7 +175,7 @@ public class EctsTableIndex extends EctsTableIndex_Base {
                 return table;
             }
         }
-        return getEctsConversionTable(curricularCourse.getDegree(), curriculumLine, grade);        
+        return getEctsConversionTable(curricularCourse.getDegree(), curriculumLine, grade);
     }
 
     protected Grade convertGradeToEcts(CurricularCourse curricularCourse, CurriculumLine curriculumLine, Grade grade) {
@@ -185,27 +188,26 @@ public class EctsTableIndex extends EctsTableIndex_Base {
         return convertGradeToEcts(curricularCourse.getDegree(), curriculumLine, grade);
     }
 
-    protected EctsConversionTable getEctsConversionTable(final Degree degree, final CurriculumLine curriculumLine, final Grade grade) {
+    protected EctsConversionTable getEctsConversionTable(final Degree degree, final CurriculumLine curriculumLine,
+            final Grade grade) {
         if (curriculumLine.getParentCycleCurriculumGroup() == null) {
             return getEctsConversionTable(Bennu.getInstance().getInstitutionUnit(), curriculumLine, grade);
         }
-        CurricularYear curricularYear =
-                CurricularYear.readByYear(curriculumLine.getParentCycleCurriculumGroup()
-                        .getCurriculum(curriculumLine.getExecutionYear()).getCurricularYear());
+        CurricularYear curricularYear = CurricularYear.readByYear(curriculumLine.getParentCycleCurriculumGroup()
+                .getCurriculum(curriculumLine.getExecutionYear()).getCurricularYear());
         EctsConversionTable table = getEnrolmentTableBy(degree, curricularYear);
         if (table != null) {
             return table;
         }
         return getEctsConversionTable(Bennu.getInstance().getInstitutionUnit(), curriculumLine, curricularYear, grade);
     }
-    
+
     protected Grade convertGradeToEcts(Degree degree, CurriculumLine curriculumLine, Grade grade) {
         if (curriculumLine.getParentCycleCurriculumGroup() == null) {
             return convertGradeToEcts(Bennu.getInstance().getInstitutionUnit(), curriculumLine, grade);
         }
-        CurricularYear curricularYear =
-                CurricularYear.readByYear(curriculumLine.getParentCycleCurriculumGroup()
-                        .getCurriculum(curriculumLine.getExecutionYear()).getCurricularYear());
+        CurricularYear curricularYear = CurricularYear.readByYear(curriculumLine.getParentCycleCurriculumGroup()
+                .getCurriculum(curriculumLine.getExecutionYear()).getCurricularYear());
         EctsConversionTable table = getEnrolmentTableBy(degree, curricularYear);
         if (table != null) {
             return table.convert(grade);
@@ -213,7 +215,8 @@ public class EctsTableIndex extends EctsTableIndex_Base {
         return convertGradeToEcts(Bennu.getInstance().getInstitutionUnit(), curriculumLine, curricularYear, grade);
     }
 
-    protected EctsConversionTable getEctsConversionTable(Unit unit, CurriculumLine curriculumLine, CurricularYear curricularYear, Grade grade) {
+    protected EctsConversionTable getEctsConversionTable(Unit unit, CurriculumLine curriculumLine, CurricularYear curricularYear,
+            Grade grade) {
         CycleType cycleType = curriculumLine.getParentCycleCurriculumGroup().getCycleType();
         EctsConversionTable table = getEnrolmentTableBy(unit, curricularYear, cycleType);
         if (table != null) {
@@ -231,7 +234,8 @@ public class EctsTableIndex extends EctsTableIndex_Base {
         throw new NoEctsComparabilityTableFound(curriculumLine);
     }
 
-    protected EctsConversionTable getEctsConversionTable(final Unit unit, final CurriculumLine curriculumLine, final Grade grade) {
+    protected EctsConversionTable getEctsConversionTable(final Unit unit, final CurriculumLine curriculumLine,
+            final Grade grade) {
         final EctsConversionTable table = getEnrolmentTableBy(unit);
         if (table != null) {
             return table;

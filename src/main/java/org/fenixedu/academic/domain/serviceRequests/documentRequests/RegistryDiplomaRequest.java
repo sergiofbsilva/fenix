@@ -39,8 +39,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 
-public class RegistryDiplomaRequest extends RegistryDiplomaRequest_Base implements IRegistryDiplomaRequest,
-        IRectorateSubmissionBatchDocumentEntry {
+public class RegistryDiplomaRequest extends RegistryDiplomaRequest_Base
+        implements IRegistryDiplomaRequest, IRectorateSubmissionBatchDocumentEntry {
 
     public RegistryDiplomaRequest() {
         super();

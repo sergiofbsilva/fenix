@@ -181,10 +181,8 @@ public class StudentDismissalRenderer extends InputRenderer {
             dismissalBean = (DismissalBean) object;
 
             HtmlBlockContainer container = new HtmlBlockContainer();
-            if (dismissalBean == null
-                    || dismissalBean.getExecutionPeriod() == null
-                    || dismissalBean.getStudentCurricularPlan().getStartExecutionPeriod()
-                            .isAfter(dismissalBean.getExecutionPeriod())) {
+            if (dismissalBean == null || dismissalBean.getExecutionPeriod() == null || dismissalBean.getStudentCurricularPlan()
+                    .getStartExecutionPeriod().isAfter(dismissalBean.getExecutionPeriod())) {
                 return new HtmlText();
             }
 
@@ -199,7 +197,8 @@ public class StudentDismissalRenderer extends InputRenderer {
 
                 radioButtonGroup.setConverter(new DomainObjectKeyConverter());
                 container.addChild(radioButtonGroup);
-                generateCourseGroupCycles(container, dismissalBean.getStudentCurricularPlan(), dismissalBean.getExecutionPeriod());
+                generateCourseGroupCycles(container, dismissalBean.getStudentCurricularPlan(),
+                        dismissalBean.getExecutionPeriod());
 
             } else if (dismissalTypeValue == DismissalType.CURRICULAR_COURSE_CREDITS) {
                 final HtmlMultipleHiddenField hiddenCurricularCourses = new HtmlMultipleHiddenField();
@@ -220,7 +219,8 @@ public class StudentDismissalRenderer extends InputRenderer {
                 hiddenOptionalCurricularCourses.setController(optionalCurricularCoursesController);
                 container.addChild(hiddenOptionalCurricularCourses);
 
-                generateCurricularCourses(container, dismissalBean.getStudentCurricularPlan(), dismissalBean.getExecutionPeriod());
+                generateCurricularCourses(container, dismissalBean.getStudentCurricularPlan(),
+                        dismissalBean.getExecutionPeriod());
             } else {
                 radioButtonGroup = new HtmlRadioButtonGroup();
 
@@ -260,8 +260,8 @@ public class StudentDismissalRenderer extends InputRenderer {
 
             final HtmlTableCell radioButtonCell = htmlTableRow.createCell();
             final HtmlRadioButton radioButton = radioButtonGroup.createRadioButton();
-            radioButton.setUserValue(MetaObjectFactory.createObject(curriculumGroup, new Schema(CurriculumGroup.class)).getKey()
-                    .toString());
+            radioButton.setUserValue(
+                    MetaObjectFactory.createObject(curriculumGroup, new Schema(CurriculumGroup.class)).getKey().toString());
             radioButton.setChecked(curriculumGroup == dismissalBean.getCurriculumGroup());
             radioButtonCell.setBody(radioButton);
             radioButtonCell.setClasses(getGroupRadioClasses());
@@ -310,9 +310,8 @@ public class StudentDismissalRenderer extends InputRenderer {
 
                 final String code = curricularCourse.getCode();
                 final String oneFullName = curricularCourse.getOneFullName(executionSemester);
-                final String name =
-                        " <span class='bold'>" + curricularCourse.getName(dismissalBean.getExecutionPeriod()) + "</span> ("
-                                + oneFullName.substring(0, oneFullName.lastIndexOf(">")) + ")";
+                final String name = " <span class='bold'>" + curricularCourse.getName(dismissalBean.getExecutionPeriod())
+                        + "</span> (" + oneFullName.substring(0, oneFullName.lastIndexOf(">")) + ")";
                 final String codeAndname = StringUtils.isEmpty(code) ? name : code + " - " + name;
                 nameCell.setBody(new HtmlText(codeAndname, false));
 
@@ -326,13 +325,14 @@ public class StudentDismissalRenderer extends InputRenderer {
                 checkBox.setName("curricularCourseCheckBox" + curricularCourse.getExternalId());
                 if (curricularCourse.isOptionalCurricularCourse()) {
                     final OptionalCurricularCourse optionalCurricularCourse = (OptionalCurricularCourse) curricularCourse;
-                    checkBox.setUserValue(new DismissalBean.SelectedOptionalCurricularCourse(optionalCurricularCourse,
-                            studentCurricularPlan).getKey());
+                    checkBox.setUserValue(
+                            new DismissalBean.SelectedOptionalCurricularCourse(optionalCurricularCourse, studentCurricularPlan)
+                                    .getKey());
                     checkBoxCell.setBody(checkBox);
                     optionalCurricularCoursesController.addCheckBox(checkBox);
                 } else {
-                    checkBox.setUserValue(new DismissalBean.SelectedCurricularCourse(curricularCourse, studentCurricularPlan)
-                            .getKey());
+                    checkBox.setUserValue(
+                            new DismissalBean.SelectedCurricularCourse(curricularCourse, studentCurricularPlan).getKey());
                     checkBoxCell.setBody(checkBox);
                     curricularCoursesController.addCheckBox(checkBox);
                 }
@@ -377,8 +377,8 @@ public class StudentDismissalRenderer extends InputRenderer {
 
             final HtmlTableCell radioButtonCell = htmlTableRow.createCell();
             final HtmlRadioButton radioButton = radioButtonGroup.createRadioButton();
-            radioButton.setUserValue(MetaObjectFactory.createObject(courseGroup, new Schema(CourseGroup.class)).getKey()
-                    .toString());
+            radioButton
+                    .setUserValue(MetaObjectFactory.createObject(courseGroup, new Schema(CourseGroup.class)).getKey().toString());
             radioButton.setChecked(courseGroup == dismissalBean.getCourseGroup());
             radioButtonCell.setBody(radioButton);
             radioButtonCell.setClasses(getGroupRadioClasses());

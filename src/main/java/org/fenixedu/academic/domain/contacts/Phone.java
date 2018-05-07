@@ -49,8 +49,8 @@ public class Phone extends Phone_Base {
         }
     };
 
-    public static Phone createPhone(Party party, String number, PartyContactType type, Boolean isDefault,
-            Boolean visibleToPublic, Boolean visibleToStudents, Boolean visibleToStaff) {
+    public static Phone createPhone(Party party, String number, PartyContactType type, Boolean isDefault, Boolean visibleToPublic,
+            Boolean visibleToStudents, Boolean visibleToStaff) {
         Phone result = null;
         if (!StringUtils.isEmpty(number)) {
             result = new Phone(party, type, visibleToPublic, visibleToStudents, visibleToStaff, isDefault, number);
@@ -123,7 +123,8 @@ public class Phone extends Phone_Base {
     }
 
     @Override
-    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact, String newValue) {
+    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
+            String newValue) {
         logEditAux(person, propertiesChanged, valueChanged, createdNewContact, newValue, "label.partyContacts.Phone");
     }
 

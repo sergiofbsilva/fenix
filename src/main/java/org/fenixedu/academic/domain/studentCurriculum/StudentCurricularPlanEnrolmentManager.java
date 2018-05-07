@@ -76,8 +76,8 @@ public class StudentCurricularPlanEnrolmentManager extends StudentCurricularPlan
 
     @Override
     protected void addEnroled() {
-        for (final IDegreeModuleToEvaluate degreeModuleToEvaluate : getStudentCurricularPlan().getDegreeModulesToEvaluate(
-                getExecutionSemester())) {
+        for (final IDegreeModuleToEvaluate degreeModuleToEvaluate : getStudentCurricularPlan()
+                .getDegreeModulesToEvaluate(getExecutionSemester())) {
             enrolmentContext.addDegreeModuleToEvaluate(degreeModuleToEvaluate);
         }
     }
@@ -156,7 +156,8 @@ public class StudentCurricularPlanEnrolmentManager extends StudentCurricularPlan
         getRegistration().updateEnrolmentDate(getExecutionYear());
     }
 
-    protected EnrollmentCondition getEnrolmentCondition(final Enrolment enrolment, final EnrolmentResultType enrolmentResultType) {
+    protected EnrollmentCondition getEnrolmentCondition(final Enrolment enrolment,
+            final EnrolmentResultType enrolmentResultType) {
         return enrolmentResultType.getEnrollmentCondition();
     }
 
@@ -182,17 +183,15 @@ public class StudentCurricularPlanEnrolmentManager extends StudentCurricularPlan
         if (!getRoot().hasExternalCycles()) {
             final PreviousYearsEnrolmentCurricularRule previousYearsEnrolmentCurricularRule =
                     new PreviousYearsEnrolmentCurricularRule(getRoot().getDegreeModule());
-            finalResult =
-                    finalResult.and(previousYearsEnrolmentCurricularRule.evaluate(new EnroledCurriculumModuleWrapper(getRoot(),
-                            getExecutionSemester()), this.enrolmentContext));
+            finalResult = finalResult.and(previousYearsEnrolmentCurricularRule
+                    .evaluate(new EnroledCurriculumModuleWrapper(getRoot(), getExecutionSemester()), this.enrolmentContext));
 
         } else {
             for (final CycleCurriculumGroup cycleCurriculumGroup : getRoot().getCycleCurriculumGroups()) {
                 final PreviousYearsEnrolmentCurricularRule previousYearsEnrolmentCurricularRule =
                         new PreviousYearsEnrolmentCurricularRule(cycleCurriculumGroup.getDegreeModule());
-                finalResult =
-                        finalResult.and(previousYearsEnrolmentCurricularRule.evaluate(new EnroledCurriculumModuleWrapper(
-                                cycleCurriculumGroup, getExecutionSemester()), this.enrolmentContext));
+                finalResult = finalResult.and(previousYearsEnrolmentCurricularRule.evaluate(
+                        new EnroledCurriculumModuleWrapper(cycleCurriculumGroup, getExecutionSemester()), this.enrolmentContext));
             }
         }
 

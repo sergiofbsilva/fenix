@@ -93,8 +93,8 @@ public class AcademicServiceRequestEventWrapper implements Wrapper {
     @Override
     public String getPhdProgramName() {
         if (request.isRequestForPhd()) {
-            return ((PhdAcademicServiceRequest) request).getPhdIndividualProgramProcess().getPhdProgram().getName(getForExecutionYear())
-                    .getContent(org.fenixedu.academic.util.LocaleUtils.PT);
+            return ((PhdAcademicServiceRequest) request).getPhdIndividualProgramProcess().getPhdProgram()
+                    .getName(getForExecutionYear()).getContent(org.fenixedu.academic.util.LocaleUtils.PT);
         }
 
         return "--";

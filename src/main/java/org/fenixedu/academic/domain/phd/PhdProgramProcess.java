@@ -64,7 +64,8 @@ abstract public class PhdProgramProcess extends PhdProgramProcess_Base {
         return result;
     }
 
-    protected Set<PhdProgramProcessDocument> filterLatestDocumentVersions(Collection<PhdProgramProcessDocument> documentsToFilter) {
+    protected Set<PhdProgramProcessDocument> filterLatestDocumentVersions(
+            Collection<PhdProgramProcessDocument> documentsToFilter) {
         final Set<PhdProgramProcessDocument> result = new HashSet<PhdProgramProcessDocument>();
 
         for (final PhdProgramProcessDocument document : documentsToFilter) {
@@ -194,7 +195,7 @@ abstract public class PhdProgramProcess extends PhdProgramProcess_Base {
 
     public boolean hasState(PhdProcessStateType type) {
         final List<PhdProcessState> states = new ArrayList<PhdProcessState>(getStates());
-        Collections.sort(states, PhdCandidacyProcessState.COMPARATOR_BY_DATE);
+        Collections.sort(states, PhdProcessState.COMPARATOR_BY_DATE);
 
         for (final PhdProcessState state : states) {
             if (state.getType().equals(type)) {

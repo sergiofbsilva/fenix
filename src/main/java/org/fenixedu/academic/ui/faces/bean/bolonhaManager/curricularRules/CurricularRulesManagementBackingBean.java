@@ -159,21 +159,21 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
                 if (getDegreeModule().isLeaf()) {
                     final CurricularCourse curricularCourse = (CurricularCourse) getDegreeModule();
                     if (curricularCourse.isOptionalCurricularCourse()) {
-                        result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                                curricularRuleType.getName())));
+                        result.add(new SelectItem(curricularRuleType.getName(),
+                                BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                         break;
                     }
                 }
 
             case DEGREE_MODULES_SELECTION_LIMIT:
                 if (!getDegreeModule().isLeaf()) {
-                    result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                            curricularRuleType.getName())));
+                    result.add(new SelectItem(curricularRuleType.getName(),
+                            BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 }
                 break;
             case PRECEDENCY_BETWEEN_DEGREE_MODULES:
-                result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                        curricularRuleType.getName())));
+                result.add(new SelectItem(curricularRuleType.getName(),
+                        BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 break;
 
             case PRECEDENCY_APPROVED_DEGREE_MODULE:
@@ -181,36 +181,36 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
             case RESTRICTION_NOT_ENROLED_DEGREE_MODULE:
             case ENROLMENT_TO_BE_APPROVED_BY_COORDINATOR:
                 if (getDegreeModule().isLeaf()) {
-                    result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                            curricularRuleType.getName())));
+                    result.add(new SelectItem(curricularRuleType.getName(),
+                            BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 }
                 break;
 
             case EXCLUSIVENESS:
-                result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                        curricularRuleType.getName())));
+                result.add(new SelectItem(curricularRuleType.getName(),
+                        BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 break;
 
             case ANY_CURRICULAR_COURSE:
                 if (getDegreeModule().isLeaf()) {
                     final CurricularCourse curricularCourse = (CurricularCourse) getDegreeModule();
                     if (curricularCourse.isOptionalCurricularCourse()) {
-                        result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                                curricularRuleType.getName())));
+                        result.add(new SelectItem(curricularRuleType.getName(),
+                                BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                     }
                 }
                 break;
 
             case EVEN_ODD:
                 if (getDegreeModule().isLeaf()) {
-                    result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                            curricularRuleType.getName())));
+                    result.add(new SelectItem(curricularRuleType.getName(),
+                            BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 }
                 break;
 
             case MINIMUM_NUMBER_OF_CREDITS_TO_ENROL:
-                result.add(new SelectItem(curricularRuleType.getName(), BundleUtil.getString(Bundle.ENUMERATION,
-                        curricularRuleType.getName())));
+                result.add(new SelectItem(curricularRuleType.getName(),
+                        BundleUtil.getString(Bundle.ENUMERATION, curricularRuleType.getName())));
                 break;
 
             default:
@@ -383,7 +383,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
     }
 
     public CurricularRule getCurricularRule() {
-        return (curricularRule == null) ? (curricularRule = FenixFramework.getDomainObject(getCurricularRuleID())) : curricularRule;
+        return (curricularRule == null) ? (curricularRule =
+                FenixFramework.getDomainObject(getCurricularRuleID())) : curricularRule;
     }
 
     public UISelectItems getDegreeModuleItems() {
@@ -495,7 +496,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
         if (getViewState().getAttribute("selectedDegreeID") == null) {
             if (getCurricularRule() != null && getCurricularRule() instanceof AnyCurricularCourse) {
                 AnyCurricularCourse anyCurricularCourse = (AnyCurricularCourse) getCurricularRule();
-                setSelectedDegreeID(anyCurricularCourse.getDegree() != null ? anyCurricularCourse.getDegree().getExternalId() : NO_SELECTION_STRING);
+                setSelectedDegreeID(anyCurricularCourse.getDegree() != null ? anyCurricularCourse.getDegree()
+                        .getExternalId() : NO_SELECTION_STRING);
             } else {
                 setSelectedDegreeID(NO_SELECTION_STRING);
             }
@@ -537,10 +539,10 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
 
             degreeTypeItems.setValue(value);
         }
-        
+
         return degreeTypeItems;
     }
-    
+
     public void setDegreeTypeItems(final UISelectItems input) {
         this.degreeTypeItems = input;
     }
@@ -567,8 +569,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
             final DegreeType bolonhaDegreeType = getDegreeType(selectedDegreeType);
             for (final Degree degree : allDegrees) {
                 if (degree.isBolonhaDegree() && (bolonhaDegreeType == null || degree.getDegreeType() == bolonhaDegreeType)) {
-                    result.add(new SelectItem(degree.getExternalId(), "[" + degree.getDegreeType().getName().getContent() + "] "
-                            + degree.getNome()));
+                    result.add(new SelectItem(degree.getExternalId(),
+                            "[" + degree.getDegreeType().getName().getContent() + "] " + degree.getNome()));
                 }
             }
             Collections.sort(result, new BeanComparator("label"));
@@ -602,8 +604,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
 
     public String getEndExecutionPeriodID() {
         if (getViewState().getAttribute("endExecutionPeriodID") == null && getCurricularRule() != null) {
-            setEndExecutionPeriodID((getCurricularRule().getEnd() == null) ? NO_SELECTION_STRING : getCurricularRule().getEnd()
-                    .getExternalId());
+            setEndExecutionPeriodID(
+                    (getCurricularRule().getEnd() == null) ? NO_SELECTION_STRING : getCurricularRule().getEnd().getExternalId());
         }
         return (String) getViewState().getAttribute("endExecutionPeriodID");
     }
@@ -655,8 +657,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
 
         for (final ExecutionSemester notClosedExecutionPeriod : notClosedExecutionPeriods) {
             if (notClosedExecutionPeriod.isAfterOrEquals(currentExecutionPeriod)) {
-                result.add(new SelectItem(notClosedExecutionPeriod.getExternalId(), notClosedExecutionPeriod.getName() + " "
-                        + notClosedExecutionPeriod.getExecutionYear().getYear()));
+                result.add(new SelectItem(notClosedExecutionPeriod.getExternalId(),
+                        notClosedExecutionPeriod.getName() + " " + notClosedExecutionPeriod.getExecutionYear().getYear()));
             }
         }
         return (executionPeriodItems = result);
@@ -737,9 +739,8 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
     }
 
     private String getFinalEndExecutionPeriodID() {
-        return (getViewState().getAttribute("endExecutionPeriodID") == null || getViewState()
-                .getAttribute("endExecutionPeriodID").equals(NO_SELECTION_STRING)) ? null : (String) getViewState().getAttribute(
-                "endExecutionPeriodID");
+        return (getViewState().getAttribute("endExecutionPeriodID") == null || getViewState().getAttribute("endExecutionPeriodID")
+                .equals(NO_SELECTION_STRING)) ? null : (String) getViewState().getAttribute("endExecutionPeriodID");
     }
 
     public String createCurricularRule() {
@@ -796,18 +797,18 @@ public class CurricularRulesManagementBackingBean extends FenixBackingBean {
     private CurricularRuleParametersDTO buildCurricularRuleParametersDTO() throws FenixServiceException, NumberFormatException {
         final CurricularRuleParametersDTO parametersDTO = new CurricularRuleParametersDTO();
         parametersDTO.setSelectedDegreeModuleID(getSelectedDegreeModuleID());
-        parametersDTO.setContextCourseGroupID((getSelectedContextCourseGroupID() == null || getSelectedContextCourseGroupID()
-                .equals(NO_SELECTION_STRING)) ? null : getSelectedContextCourseGroupID());
-        parametersDTO.setCurricularPeriodInfoDTO(new CurricularPeriodInfoDTO(Integer.valueOf(getSelectedSemester()),
-                AcademicPeriod.SEMESTER));
+        parametersDTO.setContextCourseGroupID((getSelectedContextCourseGroupID() == null
+                || getSelectedContextCourseGroupID().equals(NO_SELECTION_STRING)) ? null : getSelectedContextCourseGroupID());
+        parametersDTO.setCurricularPeriodInfoDTO(
+                new CurricularPeriodInfoDTO(Integer.valueOf(getSelectedSemester()), AcademicPeriod.SEMESTER));
         parametersDTO.setMinimumCredits(getMinimumCredits());
         parametersDTO.setMaximumCredits(getMaximumCredits());
         parametersDTO.setMinimumLimit(getMinimumLimit());
         parametersDTO.setMaximumLimit(getMaximumLimit());
-        parametersDTO
-                .setSelectedDegreeID((getSelectedDegreeID() == null || getSelectedDegreeID().equals(NO_SELECTION_STRING)) ? null : getSelectedDegreeID());
-        parametersDTO.setSelectedDepartmentUnitID((getSelectedDepartmentUnitID() == null || getSelectedDepartmentUnitID().equals(
-                NO_SELECTION_STRING)) ? null : getSelectedDepartmentUnitID());
+        parametersDTO.setSelectedDegreeID((getSelectedDegreeID() == null
+                || getSelectedDegreeID().equals(NO_SELECTION_STRING)) ? null : getSelectedDegreeID());
+        parametersDTO.setSelectedDepartmentUnitID((getSelectedDepartmentUnitID() == null
+                || getSelectedDepartmentUnitID().equals(NO_SELECTION_STRING)) ? null : getSelectedDepartmentUnitID());
         parametersDTO.setDegreeType(getDegreeType(getSelectedDegreeType()));
         // must get these values like this to prevent override values
         parametersDTO.setMinimumYear((Integer) getViewState().getAttribute("minimumYear"));

@@ -19,8 +19,8 @@
 package org.fenixedu.academic.domain.util.icalendar;
 
 import java.util.Set;
-
 import java.util.stream.Collectors;
+
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.DateTime;
@@ -44,8 +44,7 @@ public class EvaluationEventBean extends EventBean {
 
     @Override
     public String getTitle() {
-        return super.getTitle() + " : " + getCourses().stream().map(ExecutionCourse::getSigla)
-                .collect(Collectors.joining("; "));
+        return super.getTitle() + " : " + getCourses().stream().map(ExecutionCourse::getSigla).collect(Collectors.joining("; "));
     }
 
     @Override

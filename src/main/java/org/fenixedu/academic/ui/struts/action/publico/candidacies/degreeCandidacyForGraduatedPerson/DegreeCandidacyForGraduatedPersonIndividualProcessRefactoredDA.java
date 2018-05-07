@@ -53,11 +53,11 @@ import org.slf4j.LoggerFactory;
 @StrutsFunctionality(app = PublicCandidaciesApp.class, path = "graduated-person",
         titleKey = "title.application.name.degreeCandidacyForGraduatedPerson")
 @Mapping(path = "/candidacies/caseHandlingDegreeCandidacyForGraduatedPersonIndividualProcess", module = "publico")
-@Forwards({
-        @Forward(name = "open-candidacy-process-closed", path = "/publico/candidacy/candidacyProcessClosed.jsp"),
+@Forwards({ @Forward(name = "open-candidacy-process-closed", path = "/publico/candidacy/candidacyProcessClosed.jsp"),
         @Forward(name = "show-pre-creation-candidacy-form", path = "/publico/candidacy/preCreationCandidacyForm.jsp"),
         @Forward(name = "show-email-message-sent", path = "/publico/candidacy/showEmailSent.jsp"),
-        @Forward(name = "show-application-submission-conditions", path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
+        @Forward(name = "show-application-submission-conditions",
+                path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
         @Forward(name = "open-candidacy-processes-not-found", path = "/publico/candidacy/individualCandidacyNotFound.jsp"),
         @Forward(name = "show-candidacy-creation-page",
                 path = "/publico/candidacy/degreeForGraduatedPerson/createCandidacyPartOne.jsp"),
@@ -73,8 +73,8 @@ import org.slf4j.LoggerFactory;
         @Forward(name = "upload-photo", path = "/publico/candidacy/degreeForGraduatedPerson/uploadPhoto.jsp") })
 public class DegreeCandidacyForGraduatedPersonIndividualProcessRefactoredDA extends RefactoredIndividualCandidacyProcessPublicDA {
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(DegreeCandidacyForGraduatedPersonIndividualProcessRefactoredDA.class);
+    private static final Logger logger =
+            LoggerFactory.getLogger(DegreeCandidacyForGraduatedPersonIndividualProcessRefactoredDA.class);
 
     @Override
     protected Class<? extends CandidacyProcess> getParentProcessType() {

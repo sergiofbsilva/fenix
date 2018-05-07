@@ -42,8 +42,8 @@ public class PhdCandidacyFeedbackRequestProcessBean implements Serializable {
         setCandidacyProcess(process);
 
         if (process.getFeedbackRequest() != null) {
-            setSharedDocuments(new ArrayList<PhdIndividualProgramDocumentType>(process.getFeedbackRequest()
-                    .getSortedSharedDocumentTypes()));
+            setSharedDocuments(
+                    new ArrayList<PhdIndividualProgramDocumentType>(process.getFeedbackRequest().getSortedSharedDocumentTypes()));
         }
     }
 

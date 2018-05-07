@@ -127,8 +127,7 @@ public class PersistentStudentGroup extends PersistentStudentGroup_Base {
     private static PersistentStudentGroup getInstance(Supplier<Stream<PersistentStudentGroup>> options, DegreeType degreeType,
             Degree degree, CycleType cycle, Space campus, ExecutionCourse executionCourse, CurricularYear curricularYear,
             ExecutionYear executionYear) {
-        return singleton(
-                () -> select(options, degreeType, degree, cycle, campus, executionCourse, curricularYear, executionYear),
+        return singleton(() -> select(options, degreeType, degree, cycle, campus, executionCourse, curricularYear, executionYear),
                 () -> new PersistentStudentGroup(degreeType, degree, cycle, campus, executionCourse, curricularYear,
                         executionYear));
     }
@@ -136,12 +135,12 @@ public class PersistentStudentGroup extends PersistentStudentGroup_Base {
     private static Optional<PersistentStudentGroup> select(Supplier<Stream<PersistentStudentGroup>> options,
             final DegreeType degreeType, final Degree degree, final CycleType cycle, final Space campus,
             final ExecutionCourse executionCourse, final CurricularYear curricularYear, final ExecutionYear executionYear) {
-        return options
-                .get()
+        return options.get()
                 .filter(group -> Objects.equals(group.getDegreeType(), degreeType) && Objects.equals(group.getDegree(), degree)
                         && Objects.equals(group.getCycle(), cycle) && Objects.equals(group.getCampus(), campus)
                         && Objects.equals(group.getExecutionCourse(), executionCourse)
                         && Objects.equals(group.getCurricularYear(), curricularYear)
-                        && Objects.equals(group.getExecutionYear(), executionYear)).findAny();
+                        && Objects.equals(group.getExecutionYear(), executionYear))
+                .findAny();
     }
 }

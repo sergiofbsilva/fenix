@@ -26,8 +26,8 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.LabelFormatter;
 import org.joda.time.YearMonthDay;
 
-public class AdministrativeOfficeFeeAndInsuranceExemptionJustificationByDispatch extends
-        AdministrativeOfficeFeeAndInsuranceExemptionJustificationByDispatch_Base {
+public class AdministrativeOfficeFeeAndInsuranceExemptionJustificationByDispatch
+        extends AdministrativeOfficeFeeAndInsuranceExemptionJustificationByDispatch_Base {
 
     protected AdministrativeOfficeFeeAndInsuranceExemptionJustificationByDispatch() {
         super();

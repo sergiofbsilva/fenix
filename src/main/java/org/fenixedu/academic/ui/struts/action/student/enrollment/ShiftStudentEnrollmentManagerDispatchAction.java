@@ -87,7 +87,8 @@ import pt.ist.fenixframework.FenixFramework;
 public class ShiftStudentEnrollmentManagerDispatchAction extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final Student student = getUserView(request).getPerson().getStudent();
 
@@ -195,8 +196,8 @@ public class ShiftStudentEnrollmentManagerDispatchAction extends FenixDispatchAc
         request.setAttribute("executionDegrees", ExecutionDegreesFormat.buildLabelValueBeansForExecutionDegree(executionDegrees));
 
         request.setAttribute("attendingExecutionCourses", registration.getAttendingExecutionCoursesFor(executionSemester));
-        request.setAttribute("executionCoursesFromExecutionDegree", selectedExecutionDegree.getDegreeCurricularPlan()
-                .getExecutionCoursesByExecutionPeriod(executionSemester));
+        request.setAttribute("executionCoursesFromExecutionDegree",
+                selectedExecutionDegree.getDegreeCurricularPlan().getExecutionCoursesByExecutionPeriod(executionSemester));
 
         return mapping.findForward("selectCourses");
     }

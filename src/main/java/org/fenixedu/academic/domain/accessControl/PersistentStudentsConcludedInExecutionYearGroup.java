@@ -25,9 +25,9 @@ import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.bennu.core.groups.Group;
 
-import pt.ist.fenixframework.dml.runtime.Relation;
-
 import com.google.common.collect.Sets;
+
+import pt.ist.fenixframework.dml.runtime.Relation;
 
 public class PersistentStudentsConcludedInExecutionYearGroup extends PersistentStudentsConcludedInExecutionYearGroup_Base {
     protected PersistentStudentsConcludedInExecutionYearGroup(Degree degree, ExecutionYear conclusionYear) {

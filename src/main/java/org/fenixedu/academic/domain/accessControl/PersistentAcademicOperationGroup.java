@@ -31,9 +31,9 @@ import org.fenixedu.academic.domain.accessControl.academicAdministration.Academi
 import org.fenixedu.academic.domain.administrativeOffice.AdministrativeOffice;
 import org.fenixedu.bennu.core.groups.Group;
 
-import pt.ist.fenixframework.dml.runtime.Relation;
-
 import com.google.common.collect.Sets;
+
+import pt.ist.fenixframework.dml.runtime.Relation;
 
 public class PersistentAcademicOperationGroup extends PersistentAcademicOperationGroup_Base {
     protected PersistentAcademicOperationGroup(AcademicOperationType operation, Set<AcademicProgram> programs,
@@ -69,15 +69,16 @@ public class PersistentAcademicOperationGroup extends PersistentAcademicOperatio
 
     public static PersistentAcademicOperationGroup getInstance(final AcademicOperationType operation,
             final Set<AcademicProgram> programs, final Set<AdministrativeOffice> offices, final Scope scope) {
-        return singleton(() -> select(operation, programs, offices, scope), () -> new PersistentAcademicOperationGroup(operation,
-                programs, offices, scope));
+        return singleton(() -> select(operation, programs, offices, scope),
+                () -> new PersistentAcademicOperationGroup(operation, programs, offices, scope));
     }
 
     private static Optional<PersistentAcademicOperationGroup> select(final AcademicOperationType operation,
             final Set<AcademicProgram> programs, final Set<AdministrativeOffice> offices, final Scope scope) {
         return filter(PersistentAcademicOperationGroup.class).filter(
                 group -> Objects.equals(group.getOperation(), operation) && collectionEquals(group.getProgramSet(), programs)
-                        && collectionEquals(group.getOfficeSet(), offices) && Objects.equals(group.getScope(), scope)).findAny();
+                        && collectionEquals(group.getOfficeSet(), offices) && Objects.equals(group.getScope(), scope))
+                .findAny();
     }
 
     private static boolean collectionEquals(Set<?> one, Set<?> another) {

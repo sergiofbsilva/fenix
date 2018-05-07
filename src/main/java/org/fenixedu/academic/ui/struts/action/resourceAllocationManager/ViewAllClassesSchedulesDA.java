@@ -40,9 +40,9 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import com.google.common.collect.Ordering;
+
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 /**
  * @author Luis Cruz e Sara Ribeiro

@@ -28,6 +28,7 @@ import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.ui.struts.action.exceptions.FenixActionException;
 import org.fenixedu.academic.ui.struts.action.messaging.ForunsManagement;
+import org.fenixedu.academic.ui.struts.action.teacher.executionCourse.ExecutionCourseBaseAction;
 import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
@@ -47,7 +48,7 @@ public class ExecutionCourseForumManagementDispatchAction extends ForunsManageme
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        ManageExecutionCourseDA.propageContextIds(request);
+        ExecutionCourseBaseAction.propageContextIds(request);
 
         String executionCourseId = (String) request.getAttribute("executionCourseID");
         request.setAttribute("module", "/teacher");
@@ -55,7 +56,7 @@ public class ExecutionCourseForumManagementDispatchAction extends ForunsManageme
         request.setAttribute("executionCourseId", executionCourseId);
 
         ActionForward forward = super.execute(mapping, actionForm, request, response);
-        return ManageExecutionCourseDA.forward(request, forward.getPath());
+        return ExecutionCourseBaseAction.forward(request, forward.getPath());
     }
 
     public ActionForward viewForuns(ActionMapping mapping, ActionForm form, HttpServletRequest request,

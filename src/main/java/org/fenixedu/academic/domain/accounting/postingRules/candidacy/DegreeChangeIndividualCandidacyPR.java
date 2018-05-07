@@ -82,8 +82,8 @@ public class DegreeChangeIndividualCandidacyPR extends DegreeChangeIndividualCan
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
         final Money amountToPay = calculateTotalAmountToPay(event, when);
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay, event
-                .getDescriptionForEntryType(getEntryType()), amountToPay));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay,
+                event.getDescriptionForEntryType(getEntryType()), amountToPay));
     }
 
     @Override
@@ -116,7 +116,8 @@ public class DegreeChangeIndividualCandidacyPR extends DegreeChangeIndividualCan
         final PrecedentDegreeInformation information = individualCandidacy.getRefactoredPrecedentDegreeInformation();
 
         if (individualCandidacy.getUtlStudent() != null) {
-            return individualCandidacy.getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS;
+            return individualCandidacy
+                    .getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS;
         } else {
             if (information.isCandidacyInternal() || hasAnyValidRegistration((DegreeChangeIndividualCandidacyEvent) event)
                     || belongsToInstitutionGroup(information.getPrecedentInstitution())) {

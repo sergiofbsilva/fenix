@@ -50,7 +50,8 @@ import org.joda.time.LocalDate;
 @StrutsFunctionality(app = AcademicAdminPaymentsApp.class, path = "sibs-reports", titleKey = "label.payments.sibs.reports",
         accessGroup = "academic(CREATE_SIBS_PAYMENTS_REPORT)")
 @Mapping(path = "/sibsReports", module = "academicAdministration")
-@Forwards({ @Forward(name = "report-by-year-month", path = "/academicAdminOffice/accounting/reports/paymentsByYearAndMonth.jsp") })
+@Forwards({
+        @Forward(name = "report-by-year-month", path = "/academicAdminOffice/accounting/reports/paymentsByYearAndMonth.jsp") })
 public class ExportSibsPaymentsReport extends FenixDispatchAction {
 
     static public class SibsPaymentsReportBean implements Serializable {

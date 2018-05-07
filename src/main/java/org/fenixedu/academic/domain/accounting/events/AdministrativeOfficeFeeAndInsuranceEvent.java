@@ -60,8 +60,8 @@ import org.joda.time.YearMonthDay;
 
 import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 
-public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOfficeFeeAndInsuranceEvent_Base implements
-        IAdministrativeOfficeFeeEvent, IInsuranceEvent {
+public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOfficeFeeAndInsuranceEvent_Base
+        implements IAdministrativeOfficeFeeEvent, IInsuranceEvent {
 
     static {
         getRelationPersonAccountingEvent().addListener(new RelationAdapter<Party, Event>() {
@@ -71,8 +71,8 @@ public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOffi
                     Person person = (Person) party;
                     final AdministrativeOfficeFeeAndInsuranceEvent administrativeOfficeFeeAndInsuranceEvent =
                             (AdministrativeOfficeFeeAndInsuranceEvent) event;
-                    if (person.hasAdministrativeOfficeFeeInsuranceEventFor(administrativeOfficeFeeAndInsuranceEvent
-                            .getExecutionYear())) {
+                    if (person.hasAdministrativeOfficeFeeInsuranceEventFor(
+                            administrativeOfficeFeeAndInsuranceEvent.getExecutionYear())) {
                         throw new DomainException(
                                 "error.org.fenixedu.academic.domain.accounting.events.AdministrativeOfficeFeeAndInsuranceEvent.event.is.already.defined.for.execution.year");
 
@@ -169,9 +169,9 @@ public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOffi
         }
 
         final Money totalAmount = calculateTotalAmount();
-        return Collections.singletonList(AccountingEventPaymentCode.create(
-                PaymentCodeType.ADMINISTRATIVE_OFFICE_FEE_AND_INSURANCE, new YearMonthDay(), calculatePaymentCodeEndDate(), this,
-                totalAmount, totalAmount, getPerson()));
+        return Collections
+                .singletonList(AccountingEventPaymentCode.create(PaymentCodeType.ADMINISTRATIVE_OFFICE_FEE_AND_INSURANCE,
+                        new YearMonthDay(), calculatePaymentCodeEndDate(), this, totalAmount, totalAmount, getPerson()));
     }
 
     private AccountingEventPaymentCode findPaymentCodeInStudentCandidacy() {
@@ -262,7 +262,8 @@ public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOffi
     private YearMonthDay calculatePaymentCodeEndDate() {
         final YearMonthDay today = new YearMonthDay();
         final YearMonthDay administrativeOfficeFeePaymentLimitDate = getAdministrativeOfficeFeePaymentLimitDate();
-        return today.isBefore(administrativeOfficeFeePaymentLimitDate) ? administrativeOfficeFeePaymentLimitDate : calculateNextEndDate(today);
+        return today.isBefore(
+                administrativeOfficeFeePaymentLimitDate) ? administrativeOfficeFeePaymentLimitDate : calculateNextEndDate(today);
     }
 
     private Money calculateTotalAmount() {
@@ -285,9 +286,8 @@ public class AdministrativeOfficeFeeAndInsuranceEvent extends AdministrativeOffi
 
     @Override
     public boolean isInDebt() {
-        return isOpen()
-                && ((getPaymentEndDate() != null && getPaymentEndDate().isBefore(new YearMonthDay())) || getSpecificPostingRule()
-                        .getWhenToApplyFixedAmountPenalty().isBefore(new YearMonthDay()));
+        return isOpen() && ((getPaymentEndDate() != null && getPaymentEndDate().isBefore(new YearMonthDay()))
+                || getSpecificPostingRule().getWhenToApplyFixedAmountPenalty().isBefore(new YearMonthDay()));
     }
 
     private AdministrativeOfficeFeePR getSpecificPostingRule() {

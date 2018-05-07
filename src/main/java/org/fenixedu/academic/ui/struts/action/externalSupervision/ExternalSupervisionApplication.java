@@ -42,7 +42,8 @@ import org.fenixedu.bennu.struts.portal.StrutsApplication;
 public class ExternalSupervisionApplication extends Action {
 
     @Override
-    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         RegistrationProtocol registrationProtocol = AccessControl.getPerson().getOnlyRegistrationProtocol();
         if (registrationProtocol == null) {
             return mapping.findForward("welcome");

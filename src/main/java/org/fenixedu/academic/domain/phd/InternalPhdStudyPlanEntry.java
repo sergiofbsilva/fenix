@@ -56,8 +56,8 @@ public class InternalPhdStudyPlanEntry extends InternalPhdStudyPlanEntry_Base {
 
     @Override
     public String getCourseDescription() {
-        return MessageFormat.format("{0} ({1}) - {2} ects", getCompetenceCourse().getName(), getCompetenceCourse()
-                .getDepartmentUnit().getName(), getCompetenceCourse().getEctsCredits());
+        return MessageFormat.format("{0} ({1}) - {2} ects", getCompetenceCourse().getName(),
+                getCompetenceCourse().getDepartmentUnit().getName(), getCompetenceCourse().getEctsCredits());
     }
 
     @Override

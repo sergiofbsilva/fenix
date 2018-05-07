@@ -43,12 +43,10 @@ public class GenderHelper {
             return labelValueBeans;
         }
 
-        labelValueBeans =
-                new LabelValueBean[] {
-                        new LabelValueBean(BundleUtil.getString(Bundle.APPLICATION, locale, Gender.MALE.name()),
-                                Gender.MALE.name()),
-                        new LabelValueBean(BundleUtil.getString(Bundle.APPLICATION, locale, Gender.FEMALE.name()),
-                                Gender.FEMALE.name()) };
+        labelValueBeans = new LabelValueBean[] {
+                new LabelValueBean(BundleUtil.getString(Bundle.APPLICATION, locale, Gender.MALE.name()), Gender.MALE.name()),
+                new LabelValueBean(BundleUtil.getString(Bundle.APPLICATION, locale, Gender.FEMALE.name()),
+                        Gender.FEMALE.name()) };
         sexLabelValuesByLocale.put(locale, labelValueBeans);
         return labelValueBeans;
     }

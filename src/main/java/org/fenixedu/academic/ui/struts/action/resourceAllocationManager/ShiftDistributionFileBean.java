@@ -51,9 +51,8 @@ public class ShiftDistributionFileBean implements Serializable {
     @Atomic
     protected void writeDistribution() {
         final ExecutionYear executionYear = ExecutionSemester.readActualExecutionSemester().getExecutionYear();
-        final ShiftDistribution shiftDistribution =
-                executionYear.getShiftDistribution() != null ? executionYear.getShiftDistribution() : executionYear
-                        .createShiftDistribution();
+        final ShiftDistribution shiftDistribution = executionYear.getShiftDistribution() != null ? executionYear
+                .getShiftDistribution() : executionYear.createShiftDistribution();
 
         for (final Entry<Shift, List<GenericPair<DegreeCurricularPlan, Integer>>> entry : getDistribution().entrySet()) {
             for (final GenericPair<DegreeCurricularPlan, Integer> pair : entry.getValue()) {

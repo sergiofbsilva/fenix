@@ -61,9 +61,8 @@ public class MainExamsDA extends FenixDispatchAction {
         }
         RenderUtils.invalidateViewState();
         request.setAttribute("bean", contextSelectionBean);
-        final List<ExecutionDegree> executionDegrees =
-                new ArrayList<ExecutionDegree>(ExecutionDegree.filterByAcademicInterval(contextSelectionBean
-                        .getAcademicInterval()));
+        final List<ExecutionDegree> executionDegrees = new ArrayList<ExecutionDegree>(
+                ExecutionDegree.filterByAcademicInterval(contextSelectionBean.getAcademicInterval()));
         Collections.sort(executionDegrees, ExecutionDegree.EXECUTION_DEGREE_COMPARATORY_BY_DEGREE_TYPE_AND_NAME);
         request.setAttribute("executionDegrees", executionDegrees);
         request.setAttribute("executionInterval",

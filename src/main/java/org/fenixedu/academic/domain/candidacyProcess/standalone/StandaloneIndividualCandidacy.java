@@ -74,8 +74,8 @@ public class StandaloneIndividualCandidacy extends StandaloneIndividualCandidacy
     protected void checkParameters(final Person person, final IndividualCandidacyProcess process,
             final IndividualCandidacyProcessBean bean) {
         if (hasValidStandaloneIndividualCandidacy(bean, process.getCandidacyExecutionInterval())) {
-            throw new DomainException("error.StandaloneIndividualCandidacy.person.already.has.candidacy", process
-                    .getCandidacyExecutionInterval().getName());
+            throw new DomainException("error.StandaloneIndividualCandidacy.person.already.has.candidacy",
+                    process.getCandidacyExecutionInterval().getName());
         }
 
         LocalDate candidacyDate = bean.getCandidacyDate();
@@ -90,9 +90,8 @@ public class StandaloneIndividualCandidacy extends StandaloneIndividualCandidacy
     private <T extends CandidacyProcess> boolean hasValidIndividualCandidacy(final Class<T> clazz,
             final ExecutionInterval executionInterval, final IndividualCandidacyProcessBean bean) {
         T candidacyProcess = CandidacyProcess.getCandidacyProcessByExecutionInterval(clazz, executionInterval);
-        IndividualCandidacyProcess individualCandidacyProcess =
-                candidacyProcess.getChildProcessByDocumentId(bean.getPersonBean().getIdDocumentType(), bean.getPersonBean()
-                        .getDocumentIdNumber());
+        IndividualCandidacyProcess individualCandidacyProcess = candidacyProcess.getChildProcessByDocumentId(
+                bean.getPersonBean().getIdDocumentType(), bean.getPersonBean().getDocumentIdNumber());
         return individualCandidacyProcess != null && !individualCandidacyProcess.isCandidacyCancelled();
     }
 
@@ -203,8 +202,8 @@ public class StandaloneIndividualCandidacy extends StandaloneIndividualCandidacy
         for (final CurricularCourse curricularCourse : getCurricularCoursesSet()) {
             if (!studentCurricularPlan.isEnroledInExecutionPeriod(curricularCourse, getCandidacyExecutionInterval())) {
 
-                studentCurricularPlan.createNoCourseGroupCurriculumGroupEnrolment(createStudentStandaloneEnrolmentBean(
-                        studentCurricularPlan, curricularCourse));
+                studentCurricularPlan.createNoCourseGroupCurriculumGroupEnrolment(
+                        createStudentStandaloneEnrolmentBean(studentCurricularPlan, curricularCourse));
 
             }
         }

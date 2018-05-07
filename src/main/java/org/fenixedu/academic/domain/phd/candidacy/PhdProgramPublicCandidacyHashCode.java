@@ -85,8 +85,7 @@ public class PhdProgramPublicCandidacyHashCode extends PhdProgramPublicCandidacy
 
         if (program != null) {
             for (final PublicCandidacyHashCode hashCode : Bennu.getInstance().getCandidacyHashCodesSet()) {
-                if (hashCode.getEmail().equals(email)
-                        && hashCode.isFromPhdProgram()
+                if (hashCode.getEmail().equals(email) && hashCode.isFromPhdProgram()
                         && ((PhdProgramPublicCandidacyHashCode) hashCode).getPhdProgramCandidacyProcess() != null
                         && ((PhdProgramPublicCandidacyHashCode) hashCode).getPhdProgramCandidacyProcess().getPhdProgram()
                                 .equals(program)) {

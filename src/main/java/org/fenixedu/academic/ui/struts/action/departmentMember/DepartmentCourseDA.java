@@ -131,10 +131,8 @@ public class DepartmentCourseDA extends FenixDispatchAction {
     private void exportStudentsToExcel(HttpServletResponse response, CurricularCourse curricularCourse,
             ExecutionYear executionYear) throws FenixServiceException {
         try {
-            String filename =
-                    String.format("%s_%s_%s.xls", new DateTime().toString("dd-MM-yyyy_HH:mm"),
-                            BundleUtil.getString(Bundle.APPLICATION, "label.students"),
-                            curricularCourse.getName().replaceAll(" ", "_"));
+            String filename = String.format("%s_%s_%s.xls", new DateTime().toString("dd-MM-yyyy_HH:mm"),
+                    BundleUtil.getString(Bundle.APPLICATION, "label.students"), curricularCourse.getName().replaceAll(" ", "_"));
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition", "attachment; filename=" + filename);
             ServletOutputStream outputStream = response.getOutputStream();

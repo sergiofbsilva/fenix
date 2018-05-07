@@ -43,11 +43,11 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.commons.i18n.LocalizedString;
 
+import com.google.gson.JsonParser;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.gson.JsonParser;
 
 /**
  * @author Tânia Pousão Created on 31/Out/2003
@@ -115,8 +115,8 @@ public class DegreeSiteManagementDispatchAction extends FenixDispatchAction {
         }
 
         if (currentDegreeInfo == null) {
-            if (!getUser().getPerson().isCoordinatorFor(degreeCurricularPlan, currentExecutionYear)
-                    && !getUser().getPerson().isCoordinatorFor(degreeCurricularPlan, currentExecutionYear.getNextExecutionYear())) {
+            if (!getUser().getPerson().isCoordinatorFor(degreeCurricularPlan, currentExecutionYear) && !getUser().getPerson()
+                    .isCoordinatorFor(degreeCurricularPlan, currentExecutionYear.getNextExecutionYear())) {
                 addErrorMessage(request, "notAuthorized", "error.exception.notAuthorized2");
                 return new ActionForward(mapping.getInput());
             }

@@ -311,8 +311,9 @@ public class InfoCurricularCourse extends InfoObject implements Comparable {
     }
 
     public String getName() {
-        return showEnVersion && getCurricularCourse().getNameEn() != null && getCurricularCourse().getNameEn().length() > 0 ? getCurricularCourse()
-                .getNameEn() : getCurricularCourse().getName();
+        return showEnVersion && getCurricularCourse().getNameEn() != null
+                && getCurricularCourse().getNameEn().length() > 0 ? getCurricularCourse()
+                        .getNameEn() : getCurricularCourse().getName();
     }
 
     public String getNameEn() {

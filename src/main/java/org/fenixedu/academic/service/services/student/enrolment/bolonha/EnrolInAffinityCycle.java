@@ -98,8 +98,8 @@ public class EnrolInAffinityCycle {
 
                 newRegistration.setSourceRegistration(studentCurricularPlan.getRegistration());
                 newRegistration.getActiveState().setResponsiblePerson(null);
-                newRegistration.setIngressionType(IngressionType.findByPredicate(IngressionType::isDirectAccessFrom1stCycle)
-                        .orElse(null));
+                newRegistration.setIngressionType(
+                        IngressionType.findByPredicate(IngressionType::isDirectAccessFrom1stCycle).orElse(null));
 
                 markOldRegistrationWithConcludedState(studentCurricularPlan);
 

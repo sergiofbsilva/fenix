@@ -35,6 +35,7 @@ import org.fenixedu.academic.domain.enrolment.CurriculumModuleMoveWrapper;
 import org.fenixedu.academic.domain.enrolment.IDegreeModuleToEvaluate;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
+import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
 
 public class OptionalCurricularCoursesLocationBean implements Serializable {
 
@@ -125,11 +126,9 @@ public class OptionalCurricularCoursesLocationBean implements Serializable {
         }
 
         public CurriculumGroup getCurriculumGroup(final StudentCurricularPlan studentCurricularPlan) {
-            final List<CurriculumGroup> curriculumGroups =
-                    new ArrayList<CurriculumGroup>(
-                            studentCurricularPlan
-                                    .getCurricularCoursePossibleGroupsWithoutNoCourseGroupCurriculumGroups(getOptionalCurricularCourse()));
-            Collections.sort(curriculumGroups, CurriculumGroup.COMPARATOR_BY_NAME_AND_ID);
+            final List<CurriculumGroup> curriculumGroups = new ArrayList<CurriculumGroup>(studentCurricularPlan
+                    .getCurricularCoursePossibleGroupsWithoutNoCourseGroupCurriculumGroups(getOptionalCurricularCourse()));
+            Collections.sort(curriculumGroups, CurriculumModule.COMPARATOR_BY_NAME_AND_ID);
             return curriculumGroups.isEmpty() ? null : curriculumGroups.iterator().next();
         }
 

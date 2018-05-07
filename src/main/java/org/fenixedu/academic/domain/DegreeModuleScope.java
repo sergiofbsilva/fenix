@@ -48,9 +48,8 @@ public abstract class DegreeModuleScope {
                     if (cs != 0) {
                         return cs;
                     }
-                    final int cn =
-                            Collator.getInstance()
-                                    .compare(o1.getCurricularCourse().getName(), o2.getCurricularCourse().getName());
+                    final int cn = Collator.getInstance().compare(o1.getCurricularCourse().getName(),
+                            o2.getCurricularCourse().getName());
                     if (cn != 0) {
                         return cn;
                     }
@@ -72,9 +71,8 @@ public abstract class DegreeModuleScope {
                     if (cs != 0) {
                         return cs;
                     }
-                    final int cn =
-                            Collator.getInstance()
-                                    .compare(o1.getCurricularCourse().getName(), o2.getCurricularCourse().getName());
+                    final int cn = Collator.getInstance().compare(o1.getCurricularCourse().getName(),
+                            o2.getCurricularCourse().getName());
                     if (cn != 0) {
                         return cn;
                     }

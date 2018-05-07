@@ -45,8 +45,8 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PhdRegistryDiplomaRequest extends PhdRegistryDiplomaRequest_Base implements IRegistryDiplomaRequest,
-        IRectorateSubmissionBatchDocumentEntry {
+public class PhdRegistryDiplomaRequest extends PhdRegistryDiplomaRequest_Base
+        implements IRegistryDiplomaRequest, IRectorateSubmissionBatchDocumentEntry {
 
     private static final Logger logger = LoggerFactory.getLogger(PhdRegistryDiplomaRequest.class);
 
@@ -279,9 +279,9 @@ public class PhdRegistryDiplomaRequest extends PhdRegistryDiplomaRequest_Base im
 
     @Override
     public String getReceivedActionLink() {
-        return String
-                .format("/phdAcademicServiceRequestManagement.do?method=prepareReceiveOnRectorate&amp;phdAcademicServiceRequestId=%s&amp;batchOid=%s",
-                        getExternalId(), getRectorateSubmissionBatch().getExternalId());
+        return String.format(
+                "/phdAcademicServiceRequestManagement.do?method=prepareReceiveOnRectorate&amp;phdAcademicServiceRequestId=%s&amp;batchOid=%s",
+                getExternalId(), getRectorateSubmissionBatch().getExternalId());
     }
 
     @Override

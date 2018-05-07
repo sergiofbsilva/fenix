@@ -40,6 +40,7 @@ import org.fenixedu.academic.domain.candidacyProcess.over23.Over23CandidacyProce
 import org.fenixedu.academic.domain.candidacyProcess.over23.Over23IndividualCandidacyProcess;
 import org.fenixedu.academic.domain.candidacyProcess.over23.Over23IndividualCandidacyProcessBean;
 import org.fenixedu.academic.domain.exceptions.DomainException;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.dto.person.PersonBean;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.ui.struts.action.publico.PublicApplication.PublicCandidaciesApp;
@@ -53,12 +54,12 @@ import org.slf4j.LoggerFactory;
 
 @StrutsFunctionality(app = PublicCandidaciesApp.class, path = "over-23", titleKey = "title.application.name.over23")
 @Mapping(path = "/candidacies/caseHandlingOver23IndividualCandidacyProcess", module = "publico")
-@Forwards({
-        @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/over23/main.jsp"),
+@Forwards({ @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/over23/main.jsp"),
         @Forward(name = "open-candidacy-process-closed", path = "/publico/candidacy/candidacyProcessClosed.jsp"),
         @Forward(name = "show-pre-creation-candidacy-form", path = "/publico/candidacy/preCreationCandidacyForm.jsp"),
         @Forward(name = "show-email-message-sent", path = "/publico/candidacy/showEmailSent.jsp"),
-        @Forward(name = "show-application-submission-conditions", path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
+        @Forward(name = "show-application-submission-conditions",
+                path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
         @Forward(name = "open-candidacy-processes-not-found", path = "/publico/candidacy/individualCandidacyNotFound.jsp"),
         @Forward(name = "show-candidacy-creation-page", path = "/publico/candidacy/over23/createCandidacyPartOne.jsp"),
         @Forward(name = "candidacy-continue-creation", path = "/publico/candidacy/over23/createCandidacyPartTwo.jsp"),
@@ -279,7 +280,7 @@ public class Over23IndividualCandidacyProcessRefactoredDA extends RefactoredIndi
                 return executeCreateCandidacyPersonalInformationInvalid(mapping, form, request, response);
             }
         } else {
-            if (Person.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
+            if (Party.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
                 // found person with same contributor number
                 addActionMessage("individualCandidacyMessages", request, getProcessType().getSimpleName()
                         + ".error.public.candidacies.fill.personal.information.and.institution.id.contributorNumber");
@@ -425,7 +426,7 @@ public class Over23IndividualCandidacyProcessRefactoredDA extends RefactoredIndi
                     return prepareEditCandidacyProcess(mapping, form, request, response);
                 }
             } else {
-                if (Person.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
+                if (Party.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
                     // found person with same contributor number
                     addActionMessage("individualCandidacyMessages", request, getProcessType().getSimpleName()
                             + ".error.public.candidacies.fill.personal.information.and.institution.id.contributorNumber");

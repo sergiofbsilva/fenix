@@ -171,8 +171,8 @@ public class PhdProgramCandidacyProcessBean implements Serializable {
     }
 
     public ExecutionDegree getExecutionDegree() {
-        return hasDegree() ? null : getDegree().getLastActiveDegreeCurricularPlan().getExecutionDegreeByAcademicInterval(
-                getExecutionYear().getAcademicInterval());
+        return hasDegree() ? null : getDegree().getLastActiveDegreeCurricularPlan()
+                .getExecutionDegreeByAcademicInterval(getExecutionYear().getAcademicInterval());
     }
 
     public String getThesisTitle() {

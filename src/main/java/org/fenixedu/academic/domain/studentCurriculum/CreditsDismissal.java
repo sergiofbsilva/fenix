@@ -58,8 +58,8 @@ public class CreditsDismissal extends CreditsDismissal_Base {
             if (dismissal.isCreditsDismissal()) {
                 final CreditsDismissal creditsDismissal = (CreditsDismissal) dismissal;
                 if (isSimilar(credits, noEnrolCurricularCourses, creditsDismissal)) {
-                    throw new DomainException("error.CreditsDismissal.already.exists.similar", curriculumGroup.getName()
-                            .getContent());
+                    throw new DomainException("error.CreditsDismissal.already.exists.similar",
+                            curriculumGroup.getName().getContent());
                 }
             }
         }
@@ -107,8 +107,8 @@ public class CreditsDismissal extends CreditsDismissal_Base {
 
     @Override
     public LocalizedString getName() {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, BundleUtil.getString(Bundle.ACADEMIC, new Locale("pt", "PT"),
-                "label.group.credits"));
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT,
+                BundleUtil.getString(Bundle.ACADEMIC, new Locale("pt", "PT"), "label.group.credits"));
     }
 
     @Override
@@ -159,7 +159,8 @@ public class CreditsDismissal extends CreditsDismissal_Base {
     @Override
     public Grade getEctsGrade(DateTime processingDate) {
         final Grade normalizedEctsGrade = getNormalizedEctsGrade();
-        return normalizedEctsGrade == null ? EctsTableIndex.convertGradeToEcts(getStudentCurricularPlan().getDegree(), this, getGrade(), processingDate) : null;
+        return normalizedEctsGrade == null ? EctsTableIndex.convertGradeToEcts(getStudentCurricularPlan().getDegree(), this,
+                getGrade(), processingDate) : null;
     }
 
 }

@@ -39,7 +39,8 @@ public class ContextSelectionBean implements Serializable {
         this.academicInterval = AcademicInterval.readDefaultAcademicInterval(AcademicPeriod.SEMESTER);
     }
 
-    public ContextSelectionBean(AcademicInterval academicInterval, ExecutionDegree executionDegree, CurricularYear curricularYear) {
+    public ContextSelectionBean(AcademicInterval academicInterval, ExecutionDegree executionDegree,
+            CurricularYear curricularYear) {
         this.academicInterval = academicInterval;
         setExecutionDegree(executionDegree);
         setCurricularYear(curricularYear);

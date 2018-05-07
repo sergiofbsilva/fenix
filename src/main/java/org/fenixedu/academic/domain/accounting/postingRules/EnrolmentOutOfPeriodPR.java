@@ -84,9 +84,9 @@ public class EnrolmentOutOfPeriodPR extends EnrolmentOutOfPeriodPR_Base {
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override

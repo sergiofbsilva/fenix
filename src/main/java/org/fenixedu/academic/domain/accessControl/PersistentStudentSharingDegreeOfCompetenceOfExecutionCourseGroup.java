@@ -21,8 +21,8 @@ package org.fenixedu.academic.domain.accessControl;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.bennu.core.groups.Group;
 
-public class PersistentStudentSharingDegreeOfCompetenceOfExecutionCourseGroup extends
-        PersistentStudentSharingDegreeOfCompetenceOfExecutionCourseGroup_Base {
+public class PersistentStudentSharingDegreeOfCompetenceOfExecutionCourseGroup
+        extends PersistentStudentSharingDegreeOfCompetenceOfExecutionCourseGroup_Base {
     protected PersistentStudentSharingDegreeOfCompetenceOfExecutionCourseGroup(ExecutionCourse executionCourse) {
         super();
         init(executionCourse);

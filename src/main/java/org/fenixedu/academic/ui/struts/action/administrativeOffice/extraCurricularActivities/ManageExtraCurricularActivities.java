@@ -58,8 +58,8 @@ public class ManageExtraCurricularActivities extends FenixDispatchAction {
             HttpServletResponse response) {
         ExtraCurricularActivityType type = getDomainObject(request, "activityTypeId");
         if (!type.getExtraCurricularActivitySet().isEmpty()) {
-            addErrorMessage(request, "errors", "error.extraCurricularActivityTypes.unableToEditUsedType", type.getName()
-                    .getContent());
+            addErrorMessage(request, "errors", "error.extraCurricularActivityTypes.unableToEditUsedType",
+                    type.getName().getContent());
             return list(mapping, actionForm, request, response);
         }
         request.setAttribute("extraCurricularActivityType", type);

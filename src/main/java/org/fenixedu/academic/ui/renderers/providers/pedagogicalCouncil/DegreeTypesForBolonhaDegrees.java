@@ -30,10 +30,8 @@ public class DegreeTypesForBolonhaDegrees implements DataProvider {
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        return DegreeType
-                .all()
-                .filter(DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree,
-                        DegreeType::isIntegratedMasterDegree)).collect(Collectors.toList());
+        return DegreeType.all().filter(DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree,
+                DegreeType::isIntegratedMasterDegree)).collect(Collectors.toList());
     }
 
     @Override

@@ -32,22 +32,22 @@ public interface IUTLScholarshipReportResult {
     static final String BOLONHA_DEGREE_DESIGNATION = "Licenciatura 1º Ciclo";
 
     static final List<Integer> STUDENTS_WITH_CET = Arrays.asList(new Integer[] { 70855, 70696, 70757, 70786, 55647, 59218, 70749,
-            70856, 70678, 70681, 70712, 70737, 70837, 70793, 10425, 38565, 70783, 70664, 70859, 70766, 70844, 48936, 50315,
-            70788, 70794, 70795, 70804, 70809, 70716, 70719, 70763, 70776, 70841, 70923 });
+            70856, 70678, 70681, 70712, 70737, 70837, 70793, 10425, 38565, 70783, 70664, 70859, 70766, 70844, 48936, 50315, 70788,
+            70794, 70795, 70804, 70809, 70716, 70719, 70763, 70776, 70841, 70923 });
 
-    static final List<QualificationType> DEGREE_QUALIFICATION_TYPES = java.util.Arrays.asList(new QualificationType[] {
-            QualificationType.BACHELOR_AND_DEGREE, QualificationType.BACHELOR_DEGREE,
-            QualificationType.BACHELOR_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DEGREE,
-            QualificationType.DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.INTEGRATED_MASTER_DEGREE, });
+    static final List<QualificationType> DEGREE_QUALIFICATION_TYPES = java.util.Arrays
+            .asList(new QualificationType[] { QualificationType.BACHELOR_AND_DEGREE, QualificationType.BACHELOR_DEGREE,
+                    QualificationType.BACHELOR_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DEGREE,
+                    QualificationType.DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.INTEGRATED_MASTER_DEGREE, });
 
     static final List<QualificationType> MASTER_QUALIFICATION_TYPES = java.util.Arrays.asList(new QualificationType[] {
             QualificationType.INTEGRATED_MASTER_DEGREE, QualificationType.MASTER,
             QualificationType.MASTER_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.MASTER_DEGREE_WITH_RECOGNITION });
 
-    public static final List<QualificationType> PHD_QUALIFICATION_TYPES = java.util.Arrays.asList(new QualificationType[] {
-            QualificationType.DOCTORATE_DEGREE, QualificationType.DOCTORATE_DEGREE_BOLOGNA,
-            QualificationType.DOCTORATE_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DOCTORATE_DEGREE_WITH_RECOGNITION,
-            QualificationType.DOCTORATE_DEGREE_WITH_REGISTER });
+    public static final List<QualificationType> PHD_QUALIFICATION_TYPES =
+            java.util.Arrays.asList(new QualificationType[] { QualificationType.DOCTORATE_DEGREE,
+                    QualificationType.DOCTORATE_DEGREE_BOLOGNA, QualificationType.DOCTORATE_DEGREE_FOREIGNER_WITH_EQUIVALENCE,
+                    QualificationType.DOCTORATE_DEGREE_WITH_RECOGNITION, QualificationType.DOCTORATE_DEGREE_WITH_REGISTER });
 
     public String getInstitutionCode();
 

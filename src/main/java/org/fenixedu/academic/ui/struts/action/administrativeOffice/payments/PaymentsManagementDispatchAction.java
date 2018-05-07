@@ -117,12 +117,11 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
                 .map(ExternalScholarshipGratuityExemption::getExternalScholarshipGratuityContributionEvent).filter(Event::isOpen)
                 .collect(Collectors.toSet());
 
-        Set<Event> phdEvents =
-                person.getEventsByEventType(EventType.PHD_GRATUITY).stream().flatMap(e -> e.getExemptionsSet().stream())
-                        .filter(e -> e instanceof PhdGratuityExternalScholarshipExemption)
-                        .map(e -> (PhdGratuityExternalScholarshipExemption) e)
-                        .map(PhdGratuityExternalScholarshipExemption::getExternalScholarshipPhdGratuityContribuitionEvent)
-                        .filter(Event::isOpen).collect(Collectors.toSet());
+        Set<Event> phdEvents = person.getEventsByEventType(EventType.PHD_GRATUITY).stream()
+                .flatMap(e -> e.getExemptionsSet().stream()).filter(e -> e instanceof PhdGratuityExternalScholarshipExemption)
+                .map(e -> (PhdGratuityExternalScholarshipExemption) e)
+                .map(PhdGratuityExternalScholarshipExemption::getExternalScholarshipPhdGratuityContribuitionEvent)
+                .filter(Event::isOpen).collect(Collectors.toSet());
 
         request.setAttribute("events", events);
         request.setAttribute("phdEvents", phdEvents);
@@ -160,7 +159,8 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
         return showExternalEvents(mapping, form, request, response);
     }
 
-    public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         String eventId = request.getParameter("externalId");
         Event event = FenixFramework.getDomainObject(eventId == null ? (String) request.getAttribute("externalId") : eventId);
@@ -169,7 +169,8 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
         return showExternalEvents(mapping, form, request, response);
     }
 
-    protected List<SelectableEntryBean> getSelectableEntryBeans(final Set<Entry> entries, final Collection<Entry> entriesToSelect) {
+    protected List<SelectableEntryBean> getSelectableEntryBeans(final Set<Entry> entries,
+            final Collection<Entry> entriesToSelect) {
         final List<SelectableEntryBean> selectableEntryBeans = new ArrayList<SelectableEntryBean>();
         for (final Entry entry : entries) {
             selectableEntryBeans.add(new SelectableEntryBean(entriesToSelect.contains(entry) ? true : false, entry));
@@ -229,12 +230,11 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
         //This is here to force the load of the relation to debug a possible bug in FenixFramework
         paymentsManagementDTO.getPerson().getReceiptsSet().size();
         try {
-            final Receipt receipt =
-                    CreatePaymentsForEvents.run(getUserView(request).getPerson().getUser(),
-                            paymentsManagementDTO.getSelectedEntries(), PaymentMode.CASH,
-                            paymentsManagementDTO.isDifferedPayment(), paymentsManagementDTO.getPaymentDate(),
-                            paymentsManagementDTO.getPerson(), paymentsManagementDTO.getContributorName(),
-                            paymentsManagementDTO.getContributorNumber(), paymentsManagementDTO.getContributorAddress());
+            final Receipt receipt = CreatePaymentsForEvents.run(getUserView(request).getPerson().getUser(),
+                    paymentsManagementDTO.getSelectedEntries(), PaymentMode.CASH, paymentsManagementDTO.isDifferedPayment(),
+                    paymentsManagementDTO.getPaymentDate(), paymentsManagementDTO.getPerson(),
+                    paymentsManagementDTO.getContributorName(), paymentsManagementDTO.getContributorNumber(),
+                    paymentsManagementDTO.getContributorAddress());
 
             request.setAttribute("personId", paymentsManagementDTO.getPerson().getExternalId());
             request.setAttribute("receiptID", receipt.getExternalId());
@@ -258,12 +258,11 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
         return getDomainObject(request, "personId");
     }
 
-
     private Person getOriginalDebtor(Event event) {
         Exemption exemption =
                 ((event instanceof ExternalScholarshipGratuityContributionEvent) ? ((ExternalScholarshipGratuityContributionEvent) event)
                         .getExternalScholarshipGratuityExemption() : ((ExternalScholarshipPhdGratuityContribuitionEvent) event)
-                        .getPhdGratuityExternalScholarshipExemption());
+                                .getPhdGratuityExternalScholarshipExemption());
 
         return exemption.getEvent().getPerson();
     }
@@ -271,16 +270,16 @@ public class PaymentsManagementDispatchAction extends FenixDispatchAction {
     public ActionForward preparePaymentInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
 
-        request.setAttribute("paymentsManagementDTO", RenderUtils.getViewState("paymentsManagementDTO-edit").getMetaObject()
-                .getObject());
+        request.setAttribute("paymentsManagementDTO",
+                RenderUtils.getViewState("paymentsManagementDTO-edit").getMetaObject().getObject());
         return mapping.findForward("preparePayment");
     }
 
     public ActionForward prepareShowEventsInvalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
 
-        request.setAttribute("paymentsManagementDTO", RenderUtils.getViewState("paymentsManagementDTO").getMetaObject()
-                .getObject());
+        request.setAttribute("paymentsManagementDTO",
+                RenderUtils.getViewState("paymentsManagementDTO").getMetaObject().getObject());
 
         return mapping.findForward("showEvents");
     }

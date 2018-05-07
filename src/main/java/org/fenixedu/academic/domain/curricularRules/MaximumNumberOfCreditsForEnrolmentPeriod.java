@@ -33,7 +33,8 @@ import org.fenixedu.academic.dto.GenericPair;
 
 public class MaximumNumberOfCreditsForEnrolmentPeriod extends MaximumNumberOfCreditsForEnrolmentPeriod_Base {
 
-    static final public double MAXIMUM_NUMBER_OF_CREDITS = FenixEduAcademicConfiguration.getConfiguration().getMaximumNumberOfCreditsForEnrolment();
+    static final public double MAXIMUM_NUMBER_OF_CREDITS =
+            FenixEduAcademicConfiguration.getConfiguration().getMaximumNumberOfCreditsForEnrolment();
 
     static final public double MAXIMUM_NUMBER_OF_CREDITS_PARTIAL_TIME = MAXIMUM_NUMBER_OF_CREDITS / 2;
 
@@ -107,6 +108,6 @@ public class MaximumNumberOfCreditsForEnrolmentPeriod extends MaximumNumberOfCre
     @Deprecated
     static public double getMaximumNumberOfCredits(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionYear executionYear) {
-    	return MAXIMUM_NUMBER_OF_CREDITS;
+        return MAXIMUM_NUMBER_OF_CREDITS;
     }
 }

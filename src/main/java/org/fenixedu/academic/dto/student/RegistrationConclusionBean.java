@@ -268,8 +268,8 @@ public class RegistrationConclusionBean implements Serializable, IRegistrationBe
     }
 
     public boolean getCanBeConclusionProcessed() {
-        return (!isConclusionProcessed() || (isConclusionProcessed() && getRegistration().canRepeatConclusionProcess(
-                AccessControl.getPerson())))
+        return (!isConclusionProcessed()
+                || (isConclusionProcessed() && getRegistration().canRepeatConclusionProcess(AccessControl.getPerson())))
                 && isConcluded();
     }
 

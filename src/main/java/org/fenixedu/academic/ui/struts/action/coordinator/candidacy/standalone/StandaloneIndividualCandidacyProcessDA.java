@@ -30,9 +30,7 @@ import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
-@Mapping(
-        path = "/caseHandlingStandaloneIndividualCandidacyProcess",
-        module = "coordinator",
+@Mapping(path = "/caseHandlingStandaloneIndividualCandidacyProcess", module = "coordinator",
         formBeanClass = org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneIndividualCandidacyProcessDA.StandaloneIndividualCandidacyForm.class,
         functionality = DegreeCoordinatorIndex.class)
 @Forwards({
@@ -40,8 +38,8 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
                 path = "/coordinator/caseHandlingStandaloneCandidacyProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "list-allowed-activities",
                 path = "/coordinator/candidacy/standalone/listIndividualCandidacyActivities.jsp") })
-public class StandaloneIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneIndividualCandidacyProcessDA {
+public class StandaloneIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.standalone.StandaloneIndividualCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -105,8 +103,8 @@ public class StandaloneIndividualCandidacyProcessDA extends
     }
 
     @Override
-    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         throw new RuntimeException("not allowed");
     }
 
@@ -123,8 +121,8 @@ public class StandaloneIndividualCandidacyProcessDA extends
     }
 
     @Override
-    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         throw new RuntimeException("not allowed");
     }
 

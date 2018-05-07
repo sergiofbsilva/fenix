@@ -59,15 +59,15 @@ public class SibsPaymentFileProcessReport extends SibsPaymentFileProcessReport_B
         super.setFileVersion(sibsPaymentFileProcessReportDTO.getFileVersion());
         super.setDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO.getDegreeGratuityTotalAmount());
         super.setBolonhaDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO.getBolonhaDegreeGratuityTotalAmount());
-        super.setIntegratedMasterDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO
-                .getIntegratedMasterDegreeGratuityTotalAmount());
-        super.setIntegratedBolonhaMasterDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO
-                .getIntegratedBolonhaMasterDegreeGratuityTotalAmount());
+        super.setIntegratedMasterDegreeGratuityTotalAmount(
+                sibsPaymentFileProcessReportDTO.getIntegratedMasterDegreeGratuityTotalAmount());
+        super.setIntegratedBolonhaMasterDegreeGratuityTotalAmount(
+                sibsPaymentFileProcessReportDTO.getIntegratedBolonhaMasterDegreeGratuityTotalAmount());
         super.setAdministrativeOfficeTaxTotalAmount(sibsPaymentFileProcessReportDTO.getAdministrativeOfficeTaxTotalAmount());
         super.setGraduationInsuranceTotalAmount(sibsPaymentFileProcessReportDTO.getGraduationInsuranceTotalAmount());
         super.setSpecializationGratuityTotalAmount(sibsPaymentFileProcessReportDTO.getSpecializationGratuityTotalAmount());
-        super.setBolonhaMasterDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO
-                .getBolonhaMasterDegreeGratuityTotalAmount());
+        super.setBolonhaMasterDegreeGratuityTotalAmount(
+                sibsPaymentFileProcessReportDTO.getBolonhaMasterDegreeGratuityTotalAmount());
         super.setMasterDegreeGratuityTotalAmount(sibsPaymentFileProcessReportDTO.getMasterDegreeGratuityTotalAmount());
         super.setDfaGratuityTotalAmount(sibsPaymentFileProcessReportDTO.getDfaGratuityTotalAmount());
         super.setAfterGraduationInsuranceTotalAmount(sibsPaymentFileProcessReportDTO.getAfterGraduationInsuranceTotalAmount());
@@ -75,14 +75,15 @@ public class SibsPaymentFileProcessReport extends SibsPaymentFileProcessReport_B
         super.setTransactionsTotalAmount(sibsPaymentFileProcessReportDTO.getTransactionsTotalAmount());
         super.setTotalCost(sibsPaymentFileProcessReportDTO.getTotalCost());
         super.setResidencePayment(sibsPaymentFileProcessReportDTO.getResidenceAmount());
-        super.setDegreeCandidacyForGraduatedPersonAmount(sibsPaymentFileProcessReportDTO
-                .getDegreeCandidacyForGraduatedPersonAmount());
-        super.setDegreeChangeIndividualCandidacyAmount(sibsPaymentFileProcessReportDTO.getDegreeChangeIndividualCandidacyAmount());
-        super.setDegreeTransferIndividualCandidacyAmount(sibsPaymentFileProcessReportDTO
-                .getDegreeTransferIndividualCandidacyAmount());
+        super.setDegreeCandidacyForGraduatedPersonAmount(
+                sibsPaymentFileProcessReportDTO.getDegreeCandidacyForGraduatedPersonAmount());
+        super.setDegreeChangeIndividualCandidacyAmount(
+                sibsPaymentFileProcessReportDTO.getDegreeChangeIndividualCandidacyAmount());
+        super.setDegreeTransferIndividualCandidacyAmount(
+                sibsPaymentFileProcessReportDTO.getDegreeTransferIndividualCandidacyAmount());
         super.setSecondCycleIndividualCandidacyAmount(sibsPaymentFileProcessReportDTO.getSecondCycleIndividualCandidacyAmount());
-        super.setStandaloneEnrolmentGratuityEventAmount(sibsPaymentFileProcessReportDTO
-                .getStandaloneEnrolmentGratuityEventAmount());
+        super.setStandaloneEnrolmentGratuityEventAmount(
+                sibsPaymentFileProcessReportDTO.getStandaloneEnrolmentGratuityEventAmount());
         super.setOver23IndividualCandidacyEventAmount(sibsPaymentFileProcessReportDTO.getOver23IndividualCandidacyEventAmount());
         super.setInstitutionAffiliationEventAmount(sibsPaymentFileProcessReportDTO.getInstitutionAffiliationEventAmount());
         super.setPhdProgramCandidacyEventAmount(sibsPaymentFileProcessReportDTO.getPhdProgramCandidacyEventAmount());

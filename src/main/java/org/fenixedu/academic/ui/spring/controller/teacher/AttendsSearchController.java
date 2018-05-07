@@ -79,16 +79,16 @@ import pt.ist.fenixframework.FenixFramework;
 @Controller
 @RequestMapping("/teacher/{executionCourse}/attends/")
 public class AttendsSearchController extends ExecutionCourseController {
-    
+
     // hack
     @Autowired
     CSRFTokenBean csrfTokenBean;
-    
+
     @ModelAttribute("csrf")
-    public CSRFTokenBean getCSRF(){
+    public CSRFTokenBean getCSRF() {
         return csrfTokenBean;
     }
-    
+
     @Autowired
     StudentGroupService studentGroupService;
 
@@ -125,8 +125,9 @@ public class AttendsSearchController extends ExecutionCourseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<String> listAttends() {
-        return new ResponseEntity<>(view(executionCourse.getAttendsSet().stream()
-                .filter(attendee -> attendee.getRegistration() != null)).toString(), HttpStatus.OK);
+        return new ResponseEntity<>(
+                view(executionCourse.getAttendsSet().stream().filter(attendee -> attendee.getRegistration() != null)).toString(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(value = "/studentSpreadsheet", method = RequestMethod.POST)
@@ -150,13 +151,13 @@ public class AttendsSearchController extends ExecutionCourseController {
                         addCell(getLabel("label.number"), attends.getRegistration().getNumber());
                         addCell(getLabel("label.name"), attends.getRegistration().getPerson().getName());
                         addCell(getLabel("label.email"), attends.getRegistration().getPerson().getDefaultEmailAddressValue());
-                        executionCourse.getGroupings().forEach(
-                                gr -> addCell(getLabel("label.projectGroup") + " " + gr.getName(), attends.getStudentGroupsSet()
-                                        .stream().filter(sg -> sg.getGrouping().equals(gr)).map(StudentGroup::getGroupNumber)
-                                        .map(gn -> gn.toString()).findAny().orElse("")));
-                        executionCourse.getShiftTypes().forEach(
-                                shiftType -> addCell(
-                                        getLabel("label.shift") + " " + shiftType.getFullNameTipoAula(),
+                        executionCourse.getGroupings()
+                                .forEach(gr -> addCell(getLabel("label.projectGroup") + " " + gr.getName(),
+                                        attends.getStudentGroupsSet().stream().filter(sg -> sg.getGrouping().equals(gr))
+                                                .map(StudentGroup::getGroupNumber).map(gn -> gn.toString()).findAny()
+                                                .orElse("")));
+                        executionCourse.getShiftTypes()
+                                .forEach(shiftType -> addCell(getLabel("label.shift") + " " + shiftType.getFullNameTipoAula(),
                                         Optional.ofNullable(
                                                 attends.getRegistration().getShiftFor(attends.getExecutionCourse(), shiftType))
                                                 .map(Shift::getNome).orElse("")));
@@ -172,11 +173,11 @@ public class AttendsSearchController extends ExecutionCourseController {
 
                         RegistrationState registrationState =
                                 attends.getRegistration().getLastRegistrationState(attends.getExecutionYear());
-                        addCell(getLabel("label.registration.state"), registrationState == null ? "" : registrationState
-                                .getStateType().getDescription());
+                        addCell(getLabel("label.registration.state"),
+                                registrationState == null ? "" : registrationState.getStateType().getDescription());
 
-                        addCell(getLabel("label.Degree"), attends.getStudentCurricularPlanFromAttends().getDegreeCurricularPlan()
-                                .getPresentationName());
+                        addCell(getLabel("label.Degree"),
+                                attends.getStudentCurricularPlanFromAttends().getDegreeCurricularPlan().getPresentationName());
 
                         Collection<StudentStatuteBean> studentStatutes =
                                 attends.getRegistration().getStudent().getStatutes(executionCourse.getExecutionPeriod());
@@ -192,10 +193,8 @@ public class AttendsSearchController extends ExecutionCourseController {
                 });
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader(
-                "Content-disposition",
-                String.format(
-                        "attachment; filename=%s.xls",
+        response.setHeader("Content-disposition",
+                String.format("attachment; filename=%s.xls",
                         Joiner.on(" - ")
                                 .join(executionCourse.getSigla(),
                                         BundleUtil.getString("resources.ApplicationResources", "label.students"))
@@ -223,21 +222,18 @@ public class AttendsSearchController extends ExecutionCourseController {
                         addCell(getLabel("label.username"), attends.getRegistration().getPerson().getUsername());
                         addCell(getLabel("label.number"), attends.getRegistration().getNumber());
                         addCell(getLabel("label.name"), attends.getRegistration().getPerson().getPresentationName());
-                        addCell(getLabel("label.Degree"), attends.getStudentCurricularPlanFromAttends().getDegreeCurricularPlan()
-                                .getPresentationName());
+                        addCell(getLabel("label.Degree"),
+                                attends.getStudentCurricularPlanFromAttends().getDegreeCurricularPlan().getPresentationName());
                         addCell(getLabel("label.attends.enrollmentState"),
                                 BundleUtil.getString(Bundle.ENUMERATION, attends.getAttendsStateType().getQualifiedName()));
-                        executionCourse.getAssociatedEvaluationsSet().forEach(
-                                ev -> addCell(
-                                        ev.getPresentationName(),
-                                        attends.getAssociatedMarksSet().stream().filter(mark -> mark.getEvaluation() == ev)
-                                                .map(Mark::getMark).findAny().orElse("")));
+                        executionCourse.getAssociatedEvaluationsSet()
+                                .forEach(ev -> addCell(ev.getPresentationName(), attends.getAssociatedMarksSet().stream()
+                                        .filter(mark -> mark.getEvaluation() == ev).map(Mark::getMark).findAny().orElse("")));
                     }
                 });
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", String.format(
-                "attachment; filename=%s.xls",
+        response.setHeader("Content-disposition", String.format("attachment; filename=%s.xls",
                 Joiner.on(" - ")
                         .join(executionCourse.getSigla(), BundleUtil.getString("resources.ApplicationResources", "label.grades"))
                         .replace(" ", "_")));
@@ -296,12 +292,11 @@ public class AttendsSearchController extends ExecutionCourseController {
             }
         }
 
-        String label =
-                String.format("%s : %s \n%s : %s \n%s : %s \n%s : %s",
-                        BundleUtil.getString(Bundle.APPLICATION, "label.selectStudents"), attendTypeValues,
-                        BundleUtil.getString(Bundle.APPLICATION, "label.attends.courses"), degreeNameValues,
-                        BundleUtil.getString(Bundle.APPLICATION, "label.selectShift"), shiftsValues,
-                        BundleUtil.getString(Bundle.APPLICATION, "label.studentStatutes"), studentStatuteTypesValues);
+        String label = String.format("%s : %s \n%s : %s \n%s : %s \n%s : %s",
+                BundleUtil.getString(Bundle.APPLICATION, "label.selectStudents"), attendTypeValues,
+                BundleUtil.getString(Bundle.APPLICATION, "label.attends.courses"), degreeNameValues,
+                BundleUtil.getString(Bundle.APPLICATION, "label.selectShift"), shiftsValues,
+                BundleUtil.getString(Bundle.APPLICATION, "label.studentStatutes"), studentStatuteTypesValues);
 
         Builder<Attends> builder = Stream.builder();
         for (JsonElement elem : new JsonParser().parse(filteredAttendsJson).getAsJsonArray()) {
@@ -309,18 +304,14 @@ public class AttendsSearchController extends ExecutionCourseController {
             builder.accept(FenixFramework.getDomainObject(object.get("id").getAsString()));
         }
 
-        Group users =
-                Group.users(builder.build().map(a -> a.getRegistration().getPerson().getUser()).filter(Objects::nonNull)
-                        .sorted(User.COMPARATOR_BY_NAME));
+        Group users = Group.users(builder.build().map(a -> a.getRegistration().getPerson().getUser()).filter(Objects::nonNull)
+                .sorted(User.COMPARATOR_BY_NAME));
         ArrayList<Recipient> recipients = new ArrayList<Recipient>();
         recipients.add(Recipient.newInstance(label, users));
-        String sendEmailUrl =
-                UriBuilder
-                        .fromUri("/messaging/emails.do")
-                        .queryParam("method", "newEmail")
-                        .queryParam("sender", ExecutionCourseSender.newInstance(executionCourse).getExternalId())
-                        .queryParam("recipient", recipients.stream().filter(r -> r != null).map(r -> r.getExternalId()).toArray())
-                        .build().toString();
+        String sendEmailUrl = UriBuilder.fromUri("/messaging/emails.do").queryParam("method", "newEmail")
+                .queryParam("sender", ExecutionCourseSender.newInstance(executionCourse).getExternalId())
+                .queryParam("recipient", recipients.stream().filter(r -> r != null).map(r -> r.getExternalId()).toArray()).build()
+                .toString();
         String sendEmailWithChecksumUrl =
                 GenericChecksumRewriter.injectChecksumInUrl(request.getContextPath(), sendEmailUrl, session);
         return new RedirectView(sendEmailWithChecksumUrl, true);

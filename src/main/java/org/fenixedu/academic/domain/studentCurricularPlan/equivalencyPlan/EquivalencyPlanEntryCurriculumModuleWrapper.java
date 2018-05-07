@@ -35,7 +35,8 @@ public class EquivalencyPlanEntryCurriculumModuleWrapper {
             new Comparator<EquivalencyPlanEntryCurriculumModuleWrapper>() {
 
                 @Override
-                public int compare(EquivalencyPlanEntryCurriculumModuleWrapper o1, EquivalencyPlanEntryCurriculumModuleWrapper o2) {
+                public int compare(EquivalencyPlanEntryCurriculumModuleWrapper o1,
+                        EquivalencyPlanEntryCurriculumModuleWrapper o2) {
                     final DegreeModule d1 = o1.getCurriculumModule().getDegreeModule();
                     final DegreeModule d2 = o2.getCurriculumModule().getDegreeModule();
                     final int c = Collator.getInstance().compare(d1.getName(), d2.getName());

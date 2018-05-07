@@ -37,8 +37,8 @@ public abstract class StudentRegistrationDA extends FenixDispatchAction {
 
     protected Registration getAndSetRegistration(final HttpServletRequest request) {
         final String registrationID =
-                getFromRequest(request, "registrationID") != null ? getFromRequest(request, "registrationID").toString() : getFromRequest(
-                        request, "registrationId").toString();
+                getFromRequest(request, "registrationID") != null ? getFromRequest(request, "registrationID")
+                        .toString() : getFromRequest(request, "registrationId").toString();
         final Registration registration = FenixFramework.getDomainObject(registrationID);
         request.setAttribute("registration", registration);
         return registration;

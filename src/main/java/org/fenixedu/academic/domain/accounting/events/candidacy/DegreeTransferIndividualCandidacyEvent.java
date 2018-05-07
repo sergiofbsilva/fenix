@@ -37,9 +37,9 @@ public class DegreeTransferIndividualCandidacyEvent extends DegreeTransferIndivi
 
     private static final List<EventType> COMPATIBLE_TYPES = Arrays.asList(
 
-    EventType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY,
+            EventType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY,
 
-    EventType.DEGREE_CHANGE_INDIVIDUAL_CANDIDACY);
+            EventType.DEGREE_CHANGE_INDIVIDUAL_CANDIDACY);
 
     private DegreeTransferIndividualCandidacyEvent() {
         super();

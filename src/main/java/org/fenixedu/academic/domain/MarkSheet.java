@@ -156,10 +156,9 @@ public class MarkSheet extends MarkSheet_Base {
             Teacher responsibleTeacher, Date evaluationDate, EvaluationSeason season, String reason,
             MarkSheetEnrolmentEvaluationBean evaluationBean, Person creator) {
 
-        MarkSheet markSheet =
-                new MarkSheet(curricularCourse, executionSemester, responsibleTeacher, evaluationDate, season,
-                        MarkSheetState.RECTIFICATION_NOT_CONFIRMED, Boolean.FALSE,
-                        (evaluationBean != null) ? Collections.singletonList(evaluationBean) : null, creator);
+        MarkSheet markSheet = new MarkSheet(curricularCourse, executionSemester, responsibleTeacher, evaluationDate, season,
+                MarkSheetState.RECTIFICATION_NOT_CONFIRMED, Boolean.FALSE,
+                (evaluationBean != null) ? Collections.singletonList(evaluationBean) : null, creator);
         markSheet.setReason(reason);
         return markSheet;
     }
@@ -171,9 +170,8 @@ public class MarkSheet extends MarkSheet_Base {
         Collection<MarkSheetEnrolmentEvaluationBean> beans =
                 (evaluationBean != null) ? Collections.singletonList(evaluationBean) : null;
 
-        MarkSheet markSheet =
-                new OldMarkSheet(curricularCourse, executionSemester, responsibleTeacher, evaluationDate, season,
-                        MarkSheetState.RECTIFICATION_NOT_CONFIRMED, beans, creator);
+        MarkSheet markSheet = new OldMarkSheet(curricularCourse, executionSemester, responsibleTeacher, evaluationDate, season,
+                MarkSheetState.RECTIFICATION_NOT_CONFIRMED, beans, creator);
         markSheet.setReason(reason);
         return markSheet;
     }
@@ -218,10 +216,8 @@ public class MarkSheet extends MarkSheet_Base {
                     executionSemester.getPreviousExecutionPeriod())
                     && !responsibleTeacher.getPerson().isResponsibleOrCoordinatorFor(curricularCourse,
                             executionSemester.getPreviousExecutionPeriod().getPreviousExecutionPeriod())
-                    && !responsibleTeacher.getPerson().isResponsibleOrCoordinatorFor(
-                            curricularCourse,
-                            executionSemester.getPreviousExecutionPeriod().getPreviousExecutionPeriod()
-                                    .getPreviousExecutionPeriod())) {
+                    && !responsibleTeacher.getPerson().isResponsibleOrCoordinatorFor(curricularCourse, executionSemester
+                            .getPreviousExecutionPeriod().getPreviousExecutionPeriod().getPreviousExecutionPeriod())) {
                 throw new DomainException("error.teacherNotResponsibleOrNotCoordinator");
             }
 
@@ -241,14 +237,13 @@ public class MarkSheet extends MarkSheet_Base {
                 throw new DomainException("error.evaluationDateNotInExamsPeriod");
             }
 
-        } else if (!(season.isSpecialAuthorization() || (evaluationDate != null && season.getExamPeriods(executionDegree,
-                executionSemester).anyMatch(
-                o1 -> o1.nestedOccupationPeriodsContainsDay(YearMonthDay.fromDateFields(evaluationDate)))))) {
+        } else if (!(season.isSpecialAuthorization()
+                || (evaluationDate != null && season.getExamPeriods(executionDegree, executionSemester)
+                        .anyMatch(o1 -> o1.nestedOccupationPeriodsContainsDay(YearMonthDay.fromDateFields(evaluationDate)))))) {
             String dateFormat = "dd/MM/yyyy";
-            String period =
-                    season.getExamPeriods(executionDegree, executionSemester)
-                            .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-"
-                                    + o.getEndYearMonthDay().toString(dateFormat)).collect(Collectors.joining(", "));
+            String period = season.getExamPeriods(executionDegree, executionSemester)
+                    .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-" + o.getEndYearMonthDay().toString(dateFormat))
+                    .collect(Collectors.joining(", "));
             if (!Strings.isNullOrEmpty(period)) {
                 throw new DomainException("error.evaluationDateNotInExamsPeriod.withEvaluationDateAndPeriodDates",
                         DateFormatUtil.format(dateFormat, evaluationDate), period);
@@ -320,15 +315,13 @@ public class MarkSheet extends MarkSheet_Base {
         checkIfEvaluationDateIsInExamsPeriod(getCurricularCourse().getDegreeCurricularPlan(), getExecutionPeriod(),
                 evaluationBean.getEvaluationDate(), getEvaluationSeason());
 
-        EnrolmentEvaluation enrolmentEvaluation =
-                evaluationBean.getEnrolment()
-                        .getEnrolmentEvaluationBySeasonAndState(enrolmentEvaluationState, getEvaluationSeason()).orElse(null);
+        EnrolmentEvaluation enrolmentEvaluation = evaluationBean.getEnrolment()
+                .getEnrolmentEvaluationBySeasonAndState(enrolmentEvaluationState, getEvaluationSeason()).orElse(null);
 
         if (enrolmentEvaluation == null) {
-            enrolmentEvaluation =
-                    evaluationBean.getEnrolment().addNewEnrolmentEvaluation(enrolmentEvaluationState, getEvaluationSeason(),
-                            responsibleTeacher.getPerson(), evaluationBean.getGradeValue(), getCreationDate(),
-                            evaluationBean.getEvaluationDate(), getExecutionPeriod(), null);
+            enrolmentEvaluation = evaluationBean.getEnrolment().addNewEnrolmentEvaluation(enrolmentEvaluationState,
+                    getEvaluationSeason(), responsibleTeacher.getPerson(), evaluationBean.getGradeValue(), getCreationDate(),
+                    evaluationBean.getEvaluationDate(), getExecutionPeriod(), null);
         } else {
             enrolmentEvaluation.edit(responsibleTeacher.getPerson(), evaluationBean.getGradeValue(), getCreationDate(),
                     evaluationBean.getEvaluationDate());
@@ -451,8 +444,8 @@ public class MarkSheet extends MarkSheet_Base {
                         enrolmentEvaluationBean.getEvaluationDate(), getEvaluationSeason());
 
                 final EnrolmentEvaluation enrolmentEvaluation = enrolmentEvaluationBean.getEnrolmentEvaluation();
-                enrolmentEvaluation.edit(getResponsibleTeacher().getPerson(), enrolmentEvaluationBean.getGradeValue(),
-                        new Date(), enrolmentEvaluationBean.getEvaluationDate());
+                enrolmentEvaluation.edit(getResponsibleTeacher().getPerson(), enrolmentEvaluationBean.getGradeValue(), new Date(),
+                        enrolmentEvaluationBean.getEvaluationDate());
             } else {
                 // TODO:
                 throw new DomainException("error.markSheet");
@@ -541,7 +534,8 @@ public class MarkSheet extends MarkSheet_Base {
                 ;
             }
         } else {
-            for (; !getEnrolmentEvaluationsSet().isEmpty(); getEnrolmentEvaluationsSet().iterator().next().removeFromMarkSheet()) {
+            for (; !getEnrolmentEvaluationsSet().isEmpty(); getEnrolmentEvaluationsSet().iterator().next()
+                    .removeFromMarkSheet()) {
                 ;
             }
         }
@@ -561,16 +555,16 @@ public class MarkSheet extends MarkSheet_Base {
         }
 
         EnrolmentEvaluation enrolmentEvaluation = this.getEnrolmentEvaluationsSet().iterator().next().getRectified();
-        enrolmentEvaluation
-                .setEnrolmentEvaluationState((enrolmentEvaluation.getMarkSheet().getMarkSheetState() == MarkSheetState.RECTIFICATION) ? EnrolmentEvaluationState.RECTIFICATION_OBJ : EnrolmentEvaluationState.FINAL_OBJ);
+        enrolmentEvaluation.setEnrolmentEvaluationState((enrolmentEvaluation.getMarkSheet()
+                .getMarkSheetState() == MarkSheetState.RECTIFICATION) ? EnrolmentEvaluationState.RECTIFICATION_OBJ : EnrolmentEvaluationState.FINAL_OBJ);
     }
 
     protected void generateCheckSum() {
         if (isNotConfirmed()) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(getExecutionPeriod().getExecutionYear().getYear()).append(getExecutionPeriod().getSemester());
-            stringBuilder.append(getResponsibleTeacher().getPerson().getUsername()).append(
-                    getEvaluationDateDateTime().toString("yyyy/MM/dd"));
+            stringBuilder.append(getResponsibleTeacher().getPerson().getUsername())
+                    .append(getEvaluationDateDateTime().toString("yyyy/MM/dd"));
             stringBuilder.append(getEvaluationSeason().getExternalId());
             for (EnrolmentEvaluation enrolmentEvaluation : getEnrolmentEvaluationsSortedByStudentNumber()) {
                 stringBuilder.append(enrolmentEvaluation.getCheckSum());

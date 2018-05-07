@@ -35,6 +35,7 @@ import org.fenixedu.academic.domain.candidacyProcess.IndividualCandidacyDocument
 import org.fenixedu.academic.domain.candidacyProcess.IndividualCandidacyProcessBean;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.NationalIdCardAvoidanceQuestion;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.StorkAttributesList;
+import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.period.MobilityApplicationPeriod;
 import org.fenixedu.academic.util.Bundle;
@@ -152,7 +153,7 @@ public class MobilityIndividualApplicationProcessBean extends IndividualCandidac
 
     public List<CurricularCourse> getSortedSelectedCurricularCourses() {
         List<CurricularCourse> curricularCourses = new ArrayList<CurricularCourse>(this.getSelectedCurricularCourses());
-        Collections.sort(curricularCourses, CurricularCourse.COMPARATOR_BY_NAME);
+        Collections.sort(curricularCourses, DegreeModule.COMPARATOR_BY_NAME);
         return curricularCourses;
     }
 

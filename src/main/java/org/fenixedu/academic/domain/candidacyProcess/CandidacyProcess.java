@@ -21,8 +21,8 @@ package org.fenixedu.academic.domain.candidacyProcess;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import java.util.stream.Collectors;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -118,8 +118,7 @@ abstract public class CandidacyProcess extends CandidacyProcess_Base {
     public IndividualCandidacyProcess getChildProcessByDocumentId(IDDocumentType type, String identification) {
         for (IndividualCandidacyProcess individualCandidacyProcess : getChildProcessesSet()) {
             if (individualCandidacyProcess.getCandidacy() != null
-                    && identification
-                            .equals(individualCandidacyProcess.getCandidacy().getPersonalDetails().getDocumentIdNumber())
+                    && identification.equals(individualCandidacyProcess.getCandidacy().getPersonalDetails().getDocumentIdNumber())
                     && type.equals(individualCandidacyProcess.getCandidacy().getPersonalDetails().getIdDocumentType())) {
                 return individualCandidacyProcess;
             }

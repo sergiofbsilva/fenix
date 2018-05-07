@@ -184,13 +184,13 @@ public class OriginInformationForm extends Form {
 
         LocalDate now = new LocalDate();
         if (now.getYear() < conclusionYear) {
-            return Collections.singletonList(new LabelFormatter().appendLabel("error.personalInformation.year.after.current",
-                    Bundle.CANDIDATE));
+            return Collections.singletonList(
+                    new LabelFormatter().appendLabel("error.personalInformation.year.after.current", Bundle.CANDIDATE));
         }
 
         if (conclusionYear < getBirthYear()) {
-            return Collections.singletonList(new LabelFormatter().appendLabel("error.personalInformation.year.before.birthday",
-                    Bundle.CANDIDATE));
+            return Collections.singletonList(
+                    new LabelFormatter().appendLabel("error.personalInformation.year.before.birthday", Bundle.CANDIDATE));
         }
 
         return Collections.emptyList();

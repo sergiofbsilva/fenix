@@ -23,8 +23,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import java.util.stream.Collectors;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,10 +60,10 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.jsoup.helper.StringUtil;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+
+import pt.ist.fenixframework.FenixFramework;
 
 /**
  * INFO: when extending this class pay attention to the following aspects
@@ -160,8 +160,8 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
 
     public static class HideCancelledCandidaciesBean implements java.io.Serializable {
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 1L;
 
         private Boolean value = Boolean.FALSE;
@@ -197,9 +197,8 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
     protected HideCancelledCandidaciesBean getHideCancelledCandidaciesValue(HttpServletRequest request) {
         Object value = this.getObjectFromViewState("hide.cancelled.candidacies");
         if (value == null) {
-            value =
-                    getFromRequest(request, "hideCancelledCandidacies") != null ? Boolean.valueOf((String) getFromRequest(
-                            request, "hideCancelledCandidacies")) : null;
+            value = getFromRequest(request, "hideCancelledCandidacies") != null ? Boolean
+                    .valueOf((String) getFromRequest(request, "hideCancelledCandidacies")) : null;
         }
         return new HideCancelledCandidaciesBean(value != null ? (Boolean) value : Boolean.FALSE);
     }
@@ -215,7 +214,8 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
         return Predicates.alwaysTrue();
     }
 
-    protected Collection<IndividualCandidacyProcess> getChildProcesses(final CandidacyProcess process, HttpServletRequest request) {
+    protected Collection<IndividualCandidacyProcess> getChildProcesses(final CandidacyProcess process,
+            HttpServletRequest request) {
         HideCancelledCandidaciesBean hideCancelledCandidacies = getHideCancelledCandidaciesValue(request);
 
         Predicate<IndividualCandidacyProcess> predicate =
@@ -234,7 +234,8 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
                 .filter(c -> c.isFromDegreeOffice() && !c.hasCandidacyProcess()).collect(Collectors.toList());
     }
 
-    abstract protected CandidacyProcess getCandidacyProcess(HttpServletRequest request, final ExecutionInterval executionInterval);
+    abstract protected CandidacyProcess getCandidacyProcess(HttpServletRequest request,
+            final ExecutionInterval executionInterval);
 
     static public class CandidacyProcessForm extends FenixActionForm {
         private String executionIntervalId;
@@ -385,9 +386,9 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
     }
 
     protected String getReportFilename() {
-        return BundleUtil.getString(Bundle.APPLICATION, "label.candidacy." + getProcessType().getSimpleName()
-                + ".report.filename")
-                + "_" + new LocalDate().toString("ddMMyyyy") + ".xls";
+        return BundleUtil.getString(Bundle.APPLICATION,
+                "label.candidacy." + getProcessType().getSimpleName() + ".report.filename") + "_"
+                + new LocalDate().toString("ddMMyyyy") + ".xls";
     }
 
     /**
@@ -396,8 +397,8 @@ abstract public class CandidacyProcessDA extends CaseHandlingDispatchAction {
      */
     abstract protected List<CandidacyDegreeBean> createCandidacyDegreeBeans(final HttpServletRequest request);
 
-    public ActionForward prepareExecuteExportCandidacies(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ActionForward prepareExecuteExportCandidacies(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
 
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-disposition", "attachment; filename=" + getReportFilename());

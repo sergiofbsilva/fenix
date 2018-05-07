@@ -55,8 +55,9 @@ public class StudentEquivalencyPlanDA extends FenixDispatchAction {
 
         final DegreeCurricularPlan selectedDegreeCurricularPlan = getSelectedDegreeCurricularPlan(request);
         if (selectedDegreeCurricularPlan == null) {
-            request.setAttribute("degreeCurricularPlans", DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType.oneOf(
-                    DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
+            request.setAttribute("degreeCurricularPlans",
+                    DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType.oneOf(DegreeType::isBolonhaDegree,
+                            DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
         } else {
             request.setAttribute("selectedDegreeCurricularPlan", selectedDegreeCurricularPlan);
         }
@@ -119,9 +120,8 @@ public class StudentEquivalencyPlanDA extends FenixDispatchAction {
 
         StudentEquivalencyPlanEntryCreator studentEquivalencyPlanEntryCreator = getRenderedObject();
         if (studentEquivalencyPlanEntryCreator == null) {
-            studentEquivalencyPlanEntryCreator =
-                    new StudentEquivalencyPlanEntryCreator(studentCurricularPlanEquivalencePlan,
-                            degreeCurricularPlan.getEquivalencePlan());
+            studentEquivalencyPlanEntryCreator = new StudentEquivalencyPlanEntryCreator(studentCurricularPlanEquivalencePlan,
+                    degreeCurricularPlan.getEquivalencePlan());
         }
 
         final CurriculumModule curriculumModule = getCurriculumModule(request);

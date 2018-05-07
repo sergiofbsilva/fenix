@@ -63,8 +63,8 @@ public class MobilityStudentData extends MobilityStudentData_Base {
         setIntensivePortugueseCourseSeptember(erasmusStudentDataBean.getIntensivePortugueseCourseSeptember());
         setIntensivePortugueseCourseFebruary(erasmusStudentDataBean.getIntensivePortugueseCourseFebruary());
 
-        if (((MobilityApplicationProcess) erasmusIndividualCandidacy.getCandidacyProcess().getCandidacyProcess())
-                .getForSemester().equals(ErasmusApplyForSemesterType.FIRST_SEMESTER)) {
+        if (((MobilityApplicationProcess) erasmusIndividualCandidacy.getCandidacyProcess().getCandidacyProcess()).getForSemester()
+                .equals(ErasmusApplyForSemesterType.FIRST_SEMESTER)) {
             setApplyFor(erasmusStudentDataBean.getApplyFor());
         } else {
             setApplyFor(ErasmusApplyForSemesterType.SECOND_SEMESTER);

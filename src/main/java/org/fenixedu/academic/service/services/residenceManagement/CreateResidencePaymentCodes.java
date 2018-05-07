@@ -31,10 +31,9 @@ public class CreateResidencePaymentCodes {
     @Atomic
     public static void run(Collection<ResidenceEvent> events) {
         for (ResidenceEvent event : events) {
-            AccountingEventPaymentCode
-                    .create(PaymentCodeType.RESIDENCE_FEE, event.getPaymentStartDate().toYearMonthDay(), event
-                            .getPaymentLimitDate().toYearMonthDay(), event, event.getRoomValue(), event.getRoomValue(), event
-                            .getPerson());
+            AccountingEventPaymentCode.create(PaymentCodeType.RESIDENCE_FEE, event.getPaymentStartDate().toYearMonthDay(),
+                    event.getPaymentLimitDate().toYearMonthDay(), event, event.getRoomValue(), event.getRoomValue(),
+                    event.getPerson());
         }
     }
 }

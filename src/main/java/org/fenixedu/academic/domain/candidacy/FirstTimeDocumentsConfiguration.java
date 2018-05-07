@@ -20,12 +20,12 @@ package org.fenixedu.academic.domain.candidacy;
 
 import org.fenixedu.bennu.core.domain.Bennu;
 
-import pt.ist.fenixframework.Atomic;
-import pt.ist.fenixframework.Atomic.TxMode;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.Atomic.TxMode;
 
 public class FirstTimeDocumentsConfiguration extends FirstTimeDocumentsConfiguration_Base {
 

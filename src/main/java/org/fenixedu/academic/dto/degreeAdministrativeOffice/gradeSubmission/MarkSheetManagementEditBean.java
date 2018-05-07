@@ -65,7 +65,8 @@ public class MarkSheetManagementEditBean extends MarkSheetManagementBaseBean {
         return enrolmentEvaluationBeansToAppend;
     }
 
-    public void setEnrolmentEvaluationBeansToAppend(Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToAppend) {
+    public void setEnrolmentEvaluationBeansToAppend(
+            Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToAppend) {
         this.enrolmentEvaluationBeansToAppend = enrolmentEvaluationBeansToAppend;
     }
 

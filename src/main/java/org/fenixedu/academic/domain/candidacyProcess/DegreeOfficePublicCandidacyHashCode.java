@@ -101,15 +101,13 @@ public class DegreeOfficePublicCandidacyHashCode extends DegreeOfficePublicCandi
 
     private void sendEmailForApplicationSubmissionCandidacyForm(
             Class<? extends IndividualCandidacyProcess> individualCandidadyProcessClass) {
-        String subject =
-                BundleUtil.getString(Bundle.CANDIDATE, individualCandidadyProcessClass.getSimpleName()
-                        + SEND_LINK_TO_ACCESS_SUBMISSION_FORM_SUBJECT);
-        String body =
-                BundleUtil.getString(Bundle.CANDIDATE, individualCandidadyProcessClass.getSimpleName()
-                        + SEND_LINK_TO_ACCESS_SUBMISSION_FORM_BODY, Unit.getInstitutionName().getContent());
-        String link =
-                BundleUtil.getString(Bundle.CANDIDATE, individualCandidadyProcessClass.getSimpleName()
-                        + APPLICATION_SUBMISSION_LINK);
+        String subject = BundleUtil.getString(Bundle.CANDIDATE,
+                individualCandidadyProcessClass.getSimpleName() + SEND_LINK_TO_ACCESS_SUBMISSION_FORM_SUBJECT);
+        String body = BundleUtil.getString(Bundle.CANDIDATE,
+                individualCandidadyProcessClass.getSimpleName() + SEND_LINK_TO_ACCESS_SUBMISSION_FORM_BODY,
+                Unit.getInstitutionName().getContent());
+        String link = BundleUtil.getString(Bundle.CANDIDATE,
+                individualCandidadyProcessClass.getSimpleName() + APPLICATION_SUBMISSION_LINK);
         link = String.format(link, this.getValue(), I18N.getLocale());
         body = String.format(body, link);
         this.sendEmail(subject, body);
@@ -135,19 +133,21 @@ public class DegreeOfficePublicCandidacyHashCode extends DegreeOfficePublicCandi
         }
 
         String subject =
-                MessageFormat.format(BundleUtil.getString(Bundle.CANDIDATE, this.getIndividualCandidacyProcess().getClass()
-                        .getSimpleName()
-                        + INFORM_APPLICATION_SUCCESS_SUBJECT), Unit.getInstitutionAcronym(), Unit.getInstitutionName()
-                        .getContent());
+                MessageFormat.format(
+                        BundleUtil.getString(Bundle.CANDIDATE,
+                                this.getIndividualCandidacyProcess().getClass().getSimpleName()
+                                        + INFORM_APPLICATION_SUCCESS_SUBJECT),
+                        Unit.getInstitutionAcronym(), Unit.getInstitutionName().getContent());
         String body =
-                MessageFormat.format(BundleUtil.getString(Bundle.CANDIDATE, this.getIndividualCandidacyProcess().getClass()
-                        .getSimpleName()
-                        + INFORM_APPLICATION_SUCCESS_BODY), Unit.getInstitutionAcronym(), Unit.getInstitutionName().getContent());
+                MessageFormat.format(
+                        BundleUtil.getString(Bundle.CANDIDATE,
+                                this.getIndividualCandidacyProcess().getClass().getSimpleName()
+                                        + INFORM_APPLICATION_SUCCESS_BODY),
+                        Unit.getInstitutionAcronym(), Unit.getInstitutionName().getContent());
         String link = getDefaultPublicLink();
 
-        body =
-                String.format(body, new String[] { this.getIndividualCandidacyProcess().getProcessCode(), link,
-                        this.getIndividualCandidacyProcess().getCandidacyProcess().getCandidacyEnd().toString("dd/MM/yyyy") });
+        body = String.format(body, new String[] { this.getIndividualCandidacyProcess().getProcessCode(), link,
+                this.getIndividualCandidacyProcess().getCandidacyProcess().getCandidacyEnd().toString("dd/MM/yyyy") });
 
         sendEmail(subject, body);
     }
@@ -156,12 +156,10 @@ public class DegreeOfficePublicCandidacyHashCode extends DegreeOfficePublicCandi
     private static final String RECOVERY_APPLICATION_BODY = ".message.email.body.recovery.access";
 
     public void sendEmailFoAccessLinkRecovery() {
-        String subject =
-                BundleUtil.getString(Bundle.CANDIDATE, this.getIndividualCandidacyProcess().getClass().getSimpleName()
-                        + RECOVERY_APPLICATION_SUBJECT);
-        String body =
-                BundleUtil.getString(Bundle.CANDIDATE, this.getIndividualCandidacyProcess().getClass().getSimpleName()
-                        + RECOVERY_APPLICATION_BODY);
+        String subject = BundleUtil.getString(Bundle.CANDIDATE,
+                this.getIndividualCandidacyProcess().getClass().getSimpleName() + RECOVERY_APPLICATION_SUBJECT);
+        String body = BundleUtil.getString(Bundle.CANDIDATE,
+                this.getIndividualCandidacyProcess().getClass().getSimpleName() + RECOVERY_APPLICATION_BODY);
         String link = getDefaultPublicLink();
 
         body = String.format(body, new String[] { link, this.getIndividualCandidacyProcess().getProcessCode() });
@@ -171,8 +169,9 @@ public class DegreeOfficePublicCandidacyHashCode extends DegreeOfficePublicCandi
 
     public String getDefaultPublicLink() {
         return String.format(
-                BundleUtil.getString(Bundle.CANDIDATE, this.getIndividualCandidacyProcess().getClass().getSimpleName()
-                        + APPLICATION_ACCESS_LINK), this.getValue(), I18N.getLocale().getLanguage());
+                BundleUtil.getString(Bundle.CANDIDATE,
+                        this.getIndividualCandidacyProcess().getClass().getSimpleName() + APPLICATION_ACCESS_LINK),
+                this.getValue(), I18N.getLocale().getLanguage());
     }
 
     /**
@@ -205,14 +204,13 @@ public class DegreeOfficePublicCandidacyHashCode extends DegreeOfficePublicCandi
         return publicCandidacyHashCode;
     }
 
-    public static DegreeOfficePublicCandidacyHashCode getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(
-            final String email, Class<? extends IndividualCandidacyProcess> processType, CandidacyProcess process) {
+    public static DegreeOfficePublicCandidacyHashCode getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(final String email,
+            Class<? extends IndividualCandidacyProcess> processType, CandidacyProcess process) {
         return getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(email, processType, process, new ArrayList<Degree>());
     }
 
-    public static DegreeOfficePublicCandidacyHashCode getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(
-            final String email, Class<? extends IndividualCandidacyProcess> processType, CandidacyProcess process,
-            List<Degree> degreeList) {
+    public static DegreeOfficePublicCandidacyHashCode getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(final String email,
+            Class<? extends IndividualCandidacyProcess> processType, CandidacyProcess process, List<Degree> degreeList) {
 
         for (final PublicCandidacyHashCode hashCode : getHashCodesAssociatedWithEmail(email)) {
             if (!hashCode.isFromDegreeOffice()) {

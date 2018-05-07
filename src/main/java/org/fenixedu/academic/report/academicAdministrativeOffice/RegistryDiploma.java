@@ -103,10 +103,8 @@ public class RegistryDiploma extends AdministrativeOfficeDocument {
         final LocalizedString graduationLevel = getDocumentRequest().getProgramConclusion().getGraduationLevel();
 
         if (!graduationLevel.isEmpty()) {
-            degreeRegistrationDiploma =
-                    Joiner.on(" ").join(degreeRegistrationDiploma,
-                            BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.of.both"),
-                            graduationLevel.getContent(getLocale()));
+            degreeRegistrationDiploma = Joiner.on(" ").join(degreeRegistrationDiploma,
+                    BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.of.both"), graduationLevel.getContent(getLocale()));
         }
 
         addParameter("degreeRegistrationDiploma", degreeRegistrationDiploma);
@@ -158,8 +156,7 @@ public class RegistryDiploma extends AdministrativeOfficeDocument {
 
         ExecutionYear year = getDocumentRequest().getConclusionYear();
 
-        addParameter(
-                "secondParagraph",
+        addParameter("secondParagraph",
                 MessageFormat.format(secondParagraph, studentGender,
                         BundleUtil.getString(Bundle.ENUMERATION, getLocale(), person.getIdDocumentType().getName()),
                         person.getDocumentIdNumber(), country, getProgramConclusionDescription(year)));

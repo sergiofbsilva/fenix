@@ -74,8 +74,8 @@ public enum PhdInactivePredicateContainer implements PredicateContainer<PhdIndiv
         }
     };
 
-    private static class PhdInactivePredicate extends
-            InlinePredicate<PhdIndividualProgramProcess, PhdIndividualProgramProcessState> {
+    private static class PhdInactivePredicate
+            extends InlinePredicate<PhdIndividualProgramProcess, PhdIndividualProgramProcessState> {
         public PhdInactivePredicate(PhdIndividualProgramProcessState processState) {
             super(processState);
         }

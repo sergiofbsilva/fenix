@@ -56,9 +56,8 @@ public class ReadExecutionCoursesByExecutionDegreeIdAndExecutionPeriodIdAndCurYe
             final ExecutionDegree executionDegree = findExecutionDegreeByID(executionSemester, executionDegreeId);
             final DegreeCurricularPlan degreeCurricularPlan = executionDegree.getDegreeCurricularPlan();
             final CurricularYear curricularYear = CurricularYear.readByYear(curricularYearInt);
-            executionCourseList =
-                    executionSemester.getExecutionCoursesByDegreeCurricularPlanAndSemesterAndCurricularYearAndName(
-                            degreeCurricularPlan, curricularYear, "%");
+            executionCourseList = executionSemester.getExecutionCoursesByDegreeCurricularPlanAndSemesterAndCurricularYearAndName(
+                    degreeCurricularPlan, curricularYear, "%");
         }
 
         final List infoExecutionCourseList = new ArrayList(executionCourseList.size());

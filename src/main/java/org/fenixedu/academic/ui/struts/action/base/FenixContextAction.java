@@ -51,7 +51,8 @@ public abstract class FenixContextAction extends FenixAction {
         return super.execute(mapping, actionForm, request, response);
     }
 
-    protected List<LabelValueBean> buildExecutionPeriodsLabelValueList(String degreeCurricularPlanId) throws FenixActionException {
+    protected List<LabelValueBean> buildExecutionPeriodsLabelValueList(String degreeCurricularPlanId)
+            throws FenixActionException {
         List<InfoExecutionDegree> infoExecutionDegreeList = new ArrayList<InfoExecutionDegree>();
         try {
 
@@ -68,9 +69,9 @@ public abstract class FenixContextAction extends FenixAction {
                         ReadNotClosedPublicExecutionPeriodsByExecutionYear.run(infoExecutionDegree.getInfoExecutionYear());
 
                 for (InfoExecutionPeriod infoExecutionPeriodIter : infoExecutionPeriodsList) {
-                    result.add(new LabelValueBean(infoExecutionPeriodIter.getName() + " - "
-                            + infoExecutionPeriodIter.getInfoExecutionYear().getYear(), infoExecutionPeriodIter.getExternalId()
-                            .toString()));
+                    result.add(new LabelValueBean(
+                            infoExecutionPeriodIter.getName() + " - " + infoExecutionPeriodIter.getInfoExecutionYear().getYear(),
+                            infoExecutionPeriodIter.getExternalId().toString()));
                 }
             } catch (Exception e) {
                 throw new FenixActionException(e);

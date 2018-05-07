@@ -77,9 +77,8 @@ public class AlumniInfoNotUpdatedBean implements Serializable {
 
     @Atomic
     public void createRecipientGroup(Sender sender) {
-        Group recipientsGroup =
-                NotUpdatedAlumniInfoForSpecificDaysGroup.get(getDaysNotUpdated(), getProfessionalInfo(), getFormationInfo(),
-                        getPersonalDataInfo());
+        Group recipientsGroup = NotUpdatedAlumniInfoForSpecificDaysGroup.get(getDaysNotUpdated(), getProfessionalInfo(),
+                getFormationInfo(), getPersonalDataInfo());
         Recipient recipients = Recipient.newInstance(recipientsGroup);
         sender.addRecipients(recipients);
     }

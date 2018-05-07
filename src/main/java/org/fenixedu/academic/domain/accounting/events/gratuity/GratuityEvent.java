@@ -50,10 +50,8 @@ public abstract class GratuityEvent extends GratuityEvent_Base {
         getRelationGratuityEventStudentCurricularPlan().addListener(new RelationAdapter<StudentCurricularPlan, GratuityEvent>() {
             @Override
             public void beforeAdd(StudentCurricularPlan studentCurricularPlan, GratuityEvent gratuityEvent) {
-                if (gratuityEvent != null
-                        && studentCurricularPlan != null
-                        && studentCurricularPlan.getRegistration().hasGratuityEvent(gratuityEvent.getExecutionYear(),
-                                gratuityEvent.getClass())) {
+                if (gratuityEvent != null && studentCurricularPlan != null && studentCurricularPlan.getRegistration()
+                        .hasGratuityEvent(gratuityEvent.getExecutionYear(), gratuityEvent.getClass())) {
                     throw new DomainException(
                             "error.accounting.events.gratuity.GratuityEvent.person.already.has.gratuity.event.in.registration.and.year");
 
@@ -193,8 +191,8 @@ public abstract class GratuityEvent extends GratuityEvent_Base {
     }
 
     public ExternalScholarshipGratuityExemption getExternalScholarshipGratuityExemption() {
-        return (ExternalScholarshipGratuityExemption) getExemptionsSet().stream().filter(e->e instanceof ExternalScholarshipGratuityExemption).findFirst().orElse
-                (null);
+        return (ExternalScholarshipGratuityExemption) getExemptionsSet().stream()
+                .filter(e -> e instanceof ExternalScholarshipGratuityExemption).findFirst().orElse(null);
     }
 
     public GratuityExemption getGratuityExemption() {
@@ -258,9 +256,10 @@ public abstract class GratuityEvent extends GratuityEvent_Base {
         return calculateAmountToPay(new DateTime()).lessOrEqualThan(Money.ZERO);
     }
 
-
     @Override
-    public boolean isTransferable() { return isOpen() && !hasExternalScholarshipGratuityExemption(); }
+    public boolean isTransferable() {
+        return isOpen() && !hasExternalScholarshipGratuityExemption();
+    }
 
     @Override
     public boolean isInState(final EventState eventState) {

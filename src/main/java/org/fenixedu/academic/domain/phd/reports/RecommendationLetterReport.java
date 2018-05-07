@@ -106,8 +106,8 @@ public class RecommendationLetterReport extends PhdReport {
     }
 
     private boolean isProcessFromEPFL(PhdIndividualProgramProcess process) {
-        return (process.getCandidacyProcess().getPublicPhdCandidacyPeriod() != null && process.getCandidacyProcess()
-                .getPublicPhdCandidacyPeriod().isEpflCandidacyPeriod())
+        return (process.getCandidacyProcess().getPublicPhdCandidacyPeriod() != null
+                && process.getCandidacyProcess().getPublicPhdCandidacyPeriod().isEpflCandidacyPeriod())
                 || PhdIndividualProgramCollaborationType.EPFL == process.getCollaborationType();
     }
 
@@ -129,12 +129,11 @@ public class RecommendationLetterReport extends PhdReport {
                 getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.rankInClass"), 7);
         addHeaderCell(sheet,
                 getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.academicPerformance"), 8);
-        addHeaderCell(
-                sheet,
-                getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.socialAndCommunicationSkills"),
-                9);
+        addHeaderCell(sheet, getResource(
+                "label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.socialAndCommunicationSkills"), 9);
         addHeaderCell(sheet,
-                getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.potencialToExcelPhd"), 10);
+                getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.potencialToExcelPhd"),
+                10);
         addHeaderCell(sheet,
                 getResource("label.org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyRefereeLetter.refereeName"), 11);
         addHeaderCell(sheet,

@@ -61,9 +61,9 @@ public class ExternalScholarshipGratuityContributionPR extends ExternalScholarsh
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(EntryType.EXTERNAL_CONTRIBUTION_PAYMENT, event, calculateTotalAmountToPay(
-                event, when), event.getPayedAmount(), event.calculateAmountToPay(when), event
-                .getDescriptionForEntryType(EntryType.EXTERNAL_CONTRIBUTION_PAYMENT), event.calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(EntryType.EXTERNAL_CONTRIBUTION_PAYMENT, event,
+                calculateTotalAmountToPay(event, when), event.getPayedAmount(), event.calculateAmountToPay(when),
+                event.getDescriptionForEntryType(EntryType.EXTERNAL_CONTRIBUTION_PAYMENT), event.calculateAmountToPay(when)));
     }
 
     @Override
@@ -71,7 +71,8 @@ public class ExternalScholarshipGratuityContributionPR extends ExternalScholarsh
             Account fromAccount, Account toAccount, AccountingTransactionDetailDTO transactionDetail) {
 
         if (entryDTOs.size() != 1) {
-            throw new DomainException("error.accounting.postingRules.gratuity.GratuityContributionPR.invalid.number.of.entryDTOs");
+            throw new DomainException(
+                    "error.accounting.postingRules.gratuity.GratuityContributionPR.invalid.number.of.entryDTOs");
         }
 
         return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount,

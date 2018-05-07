@@ -94,8 +94,8 @@ public class SeniorStatuteSpecialSeasonEnrolmentScope extends CurricularRuleNotP
             SeniorStatuteSpecialSeasonEnrolmentScope seniorStatuteSpecialSeasonEnrolmentScope =
                     (SeniorStatuteSpecialSeasonEnrolmentScope) obj;
 
-            return (enrolment == seniorStatuteSpecialSeasonEnrolmentScope.getEnrolment() && registration == seniorStatuteSpecialSeasonEnrolmentScope
-                    .getRegistration());
+            return (enrolment == seniorStatuteSpecialSeasonEnrolmentScope.getEnrolment()
+                    && registration == seniorStatuteSpecialSeasonEnrolmentScope.getRegistration());
         }
 
         return false;

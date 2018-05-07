@@ -86,9 +86,8 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
             if (phdIndividualProgramProcess.isConcluded()) {
                 LocalDate conclusionDate = phdIndividualProgramProcess.getThesisProcess().getConclusionDate();
 
-                if (conclusionDate == null
-                        || (conclusionDate.getYear() != civilYear && conclusionDate.getYear() != civilYear - 1 && conclusionDate
-                                .getYear() != civilYear + 1)) {
+                if (conclusionDate == null || (conclusionDate.getYear() != civilYear && conclusionDate.getYear() != civilYear - 1
+                        && conclusionDate.getYear() != civilYear + 1)) {
                     continue;
                 }
             }
@@ -201,9 +200,8 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
             return;
         }
 
-        YearMonthDay registrationConclusionDate =
-                registration != null ? registration.getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                        .getConclusionDate() : null;
+        YearMonthDay registrationConclusionDate = registration != null ? registration.getLastStudentCurricularPlan()
+                .getCycle(CycleType.THIRD_CYCLE).getConclusionDate() : null;
 
         if (registration != null && registrationConclusionDate == null) {
             registrationConclusionDate =
@@ -221,10 +219,8 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
         // Média do Ciclo
         String grade = concluded ? process.getFinalGrade().getLocalizedName() : "n/a";
         if (concluded && registration != null && registration.isConcluded()) {
-            grade +=
-                    " "
-                            + registration.getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                                    .getCurriculum(registrationConclusionDate.toDateTimeAtMidnight()).getRawGrade().getValue();
+            grade += " " + registration.getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
+                    .getCurriculum(registrationConclusionDate.toDateTimeAtMidnight()).getRawGrade().getValue();
         }
         row.setCell(grade);
 
@@ -250,13 +246,15 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
         row.setCell(graduate.getIdentificationDocumentSeriesNumberValue());
 
         // Nome
-        row.setCell(registration != null ? registration.getName() : process.getPerson() != null ? process.getPerson().getName() : "n/a");
+        row.setCell(registration != null ? registration
+                .getName() : process.getPerson() != null ? process.getPerson().getName() : "n/a");
 
         // Sexo
         row.setCell(graduate.getGender().toString());
 
         // Data de Nascimento
-        row.setCell(graduate.getDateOfBirthYearMonthDay() != null ? graduate.getDateOfBirthYearMonthDay().toString("dd-MM-yyyy") : "n/a");
+        row.setCell(graduate.getDateOfBirthYearMonthDay() != null ? graduate.getDateOfBirthYearMonthDay()
+                .toString("dd-MM-yyyy") : "n/a");
 
         // País de Nascimento
         row.setCell(graduate.getCountryOfBirth() != null ? graduate.getCountryOfBirth().getName() : "n/a");
@@ -303,8 +301,8 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
         row.setCell(personalInformationBean.getDegreeDesignation());
 
         // Estado Civil
-        row.setCell(personalInformationBean.getMaritalStatus() != null ? personalInformationBean.getMaritalStatus().toString() : process
-                .getPerson().getMaritalStatus().toString());
+        row.setCell(personalInformationBean.getMaritalStatus() != null ? personalInformationBean.getMaritalStatus()
+                .toString() : process.getPerson().getMaritalStatus().toString());
 
         // País de Residência Permanente
         if (personalInformationBean.getCountryOfResidence() != null) {
@@ -610,8 +608,8 @@ public class RaidesPhdReportFile extends RaidesPhdReportFile_Base {
         }
 
         // Tipo de Acordo (AFA, AM, ERASMUS, etc)
-        row.setCell(registration != null ? registration.getRegistrationProtocol() != null ? registration
-                .getRegistrationProtocol().getCode() : "" : "");
+        row.setCell(registration != null ? registration.getRegistrationProtocol() != null ? registration.getRegistrationProtocol()
+                .getCode() : "" : "");
 
         // Data de Apresentação Pública da CAT
         if (process.getSeminarProcess() != null && process.getSeminarProcess().getPresentationDate() != null) {

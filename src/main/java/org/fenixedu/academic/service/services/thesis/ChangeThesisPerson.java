@@ -30,8 +30,8 @@ import pt.ist.fenixframework.Atomic;
 public class ChangeThesisPerson {
 
     public static enum PersonTarget {
-        orientator(ThesisParticipationType.ORIENTATOR), coorientator(ThesisParticipationType.COORIENTATOR), president(
-                ThesisParticipationType.PRESIDENT), vowel(ThesisParticipationType.VOWEL);
+        orientator(ThesisParticipationType.ORIENTATOR), coorientator(ThesisParticipationType.COORIENTATOR),
+        president(ThesisParticipationType.PRESIDENT), vowel(ThesisParticipationType.VOWEL);
 
         private ThesisParticipationType type;
 

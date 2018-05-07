@@ -29,14 +29,13 @@ import org.fenixedu.academic.service.services.commons.AbstractSearchObjects;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.presentationTier.renderers.autoCompleteProvider.AutoCompleteProvider;
 
-public class SearchExternalScholarshipPartySocialSecurityNumber extends AbstractSearchObjects<PartySocialSecurityNumber> implements
-        AutoCompleteProvider<PartySocialSecurityNumber> {
+public class SearchExternalScholarshipPartySocialSecurityNumber extends AbstractSearchObjects<PartySocialSecurityNumber>
+        implements AutoCompleteProvider<PartySocialSecurityNumber> {
 
     @Override
     public Collection<PartySocialSecurityNumber> getSearchResults(Map<String, String> argsMap, String value, int maxCount) {
-        return process(Bennu.getInstance().getExternalScholarshipProviderSet().stream().map
-                        (Party::getPartySocialSecurityNumber).filter(Objects::nonNull).collect(Collectors.toSet()), value, maxCount,
-                argsMap);
+        return process(Bennu.getInstance().getExternalScholarshipProviderSet().stream().map(Party::getPartySocialSecurityNumber)
+                .filter(Objects::nonNull).collect(Collectors.toSet()), value, maxCount, argsMap);
     }
 
 }

@@ -40,7 +40,8 @@ public class ScheduleFirstThesisMeeting extends PhdMeetingSchedulingActivity {
     @Override
     protected void activityPreConditions(PhdMeetingSchedulingProcess process, User userView) {
 
-        if (!process.getThesisProcess().getActiveState().equals(PhdThesisProcessStateType.WAITING_FOR_THESIS_MEETING_SCHEDULING)) {
+        if (!process.getThesisProcess().getActiveState()
+                .equals(PhdThesisProcessStateType.WAITING_FOR_THESIS_MEETING_SCHEDULING)) {
             throw new PreConditionNotValidException();
         }
 
@@ -130,7 +131,8 @@ public class ScheduleFirstThesisMeeting extends PhdMeetingSchedulingActivity {
         participant.addAccessType(PhdProcessAccessType.JURY_REVIEW_DOCUMENTS_DOWNLOAD);
     }
 
-    private void sendAlertToJuryElement(PhdIndividualProgramProcess process, PhdParticipant participant, PhdThesisProcessBean bean) {
+    private void sendAlertToJuryElement(PhdIndividualProgramProcess process, PhdParticipant participant,
+            PhdThesisProcessBean bean) {
         final AlertMessage subject = AlertMessage.create(bean.getMailSubject()).isKey(false).withPrefix(false);
         final AlertMessage body = AlertMessage.create(buildBody(process, participant, bean)).isKey(false).withPrefix(false);
 

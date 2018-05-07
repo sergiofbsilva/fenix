@@ -168,8 +168,9 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
     public Boolean getCanView() {
         DepartmentUnit selectedDepartmentUnit = getSelectedDepartmentUnit();
         if (selectedDepartmentUnit == null) {
-            return (this.getPersonDepartment() != null && this.getPersonDepartment().getCompetenceCourseMembersGroup() != null) ? this
-                    .getPersonDepartment().getCompetenceCourseMembersGroup().isMember(this.getUserView()) : false;
+            return (this.getPersonDepartment() != null
+                    && this.getPersonDepartment().getCompetenceCourseMembersGroup() != null) ? this.getPersonDepartment()
+                            .getCompetenceCourseMembersGroup().isMember(this.getUserView()) : false;
         } else {
             return selectedDepartmentUnit.getDepartment().getCompetenceCourseMembersGroup() != null ? selectedDepartmentUnit
                     .getDepartment().getCompetenceCourseMembersGroup().isMember(getUserView()) : false;
@@ -247,9 +248,8 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
         Group competenceCoursesManagementGroup = getSelectedDepartmentUnit().getDepartment().getCompetenceCourseMembersGroup();
 
         if (competenceCoursesManagementGroup != null) {
-            competenceCoursesManagementGroup.getMembers().forEach(
-                    user -> result.add(new SelectItem(user.getExternalId(), user.getPerson().getName() + " ("
-                            + user.getUsername() + ")")));
+            competenceCoursesManagementGroup.getMembers().forEach(user -> result
+                    .add(new SelectItem(user.getExternalId(), user.getPerson().getName() + " (" + user.getUsername() + ")")));
         }
 
         return result;
@@ -390,8 +390,8 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
         if (StringUtils.isEmpty((String) getViewState().getAttribute("competenceCourseLevel"))) {
             if (getCompetenceCourse() != null) {
                 if (getCompetenceCourse().getCompetenceCourseLevel(getAssociatedExecutionPeriod()) != null) {
-                    setCompetenceCourseLevel(getCompetenceCourse().getCompetenceCourseLevel(getAssociatedExecutionPeriod())
-                            .getName());
+                    setCompetenceCourseLevel(
+                            getCompetenceCourse().getCompetenceCourseLevel(getAssociatedExecutionPeriod()).getName());
                 }
             }
         }
@@ -546,7 +546,8 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
     }
 
     public String getCompetenceCourseID() {
-        return (competenceCourseID == null) ? (competenceCourseID = getAndHoldStringParameter("competenceCourseID")) : competenceCourseID;
+        return (competenceCourseID == null) ? (competenceCourseID =
+                getAndHoldStringParameter("competenceCourseID")) : competenceCourseID;
     }
 
     public void setCompetenceCourseID(String competenceCourseID) {
@@ -751,8 +752,9 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
     }
 
     private List<BibliographicReference> getBibliographicReferences() {
-        return (getCompetenceCourse().getBibliographicReferences(getAssociatedExecutionPeriod()) == null) ? null : getCompetenceCourse()
-                .getBibliographicReferences(getAssociatedExecutionPeriod()).getBibliographicReferencesList();
+        return (getCompetenceCourse()
+                .getBibliographicReferences(getAssociatedExecutionPeriod()) == null) ? null : getCompetenceCourse()
+                        .getBibliographicReferences(getAssociatedExecutionPeriod()).getBibliographicReferencesList();
     }
 
     public int getBibliographicReferencesCount() {
@@ -802,10 +804,9 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
 
             if (valid) {
 
-                final CompetenceCourse competenceCourse =
-                        CreateCompetenceCourse.run(getName(), getNameEn(), null, getBasic(), RegimeType.SEMESTRIAL,
-                                getEnumCompetenceCourseLevel(), getEnumCompetenceCourseType(), getCompetenceCourseGroupUnitID(),
-                                getExecutionSemester(), getCode());
+                final CompetenceCourse competenceCourse = CreateCompetenceCourse.run(getName(), getNameEn(), null, getBasic(),
+                        RegimeType.SEMESTRIAL, getEnumCompetenceCourseLevel(), getEnumCompetenceCourseType(),
+                        getCompetenceCourseGroupUnitID(), getExecutionSemester(), getCode());
                 setCompetenceCourse(competenceCourse);
                 return "setCompetenceCourseLoad";
             }
@@ -992,8 +993,8 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
 
     public String changeCompetenceCourseState() {
         try {
-            CurricularStage changed =
-                    (getCompetenceCourse().getCurricularStage().equals(CurricularStage.PUBLISHED) ? CurricularStage.APPROVED : CurricularStage.PUBLISHED);
+            CurricularStage changed = (getCompetenceCourse().getCurricularStage()
+                    .equals(CurricularStage.PUBLISHED) ? CurricularStage.APPROVED : CurricularStage.PUBLISHED);
             EditCompetenceCourse.runEditCompetenceCourse(getCompetenceCourseID(), changed);
             return "";
         } catch (NotAuthorizedException e) {
@@ -1193,9 +1194,8 @@ public class CompetenceCourseManagementBackingBean extends FenixBackingBean {
         ExecutionSemester currentSemester = ExecutionSemester.readActualExecutionSemester();
         if ((executionSemesterID == null) && (getCompetenceCourse() != null)) {
             if (getCompetenceCourse().getCompetenceCourseInformationsSet().size() == 1) {
-                executionSemesterID =
-                        getCompetenceCourse().getCompetenceCourseInformationsSet().iterator().next().getExecutionPeriod()
-                                .getExternalId();
+                executionSemesterID = getCompetenceCourse().getCompetenceCourseInformationsSet().iterator().next()
+                        .getExecutionPeriod().getExternalId();
             }
         }
         if (executionSemesterID == null) {

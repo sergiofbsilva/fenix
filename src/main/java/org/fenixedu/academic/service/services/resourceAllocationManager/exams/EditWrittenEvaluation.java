@@ -91,8 +91,8 @@ public class EditWrittenEvaluation {
             roomsToAssociate = readRooms(roomIDs);
         }
 
-        Signal.emit("academic.writtenevaluation.edited", new EditWrittenEvaluationEvent(writtenEvaluation, writtenEvaluationDate,
-                writtenEvaluationStartTime));
+        Signal.emit("academic.writtenevaluation.edited",
+                new EditWrittenEvaluationEvent(writtenEvaluation, writtenEvaluationDate, writtenEvaluationStartTime));
 
         final List<Space> previousRooms = writtenEvaluation.getAssociatedRooms();
 

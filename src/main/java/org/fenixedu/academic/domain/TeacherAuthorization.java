@@ -44,8 +44,8 @@ public class TeacherAuthorization extends TeacherAuthorization_Base implements C
         setAuthorizer(Authenticate.getUser());
     }
 
-    public static TeacherAuthorization createOrUpdate(Teacher teacher, Department department,
-            ExecutionSemester executionSemester, TeacherCategory teacherCategory, Boolean contracted, Double lessonHours) {
+    public static TeacherAuthorization createOrUpdate(Teacher teacher, Department department, ExecutionSemester executionSemester,
+            TeacherCategory teacherCategory, Boolean contracted, Double lessonHours) {
         Objects.requireNonNull(teacher);
         Objects.requireNonNull(department);
         Objects.requireNonNull(executionSemester);

@@ -45,7 +45,8 @@ public class EctsDegreeByCurricularYearConversionTable extends EctsDegreeByCurri
     }
 
     @Atomic
-    public static void createConversionTable(Degree degree, AcademicInterval year, CurricularYear curricularYear, String[] table) {
+    public static void createConversionTable(Degree degree, AcademicInterval year, CurricularYear curricularYear,
+            String[] table) {
         EctsDegreeByCurricularYearConversionTable conversion =
                 EctsTableIndex.readOrCreateByYear(year).getEnrolmentTableBy(degree, curricularYear);
         EctsComparabilityTable ectsTable = EctsComparabilityTable.fromStringArray(table);

@@ -146,8 +146,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 @StrutsFunctionality(app = AcademicAdminPhdApp.class, path = "phd-processes", titleKey = "label.phd.manageProcesses",
         accessGroup = "academic(MANAGE_PHD_PROCESSES)")
 @Mapping(path = "/phdIndividualProgramProcess", module = "academicAdministration")
-@Forwards({
-        @Forward(name = "manageProcesses", path = "/phd/academicAdminOffice/manageProcesses.jsp"),
+@Forwards({ @Forward(name = "manageProcesses", path = "/phd/academicAdminOffice/manageProcesses.jsp"),
         @Forward(name = "viewProcess", path = "/phd/academicAdminOffice/viewProcess.jsp"),
         @Forward(name = "editPersonalInformation", path = "/phd/academicAdminOffice/editPersonalInformation.jsp"),
         @Forward(name = "editQualificationsAndJobsInformation",
@@ -282,8 +281,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         return mapping.findForward("editPersonalInformation");
     }
 
-    public ActionForward prepareEditPersonalInformationInvalid(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareEditPersonalInformationInvalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         request.setAttribute("editPersonalInformationBean", getEditPersonalInformationBean());
         return mapping.findForward("editPersonalInformation");
@@ -476,8 +475,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         request.setAttribute("assistantGuidings", getProcess(request).getAssistantGuidingsSet());
     }
 
-    public ActionForward prepareManageGuidingInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareManageGuidingInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         addGuidingsContextInformation(mapping, request);
         return mapping.findForward("manageGuidingInformation");
     }
@@ -699,9 +698,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         final PhdCustomAlertBean bean = getCreateCustomAlertBean();
         request.setAttribute("createCustomAlertBean", bean);
 
-        final ActionForward result =
-                executeActivity(AddCustomAlert.class, bean, request, mapping, "createCustomAlert", "manageAlerts",
-                        "message.alert.create.with.success");
+        final ActionForward result = executeActivity(AddCustomAlert.class, bean, request, mapping, "createCustomAlert",
+                "manageAlerts", "message.alert.create.with.success");
 
         request.setAttribute("alerts", getAlertsToShow(request));
 
@@ -715,9 +713,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
     public ActionForward deleteCustomAlert(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
 
-        final ActionForward result =
-                executeActivity(DeleteCustomAlert.class, getAlert(request), request, mapping, "manageAlerts", "manageAlerts",
-                        "message.alert.deleted.with.success");
+        final ActionForward result = executeActivity(DeleteCustomAlert.class, getAlert(request), request, mapping, "manageAlerts",
+                "manageAlerts", "message.alert.deleted.with.success");
 
         request.setAttribute("alerts", getAlertsToShow(request));
 
@@ -1131,8 +1128,7 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
             return mapping.findForward("editWhenStartedStudies");
         }
 
-        return redirect(
-                String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s", process.getExternalId()),
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s", process.getExternalId()),
                 request);
     }
 
@@ -1144,7 +1140,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
             HttpServletResponse response) throws IOException {
 
         final PhdSchoolRegistrationDeclarationDocument report = new PhdSchoolRegistrationDeclarationDocument(getProcess(request));
-        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf", ReportsUtils.generateReport(report).getData());
+        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf",
+                ReportsUtils.generateReport(report).getData());
         return null;
     }
 
@@ -1162,8 +1159,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
     public ActionForward savePhdConfiguration(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
         final PhdIndividualProgramProcess process = getProcess(request);
-        PhdConfigurationIndividualProgramProcessBean bean =
-                (PhdConfigurationIndividualProgramProcessBean) getObjectFromViewState("phdConfigurationIndividualProgramProcessBean");
+        PhdConfigurationIndividualProgramProcessBean bean = (PhdConfigurationIndividualProgramProcessBean) getObjectFromViewState(
+                "phdConfigurationIndividualProgramProcessBean");
 
         ExecuteProcessActivity.run(process, ConfigurePhdIndividualProgramProcess.class, bean);
         return viewProcess(mapping, form, request, response);
@@ -1349,7 +1346,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
 
     private PhdMigrationIndividualProcessData getMigrationProcessData(Integer migrationId) {
         for (final PhdMigrationProcess migrationProcess : Bennu.getInstance().getPhdMigrationProcessesSet()) {
-            for (final PhdMigrationIndividualProcessData processData : migrationProcess.getPhdMigrationIndividualProcessDataSet()) {
+            for (final PhdMigrationIndividualProcessData processData : migrationProcess
+                    .getPhdMigrationIndividualProcessDataSet()) {
                 if (processData.getNumber().equals(migrationId)) {
                     return processData;
                 }
@@ -1390,7 +1388,7 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         predicate.add(new Predicate<PhdMigrationIndividualProcessData>() {
             @Override
             public boolean test(PhdMigrationIndividualProcessData process) {
-            	final PhdProgram program = process.getProcessBean().getPhdProgram();
+                final PhdProgram program = process.getProcessBean().getPhdProgram();
                 return AcademicAccessRule
                         .getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES, Authenticate.getUser())
                         .anyMatch(p -> p == program);
@@ -1637,8 +1635,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
 
     // Upload guidance acceptance document
 
-    public ActionForward prepareUploadGuidanceAcceptanceLetter(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareUploadGuidanceAcceptanceLetter(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         PhdIndividualProgramProcess process = getDomainObject(request, "processId");
         PhdParticipant guider = getDomainObject(request, "guidingId");
 
@@ -1653,8 +1651,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         return mapping.findForward("uploadGuidanceAcceptanceDocument");
     }
 
-    public ActionForward uploadGuidanceAcceptanceLetterInvalid(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward uploadGuidanceAcceptanceLetterInvalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return prepareUploadGuidanceAcceptanceLetter(mapping, form, request, response);
     }
 

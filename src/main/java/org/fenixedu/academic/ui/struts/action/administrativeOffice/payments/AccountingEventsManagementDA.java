@@ -43,22 +43,23 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/accountingEventsManagement", module = "academicAdministration", functionality = SearchForStudentsDA.class)
-@Forwards({
-        @Forward(name = "chooseEventType", path = "/academicAdminOffice/accountingEventsManagement/chooseEventType.jsp"),
+@Forwards({ @Forward(name = "chooseEventType", path = "/academicAdminOffice/accountingEventsManagement/chooseEventType.jsp"),
         @Forward(name = "createGratuityEvent", path = "/academicAdminOffice/accountingEventsManagement/createGratuityEvent.jsp"),
         @Forward(name = "createAdministrativeOfficeFeeAndInsuranceEvent",
                 path = "/academicAdminOffice/accountingEventsManagement/createAdministrativeOfficeFeeAndInsuranceEvent.jsp"),
-        @Forward(name = "createInsuranceEvent", path = "/academicAdminOffice/accountingEventsManagement/createInsuranceEvent.jsp"),
+        @Forward(name = "createInsuranceEvent",
+                path = "/academicAdminOffice/accountingEventsManagement/createInsuranceEvent.jsp"),
         @Forward(name = "createEnrolmentOutOfPeriodEvent",
                 path = "/academicAdminOffice/accountingEventsManagement/createEnrolmentOutOfPeriodEvent.jsp"),
         @Forward(name = "createDfaRegistrationEvent",
                 path = "/academicAdminOffice/accountingEventsManagement/createDfaRegistrationEvent.jsp") })
 public class AccountingEventsManagementDA extends FenixDispatchAction {
 
-    private static List<EventType> supportedEventTypes = Arrays.asList(EventType.GRATUITY,
-            EventType.ADMINISTRATIVE_OFFICE_FEE_INSURANCE, EventType.ENROLMENT_OUT_OF_PERIOD);
+    private static List<EventType> supportedEventTypes =
+            Arrays.asList(EventType.GRATUITY, EventType.ADMINISTRATIVE_OFFICE_FEE_INSURANCE, EventType.ENROLMENT_OUT_OF_PERIOD);
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         StudentCurricularPlan studentCurricularPlan = getStudentCurricularPlan(request);
 
@@ -185,7 +186,8 @@ public class AccountingEventsManagementDA extends FenixDispatchAction {
 
     }
 
-    private ActionForward prepareCreateAdministrativeOfficeFeeAndInsuranceEvent(ActionMapping mapping, HttpServletRequest request) {
+    private ActionForward prepareCreateAdministrativeOfficeFeeAndInsuranceEvent(ActionMapping mapping,
+            HttpServletRequest request) {
         request.setAttribute("accountingEventCreateBean", new AccountingEventCreateBean(getStudentCurricularPlan(request)));
         return mapping.findForward("createAdministrativeOfficeFeeAndInsuranceEvent");
     }
@@ -223,8 +225,8 @@ public class AccountingEventsManagementDA extends FenixDispatchAction {
     }
 
     private ActionForward prepareCreateEnrolmentOutOfPeriod(ActionMapping mapping, HttpServletRequest request) {
-        request.setAttribute("accountingEventCreateBean", new EnrolmentOutOfPeriodEventCreateBean(
-                getStudentCurricularPlan(request)));
+        request.setAttribute("accountingEventCreateBean",
+                new EnrolmentOutOfPeriodEventCreateBean(getStudentCurricularPlan(request)));
         return mapping.findForward("createEnrolmentOutOfPeriodEvent");
     }
 

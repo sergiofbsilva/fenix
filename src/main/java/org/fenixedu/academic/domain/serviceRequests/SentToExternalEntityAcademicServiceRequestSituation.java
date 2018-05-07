@@ -22,7 +22,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.dto.serviceRequests.AcademicServiceRequestBean;
 import org.joda.time.DateTime;
 
-public class SentToExternalEntityAcademicServiceRequestSituation extends SentToExternalEntityAcademicServiceRequestSituation_Base {
+public class SentToExternalEntityAcademicServiceRequestSituation
+        extends SentToExternalEntityAcademicServiceRequestSituation_Base {
 
     private SentToExternalEntityAcademicServiceRequestSituation() {
         super();
@@ -57,8 +58,8 @@ public class SentToExternalEntityAcademicServiceRequestSituation extends SentToE
             throw new DomainException("error.serviceRequests.SentToUnitAcademicServiceRequestSituation.invalid.situation.type");
         }
 
-        if (academicServiceRequestBean.getFinalSituationDate().isBefore(
-                academicServiceRequest.getActiveSituation().getSituationDate())) {
+        if (academicServiceRequestBean.getFinalSituationDate()
+                .isBefore(academicServiceRequest.getActiveSituation().getSituationDate())) {
             throw new DomainException("error.serviceRequests.SentToUnitAcademicServiceRequestSituation.invalid.situation.date");
         }
     }

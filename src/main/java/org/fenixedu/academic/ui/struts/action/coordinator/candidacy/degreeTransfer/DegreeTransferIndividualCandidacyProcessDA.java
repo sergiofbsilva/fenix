@@ -39,11 +39,12 @@ import pt.ist.fenixframework.FenixFramework;
 @Forwards({
         @Forward(name = "intro",
                 path = "/coordinator/caseHandlingDegreeTransferCandidacyProcess.do?method=listProcessAllowedActivities"),
-        @Forward(name = "introduce-candidacy-result", path = "/coordinator/candidacy/degreeTransfer/introduceCandidacyResult.jsp"),
+        @Forward(name = "introduce-candidacy-result",
+                path = "/coordinator/candidacy/degreeTransfer/introduceCandidacyResult.jsp"),
         @Forward(name = "list-allowed-activities",
                 path = "/coordinator/candidacy/degreeTransfer/listIndividualCandidacyActivities.jsp") })
-public class DegreeTransferIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeTransfer.DegreeTransferIndividualCandidacyProcessDA {
+public class DegreeTransferIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeTransfer.DegreeTransferIndividualCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -67,8 +68,8 @@ public class DegreeTransferIndividualCandidacyProcessDA extends
             HttpServletRequest request, HttpServletResponse response) {
         final String degreeCurricularPlanOID = DegreeCoordinatorIndex.findDegreeCurricularPlanID(request);
         final DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(degreeCurricularPlanOID);
-        request.setAttribute("individualCandidacyResultBean", new DegreeTransferIndividualCandidacyResultBean(
-                getProcess(request), degreeCurricularPlan.getDegree()));
+        request.setAttribute("individualCandidacyResultBean",
+                new DegreeTransferIndividualCandidacyResultBean(getProcess(request), degreeCurricularPlan.getDegree()));
         return mapping.findForward("introduce-candidacy-result");
     }
 }

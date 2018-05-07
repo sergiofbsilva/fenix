@@ -56,14 +56,14 @@ abstract public class CommonPhdThesisProcessDA extends PhdProcessDA {
     }
 
     protected ActionForward viewIndividualProgramProcess(HttpServletRequest request, final PhdThesisProcess process) {
-        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s", process
-                .getIndividualProgramProcess().getExternalId()), request);
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s",
+                process.getIndividualProgramProcess().getExternalId()), request);
     }
 
     // jury report feedback operations
 
-    public ActionForward prepareJuryReportFeedbackUpload(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareJuryReportFeedbackUpload(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdThesisProcessBean bean = new PhdThesisProcessBean();
         bean.addDocument(new PhdProgramDocumentUploadBean(PhdIndividualProgramDocumentType.JURY_REPORT_FEEDBACK));
@@ -75,8 +75,8 @@ abstract public class CommonPhdThesisProcessDA extends PhdProcessDA {
         return mapping.findForward("juryReporterFeedbackUpload");
     }
 
-    public ActionForward juryReportFeedbackUploadInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward juryReportFeedbackUploadInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("thesisProcessBean", getThesisProcessBean());
         request.setAttribute("thesisDocuments", getProcess(request).getThesisDocumentsToFeedback());
         return mapping.findForward("juryReporterFeedbackUpload");
@@ -166,8 +166,8 @@ abstract public class CommonPhdThesisProcessDA extends PhdProcessDA {
 
     private void setDefaultMeetingMailInformation(final PhdThesisProcessBean bean, final PhdThesisProcess thesisProcess) {
         final PhdIndividualProgramProcess process = thesisProcess.getIndividualProgramProcess();
-        bean.setMailSubject(AlertService
-                .getSubjectPrefixed(process, "message.phd.thesis.schedule.thesis.meeting.default.subject"));
+        bean.setMailSubject(
+                AlertService.getSubjectPrefixed(process, "message.phd.thesis.schedule.thesis.meeting.default.subject"));
         bean.setMailBody(AlertService.getBodyText(process, "message.phd.thesis.schedule.thesis.meeting.default.body"));
     }
 

@@ -69,10 +69,9 @@ public class RegistrationConclusionProcess {
 
             if (conclusionBean.hasEnteredAverageGrade()) {
                 checkGrade(conclusionBean.getEnteredAverageGrade(), gradeScale);
-                rawGrade =
-                        Grade.createGrade(
-                                new BigDecimal(conclusionBean.getEnteredAverageGrade()).setScale(2, RoundingMode.HALF_UP)
-                                        .toString(), gradeScale);
+                rawGrade = Grade.createGrade(
+                        new BigDecimal(conclusionBean.getEnteredAverageGrade()).setScale(2, RoundingMode.HALF_UP).toString(),
+                        gradeScale);
             }
 
             if (conclusionBean.hasEnteredDescriptiveGrade()) {
@@ -87,8 +86,8 @@ public class RegistrationConclusionProcess {
 
     private static void checkGrade(String value, GradeScale gradeScale) {
         if (!gradeScale.belongsTo(value)) {
-            throw new DomainException("error.RegistrationConclusionProcess.final.average.is.invalid", value, BundleUtil
-                    .getLocalizedString(Bundle.ENUMERATION, gradeScale.name()).getContent());
+            throw new DomainException("error.RegistrationConclusionProcess.final.average.is.invalid", value,
+                    BundleUtil.getLocalizedString(Bundle.ENUMERATION, gradeScale.name()).getContent());
         }
     }
 

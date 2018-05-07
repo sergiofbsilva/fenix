@@ -138,8 +138,8 @@ public class NotUpdatedAlumniInfoForSpecificDaysGroup extends FenixGroup {
             if (checkFormationNotUpdated) {
                 for (Formation formation : alumni.getFormations()) {
                     if (formation.getLastModificationDateDateTime() == null
-                            || (formation.getLastModificationDateDateTime() != null && notRecentlyUpdated(now,
-                                    formation.getLastModificationDateDateTime()))) {
+                            || (formation.getLastModificationDateDateTime() != null
+                                    && notRecentlyUpdated(now, formation.getLastModificationDateDateTime()))) {
                         User user = alumni.getStudent().getPerson().getUser();
                         if (user != null) {
                             users.add(user);
@@ -173,9 +173,8 @@ public class NotUpdatedAlumniInfoForSpecificDaysGroup extends FenixGroup {
         }
         if (checkFormationNotUpdated) {
             for (Formation formation : user.getPerson().getFormations()) {
-                if (formation.getLastModificationDateDateTime() == null
-                        || (formation.getLastModificationDateDateTime() != null && notRecentlyUpdated(now,
-                                formation.getLastModificationDateDateTime()))) {
+                if (formation.getLastModificationDateDateTime() == null || (formation.getLastModificationDateDateTime() != null
+                        && notRecentlyUpdated(now, formation.getLastModificationDateDateTime()))) {
                     return true;
                 }
             }

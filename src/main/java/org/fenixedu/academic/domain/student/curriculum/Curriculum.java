@@ -110,9 +110,8 @@ public class Curriculum implements Serializable, ICurriculum {
             if (approvedCredits.compareTo(BigDecimal.ZERO) == 0) {
                 curricularYear = Integer.valueOf(1);
             } else {
-                final BigDecimal ectsCreditsCurricularYear =
-                        curriculum.getSumEctsCredits().add(BigDecimal.valueOf(24))
-                                .divide(BigDecimal.valueOf(60), 2 * 2 + 1, RoundingMode.HALF_EVEN).add(BigDecimal.valueOf(1));
+                final BigDecimal ectsCreditsCurricularYear = curriculum.getSumEctsCredits().add(BigDecimal.valueOf(24))
+                        .divide(BigDecimal.valueOf(60), 2 * 2 + 1, RoundingMode.HALF_EVEN).add(BigDecimal.valueOf(1));
                 curricularYear = Math.min(ectsCreditsCurricularYear.intValue(), totalCurricularYears.intValue());
             }
 
@@ -139,9 +138,8 @@ public class Curriculum implements Serializable, ICurriculum {
             if (curriculum.getStudentCurricularPlan().getCycleCurriculumGroups().isEmpty()) {
                 return;
             }
-            CycleCurriculumGroup sgroup =
-                    Collections.min(curriculum.getStudentCurricularPlan().getCycleCurriculumGroups(),
-                            CycleCurriculumGroup.COMPARATOR_BY_CYCLE_TYPE_AND_ID);
+            CycleCurriculumGroup sgroup = Collections.min(curriculum.getStudentCurricularPlan().getCycleCurriculumGroups(),
+                    CycleCurriculumGroup.COMPARATOR_BY_CYCLE_TYPE_AND_ID);
             CycleType cycleIter = sgroup.getCycleType().getPrevious();
             while (cycleIter != null) {
                 if (curriculum.getStudentCurricularPlan().getDegreeCurricularPlan().getCycleCourseGroup(cycleIter) != null) {

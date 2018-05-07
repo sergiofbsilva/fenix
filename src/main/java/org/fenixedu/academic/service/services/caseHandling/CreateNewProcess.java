@@ -57,7 +57,8 @@ public class CreateNewProcess {
      * @return
      */
     @Atomic
-    public static Process run(Class<? extends Process> processClass, Object object, final List<Pair<Class<?>, Object>> activities) {
+    public static Process run(Class<? extends Process> processClass, Object object,
+            final List<Pair<Class<?>, Object>> activities) {
         final User userView = Authenticate.getUser();
         final Process process = Process.createNewProcess(userView, processClass, object);
 

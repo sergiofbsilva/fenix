@@ -36,9 +36,8 @@ import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/caseHandlingDegreeCandidacyForGraduatedPersonIndividualProcess", module = "coordinator",
         formBeanClass = FenixActionForm.class, functionality = DegreeCoordinatorIndex.class)
-@Forwards({
-        @Forward(name = "intro",
-                path = "/coordinator/caseHandlingDegreeCandidacyForGraduatedPersonProcess.do?method=listProcessAllowedActivities"),
+@Forwards({ @Forward(name = "intro",
+        path = "/coordinator/caseHandlingDegreeCandidacyForGraduatedPersonProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "introduce-candidacy-result",
                 path = "/coordinator/candidacy/graduatedPerson/introduceCandidacyResult.jsp"),
         @Forward(name = "list-allowed-activities",

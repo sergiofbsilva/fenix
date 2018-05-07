@@ -32,9 +32,8 @@ public class DegreeCurricularPlansProvider implements DataProvider {
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        final SortedSet<DegreeCurricularPlan> result =
-                new TreeSet<DegreeCurricularPlan>(
-                        DegreeCurricularPlan.DEGREE_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_EXECUTION_DEGREE_AND_DEGREE_CODE);
+        final SortedSet<DegreeCurricularPlan> result = new TreeSet<DegreeCurricularPlan>(
+                DegreeCurricularPlan.DEGREE_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_EXECUTION_DEGREE_AND_DEGREE_CODE);
 
         ExecutionDegreeListBean executionDegreeListBean = (ExecutionDegreeListBean) source;
         if (executionDegreeListBean.getDegree() != null) {

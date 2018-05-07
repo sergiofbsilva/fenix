@@ -64,8 +64,10 @@ import pt.ist.fenixframework.FenixFramework;
         input = "/editExecutionCourse.do?method=prepareEditECChooseExecDegreeAndCurYear&amp;page=0",
         formBean = "executionCourseForm", functionality = EditExecutionCourseDA.class)
 @Forwards({
-        @Forward(name = "editExecutionCourse", path = "/academicAdministration/executionCourseManagement/editExecutionCourse.jsp"),
-        @Forward(name = "viewExecutionCourse", path = "/academicAdministration/executionCourseManagement/viewExecutionCourse.jsp"),
+        @Forward(name = "editExecutionCourse",
+                path = "/academicAdministration/executionCourseManagement/editExecutionCourse.jsp"),
+        @Forward(name = "viewExecutionCourse",
+                path = "/academicAdministration/executionCourseManagement/viewExecutionCourse.jsp"),
         @Forward(name = "listExecutionCourseActions",
                 path = "/academicAdministration/executionCourseManagement/listExecutionCourseActions.jsp") })
 public class EditExecutionCourseDispatchAction extends FenixDispatchAction {
@@ -236,8 +238,8 @@ public class EditExecutionCourseDispatchAction extends FenixDispatchAction {
             infoExecutionCourse.setNome((String) editExecutionCourseForm.get("name"));
             infoExecutionCourse.setSigla((String) editExecutionCourseForm.get("code"));
             infoExecutionCourse.setComment((String) editExecutionCourseForm.get("comment"));
-            infoExecutionCourse.setAvailableGradeSubmission(Boolean.valueOf(editExecutionCourseForm
-                    .getString("availableGradeSubmission")));
+            infoExecutionCourse
+                    .setAvailableGradeSubmission(Boolean.valueOf(editExecutionCourseForm.getString("availableGradeSubmission")));
             infoExecutionCourse.setEntryPhase(EntryPhase.valueOf(editExecutionCourseForm.getString("entryPhase")));
 
         } catch (Exception e) {

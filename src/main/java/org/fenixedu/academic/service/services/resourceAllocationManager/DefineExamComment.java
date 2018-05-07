@@ -31,7 +31,8 @@ import pt.ist.fenixframework.FenixFramework;
 public class DefineExamComment {
 
     @Atomic
-    public static void run(String executionCourseInitials, String executionPeriodId, String comment) throws FenixServiceException {
+    public static void run(String executionCourseInitials, String executionPeriodId, String comment)
+            throws FenixServiceException {
         check(RolePredicates.RESOURCE_ALLOCATION_MANAGER_PREDICATE);
         final ExecutionSemester executionSemester = FenixFramework.getDomainObject(executionPeriodId);
         final ExecutionCourse executionCourse = executionSemester.getExecutionCourseByInitials(executionCourseInitials);

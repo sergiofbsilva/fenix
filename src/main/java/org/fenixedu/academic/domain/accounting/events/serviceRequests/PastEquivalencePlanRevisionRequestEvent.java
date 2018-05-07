@@ -28,8 +28,8 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.LabelFormatter;
 import org.fenixedu.academic.util.Money;
 
-public class PastEquivalencePlanRevisionRequestEvent extends PastEquivalencePlanRevisionRequestEvent_Base implements
-        IPastRequestEvent {
+public class PastEquivalencePlanRevisionRequestEvent extends PastEquivalencePlanRevisionRequestEvent_Base
+        implements IPastRequestEvent {
 
     protected PastEquivalencePlanRevisionRequestEvent() {
         super();

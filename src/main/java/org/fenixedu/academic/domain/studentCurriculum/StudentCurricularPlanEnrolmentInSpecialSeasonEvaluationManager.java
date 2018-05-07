@@ -92,9 +92,8 @@ public class StudentCurricularPlanEnrolmentInSpecialSeasonEvaluationManager exte
             throw new DomainException("error.StudentCurricularPlan.invalid.curricular.rule.level");
         }
 
-        final EnrolmentPreConditionResult result =
-                StudentCurricularPlanEnrolmentPreConditions.checkEnrolmentPeriodsForSpecialSeason(getStudentCurricularPlan(),
-                        getExecutionSemester());
+        final EnrolmentPreConditionResult result = StudentCurricularPlanEnrolmentPreConditions
+                .checkEnrolmentPeriodsForSpecialSeason(getStudentCurricularPlan(), getExecutionSemester());
 
         if (!result.isValid()) {
             throw new DomainException(result.message(), result.args());

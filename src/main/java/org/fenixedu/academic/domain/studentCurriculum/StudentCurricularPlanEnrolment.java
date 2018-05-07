@@ -239,9 +239,8 @@ abstract public class StudentCurricularPlanEnrolment {
             throw new DomainException("error.StudentCurricularPlan.invalid.curricular.rule.level");
         }
 
-        final EnrolmentPreConditionResult result =
-                StudentCurricularPlanEnrolmentPreConditions.checkEnrolmentPeriods(getStudentCurricularPlan(),
-                        getExecutionSemester());
+        final EnrolmentPreConditionResult result = StudentCurricularPlanEnrolmentPreConditions
+                .checkEnrolmentPeriods(getStudentCurricularPlan(), getExecutionSemester());
 
         if (!result.isValid()) {
             throw new DomainException(result.message(), result.args());
@@ -252,7 +251,8 @@ abstract public class StudentCurricularPlanEnrolment {
         throw new DomainException("error.invalid.user");
     }
 
-    private RuleResult evaluateDegreeModules(final Map<EnrolmentResultType, List<IDegreeModuleToEvaluate>> degreeModulesEnrolMap) {
+    private RuleResult evaluateDegreeModules(
+            final Map<EnrolmentResultType, List<IDegreeModuleToEvaluate>> degreeModulesEnrolMap) {
 
         RuleResult finalResult = RuleResult.createInitialTrue();
         final Map<IDegreeModuleToEvaluate, Set<ICurricularRule>> rulesToEvaluate = getRulesToEvaluate();
@@ -352,7 +352,7 @@ abstract public class StudentCurricularPlanEnrolment {
 
     // Old AcademicAdminOffice role check
     protected boolean isResponsiblePersonAllowedToEnrolStudents() {
-    	final Degree degree = getStudentCurricularPlan().getDegree();
+        final Degree degree = getStudentCurricularPlan().getDegree();
         return AcademicAccessRule
                 .getProgramsAccessibleToFunction(AcademicOperationType.STUDENT_ENROLMENTS, getResponsiblePerson().getUser())
                 .anyMatch(p -> p == degree);
@@ -396,6 +396,7 @@ abstract public class StudentCurricularPlanEnrolment {
 
     static private Supplier<EnrolmentManagerFactory> ENROLMENT_MANAGER_FACTORY = () -> new EnrolmentManagerFactory() {
 
+        @Override
         public StudentCurricularPlanEnrolment createManager(final EnrolmentContext enrolmentContext) {
 
             if (enrolmentContext.isNormal()) {

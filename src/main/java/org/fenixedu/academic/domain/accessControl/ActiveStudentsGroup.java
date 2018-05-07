@@ -42,9 +42,8 @@ public class ActiveStudentsGroup extends GroupStrategy {
 
     @Override
     public Stream<User> getMembers() {
-        return Stream.concat(new ActivePhdProcessesGroup().getMembers(),
-                Bennu.getInstance().getStudentsSet().stream().filter(Student::hasActiveRegistrations).map(Student::getPerson)
-                        .map(Person::getUser));
+        return Stream.concat(new ActivePhdProcessesGroup().getMembers(), Bennu.getInstance().getStudentsSet().stream()
+                .filter(Student::hasActiveRegistrations).map(Student::getPerson).map(Person::getUser));
     }
 
     @Override

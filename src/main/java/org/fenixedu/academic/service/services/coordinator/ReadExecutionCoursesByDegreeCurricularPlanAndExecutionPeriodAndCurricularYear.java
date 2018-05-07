@@ -89,8 +89,8 @@ public class ReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurr
 
     @Atomic
     public static List<ExecutionCourse> runReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurricularYear(
-            String degreeCurricularPlanID, String executionPeriodID, String curricularYearID) throws FenixServiceException,
-            NotAuthorizedException {
+            String degreeCurricularPlanID, String executionPeriodID, String curricularYearID)
+            throws FenixServiceException, NotAuthorizedException {
         try {
             DegreeCurricularPlanAuthorizationFilter.instance.execute(degreeCurricularPlanID);
             return serviceInstance.run(degreeCurricularPlanID, executionPeriodID, curricularYearID);

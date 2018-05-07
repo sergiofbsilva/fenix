@@ -97,7 +97,8 @@ public class MobilityApplicationPeriod extends MobilityApplicationPeriod_Base {
     }
 
     public MobilityApplicationProcess getMobilityApplicationProcess() {
-        return (MobilityApplicationProcess) (!getCandidacyProcessesSet().isEmpty() ? getCandidacyProcessesSet().iterator().next() : null);
+        return (MobilityApplicationProcess) (!getCandidacyProcessesSet().isEmpty() ? getCandidacyProcessesSet().iterator()
+                .next() : null);
     }
 
     @Override

@@ -79,8 +79,8 @@ import org.joda.time.YearMonthDay;
 @Deprecated
 public class SeparationCyclesManagement {
 
-    private static final Predicate<DegreeType> ACCEPTED_DEGREE_TYPES = DegreeType.oneOf(DegreeType::isBolonhaDegree,
-            DegreeType::isIntegratedMasterDegree);
+    private static final Predicate<DegreeType> ACCEPTED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isIntegratedMasterDegree);
 
     public SeparationCyclesManagement() {
     }
@@ -97,7 +97,8 @@ public class SeparationCyclesManagement {
         }
 
         if (!studentCurricularPlan.isActive() && !studentCurricularPlan.getRegistration().isConcluded()) {
-            throw new DomainException("error.SeparationCyclesManagement.not.active.or.concluded", studentCurricularPlan.getName());
+            throw new DomainException("error.SeparationCyclesManagement.not.active.or.concluded",
+                    studentCurricularPlan.getName());
         }
 
         if (studentCurricularPlan.isConclusionProcessed()) {
@@ -120,7 +121,8 @@ public class SeparationCyclesManagement {
 
         if (studentAlreadyHasNewRegistration(studentCurricularPlan)) {
             final DegreeCurricularPlan degreeCurricularPlan = secondCycle.getDegreeCurricularPlanOfDegreeModule();
-            throw new DomainException("error.SeparationCyclesManagement.already.has.registration", degreeCurricularPlan.getName());
+            throw new DomainException("error.SeparationCyclesManagement.already.has.registration",
+                    degreeCurricularPlan.getName());
         }
     }
 
@@ -249,9 +251,8 @@ public class SeparationCyclesManagement {
             return result;
         }
 
-        result =
-                StudentCurricularPlan.createWithEmptyStructure(registration, degreeCurricularPlan, cycleType,
-                        registration.getStartDate());
+        result = StudentCurricularPlan.createWithEmptyStructure(registration, degreeCurricularPlan, cycleType,
+                registration.getStartDate());
 
         // set ingression after create studentcurricularPlan
         registration.setIngressionType(IngressionType.findByPredicate(IngressionType::isDirectAccessFrom1stCycle).orElse(null));
@@ -313,7 +314,8 @@ public class SeparationCyclesManagement {
                 createSubstitutionForEnrolment((Enrolment) curriculumLine, parent);
             }
         } else if (curriculumLine.isDismissal()) {
-            if (curriculumLine.hasExecutionPeriod() && curriculumLine.getExecutionPeriod().isAfterOrEquals(getExecutionPeriod())) {
+            if (curriculumLine.hasExecutionPeriod()
+                    && curriculumLine.getExecutionPeriod().isAfterOrEquals(getExecutionPeriod())) {
                 moveDismissal((Dismissal) curriculumLine, parent);
             } else {
                 createDismissal((Dismissal) curriculumLine, parent);
@@ -383,7 +385,8 @@ public class SeparationCyclesManagement {
         return substitution;
     }
 
-    private Dismissal createNewDismissal(final Credits credits, final CurriculumGroup parent, final CurriculumLine curriculumLine) {
+    private Dismissal createNewDismissal(final Credits credits, final CurriculumGroup parent,
+            final CurriculumLine curriculumLine) {
 
         final CurricularCourse curricularCourse = curriculumLine.getCurricularCourse();
 
@@ -423,7 +426,8 @@ public class SeparationCyclesManagement {
         return line.hasCreatedBy();
     }
 
-    private boolean hasCurricularCourseToDismissal(final CurriculumGroup curriculumGroup, final CurricularCourse curricularCourse) {
+    private boolean hasCurricularCourseToDismissal(final CurriculumGroup curriculumGroup,
+            final CurricularCourse curricularCourse) {
         final CourseGroup degreeModule = curriculumGroup.getDegreeModule();
         for (final Context context : degreeModule.getChildContexts(CurricularCourse.class)) {
             final CurricularCourse each = (CurricularCourse) context.getChildDegreeModule();
@@ -569,9 +573,8 @@ public class SeparationCyclesManagement {
             stateDate = getExecutionYear().getEndDateYearMonthDay().toLocalDate();
         }
 
-        final RegistrationState state =
-                RegistrationState.createRegistrationState(oldStudentCurricularPlan.getRegistration(), null,
-                        stateDate.toDateTimeAtStartOfDay(), RegistrationStateType.CONCLUDED);
+        final RegistrationState state = RegistrationState.createRegistrationState(oldStudentCurricularPlan.getRegistration(),
+                null, stateDate.toDateTimeAtStartOfDay(), RegistrationStateType.CONCLUDED);
         state.setResponsiblePerson(null);
     }
 

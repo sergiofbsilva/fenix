@@ -37,13 +37,15 @@ public class PersistentProfessorshipsGroup extends PersistentProfessorshipsGroup
     }
 
     public static PersistentProfessorshipsGroup getInstance(Boolean externalAuthorization, AcademicPeriod period) {
-        return singleton(() -> select(externalAuthorization, period), () -> new PersistentProfessorshipsGroup(
-                externalAuthorization, period));
+        return singleton(() -> select(externalAuthorization, period),
+                () -> new PersistentProfessorshipsGroup(externalAuthorization, period));
     }
 
-    private static Optional<PersistentProfessorshipsGroup> select(final Boolean externalAuthorization, final AcademicPeriod period) {
-        return filter(PersistentProfessorshipsGroup.class).filter(
-                group -> group.getExternalAuthorizations().equals(externalAuthorization)
-                        && group.getOnCurrentPeriod().equals(period)).findAny();
+    private static Optional<PersistentProfessorshipsGroup> select(final Boolean externalAuthorization,
+            final AcademicPeriod period) {
+        return filter(PersistentProfessorshipsGroup.class)
+                .filter(group -> group.getExternalAuthorizations().equals(externalAuthorization)
+                        && group.getOnCurrentPeriod().equals(period))
+                .findAny();
     }
 }

@@ -31,8 +31,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.log.OptionalEnrolmentLog;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
 import org.fenixedu.academic.util.EnrolmentAction;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.security.Authenticate;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class OptionalEnrolment extends OptionalEnrolment_Base {
 
@@ -92,9 +92,8 @@ public class OptionalEnrolment extends OptionalEnrolment_Base {
 
     @Override
     final public boolean isEnroledInExecutionPeriod(CurricularCourse curricularCourse, ExecutionSemester executionSemester) {
-        return this.getExecutionPeriod().equals(executionSemester)
-                && (this.getCurricularCourse().equals(curricularCourse) || this.getOptionalCurricularCourse().equals(
-                        curricularCourse));
+        return this.getExecutionPeriod().equals(executionSemester) && (this.getCurricularCourse().equals(curricularCourse)
+                || this.getOptionalCurricularCourse().equals(curricularCourse));
     }
 
     @Override
@@ -105,23 +104,22 @@ public class OptionalEnrolment extends OptionalEnrolment_Base {
     @Override
     public LocalizedString getName() {
         final ExecutionSemester executionSemester = getExecutionPeriod();
-        return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT,
-                this.getOptionalCurricularCourse().getName(executionSemester)).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                this.getOptionalCurricularCourse().getNameEn(executionSemester));
+        return new LocalizedString()
+                .with(org.fenixedu.academic.util.LocaleUtils.PT, this.getOptionalCurricularCourse().getName(executionSemester))
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, this.getOptionalCurricularCourse().getNameEn(executionSemester));
     }
 
     @Override
     public LocalizedString getPresentationName() {
 
-        final String namePt =
-                String.format("%s (%s)", getOptionalCurricularCourse().getName(getExecutionPeriod()), getCurricularCourse()
-                        .getName(getExecutionPeriod()));
+        final String namePt = String.format("%s (%s)", getOptionalCurricularCourse().getName(getExecutionPeriod()),
+                getCurricularCourse().getName(getExecutionPeriod()));
 
-        final String nameEn =
-                String.format("%s (%s)", getOptionalCurricularCourse().getNameEn(getExecutionPeriod()), getCurricularCourse()
-                        .getNameEn(getExecutionPeriod()));
+        final String nameEn = String.format("%s (%s)", getOptionalCurricularCourse().getNameEn(getExecutionPeriod()),
+                getCurricularCourse().getNameEn(getExecutionPeriod()));
 
-        return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT, namePt).with(org.fenixedu.academic.util.LocaleUtils.EN, nameEn);
+        return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT, namePt)
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, nameEn);
     }
 
     @Override

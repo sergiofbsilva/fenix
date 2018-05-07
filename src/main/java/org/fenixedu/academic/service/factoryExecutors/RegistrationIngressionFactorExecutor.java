@@ -56,6 +56,7 @@ public class RegistrationIngressionFactorExecutor {
             return getRegistration();
         }
 
+        @Override
         public Registration getRegistration() {
             return this.registration;
         }
@@ -64,6 +65,7 @@ public class RegistrationIngressionFactorExecutor {
             return getRegistration() != null;
         }
 
+        @Override
         public void setRegistration(Registration registration) {
             this.registration = registration;
         }

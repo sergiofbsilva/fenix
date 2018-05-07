@@ -161,10 +161,9 @@ public class GratuitySituation extends GratuitySituation_Base {
     }
 
     private void createPaymentCode() {
-        GratuitySituationPaymentCode
-                .create(PaymentCodeType.PRE_BOLONHA_MASTER_DEGREE_TOTAL_GRATUITY, new YearMonthDay(),
-                        calculatePaymentCodeEndDate(), new Money(getRemainingValue()), new Money(getRemainingValue()),
-                        getStudent(), this);
+        GratuitySituationPaymentCode.create(PaymentCodeType.PRE_BOLONHA_MASTER_DEGREE_TOTAL_GRATUITY, new YearMonthDay(),
+                calculatePaymentCodeEndDate(), new Money(getRemainingValue()), new Money(getRemainingValue()), getStudent(),
+                this);
     }
 
     private Student getStudent() {
@@ -236,9 +235,8 @@ public class GratuitySituation extends GratuitySituation_Base {
             return true;
         } else {
             final int monthsToChargePenalty = calculateMonthsToChargePenalty(when);
-            final double penaltyAmount =
-                    new Money(calculateOriginalValueWithExemption()).multiply(PENALTY_PERCENTAGE)
-                            .multiply(new BigDecimal(monthsToChargePenalty)).getAmount().doubleValue();
+            final double penaltyAmount = new Money(calculateOriginalValueWithExemption()).multiply(PENALTY_PERCENTAGE)
+                    .multiply(new BigDecimal(monthsToChargePenalty)).getAmount().doubleValue();
 
             return calculatePayedAmountUntil(when) > (penaltyAmount + calculateOriginalValueWithExemption());
         }
@@ -298,12 +296,13 @@ public class GratuitySituation extends GratuitySituation_Base {
                 return lastPaymentPhaseDate;
             }
 
-            return lastPaymentPhaseDate.isAfter(getGratuityValues().getEndPaymentYearMonthDay()) ? lastPaymentPhaseDate : getGratuityValues()
-                    .getEndPaymentYearMonthDay();
+            return lastPaymentPhaseDate.isAfter(getGratuityValues()
+                    .getEndPaymentYearMonthDay()) ? lastPaymentPhaseDate : getGratuityValues().getEndPaymentYearMonthDay();
         }
 
         if (getGratuityValues().getEndPaymentYearMonthDay() == null) {
-            throw new DomainException("error.org.fenixedu.academic.domain.GratuitySituation.paymentMode.is.not.correctly.defined");
+            throw new DomainException(
+                    "error.org.fenixedu.academic.domain.GratuitySituation.paymentMode.is.not.correctly.defined");
         }
 
         return getGratuityValues().getEndPaymentYearMonthDay();
@@ -321,9 +320,8 @@ public class GratuitySituation extends GratuitySituation_Base {
     public GratuityTransaction processAmount(final Person responsiblePerson, final Money amount, final DateTime whenRegistered,
             final PaymentType paymentType) {
 
-        final GratuityTransaction transaction =
-                new GratuityTransaction(amount.getAmount(), whenRegistered, paymentType, TransactionType.GRATUITY_ADHOC_PAYMENT,
-                        responsiblePerson, getOrCreatePersonAccount(), this);
+        final GratuityTransaction transaction = new GratuityTransaction(amount.getAmount(), whenRegistered, paymentType,
+                TransactionType.GRATUITY_ADHOC_PAYMENT, responsiblePerson, getOrCreatePersonAccount(), this);
 
         updateRemainingValue();
 
@@ -332,8 +330,8 @@ public class GratuitySituation extends GratuitySituation_Base {
     }
 
     private PersonAccount getOrCreatePersonAccount() {
-        return getPerson().getAssociatedPersonAccount() != null ? getPerson().getAssociatedPersonAccount() : new PersonAccount(
-                getPerson());
+        return getPerson().getAssociatedPersonAccount() != null ? getPerson()
+                .getAssociatedPersonAccount() : new PersonAccount(getPerson());
     }
 
     @Override

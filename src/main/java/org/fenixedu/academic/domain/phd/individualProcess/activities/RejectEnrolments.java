@@ -54,8 +54,8 @@ public class RejectEnrolments extends PhdIndividualProgramProcessActivity {
         scp.enrol(bean.getSemester(), Collections.<IDegreeModuleToEvaluate> emptySet(),
                 getCurriculumModules(bean.getEnrolmentsToValidate()), CurricularRuleLevel.ENROLMENT_WITH_RULES);
 
-        AlertService.alertStudent(process, AlertMessage.create(bean.getMailSubject()).isKey(false), AlertMessage.create(mailBody)
-                .isKey(false));
+        AlertService.alertStudent(process, AlertMessage.create(bean.getMailSubject()).isKey(false),
+                AlertMessage.create(mailBody).isKey(false));
 
         // TODO: wich group should be used in academic office?
         // AlertService.alertAcademicOffice(process, permissionType,

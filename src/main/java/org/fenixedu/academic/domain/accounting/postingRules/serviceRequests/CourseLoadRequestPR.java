@@ -38,8 +38,8 @@ public class CourseLoadRequestPR extends CourseLoadRequestPR_Base {
     public CourseLoadRequestPR(final ServiceAgreementTemplate serviceAgreementTemplate, final DateTime startDate,
             final DateTime endDate, final Money certificateAmount, final Money amountFirstPage, final Money amountPerPage) {
         this();
-        super.init(EntryType.COURSE_LOAD_REQUEST_FEE, EventType.COURSE_LOAD_REQUEST, startDate, endDate,
-                serviceAgreementTemplate, certificateAmount, amountPerPage);
+        super.init(EntryType.COURSE_LOAD_REQUEST_FEE, EventType.COURSE_LOAD_REQUEST, startDate, endDate, serviceAgreementTemplate,
+                certificateAmount, amountPerPage);
         checkParameters(amountFirstPage);
         super.setAmountFirstPage(amountFirstPage);
     }
@@ -61,8 +61,8 @@ public class CourseLoadRequestPR extends CourseLoadRequestPR_Base {
         final CertificateRequestEvent requestEvent = (CertificateRequestEvent) event;
         // remove certificate page number
         int extraPages = requestEvent.getNumberOfPages().intValue() - 1;
-        return (extraPages <= 0) ? Money.ZERO : getAmountFirstPage().add(
-                getAmountPerPage().multiply(BigDecimal.valueOf(--extraPages)));
+        return (extraPages <= 0) ? Money.ZERO : getAmountFirstPage()
+                .add(getAmountPerPage().multiply(BigDecimal.valueOf(--extraPages)));
     }
 
     @Override

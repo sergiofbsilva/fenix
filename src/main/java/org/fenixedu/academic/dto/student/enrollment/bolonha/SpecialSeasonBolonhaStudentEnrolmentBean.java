@@ -33,8 +33,9 @@ public class SpecialSeasonBolonhaStudentEnrolmentBean extends BolonhaStudentEnro
 
     public SpecialSeasonBolonhaStudentEnrolmentBean(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionSemester executionSemester) {
-        super(studentCurricularPlan, executionSemester, new SpecialSeasonStudentCurriculumGroupBean(
-                studentCurricularPlan.getRoot(), executionSemester), CurricularRuleLevel.SPECIAL_SEASON_ENROLMENT);
+        super(studentCurricularPlan, executionSemester,
+                new SpecialSeasonStudentCurriculumGroupBean(studentCurricularPlan.getRoot(), executionSemester),
+                CurricularRuleLevel.SPECIAL_SEASON_ENROLMENT);
     }
 
     @Override

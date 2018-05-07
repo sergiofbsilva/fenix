@@ -48,9 +48,8 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
         super();
     }
 
-    public SpecializationDegreeGratuityPR(DateTime startDate, DateTime endDate,
-            ServiceAgreementTemplate serviceAgreementTemplate, Money specializationDegreeTotalAmount,
-            BigDecimal specializationDegreePartialAcceptedPercentage) {
+    public SpecializationDegreeGratuityPR(DateTime startDate, DateTime endDate, ServiceAgreementTemplate serviceAgreementTemplate,
+            Money specializationDegreeTotalAmount, BigDecimal specializationDegreePartialAcceptedPercentage) {
         super();
         init(EntryType.GRATUITY_FEE, EventType.GRATUITY, startDate, endDate, serviceAgreementTemplate,
                 specializationDegreeTotalAmount, specializationDegreePartialAcceptedPercentage);
@@ -68,7 +67,8 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
         super.setSpecializationDegreePartialAcceptedPercentage(specializationDegreePartialAcceptedPercentage);
     }
 
-    private void checkParameters(Money specializationDegreeTotalAmount, BigDecimal specializationDegreePartialAcceptedPercentage) {
+    private void checkParameters(Money specializationDegreeTotalAmount,
+            BigDecimal specializationDegreePartialAcceptedPercentage) {
         if (specializationDegreeTotalAmount == null) {
             throw new DomainException(
                     "error.accounting.postingRules.gratuity.SpecializationDegreeGratuityPR.specializationDegreeTotalAmount.cannot.be.null");
@@ -97,8 +97,8 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(Money amountToAdd, Event event, DateTime when) {
@@ -121,8 +121,8 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
 
         if (hasAlreadyPayedAnyAmount(event, when)) {
             final Money totalFinalAmount = event.getPayedAmount().add(amountToAdd);
-            if (!(totalFinalAmount.greaterOrEqualThan(calculateTotalAmountToPay(event, when)) || totalFinalAmount
-                    .equals(getPartialPaymentAmount(event, when)))) {
+            if (!(totalFinalAmount.greaterOrEqualThan(calculateTotalAmountToPay(event, when))
+                    || totalFinalAmount.equals(getPartialPaymentAmount(event, when)))) {
                 throw new DomainExceptionWithLabelFormatter(
                         "error.accounting.postingRules.gratuity.SpecializationDegreeGratuityPR.amount.being.payed.must.be.equal.to.amout.in.debt",
                         event.getDescriptionForEntryType(getEntryType()));
@@ -130,8 +130,8 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
         } else {
             if (!isPayingTotalAmount(event, when, amountToAdd) && !isPayingPartialAmount(event, when, amountToAdd)) {
                 final LabelFormatter percentageLabelFormatter = new LabelFormatter();
-                percentageLabelFormatter.appendLabel(getSpecializationDegreePartialAcceptedPercentage().multiply(
-                        BigDecimal.valueOf(100)).toString());
+                percentageLabelFormatter.appendLabel(
+                        getSpecializationDegreePartialAcceptedPercentage().multiply(BigDecimal.valueOf(100)).toString());
 
                 throw new DomainExceptionWithLabelFormatter(
                         "error.accounting.postingRules.gratuity.SpecializationDegreeGratuityPR.invalid.partial.payment.value",
@@ -183,9 +183,9 @@ public abstract class SpecializationDegreeGratuityPR extends SpecializationDegre
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override

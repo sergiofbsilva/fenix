@@ -25,8 +25,7 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(module = "student", path = "/registration", functionality = CurriculumDispatchActionForStudent.class)
-@Forwards(value = {
-        @Forward(name = "view-registration-curriculum", path = "/student/curriculum/viewRegistrationCurriculum.jsp"),
+@Forwards(value = { @Forward(name = "view-registration-curriculum", path = "/student/curriculum/viewRegistrationCurriculum.jsp"),
         @Forward(name = "chooseCycleForViewRegistrationCurriculum",
                 path = "/student/curriculum/chooseCycleForViewRegistrationCurriculum.jsp") })
 public class RegistrationDAForStudent extends RegistrationDA {

@@ -147,8 +147,8 @@ public class ExecutionYear extends ExecutionYear_Base implements Comparable<Exec
         if (object == null) {
             return 1;
         }
-        return getAcademicInterval().getStartDateTimeWithoutChronology().compareTo(
-                object.getAcademicInterval().getStartDateTimeWithoutChronology());
+        return getAcademicInterval().getStartDateTimeWithoutChronology()
+                .compareTo(object.getAcademicInterval().getStartDateTimeWithoutChronology());
     }
 
     public boolean isAfter(final ExecutionYear executionYear) {

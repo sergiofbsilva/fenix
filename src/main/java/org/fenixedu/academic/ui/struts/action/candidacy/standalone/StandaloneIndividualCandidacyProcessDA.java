@@ -162,7 +162,8 @@ public class StandaloneIndividualCandidacyProcessDA extends IndividualCandidacyP
         final StandaloneIndividualCandidacyForm form = (StandaloneIndividualCandidacyForm) actionForm;
         final StandaloneIndividualCandidacyProcessBean bean = getIndividualCandidacyProcessBean();
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
-        bean.removeCurricularCourseFromResult(CurricularCourseByExecutionSemesterBean.buildFrom(form.getCurricularCourseBeanKey()));
+        bean.removeCurricularCourseFromResult(
+                CurricularCourseByExecutionSemesterBean.buildFrom(form.getCurricularCourseBeanKey()));
         return mapping.findForward("fill-candidacy-information");
     }
 
@@ -200,8 +201,8 @@ public class StandaloneIndividualCandidacyProcessDA extends IndividualCandidacyP
     public ActionForward prepareExecuteEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
         final StandaloneIndividualCandidacyProcessBean bean = new StandaloneIndividualCandidacyProcessBean(getProcess(request));
-        bean.setSearchCurricularCourseByDegree(new SearchCurricularCourseByDegree(getProcess(request)
-                .getCandidacyExecutionInterval()));
+        bean.setSearchCurricularCourseByDegree(
+                new SearchCurricularCourseByDegree(getProcess(request).getCandidacyExecutionInterval()));
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
         return mapping.findForward("edit-candidacy-information");
     }
@@ -232,12 +233,13 @@ public class StandaloneIndividualCandidacyProcessDA extends IndividualCandidacyP
         final StandaloneIndividualCandidacyForm form = (StandaloneIndividualCandidacyForm) actionForm;
         final StandaloneIndividualCandidacyProcessBean bean = getIndividualCandidacyProcessBean();
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
-        bean.removeCurricularCourseFromResult(CurricularCourseByExecutionSemesterBean.buildFrom(form.getCurricularCourseBeanKey()));
+        bean.removeCurricularCourseFromResult(
+                CurricularCourseByExecutionSemesterBean.buildFrom(form.getCurricularCourseBeanKey()));
         return mapping.findForward("edit-candidacy-information");
     }
 
-    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         try {
             executeActivity(getProcess(request), "EditCandidacyInformation", getIndividualCandidacyProcessBean());
@@ -251,8 +253,8 @@ public class StandaloneIndividualCandidacyProcessDA extends IndividualCandidacyP
 
     public ActionForward prepareExecuteIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("standaloneIndividualCandidacyResultBean", new StandaloneIndividualCandidacyResultBean(
-                getProcess(request)));
+        request.setAttribute("standaloneIndividualCandidacyResultBean",
+                new StandaloneIndividualCandidacyResultBean(getProcess(request)));
         return mapping.findForward("introduce-candidacy-result");
     }
 
@@ -262,8 +264,8 @@ public class StandaloneIndividualCandidacyProcessDA extends IndividualCandidacyP
         return mapping.findForward("introduce-candidacy-result");
     }
 
-    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         try {
             executeActivity(getProcess(request), "IntroduceCandidacyResult", getCandidacyResultBean());

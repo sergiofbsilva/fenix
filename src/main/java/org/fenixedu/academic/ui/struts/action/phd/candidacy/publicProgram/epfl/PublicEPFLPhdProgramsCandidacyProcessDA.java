@@ -126,17 +126,17 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
     static private final List<String> DO_NOT_VALIDATE_CANDIDACY_PERIOD_IN_METHODS = Arrays.asList(
 
-    "showCandidacySuccess",
+            "showCandidacySuccess",
 
-    "viewCandidacy",
+            "viewCandidacy",
 
-    "backToViewCandidacy",
+            "backToViewCandidacy",
 
-    "prepareCreateRefereeLetter",
+            "prepareCreateRefereeLetter",
 
-    "createRefereeLetterInvalid",
+            "createRefereeLetterInvalid",
 
-    "createRefereeLetter");
+            "createRefereeLetter");
 
     static private final int MINIMUM_HABILITATIONS_AND_CERTIFICATES = 2;
     static private final int MINIMUM_CANDIDACY_REFEREES = 3;
@@ -225,9 +225,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
         sendSubmissionEmailForCandidacy(hashCode, request);
 
-        String url =
-                String.format("%s?hash=%s", EPFLPhdCandidacyProcessProperties.getConfiguration()
-                        .getPublicCandidacySubmissionLink(), hashCode.getValue());
+        String url = String.format("%s?hash=%s",
+                EPFLPhdCandidacyProcessProperties.getConfiguration().getPublicCandidacySubmissionLink(), hashCode.getValue());
 
         request.setAttribute("processLink", url);
 
@@ -238,8 +237,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         final String subject =
                 BundleUtil.getString(Bundle.PHD, "message.phd.epfl.application.email.subject.send.link.to.submission");
         final String body = BundleUtil.getString(Bundle.PHD, "message.phd.epfl.email.body.send.link.to.submission");
-        hashCode.sendEmail(subject, String.format(body, EPFLPhdCandidacyProcessProperties.getConfiguration()
-                .getPublicCandidacySubmissionLink(), hashCode.getValue()));
+        hashCode.sendEmail(subject, String.format(body,
+                EPFLPhdCandidacyProcessProperties.getConfiguration().getPublicCandidacySubmissionLink(), hashCode.getValue()));
     }
 
     public ActionForward prepareCandidacyIdentificationRecovery(ActionMapping mapping, ActionForm form,
@@ -254,8 +253,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         return mapping.findForward("candidacyIdentificationRecovery");
     }
 
-    public ActionForward candidacyIdentificationRecovery(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward candidacyIdentificationRecovery(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdProgramCandidacyProcessBean bean = getCandidacyBean();
         final PhdProgramPublicCandidacyHashCode hashCode =
@@ -276,8 +275,9 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         final String subject =
                 BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.recovery.access", Unit.getInstitutionAcronym());
         final String body = BundleUtil.getString(Bundle.APPLICATION, "message.phd.epfl.email.body.recovery.access");
-        candidacyHashCode.sendEmail(subject, String.format(body, EPFLPhdCandidacyProcessProperties.getConfiguration()
-                .getPublicCandidacyAccessLink(), candidacyHashCode.getValue()));
+        candidacyHashCode.sendEmail(subject,
+                String.format(body, EPFLPhdCandidacyProcessProperties.getConfiguration().getPublicCandidacyAccessLink(),
+                        candidacyHashCode.getValue()));
     }
 
     public ActionForward prepareCreateCandidacy(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -288,9 +288,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
     public ActionForward createCandidacyStepOne(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
 
-        final PhdProgramPublicCandidacyHashCode hashCode =
-                (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(request
-                        .getParameter("hash"));
+        final PhdProgramPublicCandidacyHashCode hashCode = (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode
+                .getPublicCandidacyCodeByHash(request.getParameter("hash"));
 
         if (hashCode == null) {
             return mapping.findForward("createCandidacyStepOne");
@@ -343,9 +342,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         PersonBean personBean = getCandidacyBean().getPersonBean();
 
         final String familyName = personBean.getFamilyNames();
-        final String composedName =
-                familyName == null || familyName.isEmpty() ? personBean.getGivenNames() : personBean.getGivenNames() + " "
-                        + familyName;
+        final String composedName = familyName == null || familyName.isEmpty() ? personBean
+                .getGivenNames() : personBean.getGivenNames() + " " + familyName;
         personBean.setName(composedName);
 
         request.setAttribute("candidacyBean", getCandidacyBean());
@@ -579,8 +577,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         return bean;
     }
 
-    public ActionForward createCandidacyStepThreeInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward createCandidacyStepThreeInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("candidacyBean", getRenderedObject("candidacyBean"));
         return mapping.findForward("createCandidacyStepThree");
     }
@@ -696,9 +694,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
     public ActionForward viewCandidacy(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
-        return viewCandidacy(mapping, request,
-                (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(request
-                        .getParameter("hash")));
+        return viewCandidacy(mapping, request, (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode
+                .getPublicCandidacyCodeByHash(request.getParameter("hash")));
     }
 
     private ActionForward viewCandidacy(ActionMapping mapping, HttpServletRequest request,
@@ -725,8 +722,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         request.setAttribute("candidacyPeriod", getPhdCandidacyPeriod(hashCode));
         validateProcess(request, hashCode.getIndividualProgramProcess());
 
-        request.setAttribute("pendingPartyContactBean", new PendingPartyContactBean(hashCode.getIndividualProgramProcess()
-                .getPerson()));
+        request.setAttribute("pendingPartyContactBean",
+                new PendingPartyContactBean(hashCode.getIndividualProgramProcess().getPerson()));
 
         return mapping.findForward("viewCandidacy");
     }
@@ -791,8 +788,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
             personBean.setCountryOfResidence(physicalAddress.getCountryOfResidence());
         }
 
-        personBean.setPhone(pendingPartyContactBean.getDefaultPhone() != null ? pendingPartyContactBean.getDefaultPhone()
-                .getNumber() : null);
+        personBean.setPhone(
+                pendingPartyContactBean.getDefaultPhone() != null ? pendingPartyContactBean.getDefaultPhone().getNumber() : null);
         personBean.setMobile(pendingPartyContactBean.getDefaultMobilePhone() != null ? pendingPartyContactBean
                 .getDefaultMobilePhone().getNumber() : null);
 
@@ -823,9 +820,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
         PersonBean personBean = bean.getPersonBean();
         final String familyName = personBean.getFamilyNames();
-        final String composedName =
-                familyName == null || familyName.isEmpty() ? personBean.getGivenNames() : personBean.getGivenNames() + " "
-                        + familyName;
+        final String composedName = familyName == null || familyName.isEmpty() ? personBean
+                .getGivenNames() : personBean.getGivenNames() + " " + familyName;
         personBean.setName(composedName);
 
         try {
@@ -851,8 +847,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
     private void prepareUploadDocumentsAttributes(PhdProgramCandidacyProcessBean bean, HttpServletRequest request) {
         request.setAttribute("candidacyBean", bean);
-        request.setAttribute("candidacyProcessDocuments", bean.getCandidacyHashCode().getIndividualProgramProcess()
-                .getCandidacyProcessDocuments());
+        request.setAttribute("candidacyProcessDocuments",
+                bean.getCandidacyHashCode().getIndividualProgramProcess().getCandidacyProcessDocuments());
 
         final PhdProgramDocumentUploadBean uploadBean = new PhdProgramDocumentUploadBean();
         uploadBean.setIndividualProgramProcess(bean.getCandidacyHashCode().getIndividualProgramProcess());
@@ -868,8 +864,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
         final PhdProgramCandidacyProcessBean bean = getCandidacyBean();
         request.setAttribute("candidacyBean", bean);
         request.setAttribute("documentByType", getRenderedObject("documentByType"));
-        request.setAttribute("candidacyProcessDocuments", bean.getCandidacyHashCode().getIndividualProgramProcess()
-                .getCandidacyProcessDocuments());
+        request.setAttribute("candidacyProcessDocuments",
+                bean.getCandidacyHashCode().getIndividualProgramProcess().getCandidacyProcessDocuments());
 
         if (!RenderUtils.getViewState("documentByType").isValid()) {
             addErrorMessage(request, "error.documentToUpload.not.valid");
@@ -933,8 +929,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
 
         final PhdProgramCandidacyProcessBean candidacyBean = getCandidacyBean();
         request.setAttribute("candidacyBean", candidacyBean);
-        request.setAttribute("individualProcessBean", new PhdIndividualProgramProcessBean(candidacyBean.getCandidacyHashCode()
-                .getIndividualProgramProcess()));
+        request.setAttribute("individualProcessBean",
+                new PhdIndividualProgramProcessBean(candidacyBean.getCandidacyHashCode().getIndividualProgramProcess()));
 
         return mapping.findForward("editPhdIndividualProgramProcessInformation");
     }
@@ -1346,8 +1342,8 @@ public class PublicEPFLPhdProgramsCandidacyProcessDA extends PublicPhdProgramCan
             addValidationMessage(request, "message.validation.missing.motivation.letter");
             result &= false;
         }
-        if (process.getCandidacyProcessDocumentsCount(PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT) < process
-                .getQualifications().size()) {
+        if (process.getCandidacyProcessDocumentsCount(
+                PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT) < process.getQualifications().size()) {
             addValidationMessage(request, "message.validation.missing.qualification.documents",
                     String.valueOf(process.getQualifications().size()));
             result &= false;

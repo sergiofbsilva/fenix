@@ -33,11 +33,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import pt.ist.fenixframework.Atomic;
 
 @SpringApplication(path = "departments", hint = "Manager", group = "#managers", title = "label.manageDepartments")
 @SpringFunctionality(app = ManageDepartmentsController.class, title = "title.departments")

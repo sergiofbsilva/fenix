@@ -52,9 +52,8 @@ public class AccessRuleSystem extends AccessRuleSystem_Base {
     }
 
     public static Stream<AccessRule> accessRules(DateTime when) {
-        Stream<AccessRule> deleted =
-                getInstance().getDeletedAccessRuleSet().stream()
-                        .filter(r -> r.getCreated().isBefore(when) && r.getRevoked().isAfter(when));
+        Stream<AccessRule> deleted = getInstance().getDeletedAccessRuleSet().stream()
+                .filter(r -> r.getCreated().isBefore(when) && r.getRevoked().isAfter(when));
         Stream<AccessRule> current = getInstance().getAccessRuleSet().stream().filter(r -> r.getCreated().isBefore(when));
         return Stream.concat(deleted, current);
     }

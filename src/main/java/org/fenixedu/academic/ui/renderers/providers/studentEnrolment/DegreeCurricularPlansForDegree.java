@@ -39,9 +39,8 @@ public class DegreeCurricularPlansForDegree implements DataProvider {
         if (optionalEnrolmentBean.getDegree() != null && optionalEnrolmentBean.getDegreeType() != null) {
             if (optionalEnrolmentBean.getDegree().getDegreeType().equals(optionalEnrolmentBean.getDegreeType())) {
                 result.addAll(optionalEnrolmentBean.getDegree().getDegreeCurricularPlansSet());
-                if (optionalEnrolmentBean.getDegreeCurricularPlan() != null
-                        && !optionalEnrolmentBean.getDegree().getDegreeCurricularPlansSet()
-                                .contains(optionalEnrolmentBean.getDegreeCurricularPlan())) {
+                if (optionalEnrolmentBean.getDegreeCurricularPlan() != null && !optionalEnrolmentBean.getDegree()
+                        .getDegreeCurricularPlansSet().contains(optionalEnrolmentBean.getDegreeCurricularPlan())) {
                     optionalEnrolmentBean.setDegreeCurricularPlan(null);
                 }
             } else {

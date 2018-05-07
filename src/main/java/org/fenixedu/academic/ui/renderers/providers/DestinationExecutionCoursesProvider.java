@@ -25,12 +25,12 @@ import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.ui.struts.action.academicAdministration.executionCourseManagement.ExecutionCourseBean;
 import org.fenixedu.academic.ui.struts.action.academicAdministration.executionCourseManagement.MergeExecutionCourseDA.DegreesMergeBean;
 
+import com.google.common.collect.Lists;
+
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
 import pt.ist.fenixWebFramework.renderers.components.converters.BiDirectionalConverter;
 import pt.ist.fenixWebFramework.renderers.components.converters.Converter;
-
-import com.google.common.collect.Lists;
 
 public class DestinationExecutionCoursesProvider implements DataProvider {
 
@@ -72,7 +72,8 @@ public class DestinationExecutionCoursesProvider implements DataProvider {
         final DegreesMergeBean bean = (DegreesMergeBean) source;
         final Degree degree = bean.getDestinationDegree();
 
-        for (final ExecutionCourse iter : SourceExecutionCoursesProvider.getExecutionCourses(degree, bean.getAcademicInterval())) {
+        for (final ExecutionCourse iter : SourceExecutionCoursesProvider.getExecutionCourses(degree,
+                bean.getAcademicInterval())) {
 
             final ExecutionCourseBean resultBean = new ExecutionCourseBean();
             resultBean.setDegree(degree);

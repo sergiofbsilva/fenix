@@ -106,9 +106,8 @@ public class StudentGroupingService {
             personList.add(AccessControl.getPerson());
         }
 
-        List<Registration> registrationsList =
-                grouping.getAttendsSet().stream().map(Attends::getRegistration)
-                        .filter(reg -> personList.contains(reg.getPerson())).collect(Collectors.toList());
+        List<Registration> registrationsList = grouping.getAttendsSet().stream().map(Attends::getRegistration)
+                .filter(reg -> personList.contains(reg.getPerson())).collect(Collectors.toList());
 
         if (!groupingIsOpenForEnrollment(grouping)) {
             throw new DomainException("error.grouping.notOpenToEnrollment");

@@ -195,8 +195,8 @@ public class StandaloneCandidacyProcessDA extends CandidacyProcessDA {
         return mapping.findForward("prepare-create-new-process");
     }
 
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("send-to-coordinator");
     }
 
@@ -254,11 +254,11 @@ public class StandaloneCandidacyProcessDA extends CandidacyProcessDA {
 
         spreadsheet.setHeaders(new String[] {
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.name"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.identificationNumber"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.identificationNumber"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.curricularCourses"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.curricularCourses"),
 
         });
         return spreadsheet;

@@ -25,8 +25,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 public class ExternalPhdProgram extends ExternalPhdProgram_Base {
@@ -44,7 +44,8 @@ public class ExternalPhdProgram extends ExternalPhdProgram_Base {
 
         check(name, nameEn, acronym, forCollaborationType);
 
-        LocalizedString nameI18N = new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, name).with(org.fenixedu.academic.util.LocaleUtils.EN, nameEn);
+        LocalizedString nameI18N = new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, name)
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, nameEn);
 
         setName(nameI18N);
 

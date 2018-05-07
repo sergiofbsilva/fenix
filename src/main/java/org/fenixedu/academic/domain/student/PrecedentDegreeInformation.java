@@ -20,8 +20,6 @@ package org.fenixedu.academic.domain.student;
 
 import java.util.Comparator;
 
-import jvstm.cps.ConsistencyPredicate;
-
 import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.SchoolLevelType;
@@ -34,6 +32,8 @@ import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.dto.candidacy.PrecedentDegreeInformationBean;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.joda.time.DateTime;
+
+import jvstm.cps.ConsistencyPredicate;
 
 /**
  * <pre>
@@ -200,16 +200,15 @@ public class PrecedentDegreeInformation extends PrecedentDegreeInformation_Base 
                 precedentInstitution =
                         UnitUtils.readExternalInstitutionUnitByName(precedentDegreeInformationBean.getPrecedentInstitutionName());
                 if (precedentInstitution == null) {
-                    precedentInstitution =
-                            Unit.createNewNoOfficialExternalInstitution(precedentDegreeInformationBean
-                                    .getPrecedentInstitutionName());
+                    precedentInstitution = Unit
+                            .createNewNoOfficialExternalInstitution(precedentDegreeInformationBean.getPrecedentInstitutionName());
                 }
             }
             setPrecedentInstitution(precedentInstitution);
             setPrecedentDegreeDesignation(precedentDegreeInformationBean.getPrecedentDegreeDesignation());
             setPrecedentSchoolLevel(precedentDegreeInformationBean.getPrecedentSchoolLevel());
-            setNumberOfEnrolmentsInPreviousDegrees(precedentDegreeInformationBean
-                    .getNumberOfPreviousYearEnrolmentsInPrecedentDegree());
+            setNumberOfEnrolmentsInPreviousDegrees(
+                    precedentDegreeInformationBean.getNumberOfPreviousYearEnrolmentsInPrecedentDegree());
             setMobilityProgramDuration(precedentDegreeInformationBean.getMobilityProgramDuration());
         }
     }

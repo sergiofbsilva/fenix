@@ -26,10 +26,11 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 @Mapping(path = "/caseHandlingDegreeTransferIndividualCandidacyProcess", module = "nape", formBeanClass = FenixActionForm.class,
         functionality = DegreeTransferCandidacyProcessDA.class)
 @Forwards({
-        @Forward(name = "intro", path = "/nape/caseHandlingDegreeTransferCandidacyProcess.do?method=listProcessAllowedActivities"),
+        @Forward(name = "intro",
+                path = "/nape/caseHandlingDegreeTransferCandidacyProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "list-allowed-activities",
                 path = "/scientificCouncil/candidacy/degreeTransfer/listIndividualCandidacyActivities.jsp") })
-public class DegreeTransferIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeTransfer.DegreeTransferIndividualCandidacyProcessDA {
+public class DegreeTransferIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeTransfer.DegreeTransferIndividualCandidacyProcessDA {
 
 }

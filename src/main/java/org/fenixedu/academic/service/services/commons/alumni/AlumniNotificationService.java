@@ -53,9 +53,8 @@ public class AlumniNotificationService {
         final String subject =
                 BundleUtil.getString(Bundle.ALUMNI, "alumni.public.registration.mail.subject", Unit.getInstitutionAcronym());
         final Person person = alumni.getStudent().getPerson();
-        final String body =
-                BundleUtil.getString(Bundle.ALUMNI, "alumni.public.registration.url", person.getFirstAndLastName(),
-                        getRegisterConclusionURL(alumni));
+        final String body = BundleUtil.getString(Bundle.ALUMNI, "alumni.public.registration.url", person.getFirstAndLastName(),
+                getRegisterConclusionURL(alumni));
 
         sendEmail(Collections.EMPTY_LIST, subject, body, alumniEmail);
     }
@@ -71,15 +70,13 @@ public class AlumniNotificationService {
 
     protected static void sendIdentityCheckEmail(AlumniIdentityCheckRequest request, Boolean approval) {
 
-        final String subject =
-                MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.mail.subject"),
-                        Unit.getInstitutionAcronym());
+        final String subject = MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.mail.subject"),
+                Unit.getInstitutionAcronym());
 
         String body;
         if (approval) {
-            body =
-                    MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.confirm.identity"),
-                            request.getAlumni().getStudent().getPerson().getFirstAndLastName());
+            body = MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.confirm.identity"),
+                    request.getAlumni().getStudent().getPerson().getFirstAndLastName());
 
             switch (request.getRequestType()) {
 
@@ -87,33 +84,28 @@ public class AlumniNotificationService {
                 body += BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.curriculum.access");
                 break;
             case PASSWORD_REQUEST:
-                body +=
-                        MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.password.request"),
-                                request.getAlumni().getLoginUsername(), "https://id.tecnico.ulisboa.pt", request.getExternalId(),
-                                request.getRequestToken().toString());
+                body += MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.password.request"),
+                        request.getAlumni().getLoginUsername(), "https://id.tecnico.ulisboa.pt", request.getExternalId(),
+                        request.getRequestToken().toString());
                 break;
             case STUDENT_NUMBER_RECOVERY:
-                body +=
-                        MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.student.number.info"),
-                                request.getAlumni().getStudent().getNumber().toString(), Unit.getInstitutionAcronym());
+                body += MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.student.number.info"),
+                        request.getAlumni().getStudent().getNumber().toString(), Unit.getInstitutionAcronym());
                 break;
 
             default:
                 return;
             }
         } else {
-            body =
-                    MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.refuse.identity"), request
-                            .getAlumni().getStudent().getPerson().getFirstAndLastName());
+            body = MessageFormat.format(BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.refuse.identity"),
+                    request.getAlumni().getStudent().getPerson().getFirstAndLastName());
         }
 
         body = body + " " + request.getComment();
         if (!approval && request.getRequestType().equals(AlumniRequestType.PASSWORD_REQUEST)) {
-            body +=
-                    "\n"
-                            + MessageFormat.format(
-                                    BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.password.request.refuse"),
-                                    getRegisterConclusionURL(request.getAlumni()));
+            body += "\n" + MessageFormat.format(
+                    BundleUtil.getString(Bundle.MANAGER, "alumni.identity.request.password.request.refuse"),
+                    getRegisterConclusionURL(request.getAlumni()));
         }
 
         sendEmail(Collections.EMPTY_LIST, subject, body, request.getContactEmail());
@@ -121,12 +113,10 @@ public class AlumniNotificationService {
 
     protected static void sendRegistrationSuccessMail(final Alumni alumni) {
 
-        final String subject =
-                MessageFormat.format(BundleUtil.getString(Bundle.ALUMNI, "alumni.public.success.mail.subject"),
-                        Unit.getInstitutionAcronym());
-        final String body =
-                MessageFormat.format(BundleUtil.getString(Bundle.ALUMNI, "alumni.public.username.login.url"), alumni.getStudent()
-                        .getPerson().getFirstAndLastName(), alumni.getLoginUsername());
+        final String subject = MessageFormat.format(BundleUtil.getString(Bundle.ALUMNI, "alumni.public.success.mail.subject"),
+                Unit.getInstitutionAcronym());
+        final String body = MessageFormat.format(BundleUtil.getString(Bundle.ALUMNI, "alumni.public.username.login.url"),
+                alumni.getStudent().getPerson().getFirstAndLastName(), alumni.getLoginUsername());
 
         sendEmail(getAlumniRecipients(alumni), subject, body, null);
     }

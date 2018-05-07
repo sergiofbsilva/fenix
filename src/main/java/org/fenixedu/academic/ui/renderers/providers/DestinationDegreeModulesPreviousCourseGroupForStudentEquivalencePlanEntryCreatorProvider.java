@@ -23,8 +23,8 @@ import org.fenixedu.academic.ui.struts.action.coordinator.StudentEquivalencyPlan
 
 import pt.ist.fenixWebFramework.renderers.DataProvider;
 
-public class DestinationDegreeModulesPreviousCourseGroupForStudentEquivalencePlanEntryCreatorProvider extends
-        DestinationDegreeModulesPreviousCourseGroupForEquivalencePlanEntryCreatorProvider implements DataProvider {
+public class DestinationDegreeModulesPreviousCourseGroupForStudentEquivalencePlanEntryCreatorProvider
+        extends DestinationDegreeModulesPreviousCourseGroupForEquivalencePlanEntryCreatorProvider implements DataProvider {
 
     @Override
     protected DegreeCurricularPlan getDegreeCurricularPlan(Object source) {

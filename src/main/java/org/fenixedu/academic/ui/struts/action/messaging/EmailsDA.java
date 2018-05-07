@@ -45,18 +45,18 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
+import com.google.common.base.Strings;
+
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.common.base.Strings;
 
 @StrutsFunctionality(app = MessagingEmailsApp.class, path = "new-email", titleKey = "label.email.new")
 @Mapping(path = "/emails", module = "messaging")
 @Forwards({ @Forward(name = "new.email", path = "/messaging/newEmail.jsp"),
         @Forward(name = "cancel", path = "/messaging/announcements/announcementsStartPageHandler.do?method=news") })
 public class EmailsDA extends FenixDispatchAction {
-    public static final ActionForward FORWARD_TO_NEW_EMAIL = new ActionForward("emails", "/emails.do?method=forwardToNewEmail",
-            false, "/messaging");
+    public static final ActionForward FORWARD_TO_NEW_EMAIL =
+            new ActionForward("emails", "/emails.do?method=forwardToNewEmail", false, "/messaging");
 
     public ActionForward cancel(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
@@ -90,10 +90,9 @@ public class EmailsDA extends FenixDispatchAction {
                 emailBean.setSender(sender);
                 String[] recipientsParameter = request.getParameterValues("recipient");
                 if (recipientsParameter != null) {
-                    List<Recipient> recipients =
-                            Stream.of(recipientsParameter)
-                                    .map(recipientExternalId -> (Recipient) FenixFramework.getDomainObject(recipientExternalId))
-                                    .collect(Collectors.toList());
+                    List<Recipient> recipients = Stream.of(recipientsParameter)
+                            .map(recipientExternalId -> (Recipient) FenixFramework.getDomainObject(recipientExternalId))
+                            .collect(Collectors.toList());
                     emailBean.setRecipients(recipients);
                 }
             }
@@ -117,8 +116,8 @@ public class EmailsDA extends FenixDispatchAction {
         }
         final Message message = emailBean.send();
         request.setAttribute("created", Boolean.TRUE);
-        return new FenixActionForward(request, new ActionForward("/viewSentEmails.do?method=viewEmail&messagesId="
-                + message.getExternalId(), true));
+        return new FenixActionForward(request,
+                new ActionForward("/viewSentEmails.do?method=viewEmail&messagesId=" + message.getExternalId(), true));
     }
 
     public static ActionForward sendEmail(HttpServletRequest request, Sender sender, Recipient... recipient) {

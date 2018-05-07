@@ -29,8 +29,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class MeasurementTestRoom extends MeasurementTestRoom_Base {
 
     static {
-        getRelationMeasurementTestShiftMeasurementTestRoom().addListener(
-                new RelationAdapter<MeasurementTestShift, MeasurementTestRoom>() {
+        getRelationMeasurementTestShiftMeasurementTestRoom()
+                .addListener(new RelationAdapter<MeasurementTestShift, MeasurementTestRoom>() {
                     @Override
                     public void beforeAdd(MeasurementTestShift shift, MeasurementTestRoom toAdd) {
 

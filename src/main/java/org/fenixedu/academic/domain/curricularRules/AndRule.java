@@ -55,8 +55,8 @@ public class AndRule extends AndRule_Base {
             DegreeModule degreeModuleToVerify, CourseGroup parentCourseGroup) {
         RuleResult result = RuleResult.createTrue(degreeModuleToVerify);
         for (final CurricularRule curricularRule : getCurricularRulesSet()) {
-            result =
-                    result.and(curricularRule.verify(verifyRuleLevel, enrolmentContext, degreeModuleToVerify, parentCourseGroup));
+            result = result
+                    .and(curricularRule.verify(verifyRuleLevel, enrolmentContext, degreeModuleToVerify, parentCourseGroup));
         }
         return result;
     }

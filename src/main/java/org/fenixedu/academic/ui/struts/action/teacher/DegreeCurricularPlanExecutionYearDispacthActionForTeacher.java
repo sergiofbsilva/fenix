@@ -30,6 +30,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @Mapping(module = "teacher", path = "/chooseExecutionYearAndDegreeCurricularPlan",
         formBean = "executionYearDegreeCurricularPlanForm")
 @Forwards({ @Forward(name = "chooseExecutionYear", path = "/commons/curriculumHistoric/chooseDegreeCPlanExecutionYear.jsp"),
-        @Forward(name = "showActiveCurricularCourses", path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
+        @Forward(name = "showActiveCurricularCourses",
+                path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
 public class DegreeCurricularPlanExecutionYearDispacthActionForTeacher extends DegreeCurricularPlanExecutionYearDispacthAction {
 }

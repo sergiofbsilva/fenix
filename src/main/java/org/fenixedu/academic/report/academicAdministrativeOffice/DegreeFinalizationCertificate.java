@@ -115,16 +115,13 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         String institutionName = getInstitutionName();
         String universityName = getUniversityName(new DateTime());
 
-        String stringTemplate =
-                BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
-                        "label.academicDocument.declaration.firstParagraph");
+        String stringTemplate = BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
+                "label.academicDocument.declaration.firstParagraph");
 
-        addParameter(
-                "firstParagraph",
-                "     "
-                        + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
-                                adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
-                                universityName.toUpperCase(getLocale())));
+        addParameter("firstParagraph",
+                "     " + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
+                        adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
+                        universityName.toUpperCase(getLocale())));
 
         addParameter("certificate", BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
                 "label.academicDocument.standaloneEnrolmentCertificate.secondParagraph"));
@@ -149,8 +146,8 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         final StringBuilder result = new StringBuilder();
 
         if (!request.mustHideConclusionDate()) {
-            result.append(SINGLE_SPACE).append(
-                    BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.onThe"));
+            result.append(SINGLE_SPACE)
+                    .append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.onThe"));
             result.append(SINGLE_SPACE).append(request.getConclusionDate().toString(DD_MMMM_YYYY, getLocale()));
         }
 
@@ -168,15 +165,15 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
             } else {
                 final String date = request.getExceptionalConclusionDate().toString(DD_MMMM_YYYY, getLocale());
                 if (request.getInternshipAbolished()) {
-                    result.append(SINGLE_SPACE).append(
-                            BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.in"));
+                    result.append(SINGLE_SPACE)
+                            .append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.in"));
                     result.append(SINGLE_SPACE).append(date);
                     result.append(", ");
                     result.append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
                             "documents.DegreeFinalizationCertificate.exceptionalConclusionInfo.internshipAbolished"));
                 } else if (request.getInternshipApproved()) {
-                    result.append(SINGLE_SPACE).append(
-                            BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.in"));
+                    result.append(SINGLE_SPACE)
+                            .append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(), "label.in"));
                     result.append(SINGLE_SPACE).append(date);
                     result.append(", ");
                     result.append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
@@ -216,9 +213,8 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         final StringBuilder res = new StringBuilder();
 
         if (getDocumentRequest().isToShowCredits()) {
-            res.append(SINGLE_SPACE).append(
-                    BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
-                            "documents.DegreeFinalizationCertificate.creditsInfo"));
+            res.append(SINGLE_SPACE).append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
+                    "documents.DegreeFinalizationCertificate.creditsInfo"));
             res.append(SINGLE_SPACE).append(String.valueOf(request.getEctsCredits())).append(getCreditsDescription());
         }
 
@@ -261,9 +257,8 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         final StringBuilder res = new StringBuilder();
 
         if (request.getDetailed()) {
-            res.append(SINGLE_SPACE)
-                    .append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
-                            "documents.DegreeFinalizationCertificate.detailedInfoIntro")).append(":");
+            res.append(SINGLE_SPACE).append(BundleUtil.getString(Bundle.ACADEMIC, getDocumentRequest().getLanguage(),
+                    "documents.DegreeFinalizationCertificate.detailedInfoIntro")).append(":");
         } else {
             res.append(".");
         }
@@ -304,9 +299,8 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
     }
 
     final private void reportEntry(final StringBuilder result, final ICurriculumEntry entry, final Map<Unit, String> unitIDs) {
-        result.append(
-                FenixStringTools.multipleLineRightPadWithSuffix(getCurriculumEntryName(unitIDs, entry), LINE_LENGTH, END_CHAR,
-                        getCreditsAndGradeInfo(entry))).append(LINE_BREAK);
+        result.append(FenixStringTools.multipleLineRightPadWithSuffix(getCurriculumEntryName(unitIDs, entry), LINE_LENGTH,
+                END_CHAR, getCreditsAndGradeInfo(entry))).append(LINE_BREAK);
     }
 
     final private String getCreditsAndGradeInfo(final ICurriculumEntry entry) {
@@ -333,9 +327,8 @@ public class DegreeFinalizationCertificate extends AdministrativeOfficeDocument 
         final CertificateRequestPR certificateRequestPR = (CertificateRequestPR) getPostingRule();
 
         final Money amountPerPage = certificateRequestPR.getAmountPerPage();
-        final Money baseAmountPlusAmountForUnits =
-                certificateRequestPR.getBaseAmount().add(
-                        certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
+        final Money baseAmountPlusAmountForUnits = certificateRequestPR.getBaseAmount()
+                .add(certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
         final Money urgencyAmount = certificateRequest.getUrgentRequest() ? certificateRequestPR.getBaseAmount() : Money.ZERO;
 
         addParameter("amountPerPage", amountPerPage);

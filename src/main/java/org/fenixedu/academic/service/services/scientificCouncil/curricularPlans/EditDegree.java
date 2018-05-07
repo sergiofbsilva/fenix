@@ -42,7 +42,8 @@ public class EditDegree {
             String ministryCode) throws FenixServiceException {
 
         check(RolePredicates.SCIENTIFIC_COUNCIL_PREDICATE);
-        if (externalId == null || name == null || nameEn == null || acronym == null || degreeType == null || ectsCredits == null) {
+        if (externalId == null || name == null || nameEn == null || acronym == null || degreeType == null
+                || ectsCredits == null) {
             throw new InvalidArgumentsServiceException();
         }
 
@@ -50,8 +51,8 @@ public class EditDegree {
 
         if (degreeToEdit == null) {
             throw new NonExistingServiceException();
-        } else if (!degreeToEdit.getSigla().equalsIgnoreCase(acronym)
-                || !degreeToEdit.getNameFor(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.PT).equalsIgnoreCase(name)
+        } else if (!degreeToEdit.getSigla().equalsIgnoreCase(acronym) || !degreeToEdit.getNameFor(executionYear)
+                .getContent(org.fenixedu.academic.util.LocaleUtils.PT).equalsIgnoreCase(name)
                 || !degreeToEdit.getDegreeType().equals(degreeType)) {
 
             final List<Degree> degrees = Degree.readNotEmptyDegrees();
@@ -62,8 +63,10 @@ public class EditDegree {
                     if (degree.getSigla().equalsIgnoreCase(acronym)) {
                         throw new FenixServiceException("error.existing.degree.acronym");
                     }
-                    if ((degree.getNameFor(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.PT).equalsIgnoreCase(name) || degree
-                            .getNameFor(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.EN).equalsIgnoreCase(nameEn))
+                    if ((degree.getNameFor(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.PT)
+                            .equalsIgnoreCase(name)
+                            || degree.getNameFor(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.EN)
+                                    .equalsIgnoreCase(nameEn))
                             && degree.getDegreeType().equals(degreeType)) {
                         throw new FenixServiceException("error.existing.degree.name.and.type");
                     }

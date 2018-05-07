@@ -52,8 +52,9 @@ public class EquivalencyPlanDA extends FenixDispatchAction {
 
         final DegreeCurricularPlan degreeCurricularPlan = getDegreeCurricularPlan(request);
         if (degreeCurricularPlan == null) {
-            request.setAttribute("degreeCurricularPlans", DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType.oneOf(
-                    DegreeType::isBolonhaDegree, DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
+            request.setAttribute("degreeCurricularPlans",
+                    DegreeCurricularPlan.getDegreeCurricularPlans(DegreeType.oneOf(DegreeType::isBolonhaDegree,
+                            DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
         } else {
             request.setAttribute("degreeCurricularPlan", degreeCurricularPlan);
             final DegreeCurricularPlanBean degreeCurricularPlanBean = new DegreeCurricularPlanBean(degreeCurricularPlan);

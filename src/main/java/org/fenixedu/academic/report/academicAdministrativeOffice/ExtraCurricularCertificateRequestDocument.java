@@ -24,6 +24,7 @@ import java.util.TreeSet;
 import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.ExtraCurricularCertificateRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.IDocumentRequest;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.util.FenixStringTools;
 
 public class ExtraCurricularCertificateRequestDocument extends AdministrativeOfficeDocument {
@@ -54,13 +55,13 @@ public class ExtraCurricularCertificateRequestDocument extends AdministrativeOff
         final StringBuilder result = new StringBuilder();
         ExtraCurricularCertificateRequest request = getDocumentRequest();
 
-        final Collection<Enrolment> enrolments = new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
+        final Collection<Enrolment> enrolments =
+                new TreeSet<Enrolment>(ICurriculumEntry.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
         enrolments.addAll(request.getEnrolmentsSet());
 
         for (final Enrolment enrolment : enrolments) {
-            result.append(
-                    FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(), LINE_LENGTH,
-                            END_CHAR, getCreditsAndGradeInfo(enrolment, enrolment.getExecutionYear()))).append(LINE_BREAK);
+            result.append(FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(),
+                    LINE_LENGTH, END_CHAR, getCreditsAndGradeInfo(enrolment, enrolment.getExecutionYear()))).append(LINE_BREAK);
         }
 
         result.append(generateEndLine());

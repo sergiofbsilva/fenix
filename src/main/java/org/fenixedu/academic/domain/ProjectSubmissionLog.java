@@ -28,12 +28,12 @@ public class ProjectSubmissionLog extends ProjectSubmissionLog_Base {
     public static Comparator<ProjectSubmissionLog> COMPARATOR_BY_MOST_RECENT_SUBMISSION_DATE =
             new Comparator<ProjectSubmissionLog>() {
                 @Override
-                public int compare(ProjectSubmissionLog leftProjectSubmissionLog, ProjectSubmissionLog rightProjectSubmissionLog) {
-                    int comparationResult =
-                            leftProjectSubmissionLog.getSubmissionDateTime().compareTo(
-                                    rightProjectSubmissionLog.getSubmissionDateTime());
-                    return (comparationResult == 0) ? leftProjectSubmissionLog.getExternalId().compareTo(
-                            rightProjectSubmissionLog.getExternalId()) : -(comparationResult);
+                public int compare(ProjectSubmissionLog leftProjectSubmissionLog,
+                        ProjectSubmissionLog rightProjectSubmissionLog) {
+                    int comparationResult = leftProjectSubmissionLog.getSubmissionDateTime()
+                            .compareTo(rightProjectSubmissionLog.getSubmissionDateTime());
+                    return (comparationResult == 0) ? leftProjectSubmissionLog.getExternalId()
+                            .compareTo(rightProjectSubmissionLog.getExternalId()) : -(comparationResult);
                 }
             };
 

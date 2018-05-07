@@ -39,8 +39,8 @@ import pt.ist.fenixframework.FenixFramework;
 public class EditCompetenceCourseLoad {
 
     @Atomic
-    public static void run(String competenceCourseID, RegimeType regimeType, Integer numberOfPeriods, List<CourseLoad> courseLoads)
-            throws FenixServiceException {
+    public static void run(String competenceCourseID, RegimeType regimeType, Integer numberOfPeriods,
+            List<CourseLoad> courseLoads) throws FenixServiceException {
         check(RolePredicates.BOLONHA_MANAGER_PREDICATE);
         final CompetenceCourse competenceCourse = FenixFramework.getDomainObject(competenceCourseID);
         if (competenceCourse == null) {

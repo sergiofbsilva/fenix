@@ -30,9 +30,9 @@ import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.spaces.domain.Space;
 
-import pt.ist.fenixframework.dml.runtime.Relation;
-
 import com.google.common.collect.Sets;
+
+import pt.ist.fenixframework.dml.runtime.Relation;
 
 public class PersistentTeacherGroup extends PersistentTeacherGroup_Base {
     protected PersistentTeacherGroup(Degree degree, ExecutionCourse executionCourse, Space campus, Department department,
@@ -93,12 +93,12 @@ public class PersistentTeacherGroup extends PersistentTeacherGroup_Base {
     private static PersistentTeacherGroup getInstance(Supplier<Stream<PersistentTeacherGroup>> options, Degree degree,
             ExecutionCourse executionCourse, Space campus, Department department, ExecutionYear executionYear) {
         return singleton(
-                () -> options
-                        .get()
+                () -> options.get()
                         .filter(group -> Objects.equals(group.getDegree(), degree)
                                 && Objects.equals(group.getExecutionCourse(), executionCourse)
                                 && Objects.equals(group.getCampus(), campus) && Objects.equals(group.getDepartment(), department)
-                                && Objects.equals(group.getExecutionYear(), executionYear)).findAny(),
+                                && Objects.equals(group.getExecutionYear(), executionYear))
+                        .findAny(),
                 () -> new PersistentTeacherGroup(degree, executionCourse, campus, department, executionYear));
     }
 }

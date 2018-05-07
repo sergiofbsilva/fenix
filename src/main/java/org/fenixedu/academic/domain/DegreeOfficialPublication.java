@@ -39,7 +39,8 @@ public class DegreeOfficialPublication extends DegreeOfficialPublication_Base {
     @Atomic
     public DegreeSpecializationArea createSpecializationArea(String nameEn, String namePt) {
 
-        LocalizedString area = new LocalizedString(org.fenixedu.academic.util.LocaleUtils.EN, nameEn).with(org.fenixedu.academic.util.LocaleUtils.PT, namePt);
+        LocalizedString area = new LocalizedString(org.fenixedu.academic.util.LocaleUtils.EN, nameEn)
+                .with(org.fenixedu.academic.util.LocaleUtils.PT, namePt);
 
         return new DegreeSpecializationArea(this, area);
     }

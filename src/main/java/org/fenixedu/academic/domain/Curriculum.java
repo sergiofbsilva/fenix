@@ -83,8 +83,8 @@ public class Curriculum extends Curriculum_Base {
     }
 
     public LocalizedString getFullObjectivesI18N() {
-        return new LocalizedString.Builder()
-                .with(org.fenixedu.academic.util.LocaleUtils.PT, getFullObjectives()).with(org.fenixedu.academic.util.LocaleUtils.EN, getFullObjectivesEn()).build();
+        return new LocalizedString.Builder().with(org.fenixedu.academic.util.LocaleUtils.PT, getFullObjectives())
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, getFullObjectivesEn()).build();
     }
 
     public LocalizedString getGeneralObjectivesI18N() {

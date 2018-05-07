@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.ErasmusApplyForSemesterType;
 import org.fenixedu.academic.domain.candidacyProcess.mobility.MobilityApplicationProcess;
+import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
@@ -92,7 +93,7 @@ public class DegreeCourseInformationBean implements java.io.Serializable, DataPr
     }
 
     private SortedSet<CurricularCourse> getCurricularCoursesForChosenDegree() {
-        final SortedSet<CurricularCourse> result = new TreeSet<CurricularCourse>(CurricularCourse.COMPARATOR_BY_NAME);
+        final SortedSet<CurricularCourse> result = new TreeSet<CurricularCourse>(DegreeModule.COMPARATOR_BY_NAME);
 
         for (DegreeCurricularPlan degreeCurricularPlan : getChosenDegreeCurricularPlans()) {
             ExecutionSemester firstSemester = getExecutionYear().getExecutionSemesterFor(1);

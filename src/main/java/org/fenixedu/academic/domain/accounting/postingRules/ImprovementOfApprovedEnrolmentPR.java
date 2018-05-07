@@ -60,7 +60,8 @@ public class ImprovementOfApprovedEnrolmentPR extends ImprovementOfApprovedEnrol
 
     private void checkParameters(Money fixedAmount, Money fixedAmountPenalty) {
         if (fixedAmount == null) {
-            throw new DomainException("error.accounting.postingRules.ImprovementOfApprovedEnrolmentPR.fixedAmount.cannot.be.null");
+            throw new DomainException(
+                    "error.accounting.postingRules.ImprovementOfApprovedEnrolmentPR.fixedAmount.cannot.be.null");
         }
         if (fixedAmountPenalty == null) {
             throw new DomainException(
@@ -117,9 +118,8 @@ public class ImprovementOfApprovedEnrolmentPR extends ImprovementOfApprovedEnrol
     private EnrolmentPeriodInImprovementOfApprovedEnrolment getEnrolmentPeriodInImprovementOfApprovedEnrolment(
             EnrolmentEvaluation enrolmentEvaluation) {
         final DegreeCurricularPlan degreeCurricularPlan = enrolmentEvaluation.getDegreeCurricularPlan();
-        final EnrolmentPeriod enrolmentPeriodInImprovementOfApprovedEnrolment =
-                enrolmentEvaluation.getExecutionPeriod().getEnrolmentPeriod(
-                        EnrolmentPeriodInImprovementOfApprovedEnrolment.class, degreeCurricularPlan);
+        final EnrolmentPeriod enrolmentPeriodInImprovementOfApprovedEnrolment = enrolmentEvaluation.getExecutionPeriod()
+                .getEnrolmentPeriod(EnrolmentPeriodInImprovementOfApprovedEnrolment.class, degreeCurricularPlan);
         if (enrolmentPeriodInImprovementOfApprovedEnrolment == null) {
             throw new DomainException(
                     "error.accounting.postingRules.ImprovementOfApprovedEnrolmentPR.enrolmentPeriodInImprovementOfApprovedEnrolment.must.not.be.null");

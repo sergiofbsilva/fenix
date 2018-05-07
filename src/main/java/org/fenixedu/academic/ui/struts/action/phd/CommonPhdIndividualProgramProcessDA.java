@@ -227,7 +227,8 @@ abstract public class CommonPhdIndividualProgramProcessDA extends PhdProcessDA {
         return forwardToAlertMessageArchive(mapping, request, yearMonthBean);
     }
 
-    private ActionForward forwardToAlertMessageArchive(ActionMapping mapping, HttpServletRequest request, YearMonth yearMonthBean) {
+    private ActionForward forwardToAlertMessageArchive(ActionMapping mapping, HttpServletRequest request,
+            YearMonth yearMonthBean) {
         Integer year = yearMonthBean.getYear();
         if (year == null) {
             year = Integer.valueOf(ExecutionYear.readCurrentExecutionYear().getYear());

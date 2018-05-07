@@ -34,9 +34,8 @@ public class StudentExecutionYearsProvider implements DataProvider {
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        List<ExecutionYear> result =
-                new ArrayList(((RegistrationSelectExecutionYearBean) source).getRegistration().getStudent()
-                        .getEnrolmentsExecutionYears());
+        List<ExecutionYear> result = new ArrayList(
+                ((RegistrationSelectExecutionYearBean) source).getRegistration().getStudent().getEnrolmentsExecutionYears());
         Collections.sort(result, new BeanComparator("year"));
         return result;
     }

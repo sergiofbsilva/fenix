@@ -55,8 +55,8 @@ public class EvenOddExecuter extends CurricularRuleExecutor {
 
     private RuleResult createFalseRuleResult(final EvenOddRule rule, final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
         return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                "curricularRules.ruleExecutors.EvenOddExecutor.invalid.number", rule.getEvenOddString(), rule
-                        .getDegreeModuleToApplyRule().getName());
+                "curricularRules.ruleExecutors.EvenOddExecutor.invalid.number", rule.getEvenOddString(),
+                rule.getDegreeModuleToApplyRule().getName());
     }
 
     private boolean isEven(int number) {

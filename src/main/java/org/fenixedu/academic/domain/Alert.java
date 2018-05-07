@@ -19,8 +19,8 @@
 package org.fenixedu.academic.domain;
 
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 public abstract class Alert extends Alert_Base {

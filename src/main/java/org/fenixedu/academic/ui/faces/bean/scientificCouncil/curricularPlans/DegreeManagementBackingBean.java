@@ -170,8 +170,8 @@ public class DegreeManagementBackingBean extends FenixBackingBean {
     }
 
     public String getNameEn() {
-        return (nameEn == null && getDegree() != null) ? (nameEn =
-                getDegree().getNameFor(getSelectedExecutionYear()).getContent(org.fenixedu.academic.util.LocaleUtils.EN)) : nameEn;
+        return (nameEn == null && getDegree() != null) ? (nameEn = getDegree().getNameFor(getSelectedExecutionYear())
+                .getContent(org.fenixedu.academic.util.LocaleUtils.EN)) : nameEn;
     }
 
     public void setNameEn(String nameEn) {
@@ -336,10 +336,9 @@ public class DegreeManagementBackingBean extends FenixBackingBean {
         }
 
         try {
-            EditDegree.run(this.getDegreeId(), name, nameEn, this.acronym,
-                    FenixFramework.getDomainObject(getBolonhaDegreeType()), this.getEctsCredits(),
-                    GradeScale.valueOf(gradeScale), this.prevailingScientificArea, getSelectedExecutionYear(), getCode(),
-                    getMinistryCode());
+            EditDegree.run(this.getDegreeId(), name, nameEn, this.acronym, FenixFramework.getDomainObject(getBolonhaDegreeType()),
+                    this.getEctsCredits(), GradeScale.valueOf(gradeScale), this.prevailingScientificArea,
+                    getSelectedExecutionYear(), getCode(), getMinistryCode());
         } catch (IllegalDataAccessException e) {
             this.addErrorMessage(BundleUtil.getString(Bundle.SCIENTIFIC, "error.notAuthorized"));
             return "curricularPlansManagement";
@@ -702,9 +701,8 @@ public class DegreeManagementBackingBean extends FenixBackingBean {
                 return "";
             }
 
-            LocalDate localDate =
-                    new LocalDate(Integer.parseInt(dateFields[2]), Integer.parseInt(dateFields[1]),
-                            Integer.parseInt(dateFields[0]));
+            LocalDate localDate = new LocalDate(Integer.parseInt(dateFields[2]), Integer.parseInt(dateFields[1]),
+                    Integer.parseInt(dateFields[0]));
 
             Degree degree = getDegree();
 
@@ -735,9 +733,8 @@ public class DegreeManagementBackingBean extends FenixBackingBean {
         }
 
         public DegreeOfficialPublication getDegreeOfficialPublication() {
-            this.degreeOfficialPublication =
-                    (this.getOfficialPubId() == null ? null : (DegreeOfficialPublication) FenixFramework
-                            .getDomainObject(getOfficialPubId()));
+            this.degreeOfficialPublication = (this.getOfficialPubId() == null ? null : (DegreeOfficialPublication) FenixFramework
+                    .getDomainObject(getOfficialPubId()));
 
             return this.degreeOfficialPublication;
         }

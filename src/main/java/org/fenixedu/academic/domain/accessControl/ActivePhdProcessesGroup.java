@@ -27,8 +27,8 @@ public class ActivePhdProcessesGroup extends GroupStrategy {
     public Stream<User> getMembers() {
         return Bennu.getInstance().getPhdProgramsSet().stream()
                 .flatMap(program -> program.getIndividualProgramProcessesSet().stream())
-                .filter(PhdIndividualProgramProcess::isProcessActive).map(PhdIndividualProgramProcess::getPerson).map
-                        (Person::getUser);
+                .filter(PhdIndividualProgramProcess::isProcessActive).map(PhdIndividualProgramProcess::getPerson)
+                .map(Person::getUser);
     }
 
     @Override

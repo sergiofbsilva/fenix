@@ -72,8 +72,7 @@ import pt.ist.fenixframework.Atomic;
 
 @StrutsFunctionality(app = CompetenceCourseManagementApp.class, path = "versions", titleKey = "label.manage.versions")
 @Mapping(module = "bolonhaManager", path = "/competenceCourses/manageVersions")
-@Forwards({
-        @Forward(name = "showCourses", path = "/bolonhaManager/competenceCourseVersions/listCompetenceCourses.jsp"),
+@Forwards({ @Forward(name = "showCourses", path = "/bolonhaManager/competenceCourseVersions/listCompetenceCourses.jsp"),
         @Forward(name = "createVersions", path = "/bolonhaManager/competenceCourseVersions/createVersion.jsp"),
         @Forward(name = "viewVersions", path = "/bolonhaManager/competenceCourseVersions/viewVersions.jsp"),
         @Forward(name = "viewVersionDetails", path = "/bolonhaManager/competenceCourseVersions/viewVersionDetails.jsp"),
@@ -85,16 +84,15 @@ import pt.ist.fenixframework.Atomic;
 public class ManageCompetenceCourseInformationVersions extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         CompetenceCourseInformationRequestBean requestBean = getOrCreateRequestBean(request);
         List<Department> departments = Bennu.getInstance().getDepartmentsSet().stream()
                 .filter(dep -> dep.getCompetenceCourseMembersGroup().isMember(Authenticate.getUser()))
-                .sorted(Department.COMPARATOR_BY_NAME)
-                .collect(Collectors.toList());
+                .sorted(Department.COMPARATOR_BY_NAME).collect(Collectors.toList());
         request.setAttribute("departments", departments);
         Department department = getDepartment(request, departments);
-        request.setAttribute(
-                "department", department);
+        request.setAttribute("department", department);
         request.setAttribute("competenceCourseMembersGroupMembers", department == null ? null : department
                 .getCompetenceCourseMembersGroup().getMembers().collect(Collectors.toSet()));
         request.setAttribute("requestBean", requestBean);
@@ -150,14 +148,13 @@ public class ManageCompetenceCourseInformationVersions extends FenixDispatchActi
         }
 
         if (bean == null) {
-            CompetenceCourseInformation courseInformation = course.findCompetenceCourseInformationForExecutionPeriod((period != null) ? period : ExecutionSemester
-                    .readActualExecutionSemester());
+            CompetenceCourseInformation courseInformation = course.findCompetenceCourseInformationForExecutionPeriod(
+                    (period != null) ? period : ExecutionSemester.readActualExecutionSemester());
             if (courseInformation != null) {
-                bean =
-                    new CompetenceCourseInformationRequestBean(courseInformation);
+                bean = new CompetenceCourseInformationRequestBean(courseInformation);
             } else {
-                bean = new CompetenceCourseInformationRequestBean(course, (period != null) ? period : ExecutionSemester
-                        .readActualExecutionSemester());
+                bean = new CompetenceCourseInformationRequestBean(course,
+                        (period != null) ? period : ExecutionSemester.readActualExecutionSemester());
             }
         } else {
             if (information == null) {
@@ -174,11 +171,10 @@ public class ManageCompetenceCourseInformationVersions extends FenixDispatchActi
         } else {
             if (information != null && information.getCompetenceCourseLoadsSet().size() > 0) {
                 load = new CompetenceCourseLoadBean(information.getCompetenceCourseLoadsSet().iterator().next());
-            } else if (period != null
-                    && course.findCompetenceCourseInformationForExecutionPeriod(period).getCompetenceCourseLoadsSet().size() > 0) {
-                load =
-                        new CompetenceCourseLoadBean(course.findCompetenceCourseInformationForExecutionPeriod(period)
-                                .getCompetenceCourseLoadsSet().iterator().next());
+            } else if (period != null && course.findCompetenceCourseInformationForExecutionPeriod(period)
+                    .getCompetenceCourseLoadsSet().size() > 0) {
+                load = new CompetenceCourseLoadBean(course.findCompetenceCourseInformationForExecutionPeriod(period)
+                        .getCompetenceCourseLoadsSet().iterator().next());
             } else {
                 load = new CompetenceCourseLoadBean();
             }

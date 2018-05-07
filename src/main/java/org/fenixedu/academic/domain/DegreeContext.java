@@ -38,8 +38,8 @@ public class DegreeContext extends DegreeContext_Base {
         setPeriod(period);
     }
 
-    private void checkParameters(DegreeCurricularPlan degreeCurricularPlan, AcademicPeriod period,
-            AcademicInterval beginInterval, AcademicInterval endInterval) {
+    private void checkParameters(DegreeCurricularPlan degreeCurricularPlan, AcademicPeriod period, AcademicInterval beginInterval,
+            AcademicInterval endInterval) {
         if (degreeCurricularPlan == null || period == null || beginInterval == null) {
             throw new DomainException("error.degree.context.wrong.arguments");
         }

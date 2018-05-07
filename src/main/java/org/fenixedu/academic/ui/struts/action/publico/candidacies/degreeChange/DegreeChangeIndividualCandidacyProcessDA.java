@@ -56,13 +56,13 @@ import org.slf4j.LoggerFactory;
 
 @StrutsFunctionality(app = PublicCandidaciesApp.class, path = "degree-change", titleKey = "title.application.name.degreeChange")
 @Mapping(path = "/candidacies/caseHandlingDegreeChangeIndividualCandidacyProcess", module = "publico")
-@Forwards({
-        @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/degreechange/main.jsp"),
+@Forwards({ @Forward(name = "begin-candidacy-process-intro", path = "/publico/candidacy/degreechange/main.jsp"),
         @Forward(name = "begin-candidacy-process-intro-en", path = "/publico/candidacy/degreechange/main.jsp"),
         @Forward(name = "open-candidacy-process-closed", path = "/publico/candidacy/candidacyProcessClosed.jsp"),
         @Forward(name = "show-pre-creation-candidacy-form", path = "/publico/candidacy/preCreationCandidacyForm.jsp"),
         @Forward(name = "show-email-message-sent", path = "/publico/candidacy/showEmailSent.jsp"),
-        @Forward(name = "show-application-submission-conditions", path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
+        @Forward(name = "show-application-submission-conditions",
+                path = "/publico/candidacy/applicationSubmissionConditions.jsp"),
         @Forward(name = "open-candidacy-processes-not-found", path = "/publico/candidacy/individualCandidacyNotFound.jsp"),
         @Forward(name = "show-candidacy-creation-page", path = "/publico/candidacy/degreechange/createCandidacyPartOne.jsp"),
         @Forward(name = "candidacy-continue-creation", path = "/publico/candidacy/degreechange/createCandidacyPartTwo.jsp"),

@@ -92,8 +92,8 @@ public class ApprovementCertificate extends AdministrativeOfficeDocument {
         entries.clear();
         entries.addAll(request.getPropaedeuticEntriesToReport());
         if (!entries.isEmpty()) {
-            reportRemainingEntries(res, entries, ids, registration.getLastStudentCurricularPlan()
-                    .getPropaedeuticCurriculumGroup());
+            reportRemainingEntries(res, entries, ids,
+                    registration.getLastStudentCurricularPlan().getPropaedeuticCurriculumGroup());
         }
 
         if (getDocumentRequest().isToShowCredits()) {
@@ -173,9 +173,8 @@ public class ApprovementCertificate extends AdministrativeOfficeDocument {
 
     final private void reportEntry(final StringBuilder result, final ICurriculumEntry entry,
             final Map<Unit, String> academicUnitIdentifiers, final ExecutionYear executionYear) {
-        result.append(
-                FenixStringTools.multipleLineRightPadWithSuffix(getCurriculumEntryName(academicUnitIdentifiers, entry),
-                        LINE_LENGTH, END_CHAR, getCreditsAndGradeInfo(entry, executionYear))).append(LINE_BREAK);
+        result.append(FenixStringTools.multipleLineRightPadWithSuffix(getCurriculumEntryName(academicUnitIdentifiers, entry),
+                LINE_LENGTH, END_CHAR, getCreditsAndGradeInfo(entry, executionYear))).append(LINE_BREAK);
     }
 
     @Override
@@ -184,9 +183,8 @@ public class ApprovementCertificate extends AdministrativeOfficeDocument {
         final CertificateRequestPR certificateRequestPR = (CertificateRequestPR) getPostingRule();
 
         final Money amountPerPage = certificateRequestPR.getAmountPerPage();
-        final Money baseAmountPlusAmountForUnits =
-                certificateRequestPR.getBaseAmount().add(
-                        certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
+        final Money baseAmountPlusAmountForUnits = certificateRequestPR.getBaseAmount()
+                .add(certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
         final Money urgencyAmount = certificateRequest.getUrgentRequest() ? certificateRequestPR.getBaseAmount() : Money.ZERO;
 
         addParameter("amountPerPage", amountPerPage);

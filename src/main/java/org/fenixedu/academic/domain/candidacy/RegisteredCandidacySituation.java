@@ -63,9 +63,8 @@ public class RegisteredCandidacySituation extends RegisteredCandidacySituation_B
 
         if (getCandidacy() instanceof DFACandidacy) {
             DFACandidacy dfaCandidacy = ((DFACandidacy) getCandidacy());
-            registration =
-                    new Registration(person, dfaCandidacy.getExecutionDegree().getDegreeCurricularPlan(), dfaCandidacy,
-                            registrationProtocol, cycleType, dfaCandidacy.getExecutionDegree().getExecutionYear());
+            registration = new Registration(person, dfaCandidacy.getExecutionDegree().getDegreeCurricularPlan(), dfaCandidacy,
+                    registrationProtocol, cycleType, dfaCandidacy.getExecutionDegree().getExecutionYear());
 
             //person.addPersonRoles(Role.getRoleByRoleType(RoleType.STUDENT));
             dfaCandidacy.setRegistration(registration);
@@ -89,8 +88,8 @@ public class RegisteredCandidacySituation extends RegisteredCandidacySituation_B
             qualification.setSchool(dfaCandidacy.getPrecedentDegreeInformation().getInstitutionName());
             qualification.setDegree(dfaCandidacy.getPrecedentDegreeInformation().getDegreeDesignation());
             if (dfaCandidacy.getPrecedentDegreeInformation().getConclusionYear() != null) {
-                qualification.setDateYearMonthDay(new YearMonthDay(dfaCandidacy.getPrecedentDegreeInformation()
-                        .getConclusionYear(), 1, 1));
+                qualification.setDateYearMonthDay(
+                        new YearMonthDay(dfaCandidacy.getPrecedentDegreeInformation().getConclusionYear(), 1, 1));
             }
             qualification.setCountry(dfaCandidacy.getPrecedentDegreeInformation().getCountry());
         }

@@ -35,8 +35,8 @@ import org.fenixedu.academic.domain.administrativeOffice.AdministrativeOffice;
 import org.fenixedu.academic.domain.degreeStructure.CompetenceCourseInformation;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.YearMonthDay;
 
@@ -138,8 +138,8 @@ public class CompetenceCourseGroupUnit extends CompetenceCourseGroupUnit_Base {
             if (competenceInformation.getCompetenceCourse().getCompetenceCourseGroupUnit() == this) {
                 result.add(competenceInformation.getCompetenceCourse());
             }
-            if (competenceInformation.getCompetenceCourse().getCompetenceCourseGroupUnit(
-                    ExecutionSemester.readLastExecutionSemester()) == this) {
+            if (competenceInformation.getCompetenceCourse()
+                    .getCompetenceCourseGroupUnit(ExecutionSemester.readLastExecutionSemester()) == this) {
                 result.add(competenceInformation.getCompetenceCourse());
             }
         }

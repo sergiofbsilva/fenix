@@ -36,8 +36,8 @@ public class CreateStudentCurricularPlan {
 
     @Atomic
     public static void run(final Integer studentNumber, final DegreeType degreeType,
-            final StudentCurricularPlanState studentCurricularPlanState, final String degreeCurricularPlanId, final Date startDate)
-            throws FenixServiceException {
+            final StudentCurricularPlanState studentCurricularPlanState, final String degreeCurricularPlanId,
+            final Date startDate) throws FenixServiceException {
         final Registration registration = Registration.readStudentByNumberAndDegreeType(studentNumber, degreeType);
         if (registration == null) {
             throw new NonExistingServiceException("exception.student.does.not.exist");
@@ -48,8 +48,8 @@ public class CreateStudentCurricularPlan {
             throw new NonExistingServiceException("exception.degree.curricular.plan.does.not.exist");
         }
 
-        StudentCurricularPlan
-                .createWithEmptyStructure(registration, degreeCurricularPlan, YearMonthDay.fromDateFields(startDate));
+        StudentCurricularPlan.createWithEmptyStructure(registration, degreeCurricularPlan,
+                YearMonthDay.fromDateFields(startDate));
     }
 
 }

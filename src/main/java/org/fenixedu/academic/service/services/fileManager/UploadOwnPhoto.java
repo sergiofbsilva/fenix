@@ -29,9 +29,9 @@ import org.fenixedu.academic.dto.person.PhotographUploadBean;
 import org.fenixedu.academic.predicate.AccessControl;
 import org.fenixedu.academic.util.ContentType;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.ByteStreams;
+
+import pt.ist.fenixframework.Atomic;
 
 /**
  * @author Pedro Santos (pmrsa)

@@ -141,9 +141,9 @@ public class ApprovementMobilityCertificate extends AdministrativeOfficeDocument
         final Map<Unit, String> ids = new HashMap<Unit, String>();
         for (final ICurriculumEntry entry : entries) {
             final ExecutionYear executionYear = entry.getExecutionYear();
-            beans.add(new ApprovementMobilityCertificateBean(getCurriculumEntryName(ids, entry), entry
-                    .getEctsCreditsForCurriculum().toString(), entry.getGradeValue(), getEctsGrade(entry), executionYear
-                    .getYear()));
+            beans.add(new ApprovementMobilityCertificateBean(getCurriculumEntryName(ids, entry),
+                    entry.getEctsCreditsForCurriculum().toString(), entry.getGradeValue(), getEctsGrade(entry),
+                    executionYear.getYear()));
         }
         StringBuilder extraInfo = new StringBuilder();
         if (!ids.isEmpty()) {
@@ -165,13 +165,13 @@ public class ApprovementMobilityCertificate extends AdministrativeOfficeDocument
             final StringBuilder unit = new StringBuilder();
 
             unit.append(academicUnitId.getValue());
-            unit.append(SINGLE_SPACE).append(
-                    BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "documents.external.curricular.courses.one"));
+            unit.append(SINGLE_SPACE)
+                    .append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "documents.external.curricular.courses.one"));
             unit.append(SINGLE_SPACE).append(getMLSTextContent(academicUnitId.getKey().getPartyName()).toUpperCase());
 
             if (description.length() > 0) {
-                unit.append(SINGLE_SPACE).append(
-                        BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "documents.external.curricular.courses.two"));
+                unit.append(SINGLE_SPACE)
+                        .append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "documents.external.curricular.courses.two"));
                 unit.append(SINGLE_SPACE).append(description);
             }
             result.append(unit.toString());
@@ -204,9 +204,8 @@ public class ApprovementMobilityCertificate extends AdministrativeOfficeDocument
         if (entry instanceof IEnrolment) {
             IEnrolment enrolment = (IEnrolment) entry;
             try {
-                Grade grade =
-                        enrolment.getEctsGrade(getDocumentRequest().getRegistration().getLastStudentCurricularPlan(),
-                                processingDate);
+                Grade grade = enrolment.getEctsGrade(getDocumentRequest().getRegistration().getLastStudentCurricularPlan(),
+                        processingDate);
                 return grade.getValue();
             } catch (NoEctsComparabilityTableFound nectfe) {
                 return "--";
@@ -232,8 +231,8 @@ public class ApprovementMobilityCertificate extends AdministrativeOfficeDocument
             getCreditsInfo(result, entry);
         }
         result.append(entry.getGradeValue());
-        result.append(StringUtils.rightPad("(" + BundleUtil.getString(Bundle.ENUMERATION, getLocale(), entry.getGradeValue())
-                + ")", SUFFIX_LENGTH, ' '));
+        result.append(StringUtils.rightPad(
+                "(" + BundleUtil.getString(Bundle.ENUMERATION, getLocale(), entry.getGradeValue()) + ")", SUFFIX_LENGTH, ' '));
 
         result.append(", ");
 
@@ -261,9 +260,8 @@ public class ApprovementMobilityCertificate extends AdministrativeOfficeDocument
         final CertificateRequestPR certificateRequestPR = (CertificateRequestPR) getPostingRule();
 
         final Money amountPerPage = certificateRequestPR.getAmountPerPage();
-        final Money baseAmountPlusAmountForUnits =
-                certificateRequestPR.getBaseAmount().add(
-                        certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
+        final Money baseAmountPlusAmountForUnits = certificateRequestPR.getBaseAmount()
+                .add(certificateRequestPR.getAmountForUnits(certificateRequest.getNumberOfUnits()));
         final Money urgencyAmount = certificateRequest.getUrgentRequest() ? certificateRequestPR.getBaseAmount() : Money.ZERO;
 
         addParameter("amountPerPage", amountPerPage);

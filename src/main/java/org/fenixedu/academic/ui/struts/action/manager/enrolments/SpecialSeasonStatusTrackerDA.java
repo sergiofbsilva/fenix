@@ -98,9 +98,10 @@ public class SpecialSeasonStatusTrackerDA extends FenixDispatchAction {
                     for (Enrolment enrolment : course.getActiveEnrollments(bean.getExecutionSemester())) {
                         if (enrolment.isSpecialSeason()) {
                             enrolments.add(enrolment);
-                            bean.addEntry(enrolment.getRegistration().getNumber(), enrolment.getRegistration().getPerson()
-                                    .getName(), enrolment.getRegistration().getDegree().getSigla(), enrolment
-                                    .getCurricularCourse().getName(bean.getExecutionSemester()));
+                            bean.addEntry(enrolment.getRegistration().getNumber(),
+                                    enrolment.getRegistration().getPerson().getName(),
+                                    enrolment.getRegistration().getDegree().getSigla(),
+                                    enrolment.getCurricularCourse().getName(bean.getExecutionSemester()));
                         }
                     }
                 }
@@ -169,23 +170,23 @@ public class SpecialSeasonStatusTrackerDA extends FenixDispatchAction {
 
         spreadsheet.setHeaders(new String[] {
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.username"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.username"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.number"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.number"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.name"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.email"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.email"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.Degree"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.Degree"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.curricularPlan"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.curricularPlan"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.curricular.course.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.curricular.course.name"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.curricular.course.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.curricular.course.name"),
 
-        " ", " " });
+                " ", " " });
 
         return spreadsheet;
     }

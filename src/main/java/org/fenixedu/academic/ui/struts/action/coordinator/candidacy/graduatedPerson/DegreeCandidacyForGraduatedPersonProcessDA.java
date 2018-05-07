@@ -52,8 +52,8 @@ import pt.ist.fenixframework.FenixFramework;
         functionality = DegreeCoordinatorIndex.class)
 @Forwards({ @Forward(name = "intro", path = "/coordinator/candidacy/graduatedPerson/mainCandidacyProcess.jsp"),
         @Forward(name = "view-candidacy-results", path = "/coordinator/candidacy/graduatedPerson/viewCandidacyResults.jsp") })
-public class DegreeCandidacyForGraduatedPersonProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.graduatedPerson.DegreeCandidacyForGraduatedPersonProcessDA {
+public class DegreeCandidacyForGraduatedPersonProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.graduatedPerson.DegreeCandidacyForGraduatedPersonProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -107,8 +107,8 @@ public class DegreeCandidacyForGraduatedPersonProcessDA extends
         DegreeCurricularPlan degreeCurricularPlan = getDegreeCurricularPlan(request);
 
         for (IndividualCandidacyProcess child : processes) {
-            if (((DegreeCandidacyForGraduatedPersonIndividualProcess) child).getCandidacy().getSelectedDegree() == degreeCurricularPlan
-                    .getDegree()) {
+            if (((DegreeCandidacyForGraduatedPersonIndividualProcess) child).getCandidacy()
+                    .getSelectedDegree() == degreeCurricularPlan.getDegree()) {
                 selectedDegreesIndividualCandidacyProcesses.add(child);
             }
         }

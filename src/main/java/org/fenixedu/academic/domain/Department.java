@@ -51,10 +51,10 @@ import org.fenixedu.academic.domain.organizationalStructure.ScientificAreaUnit;
 import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.fenixedu.academic.domain.time.calendarStructure.AcademicInterval;
 import org.fenixedu.academic.predicate.AccessControl;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class Department extends Department_Base {
 
@@ -79,8 +79,8 @@ public class Department extends Department_Base {
     }
 
     public List<Teacher> getAllTeachers(ExecutionSemester semester) {
-        return getTeacherAuthorizationStream().filter(a -> a.getExecutionSemester().equals(semester)).map(TeacherAuthorization::getTeacher)
-                .distinct().collect(Collectors.toList());
+        return getTeacherAuthorizationStream().filter(a -> a.getExecutionSemester().equals(semester))
+                .map(TeacherAuthorization::getTeacher).distinct().collect(Collectors.toList());
     }
 
     public List<Teacher> getAllTeachers(ExecutionYear executionYear) {

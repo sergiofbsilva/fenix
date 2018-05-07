@@ -53,7 +53,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
         @Forward(name = "cannotChange", path = "/candidate/cannotChangePersonalData.jsp") })
 public class ChangePersonalDataDispatchAction extends FenixDispatchAction {
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final Candidacy candidacy = getCandidacy(request);
         if (candidacy instanceof DFACandidacy && candidacy.getActiveCandidacySituation().canChangePersonalData()) {
@@ -72,17 +73,15 @@ public class ChangePersonalDataDispatchAction extends FenixDispatchAction {
     public ActionForward change(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
             throws FenixServiceException {
 
-        PrecedentDegreeInformationBean precedentDegreeInformation =
-                (PrecedentDegreeInformationBean) RenderUtils.getViewState("precedentDegreeInformation").getMetaObject()
-                        .getObject();
+        PrecedentDegreeInformationBean precedentDegreeInformation = (PrecedentDegreeInformationBean) RenderUtils
+                .getViewState("precedentDegreeInformation").getMetaObject().getObject();
 
         EditPrecedentDegreeInformation.run(precedentDegreeInformation);
 
         try {
-            StateMachineRunner
-                    .run(new StateMachineRunner.RunnerArgs(precedentDegreeInformation.getPrecedentDegreeInformation()
-                            .getStudentCandidacy().getActiveCandidacySituation(), CandidacySituationType.STAND_BY_FILLED_DATA
-                            .toString()));
+            StateMachineRunner.run(new StateMachineRunner.RunnerArgs(precedentDegreeInformation.getPrecedentDegreeInformation()
+                    .getStudentCandidacy().getActiveCandidacySituation(),
+                    CandidacySituationType.STAND_BY_FILLED_DATA.toString()));
         } catch (DomainException e) {
             // Didn't move to next state
         }

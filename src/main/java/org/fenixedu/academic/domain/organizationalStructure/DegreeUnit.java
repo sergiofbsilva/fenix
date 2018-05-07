@@ -36,10 +36,9 @@ public class DegreeUnit extends DegreeUnit_Base {
         super.setType(PartyTypeEnum.DEGREE_UNIT);
     }
 
-    public static DegreeUnit createNewInternalDegreeUnit(LocalizedString unitName, String unitNameCard,
-            Integer costCenterCode, String acronym, YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit,
-            AccountabilityType accountabilityType, String webAddress, Degree degree, UnitClassification classification,
-            Boolean canBeResponsibleOfSpaces, Space campus) {
+    public static DegreeUnit createNewInternalDegreeUnit(LocalizedString unitName, String unitNameCard, Integer costCenterCode,
+            String acronym, YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit, AccountabilityType accountabilityType,
+            String webAddress, Degree degree, UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
 
         DegreeUnit degreeUnit = new DegreeUnit();
         degreeUnit.init(unitName, unitNameCard, costCenterCode, acronym, beginDate, endDate, webAddress, classification, null,

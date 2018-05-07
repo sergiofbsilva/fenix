@@ -28,7 +28,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 @Forwards({
         @Forward(name = "intro", path = "/nape/caseHandlingSecondCycleCandidacyProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "list-allowed-activities", path = "/nape/candidacy/secondCycle/listIndividualCandidacyActivities.jsp") })
-public class SecondCycleIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleIndividualCandidacyProcessDA {
+public class SecondCycleIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleIndividualCandidacyProcessDA {
 
 }

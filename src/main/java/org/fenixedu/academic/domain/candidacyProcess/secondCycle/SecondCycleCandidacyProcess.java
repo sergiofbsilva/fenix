@@ -148,8 +148,8 @@ public class SecondCycleCandidacyProcess extends SecondCycleCandidacyProcess_Bas
             final SecondCycleIndividualCandidacyProcess process) {
         for (Degree degree : process.getSelectedDegrees()) {
             SortedSet<SecondCycleIndividualCandidacyProcess> values =
-                result.computeIfAbsent(degree, key -> (new TreeSet<SecondCycleIndividualCandidacyProcess>(
-                        SecondCycleIndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON)));
+                    result.computeIfAbsent(degree, key -> (new TreeSet<SecondCycleIndividualCandidacyProcess>(
+                            IndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON)));
             values.add(process);
         }
     }
@@ -164,12 +164,13 @@ public class SecondCycleCandidacyProcess extends SecondCycleCandidacyProcess_Bas
         return result;
     }
 
-    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES = DegreeType.oneOf(DegreeType::isBolonhaMasterDegree,
-            DegreeType::isIntegratedMasterDegree);
+    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }

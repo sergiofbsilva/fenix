@@ -63,9 +63,8 @@ public class OutboundMobilityCandidacyPeriod extends OutboundMobilityCandidacyPe
                 final OutboundMobilityCandidacyContestGroup newGroup =
                         new OutboundMobilityCandidacyContestGroup(group.getExecutionDegreeSet());
                 for (final OutboundMobilityCandidacyContest contest : group.getOutboundMobilityCandidacyContestSet()) {
-                    final OutboundMobilityCandidacyContest newContest =
-                            new OutboundMobilityCandidacyContest(this, newGroup, contest.getMobilityAgreement(),
-                                    contest.getVacancies());
+                    final OutboundMobilityCandidacyContest newContest = new OutboundMobilityCandidacyContest(this, newGroup,
+                            contest.getMobilityAgreement(), contest.getVacancies());
                     newGroup.getOutboundMobilityCandidacyContestSet().add(newContest);
                 }
                 newGroup.getMobilityCoordinatorSet().addAll(group.getMobilityCoordinatorSet());
@@ -151,7 +150,8 @@ public class OutboundMobilityCandidacyPeriod extends OutboundMobilityCandidacyPe
 
     public OutboundMobilityCandidacySubmission findSubmissionFor(final Person person) {
         for (final Registration registration : person.getStudent().getRegistrationsSet()) {
-            for (final OutboundMobilityCandidacySubmission submission : registration.getOutboundMobilityCandidacySubmissionSet()) {
+            for (final OutboundMobilityCandidacySubmission submission : registration
+                    .getOutboundMobilityCandidacySubmissionSet()) {
                 if (submission.getOutboundMobilityCandidacyPeriod() == this) {
                     return submission;
                 }
@@ -306,8 +306,8 @@ public class OutboundMobilityCandidacyPeriod extends OutboundMobilityCandidacyPe
                 } else {
                     if (!gv.equals(grade.getGrade())) {
                         final Registration registration = submission.getRegistration();
-                        error.append(getString("label.error.student.has.different.grades.in.different.groups", registration
-                                .getPerson().getUsername(), registration.getDegree().getSigla()));
+                        error.append(getString("label.error.student.has.different.grades.in.different.groups",
+                                registration.getPerson().getUsername(), registration.getDegree().getSigla()));
                         error.append("\n");
                     }
                 }
@@ -347,8 +347,9 @@ public class OutboundMobilityCandidacyPeriod extends OutboundMobilityCandidacyPe
             }
             if (selectedCandidacy != selections.get(submission)) {
                 final Registration registration = submission.getRegistration();
-                result.append(getString("label.changed.candidate.selection", registration.getPerson().getUsername(), registration
-                        .getDegree().getSigla(), printPlacement(selections.get(submission)), printPlacement(selectedCandidacy)));
+                result.append(getString("label.changed.candidate.selection", registration.getPerson().getUsername(),
+                        registration.getDegree().getSigla(), printPlacement(selections.get(submission)),
+                        printPlacement(selectedCandidacy)));
                 result.append("\n");
             }
         }

@@ -34,6 +34,7 @@ import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.ExecutionDegree;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.Person;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
 import org.fenixedu.academic.service.services.person.SearchPerson;
 import org.fenixedu.academic.service.services.person.SearchPerson.SearchParameters;
@@ -118,7 +119,7 @@ public class ManageSecondCycleThesisSearchBean implements Serializable {
     }
 
     public SortedSet<Person> findPersonBySearchString() {
-        final SortedSet<Person> result = new TreeSet<Person>(Person.COMPARATOR_BY_NAME_AND_ID);
+        final SortedSet<Person> result = new TreeSet<Person>(Party.COMPARATOR_BY_NAME_AND_ID);
         if (searchString != null && !searchString.isEmpty()) {
             result.addAll(searchName(searchString));
             result.addAll(searchUsername(searchString));

@@ -79,9 +79,8 @@ public class RestrictionBetweenDegreeModules extends RestrictionBetweenDegreeMod
         labelList.add(new GenericPair<Object, Boolean>(": ", false));
 
         // getting full name only for course groups
-        String precedenceDegreeModule =
-                (getPrecedenceDegreeModule().isLeaf()) ? getPrecedenceDegreeModule().getName() : getPrecedenceDegreeModule()
-                        .getOneFullName();
+        String precedenceDegreeModule = (getPrecedenceDegreeModule().isLeaf()) ? getPrecedenceDegreeModule()
+                .getName() : getPrecedenceDegreeModule().getOneFullName();
         labelList.add(new GenericPair<Object, Boolean>(precedenceDegreeModule, false));
 
         if (getMinimumCredits().doubleValue() != 0.0) {

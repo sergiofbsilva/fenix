@@ -61,8 +61,8 @@ public class UTLScholarshipReportDA extends FenixDispatchAction {
         Spreadsheet spreadsheet = bean.buildSpreadsheet();
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment; filename=bolsa_accao_social_utl_" + registration.getNumber()
-                + ".xls");
+        response.setHeader("Content-Disposition",
+                "attachment; filename=bolsa_accao_social_utl_" + registration.getNumber() + ".xls");
         spreadsheet.exportToXLSSheet(response.getOutputStream());
 
         return null;

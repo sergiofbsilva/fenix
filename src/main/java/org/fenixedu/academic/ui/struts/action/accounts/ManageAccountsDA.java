@@ -38,10 +38,10 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
+import com.google.common.base.Strings;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
-
-import com.google.common.base.Strings;
 
 @StrutsFunctionality(app = AccountManagementApp.class, path = "manage-accounts",
         titleKey = "link.accountmanagement.manageaccounts")
@@ -59,7 +59,8 @@ public class ManageAccountsDA extends FenixDispatchAction {
         return mapping.findForward("manageAccounts");
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         SearchParametersBean parameters = getRenderedObject("searchParameters");
         request.setAttribute("matches", parameters.search());
         return mapping.findForward("manageAccounts");
@@ -79,9 +80,8 @@ public class ManageAccountsDA extends FenixDispatchAction {
             results = Person.findPersonByDocumentID(bean.getDocumentIdNumber());
         }
         if (!Strings.isNullOrEmpty(bean.getGivenNames()) || !Strings.isNullOrEmpty(bean.getFamilyNames())) {
-            String name =
-                    Stream.of(bean.getGivenNames(), bean.getFamilyNames()).filter(n -> !Strings.isNullOrEmpty(n))
-                            .collect(Collectors.joining(" "));
+            String name = Stream.of(bean.getGivenNames(), bean.getFamilyNames()).filter(n -> !Strings.isNullOrEmpty(n))
+                    .collect(Collectors.joining(" "));
             Stream<Person> stream = Person.findPersonStream(name, Integer.MAX_VALUE);
             if (results.isEmpty()) {
                 results = stream.collect(Collectors.toSet());

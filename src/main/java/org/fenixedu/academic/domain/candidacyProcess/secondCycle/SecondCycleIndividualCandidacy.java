@@ -359,8 +359,8 @@ public class SecondCycleIndividualCandidacy extends SecondCycleIndividualCandida
 
         Formatter formatter = new Formatter(result);
 
-        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"), getCandidacyProcess()
-                .getProcessCode());
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"),
+                getCandidacyProcess().getProcessCode());
         PrecedentDegreeInformation precedentDegreeInformation = getCandidacyProcess().getPrecedentDegreeInformation();
         formatter.format("%s: %s\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.previous.degree"),
@@ -375,8 +375,7 @@ public class SecondCycleIndividualCandidacy extends SecondCycleIndividualCandida
         formatter.format("%s: %s\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.professionalStatus"),
                 StringUtils.isEmpty(getProfessionalStatus()) ? StringUtils.EMPTY : getProfessionalStatus());
-        formatter.format("%s: %s\n",
-                BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.otherEducation"),
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.otherEducation"),
                 StringUtils.isEmpty(getOtherEducation()) ? StringUtils.EMPTY : getOtherEducation());
         formatter.format("%s: %d\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.professionalExperience"),
@@ -385,12 +384,10 @@ public class SecondCycleIndividualCandidacy extends SecondCycleIndividualCandida
                 getAffinity() != null ? getAffinity() : BigDecimal.ZERO);
         formatter.format("%s: %d\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.degreeNature"),
                 getDegreeNature() != null ? getDegreeNature() : 0);
-        formatter.format("%s: %f\n",
-                BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.candidacyGrade"),
+        formatter.format("%s: %f\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.candidacyGrade"),
                 getCandidacyGrade() != null ? getCandidacyGrade() : BigDecimal.ZERO);
-        formatter
-                .format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.interviewGrade"),
-                        getInterviewGrade());
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.interviewGrade"),
+                getInterviewGrade());
         formatter.format("%s: %f\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.seriesCandidacyGrade"),
                 getSeriesCandidacyGrade() != null ? getSeriesCandidacyGrade() : BigDecimal.ZERO);

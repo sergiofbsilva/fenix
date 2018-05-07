@@ -117,8 +117,8 @@ public class StudentCurricularPlanStandaloneEnrolmentManager extends StudentCurr
     }
 
     private void addEnroledFromStudentCurricularPlan() {
-        for (final IDegreeModuleToEvaluate degreeModuleToEvaluate : getStudentCurricularPlan().getDegreeModulesToEvaluate(
-                getExecutionSemester())) {
+        for (final IDegreeModuleToEvaluate degreeModuleToEvaluate : getStudentCurricularPlan()
+                .getDegreeModulesToEvaluate(getExecutionSemester())) {
             enrolmentContext.addDegreeModuleToEvaluate(degreeModuleToEvaluate);
         }
     }
@@ -156,8 +156,8 @@ public class StudentCurricularPlanStandaloneEnrolmentManager extends StudentCurr
         }
 
         if (isEmptyDegree()) {
-            return actualResult.and(new MaximumNumberOfEctsInStandaloneCurriculumGroup(getStandaloneCurriculumGroup()).evaluate(
-                    getEnroledCurriculumGroup(), enrolmentContext));
+            return actualResult.and(new MaximumNumberOfEctsInStandaloneCurriculumGroup(getStandaloneCurriculumGroup())
+                    .evaluate(getEnroledCurriculumGroup(), enrolmentContext));
         } else {
             return actualResult;
         }

@@ -119,9 +119,9 @@ public class CurricularRulesManager {
                 (DepartmentUnit) FenixFramework.getDomainObject(parametersDTO.getSelectedDepartmentUnitID());
 
         return new AnyCurricularCourse((OptionalCurricularCourse) toApplyRule, contextCourseGroup, begin, end,
-                parametersDTO.getMinimumCredits(), parametersDTO.getMaximumCredits(), parametersDTO.getCurricularPeriodInfoDTO()
-                        .getOrder(), parametersDTO.getMinimumYear(), parametersDTO.getMaximumYear(),
-                parametersDTO.getDegreeType(), degree, departmentUnit);
+                parametersDTO.getMinimumCredits(), parametersDTO.getMaximumCredits(),
+                parametersDTO.getCurricularPeriodInfoDTO().getOrder(), parametersDTO.getMinimumYear(),
+                parametersDTO.getMaximumYear(), parametersDTO.getDegreeType(), degree, departmentUnit);
     }
 
     private static CurricularRule createExclusiveness(DegreeModule firstExclusiveDegreeModule, ExecutionSemester begin,

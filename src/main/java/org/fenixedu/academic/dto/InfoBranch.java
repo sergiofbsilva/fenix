@@ -79,8 +79,8 @@ public class InfoBranch extends InfoObject {
     }
 
     public String getName() {
-        return showEnVersion && getBranch().getNameEn() != null && getBranch().getNameEn().length() > 0 ? getBranch().getNameEn() : getBranch()
-                .getName();
+        return showEnVersion && getBranch().getNameEn() != null && getBranch().getNameEn().length() > 0 ? getBranch()
+                .getNameEn() : getBranch().getName();
     }
 
     public InfoDegreeCurricularPlan getInfoDegreeCurricularPlan() {

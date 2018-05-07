@@ -134,8 +134,8 @@ public class DegreeModuleToEnrol implements Serializable, IDegreeModuleToEvaluat
     public boolean equals(Object obj) {
         if (obj instanceof DegreeModuleToEnrol) {
             final DegreeModuleToEnrol degreeModuleToEnrol = (DegreeModuleToEnrol) obj;
-            return (this.getContext().equals(degreeModuleToEnrol.getContext()) && (this.getCurriculumGroup()
-                    .equals(degreeModuleToEnrol.getCurriculumGroup())));
+            return (this.getContext().equals(degreeModuleToEnrol.getContext())
+                    && (this.getCurriculumGroup().equals(degreeModuleToEnrol.getCurriculumGroup())));
         }
         return false;
     }

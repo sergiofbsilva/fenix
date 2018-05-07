@@ -53,7 +53,8 @@ public class LearningAgreementDocument extends FenixReport {
 
     @Override
     protected void fillReport() {
-        addParameter("mobilityProgram", process.getMobilityProgram().getName().getContent(org.fenixedu.academic.util.LocaleUtils.EN));
+        addParameter("mobilityProgram",
+                process.getMobilityProgram().getName().getContent(org.fenixedu.academic.util.LocaleUtils.EN));
         addParameter("academicYear", process.getCandidacyExecutionInterval().getName());
         addParameter("studentName", process.getPersonalDetails().getName());
         addParameter("sendingInstitution", process.getCandidacy().getMobilityStudentData().getSelectedOpening()
@@ -68,10 +69,10 @@ public class LearningAgreementDocument extends FenixReport {
         for (CurricularCourse course : process.getCandidacy().getCurricularCoursesSet()) {
             String yearAndSemester = buildYearAndSemester(course);
 
-            result.append(
-                    FenixStringTools.multipleLineRightPadWithSuffix(course.getNameI18N().getContent(org.fenixedu.academic.util.LocaleUtils.EN)
-                            + " (" + course.getDegree().getSigla() + ")" + yearAndSemester, LINE_LENGTH, END_CHAR, course
-                            .getEctsCredits().toString())).append(LINE_BREAK);
+            result.append(FenixStringTools.multipleLineRightPadWithSuffix(
+                    course.getNameI18N().getContent(org.fenixedu.academic.util.LocaleUtils.EN) + " ("
+                            + course.getDegree().getSigla() + ")" + yearAndSemester,
+                    LINE_LENGTH, END_CHAR, course.getEctsCredits().toString())).append(LINE_BREAK);
         }
 
         return result.toString();
@@ -81,9 +82,8 @@ public class LearningAgreementDocument extends FenixReport {
         String year = "";
         String semester = "";
 
-        if (course.getParentContextsSet().size() > 1
-                && ((MobilityApplicationProcess) process.getCandidacyProcess()).getForSemester().equals(
-                        ErasmusApplyForSemesterType.SECOND_SEMESTER)) {
+        if (course.getParentContextsSet().size() > 1 && ((MobilityApplicationProcess) process.getCandidacyProcess())
+                .getForSemester().equals(ErasmusApplyForSemesterType.SECOND_SEMESTER)) {
             TreeSet<Integer> years = new TreeSet<Integer>();
             for (Context context : course.getParentContextsSet()) {
                 years.add(context.getCurricularYear());

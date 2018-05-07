@@ -37,9 +37,9 @@ import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 import org.fenixedu.academic.domain.enrolment.IDegreeModuleToEvaluate;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.EnrolmentAction;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.academic.util.predicates.ResultCollection;
 import org.fenixedu.bennu.core.security.Authenticate;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.YearMonthDay;
 
 abstract public class CurriculumLine extends CurriculumLine_Base {
@@ -47,9 +47,8 @@ abstract public class CurriculumLine extends CurriculumLine_Base {
     static final public Comparator<CurriculumLine> COMPARATOR_BY_APPROVEMENT_DATE_AND_ID = new Comparator<CurriculumLine>() {
         @Override
         public int compare(CurriculumLine o1, CurriculumLine o2) {
-            int result =
-                    (o1.getApprovementDate() != null && o2.getApprovementDate() != null) ? o1.getApprovementDate().compareTo(
-                            o2.getApprovementDate()) : 0;
+            int result = (o1.getApprovementDate() != null && o2.getApprovementDate() != null) ? o1.getApprovementDate()
+                    .compareTo(o2.getApprovementDate()) : 0;
             return result == 0 ? DomainObjectUtil.COMPARATOR_BY_ID.compare(o1, o2) : result;
         }
     };
@@ -145,7 +144,8 @@ abstract public class CurriculumLine extends CurriculumLine_Base {
     }
 
     @Override
-    public boolean hasEnrolmentWithEnroledState(final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
+    public boolean hasEnrolmentWithEnroledState(final CurricularCourse curricularCourse,
+            final ExecutionSemester executionSemester) {
         return false;
     }
 
@@ -223,8 +223,8 @@ abstract public class CurriculumLine extends CurriculumLine_Base {
     public LocalizedString getName() {
         ExecutionSemester period = getExecutionPeriod();
         CurricularCourse course = getCurricularCourse();
-        return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT, course.getName(period)).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                course.getNameEn(period));
+        return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.PT, course.getName(period))
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, course.getNameEn(period));
     }
 
     public boolean hasExecutionPeriod() {
@@ -324,9 +324,9 @@ abstract public class CurriculumLine extends CurriculumLine_Base {
 
     abstract public String getModuleTypeName();
 
-	@Override
-	public Stream<CurriculumLine> getCurriculumLineStream() {
-		return Stream.of(this);
-	}
+    @Override
+    public Stream<CurriculumLine> getCurriculumLineStream() {
+        return Stream.of(this);
+    }
 
 }

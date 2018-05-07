@@ -68,19 +68,15 @@ public class ImprovementOfApprovedEnrolmentExecutor extends CurricularRuleExecut
 
         if (!executionSemester.isOneYearAfter(enrolment.getExecutionPeriod())) {
             if (!degreeModule.hasAnyParentContexts(executionSemester)) {
-                return RuleResult
-                        .createFalse(
-                                sourceDegreeModuleToEvaluate.getDegreeModule(),
-                                "curricularRules.ruleExecutors.ImprovementOfApprovedEnrolmentExecutor.degree.module.has.no.context.in.present.execution.period",
-                                degreeModule.getName(), executionSemester.getQualifiedName());
+                return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                        "curricularRules.ruleExecutors.ImprovementOfApprovedEnrolmentExecutor.degree.module.has.no.context.in.present.execution.period",
+                        degreeModule.getName(), executionSemester.getQualifiedName());
             }
 
             if (!enrolment.isImprovingInExecutionPeriodFollowingApproval(executionSemester)) {
-                return RuleResult
-                        .createFalse(
-                                sourceDegreeModuleToEvaluate.getDegreeModule(),
-                                "curricularRules.ruleExecutors.ImprovementOfApprovedEnrolmentExecutor.is.not.improving.in.execution.period.following.approval",
-                                degreeModule.getName());
+                return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                        "curricularRules.ruleExecutors.ImprovementOfApprovedEnrolmentExecutor.is.not.improving.in.execution.period.following.approval",
+                        degreeModule.getName());
             }
         }
 

@@ -55,14 +55,12 @@ public class InfoGratuityValues extends InfoObject {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        result =
-                result.append("[InfoGratuityValues: \n").append("externalId= ").append(getExternalId()).append("\nanualValue= ")
-                        .append(getAnualValue()).append("\nscholarShipPart= ").append(getScholarShipValue())
-                        .append("\nfinalProofValue= ").append(getFinalProofValue()).append("\ncourseValue= ")
-                        .append(getCourseValue()).append("\ncreditValue= ").append(getCreditValue())
-                        .append("\nproofRequestPayment= ").append(getProofRequestPayment()).append("\nstartPayment= ")
-                        .append(getStartPayment()).append("\nendPayment= ").append(getEndPayment())
-                        .append("\nregistrationPayment= ").append(getRegistrationPayment()).append("]");
+        result = result.append("[InfoGratuityValues: \n").append("externalId= ").append(getExternalId()).append("\nanualValue= ")
+                .append(getAnualValue()).append("\nscholarShipPart= ").append(getScholarShipValue()).append("\nfinalProofValue= ")
+                .append(getFinalProofValue()).append("\ncourseValue= ").append(getCourseValue()).append("\ncreditValue= ")
+                .append(getCreditValue()).append("\nproofRequestPayment= ").append(getProofRequestPayment())
+                .append("\nstartPayment= ").append(getStartPayment()).append("\nendPayment= ").append(getEndPayment())
+                .append("\nregistrationPayment= ").append(getRegistrationPayment()).append("]");
         return result.toString();
     }
 

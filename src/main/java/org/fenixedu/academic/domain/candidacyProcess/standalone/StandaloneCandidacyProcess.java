@@ -93,7 +93,7 @@ public class StandaloneCandidacyProcess extends StandaloneCandidacyProcess_Base 
                 result.add((StandaloneIndividualCandidacyProcess) child);
             }
         }
-        Collections.sort(result, StandaloneIndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON);
+        Collections.sort(result, IndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON);
         return result;
     }
 
@@ -114,8 +114,9 @@ public class StandaloneCandidacyProcess extends StandaloneCandidacyProcess_Base 
             DegreeType::isIntegratedMasterDegree, DegreeType::isSpecializationDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }
@@ -136,7 +137,8 @@ public class StandaloneCandidacyProcess extends StandaloneCandidacyProcess_Base 
         @Override
         protected StandaloneCandidacyProcess executeActivity(StandaloneCandidacyProcess process, User userView, Object object) {
             final CandidacyProcessBean bean = (CandidacyProcessBean) object;
-            return new StandaloneCandidacyProcess((ExecutionSemester) bean.getExecutionInterval(), bean.getStart(), bean.getEnd());
+            return new StandaloneCandidacyProcess((ExecutionSemester) bean.getExecutionInterval(), bean.getStart(),
+                    bean.getEnd());
         }
     }
 

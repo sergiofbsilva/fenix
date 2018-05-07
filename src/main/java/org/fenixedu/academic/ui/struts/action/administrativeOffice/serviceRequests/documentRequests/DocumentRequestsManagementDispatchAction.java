@@ -30,8 +30,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jvstm.cps.ConsistencyException;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -59,21 +57,22 @@ import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
+import jvstm.cps.ConsistencyException;
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/documentRequestsManagement", module = "academicAdministration",
         formBeanClass = AcademicServiceRequestsManagementDispatchAction.AcademicServiceRequestsManagementForm.class,
         functionality = AcademicServiceRequestsManagementDispatchAction.class)
-@Forwards({
-        @Forward(name = "printDocument", path = "/academicAdminOffice/serviceRequests/documentRequests/printDocument.jsp"),
+@Forwards({ @Forward(name = "printDocument", path = "/academicAdminOffice/serviceRequests/documentRequests/printDocument.jsp"),
         @Forward(name = "createDocumentRequests",
                 path = "/academicAdminOffice/serviceRequests/documentRequests/createDocumentRequests.jsp"),
         @Forward(name = "viewDocumentRequestsToCreate",
                 path = "/academicAdminOffice/serviceRequests/documentRequests/viewDocumentRequestsToCreate.jsp"),
         @Forward(name = "chooseExamsToCreateExamDateCertificateRequest",
                 path = "/academicAdminOffice/serviceRequests/documentRequests/chooseExamsToCreateExamDateCertificateRequest.jsp"),
-        @Forward(name = "viewRegistrationDetails", path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
+        @Forward(name = "viewRegistrationDetails",
+                path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
         @Forward(name = "processNewAcademicServiceRequest",
                 path = "/academicAdministration/academicServiceRequestsManagement.do?method=processNewAcademicServiceRequest") })
 public class DocumentRequestsManagementDispatchAction extends FenixDispatchAction {
@@ -218,7 +217,8 @@ public class DocumentRequestsManagementDispatchAction extends FenixDispatchActio
         }
     }
 
-    private void setAdditionalInformationSchemaName(HttpServletRequest request, final DocumentRequestCreateBean requestCreateBean) {
+    private void setAdditionalInformationSchemaName(HttpServletRequest request,
+            final DocumentRequestCreateBean requestCreateBean) {
         if (!requestCreateBean.getHasAdditionalInformation()) {
             return;
         }
@@ -257,7 +257,8 @@ public class DocumentRequestsManagementDispatchAction extends FenixDispatchActio
                 (DocumentRequestCreateBean) RenderUtils.getViewState().getMetaObject().getObject();
 
         if (requestCreateBean.getChosenDocumentRequestType() == DocumentRequestType.EXAM_DATE_CERTIFICATE) {
-            return prepareChooseExamsToCreateExamDateCertificateRequest(mapping, actionForm, request, response, requestCreateBean);
+            return prepareChooseExamsToCreateExamDateCertificateRequest(mapping, actionForm, request, response,
+                    requestCreateBean);
         }
 
         setAdditionalInformationSchemaName(request, requestCreateBean);
@@ -269,9 +270,8 @@ public class DocumentRequestsManagementDispatchAction extends FenixDispatchActio
             HttpServletRequest request, HttpServletResponse response, DocumentRequestCreateBean requestCreateBean) {
 
         request.setAttribute("documentRequestCreateBean", requestCreateBean);
-        final ExamDateCertificateExamSelectionBean examSelectionBean =
-                ExamDateCertificateExamSelectionBean.buildFor(requestCreateBean.getEnrolments(),
-                        requestCreateBean.getExecutionPeriod());
+        final ExamDateCertificateExamSelectionBean examSelectionBean = ExamDateCertificateExamSelectionBean
+                .buildFor(requestCreateBean.getEnrolments(), requestCreateBean.getExecutionPeriod());
         request.setAttribute("examSelectionBean", examSelectionBean);
         request.setAttribute("enrolmentsWithoutExam",
                 examSelectionBean.getEnrolmentsWithoutExam(requestCreateBean.getEnrolments()));
@@ -343,9 +343,9 @@ public class DocumentRequestsManagementDispatchAction extends FenixDispatchActio
 
         final DocumentRequestCreateBean documentRequestCreateBean = getRenderedObject();
         if (documentRequestCreateBean.isToUseAll()) {
-            Set<Degree> degrees =
-                    AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS,
-                            Authenticate.getUser()).collect(Collectors.toSet());
+            Set<Degree> degrees = AcademicAccessRule
+                    .getDegreesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
+                    .collect(Collectors.toSet());
             Set<Enrolment> aprovedEnrolments = new HashSet<Enrolment>();
             for (Degree degree : degrees) {
                 for (final Registration registration : documentRequestCreateBean.getStudent().getRegistrationsFor(degree)) {

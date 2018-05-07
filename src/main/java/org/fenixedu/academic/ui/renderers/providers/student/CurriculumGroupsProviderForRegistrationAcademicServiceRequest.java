@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
+import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
 import org.fenixedu.academic.dto.student.RegistrationSelectExecutionYearBean;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyConverter;
@@ -39,7 +40,7 @@ public class CurriculumGroupsProviderForRegistrationAcademicServiceRequest imple
         final List<CurriculumGroup> curriculumGroups =
                 new ArrayList<CurriculumGroup>(studentCurricularPlan.getRoot().getAllCurriculumGroups());
         curriculumGroups.removeAll(studentCurricularPlan.getRoot().getCycleCurriculumGroups());
-        Collections.sort(curriculumGroups, CurriculumGroup.COMPARATOR_BY_NAME_AND_ID);
+        Collections.sort(curriculumGroups, CurriculumModule.COMPARATOR_BY_NAME_AND_ID);
         return curriculumGroups;
     }
 

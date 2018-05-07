@@ -155,8 +155,8 @@ public class OutboundMobilityCandidacyDA extends FenixDispatchAction {
         return prepare(mapping, request, outboundMobilityContextBean);
     }
 
-    public ActionForward deleteContest(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward deleteContest(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) {
         final OutboundMobilityContextBean outboundMobilityContextBean = getRenderedObject();
         final OutboundMobilityCandidacyContest contest = getDomainObject(request, "contestOid");
         if (contest != null) {
@@ -198,7 +198,8 @@ public class OutboundMobilityCandidacyDA extends FenixDispatchAction {
         return constructRedirectPath(mapping, request, path);
     }
 
-    private String constructRedirectPath(final ActionMapping mapping, final HttpServletRequest request, final StringBuilder path) {
+    private String constructRedirectPath(final ActionMapping mapping, final HttpServletRequest request,
+            final StringBuilder path) {
         final String result =
                 GenericChecksumRewriter.injectChecksumInUrl(request.getContextPath(), path.toString(), request.getSession());
         return result.substring(mapping.getModuleConfig().getPrefix().length());
@@ -247,16 +248,16 @@ public class OutboundMobilityCandidacyDA extends FenixDispatchAction {
         return null;
     }
 
-    public ActionForward editVacancies(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward editVacancies(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) {
         final OutboundMobilityCandidacyContest contest = getDomainObject(request, "contestOid");
         final String vacancies = (String) getFromRequest(request, "vacancies");
         contest.editVacancies(vacancies == null || vacancies.isEmpty() ? null : new Integer(vacancies));
         return null;
     }
 
-    public ActionForward viewCandidate(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward viewCandidate(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) {
         final OutboundMobilityContextBean outboundMobilityContextBean = new OutboundMobilityContextBean();
         final Person person = getDomainObject(request, "personOid");
         if (person != null) {
@@ -271,8 +272,8 @@ public class OutboundMobilityCandidacyDA extends FenixDispatchAction {
         return mapping.findForward("viewCandidate");
     }
 
-    public ActionForward selectCandite(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward selectCandite(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) {
         final OutboundMobilityCandidacy candidacy = getDomainObject(request, "candidacyOid");
         candidacy.select();
         final OutboundMobilityContextBean outboundMobilityContextBean = new OutboundMobilityContextBean();
@@ -442,12 +443,10 @@ public class OutboundMobilityCandidacyDA extends FenixDispatchAction {
         final OutboundMobilityCandidacyPeriod period = getDomainObject(request, "candidacyPeriodOid");
         final OutboundMobilityCandidacyContestGroup mobilityGroup = getDomainObject(request, "mobilityGroupOid");
 
-        final String toGroupName =
-                BundleUtil.getString(Bundle.ACADEMIC, "label.send.email.to.candidates.group.to.name",
-                        mobilityGroup.getDescription(), period.getExecutionInterval().getName());
-        final Group group =
-                Group.users(period.getOutboundMobilityCandidacySubmissionSet().stream()
-                        .filter(s -> s.hasContestInGroup(mobilityGroup)).map(s -> s.getRegistration().getPerson().getUser()));
+        final String toGroupName = BundleUtil.getString(Bundle.ACADEMIC, "label.send.email.to.candidates.group.to.name",
+                mobilityGroup.getDescription(), period.getExecutionInterval().getName());
+        final Group group = Group.users(period.getOutboundMobilityCandidacySubmissionSet().stream()
+                .filter(s -> s.hasContestInGroup(mobilityGroup)).map(s -> s.getRegistration().getPerson().getUser()));
 
         final Recipient recipient = Recipient.newInstance(toGroupName, group);
         final EmailBean bean = new EmailBean();

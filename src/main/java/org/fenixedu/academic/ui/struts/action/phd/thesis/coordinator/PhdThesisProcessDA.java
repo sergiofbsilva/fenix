@@ -108,9 +108,9 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
     private static final List<PhdIndividualProgramDocumentType> AVAILABLE_DOCUMENTS_TO_COORDINATOR = Arrays
             .asList(new PhdIndividualProgramDocumentType[] { PhdIndividualProgramDocumentType.ASSISTENT_GUIDER_ACCEPTANCE_LETTER,
-                    PhdIndividualProgramDocumentType.CANDIDACY_FEEDBACK_DOCUMENT,
-                    PhdIndividualProgramDocumentType.CANDIDACY_FORM, PhdIndividualProgramDocumentType.CANDIDACY_RATIFICATION,
-                    PhdIndividualProgramDocumentType.CV, PhdIndividualProgramDocumentType.DEGREE_FINALIZATION_CERTIFICATE,
+                    PhdIndividualProgramDocumentType.CANDIDACY_FEEDBACK_DOCUMENT, PhdIndividualProgramDocumentType.CANDIDACY_FORM,
+                    PhdIndividualProgramDocumentType.CANDIDACY_RATIFICATION, PhdIndividualProgramDocumentType.CV,
+                    PhdIndividualProgramDocumentType.DEGREE_FINALIZATION_CERTIFICATE,
                     PhdIndividualProgramDocumentType.DISSERTATION_OR_FINAL_WORK_DOCUMENT,
                     PhdIndividualProgramDocumentType.FINAL_THESIS, PhdIndividualProgramDocumentType.GRE_LINGUISTICS_CERTIFICATE,
                     PhdIndividualProgramDocumentType.GUIDER_ACCEPTANCE_LETTER,

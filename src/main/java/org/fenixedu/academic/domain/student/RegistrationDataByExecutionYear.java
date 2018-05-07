@@ -54,12 +54,10 @@ public class RegistrationDataByExecutionYear extends RegistrationDataByExecution
     }
 
     protected void checkRules() {
-        Optional<RegistrationDataByExecutionYear> result =
-                getRegistration()
-                        .getRegistrationDataByExecutionYearSet()
-                        .stream()
-                        .filter(registrationDataByExecutionYear -> registrationDataByExecutionYear.getExecutionYear() == getExecutionYear()
-                                && registrationDataByExecutionYear != this).findAny();
+        Optional<RegistrationDataByExecutionYear> result = getRegistration().getRegistrationDataByExecutionYearSet().stream()
+                .filter(registrationDataByExecutionYear -> registrationDataByExecutionYear
+                        .getExecutionYear() == getExecutionYear() && registrationDataByExecutionYear != this)
+                .findAny();
         if (result.isPresent()) {
             throw new DomainException("error.RegistrationDatByExecutionYear.executionYearShouldBeUnique");
         }
@@ -91,12 +89,9 @@ public class RegistrationDataByExecutionYear extends RegistrationDataByExecution
 
     public static RegistrationDataByExecutionYear getOrCreateRegistrationDataByYear(final Registration registration,
             final ExecutionYear executionYear) {
-        final Optional<RegistrationDataByExecutionYear> result =
-                registration
-                        .getRegistrationDataByExecutionYearSet()
-                        .stream()
-                        .filter(registrationDataByExecutionYear -> registrationDataByExecutionYear.getExecutionYear() == executionYear)
-                        .findAny();
+        final Optional<RegistrationDataByExecutionYear> result = registration.getRegistrationDataByExecutionYearSet().stream()
+                .filter(registrationDataByExecutionYear -> registrationDataByExecutionYear.getExecutionYear() == executionYear)
+                .findAny();
 
         return result.isPresent() ? result.get() : new RegistrationDataByExecutionYear(registration, executionYear);
     }

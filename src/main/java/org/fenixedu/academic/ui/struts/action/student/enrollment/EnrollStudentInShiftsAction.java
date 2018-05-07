@@ -44,9 +44,8 @@ import org.slf4j.LoggerFactory;
 import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(module = "student", path = "/enrollStudentInShifts",
-        input = "/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment",
-        formBean = "studentShiftEnrollmentForm", validate = false,
-        functionality = ShiftStudentEnrollmentManagerDispatchAction.class)
+        input = "/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment", formBean = "studentShiftEnrollmentForm",
+        validate = false, functionality = ShiftStudentEnrollmentManagerDispatchAction.class)
 @Forwards(@Forward(name = "enrollmentConfirmation",
         path = "/student/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment"))
 public class EnrollStudentInShiftsAction extends FenixAction {
@@ -63,9 +62,8 @@ public class EnrollStudentInShiftsAction extends FenixAction {
         }
 
         try {
-            ShiftEnrollmentErrorReport errorReport =
-                    EnrollStudentInShifts.runEnrollStudentInShifts(getRegistration(request), shiftId,
-                            getExecutionSemester(request));
+            ShiftEnrollmentErrorReport errorReport = EnrollStudentInShifts.runEnrollStudentInShifts(getRegistration(request),
+                    shiftId, getExecutionSemester(request));
 
             if (errorReport.getUnAvailableShifts().size() > 0) {
                 for (final Shift shift : (List<Shift>) errorReport.getUnAvailableShifts()) {

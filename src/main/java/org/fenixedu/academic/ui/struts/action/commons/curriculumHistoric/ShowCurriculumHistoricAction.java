@@ -55,9 +55,8 @@ public class ShowCurriculumHistoricAction extends FenixDispatchAction {
 
         final CurricularCourse curricularCourse = getDomainObject(request, "curricularCourseCode");
 
-        final AcademicInterval interval =
-                curricularCourse.isAnual() ? academicInterval : academicInterval.getChildAcademicInterval(
-                        AcademicPeriod.SEMESTER, semester);
+        final AcademicInterval interval = curricularCourse.isAnual() ? academicInterval : academicInterval
+                .getChildAcademicInterval(AcademicPeriod.SEMESTER, semester);
 
         request.setAttribute("infoCurriculumHistoricReport", new InfoCurriculumHistoricReport(interval, curricularCourse));
 

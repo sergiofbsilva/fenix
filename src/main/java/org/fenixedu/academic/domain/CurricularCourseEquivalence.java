@@ -79,9 +79,9 @@ public class CurricularCourseEquivalence extends CurricularCourseEquivalence_Bas
         for (final CurricularCourseEquivalence curricularCourseEquivalence : curricularCourse
                 .getCurricularCourseEquivalencesSet()) {
             int sizeOld = curricularCourseEquivalence.getOldCurricularCoursesSet().size();
-            if ((size == sizeOld)
-                    && CollectionUtils.intersection(oldCurricularCourses,
-                            curricularCourseEquivalence.getOldCurricularCoursesSet()).size() == size) {
+            if ((size == sizeOld) && CollectionUtils
+                    .intersection(oldCurricularCourses, curricularCourseEquivalence.getOldCurricularCoursesSet())
+                    .size() == size) {
                 throw new DomainException("error.exists.curricular.course.equivalency");
             }
         }

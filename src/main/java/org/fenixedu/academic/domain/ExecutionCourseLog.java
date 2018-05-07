@@ -32,8 +32,8 @@ public class ExecutionCourseLog extends ExecutionCourseLog_Base {
             return ExecutionCourseLogTypes.class.getSimpleName() + "." + name();
         }
 
-        private static final Collection<ExecutionCourseLogTypes> typesAsList = Collections.unmodifiableList(Arrays
-                .asList(values()));
+        private static final Collection<ExecutionCourseLogTypes> typesAsList =
+                Collections.unmodifiableList(Arrays.asList(values()));
 
         public static Collection<ExecutionCourseLogTypes> valuesAsList() {
             return typesAsList;

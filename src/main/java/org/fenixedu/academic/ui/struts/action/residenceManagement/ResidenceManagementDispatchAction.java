@@ -285,8 +285,8 @@ public class ResidenceManagementDispatchAction extends FenixDispatchAction {
         return beans;
     }
 
-    private List<ResidenceEventBean> processCurrentDebts(ImportResidenceEventBean bean) throws IOException,
-            InvalidSpreadSheetName {
+    private List<ResidenceEventBean> processCurrentDebts(ImportResidenceEventBean bean)
+            throws IOException, InvalidSpreadSheetName {
         List<ResidenceEventBean> beans = new ArrayList<ResidenceEventBean>();
 
         POIFSFileSystem fs = new POIFSFileSystem(bean.getFile());

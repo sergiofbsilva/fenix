@@ -47,12 +47,13 @@ public class MeasurementTest extends MeasurementTest_Base {
         }
         String[] args1 = {};
         if (executionYear == null) {
-            throw new DomainException(
-                    "error.org.fenixedu.academic.domain.candidacy.MeasurementTest.executionYear.cannot.be.null", args1);
+            throw new DomainException("error.org.fenixedu.academic.domain.candidacy.MeasurementTest.executionYear.cannot.be.null",
+                    args1);
         }
         String[] args2 = {};
         if (campus == null) {
-            throw new DomainException("error.org.fenixedu.academic.domain.candidacy.MeasurementTest.campus.cannot.be.null", args2);
+            throw new DomainException("error.org.fenixedu.academic.domain.candidacy.MeasurementTest.campus.cannot.be.null",
+                    args2);
         }
 
         setEntryPhase(entryPhase);

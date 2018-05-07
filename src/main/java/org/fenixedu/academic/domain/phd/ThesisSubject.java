@@ -21,8 +21,8 @@ package org.fenixedu.academic.domain.phd;
 import org.fenixedu.academic.domain.Teacher;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.phd.exceptions.PhdDomainOperationException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 import pt.ist.fenixframework.Atomic;
 
@@ -33,8 +33,8 @@ public class ThesisSubject extends ThesisSubject_Base {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    protected ThesisSubject(PhdProgramFocusArea focusArea, LocalizedString name, LocalizedString description,
-            Teacher teacher, String externalAdvisor) {
+    protected ThesisSubject(PhdProgramFocusArea focusArea, LocalizedString name, LocalizedString description, Teacher teacher,
+            String externalAdvisor) {
         this();
 
         checkParameters(focusArea, name, description, teacher);
@@ -67,7 +67,8 @@ public class ThesisSubject extends ThesisSubject_Base {
         }
 
         if (name.getContent(org.fenixedu.academic.util.LocaleUtils.EN) == null) {
-            throw new PhdDomainOperationException("error.org.fenixedu.academic.domain.phd.ThesisSubject.name.in.english.required");
+            throw new PhdDomainOperationException(
+                    "error.org.fenixedu.academic.domain.phd.ThesisSubject.name.in.english.required");
         }
 
         if (teacher == null) {

@@ -110,8 +110,8 @@ public class AlumniManager {
 
                 throw new DomainException("error.no.concluded.registrations");
             } else {
-                throw new DomainException("error.no.registrations", Unit.getInstitutionAcronym(), Installation.getInstance()
-                        .getInstituitionalEmailAddress("alumni"));
+                throw new DomainException("error.no.registrations", Unit.getInstitutionAcronym(),
+                        Installation.getInstance().getInstituitionalEmailAddress("alumni"));
             }
         }
     }

@@ -123,7 +123,7 @@ public class ExecutionPeriodStatisticsBean implements Serializable {
                 gradesAcumulator += enrolment.getGrade().getNumericValue().doubleValue();
             }
         }
-        aritmeticAverage = ((double) gradesAcumulator / (double) concludedCurricularCourses);
+        aritmeticAverage = (gradesAcumulator / concludedCurricularCourses);
         setAritmeticAverage((int) (aritmeticAverage * 100) / 100.0);
     }
 

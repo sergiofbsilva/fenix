@@ -40,8 +40,7 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(path = "/phdStudentEnrolment", module = "student", functionality = StudentEnrollmentManagementDA.class)
-@Forwards({
-        @Forward(name = "showWelcome", path = "/phd/student/enrolments/showWelcome.jsp"),
+@Forwards({ @Forward(name = "showWelcome", path = "/phd/student/enrolments/showWelcome.jsp"),
         @Forward(name = "showDegreeModulesToEnrol", path = "/phd/student/enrolments/showDegreeModulesToEnrol.jsp"),
         @Forward(name = "chooseOptionalCurricularCourseToEnrol",
                 path = "/phd/student/enrolments/chooseOptionalCurricularCourseToEnrol.jsp") })
@@ -114,8 +113,8 @@ public class PhdStudentEnrolmentDA extends BolonhaStudentEnrollmentDispatchActio
     }
 
     private void addCompetenceCoursesAvalailableToEnrol(HttpServletRequest request, StudentCurricularPlan studentCurricularPlan) {
-        request.setAttribute("competenceCoursesAvailableToEnrol", studentCurricularPlan.getRegistration()
-                .getPhdIndividualProgramProcess().getCompetenceCoursesAvailableToEnrol());
+        request.setAttribute("competenceCoursesAvailableToEnrol",
+                studentCurricularPlan.getRegistration().getPhdIndividualProgramProcess().getCompetenceCoursesAvailableToEnrol());
     }
 
     @Override

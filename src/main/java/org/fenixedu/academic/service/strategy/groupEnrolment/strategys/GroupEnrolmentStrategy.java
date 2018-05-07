@@ -91,7 +91,8 @@ public abstract class GroupEnrolmentStrategy implements IGroupEnrolmentStrategy 
             }
         }
 
-        if (actualDateInMills.compareTo(enrolmentBeginDayInMills) > 0 && actualDateInMills.compareTo(enrolmentEndDayInMills) < 0) {
+        if (actualDateInMills.compareTo(enrolmentBeginDayInMills) > 0
+                && actualDateInMills.compareTo(enrolmentEndDayInMills) < 0) {
             return true;
         }
 

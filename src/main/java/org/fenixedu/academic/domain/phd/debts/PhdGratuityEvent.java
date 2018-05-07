@@ -118,9 +118,8 @@ public class PhdGratuityEvent extends PhdGratuityEvent_Base {
         DateTime lastPaymentDay =
                 new LocalDate(getYear(), phdGratuityPeriod.getLastPayment().get(DateTimeFieldType.monthOfYear()),
                         phdGratuityPeriod.getLastPayment().get(DateTimeFieldType.dayOfMonth())).toDateMidnight().toDateTime();
-        DateTime endDay =
-                new LocalDate(getYear(), phdGratuityPeriod.getEnd().get(DateTimeFieldType.monthOfYear()), phdGratuityPeriod
-                        .getEnd().get(DateTimeFieldType.dayOfMonth())).toDateMidnight().toDateTime();
+        DateTime endDay = new LocalDate(getYear(), phdGratuityPeriod.getEnd().get(DateTimeFieldType.monthOfYear()),
+                phdGratuityPeriod.getEnd().get(DateTimeFieldType.dayOfMonth())).toDateMidnight().toDateTime();
 
         if (lastPaymentDay.isBefore(endDay)) {
             return new LocalDate(getYear() + 1, phdGratuityPeriod.getLastPayment().get(DateTimeFieldType.monthOfYear()),
@@ -132,7 +131,9 @@ public class PhdGratuityEvent extends PhdGratuityEvent_Base {
     }
 
     @Override
-    public boolean isTransferable() { return isOpen()  && !hasExternalScholarshipGratuityExemption(); }
+    public boolean isTransferable() {
+        return isOpen() && !hasExternalScholarshipGratuityExemption();
+    }
 
     public boolean hasExternalScholarshipGratuityExemption() {
         return hasExemptionsOfType(PhdGratuityExternalScholarshipExemption.class);

@@ -83,9 +83,8 @@ public class EditMarkSheet {
         Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToAppendList =
                 getEnrolmentEvaluationsWithValidGrades(markSheetManagementEditBean.getEnrolmentEvaluationBeansToAppend());
 
-        Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToRemoveList =
-                CollectionUtils.subtract(markSheetManagementEditBean.getEnrolmentEvaluationBeansToEdit(),
-                        filteredEnrolmentEvaluationBeansToEditList);
+        Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToRemoveList = CollectionUtils.subtract(
+                markSheetManagementEditBean.getEnrolmentEvaluationBeansToEdit(), filteredEnrolmentEvaluationBeansToEditList);
 
         markSheetManagementEditBean.getMarkSheet().editNormal(filteredEnrolmentEvaluationBeansToEditList,
                 enrolmentEvaluationBeansToAppendList, enrolmentEvaluationBeansToRemoveList);

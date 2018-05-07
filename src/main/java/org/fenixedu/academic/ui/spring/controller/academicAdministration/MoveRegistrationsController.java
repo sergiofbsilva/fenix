@@ -95,8 +95,8 @@ public class MoveRegistrationsController extends StrutsFunctionalityController {
 
     private void moveEvent(Event event, Person target) {
         if (event instanceof AdministrativeOfficeFeeAndInsuranceEvent) {
-            if (target.hasAdministrativeOfficeFeeInsuranceEventFor(((AdministrativeOfficeFeeAndInsuranceEvent) event)
-                    .getExecutionYear())) {
+            if (target.hasAdministrativeOfficeFeeInsuranceEventFor(
+                    ((AdministrativeOfficeFeeAndInsuranceEvent) event).getExecutionYear())) {
                 return;
             }
         }

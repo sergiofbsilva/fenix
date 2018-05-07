@@ -53,8 +53,8 @@ abstract public class CommonPublicPresentationSeminarDA extends PhdProcessDA {
 
     protected ActionForward viewIndividualProgramProcess(HttpServletRequest request,
             final PublicPresentationSeminarProcess process) {
-        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s", process
-                .getIndividualProgramProcess().getExternalId()), request);
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s",
+                process.getIndividualProgramProcess().getExternalId()), request);
     }
 
     // submit comission

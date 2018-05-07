@@ -290,7 +290,8 @@ public class AcademicTrimesterDateTimeField extends DateTimeField {
     }
 
     private UnsupportedOperationException unsupported() {
-        return new UnsupportedOperationException(AcademicTrimesterDateTimeFieldType.academicTrimester() + " field is unsupported");
+        return new UnsupportedOperationException(
+                AcademicTrimesterDateTimeFieldType.academicTrimester() + " field is unsupported");
     }
 
 }

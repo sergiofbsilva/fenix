@@ -172,9 +172,8 @@ public class Recipient extends Recipient_Base {
         StringBuilder builder = new StringBuilder();
         Group membersGroup = getMembers();
 
-        membersGroup.getMembers().forEach(
-                user -> builder.append(user.getPerson().getName()).append(" (")
-                        .append(user.getPerson().getEmailForSendingEmails()).append(")").append("\n"));
+        membersGroup.getMembers().forEach(user -> builder.append(user.getPerson().getName()).append(" (")
+                .append(user.getPerson().getEmailForSendingEmails()).append(")").append("\n"));
 
         return builder.toString();
     }

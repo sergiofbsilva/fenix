@@ -39,7 +39,8 @@ public abstract class ServiceAgreement extends ServiceAgreement_Base {
             public void beforeAdd(ServiceAgreement serviceAgreementToAdd, Person person) {
                 if (serviceAgreementToAdd != null && person != null) {
                     for (final ServiceAgreement serviceAgreement : person.getServiceAgreementsSet()) {
-                        if (serviceAgreement.getServiceAgreementTemplate() == serviceAgreementToAdd.getServiceAgreementTemplate()) {
+                        if (serviceAgreement.getServiceAgreementTemplate() == serviceAgreementToAdd
+                                .getServiceAgreementTemplate()) {
                             throw new DomainException(
                                     "error.accounting.ServiceAgreement.person.already.has.service.agreement.for.service.agreement.template");
                         }

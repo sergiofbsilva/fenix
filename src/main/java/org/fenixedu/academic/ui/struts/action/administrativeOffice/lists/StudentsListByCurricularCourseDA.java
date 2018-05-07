@@ -107,9 +107,9 @@ public class StudentsListByCurricularCourseDA extends FenixDispatchAction {
     private SearchStudentsByCurricularCourseParametersBean getOrCreateSearchBean() {
         SearchStudentsByCurricularCourseParametersBean bean = getRenderedObject("searchBean");
         if (bean == null) {
-            bean =
-                    new SearchStudentsByCurricularCourseParametersBean(AcademicAccessRule.getDegreesAccessibleToFunction(
-                            AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser()).collect(Collectors.toSet()));
+            bean = new SearchStudentsByCurricularCourseParametersBean(AcademicAccessRule
+                    .getDegreesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser())
+                    .collect(Collectors.toSet()));
         }
         return bean;
     }
@@ -119,9 +119,8 @@ public class StudentsListByCurricularCourseDA extends FenixDispatchAction {
 
         final SearchStudentsByCurricularCourseParametersBean searchBean = getOrCreateSearchBean();
 
-        final SortedSet<DegreeModuleScope> degreeModuleScopes =
-                new TreeSet<DegreeModuleScope>(
-                        DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME_AND_BRANCH);
+        final SortedSet<DegreeModuleScope> degreeModuleScopes = new TreeSet<DegreeModuleScope>(
+                DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME_AND_BRANCH);
         degreeModuleScopes.addAll(searchBean.getDegreeCurricularPlan().getDegreeModuleScopesFor(searchBean.getExecutionYear()));
 
         if (degreeModuleScopes.isEmpty()) {
@@ -187,9 +186,8 @@ public class StudentsListByCurricularCourseDA extends FenixDispatchAction {
         final String year = (String) getFromRequest(request, "year");
 
         try {
-            String filename =
-                    getResourceMessage("label.students") + "_" + curricularCourse.getName() + "_("
-                            + curricularCourse.getDegreeCurricularPlan().getName() + ")_" + executionYear.getYear();
+            String filename = getResourceMessage("label.students") + "_" + curricularCourse.getName() + "_("
+                    + curricularCourse.getDegreeCurricularPlan().getName() + ")_" + executionYear.getYear();
 
             response.setContentType("application/vnd.ms-excel");
             response.setHeader("Content-disposition", "attachment; filename=\"" + filename.replace(" ", "_") + ".xls\"");
@@ -353,7 +351,8 @@ public class StudentsListByCurricularCourseDA extends FenixDispatchAction {
     }
 
     protected Set<DegreeType> getAdministratedDegreeTypes() {
-        return AcademicAccessRule.getDegreeTypesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS,
-                Authenticate.getUser()).collect(Collectors.toSet());
+        return AcademicAccessRule
+                .getDegreeTypesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser())
+                .collect(Collectors.toSet());
     }
 }

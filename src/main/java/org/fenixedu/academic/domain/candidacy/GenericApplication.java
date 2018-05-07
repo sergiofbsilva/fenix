@@ -30,10 +30,10 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
+
+import pt.ist.fenixframework.Atomic;
 
 public class GenericApplication extends GenericApplication_Base {
 
@@ -72,22 +72,17 @@ public class GenericApplication extends GenericApplication_Base {
     }
 
     public void sendEmailForApplication() {
-        final String subject =
-                BundleUtil.getString(Bundle.CANDIDATE, "label.application.email.subject", getGenericApplicationPeriod()
-                        .getTitle().getContent());
-        final String body =
-                BundleUtil.getString(Bundle.CANDIDATE, "label.application.email.body", getApplicationNumber(),
-                        generateConfirmationLink(), getGenericApplicationPeriod().getTitle().getContent(),
-                        Unit.getInstitutionAcronym());
+        final String subject = BundleUtil.getString(Bundle.CANDIDATE, "label.application.email.subject",
+                getGenericApplicationPeriod().getTitle().getContent());
+        final String body = BundleUtil.getString(Bundle.CANDIDATE, "label.application.email.body", getApplicationNumber(),
+                generateConfirmationLink(), getGenericApplicationPeriod().getTitle().getContent(), Unit.getInstitutionAcronym());
         new Message(getRootDomainObject().getSystemSender(), getEmail(), subject, body);
     }
 
     private String generateConfirmationLink() {
-        final String confirmationCode =
-                Hashing.sha512()
-                        .hashString(
-                                getEmail() + System.currentTimeMillis() + hashCode()
-                                        + new Random(System.currentTimeMillis()).nextGaussian(), Charsets.UTF_8).toString();
+        final String confirmationCode = Hashing.sha512().hashString(
+                getEmail() + System.currentTimeMillis() + hashCode() + new Random(System.currentTimeMillis()).nextGaussian(),
+                Charsets.UTF_8).toString();
         setConfirmationCode(confirmationCode);
         return FenixEduAcademicConfiguration.getConfiguration().getGenericApplicationEmailConfirmationLink() + confirmationCode
                 + "&applicationExternalId=" + getExternalId();
@@ -96,7 +91,7 @@ public class GenericApplication extends GenericApplication_Base {
     public boolean isAllPersonalInformationFilled() {
         return getGender() != null && getDateOfBirthYearMonthDay() != null && getDocumentIdNumber() != null
                 && !getDocumentIdNumber().isEmpty() && getIdDocumentType() != null && getNationality() != null
-                /* && getFiscalCode() != null && !getFiscalCode().isEmpty() */&& getAddress() != null && !getAddress().isEmpty()
+                /* && getFiscalCode() != null && !getFiscalCode().isEmpty() */ && getAddress() != null && !getAddress().isEmpty()
                 && getAreaCode() != null && !getAreaCode().isEmpty() && getArea() != null && !getArea().isEmpty()
                 && getTelephoneContact() != null && !getTelephoneContact().isEmpty();
     }

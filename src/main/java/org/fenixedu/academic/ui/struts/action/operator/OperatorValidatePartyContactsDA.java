@@ -63,9 +63,8 @@ public class OperatorValidatePartyContactsDA extends FenixDispatchAction {
     public ActionForward prepare(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
 
-        Predicate<PartyContactValidation> predicate =
-                new AndPredicate<PartyContactValidation>(PartyContactValidation.PREDICATE_INVALID,
-                        PhysicalAddressValidation.PREDICATE_FILE);
+        Predicate<PartyContactValidation> predicate = new AndPredicate<PartyContactValidation>(
+                PartyContactValidation.PREDICATE_INVALID, PhysicalAddressValidation.PREDICATE_FILE);
 
         final Collection<PartyContactValidation> partyContactValidation =
                 ContactRoot.getInstance().getInvalidPartyContactValidationsSet();
@@ -96,13 +95,11 @@ public class OperatorValidatePartyContactsDA extends FenixDispatchAction {
     @Atomic
     private void sendPhysicalAddressValidationEmail(PhysicalAddressValidation physicalAddressValidation) {
         final Person person = (Person) physicalAddressValidation.getPartyContact().getParty();
-        final String subject =
-                BundleUtil.getString(Bundle.MANAGER, "label.contacts.validation.operator.email.subject",
-                        Unit.getInstitutionAcronym());
+        final String subject = BundleUtil.getString(Bundle.MANAGER, "label.contacts.validation.operator.email.subject",
+                Unit.getInstitutionAcronym());
         final String state = StringUtils.uncapitalize(physicalAddressValidation.getState().getPresentationName());
-        String body =
-                BundleUtil.getString(Bundle.MANAGER, "label.contacts.validation.operator.email.body", physicalAddressValidation
-                        .getPartyContact().getPresentationValue(), state);
+        String body = BundleUtil.getString(Bundle.MANAGER, "label.contacts.validation.operator.email.body",
+                physicalAddressValidation.getPartyContact().getPresentationValue(), state);
         final String description = physicalAddressValidation.getDescription();
         if (!StringUtils.isEmpty(description)) {
             body += "\n" + description;

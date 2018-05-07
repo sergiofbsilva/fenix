@@ -71,12 +71,12 @@ public class LessonInstanceSpaceOccupation extends LessonInstanceSpaceOccupation
         if (/*!space.isOccupiedByExecutionCourse(executionCourse, lessonInstance.getBeginDateTime(),
                 lessonInstance.getEndDateTime())
                 &&*//*!space.isFree(lessonInstance.getDay(), lessonInstance.getDay(), lessonInstance.getStartTime(),
-                    lessonInstance.getEndTime(), lessonInstance.getDayOfweek(), null, null, null)*/
-        !space.isFree(Lists.newArrayList(new Interval[] { new Interval(lessonInstance.getBeginDateTime(), lessonInstance
-                .getEndDateTime()) }))) {
+                     lessonInstance.getEndTime(), lessonInstance.getDayOfweek(), null, null, null)*/
+        !space.isFree(Lists.newArrayList(
+                new Interval[] { new Interval(lessonInstance.getBeginDateTime(), lessonInstance.getEndDateTime()) }))) {
 
-            throw new DomainException("error.LessonInstanceSpaceOccupation.room.is.not.free", space.getName(), lessonInstance
-                    .getDay().toString("dd-MM-yy"));
+            throw new DomainException("error.LessonInstanceSpaceOccupation.room.is.not.free", space.getName(),
+                    lessonInstance.getDay().toString("dd-MM-yy"));
         }
 
         addLessonInstances(lessonInstance);
@@ -113,9 +113,8 @@ public class LessonInstanceSpaceOccupation extends LessonInstanceSpaceOccupation
         DateTime endDateTime = endDateToSearch != null ? endDateToSearch.toDateTime(new TimeOfDay(23, 59, 59)) : null;
 
         for (LessonInstance lessonInstance : lessonInstances) {
-            if (startDateTime == null
-                    || (!lessonInstance.getEndDateTime().isBefore(startDateTime) && !lessonInstance.getBeginDateTime().isAfter(
-                            endDateTime))) {
+            if (startDateTime == null || (!lessonInstance.getEndDateTime().isBefore(startDateTime)
+                    && !lessonInstance.getBeginDateTime().isAfter(endDateTime))) {
 
                 result.add(new Interval(lessonInstance.getBeginDateTime(), lessonInstance.getEndDateTime()));
             }

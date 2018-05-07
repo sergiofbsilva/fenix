@@ -46,9 +46,9 @@ public class DegreeTypesDegreeForOldMarkSheets implements DataProvider {
         final MarkSheetManagementBaseBean markSheetManagementBean = (MarkSheetManagementBaseBean) source;
         if (markSheetManagementBean.getExecutionPeriod() != null) {
             final Set<Degree> result = new TreeSet<Degree>(Degree.COMPARATOR_BY_DEGREE_TYPE_AND_NAME_AND_ID);
-            Set<Degree> availableDegrees =
-                    AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS,
-                            Authenticate.getUser()).collect(Collectors.toSet());
+            Set<Degree> availableDegrees = AcademicAccessRule
+                    .getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS, Authenticate.getUser())
+                    .collect(Collectors.toSet());
             Set<Degree> degrees = new HashSet<Degree>();
             for (Degree degree : availableDegrees) {
                 if (!degree.isBolonhaDegree()) {

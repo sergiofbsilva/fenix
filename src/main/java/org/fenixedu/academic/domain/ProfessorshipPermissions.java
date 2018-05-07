@@ -87,14 +87,14 @@ public class ProfessorshipPermissions extends ProfessorshipPermissions_Base {
 
     public void logEditProfessorship() {
         ExecutionCourse ec = getProfessorship().getExecutionCourse();
-        ProfessorshipManagementLog.createLog(ec, Bundle.MESSAGING, "log.executionCourse.professorship.edited", getProfessorship()
-                .getPerson().getPresentationName(), ec.getNome(), ec.getDegreePresentationString());
+        ProfessorshipManagementLog.createLog(ec, Bundle.MESSAGING, "log.executionCourse.professorship.edited",
+                getProfessorship().getPerson().getPresentationName(), ec.getNome(), ec.getDegreePresentationString());
     }
 
     @Override
     public void setSections(boolean sections) {
         super.setSections(sections);
-        Signal.emit(PROFESSORSHIP_PERMISSIONS_CHANGED,new DomainObjectEvent<>(this));
+        Signal.emit(PROFESSORSHIP_PERMISSIONS_CHANGED, new DomainObjectEvent<>(this));
     }
 
     @Override

@@ -26,8 +26,8 @@ import org.joda.time.DateTime;
 
 public class AcademicYearCE extends AcademicYearCE_Base {
 
-    public AcademicYearCE(AcademicCalendarEntry parentEntry, LocalizedString title, LocalizedString description,
-            DateTime begin, DateTime end, AcademicCalendarRootEntry rootEntry) {
+    public AcademicYearCE(AcademicCalendarEntry parentEntry, LocalizedString title, LocalizedString description, DateTime begin,
+            DateTime end, AcademicCalendarRootEntry rootEntry) {
 
         super();
         super.initEntry(parentEntry, title, description, begin, end, rootEntry);

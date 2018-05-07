@@ -50,9 +50,9 @@ import org.fenixedu.academic.service.services.messaging.CreateConversationThread
 import org.fenixedu.academic.service.services.messaging.RemoveForumEmailSubscriber;
 import org.fenixedu.academic.ui.struts.action.base.FenixDispatchAction;
 import org.fenixedu.academic.ui.struts.action.utils.RequestUtils;
+import org.fenixedu.bennu.core.security.Authenticate;
 import org.fenixedu.commons.i18n.I18N;
 import org.fenixedu.commons.i18n.LocalizedString;
-import org.fenixedu.bennu.core.security.Authenticate;
 
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
@@ -231,9 +231,8 @@ public abstract class ForunsManagement extends FenixDispatchAction {
 
             String author = message.getCreator().getName() + " (" + message.getCreator().getUsername() + ")";
 
-            quotationText =
-                    resources.getMessage(this.getLocale(request), "messaging.viewThread.quotationText", author, message.getBody()
-                            .getContent());
+            quotationText = resources.getMessage(this.getLocale(request), "messaging.viewThread.quotationText", author,
+                    message.getBody().getContent());
 
         }
         return new LocalizedString(I18N.getLocale(), quotationText);

@@ -83,7 +83,8 @@ public class UIHtmlEditor extends UIInput {
         writer.endElement("script");
     }
 
-    private void initializeEditorScriptIfRequired(ResponseWriter writer, Map requestMap, FacesContext context) throws IOException {
+    private void initializeEditorScriptIfRequired(ResponseWriter writer, Map requestMap, FacesContext context)
+            throws IOException {
         if (requestMap.containsKey(INIT_SCRIPT_FLAG_REQUEST_VARIABLE) == false) {
 
             String contextPath = ((HttpServletRequest) context.getExternalContext().getRequest()).getContextPath();

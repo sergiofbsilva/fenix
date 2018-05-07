@@ -31,8 +31,8 @@ public class TypeOfProgrammeList implements Serializable {
 
     public static class EmptyTypeOfProgrammeList extends TypeOfProgrammeList {
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 1L;
 
         @Override

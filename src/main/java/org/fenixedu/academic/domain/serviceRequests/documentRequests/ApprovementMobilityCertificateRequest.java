@@ -76,8 +76,8 @@ public class ApprovementMobilityCertificateRequest extends ApprovementMobilityCe
     @Override
     public boolean isFreeProcessed() {
         return getDocumentRequestType() == DocumentRequestType.APPROVEMENT_MOBILITY_CERTIFICATE
-                && (getRegistration().getRegistrationProtocol().isMobilityAgreement() || getRegistration()
-                        .getRegistrationProtocol().isExempted());
+                && (getRegistration().getRegistrationProtocol().isMobilityAgreement()
+                        || getRegistration().getRegistrationProtocol().isExempted());
     }
 
     @Override
@@ -207,8 +207,8 @@ public class ApprovementMobilityCertificateRequest extends ApprovementMobilityCe
         for (final ICurriculumEntry entry : curriculum.getCurriculumEntries()) {
             if (entry instanceof Dismissal) {
                 final Dismissal dismissal = (Dismissal) entry;
-                if (dismissal.getCredits().isEquivalence() || dismissal.isCreditsDismissal()
-                        && !dismissal.getCredits().isSubstitution()) {
+                if (dismissal.getCredits().isEquivalence()
+                        || dismissal.isCreditsDismissal() && !dismissal.getCredits().isSubstitution()) {
                     continue;
                 }
             }
@@ -266,7 +266,8 @@ public class ApprovementMobilityCertificateRequest extends ApprovementMobilityCe
         return result;
     }
 
-    private void reportApprovedCurriculumLines(final Collection<ICurriculumEntry> result, final Collection<CurriculumLine> lines) {
+    private void reportApprovedCurriculumLines(final Collection<ICurriculumEntry> result,
+            final Collection<CurriculumLine> lines) {
         for (final CurriculumLine line : lines) {
             if (line.isApproved()) {
                 if (line.isEnrolment()) {
@@ -279,7 +280,8 @@ public class ApprovementMobilityCertificateRequest extends ApprovementMobilityCe
     }
 
     private void reportExternalGroups(final Collection<ICurriculumEntry> result) {
-        for (final ExternalCurriculumGroup group : getRegistration().getLastStudentCurricularPlan().getExternalCurriculumGroups()) {
+        for (final ExternalCurriculumGroup group : getRegistration().getLastStudentCurricularPlan()
+                .getExternalCurriculumGroups()) {
             filterEntries(result, this, group.getCurriculumInAdvance(getFilteringDate()));
         }
     }

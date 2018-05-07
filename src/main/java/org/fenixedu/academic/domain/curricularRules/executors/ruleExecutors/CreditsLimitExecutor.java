@@ -56,10 +56,9 @@ public class CreditsLimitExecutor extends CurricularRuleExecutor {
                         (EnroledCurriculumModuleWrapper) degreeModuleToEvaluate;
                 final CurriculumModule curriculumModule = moduleEnroledWrapper.getCurriculumModule();
 
-                final Double ectsCredits =
-                        curriculumModule.getAprovedEctsCredits()
-                                + curriculumModule.getEnroledEctsCredits(enrolmentContext.getExecutionPeriod())
-                                + calculateEctsCreditsFromToEnrolCurricularCourses(enrolmentContext, curriculumModule);
+                final Double ectsCredits = curriculumModule.getAprovedEctsCredits()
+                        + curriculumModule.getEnroledEctsCredits(enrolmentContext.getExecutionPeriod())
+                        + calculateEctsCreditsFromToEnrolCurricularCourses(enrolmentContext, curriculumModule);
 
                 if (rule.creditsExceedMaximum(ectsCredits)) {
                     if (sourceDegreeModuleToEvaluate.isEnroled() && sourceDegreeModuleToEvaluate.isLeaf()) {
@@ -89,8 +88,8 @@ public class CreditsLimitExecutor extends CurricularRuleExecutor {
 
         final ExecutionSemester executionSemester = enrolmentContext.getExecutionPeriod();
         Double ectsCredits = curricularCourse.getEctsCredits(executionSemester);
-        return rule.allowCredits(ectsCredits) ? RuleResult.createTrue(sourceDegreeModuleToEvaluate.getDegreeModule()) : createFalseRuleResult(
-                rule, sourceDegreeModuleToEvaluate, ectsCredits);
+        return rule.allowCredits(ectsCredits) ? RuleResult.createTrue(sourceDegreeModuleToEvaluate
+                .getDegreeModule()) : createFalseRuleResult(rule, sourceDegreeModuleToEvaluate, ectsCredits);
     }
 
     private Double calculateEctsCreditsFromToEnrolCurricularCourses(final EnrolmentContext enrolmentContext,
@@ -112,13 +111,13 @@ public class CreditsLimitExecutor extends CurricularRuleExecutor {
             final Double ectsCredits) {
         if (rule.getMinimumCredits().equals(rule.getMaximumCredits())) {
             return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limit.not.fulfilled", rule.getDegreeModuleToApplyRule()
-                            .getName(), rule.getMinimumCredits().toString(), ectsCredits.toString());
+                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limit.not.fulfilled",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumCredits().toString(), ectsCredits.toString());
         } else {
             return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limits.not.fulfilled", rule.getDegreeModuleToApplyRule()
-                            .getName(), rule.getMinimumCredits().toString(), rule.getMaximumCredits().toString(), ectsCredits
-                            .toString());
+                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limits.not.fulfilled",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumCredits().toString(),
+                    rule.getMaximumCredits().toString(), ectsCredits.toString());
         }
     }
 
@@ -157,10 +156,8 @@ public class CreditsLimitExecutor extends CurricularRuleExecutor {
                     }
                 }
 
-                ectsCredits =
-                        Double.valueOf(ectsCredits.doubleValue()
-                                + curriculumModule.getEnroledEctsCredits(executionSemester.getPreviousExecutionPeriod())
-                                        .doubleValue());
+                ectsCredits = Double.valueOf(ectsCredits.doubleValue()
+                        + curriculumModule.getEnroledEctsCredits(executionSemester.getPreviousExecutionPeriod()).doubleValue());
 
                 // TODO: remove duplicated ects from anual CurricularCourses
 
@@ -178,17 +175,17 @@ public class CreditsLimitExecutor extends CurricularRuleExecutor {
         }
     }
 
-    private RuleResult createImpossibleResult(final CreditsLimit rule,
-            final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate, final Double ectsCredits) {
+    private RuleResult createImpossibleResult(final CreditsLimit rule, final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate,
+            final Double ectsCredits) {
         if (rule.getMinimumCredits().equals(rule.getMaximumCredits())) {
             return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limit.not.fulfilled", rule.getDegreeModuleToApplyRule()
-                            .getName(), rule.getMinimumCredits().toString(), ectsCredits.toString());
+                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limit.not.fulfilled",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumCredits().toString(), ectsCredits.toString());
         } else {
             return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limits.not.fulfilled", rule.getDegreeModuleToApplyRule()
-                            .getName(), rule.getMinimumCredits().toString(), rule.getMaximumCredits().toString(), ectsCredits
-                            .toString());
+                    "curricularRules.ruleExecutors.CreditsLimitExecutor.limits.not.fulfilled",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumCredits().toString(),
+                    rule.getMaximumCredits().toString(), ectsCredits.toString());
         }
     }
 

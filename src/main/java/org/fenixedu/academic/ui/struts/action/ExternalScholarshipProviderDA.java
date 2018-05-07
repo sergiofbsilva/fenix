@@ -79,7 +79,8 @@ public class ExternalScholarshipProviderDA extends FenixDispatchAction {
     }
 
     @Atomic
-    public ActionForward remove(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward remove(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         Party party = FenixFramework.getDomainObject(request.getParameter("provider"));
         Collection<Party> externalScholarshipProvider = Bennu.getInstance().getExternalScholarshipProviderSet();
         externalScholarshipProvider.remove(party);

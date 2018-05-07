@@ -38,8 +38,8 @@ public class CreateGratuityExemption {
         if (createGratuityExemptionBean.isPercentageExemption()) {
             new PercentageGratuityExemption(responsible, createGratuityExemptionBean.getGratuityEvent(),
                     createGratuityExemptionBean.getExemptionJustificationType(), createGratuityExemptionBean.getReason(),
-                    createGratuityExemptionBean.getDispatchDate(), createGratuityExemptionBean.getSelectedPercentage().divide(
-                            BigDecimal.valueOf(100)));
+                    createGratuityExemptionBean.getDispatchDate(),
+                    createGratuityExemptionBean.getSelectedPercentage().divide(BigDecimal.valueOf(100)));
         } else {
             new ValueGratuityExemption(responsible, createGratuityExemptionBean.getGratuityEvent(),
                     createGratuityExemptionBean.getExemptionJustificationType(), createGratuityExemptionBean.getReason(),

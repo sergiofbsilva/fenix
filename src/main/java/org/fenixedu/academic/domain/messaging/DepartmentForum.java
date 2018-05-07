@@ -63,8 +63,8 @@ public class DepartmentForum extends DepartmentForum_Base {
 
     public Group getDepartmentForumGroup() {
         Department department = getDepartment();
-        return UnitGroup.recursiveWorkers(department.getDepartmentUnit()).or(
-                Person.convertToUserGroup(getPersonsFromTeachers(department)));
+        return UnitGroup.recursiveWorkers(department.getDepartmentUnit())
+                .or(Person.convertToUserGroup(getPersonsFromTeachers(department)));
     }
 
     private Collection<Person> getDepartmentManagers() {

@@ -25,8 +25,8 @@ import org.fenixedu.academic.domain.accounting.ServiceAgreementTemplate;
 import org.fenixedu.academic.util.Money;
 import org.joda.time.DateTime;
 
-public class SecondCycleIndividualCandidacyFixedValueMultipleDegreesPR extends
-        SecondCycleIndividualCandidacyFixedValueMultipleDegreesPR_Base {
+public class SecondCycleIndividualCandidacyFixedValueMultipleDegreesPR
+        extends SecondCycleIndividualCandidacyFixedValueMultipleDegreesPR_Base {
 
     public SecondCycleIndividualCandidacyFixedValueMultipleDegreesPR() {
         super();

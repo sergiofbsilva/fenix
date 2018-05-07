@@ -171,8 +171,8 @@ public class SecondCycleIndividualCandidacyProcessBean extends IndividualCandida
     }
 
     public void addHabilitationCertificateDocument() {
-        this.habilitationCertificateList.add(new CandidacyProcessDocumentUploadBean(
-                IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT));
+        this.habilitationCertificateList.add(
+                new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT));
     }
 
     public void removeHabilitationCertificateDocument(final int index) {
@@ -180,8 +180,8 @@ public class SecondCycleIndividualCandidacyProcessBean extends IndividualCandida
     }
 
     public void addReportOrWorkDocument() {
-        this.reportOrWorkDocumentList.add(new CandidacyProcessDocumentUploadBean(
-                IndividualCandidacyDocumentFileType.REPORT_OR_WORK_DOCUMENT));
+        this.reportOrWorkDocumentList
+                .add(new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.REPORT_OR_WORK_DOCUMENT));
     }
 
     public void removeReportOrWorkDocument(final int index) {
@@ -198,8 +198,8 @@ public class SecondCycleIndividualCandidacyProcessBean extends IndividualCandida
 
     @Override
     public void initializeDocumentUploadBeans() {
-        setDocumentIdentificationDocument(new CandidacyProcessDocumentUploadBean(
-                IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION));
+        setDocumentIdentificationDocument(
+                new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION));
         setPaymentDocument(new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT));
         setVatCatCopyDocument(new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT));
 

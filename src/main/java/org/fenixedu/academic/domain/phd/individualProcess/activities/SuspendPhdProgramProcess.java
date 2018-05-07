@@ -48,8 +48,8 @@ public class SuspendPhdProgramProcess extends PhdIndividualProgramProcessActivit
         PhdIndividualProgramProcessBean bean = (PhdIndividualProgramProcessBean) object;
 
         DateTime stateDate = bean.getStateDate().toDateTimeAtStartOfDay();
-        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.SUSPENDED,
-                userView.getPerson(), "", stateDate);
+        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.SUSPENDED, userView.getPerson(),
+                "", stateDate);
 
         process.cancelDebts(userView.getPerson());
 

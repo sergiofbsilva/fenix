@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.ExecutionCourse;
 
 import pt.ist.fenixframework.dml.runtime.Relation;
 
-public abstract class PersistentSpecialCriteriaOverExecutionCourseGroup extends
-        PersistentSpecialCriteriaOverExecutionCourseGroup_Base {
+public abstract class PersistentSpecialCriteriaOverExecutionCourseGroup
+        extends PersistentSpecialCriteriaOverExecutionCourseGroup_Base {
     protected PersistentSpecialCriteriaOverExecutionCourseGroup() {
         super();
     }
@@ -44,8 +44,7 @@ public abstract class PersistentSpecialCriteriaOverExecutionCourseGroup extends
 
     protected static <T extends PersistentSpecialCriteriaOverExecutionCourseGroup> T singleton(Class<T> type,
             ExecutionCourse executionCourse, Supplier<T> creator) {
-        return singleton(
-                () -> (Optional<T>) executionCourse.getSpecialCriteriaOverExecutionCourseGroupSet().stream()
-                        .filter(group -> group.getClass() == type).findAny(), creator);
+        return singleton(() -> (Optional<T>) executionCourse.getSpecialCriteriaOverExecutionCourseGroupSet().stream()
+                .filter(group -> group.getClass() == type).findAny(), creator);
     }
 }

@@ -186,11 +186,10 @@ public abstract class PartyContactBean implements Serializable {
             }
         }
 
-        changes =
-                changes || (getContact().getDefaultContact().booleanValue() != isDefault)
-                        || (getContact().getVisibleToPublic().booleanValue() != getVisibleToPublic().booleanValue())
-                        || (getContact().getVisibleToStudents().booleanValue() != getVisibleToStudents().booleanValue())
-                        || (getContact().getVisibleToStaff().booleanValue() != getVisibleToStaff().booleanValue());
+        changes = changes || (getContact().getDefaultContact().booleanValue() != isDefault)
+                || (getContact().getVisibleToPublic().booleanValue() != getVisibleToPublic().booleanValue())
+                || (getContact().getVisibleToStudents().booleanValue() != getVisibleToStudents().booleanValue())
+                || (getContact().getVisibleToStaff().booleanValue() != getVisibleToStaff().booleanValue());
 
         if (changes) {
             if (!isInstitutional()) {

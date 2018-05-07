@@ -22,6 +22,7 @@ import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
+import org.fenixedu.academic.domain.StudentCurricularPlan_Base;
 import org.fenixedu.academic.domain.accounting.Account;
 import org.fenixedu.academic.domain.accounting.AccountType;
 import org.fenixedu.academic.domain.accounting.EntryType;
@@ -38,14 +39,15 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class EnrolmentOutOfPeriodEvent extends EnrolmentOutOfPeriodEvent_Base {
 
     static {
-        StudentCurricularPlan.getRelationEnrolmentOutOfPeriodEventStudentCurricularPlan().addListener(
-                new RelationAdapter<StudentCurricularPlan, EnrolmentOutOfPeriodEvent>() {
+        StudentCurricularPlan_Base.getRelationEnrolmentOutOfPeriodEventStudentCurricularPlan()
+                .addListener(new RelationAdapter<StudentCurricularPlan, EnrolmentOutOfPeriodEvent>() {
                     @Override
                     public void beforeAdd(StudentCurricularPlan studentCurricularPlan,
                             EnrolmentOutOfPeriodEvent enrolmentOutOfPeriodEvent) {
                         if (studentCurricularPlan != null && enrolmentOutOfPeriodEvent != null) {
                             final Registration registration = studentCurricularPlan.getRegistration();
-                            if (registration.containsEnrolmentOutOfPeriodEventFor(enrolmentOutOfPeriodEvent.getExecutionPeriod())) {
+                            if (registration
+                                    .containsEnrolmentOutOfPeriodEventFor(enrolmentOutOfPeriodEvent.getExecutionPeriod())) {
                                 throw new DomainException(
                                         "error.accounting.events.EnrolmentOutOfPeriodEvent.registration.already.contains.enrolment.out.of.period.event.for.period",
                                         studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),

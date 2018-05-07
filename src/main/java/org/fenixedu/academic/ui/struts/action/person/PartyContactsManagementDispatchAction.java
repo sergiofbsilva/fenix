@@ -98,8 +98,8 @@ public class PartyContactsManagementDispatchAction extends FenixDispatchAction {
         PartyContactBean contact = getRenderedObject("edit-contact");
         RenderUtils.invalidateViewState();
         if (contact.getVisibleToPublic().booleanValue()) {
-            contact.setVisibleToPublic(new Boolean(contact.getVisibleToStudents().booleanValue()
-                    && contact.getVisibleToStaff().booleanValue()));
+            contact.setVisibleToPublic(
+                    new Boolean(contact.getVisibleToStudents().booleanValue() && contact.getVisibleToStaff().booleanValue()));
         }
         contact.setVisibleToManagement(Boolean.TRUE);
         request.setAttribute("partyContact", contact);
@@ -278,8 +278,8 @@ public class PartyContactsManagementDispatchAction extends FenixDispatchAction {
         PhysicalAddressBean physicalAddressBean = getRenderedObject("physicalAddressBean");
         final PhysicalAddressValidationBean validationBean = physicalAddressBean.getValidationBean();
         try {
-        validationBean.getValidation().setFile(validationBean.getFileName(), validationBean.getFileName(),
-                validationBean.readStream());
+            validationBean.getValidation().setFile(validationBean.getFileName(), validationBean.getFileName(),
+                    validationBean.readStream());
         } catch (DomainException e) {
             RenderUtils.invalidateViewState();
             addActionMessageLiteral(request, e.getLocalizedMessage());
@@ -375,16 +375,18 @@ public class PartyContactsManagementDispatchAction extends FenixDispatchAction {
 
     public static boolean isToBeValidated(PartyContactBean contact) {
         return !(contact instanceof WebAddressBean
-                || (contact instanceof PhysicalAddressBean && !FenixEduAcademicConfiguration.getConfiguration()
-                        .getPhysicalAddressRequiresValidation()) || ((contact instanceof MobilePhoneBean || contact instanceof PhoneBean) && !PhoneValidationUtils
-                .getInstance().shouldRun()));
+                || (contact instanceof PhysicalAddressBean
+                        && !FenixEduAcademicConfiguration.getConfiguration().getPhysicalAddressRequiresValidation())
+                || ((contact instanceof MobilePhoneBean || contact instanceof PhoneBean)
+                        && !PhoneValidationUtils.getInstance().shouldRun()));
     }
 
     protected boolean isToBeValidated(PartyContact contact) {
         return !(contact instanceof WebAddress
-                || (contact instanceof PhysicalAddress && !FenixEduAcademicConfiguration.getConfiguration()
-                        .getPhysicalAddressRequiresValidation()) || ((contact instanceof MobilePhone || contact instanceof Phone) && !PhoneValidationUtils
-                .getInstance().shouldRun()));
+                || (contact instanceof PhysicalAddress
+                        && !FenixEduAcademicConfiguration.getConfiguration().getPhysicalAddressRequiresValidation())
+                || ((contact instanceof MobilePhone || contact instanceof Phone)
+                        && !PhoneValidationUtils.getInstance().shouldRun()));
     }
 
 }

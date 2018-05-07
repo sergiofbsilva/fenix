@@ -22,8 +22,8 @@ import java.math.BigDecimal;
 
 import org.fenixedu.bennu.core.domain.Bennu;
 
-public class OutboundMobilityCandidacySubmissionGrade extends OutboundMobilityCandidacySubmissionGrade_Base implements
-        Comparable<OutboundMobilityCandidacySubmissionGrade> {
+public class OutboundMobilityCandidacySubmissionGrade extends OutboundMobilityCandidacySubmissionGrade_Base
+        implements Comparable<OutboundMobilityCandidacySubmissionGrade> {
 
     public OutboundMobilityCandidacySubmissionGrade(final OutboundMobilityCandidacySubmission submission,
             final OutboundMobilityCandidacyContestGroup mobilityGroup, final BigDecimal grade,

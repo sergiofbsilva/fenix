@@ -45,9 +45,9 @@ public class FullGratuityPaymentPlanForPartialRegime extends FullGratuityPayment
     protected Collection<PaymentPlanRule> getSpecificPaymentPlanRules() {
         return Arrays.asList(
 
-        PaymentPlanRuleFactory.create(IsPartialRegimePaymentPlanRule.class),
+                PaymentPlanRuleFactory.create(IsPartialRegimePaymentPlanRule.class),
 
-        PaymentPlanRuleFactory.create(HasEnrolmentsForExecutionSemesterPaymentPlanRule.class)
+                PaymentPlanRuleFactory.create(HasEnrolmentsForExecutionSemesterPaymentPlanRule.class)
 
         );
     }

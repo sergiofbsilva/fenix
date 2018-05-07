@@ -22,6 +22,7 @@
 package org.fenixedu.academic.domain.phd.thesis.activities;
 
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
+import org.fenixedu.academic.domain.phd.PhdProgramProcess;
 import org.fenixedu.academic.domain.phd.thesis.PhdThesisProcess;
 import org.fenixedu.bennu.core.domain.User;
 
@@ -30,7 +31,7 @@ public class DownloadThesisRequirement extends PhdThesisActivity {
     @Override
     protected void activityPreConditions(PhdThesisProcess process, User userView) {
 
-        if (process.hasThesisRequirementDocument() && PhdThesisProcess.isParticipant(process, userView)) {
+        if (process.hasThesisRequirementDocument() && PhdProgramProcess.isParticipant(process, userView)) {
             return;
         }
 

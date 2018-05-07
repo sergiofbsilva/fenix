@@ -45,7 +45,8 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 public class FirstTimeCandidacySummaryFileDA extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("studentNumberBean", new StudentNumberBean());
         return mapping.findForward("prepare");
     }

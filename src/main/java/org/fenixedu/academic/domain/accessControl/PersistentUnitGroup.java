@@ -49,11 +49,10 @@ public class PersistentUnitGroup extends PersistentUnitGroup_Base {
     public static PersistentUnitGroup getInstance(final Unit unit, final AccountabilityTypeEnum relationType,
             final Boolean includeSubUnits) {
         return singleton(
-                () -> unit
-                        .getUnitGroupSet()
-                        .stream()
+                () -> unit.getUnitGroupSet().stream()
                         .filter(group -> Objects.equals(group.getRelationType(), relationType)
-                                && Objects.equals(group.getIncludeSubUnits(), includeSubUnits)).findAny(),
+                                && Objects.equals(group.getIncludeSubUnits(), includeSubUnits))
+                        .findAny(),
                 () -> new PersistentUnitGroup(unit, relationType, includeSubUnits));
     }
 }

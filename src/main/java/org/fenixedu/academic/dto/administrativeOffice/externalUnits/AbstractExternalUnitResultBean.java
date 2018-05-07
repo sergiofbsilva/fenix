@@ -31,8 +31,8 @@ import org.fenixedu.academic.dto.LinkObject;
 
 public abstract class AbstractExternalUnitResultBean implements Serializable {
 
-    transient protected static final List<AccountabilityTypeEnum> ACCOUNTABILITY_TYPES = Arrays
-            .asList(new AccountabilityTypeEnum[] { AccountabilityTypeEnum.GEOGRAPHIC,
+    transient protected static final List<AccountabilityTypeEnum> ACCOUNTABILITY_TYPES =
+            Arrays.asList(new AccountabilityTypeEnum[] { AccountabilityTypeEnum.GEOGRAPHIC,
                     AccountabilityTypeEnum.ORGANIZATIONAL_STRUCTURE, AccountabilityTypeEnum.ACADEMIC_STRUCTURE });
 
     private PartyTypeEnum parentUnitType;

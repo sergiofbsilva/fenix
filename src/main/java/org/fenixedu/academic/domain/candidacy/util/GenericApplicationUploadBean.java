@@ -29,10 +29,10 @@ import org.fenixedu.academic.domain.candidacy.GenericApplicationLetterOfRecoment
 import org.fenixedu.academic.domain.candidacy.GenericApplicationRecomentation;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.ByteStreams;
 import com.lowagie.text.pdf.PdfReader;
+
+import pt.ist.fenixframework.Atomic;
 
 public class GenericApplicationUploadBean implements Serializable {
 

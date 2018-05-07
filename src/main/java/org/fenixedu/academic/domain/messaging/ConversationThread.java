@@ -18,12 +18,12 @@
  */
 package org.fenixedu.academic.domain.messaging;
 
-import jvstm.cps.ConsistencyPredicate;
-
 import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
+
+import jvstm.cps.ConsistencyPredicate;
 
 public class ConversationThread extends ConversationThread_Base implements Comparable<ConversationThread> {
 

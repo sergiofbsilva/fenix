@@ -146,8 +146,8 @@ public class InfoLessonInstanceAggregation extends InfoShowOccupation {
         final ExecutionCourse executionCourse = shift.getExecutionCourse();
         final YearMonthDay firstPossibleLessonDay = executionCourse.getMaxLessonsPeriod().getLeft();
         final YearMonthDay lastPossibleLessonDay = executionCourse.getMaxLessonsPeriod().getRight();
-        return getWeeks(new Interval(firstPossibleLessonDay.toDateTimeAtMidnight(), lastPossibleLessonDay.toDateTimeAtMidnight()
-                .plusDays(1)));
+        return getWeeks(new Interval(firstPossibleLessonDay.toDateTimeAtMidnight(),
+                lastPossibleLessonDay.toDateTimeAtMidnight().plusDays(1)));
     }
 
     public SortedSet<Integer> getWeeks(final Interval lessonInterval) {

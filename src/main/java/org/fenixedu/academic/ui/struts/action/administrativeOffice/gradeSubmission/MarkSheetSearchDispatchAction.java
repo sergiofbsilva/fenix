@@ -223,8 +223,8 @@ public class MarkSheetSearchDispatchAction extends MarkSheetDispatchAction {
         return mapping.findForward("listMarkSheet");
     }
 
-    public ActionForward searchConfirmedMarkSheetsFilled(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward searchConfirmedMarkSheetsFilled(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         MarkSheetManagementSearchBean searchBean = new MarkSheetManagementSearchBean();
         fillMarkSheetBean(actionForm, request, searchBean);
 
@@ -271,8 +271,8 @@ public class MarkSheetSearchDispatchAction extends MarkSheetDispatchAction {
 
     public ActionForward choosePrinterMarkSheetsWeb(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
-        return choosePrinterMarkSheetsWeb(mapping, actionForm, request, response,
-                ExecutionSemester.readActualExecutionSemester(), null);
+        return choosePrinterMarkSheetsWeb(mapping, actionForm, request, response, ExecutionSemester.readActualExecutionSemester(),
+                null);
     }
 
     public ActionForward choosePrinterMarkSheetsWebPostBack(ActionMapping mapping, ActionForm actionForm,
@@ -324,14 +324,13 @@ public class MarkSheetSearchDispatchAction extends MarkSheetDispatchAction {
 
         final List<LabelValueBean> result = new ArrayList<LabelValueBean>();
         Set<Degree> degreesForMarksheets =
-                AcademicAccessRule
-                        .getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS, Authenticate.getUser()).collect(
-                                Collectors.toSet());
+                AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS, Authenticate.getUser())
+                        .collect(Collectors.toSet());
 
         for (final DegreeCurricularPlan dcp : dcps) {
             if (degreesForMarksheets.contains(dcp.getDegree())) {
-                result.add(new LabelValueBean(dcp.getPresentationName(semester.getExecutionYear()), dcp.getExternalId()
-                        .toString()));
+                result.add(
+                        new LabelValueBean(dcp.getPresentationName(semester.getExecutionYear()), dcp.getExternalId().toString()));
             }
         }
 
@@ -344,8 +343,8 @@ public class MarkSheetSearchDispatchAction extends MarkSheetDispatchAction {
 
         final List<LabelValueBean> periods = new ArrayList<LabelValueBean>();
         for (final ExecutionSemester period : notClosedExecutionPeriods) {
-            periods.add(new LabelValueBean(period.getExecutionYear().getYear() + " - " + period.getName(), period.getExternalId()
-                    .toString()));
+            periods.add(new LabelValueBean(period.getExecutionYear().getYear() + " - " + period.getName(),
+                    period.getExternalId().toString()));
         }
 
         request.setAttribute("periods", periods);
@@ -415,9 +414,8 @@ public class MarkSheetSearchDispatchAction extends MarkSheetDispatchAction {
         final ActionMessages actionMessages = new ActionMessages();
 
         try (ServletOutputStream writer = response.getOutputStream()) {
-            Collection<MarkSheet> markSheets =
-                    getExecutionSemester(form).getWebMarkSheetsNotPrinted(AccessControl.getPerson(),
-                            getDegreeCurricularPlan(form));
+            Collection<MarkSheet> markSheets = getExecutionSemester(form).getWebMarkSheetsNotPrinted(AccessControl.getPerson(),
+                    getDegreeCurricularPlan(form));
             List<MarkSheetDocument> reports = markSheets.stream().map(MarkSheetDocument::new).collect(Collectors.toList());
             byte[] data = ReportsUtils.generateReport(reports.toArray(new MarkSheetDocument[0])).getData();
             response.setContentLength(data.length);

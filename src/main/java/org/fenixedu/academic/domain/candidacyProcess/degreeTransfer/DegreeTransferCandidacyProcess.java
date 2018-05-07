@@ -55,8 +55,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class DegreeTransferCandidacyProcess extends DegreeTransferCandidacyProcess_Base {
 
     static {
-        getRelationCandidacyPeriodCandidacyProcess().addListener(
-                new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
+        getRelationCandidacyPeriodCandidacyProcess()
+                .addListener(new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
                     @Override
                     public void beforeAdd(CandidacyProcess candidacyProcess, CandidacyProcessCandidacyPeriod candidacyPeriod) {
                         super.beforeAdd(candidacyProcess, candidacyPeriod);
@@ -130,12 +130,13 @@ public class DegreeTransferCandidacyProcess extends DegreeTransferCandidacyProce
 
     // static information
 
-    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES = DegreeType.oneOf(DegreeType::isBolonhaDegree,
-            DegreeType::isIntegratedMasterDegree);
+    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isIntegratedMasterDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }
@@ -156,7 +157,8 @@ public class DegreeTransferCandidacyProcess extends DegreeTransferCandidacyProce
         protected DegreeTransferCandidacyProcess executeActivity(DegreeTransferCandidacyProcess dummy, User userView,
                 Object object) {
             final CandidacyProcessBean bean = (CandidacyProcessBean) object;
-            return new DegreeTransferCandidacyProcess((ExecutionYear) bean.getExecutionInterval(), bean.getStart(), bean.getEnd());
+            return new DegreeTransferCandidacyProcess((ExecutionYear) bean.getExecutionInterval(), bean.getStart(),
+                    bean.getEnd());
         }
     }
 
@@ -273,7 +275,8 @@ public class DegreeTransferCandidacyProcess extends DegreeTransferCandidacyProce
         return result;
     }
 
-    public List<DegreeTransferIndividualCandidacyProcess> getValidDegreeTransferIndividualCandidacyProcesses(final Degree degree) {
+    public List<DegreeTransferIndividualCandidacyProcess> getValidDegreeTransferIndividualCandidacyProcesses(
+            final Degree degree) {
         if (degree == null) {
             return Collections.emptyList();
         }
@@ -320,9 +323,8 @@ public class DegreeTransferCandidacyProcess extends DegreeTransferCandidacyProce
             DegreeTransferIndividualCandidacyProcess process) {
         SortedSet<DegreeTransferIndividualCandidacyProcess> values = result.get(process.getCandidacySelectedDegree());
         if (values == null) {
-            result.put(process.getCandidacySelectedDegree(), values =
-                    new TreeSet<DegreeTransferIndividualCandidacyProcess>(
-                            DegreeTransferIndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON));
+            result.put(process.getCandidacySelectedDegree(), values = new TreeSet<DegreeTransferIndividualCandidacyProcess>(
+                    IndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON));
         }
         values.add(process);
     }

@@ -45,11 +45,9 @@ public class RestrictionDoneDegreeModuleExecutor extends CurricularRuleExecutor 
 
         final CurricularCourse curricularCourse = rule.getPrecedenceDegreeModule();
         if (isEnrolling(enrolmentContext, curricularCourse) || isEnroled(enrolmentContext, curricularCourse, executionSemester)) {
-            return RuleResult
-                    .createFalse(
-                            sourceDegreeModuleToEvaluate.getDegreeModule(),
-                            "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.cannot.enrol.simultaneously.to.degreeModule.and.precedenceDegreeModule",
-                            rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
+            return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                    "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.cannot.enrol.simultaneously.to.degreeModule.and.precedenceDegreeModule",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
         }
 
         if (isApproved(enrolmentContext, curricularCourse)) {
@@ -81,11 +79,9 @@ public class RestrictionDoneDegreeModuleExecutor extends CurricularRuleExecutor 
         final CurricularCourse curricularCourse = rule.getPrecedenceDegreeModule();
 
         if (isEnrolling(enrolmentContext, curricularCourse) || isEnroled(enrolmentContext, curricularCourse, executionSemester)) {
-            return RuleResult
-                    .createFalse(
-                            sourceDegreeModuleToEvaluate.getDegreeModule(),
-                            "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.cannot.enrol.simultaneously.to.degreeModule.and.precedenceDegreeModule",
-                            rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
+            return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                    "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.cannot.enrol.simultaneously.to.degreeModule.and.precedenceDegreeModule",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
         }
 
         if (isApproved(enrolmentContext, curricularCourse)) {
@@ -110,20 +106,16 @@ public class RestrictionDoneDegreeModuleExecutor extends CurricularRuleExecutor 
 
     private RuleResult createFalseRuleResult(final RestrictionDoneDegreeModule rule,
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
-        return RuleResult
-                .createFalse(
-                        sourceDegreeModuleToEvaluate.getDegreeModule(),
-                        "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.student.is.not.approved.to.precendenceDegreeModule",
-                        rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
+        return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.student.is.not.approved.to.precendenceDegreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
     }
 
     private RuleResult createImpossibleRuleResult(final RestrictionDoneDegreeModule rule,
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
-        return RuleResult
-                .createImpossible(
-                        sourceDegreeModuleToEvaluate.getDegreeModule(),
-                        "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.student.is.not.approved.to.precendenceDegreeModule",
-                        rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
+        return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                "curricularRules.ruleExecutors.RestrictionDoneDegreeModuleExecutor.student.is.not.approved.to.precendenceDegreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName());
     }
 
     @Override

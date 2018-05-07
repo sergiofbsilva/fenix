@@ -126,8 +126,8 @@ public class AlumniHomeDA extends FenixAction {
                     }
                     totalNumber++;
                 }
-                if (AcademicalInstitutionUnit.readOfficialParentUnitsByType(academicalInstitutionType).contains(
-                        formation.getInstitution())) {
+                if (AcademicalInstitutionUnit.readOfficialParentUnitsByType(academicalInstitutionType)
+                        .contains(formation.getInstitution())) {
                     if (formation.getBaseInstitution() != null) {
                         numberOfHits++;
                     }

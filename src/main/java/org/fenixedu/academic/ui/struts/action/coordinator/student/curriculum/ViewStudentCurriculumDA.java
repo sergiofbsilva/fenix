@@ -50,7 +50,8 @@ public class ViewStudentCurriculumDA extends FenixDispatchAction {
         return super.execute(mapping, actionForm, request, response);
     }
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         setDegreeCurricularPlanId(form, getDegreeCurricularPlanId(request));
         setExecutionDegreeId(form, getExecutionDegreeId(request));

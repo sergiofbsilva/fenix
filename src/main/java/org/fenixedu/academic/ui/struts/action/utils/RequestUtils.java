@@ -83,9 +83,8 @@ public class RequestUtils {
             public Object transform(Object arg0) {
                 InfoExecutionDegree infoExecutionDegree = (InfoExecutionDegree) arg0;
 
-                String label =
-                        infoExecutionDegree.getInfoDegreeCurricularPlan().getDegreeCurricularPlan()
-                                .getPresentationName(infoExecutionDegree.getInfoExecutionYear().getExecutionYear());
+                String label = infoExecutionDegree.getInfoDegreeCurricularPlan().getDegreeCurricularPlan()
+                        .getPresentationName(infoExecutionDegree.getInfoExecutionYear().getExecutionYear());
 
                 String value = infoExecutionDegree.getExternalId().toString();
 

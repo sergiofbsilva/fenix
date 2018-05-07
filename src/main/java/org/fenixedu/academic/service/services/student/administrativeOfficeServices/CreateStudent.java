@@ -66,23 +66,20 @@ public class CreateStudent {
         // create registration
         Registration registration = studentCandidacy.getRegistration();
         if (registration == null) {
-            registration =
-                    Registration.createRegistrationWithCustomStudentNumber(person, executionDegreeBean.getDegreeCurricularPlan(),
-                            studentCandidacy, ingressionInformationBean.getRegistrationProtocol(),
-                            executionDegreeBean.getCycleType(), executionDegreeBean.getExecutionYear(),
-                            personBean.getStudentNumber());
+            registration = Registration.createRegistrationWithCustomStudentNumber(person,
+                    executionDegreeBean.getDegreeCurricularPlan(), studentCandidacy,
+                    ingressionInformationBean.getRegistrationProtocol(), executionDegreeBean.getCycleType(),
+                    executionDegreeBean.getExecutionYear(), personBean.getStudentNumber());
         }
         registration.setHomologationDate(ingressionInformationBean.getHomologationDate());
         registration.setStudiesStartDate(ingressionInformationBean.getStudiesStartDate());
 
-        PersonalIngressionData personalIngressionData =
-                registration.getStudent().getPersonalIngressionDataByExecutionYear(
-                        executionDegreeBean.getExecutionDegree().getExecutionYear());
+        PersonalIngressionData personalIngressionData = registration.getStudent()
+                .getPersonalIngressionDataByExecutionYear(executionDegreeBean.getExecutionDegree().getExecutionYear());
 
         if (personalIngressionData == null) {
-            personalIngressionData =
-                    new PersonalIngressionData(originInformationBean, personBean, registration.getStudent(), executionDegreeBean
-                            .getExecutionDegree().getExecutionYear());
+            personalIngressionData = new PersonalIngressionData(originInformationBean, personBean, registration.getStudent(),
+                    executionDegreeBean.getExecutionDegree().getExecutionYear());
         } else {
             personalIngressionData.edit(originInformationBean, personBean);
         }

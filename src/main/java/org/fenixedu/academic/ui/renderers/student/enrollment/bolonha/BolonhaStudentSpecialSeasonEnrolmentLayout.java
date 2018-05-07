@@ -27,8 +27,8 @@ import pt.ist.fenixWebFramework.renderers.components.HtmlBlockContainer;
 public class BolonhaStudentSpecialSeasonEnrolmentLayout extends BolonhaStudentEnrolmentLayout {
 
     @Override
-    protected void generateCycleCourseGroupsToEnrol(final HtmlBlockContainer container,
-            final ExecutionSemester executionSemester, final StudentCurricularPlan studentCurricularPlan, int depth) {
+    protected void generateCycleCourseGroupsToEnrol(final HtmlBlockContainer container, final ExecutionSemester executionSemester,
+            final StudentCurricularPlan studentCurricularPlan, int depth) {
 
         if (studentCurricularPlan.hasConcludedAnyInternalCycle()
                 && studentCurricularPlan.getDegreeType().hasExactlyOneCycleType()) {
@@ -38,8 +38,8 @@ public class BolonhaStudentSpecialSeasonEnrolmentLayout extends BolonhaStudentEn
         if (canPerformStudentEnrolments) {
             for (final CycleType cycleType : getAllCycleTypesToEnrolPreviousToFirstExistingCycle(studentCurricularPlan)) {
                 generateCourseGroupToEnroll(container,
-                        buildDegreeModuleToEnrolForCycle(studentCurricularPlan, cycleType, executionSemester), depth
-                                + getRenderer().getWidthDecreasePerLevel());
+                        buildDegreeModuleToEnrolForCycle(studentCurricularPlan, cycleType, executionSemester),
+                        depth + getRenderer().getWidthDecreasePerLevel());
 
             }
         }

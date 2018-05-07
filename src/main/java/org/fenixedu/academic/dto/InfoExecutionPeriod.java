@@ -66,8 +66,8 @@ public class InfoExecutionPeriod extends InfoObject implements Comparable {
     public boolean equals(Object obj) {
         if (obj instanceof InfoExecutionPeriod) {
             InfoExecutionPeriod infoExecutionPeriod = (InfoExecutionPeriod) obj;
-            return (getInfoExecutionYear().equals(infoExecutionPeriod.getInfoExecutionYear()) && getName().equals(
-                    infoExecutionPeriod.getName()));
+            return (getInfoExecutionYear().equals(infoExecutionPeriod.getInfoExecutionYear())
+                    && getName().equals(infoExecutionPeriod.getName()));
 
         }
         return false;

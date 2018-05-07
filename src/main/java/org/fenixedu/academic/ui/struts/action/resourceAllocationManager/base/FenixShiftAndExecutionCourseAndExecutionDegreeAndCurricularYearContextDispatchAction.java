@@ -26,8 +26,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.fenixedu.academic.ui.struts.action.utils.ContextUtils;
 
-public abstract class FenixShiftAndExecutionCourseAndExecutionDegreeAndCurricularYearContextDispatchAction extends
-        FenixExecutionCourseAndExecutionDegreeAndCurricularYearContextDispatchAction {
+public abstract class FenixShiftAndExecutionCourseAndExecutionDegreeAndCurricularYearContextDispatchAction
+        extends FenixExecutionCourseAndExecutionDegreeAndCurricularYearContextDispatchAction {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,

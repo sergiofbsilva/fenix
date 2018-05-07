@@ -120,7 +120,8 @@ public class DegreeCandidacyForGraduatedPersonProcessDA extends CandidacyProcess
         return null;
     }
 
-    private List<DegreeCandidacyForGraduatedPersonCandidacyPeriod> getCandidacyPeriods(final ExecutionInterval executionInterval) {
+    private List<DegreeCandidacyForGraduatedPersonCandidacyPeriod> getCandidacyPeriods(
+            final ExecutionInterval executionInterval) {
         List<DegreeCandidacyForGraduatedPersonCandidacyPeriod> candidacyPeriods =
                 (List<DegreeCandidacyForGraduatedPersonCandidacyPeriod>) executionInterval
                         .getCandidacyPeriods(DegreeCandidacyForGraduatedPersonCandidacyPeriod.class);
@@ -231,8 +232,8 @@ public class DegreeCandidacyForGraduatedPersonProcessDA extends CandidacyProcess
         return result;
     }
 
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("send-to-coordinator");
     }
 
@@ -351,8 +352,8 @@ public class DegreeCandidacyForGraduatedPersonProcessDA extends CandidacyProcess
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPersonalDetails().getName());
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPersonalDetails().getDocumentIdNumber());
-        row.setCell(degreeCandidacyForGraduatedPersonProcess.getPersonalDetails().getCountry().getCountryNationality()
-                .getContent());
+        row.setCell(
+                degreeCandidacyForGraduatedPersonProcess.getPersonalDetails().getCountry().getCountryNationality().getContent());
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPrecedentDegreeInformation().getDegreeAndInstitutionName());
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPrecedentDegreeInformation().getDegreeDesignation());
         row.setCell(degreeCandidacyForGraduatedPersonProcess.getPrecedentDegreeInformation().getConclusionDate()
@@ -375,7 +376,8 @@ public class DegreeCandidacyForGraduatedPersonProcessDA extends CandidacyProcess
             return new Predicate<IndividualCandidacyProcess>() {
                 @Override
                 public boolean apply(IndividualCandidacyProcess process) {
-                    return ((DegreeCandidacyForGraduatedPersonIndividualProcess) process).getCandidacy().getSelectedDegree() == selectedDegree;
+                    return ((DegreeCandidacyForGraduatedPersonIndividualProcess) process).getCandidacy()
+                            .getSelectedDegree() == selectedDegree;
                 }
             };
         }

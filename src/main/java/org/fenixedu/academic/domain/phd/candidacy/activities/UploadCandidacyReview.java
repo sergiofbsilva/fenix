@@ -31,8 +31,8 @@ public class UploadCandidacyReview extends PhdProgramCandidacyProcessActivity {
     @Override
     protected void activityPreConditions(PhdProgramCandidacyProcess process, User userView) {
         if (process.isInState(PhdProgramCandidacyProcessState.PENDING_FOR_COORDINATOR_OPINION)) {
-            if ((process.isAllowedToManageProcess(userView) || process.getIndividualProgramProcess().isCoordinatorForPhdProgram(
-                    userView.getPerson()))) {
+            if ((process.isAllowedToManageProcess(userView)
+                    || process.getIndividualProgramProcess().isCoordinatorForPhdProgram(userView.getPerson()))) {
                 return;
             }
         }

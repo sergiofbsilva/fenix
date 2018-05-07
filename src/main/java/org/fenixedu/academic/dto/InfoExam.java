@@ -198,12 +198,11 @@ public class InfoExam extends InfoWrittenEvaluation {
         boolean result = false;
         if (obj instanceof InfoExam) {
             InfoExam infoExam = (InfoExam) obj;
-            result =
-                    getExternalId().equals(infoExam.getExternalId()) && getDate().equals(infoExam.getDate())
-                            && getEnrollmentBeginDayFormatted().equals(infoExam.getEnrollmentBeginDayFormatted())
-                            && getEnrollmentBeginTimeFormatted().equals(infoExam.getEnrollmentBeginTimeFormatted())
-                            && getEnrollmentEndDayFormatted().equals(infoExam.getEnrollmentEndDayFormatted())
-                            && getEnrollmentEndTimeFormatted().equals(infoExam.getEnrollmentEndTimeFormatted());
+            result = getExternalId().equals(infoExam.getExternalId()) && getDate().equals(infoExam.getDate())
+                    && getEnrollmentBeginDayFormatted().equals(infoExam.getEnrollmentBeginDayFormatted())
+                    && getEnrollmentBeginTimeFormatted().equals(infoExam.getEnrollmentBeginTimeFormatted())
+                    && getEnrollmentEndDayFormatted().equals(infoExam.getEnrollmentEndDayFormatted())
+                    && getEnrollmentEndTimeFormatted().equals(infoExam.getEnrollmentEndTimeFormatted());
         }
         return result;
     }

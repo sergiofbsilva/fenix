@@ -168,8 +168,8 @@ public class DegreeCurricularPlanOptionalEnrolmentsRenderer extends InputRendere
             generateCurricularCourses(blockContainer, childCurricularCourseContexts, depth + getWidthDecreasePerLevel());
 
             for (Context context : childCourseGroupContexts) {
-                generateCourseGroup(blockContainer, (CourseGroup) context.getChildDegreeModule(), depth
-                        + getWidthDecreasePerLevel());
+                generateCourseGroup(blockContainer, (CourseGroup) context.getChildDegreeModule(),
+                        depth + getWidthDecreasePerLevel());
             }
         }
 
@@ -215,11 +215,12 @@ public class DegreeCurricularPlanOptionalEnrolmentsRenderer extends InputRendere
                     final String name = "curricularCourseEnrolLink" + curricularCourse.getExternalId();
                     actionLink.setText(BundleUtil.getString(Bundle.ACADEMIC, "link.option.enrol.curricular.course"));
                     actionLink.setName(name);
-                    actionLink.setOnClick(String.format(
-                            "$(this).closest('form').find('input[name=\\'method\\']').attr('value', '%s');"
-                            		+ " var els=document.getElementsByName('" + name + "');"
-                            		+ " for (var i=0;i<els.length;els[i++].value = '" + name + "');"
-                            		+ "", getMethodName()));
+                    actionLink
+                            .setOnClick(String.format(
+                                    "$(this).closest('form').find('input[name=\\'method\\']').attr('value', '%s');"
+                                            + " var els=document.getElementsByName('" + name + "');"
+                                            + " for (var i=0;i<els.length;els[i++].value = '" + name + "');" + "",
+                                    getMethodName()));
                     actionLink.setController(new UpdateSelectedCurricularCourseController(curricularCourse));
                     linkTableCell.setBody(actionLink);
                 }

@@ -70,8 +70,9 @@ public class IndividualCandidacyDocumentFile extends IndividualCandidacyDocument
         Person person = user.getPerson();
 
         // Academic Administration Permissions
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, person.getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, person.getUser())
+                .collect(Collectors.toSet())) {
             for (IndividualCandidacy individualCandidacy : getIndividualCandidacySet()) {
                 if (individualCandidacy.getAllDegrees().contains(program)) {
                     return true;

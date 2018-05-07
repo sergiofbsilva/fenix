@@ -48,13 +48,13 @@ import org.fenixedu.academic.domain.curricularRules.Exclusiveness;
 import org.fenixedu.academic.domain.curricularRules.ICurricularRule;
 import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 abstract public class DegreeModule extends DegreeModule_Base {
 
-    static final public Comparator<DegreeModule> COMPARATOR_BY_NAME = Comparator.<DegreeModule, LocalizedString> comparing(
-            DegreeModule::getNameI18N).thenComparing(DegreeModule::getExternalId);
+    static final public Comparator<DegreeModule> COMPARATOR_BY_NAME = Comparator
+            .<DegreeModule, LocalizedString> comparing(DegreeModule::getNameI18N).thenComparing(DegreeModule::getExternalId);
 
     public static class ComparatorByMinEcts implements Comparator<DegreeModule> {
 
@@ -67,10 +67,10 @@ abstract public class DegreeModule extends DegreeModule_Base {
 
         @Override
         public int compare(DegreeModule leftDegreeModule, DegreeModule rightDegreeModule) {
-            int comparationResult =
-                    leftDegreeModule.getMinEctsCredits(this.executionSemester).compareTo(
-                            rightDegreeModule.getMinEctsCredits(this.executionSemester));
-            return (comparationResult == 0) ? leftDegreeModule.getExternalId().compareTo(rightDegreeModule.getExternalId()) : comparationResult;
+            int comparationResult = leftDegreeModule.getMinEctsCredits(this.executionSemester)
+                    .compareTo(rightDegreeModule.getMinEctsCredits(this.executionSemester));
+            return (comparationResult == 0) ? leftDegreeModule.getExternalId()
+                    .compareTo(rightDegreeModule.getExternalId()) : comparationResult;
         }
 
     }
@@ -135,7 +135,8 @@ abstract public class DegreeModule extends DegreeModule_Base {
         return result.toString();
     }
 
-    protected void getOneFullNameI18N(final StringBuilder result, final ExecutionSemester executionSemester, final Locale language) {
+    protected void getOneFullNameI18N(final StringBuilder result, final ExecutionSemester executionSemester,
+            final Locale language) {
         final String selfName = getNameI18N(executionSemester).getContent(language);
 
         if (isRoot()) {
@@ -440,7 +441,8 @@ abstract public class DegreeModule extends DegreeModule_Base {
         return false;
     }
 
-    public List<? extends ICurricularRule> getCurricularRules(final CurricularRuleType ruleType, final ExecutionYear executionYear) {
+    public List<? extends ICurricularRule> getCurricularRules(final CurricularRuleType ruleType,
+            final ExecutionYear executionYear) {
         final List<ICurricularRule> result = new ArrayList<ICurricularRule>();
         for (final ICurricularRule curricularRule : getCurricularRulesSet()) {
             if (curricularRule.hasCurricularRuleType(ruleType) && isCurricularRuleValid(curricularRule, executionYear)) {
@@ -570,7 +572,8 @@ abstract public class DegreeModule extends DegreeModule_Base {
 
     private ExecutionSemester getFirstExecutionPeriodOfFirstExecutionDegree() {
         final ExecutionDegree executionDegree = getParentDegreeCurricularPlan().getFirstExecutionDegree();
-        return executionDegree != null ? executionDegree.getExecutionYear().getFirstExecutionPeriod() : getBeginBolonhaExecutionPeriod();
+        return executionDegree != null ? executionDegree.getExecutionYear()
+                .getFirstExecutionPeriod() : getBeginBolonhaExecutionPeriod();
     }
 
     public DegreeModulesSelectionLimit getDegreeModulesSelectionLimitRule(final ExecutionSemester executionSemester) {

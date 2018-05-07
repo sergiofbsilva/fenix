@@ -114,7 +114,8 @@ public class CoordinatorEvaluationsBackingBean extends FenixBackingBean {
 
     public String getDegreeCurricularPlanID() {
         DegreeCoordinatorIndex.setCoordinatorContext(getRequest());
-        return (degreeCurricularPlanID == null) ? degreeCurricularPlanID = getAndHoldStringParameter("degreeCurricularPlanID") : degreeCurricularPlanID;
+        return (degreeCurricularPlanID == null) ? degreeCurricularPlanID =
+                getAndHoldStringParameter("degreeCurricularPlanID") : degreeCurricularPlanID;
     }
 
     public String getExecutionPeriodID() throws FenixServiceException {
@@ -394,16 +395,14 @@ public class CoordinatorEvaluationsBackingBean extends FenixBackingBean {
 
     private void constructCalendarLink(final List<CalendarLink> calendarLinks, final Project project,
             final ExecutionCourse executionCourse) {
-        final CalendarLink calendarLinkBegin =
-                new CalendarLink(executionCourse, project, project.getBegin(), messages.getMessage(locale,
-                        "label.evaluation.project.begin"), locale);
+        final CalendarLink calendarLinkBegin = new CalendarLink(executionCourse, project, project.getBegin(),
+                messages.getMessage(locale, "label.evaluation.project.begin"), locale);
         addLinkParameters(calendarLinkBegin, executionCourse, project);
         addProjectLinkParameters(calendarLinkBegin, project);
         calendarLinks.add(calendarLinkBegin);
 
-        final CalendarLink calendarLinkEnd =
-                new CalendarLink(executionCourse, project, project.getEnd(), messages.getMessage(locale,
-                        "label.evaluation.project.end"), locale);
+        final CalendarLink calendarLinkEnd = new CalendarLink(executionCourse, project, project.getEnd(),
+                messages.getMessage(locale, "label.evaluation.project.end"), locale);
         addLinkParameters(calendarLinkEnd, executionCourse, project);
         addProjectLinkParameters(calendarLinkEnd, project);
         calendarLinks.add(calendarLinkEnd);
@@ -414,8 +413,8 @@ public class CoordinatorEvaluationsBackingBean extends FenixBackingBean {
         calendarLink.addLinkParameter("degreeCurricularPlanID", getDegreeCurricularPlanID().toString());
         calendarLink.addLinkParameter("executionPeriodID", executionCourse.getExecutionPeriod().getExternalId().toString());
         calendarLink.addLinkParameter("executionCourseID", executionCourse.getExternalId().toString());
-        calendarLink
-                .addLinkParameter("curricularYearID", (getCurricularYearID() != null) ? getCurricularYearID().toString() : "");
+        calendarLink.addLinkParameter("curricularYearID",
+                (getCurricularYearID() != null) ? getCurricularYearID().toString() : "");
         calendarLink.addLinkParameter("evaluationID", evaluation.getExternalId().toString());
         calendarLink.addLinkParameter("evaluationType", evaluation.getClass().getName());
     }
@@ -455,7 +454,8 @@ public class CoordinatorEvaluationsBackingBean extends FenixBackingBean {
     }
 
     public String getExecutionCourseID() {
-        return (executionCourseID == null) ? executionCourseID = getAndHoldStringParameter("executionCourseID") : executionCourseID;
+        return (executionCourseID == null) ? executionCourseID =
+                getAndHoldStringParameter("executionCourseID") : executionCourseID;
     }
 
     public void setExecutionCourseID(String executionCourseID) {

@@ -72,7 +72,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcess extends DegreeCa
         super();
     }
 
-    private DegreeCandidacyForGraduatedPersonIndividualProcess(final DegreeCandidacyForGraduatedPersonIndividualProcessBean bean) {
+    private DegreeCandidacyForGraduatedPersonIndividualProcess(
+            final DegreeCandidacyForGraduatedPersonIndividualProcessBean bean) {
         this();
 
         /*
@@ -161,8 +162,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcess extends DegreeCa
             return false;
         }
 
-        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES, process
-                .getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
+        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES,
+                process.getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
     }
 
     @StartActivity
@@ -218,8 +219,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcess extends DegreeCa
         @Override
         protected DegreeCandidacyForGraduatedPersonIndividualProcess executeActivity(
                 DegreeCandidacyForGraduatedPersonIndividualProcess process, User userView, Object object) {
-            process.editPersonalCandidacyInformation(((DegreeCandidacyForGraduatedPersonIndividualProcessBean) object)
-                    .getPersonBean());
+            process.editPersonalCandidacyInformation(
+                    ((DegreeCandidacyForGraduatedPersonIndividualProcessBean) object).getPersonBean());
             return process;
         }
     }
@@ -366,8 +367,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcess extends DegreeCa
         }
     }
 
-    static private class EditPublicCandidacyPersonalInformation extends
-            Activity<DegreeCandidacyForGraduatedPersonIndividualProcess> {
+    static private class EditPublicCandidacyPersonalInformation
+            extends Activity<DegreeCandidacyForGraduatedPersonIndividualProcess> {
 
         @Override
         public void checkPreConditions(DegreeCandidacyForGraduatedPersonIndividualProcess process, User userView) {
@@ -379,8 +380,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcess extends DegreeCa
         @Override
         protected DegreeCandidacyForGraduatedPersonIndividualProcess executeActivity(
                 DegreeCandidacyForGraduatedPersonIndividualProcess process, User userView, Object object) {
-            process.editPersonalCandidacyInformation(((DegreeCandidacyForGraduatedPersonIndividualProcessBean) object)
-                    .getPersonBean());
+            process.editPersonalCandidacyInformation(
+                    ((DegreeCandidacyForGraduatedPersonIndividualProcessBean) object).getPersonBean());
             return process;
         }
 

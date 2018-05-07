@@ -67,17 +67,18 @@ public class ExclusivenessExecutor extends CurricularRuleExecutor {
         return RuleResult.createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
     }
 
-    private RuleResult createFalseRuleResult(final Exclusiveness rule, final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
+    private RuleResult createFalseRuleResult(final Exclusiveness rule,
+            final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
         return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                "curricularRules.ruleExecutors.ExclusivenessExecutor.exclusive.degreeModule", rule.getDegreeModuleToApplyRule()
-                        .getName(), rule.getExclusiveDegreeModule().getName());
+                "curricularRules.ruleExecutors.ExclusivenessExecutor.exclusive.degreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getExclusiveDegreeModule().getName());
     }
 
     private RuleResult createImpossibleRuleResult(final Exclusiveness rule,
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
         return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                "curricularRules.ruleExecutors.ExclusivenessExecutor.exclusive.degreeModule", rule.getDegreeModuleToApplyRule()
-                        .getName(), rule.getExclusiveDegreeModule().getName());
+                "curricularRules.ruleExecutors.ExclusivenessExecutor.exclusive.degreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getExclusiveDegreeModule().getName());
     }
 
     @Override

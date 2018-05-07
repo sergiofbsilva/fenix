@@ -73,8 +73,8 @@ public class CandidateGroup extends GroupStrategy {
             return false;
         }
         // ... and also DFA/PHD Candidacies in the admitted state (as this seems to be one of the last possible outcomes).
-        return !((candidacy instanceof DFACandidacy || candidacy instanceof PHDProgramCandidacy) && situation
-                .equals(CandidacySituationType.ADMITTED));
+        return !((candidacy instanceof DFACandidacy || candidacy instanceof PHDProgramCandidacy)
+                && situation.equals(CandidacySituationType.ADMITTED));
     }
 
     @Override

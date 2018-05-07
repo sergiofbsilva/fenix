@@ -40,8 +40,9 @@ public class EnrolmentEvaluationLog extends EnrolmentEvaluationLog_Base {
     }
 
     void init(final EnrolmentEvaluation enrolmentEvaluation) {
-        setCurricularCourse(String.format("externalId: %s; code: %s; name %s", enrolmentEvaluation.getEnrolment()
-                .getCurricularCourse().getExternalId(), enrolmentEvaluation.getEnrolment().getCurricularCourse().getCode(),
+        setCurricularCourse(String.format("externalId: %s; code: %s; name %s",
+                enrolmentEvaluation.getEnrolment().getCurricularCourse().getExternalId(),
+                enrolmentEvaluation.getEnrolment().getCurricularCourse().getCode(),
                 enrolmentEvaluation.getEnrolment().getCurricularCourse().getName()));
 
         setGradeValue(enrolmentEvaluation.getGradeValue());
@@ -52,7 +53,8 @@ public class EnrolmentEvaluationLog extends EnrolmentEvaluationLog_Base {
         setExecutionSemester(enrolmentEvaluation.getEnrolment().getExecutionPeriod().getName());
         setExamDate(enrolmentEvaluation.getExamDateYearMonthDay() != null ? enrolmentEvaluation.getExamDateYearMonthDay()
                 .toString("dd/MM/yyyy") : "");
-        setEnrolmentEvaluationResponsible(enrolmentEvaluation.getPerson() != null ? enrolmentEvaluation.getPerson().getUsername() : "");
+        setEnrolmentEvaluationResponsible(
+                enrolmentEvaluation.getPerson() != null ? enrolmentEvaluation.getPerson().getUsername() : "");
         setBook(enrolmentEvaluation.getBookReference());
         setPage(enrolmentEvaluation.getPage());
         setActionDate(new DateTime().toString());

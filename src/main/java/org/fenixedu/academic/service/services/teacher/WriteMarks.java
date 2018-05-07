@@ -147,8 +147,8 @@ public class WriteMarks {
             final String markValue = entry.mark;
 
             if (attend.getEnrolment() != null && attend.getEnrolment().isImpossible()) {
-                exceptionList.add(new DomainException("errors.student.with.impossible.enrolment", attend.getRegistration()
-                        .getStudent().getNumber().toString()));
+                exceptionList.add(new DomainException("errors.student.with.impossible.enrolment",
+                        attend.getRegistration().getStudent().getNumber().toString()));
             } else {
                 final Mark mark = attend.getMarkByEvaluation(evaluation);
 

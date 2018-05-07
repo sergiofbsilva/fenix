@@ -52,21 +52,18 @@ public class StudentGroupService {
 
     @Atomic
     public Grouping createOrEditGrouping(ProjectGroupBean bean, ExecutionCourse executionCourse) {
-        EnrolmentGroupPolicyType enrolmentPolicyType =
-                bean.getAtomicEnrolmentPolicy() != null && bean.getAtomicEnrolmentPolicy() ? new EnrolmentGroupPolicyType(1) : new EnrolmentGroupPolicyType(
-                        2);
+        EnrolmentGroupPolicyType enrolmentPolicyType = bean.getAtomicEnrolmentPolicy() != null
+                && bean.getAtomicEnrolmentPolicy() ? new EnrolmentGroupPolicyType(1) : new EnrolmentGroupPolicyType(2);
         ShiftType shiftType =
                 bean.getShiftType() == null || bean.getShiftType().isEmpty() ? null : ShiftType.valueOf(bean.getShiftType());
 
         Grouping grouping = bean.getExternalId() == null ? null : FenixFramework.getDomainObject(bean.getExternalId());
 
         if (grouping == null) {
-            grouping =
-                    Grouping.create(bean.getName(), bean.getEnrolmentBeginDay().toDate(), bean.getEnrolmentEndDay().toDate(),
-                            enrolmentPolicyType, bean.getMaxGroupNumber(), bean.getIdealGroupCapacity(),
-                            bean.getMaximumGroupCapacity(), bean.getMinimumGroupCapacity(), bean.getProjectDescription(),
-                            shiftType, bean.getAutomaticEnrolment(), bean.getDifferentiatedCapacity(), executionCourse,
-                            bean.getDifferentiatedCapacityShifts());
+            grouping = Grouping.create(bean.getName(), bean.getEnrolmentBeginDay().toDate(), bean.getEnrolmentEndDay().toDate(),
+                    enrolmentPolicyType, bean.getMaxGroupNumber(), bean.getIdealGroupCapacity(), bean.getMaximumGroupCapacity(),
+                    bean.getMinimumGroupCapacity(), bean.getProjectDescription(), shiftType, bean.getAutomaticEnrolment(),
+                    bean.getDifferentiatedCapacity(), executionCourse, bean.getDifferentiatedCapacityShifts());
 
         } else {
             grouping.edit(bean.getName(), bean.getEnrolmentBeginDay().toDate(), bean.getEnrolmentEndDay().toDate(),
@@ -79,7 +76,8 @@ public class StudentGroupService {
     }
 
     @Atomic
-    public void updateGroupingAttends(Grouping grouping, Map<String, Boolean> studentsToRemove, Map<String, Boolean> studentsToAdd) {
+    public void updateGroupingAttends(Grouping grouping, Map<String, Boolean> studentsToRemove,
+            Map<String, Boolean> studentsToAdd) {
         for (Map.Entry<String, Boolean> entry : studentsToRemove.entrySet()) {
             if (entry.getValue()) {
                 Attends attends = (Attends) FenixFramework.getDomainObject(entry.getKey());
@@ -95,10 +93,9 @@ public class StudentGroupService {
                 Registration registration = (Registration) FenixFramework.getDomainObject(entry.getKey());
 
                 if (grouping.getAttendsSet().stream().noneMatch(attends -> attends.getRegistration().equals(registration))) {
-                    Optional<Attends> opt =
-                            registration.getAssociatedAttendsSet().stream()
-                                    .filter(attends -> grouping.getExecutionCourses().stream().anyMatch(ec -> attends.isFor(ec)))
-                                    .findAny();
+                    Optional<Attends> opt = registration.getAssociatedAttendsSet().stream()
+                            .filter(attends -> grouping.getExecutionCourses().stream().anyMatch(ec -> attends.isFor(ec)))
+                            .findAny();
                     if (opt.isPresent()) {
                         grouping.addAttends(opt.get());
                     }

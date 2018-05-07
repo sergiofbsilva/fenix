@@ -62,8 +62,8 @@ public class ReadAvailableClassesForShift {
         final Set<SchoolClass> availableSchoolClasses = new HashSet<SchoolClass>();
 
         for (DegreeCurricularPlan degreeCurricularPlan : executionCourse.getAssociatedDegreeCurricularPlans()) {
-            for (SchoolClass schoolClass : degreeCurricularPlan.getExecutionDegreeByAcademicInterval(
-                    executionCourse.getAcademicInterval()).getSchoolClassesSet()) {
+            for (SchoolClass schoolClass : degreeCurricularPlan
+                    .getExecutionDegreeByAcademicInterval(executionCourse.getAcademicInterval()).getSchoolClassesSet()) {
                 if (schoolClass.getAcademicInterval().equals(executionCourse.getAcademicInterval())) {
                     if (!shift.getAssociatedClassesSet().contains(schoolClass)) {
                         availableSchoolClasses.add(schoolClass);

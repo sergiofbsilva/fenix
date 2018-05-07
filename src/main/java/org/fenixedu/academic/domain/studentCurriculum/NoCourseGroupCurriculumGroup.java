@@ -84,9 +84,10 @@ public abstract class NoCourseGroupCurriculumGroup extends NoCourseGroupCurricul
 
     @Override
     public LocalizedString getName() {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, getNoCourseGroupCurriculumGroupType().getLocalizedName(
-                org.fenixedu.academic.util.LocaleUtils.PT)).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                getNoCourseGroupCurriculumGroupType().getLocalizedName(org.fenixedu.academic.util.LocaleUtils.EN));
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT,
+                getNoCourseGroupCurriculumGroupType().getLocalizedName(org.fenixedu.academic.util.LocaleUtils.PT)).with(
+                        org.fenixedu.academic.util.LocaleUtils.EN,
+                        getNoCourseGroupCurriculumGroupType().getLocalizedName(org.fenixedu.academic.util.LocaleUtils.EN));
     }
 
     @Override
@@ -208,7 +209,8 @@ public abstract class NoCourseGroupCurriculumGroup extends NoCourseGroupCurricul
     }
 
     @Override
-    public ICurricularRule getMostRecentActiveCurricularRule(final CurricularRuleType ruleType, final ExecutionYear executionYear) {
+    public ICurricularRule getMostRecentActiveCurricularRule(final CurricularRuleType ruleType,
+            final ExecutionYear executionYear) {
         return null;
     }
 

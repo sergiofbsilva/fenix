@@ -34,8 +34,8 @@ public class MaximumNumberOfECTSInSpecialSeasonEvaluation extends CurricularRule
 
     @Override
     public List<GenericPair<Object, Boolean>> getLabel() {
-        return Collections.singletonList(new GenericPair<Object, Boolean>(
-                "label.maximumNumberOfEnrolmentsInSpecialSeasonEvaluation", true));
+        return Collections.singletonList(
+                new GenericPair<Object, Boolean>("label.maximumNumberOfEnrolmentsInSpecialSeasonEvaluation", true));
     }
 
     @Override

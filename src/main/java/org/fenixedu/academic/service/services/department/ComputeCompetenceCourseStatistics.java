@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.Department;
 import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.dto.department.CompetenceCourseStatisticsDTO;
+import org.fenixedu.academic.dto.department.CourseStatisticsDTO;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 
 import pt.ist.fenixframework.Atomic;
@@ -61,7 +62,7 @@ public class ComputeCompetenceCourseStatistics extends ComputeCourseStatistics {
             }
         }
 
-        Collections.sort(results, CompetenceCourseStatisticsDTO.COURSE_STATISTICS_COMPARATOR_BY_NAME);
+        Collections.sort(results, CourseStatisticsDTO.COURSE_STATISTICS_COMPARATOR_BY_NAME);
 
         return results;
     }

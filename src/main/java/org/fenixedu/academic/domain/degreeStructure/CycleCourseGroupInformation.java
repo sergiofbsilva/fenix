@@ -27,9 +27,9 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.commons.i18n.LocalizedString;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.Atomic;
 
 public class CycleCourseGroupInformation extends CycleCourseGroupInformation_Base {
 
@@ -55,8 +55,8 @@ public class CycleCourseGroupInformation extends CycleCourseGroupInformation_Bas
         setCycleCourseGroup(cycleCourseGroup);
         checkParameters(graduateTitleSuffix, graduateTitleSuffixEn);
 
-        setGraduateTitleSuffix(new LocalizedString(Locale.getDefault(), graduateTitleSuffix).with(Locale.ENGLISH,
-                graduateTitleSuffixEn));
+        setGraduateTitleSuffix(
+                new LocalizedString(Locale.getDefault(), graduateTitleSuffix).with(Locale.ENGLISH, graduateTitleSuffixEn));
     }
 
     @Atomic
@@ -64,8 +64,8 @@ public class CycleCourseGroupInformation extends CycleCourseGroupInformation_Bas
         setExecutionYear(editExecutionYear);
         checkParameters(graduateTitleSuffix, graduateTitleSuffixEn);
 
-        setGraduateTitleSuffix(new LocalizedString(Locale.getDefault(), graduateTitleSuffix).with(Locale.ENGLISH,
-                graduateTitleSuffixEn));
+        setGraduateTitleSuffix(
+                new LocalizedString(Locale.getDefault(), graduateTitleSuffix).with(Locale.ENGLISH, graduateTitleSuffixEn));
     }
 
     private void checkParameters(String graduatedTitleSuffix, String graduatedTitleSuffixEn) {

@@ -91,8 +91,8 @@ public class RegistrationCurriculumBean extends RegistrationSelectExecutionYearB
     }
 
     public ICurriculum getCurriculum(final ExecutionYear executionYear) {
-        return hasCurriculumGroup() ? getCurriculumGroup().getCurriculum(executionYear) : getRegistration().getCurriculum(
-                executionYear);
+        return hasCurriculumGroup() ? getCurriculumGroup().getCurriculum(executionYear) : getRegistration()
+                .getCurriculum(executionYear);
     }
 
     public ICurriculum getCurriculum() {

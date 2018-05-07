@@ -23,11 +23,13 @@ import java.io.Serializable;
 import org.fenixedu.academic.domain.CurricularCourse;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.ExecutionYear;
+import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 import org.fenixedu.academic.domain.organizationalStructure.DepartmentUnit;
 
 import pt.ist.fenixframework.FenixFramework;
 
-public class CurricularCourseByExecutionSemesterBean implements Serializable, Comparable<CurricularCourseByExecutionSemesterBean> {
+public class CurricularCourseByExecutionSemesterBean
+        implements Serializable, Comparable<CurricularCourseByExecutionSemesterBean> {
 
     private CurricularCourse curricularCourse;
     private ExecutionSemester executionSemester;
@@ -119,7 +121,8 @@ public class CurricularCourseByExecutionSemesterBean implements Serializable, Co
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof CurricularCourseByExecutionSemesterBean) ? equals((CurricularCourseByExecutionSemesterBean) obj) : false;
+        return (obj instanceof CurricularCourseByExecutionSemesterBean) ? equals(
+                (CurricularCourseByExecutionSemesterBean) obj) : false;
     }
 
     public boolean equals(CurricularCourseByExecutionSemesterBean obj) {
@@ -133,8 +136,7 @@ public class CurricularCourseByExecutionSemesterBean implements Serializable, Co
 
     @Override
     public int compareTo(CurricularCourseByExecutionSemesterBean other) {
-        return other == null ? 1 : CurricularCourse.COMPARATOR_BY_NAME
-                .compare(getCurricularCourse(), other.getCurricularCourse());
+        return other == null ? 1 : DegreeModule.COMPARATOR_BY_NAME.compare(getCurricularCourse(), other.getCurricularCourse());
     }
 
     static public CurricularCourseByExecutionSemesterBean buildFrom(final String key) {

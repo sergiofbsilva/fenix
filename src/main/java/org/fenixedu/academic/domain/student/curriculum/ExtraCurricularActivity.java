@@ -66,7 +66,8 @@ public class ExtraCurricularActivity extends ExtraCurricularActivity_Base {
             }
         }
         if (existing.size() == MAX_ACTIVITIES) {
-            throw new DomainException("error.extraCurricularActivity.maxActivitiesLimitReached", Integer.toString(MAX_ACTIVITIES));
+            throw new DomainException("error.extraCurricularActivity.maxActivitiesLimitReached",
+                    Integer.toString(MAX_ACTIVITIES));
         }
     }
 

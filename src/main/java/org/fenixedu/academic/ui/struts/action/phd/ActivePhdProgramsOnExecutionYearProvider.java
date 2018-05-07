@@ -42,8 +42,9 @@ public class ActivePhdProgramsOnExecutionYearProvider extends AbstractDomainObje
 
         List<PhdProgram> phdProgramsList = new ArrayList<PhdProgram>();
 
-        for (PhdProgram phdProgram : AcademicAccessRule.getPhdProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_PHD_PROCESSES, Authenticate.getUser()).collect(Collectors.toSet())) {
+        for (PhdProgram phdProgram : AcademicAccessRule
+                .getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES, Authenticate.getUser())
+                .collect(Collectors.toSet())) {
             if (phdProgram.isActive(bean.getExecutionYear())) {
                 phdProgramsList.add(phdProgram);
             }

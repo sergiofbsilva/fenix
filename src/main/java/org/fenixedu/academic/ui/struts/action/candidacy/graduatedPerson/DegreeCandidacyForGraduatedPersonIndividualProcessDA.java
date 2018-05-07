@@ -46,10 +46,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/caseHandlingDegreeCandidacyForGraduatedPersonIndividualProcess", module = "academicAdministration",
         formBeanClass = FenixActionForm.class, functionality = DegreeCandidacyForGraduatedPersonProcessDA.class)
-@Forwards({
-        @Forward(
-                name = "intro",
-                path = "/academicAdministration/caseHandlingDegreeCandidacyForGraduatedPersonProcess.do?method=listProcessAllowedActivities"),
+@Forwards({ @Forward(name = "intro",
+        path = "/academicAdministration/caseHandlingDegreeCandidacyForGraduatedPersonProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "list-allowed-activities", path = "/candidacy/graduatedPerson/listIndividualCandidacyActivities.jsp"),
         @Forward(name = "prepare-create-new-process", path = "/candidacy/selectPersonForCandidacy.jsp"),
         @Forward(name = "fill-personal-information", path = "/candidacy/fillPersonalInformation.jsp"),
@@ -168,8 +166,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcessDA extends Indivi
         return mapping.findForward("edit-candidacy-information");
     }
 
-    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         try {
             executeActivity(getProcess(request), "EditCandidacyInformation", getIndividualCandidacyProcessBean());
@@ -199,8 +197,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcessDA extends Indivi
     public ActionForward prepareExecuteChangeIndividualCandidacyState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
 
-        request.setAttribute("individualCandidacyResultBean", new DegreeCandidacyForGraduatedPersonIndividualCandidacyResultBean(
-                getProcess(request)));
+        request.setAttribute("individualCandidacyResultBean",
+                new DegreeCandidacyForGraduatedPersonIndividualCandidacyResultBean(getProcess(request)));
         return mapping.findForward("change-state");
     }
 
@@ -223,8 +221,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcessDA extends Indivi
         return mapping.findForward("introduce-candidacy-result");
     }
 
-    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         try {
             executeActivity(getProcess(request), "IntroduceCandidacyResult", getCandidacyResultBean());
@@ -293,16 +291,16 @@ public class DegreeCandidacyForGraduatedPersonIndividualProcessDA extends Indivi
 
     public ActionForward prepareExecuteChangeProcessCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new DegreeCandidacyForGraduatedPersonIndividualProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new DegreeCandidacyForGraduatedPersonIndividualProcessBean(getProcess(request)));
 
         return mapping.findForward("change-process-checked-state");
     }
 
     public ActionForward prepareExecuteChangePaymentCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new DegreeCandidacyForGraduatedPersonIndividualProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new DegreeCandidacyForGraduatedPersonIndividualProcessBean(getProcess(request)));
 
         return mapping.findForward("change-payment-checked-state");
     }

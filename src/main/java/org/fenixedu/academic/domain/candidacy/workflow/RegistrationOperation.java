@@ -68,8 +68,8 @@ public class RegistrationOperation extends CandidacyOperation {
         enrolStudentInCurricularCourses(executionDegree, registration);
         associateShiftsFor(registration);
         //assignMeasurementTestShift(registration);
-        Signal.emit("academic.candidacy.registration.created", new RegistrationCreatedByCandidacy(registration,
-                getStudentCandidacy()));
+        Signal.emit("academic.candidacy.registration.created",
+                new RegistrationCreatedByCandidacy(registration, getStudentCandidacy()));
     }
 
     protected void associateShiftsFor(final Registration registration) {
@@ -111,9 +111,8 @@ public class RegistrationOperation extends CandidacyOperation {
 
     protected void enrolStudentInCurricularCourses(final ExecutionDegree executionDegree, final Registration registration) {
         final ExecutionSemester executionSemester = getExecutionPeriod();
-        final StudentCurricularPlan studentCurricularPlan =
-                StudentCurricularPlan.createBolonhaStudentCurricularPlan(registration, executionDegree.getDegreeCurricularPlan(),
-                        new YearMonthDay(), executionSemester);
+        final StudentCurricularPlan studentCurricularPlan = StudentCurricularPlan.createBolonhaStudentCurricularPlan(registration,
+                executionDegree.getDegreeCurricularPlan(), new YearMonthDay(), executionSemester);
 
         studentCurricularPlan.createFirstTimeStudentEnrolmentsFor(executionSemester, getCurrentUsername());
         registration.updateEnrolmentDate(executionSemester.getExecutionYear());
@@ -142,8 +141,8 @@ public class RegistrationOperation extends CandidacyOperation {
                 getStudentCandidacy().getStudentPersonalDataStudentsAssociationAuthorization());
 
         if (getStudentCandidacy().getApplyForResidence()) {
-            registration.getStudent().setResidenceCandidacyForCurrentExecutionYear(
-                    getStudentCandidacy().getNotesAboutResidenceAppliance());
+            registration.getStudent()
+                    .setResidenceCandidacyForCurrentExecutionYear(getStudentCandidacy().getNotesAboutResidenceAppliance());
         }
 
         return registration;

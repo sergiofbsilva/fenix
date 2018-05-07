@@ -113,7 +113,8 @@ public class ScheduleThesisMeeting extends PhdThesisActivity {
         participant.addAccessType(PhdProcessAccessType.JURY_REVIEW_DOCUMENTS_DOWNLOAD);
     }
 
-    private void sendAlertToJuryElement(PhdIndividualProgramProcess process, PhdParticipant participant, PhdThesisProcessBean bean) {
+    private void sendAlertToJuryElement(PhdIndividualProgramProcess process, PhdParticipant participant,
+            PhdThesisProcessBean bean) {
         final AlertMessage subject = AlertMessage.create(bean.getMailSubject()).isKey(false).withPrefix(false);
         final AlertMessage body = AlertMessage.create(buildBody(process, participant, bean)).isKey(false).withPrefix(false);
 

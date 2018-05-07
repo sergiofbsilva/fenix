@@ -156,9 +156,8 @@ public final class RenderTimeTableTag extends TagSupport {
         JspWriter writer = pageContext.getOut();
         TimeTable timeTable = generateTimeTable(infoLessonList, locale, pageContext, startTimeTableHour);
 
-        TimeTableRenderer renderer =
-                new TimeTableRenderer(timeTable, lessonSlotContentRenderer, this.slotSizeMinutes, startTimeTableHour,
-                        this.endTimeTableHour, colorPicker);
+        TimeTableRenderer renderer = new TimeTableRenderer(timeTable, lessonSlotContentRenderer, this.slotSizeMinutes,
+                startTimeTableHour, this.endTimeTableHour, colorPicker);
 
         try {
             writer.print(renderer.render(locale, pageContext, getDefinedWidth()));
@@ -234,10 +233,10 @@ public final class RenderTimeTableTag extends TagSupport {
 
             InfoShowOccupation elem = iterator.next();
 
-            if (elem instanceof InfoLesson || elem instanceof InfoLessonInstance || elem instanceof InfoLessonInstanceAggregation) {
-                SubtitleEntry subtitleEntry =
-                        new SubtitleEntry(elem.getInfoShift().getInfoDisciplinaExecucao().getSigla(), elem.getInfoShift()
-                                .getInfoDisciplinaExecucao().getNome());
+            if (elem instanceof InfoLesson || elem instanceof InfoLessonInstance
+                    || elem instanceof InfoLessonInstanceAggregation) {
+                SubtitleEntry subtitleEntry = new SubtitleEntry(elem.getInfoShift().getInfoDisciplinaExecucao().getSigla(),
+                        elem.getInfoShift().getInfoDisciplinaExecucao().getNome());
 
                 if (!listaAuxiliar.contains(subtitleEntry)) {
                     listaAuxiliar.add(subtitleEntry);
@@ -358,9 +357,8 @@ public final class RenderTimeTableTag extends TagSupport {
             break;
 
         case TimeTableType.SHIFT_ENROLLMENT_TIMETABLE:
-            this.lessonSlotContentRenderer =
-                    new ShiftEnrollmentTimeTableLessonContentRenderer(getStudentID(), getApplication(), getClassID(),
-                            getExecutionCourseID(), getExecutionSemesterID(), getAction());
+            this.lessonSlotContentRenderer = new ShiftEnrollmentTimeTableLessonContentRenderer(getStudentID(), getApplication(),
+                    getClassID(), getExecutionCourseID(), getExecutionSemesterID(), getAction());
             this.colorPicker = new ClassTimeTableColorPicker();
             Integer defaultTime = new Integer(19);
             Integer endTime = defaultTime;

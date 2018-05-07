@@ -40,9 +40,10 @@ public class RemoveCoordinators {
             if (coordinator != null) {
                 final Person person = coordinator.getPerson();
 
-                CoordinationTeamLog.createLog(coordinator.getExecutionDegree().getDegree(), coordinator.getExecutionDegree()
-                        .getExecutionYear(), Bundle.MESSAGING, "log.degree.coordinationteam.removemember", coordinator
-                        .getPerson().getPresentationName(), coordinator.getExecutionDegree().getPresentationName());
+                CoordinationTeamLog.createLog(coordinator.getExecutionDegree().getDegree(),
+                        coordinator.getExecutionDegree().getExecutionYear(), Bundle.MESSAGING,
+                        "log.degree.coordinationteam.removemember", coordinator.getPerson().getPresentationName(),
+                        coordinator.getExecutionDegree().getPresentationName());
 
                 coordinator.delete();
             }
@@ -57,7 +58,7 @@ public class RemoveCoordinators {
     public static void runRemoveCoordinators(String executionDegreeID, List<String> coordinatorsToRemoveIDs)
             throws NotAuthorizedException {
         ResponsibleDegreeCoordinatorAuthorizationFilter.instance.execute(executionDegreeID);
-        serviceInstance.run(executionDegreeID, coordinatorsToRemoveIDs);
+        RemoveCoordinators.run(executionDegreeID, coordinatorsToRemoveIDs);
     }
 
 }

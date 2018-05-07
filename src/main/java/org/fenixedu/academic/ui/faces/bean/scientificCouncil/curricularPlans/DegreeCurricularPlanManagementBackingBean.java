@@ -117,9 +117,8 @@ public class DegreeCurricularPlanManagementBackingBean extends FenixBackingBean 
 
         Group curricularPlanMembersGroup = getDcp().getCurricularPlanMembersGroup();
         if (curricularPlanMembersGroup != null) {
-            curricularPlanMembersGroup.getMembers().forEach(
-                    user -> result.add(new SelectItem(user.getExternalId(), user.getPerson().getName() + " ("
-                            + user.getUsername() + ")")));
+            curricularPlanMembersGroup.getMembers().forEach(user -> result
+                    .add(new SelectItem(user.getExternalId(), user.getPerson().getName() + " (" + user.getUsername() + ")")));
         }
 
         return result;
@@ -210,7 +209,8 @@ public class DegreeCurricularPlanManagementBackingBean extends FenixBackingBean 
     public List<SelectItem> getGradeScales() {
         List<SelectItem> result = new ArrayList<SelectItem>();
 
-        result.add(new SelectItem(this.NO_SELECTION, BundleUtil.getString(Bundle.SCIENTIFIC, "choose")));
+        result.add(new SelectItem(DegreeCurricularPlanManagementBackingBean.NO_SELECTION,
+                BundleUtil.getString(Bundle.SCIENTIFIC, "choose")));
         result.add(new SelectItem(GradeScale.TYPE20.name(), BundleUtil.getString(Bundle.ENUMERATION, GradeScale.TYPE20.name())));
         result.add(new SelectItem(GradeScale.TYPE5.name(), BundleUtil.getString(Bundle.ENUMERATION, GradeScale.TYPE5.name())));
 
@@ -246,13 +246,13 @@ public class DegreeCurricularPlanManagementBackingBean extends FenixBackingBean 
         List<SelectItem> result = new ArrayList<SelectItem>();
 
         if (getDcp().getExecutionDegreesSet().isEmpty()) {
-            result.add(new SelectItem(CurricularStage.DRAFT.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                    CurricularStage.DRAFT.getName())));
+            result.add(new SelectItem(CurricularStage.DRAFT.name(),
+                    BundleUtil.getString(Bundle.ENUMERATION, CurricularStage.DRAFT.getName())));
         }
-        result.add(new SelectItem(CurricularStage.PUBLISHED.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                CurricularStage.PUBLISHED.getName())));
-        result.add(new SelectItem(CurricularStage.APPROVED.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                CurricularStage.APPROVED.getName())));
+        result.add(new SelectItem(CurricularStage.PUBLISHED.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, CurricularStage.PUBLISHED.getName())));
+        result.add(new SelectItem(CurricularStage.APPROVED.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, CurricularStage.APPROVED.getName())));
 
         return result;
     }
@@ -260,14 +260,14 @@ public class DegreeCurricularPlanManagementBackingBean extends FenixBackingBean 
     public List<SelectItem> getStates() {
         List<SelectItem> result = new ArrayList<SelectItem>();
 
-        result.add(new SelectItem(DegreeCurricularPlanState.ACTIVE.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                DegreeCurricularPlanState.ACTIVE.getName())));
-        result.add(new SelectItem(DegreeCurricularPlanState.NOT_ACTIVE.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                DegreeCurricularPlanState.NOT_ACTIVE.getName())));
-        result.add(new SelectItem(DegreeCurricularPlanState.CONCLUDED.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                DegreeCurricularPlanState.CONCLUDED.getName())));
-        result.add(new SelectItem(DegreeCurricularPlanState.PAST.name(), BundleUtil.getString(Bundle.ENUMERATION,
-                DegreeCurricularPlanState.PAST.getName())));
+        result.add(new SelectItem(DegreeCurricularPlanState.ACTIVE.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, DegreeCurricularPlanState.ACTIVE.getName())));
+        result.add(new SelectItem(DegreeCurricularPlanState.NOT_ACTIVE.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, DegreeCurricularPlanState.NOT_ACTIVE.getName())));
+        result.add(new SelectItem(DegreeCurricularPlanState.CONCLUDED.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, DegreeCurricularPlanState.CONCLUDED.getName())));
+        result.add(new SelectItem(DegreeCurricularPlanState.PAST.name(),
+                BundleUtil.getString(Bundle.ENUMERATION, DegreeCurricularPlanState.PAST.getName())));
 
         return result;
     }
@@ -396,8 +396,8 @@ public class DegreeCurricularPlanManagementBackingBean extends FenixBackingBean 
                 continue;
             }
 
-            result.add(new SelectItem(entry.getRepresentationInStringFormat(), BundleUtil.getString(Bundle.ENUMERATION,
-                    entry.getName())));
+            result.add(new SelectItem(entry.getRepresentationInStringFormat(),
+                    BundleUtil.getString(Bundle.ENUMERATION, entry.getName())));
         }
 
         result.add(0, new SelectItem(NO_SELECTION, BundleUtil.getString(Bundle.SCIENTIFIC, "choose")));

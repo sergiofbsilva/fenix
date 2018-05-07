@@ -31,8 +31,8 @@ public class StorkAttributesList implements Serializable {
 
     private static class EmptyTypeOfStorkAttributesList extends StorkAttributesList {
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 1L;
 
         @Override

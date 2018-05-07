@@ -128,7 +128,8 @@ public class MobilePhone extends MobilePhone_Base {
     }
 
     @Override
-    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact, String newValue) {
+    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
+            String newValue) {
         logEditAux(person, propertiesChanged, valueChanged, createdNewContact, newValue, "label.partyContacts.MobilePhone");
     }
 

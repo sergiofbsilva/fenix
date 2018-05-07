@@ -18,8 +18,6 @@
  */
 package org.fenixedu.academic.service.services.administrativeOffice.gradeSubmission;
 
-import pt.ist.fenixframework.Atomic;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -44,6 +42,8 @@ import org.fenixedu.academic.dto.teacher.gradeSubmission.MarkSheetTeacherGradeSu
 import org.fenixedu.academic.dto.teacher.gradeSubmission.MarkSheetTeacherMarkBean;
 import org.fenixedu.academic.service.services.exceptions.InvalidArgumentsServiceException;
 import org.joda.time.YearMonthDay;
+
+import pt.ist.fenixframework.Atomic;
 
 public class CreateMarkSheetByTeacher {
 
@@ -99,10 +99,9 @@ public class CreateMarkSheetByTeacher {
                 Collection<MarkSheetEnrolmentEvaluationBean> markSheetEnrolmentEvaluationBeans = seasonEntry.getValue();
 
                 if (markSheetEnrolmentEvaluationBeans != null) {
-                    MarkSheet markSheet =
-                            curricularCourse.createNormalMarkSheet(executionCourse.getExecutionPeriod(), responsibleTeacher,
-                                    evaluationDate, season, Boolean.TRUE, markSheetEnrolmentEvaluationBeans,
-                                    responsibleTeacher.getPerson());
+                    MarkSheet markSheet = curricularCourse.createNormalMarkSheet(executionCourse.getExecutionPeriod(),
+                            responsibleTeacher, evaluationDate, season, Boolean.TRUE, markSheetEnrolmentEvaluationBeans,
+                            responsibleTeacher.getPerson());
                     enrolmetnEvaluations.addAll(markSheet.getEnrolmentEvaluationsSet());
                 }
             }
@@ -145,7 +144,8 @@ public class CreateMarkSheetByTeacher {
     }
 
     private static Collection<MarkSheetEnrolmentEvaluationBean> getEvaluationBeans(
-            Map<EvaluationSeason, Collection<MarkSheetEnrolmentEvaluationBean>> evaluationBeansForSeason, EvaluationSeason season) {
+            Map<EvaluationSeason, Collection<MarkSheetEnrolmentEvaluationBean>> evaluationBeansForSeason,
+            EvaluationSeason season) {
         Collection<MarkSheetEnrolmentEvaluationBean> evaluationBeans = evaluationBeansForSeason.get(season);
         if (evaluationBeans == null) {
             evaluationBeans = new ArrayList<MarkSheetEnrolmentEvaluationBean>();

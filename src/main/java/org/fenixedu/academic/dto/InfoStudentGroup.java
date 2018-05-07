@@ -73,9 +73,8 @@ public class InfoStudentGroup extends InfoObject {
     public boolean equals(Object arg0) {
         boolean result = false;
         if (arg0 instanceof InfoStudentGroup) {
-            result =
-                    (getInfoGrouping().equals(((InfoStudentGroup) arg0).getInfoGrouping()))
-                            && (getGroupNumber().equals(((InfoStudentGroup) arg0).getGroupNumber()));
+            result = (getInfoGrouping().equals(((InfoStudentGroup) arg0).getInfoGrouping()))
+                    && (getGroupNumber().equals(((InfoStudentGroup) arg0).getGroupNumber()));
             if (getInfoShift() != null) {
                 result = result && (getInfoShift().equals(((InfoStudentGroup) arg0).getInfoShift()));
             } else if (((InfoStudentGroup) arg0).getInfoShift() != null) {

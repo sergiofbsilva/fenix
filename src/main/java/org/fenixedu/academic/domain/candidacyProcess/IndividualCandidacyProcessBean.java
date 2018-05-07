@@ -282,9 +282,8 @@ abstract public class IndividualCandidacyProcessBean implements Serializable {
         this.paymentDocument = new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT);
         this.habilitationCertificationDocument =
                 new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
-        this.firstCycleAccessHabilitationDocument =
-                new CandidacyProcessDocumentUploadBean(
-                        IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_DOCUMENT);
+        this.firstCycleAccessHabilitationDocument = new CandidacyProcessDocumentUploadBean(
+                IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_DOCUMENT);
         this.vatCatCopyDocument = new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT);
         setPhotoDocument(new CandidacyProcessDocumentUploadBean(IndividualCandidacyDocumentFileType.PHOTO));
     }

@@ -28,7 +28,8 @@ import pt.ist.fenixframework.Atomic;
 public class AlterExecutionPeriodState {
 
     @Atomic
-    public static void run(final String year, final Integer semester, final PeriodState periodState) throws FenixServiceException {
+    public static void run(final String year, final Integer semester, final PeriodState periodState)
+            throws FenixServiceException {
         final ExecutionYear executionYear = ExecutionYear.readExecutionYearByName(year);
         final ExecutionSemester executionSemester = executionYear.getExecutionSemesterFor(semester);
         if (executionSemester == null) {

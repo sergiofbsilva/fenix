@@ -37,8 +37,8 @@ public class AddState extends PhdProgramCandidacyProcessActivity {
     protected PhdProgramCandidacyProcess executeActivity(PhdProgramCandidacyProcess process, User userView, Object object) {
         PhdProgramCandidacyProcessBean bean = (PhdProgramCandidacyProcessBean) object;
 
-        PhdCandidacyProcessState.createStateWithGivenStateDate(process, bean.getState(), userView.getPerson(), "", bean
-                .getStateDate().toDateTimeAtStartOfDay());
+        PhdCandidacyProcessState.createStateWithGivenStateDate(process, bean.getState(), userView.getPerson(), "",
+                bean.getStateDate().toDateTimeAtStartOfDay());
 
         return process;
     }

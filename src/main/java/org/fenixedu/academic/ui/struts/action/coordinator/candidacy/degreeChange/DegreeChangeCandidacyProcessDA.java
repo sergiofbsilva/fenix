@@ -50,8 +50,8 @@ import pt.ist.fenixframework.FenixFramework;
         formBeanClass = DegreeChangeCandidacyProcessDA.DegreeChangeCandidacyProcessForm.class,
         functionality = DegreeCoordinatorIndex.class)
 @Forwards(@Forward(name = "intro", path = "/coordinator/candidacy/degreeChange/mainCandidacyProcess.jsp"))
-public class DegreeChangeCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeCandidacyProcessDA {
+public class DegreeChangeCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,

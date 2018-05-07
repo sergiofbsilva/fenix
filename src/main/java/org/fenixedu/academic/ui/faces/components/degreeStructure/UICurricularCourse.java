@@ -166,8 +166,8 @@ public class UICurricularCourse extends UIDegreeModule {
             writer.writeAttribute("class", "highlight2 smalltxt", null);
             writer.writeAttribute("align", "center", null);
             writer.writeAttribute("style", "width: 1em;", null);
-            writer.append(BundleUtil.getString(Bundle.ENUMERATION, this.curricularCourse.getRegime(this.executionYear).toString()
-                    + ".ACRONYM"));
+            writer.append(BundleUtil.getString(Bundle.ENUMERATION,
+                    this.curricularCourse.getRegime(this.executionYear).toString() + ".ACRONYM"));
         } else {
             writer.append("&nbsp;");
         }
@@ -184,9 +184,8 @@ public class UICurricularCourse extends UIDegreeModule {
             writer.writeAttribute("style", "color: #888", null);
             writer.append(BundleUtil.getString(Bundle.BOLONHA, "contactLessonHoursAcronym")).append("-");
             writer.endElement("span");
-            final BigDecimal contactLoad =
-                    new BigDecimal(this.curricularCourse.getContactLoad(curricularPeriod, executionYear)).setScale(2,
-                            RoundingMode.HALF_EVEN);
+            final BigDecimal contactLoad = new BigDecimal(this.curricularCourse.getContactLoad(curricularPeriod, executionYear))
+                    .setScale(2, RoundingMode.HALF_EVEN);
             writer.append(contactLoad.toPlainString()).append(" ");
 
             writer.startElement("span", this);
@@ -236,17 +235,15 @@ public class UICurricularCourse extends UIDegreeModule {
             if (previousContext.getCurricularPeriod().getParent().getChildOrder() != null) {
                 writer.append(String.valueOf(previousContext.getCurricularPeriod().getParent().getChildOrder()));
                 writer.append(" ");
-                writer.append(BundleUtil.getString(Bundle.ENUMERATION, previousContext.getCurricularPeriod().getParent()
-                        .getAcademicPeriod().getName()
-                        + ".ABBREVIATION"));
+                writer.append(BundleUtil.getString(Bundle.ENUMERATION,
+                        previousContext.getCurricularPeriod().getParent().getAcademicPeriod().getName() + ".ABBREVIATION"));
                 writer.append(", ");
             }
 
             writer.append(String.valueOf(previousContext.getCurricularPeriod().getChildOrder() + 1));
             writer.append(" ");
-            writer.append(BundleUtil.getString(Bundle.ENUMERATION, previousContext.getCurricularPeriod().getAcademicPeriod()
-                    .getName()
-                    + ".ABBREVIATION"));
+            writer.append(BundleUtil.getString(Bundle.ENUMERATION,
+                    previousContext.getCurricularPeriod().getAcademicPeriod().getName() + ".ABBREVIATION"));
         } else {
             writer.append(previousContext.getParentCourseGroup().getName());
         }
@@ -263,9 +260,8 @@ public class UICurricularCourse extends UIDegreeModule {
             writer.writeAttribute("style", "color: #888", null);
             writer.append(BundleUtil.getString(Bundle.BOLONHA, "contactLessonHoursAcronym")).append("-");
             writer.endElement("span");
-            final BigDecimal contactLoad =
-                    new BigDecimal(this.curricularCourse.getCompetenceCourse().getContactLoad(
-                            previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear)).setScale(2,
+            final BigDecimal contactLoad = new BigDecimal(this.curricularCourse.getCompetenceCourse()
+                    .getContactLoad(previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear)).setScale(2,
                             RoundingMode.HALF_EVEN);
             writer.append(contactLoad.toString()).append(" ");
 
@@ -273,10 +269,9 @@ public class UICurricularCourse extends UIDegreeModule {
             writer.writeAttribute("style", "color: #888", null);
             writer.append(BundleUtil.getString(Bundle.BOLONHA, "autonomousWorkAcronym")).append("-");
             writer.endElement("span");
-            writer.append(
-                    this.curricularCourse.getCompetenceCourse()
-                            .getAutonomousWorkHours(previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear)
-                            .toString()).append(" ");
+            writer.append(this.curricularCourse.getCompetenceCourse()
+                    .getAutonomousWorkHours(previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear).toString())
+                    .append(" ");
 
             writer.startElement("span", this);
             writer.writeAttribute("style", "color: #888", null);
@@ -290,8 +285,8 @@ public class UICurricularCourse extends UIDegreeModule {
             writer.writeAttribute("class", "smalltxt", null);
             writer.writeAttribute("align", "right", null);
             writer.append(BundleUtil.getString(Bundle.BOLONHA, "credits.abbreviation")).append(" ");
-            writer.append(String.valueOf(this.curricularCourse.getCompetenceCourse().getEctsCredits(
-                    previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear)));
+            writer.append(String.valueOf(this.curricularCourse.getCompetenceCourse()
+                    .getEctsCredits(previousContext.getCurricularPeriod().getChildOrder() + 1, executionYear)));
         } else {
             writer.append("&nbsp;");
             writer.endElement("td");

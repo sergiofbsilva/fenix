@@ -161,8 +161,8 @@ public class ExternalSupervisorViewYearDA extends FenixDispatchAction {
         final Registration registration = studentCurricularPlan.getRegistration();
 
         if (registration.isConcluded()) {
-            if (registration.isRegistrationConclusionProcessed()
-                    && (!registration.isBolonha() || studentCurricularPlan.getInternalCycleCurriculumGroupsSize().intValue() == 1)) {
+            if (registration.isRegistrationConclusionProcessed() && (!registration.isBolonha()
+                    || studentCurricularPlan.getInternalCycleCurriculumGroupsSize().intValue() == 1)) {
                 return registration.getRawGrade().getValue();
             } else {
                 return " - ";
@@ -177,37 +177,38 @@ public class ExternalSupervisorViewYearDA extends FenixDispatchAction {
 
         spreadsheet.setHeaders(new String[] {
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.username"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.username"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.number"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.number"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.name"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.email"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.email"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.identificationDocumentType"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.identificationDocumentType"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.identificationDocumentNumber"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.identificationDocumentNumber"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.Degree"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.Degree"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.curricularPlan"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.curricularPlan"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.org.fenixedu.academic.domain.student.Registration.startDate"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.org.fenixedu.academic.domain.student.Registration.startDate"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.org.fenixedu.academic.domain.student.Registration.conclusionDate"),
+                BundleUtil.getString(Bundle.APPLICATION,
+                        "label.org.fenixedu.academic.domain.student.Registration.conclusionDate"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.plan.state"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.plan.state"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.number.approved.curricular.courses"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.number.approved.curricular.courses"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.ects"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.ects"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.average"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.average"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.year"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.year"),
 
-        " ", " " });
+                " ", " " });
 
         return spreadsheet;
     }

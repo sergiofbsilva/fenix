@@ -131,9 +131,10 @@ public class ExecutionCourseBean implements Serializable, HasExecutionSemester, 
         if (this.chooseNotLinked) {
             result = this.getExecutionSemester().getExecutionCoursesWithNoCurricularCourses();
         } else {
-            for (final CurricularCourse curricularCourse : getDegreeCurricularPlan().getCurricularCourses(getExecutionSemester())) {
-                if (curricularCourse.hasScopeInGivenSemesterAndCurricularYearInDCP(getCurricularYear(),
-                        getDegreeCurricularPlan(), getExecutionSemester())) {
+            for (final CurricularCourse curricularCourse : getDegreeCurricularPlan()
+                    .getCurricularCourses(getExecutionSemester())) {
+                if (curricularCourse.hasScopeInGivenSemesterAndCurricularYearInDCP(getCurricularYear(), getDegreeCurricularPlan(),
+                        getExecutionSemester())) {
                     result.addAll(curricularCourse.getExecutionCoursesByExecutionPeriod(getExecutionSemester()));
                 }
             }
@@ -156,9 +157,8 @@ public class ExecutionCourseBean implements Serializable, HasExecutionSemester, 
 
             final Set<DegreeCurricularPlan> plans;
             if (getDegree() != null) {
-                plans =
-                        Sets.intersection(getDegree().getDegreeCurricularPlansSet(),
-                                Sets.newHashSet(getSourceExecutionCourse().getAssociatedDegreeCurricularPlans()));
+                plans = Sets.intersection(getDegree().getDegreeCurricularPlansSet(),
+                        Sets.newHashSet(getSourceExecutionCourse().getAssociatedDegreeCurricularPlans()));
             } else {
                 plans = Sets.newHashSet(getSourceExecutionCourse().getAssociatedDegreeCurricularPlans());
             }
@@ -177,9 +177,8 @@ public class ExecutionCourseBean implements Serializable, HasExecutionSemester, 
 
             final Set<DegreeCurricularPlan> plans;
             if (getDegree() != null) {
-                plans =
-                        Sets.intersection(getDegree().getDegreeCurricularPlansSet(),
-                                Sets.newHashSet(getDestinationExecutionCourse().getAssociatedDegreeCurricularPlans()));
+                plans = Sets.intersection(getDegree().getDegreeCurricularPlansSet(),
+                        Sets.newHashSet(getDestinationExecutionCourse().getAssociatedDegreeCurricularPlans()));
             } else {
                 plans = Sets.newHashSet(getDestinationExecutionCourse().getAssociatedDegreeCurricularPlans());
             }

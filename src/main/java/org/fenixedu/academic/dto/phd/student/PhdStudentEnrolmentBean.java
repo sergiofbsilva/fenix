@@ -30,8 +30,9 @@ public class PhdStudentEnrolmentBean extends BolonhaStudentEnrollmentBean {
     public PhdStudentEnrolmentBean(StudentCurricularPlan studentCurricularPlan, ExecutionSemester executionSemester,
             int[] curricularYears, CurricularRuleLevel curricularRuleLevel) {
 
-        super(studentCurricularPlan, executionSemester, new PhdStudentCurriculumGroupBean(studentCurricularPlan.getRoot(),
-                executionSemester, curricularYears), curricularRuleLevel);
+        super(studentCurricularPlan, executionSemester,
+                new PhdStudentCurriculumGroupBean(studentCurricularPlan.getRoot(), executionSemester, curricularYears),
+                curricularRuleLevel);
     }
 
 }

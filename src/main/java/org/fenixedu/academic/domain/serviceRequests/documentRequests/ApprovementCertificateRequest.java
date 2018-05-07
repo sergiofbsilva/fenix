@@ -180,7 +180,8 @@ public class ApprovementCertificateRequest extends ApprovementCertificateRequest
         final Registration registration = getRegistration();
         ICurriculum curriculum;
         if (registration.isBolonha()) {
-            for (final CycleCurriculumGroup cycle : registration.getLastStudentCurricularPlan().getInternalCycleCurriculumGrops()) {
+            for (final CycleCurriculumGroup cycle : registration.getLastStudentCurricularPlan()
+                    .getInternalCycleCurriculumGrops()) {
                 if (cycle.hasAnyApprovedCurriculumLines() && (useConcluded || !cycle.isConclusionProcessed())) {
                     curriculum = cycle.getCurriculum(getFilteringDate());
                     filterEntries(result, this, curriculum);
@@ -198,13 +199,13 @@ public class ApprovementCertificateRequest extends ApprovementCertificateRequest
         return hasConcluded() ? getRequestConclusionDate() : new DateTime();
     }
 
-    static final public void filterEntries(final Collection<ICurriculumEntry> result,
-            final ApprovementCertificateRequest request, final ICurriculum curriculum) {
+    static final public void filterEntries(final Collection<ICurriculumEntry> result, final ApprovementCertificateRequest request,
+            final ICurriculum curriculum) {
         for (final ICurriculumEntry entry : curriculum.getCurriculumEntries()) {
             if (entry instanceof Dismissal) {
                 final Dismissal dismissal = (Dismissal) entry;
-                if (dismissal.getCredits().isEquivalence() || dismissal.isCreditsDismissal()
-                        && !dismissal.getCredits().isSubstitution()) {
+                if (dismissal.getCredits().isEquivalence()
+                        || dismissal.isCreditsDismissal() && !dismissal.getCredits().isSubstitution()) {
                     continue;
                 }
             } else if (entry instanceof ExternalEnrolment && request.getIgnoreExternalEntries()) {
@@ -240,7 +241,8 @@ public class ApprovementCertificateRequest extends ApprovementCertificateRequest
         return result;
     }
 
-    private void reportApprovedCurriculumLines(final Collection<ICurriculumEntry> result, final Collection<CurriculumLine> lines) {
+    private void reportApprovedCurriculumLines(final Collection<ICurriculumEntry> result,
+            final Collection<CurriculumLine> lines) {
         for (final CurriculumLine line : lines) {
             if (line.isApproved()) {
                 if (line.isEnrolment()) {

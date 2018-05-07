@@ -103,8 +103,8 @@ public class DocumentRequestExcelUtils {
                         programConclusion != null ? programConclusion.getName().getContent() : null);
 
                 if (document.isRequestForRegistration()) {
-                    addCell("Tipo de Curso", ((RegistrationAcademicServiceRequest) document).getDegreeType().getName()
-                            .getContent());
+                    addCell("Tipo de Curso",
+                            ((RegistrationAcademicServiceRequest) document).getDegreeType().getName().getContent());
                 } else if (document.isRequestForPhd()) {
                     addCell("Tipo de Estudos", "Programa doutoral");
                 }

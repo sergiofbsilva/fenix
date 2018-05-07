@@ -107,8 +107,8 @@ public class PublicPresentationSeminarProcess extends PublicPresentationSeminarP
             bean.getDocument().setType(PhdIndividualProgramDocumentType.PUBLIC_PRESENTATION_SEMINAR_COMISSION);
 
             process.addDocument(bean.getDocument(), userView.getPerson());
-            process.createState(PublicPresentationSeminarProcessStateType.COMMISSION_WAITING_FOR_VALIDATION,
-                    userView.getPerson(), bean.getRemarks());
+            process.createState(PublicPresentationSeminarProcessStateType.COMMISSION_WAITING_FOR_VALIDATION, userView.getPerson(),
+                    bean.getRemarks());
 
             if (bean.getGenerateAlert()) {
                 AlertService.alertAcademicOffice(process.getIndividualProgramProcess(),

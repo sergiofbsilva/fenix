@@ -41,9 +41,9 @@ import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/curricularPlans/editOfficialPublication", module = "scientificCouncil", formBeanClass = FenixActionForm.class,
         functionality = ScientificCurricularPlansManagement.class)
-@Forwards({
-        @Forward(name = "prepare", path = "/scientificCouncil/curricularPlans/editOfficialPublication.jsp"),
-        @Forward(name = "prepareSpecializationArea", path = "/scientificCouncil/curricularPlans/editDegreeSpecializationArea.jsp"),
+@Forwards({ @Forward(name = "prepare", path = "/scientificCouncil/curricularPlans/editOfficialPublication.jsp"),
+        @Forward(name = "prepareSpecializationArea",
+                path = "/scientificCouncil/curricularPlans/editDegreeSpecializationArea.jsp"),
         @Forward(name = "editDegree", path = "/scientificCouncil/curricularPlans/editDegree.jsp"),
         @Forward(name = "deletePublication", path = "/scientificCouncil/curricularPlans/deleteDegreeOfficialPublication.jsp") })
 public class EditDegreeOfficialPublicationDA extends FenixDispatchAction {
@@ -167,7 +167,8 @@ public class EditDegreeOfficialPublicationDA extends FenixDispatchAction {
             final HttpServletResponse response) {
         String degreeId = request.getParameter("degreeId");
 
-        return new FenixActionForward(request, new ActionForward("/curricularPlans/editDegree.faces?degreeId=" + degreeId, false));
+        return new FenixActionForward(request,
+                new ActionForward("/curricularPlans/editDegree.faces?degreeId=" + degreeId, false));
     }
 
     public ActionForward deleteDegreeOfficialPublication(final ActionMapping mapping, final ActionForm form,
@@ -179,6 +180,7 @@ public class EditDegreeOfficialPublicationDA extends FenixDispatchAction {
 
         publication.delete();
 
-        return new FenixActionForward(request, new ActionForward("/curricularPlans/editDegree.faces?degreeId=" + degreeId, false));
+        return new FenixActionForward(request,
+                new ActionForward("/curricularPlans/editDegree.faces?degreeId=" + degreeId, false));
     }
 }

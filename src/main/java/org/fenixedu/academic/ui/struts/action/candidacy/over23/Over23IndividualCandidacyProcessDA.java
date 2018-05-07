@@ -195,8 +195,8 @@ public class Over23IndividualCandidacyProcessDA extends IndividualCandidacyProce
 
     public ActionForward prepareExecuteEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new Over23IndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new Over23IndividualCandidacyProcessBean(getProcess(request)));
         return mapping.findForward("edit-candidacy-information");
     }
 
@@ -206,8 +206,8 @@ public class Over23IndividualCandidacyProcessDA extends IndividualCandidacyProce
         return mapping.findForward("edit-candidacy-information");
     }
 
-    public ActionForward addDegreeToCandidacyWhenEditing(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward addDegreeToCandidacyWhenEditing(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return addDegreeToCandidacy(mapping, actionForm, request, response, "edit-candidacy-information");
     }
 
@@ -218,8 +218,8 @@ public class Over23IndividualCandidacyProcessDA extends IndividualCandidacyProce
 
     public ActionForward prepareExecuteChangePaymentCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new Over23IndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new Over23IndividualCandidacyProcessBean(getProcess(request)));
 
         return mapping.findForward("change-payment-checked-state");
     }
@@ -255,8 +255,8 @@ public class Over23IndividualCandidacyProcessDA extends IndividualCandidacyProce
         return mapping.findForward("introduce-candidacy-result");
     }
 
-    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         try {
             executeActivity(getProcess(request), "IntroduceCandidacyResult", getCandidacyResultBean());
         } catch (DomainException e) {
@@ -400,8 +400,8 @@ public class Over23IndividualCandidacyProcessDA extends IndividualCandidacyProce
 
     public ActionForward prepareExecuteChangeProcessCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new Over23IndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new Over23IndividualCandidacyProcessBean(getProcess(request)));
 
         return mapping.findForward("change-process-checked-state");
     }

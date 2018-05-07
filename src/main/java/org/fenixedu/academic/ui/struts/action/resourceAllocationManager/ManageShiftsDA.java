@@ -85,11 +85,10 @@ public class ManageShiftsDA extends FenixExecutionDegreeAndCurricularYearContext
         }
 
         private ActionForward redirectToShiftsList(HttpServletRequest request) {
-            String url =
-                    Stream.of("/manageShifts.do?method=listShifts&page=0",
-                            getQueryParam(request, PresentationConstants.ACADEMIC_INTERVAL),
-                            getQueryParam(request, PresentationConstants.CURRICULAR_YEAR_OID),
-                            getQueryParam(request, PresentationConstants.EXECUTION_DEGREE_OID)).collect(Collectors.joining("&"));
+            String url = Stream.of("/manageShifts.do?method=listShifts&page=0",
+                    getQueryParam(request, PresentationConstants.ACADEMIC_INTERVAL),
+                    getQueryParam(request, PresentationConstants.CURRICULAR_YEAR_OID),
+                    getQueryParam(request, PresentationConstants.EXECUTION_DEGREE_OID)).collect(Collectors.joining("&"));
 
             return redirect(url, request);
         }
@@ -229,10 +228,9 @@ public class ManageShiftsDA extends FenixExecutionDegreeAndCurricularYearContext
 
     private void readAndSetInfoToManageShifts(HttpServletRequest request) throws FenixServiceException, Exception {
         ContextSelectionBean context = (ContextSelectionBean) request.getAttribute(PresentationConstants.CONTEXT_SELECTION_BEAN);
-        List<InfoShift> infoShifts =
-                ReadShiftsByExecutionPeriodAndExecutionDegreeAndCurricularYear.run(context.getAcademicInterval(),
-                        new InfoExecutionDegree(context.getExecutionDegree()),
-                        new InfoCurricularYear(context.getCurricularYear()));
+        List<InfoShift> infoShifts = ReadShiftsByExecutionPeriodAndExecutionDegreeAndCurricularYear.run(
+                context.getAcademicInterval(), new InfoExecutionDegree(context.getExecutionDegree()),
+                new InfoCurricularYear(context.getCurricularYear()));
 
         Collections.sort(infoShifts, InfoShift.SHIFT_COMPARATOR_BY_TYPE_AND_ORDERED_LESSONS);
 

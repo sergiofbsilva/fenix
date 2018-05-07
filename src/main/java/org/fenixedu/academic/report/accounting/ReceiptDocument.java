@@ -95,10 +95,8 @@ public class ReceiptDocument extends FenixReport {
 
         addParameter("original", this.original);
         addParameter("contributorName", this.receipt.getContributorName());
-        addParameter(
-                "contributorSocialSecurityNumber",
-                Strings.isNullOrEmpty(this.receipt.getContributorNumber()) ? Receipt.GENERIC_CONTRIBUTOR_PARTY_NUMBER : this.receipt
-                        .getContributorNumber());
+        addParameter("contributorSocialSecurityNumber", Strings.isNullOrEmpty(this.receipt
+                .getContributorNumber()) ? Receipt.GENERIC_CONTRIBUTOR_PARTY_NUMBER : this.receipt.getContributorNumber());
         addParameter("contributorAddress", this.receipt.getContributorAddress());
 
         addParameter("studentNumber", this.receipt.getPerson().getStudent() != null ? this.receipt.getPerson().getStudent()

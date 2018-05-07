@@ -49,8 +49,8 @@ public class CancelPhdProgramProcess extends PhdIndividualProgramProcessActivity
         PhdIndividualProgramProcessBean bean = (PhdIndividualProgramProcessBean) object;
         DateTime stateDate = bean.getStateDate().toDateTimeAtStartOfDay();
 
-        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.CANCELLED,
-                userView.getPerson(), "", stateDate);
+        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.CANCELLED, userView.getPerson(),
+                "", stateDate);
 
         process.cancelDebts(userView.getPerson());
 

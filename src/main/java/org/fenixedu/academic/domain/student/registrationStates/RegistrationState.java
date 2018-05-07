@@ -235,9 +235,9 @@ public abstract class RegistrationState extends RegistrationState_Base implement
                 responsablePersonName = "-";
             }
 
-            org.fenixedu.academic.domain.student.RegistrationStateLog
-                    .createRegistrationStateLog(getRegistration(), Bundle.MESSAGING,
-                            "log.registration.registrationstate.removed", getStateType().getDescription(), getRemarks());
+            org.fenixedu.academic.domain.student.RegistrationStateLog.createRegistrationStateLog(getRegistration(),
+                    Bundle.MESSAGING, "log.registration.registrationstate.removed", getStateType().getDescription(),
+                    getRemarks());
             setRegistration(null);
             setResponsiblePerson(null);
             setRootDomainObject(null);

@@ -46,10 +46,10 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
+import com.google.common.io.ByteStreams;
+
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.common.io.ByteStreams;
 
 @StrutsFunctionality(app = StudentSubmitApp.class, path = "thesis", titleKey = "label.student.thesis.submission")
 @Mapping(path = "/thesisSubmission", module = "student")
@@ -129,8 +129,8 @@ public class ThesisSubmissionDA extends AbstractManageThesisDA {
         return prepareThesisSubmission(mapping, request, response, thesis);
     }
 
-    private ActionForward prepareThesisSubmission(ActionMapping mapping, HttpServletRequest request,
-            HttpServletResponse response, Thesis thesis) throws Exception {
+    private ActionForward prepareThesisSubmission(ActionMapping mapping, HttpServletRequest request, HttpServletResponse response,
+            Thesis thesis) throws Exception {
         if (thesis == null || thesis.isDraft() || thesis.isSubmitted()) {
             request.setAttribute("noThesis", true);
             return mapping.findForward("thesis-notFound");

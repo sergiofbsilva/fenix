@@ -156,8 +156,8 @@ public class DegreeChangeIndividualCandidacyProcess extends DegreeChangeIndividu
             return false;
         }
 
-        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES, process
-                .getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
+        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES,
+                process.getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
     }
 
     @StartActivity
@@ -471,9 +471,9 @@ public class DegreeChangeIndividualCandidacyProcess extends DegreeChangeIndividu
         }
 
         private IngressionType getIngressionType(final DegreeChangeIndividualCandidacyProcess process) {
-            return process.getPrecedentDegreeInformation().isCandidacyExternal() ? IngressionType.findByPredicate(
-                    IngressionType::isExternalDegreeChange).orElse(null) : IngressionType.findByPredicate(
-                    IngressionType::isInternalDegreeChange).orElse(null);
+            return process.getPrecedentDegreeInformation().isCandidacyExternal() ? IngressionType
+                    .findByPredicate(IngressionType::isExternalDegreeChange)
+                    .orElse(null) : IngressionType.findByPredicate(IngressionType::isInternalDegreeChange).orElse(null);
         }
 
         private DegreeCurricularPlan getDegreeCurricularPlan(final DegreeChangeIndividualCandidacyProcess process) {
@@ -588,8 +588,8 @@ public class DegreeChangeIndividualCandidacyProcess extends DegreeChangeIndividu
             missingDocumentFiles.add(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE);
         }
 
-        if (getCandidacy().getRefactoredPrecedentDegreeInformation().isCandidacyExternal()
-                && getActiveFileForType(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
+        if (getCandidacy().getRefactoredPrecedentDegreeInformation().isCandidacyExternal() && getActiveFileForType(
+                IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
             missingDocumentFiles.add(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE);
         }
 

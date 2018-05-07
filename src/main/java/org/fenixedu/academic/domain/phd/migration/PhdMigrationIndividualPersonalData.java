@@ -91,8 +91,8 @@ public class PhdMigrationIndividualPersonalData extends PhdMigrationIndividualPe
 
         if (person.getDateOfBirthYearMonthDay() == null
                 || !person.getDateOfBirthYearMonthDay().isEqual(getPersonalBean().getDateOfBirth())) {
-            throw new BirthdayMismatchException("Original: " + getPersonalBean().getDateOfBirth() + " Differs from: "
-                    + person.getDateOfBirthYearMonthDay());
+            throw new BirthdayMismatchException(
+                    "Original: " + getPersonalBean().getDateOfBirth() + " Differs from: " + person.getDateOfBirthYearMonthDay());
         }
 
         return person;
@@ -196,8 +196,8 @@ public class PhdMigrationIndividualPersonalData extends PhdMigrationIndividualPe
         bean.setGivenNames(readGivenName(personalBean.getFullName(), personalBean.getFamilyName()));
         bean.setFamilyNames(personalBean.getFamilyName());
 
-        bean.setDateOfBirth(new YearMonthDay(personalBean.getDateOfBirth().getYear(), personalBean.getDateOfBirth()
-                .getMonthOfYear(), personalBean.getDateOfBirth().getDayOfMonth()));
+        bean.setDateOfBirth(new YearMonthDay(personalBean.getDateOfBirth().getYear(),
+                personalBean.getDateOfBirth().getMonthOfYear(), personalBean.getDateOfBirth().getDayOfMonth()));
         bean.setGender(personalBean.getGender());
         bean.setNationality(personalBean.getNationality());
 

@@ -45,9 +45,9 @@ public class DegreeCurricularPlansForDegree implements DataProvider {
 
         if (markSheetManagementBean.getDegree() != null && markSheetManagementBean.getExecutionPeriod() != null) {
 
-            Set<Degree> availableDegrees =
-                    AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS,
-                            Authenticate.getUser()).collect(Collectors.toSet());
+            Set<Degree> availableDegrees = AcademicAccessRule
+                    .getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_MARKSHEETS, Authenticate.getUser())
+                    .collect(Collectors.toSet());
 
             for (final DegreeCurricularPlan dcp : markSheetManagementBean.getDegree().getDegreeCurricularPlansSet()) {
                 if (availableDegrees.contains(dcp.getDegree())) {
@@ -64,8 +64,8 @@ public class DegreeCurricularPlansForDegree implements DataProvider {
 
     private boolean canSubmitImprovementMarksheets(final MarkSheetManagementBaseBean markSheetManagementBean,
             final DegreeCurricularPlan degreeCurricularPlan) {
-        return degreeCurricularPlan.canSubmitImprovementMarkSheets(markSheetManagementBean.getExecutionPeriod()
-                .getExecutionYear());
+        return degreeCurricularPlan
+                .canSubmitImprovementMarkSheets(markSheetManagementBean.getExecutionPeriod().getExecutionYear());
     }
 
     private boolean hasExecutionDegreeForYear(final MarkSheetManagementBaseBean markSheetManagementBean,

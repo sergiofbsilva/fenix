@@ -51,9 +51,8 @@ public class PersonPaymentCodeGenerator extends PaymentCodeGenerator {
 
     @Override
     public String generateNewCodeFor(final PaymentCodeType paymentCodeType, final Person person) {
-        String baseCode =
-                getPersonCodeDigits(person)
-                        + StringUtils.leftPad(Integer.toString(paymentCodeType.getTypeDigit()), TYPE_CODE_LENGTH, CODE_FILLER);
+        String baseCode = getPersonCodeDigits(person)
+                + StringUtils.leftPad(Integer.toString(paymentCodeType.getTypeDigit()), TYPE_CODE_LENGTH, CODE_FILLER);
         baseCode = baseCode + Verhoeff.generateVerhoeff(baseCode);
         if (baseCode.length() != CODE_LENGTH) {
             throw new RuntimeException("Unexpected code length for generated code");

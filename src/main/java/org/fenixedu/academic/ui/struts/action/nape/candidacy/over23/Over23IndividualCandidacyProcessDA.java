@@ -26,6 +26,6 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
         formBeanClass = Over23IndividualCandidacyProcessDA.CandidacyForm.class, functionality = Over23CandidacyProcessDA.class)
 @Forwards({ @Forward(name = "intro", path = "/nape/candidacy/mainCandidacyProcess.jsp"),
         @Forward(name = "list-allowed-activities", path = "/nape/candidacy/over23/listIndividualCandidacyActivities.jsp") })
-public class Over23IndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.over23.Over23IndividualCandidacyProcessDA {
+public class Over23IndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.over23.Over23IndividualCandidacyProcessDA {
 }

@@ -26,8 +26,8 @@ import org.fenixedu.academic.service.services.commons.AbstractSearchObjects;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.presentationTier.renderers.autoCompleteProvider.AutoCompleteProvider;
 
-public class SearchPartySocialSecurityNumber extends AbstractSearchObjects<PartySocialSecurityNumber> implements
-        AutoCompleteProvider<PartySocialSecurityNumber> {
+public class SearchPartySocialSecurityNumber extends AbstractSearchObjects<PartySocialSecurityNumber>
+        implements AutoCompleteProvider<PartySocialSecurityNumber> {
 
     @Override
     public Collection<PartySocialSecurityNumber> getSearchResults(Map<String, String> argsMap, String value, int maxCount) {

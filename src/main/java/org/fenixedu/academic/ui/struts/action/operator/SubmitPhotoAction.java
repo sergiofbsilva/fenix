@@ -47,10 +47,10 @@ import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 import org.joda.time.DateTime;
 
+import com.google.common.io.ByteStreams;
+
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.Atomic;
-
-import com.google.common.io.ByteStreams;
 
 @StrutsFunctionality(app = OperatorApplication.class, path = "submit-photo", titleKey = "link.operator.submitPhoto")
 @Mapping(module = "operator", path = "/submitPhoto")

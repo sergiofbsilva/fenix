@@ -64,8 +64,8 @@ public class StudentEnrolmentsDA extends FenixDispatchAction {
         return showExecutionPeriodEnrolments(studentEnrolmentBean, mapping, actionForm, request, response);
     }
 
-    public ActionForward prepareFromStudentEnrollmentWithRules(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareFromStudentEnrollmentWithRules(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         final StudentEnrolmentBean studentEnrolmentBean = new StudentEnrolmentBean();
         studentEnrolmentBean.setExecutionPeriod((ExecutionSemester) request.getAttribute("executionPeriod"));
         studentEnrolmentBean.setStudentCurricularPlan((StudentCurricularPlan) request.getAttribute("studentCurricularPlan"));
@@ -124,8 +124,7 @@ public class StudentEnrolmentsDA extends FenixDispatchAction {
             final HttpServletResponse response) {
 
         try {
-            atomic(() ->
-            {
+            atomic(() -> {
                 final Enrolment enrolment = getDomainObject(request, "enrolmentId");
                 enrolment.activate();
             });

@@ -123,10 +123,9 @@ public class RoomSearchDA extends FenixDispatchAction {
         DiaSemana dayOfWeek = new DiaSemana(dayOfWeekInt);
 
         List<InfoRoom> availableInfoRoom = null;
-        availableInfoRoom =
-                SpaceUtils.allocatableSpace(YearMonthDay.fromCalendarFields(searchDate),
-                        YearMonthDay.fromCalendarFields(searchDate), HourMinuteSecond.fromCalendarFields(searchStartTime),
-                        HourMinuteSecond.fromCalendarFields(searchEndTime), dayOfWeek, null, null, false);
+        availableInfoRoom = SpaceUtils.allocatableSpace(YearMonthDay.fromCalendarFields(searchDate),
+                YearMonthDay.fromCalendarFields(searchDate), HourMinuteSecond.fromCalendarFields(searchStartTime),
+                HourMinuteSecond.fromCalendarFields(searchEndTime), dayOfWeek, null, null, false);
         String sdate = roomSearchForm.get("day") + "/" + roomSearchForm.get("month") + "/" + roomSearchForm.get("year");
         String startTime = roomSearchForm.get("beginningHour") + ":" + roomSearchForm.get("beginningMinute");
         String endTime = roomSearchForm.get("endHour") + ":" + roomSearchForm.get("endMinute");
@@ -152,8 +151,8 @@ public class RoomSearchDA extends FenixDispatchAction {
                 Iterator<InfoRoom> iter = availableInfoRoom.iterator();
                 while (iter.hasNext()) {
                     InfoRoom elem = iter.next();
-                    if (!((normal != null && elem.getCapacidadeNormal().intValue() < normal.intValue()) || (exam != null && elem
-                            .getCapacidadeExame().intValue() < exam.intValue()))) {
+                    if (!((normal != null && elem.getCapacidadeNormal().intValue() < normal.intValue())
+                            || (exam != null && elem.getCapacidadeExame().intValue() < exam.intValue()))) {
                         newAvailableInfoRoom.add(elem);
                     }
                 }

@@ -60,9 +60,8 @@ public class InfoEnrolmentEvaluation extends InfoObject {
         if (obj instanceof InfoEnrolmentEvaluation) {
             InfoEnrolmentEvaluation InfoEnrolmentEvaluation = (InfoEnrolmentEvaluation) obj;
 
-            resultado =
-                    this.getInfoEnrolment().equals(InfoEnrolmentEvaluation.getInfoEnrolment())
-                            && this.getEvaluationSeason().equals(InfoEnrolmentEvaluation.getEvaluationSeason());
+            resultado = this.getInfoEnrolment().equals(InfoEnrolmentEvaluation.getInfoEnrolment())
+                    && this.getEvaluationSeason().equals(InfoEnrolmentEvaluation.getEvaluationSeason());
         }
         return resultado;
     }

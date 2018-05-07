@@ -26,6 +26,6 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = RAMCurriculumHistoricApp.class, path = "view", titleKey = "link.visualize")
 @Mapping(module = "resourceAllocationManager", path = "/chooseExecutionYearAndDegreeCurricularPlan",
         formBean = "executionYearDegreeCurricularPlanForm")
-public class DegreeCurricularPlanExecutionYearDispacthActionForResourceAllocationManager extends
-        DegreeCurricularPlanExecutionYearDispacthAction {
+public class DegreeCurricularPlanExecutionYearDispacthActionForResourceAllocationManager
+        extends DegreeCurricularPlanExecutionYearDispacthAction {
 }

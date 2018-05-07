@@ -57,8 +57,8 @@ public class DestinationDegreeModulesPreviousCourseGroupForEquivalencePlanEntryC
     @Override
     public Object provide(Object source, Object currentValue) {
         final List<GenericPair<String, String>> result = new ArrayList<GenericPair<String, String>>();
-        for (final List<DegreeModule> degreeModules : getDegreeCurricularPlan(source).getDcpDegreeModulesIncludingFullPath(
-                CourseGroup.class, null)) {
+        for (final List<DegreeModule> degreeModules : getDegreeCurricularPlan(source)
+                .getDcpDegreeModulesIncludingFullPath(CourseGroup.class, null)) {
             result.add(new CourseGroupPair((CourseGroup) degreeModules.get(degreeModules.size() - 1), buildPath(degreeModules)));
 
         }

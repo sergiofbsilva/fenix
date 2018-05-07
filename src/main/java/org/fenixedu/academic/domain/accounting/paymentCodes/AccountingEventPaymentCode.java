@@ -63,9 +63,10 @@ public class AccountingEventPaymentCode extends AccountingEventPaymentCode_Base 
 
     public static AccountingEventPaymentCode create(final PaymentCodeType paymentCodeType, final YearMonthDay startDate,
             final YearMonthDay endDate, final Event event, final Money minAmount, final Money maxAmount, final Person person) {
-        return PaymentCode.canGenerateNewCode(AccountingEventPaymentCode.class, paymentCodeType, person) ? new AccountingEventPaymentCode(
-                paymentCodeType, startDate, endDate, event, minAmount, maxAmount, person) : findAndReuseExistingCode(
-                paymentCodeType, startDate, endDate, event, minAmount, maxAmount, person);
+        return PaymentCode.canGenerateNewCode(AccountingEventPaymentCode.class, paymentCodeType,
+                person) ? new AccountingEventPaymentCode(paymentCodeType, startDate, endDate, event, minAmount, maxAmount,
+                        person) : findAndReuseExistingCode(paymentCodeType, startDate, endDate, event, minAmount, maxAmount,
+                                person);
     }
 
     protected static AccountingEventPaymentCode findAndReuseExistingCode(final PaymentCodeType paymentCodeType,
@@ -116,7 +117,8 @@ public class AccountingEventPaymentCode extends AccountingEventPaymentCode_Base 
     }
 
     @Override
-    protected void internalProcess(Person person, Money amount, DateTime whenRegistered, String sibsTransactionId, String comments) {
+    protected void internalProcess(Person person, Money amount, DateTime whenRegistered, String sibsTransactionId,
+            String comments) {
         final Event event = getAccountingEvent();
         if (event.isCancelled()) {
             logger.warn("############################ PROCESSING CODE FOR CANCELLED EVENT ###############################");
@@ -125,8 +127,8 @@ public class AccountingEventPaymentCode extends AccountingEventPaymentCode_Base 
             logger.warn("################################################################################################");
         }
 
-        event.process(person.getUser(), this, amount, new SibsTransactionDetailDTO(whenRegistered, sibsTransactionId, getCode(),
-                comments));
+        event.process(person.getUser(), this, amount,
+                new SibsTransactionDetailDTO(whenRegistered, sibsTransactionId, getCode(), comments));
     }
 
     @Override

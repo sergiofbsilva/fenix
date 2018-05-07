@@ -44,7 +44,8 @@ public class PersonRotationPaymentCodeGenerator extends PaymentCodeGenerator {
 
             int comparationResult = leftCodeControlDigits.compareTo(rightCodeControlDigits);
 
-            return (comparationResult == 0) ? leftPaymentCode.getExternalId().compareTo(rightPaymentCode.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPaymentCode.getExternalId()
+                    .compareTo(rightPaymentCode.getExternalId()) : comparationResult;
         }
     };
 
@@ -68,7 +69,8 @@ public class PersonRotationPaymentCodeGenerator extends PaymentCodeGenerator {
     @Override
     public String generateNewCodeFor(final PaymentCodeType paymentCodeType, final Person person) {
         final PaymentCode lastPaymentCode = findLastPaymentCode(paymentCodeType, person);
-        return lastPaymentCode == null ? generateFirstCodeForType(paymentCodeType, person) : generateNewCodeBasedOnLastPaymentCode(lastPaymentCode);
+        return lastPaymentCode == null ? generateFirstCodeForType(paymentCodeType,
+                person) : generateNewCodeBasedOnLastPaymentCode(lastPaymentCode);
     }
 
     private PaymentCode findLastPaymentCode(final PaymentCodeType paymentCodeType, Person person) {
@@ -100,9 +102,8 @@ public class PersonRotationPaymentCodeGenerator extends PaymentCodeGenerator {
     }
 
     private static String generateFinalCode(final PaymentCodeType paymentCodeType, final Person person, int digits) {
-        final String finalCode =
-                getCodePrefix(paymentCodeType, person)
-                        + StringUtils.leftPad(String.valueOf(digits), CONTROL_DIGITS_LENGTH, CODE_FILLER);
+        final String finalCode = getCodePrefix(paymentCodeType, person)
+                + StringUtils.leftPad(String.valueOf(digits), CONTROL_DIGITS_LENGTH, CODE_FILLER);
 
         if (finalCode.length() != CODE_LENGTH) {
             throw new RuntimeException("Unexpected code length for generated code");

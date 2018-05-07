@@ -55,7 +55,8 @@ public abstract class PaymentCode extends PaymentCode_Base {
         @Override
         public int compare(PaymentCode leftPaymentCode, PaymentCode rightPaymentCode) {
             int comparationResult = leftPaymentCode.getEndDate().compareTo(rightPaymentCode.getEndDate());
-            return (comparationResult == 0) ? leftPaymentCode.getExternalId().compareTo(rightPaymentCode.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPaymentCode.getExternalId()
+                    .compareTo(rightPaymentCode.getExternalId()) : comparationResult;
         }
     };
 
@@ -207,7 +208,8 @@ public abstract class PaymentCode extends PaymentCode_Base {
     }
 
     @Atomic
-    public void process(Person responsiblePerson, Money amount, DateTime whenRegistered, String sibsTransactionId, String comments) {
+    public void process(Person responsiblePerson, Money amount, DateTime whenRegistered, String sibsTransactionId,
+            String comments) {
 
         if (isProcessed()) {
             return;

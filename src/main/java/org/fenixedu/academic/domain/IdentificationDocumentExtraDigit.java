@@ -49,6 +49,7 @@ public class IdentificationDocumentExtraDigit extends IdentificationDocumentExtr
     }
 
     final static int[] factor = new int[] { 9, 8, 7, 6, 5, 4, 3, 2 };
+
     private static boolean isValidBI(final String num) {
         final int l = num.length();
         if (l == 9) {
@@ -62,6 +63,6 @@ public class IdentificationDocumentExtraDigit extends IdentificationDocumentExtr
     }
 
     private static int toInt(final char c) {
-        return Character.isDigit(c) ? Character.getNumericValue(c) : ((int) c) - ((int) 'A') + 10;
+        return Character.isDigit(c) ? Character.getNumericValue(c) : (c) - ('A') + 10;
     }
 }

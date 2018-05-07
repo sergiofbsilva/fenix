@@ -148,8 +148,8 @@ public class AlertService {
             } else {
                 guiding.ensureExternalAccess();
                 new Message(Bennu.getInstance().getSystemSender(), Collections.<ReplyTo> emptyList(),
-                        Collections.<Recipient> emptyList(), getSubjectPrefixed(process, subjectKey), getBodyText(process,
-                                bodyKey), Collections.singleton(guiding.getEmail()));
+                        Collections.<Recipient> emptyList(), getSubjectPrefixed(process, subjectKey),
+                        getBodyText(process, bodyKey), Collections.singleton(guiding.getEmail()));
             }
         }
 
@@ -173,8 +173,8 @@ public class AlertService {
             } else {
                 guiding.ensureExternalAccess();
                 new Message(Bennu.getInstance().getSystemSender(), Collections.<ReplyTo> emptyList(),
-                        Collections.<Recipient> emptyList(), getSubjectPrefixed(process, subjectMessage), getBodyText(process,
-                                bodyMessage), Collections.singleton(guiding.getEmail()));
+                        Collections.<Recipient> emptyList(), getSubjectPrefixed(process, subjectMessage),
+                        getBodyText(process, bodyMessage), Collections.singleton(guiding.getEmail()));
             }
         }
 
@@ -193,8 +193,8 @@ public class AlertService {
         alertBean.setSubject(getSubjectPrefixed(process, subjectKey));
         alertBean.setBody(getBodyText(process, bodyKey));
         alertBean.setFireDate(new LocalDate());
-        alertBean.setTargetGroup(AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESSES,
-                process.getPhdProgram()));
+        alertBean.setTargetGroup(
+                AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESSES, process.getPhdProgram()));
 
         new PhdCustomAlert(alertBean);
     }
@@ -244,8 +244,10 @@ public class AlertService {
         alertCoordinators(process, process.getCoordinatorsFor(ExecutionYear.readCurrentExecutionYear()), subject, body);
     }
 
-    static public void alertResponsibleCoordinators(PhdIndividualProgramProcess process, AlertMessage subject, AlertMessage body) {
-        alertCoordinators(process, process.getResponsibleCoordinatorsFor(ExecutionYear.readCurrentExecutionYear()), subject, body);
+    static public void alertResponsibleCoordinators(PhdIndividualProgramProcess process, AlertMessage subject,
+            AlertMessage body) {
+        alertCoordinators(process, process.getResponsibleCoordinatorsFor(ExecutionYear.readCurrentExecutionYear()), subject,
+                body);
     }
 
     static private void alertCoordinators(PhdIndividualProgramProcess process, Set<Person> persons, AlertMessage subject,
@@ -276,8 +278,9 @@ public class AlertService {
             } else {
                 Unit unit = process.getAdministrativeOffice().getUnit();
                 UnitBasedSender sender = unit.getUnitBasedSenderSet().iterator().next();
-                new Message(sender, Collections.<ReplyTo> emptyList(), Collections.<Recipient> emptyList(), getSubjectPrefixed(
-                        process, subject), getBodyText(process, body), Collections.singleton(participant.getEmail()));
+                new Message(sender, Collections.<ReplyTo> emptyList(), Collections.<Recipient> emptyList(),
+                        getSubjectPrefixed(process, subject), getBodyText(process, body),
+                        Collections.singleton(participant.getEmail()));
             }
         }
 

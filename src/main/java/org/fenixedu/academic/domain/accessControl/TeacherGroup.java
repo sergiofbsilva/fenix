@@ -219,7 +219,8 @@ public class TeacherGroup extends FenixGroup {
                 }
             }
             if (department != null) {
-                if (department.equals(user.getPerson().getTeacher().getLastDepartment(getExecutionYear().getAcademicInterval()))) {
+                if (department
+                        .equals(user.getPerson().getTeacher().getLastDepartment(getExecutionYear().getAcademicInterval()))) {
                     return true;
                 }
             }

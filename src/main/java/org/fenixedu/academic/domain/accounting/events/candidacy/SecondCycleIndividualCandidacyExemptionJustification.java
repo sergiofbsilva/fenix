@@ -22,8 +22,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.LabelFormatter;
 
-public class SecondCycleIndividualCandidacyExemptionJustification extends
-        SecondCycleIndividualCandidacyExemptionJustification_Base {
+public class SecondCycleIndividualCandidacyExemptionJustification
+        extends SecondCycleIndividualCandidacyExemptionJustification_Base {
 
     private SecondCycleIndividualCandidacyExemptionJustification() {
         super();

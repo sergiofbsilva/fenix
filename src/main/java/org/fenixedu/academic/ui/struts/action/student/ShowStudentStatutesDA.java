@@ -47,7 +47,8 @@ public class ShowStudentStatutesDA extends FenixDispatchAction {
 
     @EntryPoint
     @Override
-    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         User userView = getUserView(request);
         Student student = userView.getPerson().getStudent();
         ArrayList<StudentStatute> studentStatutes = new ArrayList<StudentStatute>(student.getStudentStatutesSet());

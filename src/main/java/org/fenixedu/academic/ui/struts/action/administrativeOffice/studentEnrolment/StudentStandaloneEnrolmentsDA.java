@@ -37,8 +37,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/studentStandaloneEnrolments", module = "academicAdministration", functionality = SearchForStudentsDA.class)
-@Forwards({
-        @Forward(name = "showExtraEnrolments", path = "/academicAdminOffice/showNoCourseGroupCurriculumGroupEnrolments.jsp"),
+@Forwards({ @Forward(name = "showExtraEnrolments", path = "/academicAdminOffice/showNoCourseGroupCurriculumGroupEnrolments.jsp"),
         @Forward(name = "chooseExtraEnrolment", path = "/academicAdminOffice/chooseNoCourseGroupCurriculumGroupEnrolment.jsp"),
         @Forward(name = "showDegreeModulesToEnrol",
                 path = "/academicAdministration/studentEnrolments.do?method=prepareFromExtraEnrolment") })

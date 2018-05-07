@@ -66,7 +66,8 @@ public class SearchExecutionCourseAttendsAction extends ExecutionCourseBaseActio
         return super.execute(mapping, actionForm, request, response);
     }
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         // Integer objectCode =
         // Integer.valueOf(request.getParameter("objectCode"));
         ExecutionCourse executionCourse = getExecutionCourse(request);
@@ -194,7 +195,8 @@ public class SearchExecutionCourseAttendsAction extends ExecutionCourseBaseActio
         return EmailsDA.sendEmail(request, sender, recipient);
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         request.setAttribute("objectCode", request.getAttribute("objectCode"));
 

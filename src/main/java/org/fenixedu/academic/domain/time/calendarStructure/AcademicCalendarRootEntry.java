@@ -25,16 +25,15 @@ import java.util.List;
 
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.time.chronologies.AcademicChronology;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 public class AcademicCalendarRootEntry extends AcademicCalendarRootEntry_Base {
 
     private transient volatile AcademicChronology academicChronology;
 
-    public AcademicCalendarRootEntry(LocalizedString title, LocalizedString description,
-            AcademicCalendarEntry templateCalendar) {
+    public AcademicCalendarRootEntry(LocalizedString title, LocalizedString description, AcademicCalendarEntry templateCalendar) {
         super();
         setRootDomainObjectForRootEntries(Bennu.getInstance());
         setTitle(title);
@@ -111,7 +110,8 @@ public class AcademicCalendarRootEntry extends AcademicCalendarRootEntry_Base {
     public AcademicCalendarEntry getEntryByInstant(long instant, Class<? extends AcademicCalendarEntry> entryClass,
             Class<? extends AcademicCalendarEntry> parentEntryClass) {
         AcademicCalendarEntry entryResult = null;
-        for (AcademicCalendarEntry entry : getChildEntriesWithTemplateEntries(Long.valueOf(instant), entryClass, parentEntryClass)) {
+        for (AcademicCalendarEntry entry : getChildEntriesWithTemplateEntries(Long.valueOf(instant), entryClass,
+                parentEntryClass)) {
             entryResult = (entryResult == null || entry.getBegin().isAfter(entryResult.getBegin())) ? entry : entryResult;
         }
         return entryResult;

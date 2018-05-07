@@ -78,7 +78,8 @@ public class DegreeCandidacyManagementDispatchAction extends FenixDispatchAction
 
     private static final Logger logger = LoggerFactory.getLogger(DegreeCandidacyManagementDispatchAction.class);
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("showWelcome");
     }
 
@@ -99,9 +100,8 @@ public class DegreeCandidacyManagementDispatchAction extends FenixDispatchAction
     public ActionForward doOperation(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws FenixActionException, FenixServiceException {
 
-        final CandidacyOperation operation =
-                (CandidacyOperation) getCandidacy(request).getActiveCandidacySituation().getOperationByTypeAndPerson(
-                        getOperationType(request), getLoggedPerson(request));
+        final CandidacyOperation operation = (CandidacyOperation) getCandidacy(request).getActiveCandidacySituation()
+                .getOperationByTypeAndPerson(getOperationType(request), getLoggedPerson(request));
         request.setAttribute("operation", operation);
         request.setAttribute("candidacy", getCandidacy(request));
 
@@ -164,8 +164,8 @@ public class DegreeCandidacyManagementDispatchAction extends FenixDispatchAction
     }
 
     private ActionForward executeOperation(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response, CandidacyOperation candidacyOperation) throws FenixServiceException,
-            FenixActionException {
+            HttpServletResponse response, CandidacyOperation candidacyOperation)
+            throws FenixServiceException, FenixActionException {
 
         final User userView = getUserView(request);
 
@@ -174,8 +174,7 @@ public class DegreeCandidacyManagementDispatchAction extends FenixDispatchAction
         }
 
         if (candidacyOperation != null && candidacyOperation.getType() == CandidacyOperationType.FILL_PERSONAL_DATA) {
-            request.setAttribute(
-                    "aditionalInformation",
+            request.setAttribute("aditionalInformation",
                     getResources(request).getMessage("label.candidacy.username.changed.message",
                             userView.getPerson().getUsername(), Unit.getInstitutionAcronym()));
         }

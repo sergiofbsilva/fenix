@@ -23,15 +23,13 @@ public class StudentWarningsDefaultCheckers {
             String identificationDocumentSeriesNumber = person.getIdentificationDocumentSeriesNumber();
             if (identificationDocumentSeriesNumber.length() == 1) {
                 try {
-                    IdentificationDocumentExtraDigit
-                            .validate(person.getDocumentIdNumber(), identificationDocumentSeriesNumber);
+                    IdentificationDocumentExtraDigit.validate(person.getDocumentIdNumber(), identificationDocumentSeriesNumber);
                 } catch (DomainException de) {
                     warnings.add(BundleUtil.getString(Bundle.APPLICATION, de.getMessage()));
                 }
             } else {
                 try {
-                    IdentificationDocumentSeriesNumber
-                            .validate(person.getDocumentIdNumber(), identificationDocumentSeriesNumber);
+                    IdentificationDocumentSeriesNumber.validate(person.getDocumentIdNumber(), identificationDocumentSeriesNumber);
                 } catch (DomainException de) {
                     warnings.add(BundleUtil.getString(Bundle.APPLICATION, de.getMessage()));
                 }

@@ -62,7 +62,8 @@ public enum PhdMeetingSchedulingProcessStateType implements PhdProcessStateType 
         return getPossibleNextStates(activeState);
     }
 
-    public static List<PhdMeetingSchedulingProcessStateType> getPossibleNextStates(final PhdMeetingSchedulingProcessStateType type) {
+    public static List<PhdMeetingSchedulingProcessStateType> getPossibleNextStates(
+            final PhdMeetingSchedulingProcessStateType type) {
 
         if (type == null) {
             return Arrays.asList(new PhdMeetingSchedulingProcessStateType[] { WAITING_FIRST_THESIS_MEETING_REQUEST,

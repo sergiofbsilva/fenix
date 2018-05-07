@@ -32,19 +32,19 @@ public class QualificationTypes {
         return MASTER_QUALIFICATION_TYPES.contains(type);
     }
 
-    public static final List<QualificationType> PHD_QUALIFICATION_TYPES = java.util.Arrays.asList(new QualificationType[] {
-            QualificationType.DOCTORATE_DEGREE, QualificationType.DOCTORATE_DEGREE_BOLOGNA,
-            QualificationType.DOCTORATE_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DOCTORATE_DEGREE_WITH_RECOGNITION,
-            QualificationType.DOCTORATE_DEGREE_WITH_REGISTER });
+    public static final List<QualificationType> PHD_QUALIFICATION_TYPES =
+            java.util.Arrays.asList(new QualificationType[] { QualificationType.DOCTORATE_DEGREE,
+                    QualificationType.DOCTORATE_DEGREE_BOLOGNA, QualificationType.DOCTORATE_DEGREE_FOREIGNER_WITH_EQUIVALENCE,
+                    QualificationType.DOCTORATE_DEGREE_WITH_RECOGNITION, QualificationType.DOCTORATE_DEGREE_WITH_REGISTER });
 
     public static boolean isPhdQualificationType(QualificationType type) {
         return PHD_QUALIFICATION_TYPES.contains(type);
     }
 
-    public static final List<QualificationType> DEGREE_QUALIFICATION_TYPES = java.util.Arrays.asList(new QualificationType[] {
-            QualificationType.BACHELOR_AND_DEGREE, QualificationType.BACHELOR_DEGREE,
-            QualificationType.BACHELOR_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DEGREE,
-            QualificationType.DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.INTEGRATED_MASTER_DEGREE, });
+    public static final List<QualificationType> DEGREE_QUALIFICATION_TYPES = java.util.Arrays
+            .asList(new QualificationType[] { QualificationType.BACHELOR_AND_DEGREE, QualificationType.BACHELOR_DEGREE,
+                    QualificationType.BACHELOR_DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.DEGREE,
+                    QualificationType.DEGREE_FOREIGNER_WITH_EQUIVALENCE, QualificationType.INTEGRATED_MASTER_DEGREE, });
 
     public static boolean isDegreeQualificationType(QualificationType type) {
         return DEGREE_QUALIFICATION_TYPES.contains(type);

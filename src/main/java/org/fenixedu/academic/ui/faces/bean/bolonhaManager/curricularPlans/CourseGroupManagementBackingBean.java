@@ -51,9 +51,9 @@ import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.fenixedu.commons.i18n.I18N;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.FenixFramework;
 
 public class CourseGroupManagementBackingBean extends CurricularCourseManagementBackingBean {
 
@@ -108,7 +108,8 @@ public class CourseGroupManagementBackingBean extends CurricularCourseManagement
     }
 
     public Boolean getIsOptional() {
-        return (isOptional == null && getCourseGroupID() != null) ? getCourseGroup(getCourseGroupID()).getIsOptional() : isOptional;
+        return (isOptional == null && getCourseGroupID() != null) ? getCourseGroup(getCourseGroupID())
+                .getIsOptional() : isOptional;
     }
 
     public void setIsOptional(Boolean isOptional) {

@@ -44,33 +44,32 @@ public class ExportEPFLPhdProgramCandidacies {
             writer.println("<?xml version=\"1.0\" encoding=\"" + Charset.defaultCharset().name() + "\" ?>");
             writer.println("<data>");
 
-            List<PhdIndividualProgramProcess> list =
-                    PhdIndividualProgramProcess.search(ExecutionYear.readCurrentExecutionYear(),
-                            new Predicate<PhdIndividualProgramProcess>() {
+            List<PhdIndividualProgramProcess> list = PhdIndividualProgramProcess.search(ExecutionYear.readCurrentExecutionYear(),
+                    new Predicate<PhdIndividualProgramProcess>() {
 
-                                @Override
-                                public boolean test(PhdIndividualProgramProcess t) {
+                        @Override
+                        public boolean test(PhdIndividualProgramProcess t) {
 
-                                    if (t.getExecutionYear() != ExecutionYear.readCurrentExecutionYear()) {
-                                        return false;
-                                    }
+                            if (t.getExecutionYear() != ExecutionYear.readCurrentExecutionYear()) {
+                                return false;
+                            }
 
-                                    if (!PhdIndividualProgramCollaborationType.EPFL.equals(t.getCollaborationType())) {
-                                        return false;
-                                    }
+                            if (!PhdIndividualProgramCollaborationType.EPFL.equals(t.getCollaborationType())) {
+                                return false;
+                            }
 
-                                    if (!PhdIndividualProgramProcessState.CANDIDACY.equals(t.getActiveState())) {
-                                        return false;
-                                    }
+                            if (!PhdIndividualProgramProcessState.CANDIDACY.equals(t.getActiveState())) {
+                                return false;
+                            }
 
-//                                    if (!t.getCandidacyProcess().getValidatedByCandidate()) {
-//                                        return false;
-//                                    }
+        //                                    if (!t.getCandidacyProcess().getValidatedByCandidate()) {
+        //                                        return false;
+        //                                    }
 
-                                    return true;
-                                }
+                            return true;
+                        }
 
-                            });
+                    });
             for (PhdIndividualProgramProcess process : list) {
                 writePersonInfo(process, writer);
             }
@@ -101,39 +100,36 @@ public class ExportEPFLPhdProgramCandidacies {
         writer.println(addTabs(2) + "<detailPersonne action=\"AUTO\">");
 
         writer.println(addTabs(3) + "<domaine>DOMAINEACADEMIQUE</domaine>");
-        writer.println(addTabs(3)
-                + String.format("<datePersonne action=\"AUTO\" type=\"TYPE_DATE_ENTREE\">%s</datePersonne>", process
-                        .getCandidacyProcess().getCandidacyDate().toString("dd.MM.yyyy")));
+        writer.println(addTabs(3) + String.format("<datePersonne action=\"AUTO\" type=\"TYPE_DATE_ENTREE\">%s</datePersonne>",
+                process.getCandidacyProcess().getCandidacyDate().toString("dd.MM.yyyy")));
 
-        writer.println(addTabs(3)
-                + String.format(
-                        "<lieuPersonne action=\"AUTO\" type=\"LIEUNAI\" identificationLieu=\"iso\" iso=\"%s\" typeLieu=\"PAYS\">%s</lieuPersonne>",
-                        person.getCountry().getCode(),
-                        person.getCountry().getCountryNationality().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
+        writer.println(addTabs(3) + String.format(
+                "<lieuPersonne action=\"AUTO\" type=\"LIEUNAI\" identificationLieu=\"iso\" iso=\"%s\" typeLieu=\"PAYS\">%s</lieuPersonne>",
+                person.getCountry().getCode(),
+                person.getCountry().getCountryNationality().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
 
-        writer.println(addTabs(3)
-                + String.format("<lieuPersonne action=\"AUTO\" type=\"LIEUNAIETRA\" "
+        writer.println(addTabs(3) + String.format(
+                "<lieuPersonne action=\"AUTO\" type=\"LIEUNAIETRA\" "
                         + "typeLieu=\"LOCETRNONCON\" forceTo=\"LOCETRNONCON\">%s</lieuPersonne>",
-                        person.getDistrictSubdivisionOfBirth()));
+                person.getDistrictSubdivisionOfBirth()));
 
-        writer.println(addTabs(3)
-                + String.format("<lieuPersonne action=\"AUTO\" type=\"LIEUORI\" identificationLieu=\"iso\" iso=\"%s\" "
-                        + "typeLieu=\"PAYS\">%s</lieuPersonne>", person.getCountry().getCode(), person.getCountry()
-                        .getLocalizedName().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
+        writer.println(addTabs(3) + String.format(
+                "<lieuPersonne action=\"AUTO\" type=\"LIEUORI\" identificationLieu=\"iso\" iso=\"%s\" "
+                        + "typeLieu=\"PAYS\">%s</lieuPersonne>",
+                person.getCountry().getCode(),
+                person.getCountry().getLocalizedName().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
 
         writer.println(addTabs(3) + "<adresse type=\"ADR_ECH\" action=\"AUTO\">");
 
         writer.println(addTabs(4) + String.format("<ligne n=\"1\">%s</ligne>", person.getAddress()));
-        writer.println(addTabs(4)
-                + String.format(
-                        "<localite typeLieu=\"LOCALITE;LOCETRNONCON\" identificationLieu=\"zip\" zip=\"%s\" b_returnfirst=\"1\">%s</localite>",
-                        person.getAreaCode(), person.getArea()));
+        writer.println(addTabs(4) + String.format(
+                "<localite typeLieu=\"LOCALITE;LOCETRNONCON\" identificationLieu=\"zip\" zip=\"%s\" b_returnfirst=\"1\">%s</localite>",
+                person.getAreaCode(), person.getArea()));
 
         if (person.getCountryOfResidence() != null) {
-            writer.println(addTabs(4)
-                    + String.format("<pays identificationLieu=\"iso\" iso=\"%s\" b_returnfirst=\"1\">%s</pays>", person
-                            .getCountryOfResidence().getCode(),
-                            person.getCountryOfResidence().getLocalizedName().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
+            writer.println(addTabs(4) + String.format("<pays identificationLieu=\"iso\" iso=\"%s\" b_returnfirst=\"1\">%s</pays>",
+                    person.getCountryOfResidence().getCode(),
+                    person.getCountryOfResidence().getLocalizedName().getContent(org.fenixedu.academic.util.LocaleUtils.EN)));
         } else {
             writer.println(addTabs(4) + "<pays identificationLieu=\"iso\" iso=\"\" b_returnfirst=\"1\"></pays>");
         }
@@ -163,14 +159,13 @@ public class ExportEPFLPhdProgramCandidacies {
         }
 
         if (process.getExternalPhdProgram() != null) {
-            writer.println(addTabs(3)
-                    + String.format("<detail type=\"PDOC_AT_EPFL\" format=\"COURTU\">%s</detail>", process
-                            .getExternalPhdProgram().getAcronym()));
+            writer.println(addTabs(3) + String.format("<detail type=\"PDOC_AT_EPFL\" format=\"COURTU\">%s</detail>",
+                    process.getExternalPhdProgram().getAcronym()));
         }
 
-        writer.println(addTabs(3)
-                + String.format(" <detail type=\"GPSDOMFOCUS\" conversion=\"IMPORT_IST:GPSDOMFOCUS\">%s</detail> ", process
-                        .getPhdProgramFocusArea().getName()));
+        writer.println(
+                addTabs(3) + String.format(" <detail type=\"GPSDOMFOCUS\" conversion=\"IMPORT_IST:GPSDOMFOCUS\">%s</detail> ",
+                        process.getPhdProgramFocusArea().getName()));
 
         writer.println(addTabs(2) + "</inscription>");
 
@@ -178,13 +173,13 @@ public class ExportEPFLPhdProgramCandidacies {
     }
 
     private static String getUrlForProcess(PhdIndividualProgramProcess process) {
-        return String.format("https://fenix.ist.utl.pt/phd/epfl/applications/show?process=%s", process
-                .getCandidacyProcessHashCode().getValue());
+        return String.format("https://fenix.ist.utl.pt/phd/epfl/applications/show?process=%s",
+                process.getCandidacyProcessHashCode().getValue());
     }
 
     private static String getUrlForProcessDocs(PhdIndividualProgramProcess process) {
-        return String.format("https://fenix.ist.utl.pt/phd/epfl/applications/candidateDocuments?candidateOid=%s", process
-                .getCandidacyProcessHashCode().getExternalId());
+        return String.format("https://fenix.ist.utl.pt/phd/epfl/applications/candidateDocuments?candidateOid=%s",
+                process.getCandidacyProcessHashCode().getExternalId());
     }
 
     private static String getUrlForPhoto(final Photograph photo) {

@@ -69,9 +69,8 @@ public class SearchCurricularCourseBean implements Serializable {
                 continue;
             }
 
-            if (getEndExecutionYear() != null
-                    && ((context.getEndExecutionPeriod() == null) || (context.getEndExecutionPeriod().getExecutionYear()
-                            .isAfter(getEndExecutionYear())))) {
+            if (getEndExecutionYear() != null && ((context.getEndExecutionPeriod() == null)
+                    || (context.getEndExecutionPeriod().getExecutionYear().isAfter(getEndExecutionYear())))) {
                 continue;
             }
 
@@ -82,7 +81,7 @@ public class SearchCurricularCourseBean implements Serializable {
             nameI18N.forEach((l, s) -> {
                 if (searchPattern.matcher(s).matches()) {
                     result.add(context);
-                }                
+                }
             });
         }
     }

@@ -84,15 +84,15 @@ public class CreditNoteDocument extends FenixReport {
         addParameter("ownerUnitPhone", Bennu.getInstance().getInstitutionUnit().getDefaultPhoneNumber());
 
         addParameter("creditNoteNumber", this.creditNote.getNumber() + "/" + this.creditNote.getYear().toString());
-        addParameter("receiptNumber", this.creditNote.getReceipt().getNumberWithSeries() + "/"
-                + this.creditNote.getReceipt().getYear().toString());
+        addParameter("receiptNumber",
+                this.creditNote.getReceipt().getNumberWithSeries() + "/" + this.creditNote.getReceipt().getYear().toString());
         addParameter("annulled", this.creditNote.isAnnulled());
         addParameter("creditNoteDate", this.creditNote.getWhenCreated().toString(DD_MMMM_YYYY, getLocale()));
         addParameter("total", this.creditNote.getTotalAmount().toPlainString());
 
         addParameter("original", this.original);
-        addParameter("studentNumber", this.creditNote.getReceipt().getPerson().getStudent() != null ? this.creditNote
-                .getReceipt().getPerson().getStudent().getNumber().toString() : null);
+        addParameter("studentNumber", this.creditNote.getReceipt().getPerson().getStudent() != null ? this.creditNote.getReceipt()
+                .getPerson().getStudent().getNumber().toString() : null);
 
         addDataSourceElements(buildEntries());
 
@@ -106,8 +106,8 @@ public class CreditNoteDocument extends FenixReport {
 
         final List<CreditNoteDocumentEntry> result = new ArrayList<CreditNoteDocumentEntry>();
         for (final CreditNoteEntry each : sortedEntries) {
-            result.add(new CreditNoteDocumentEntry(each.getAccountingEntry().getDescription().toString(), each.getAmount()
-                    .toPlainString()));
+            result.add(new CreditNoteDocumentEntry(each.getAccountingEntry().getDescription().toString(),
+                    each.getAmount().toPlainString()));
         }
 
         return result;

@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.degreeStructure.ProgramConclusion;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.EnrolmentCertificateRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.IDocumentRequest;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.FenixStringTools;
 import org.fenixedu.academic.util.Money;
@@ -57,13 +58,11 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
 
         String student;
         if (registration.getStudent().getPerson().isMale()) {
-            student =
-                    BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                            "label.academicDocument.enrolment.declaration.maleEnrolment");
+            student = BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                    "label.academicDocument.enrolment.declaration.maleEnrolment");
         } else {
-            student =
-                    BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                            "label.academicDocument.enrolment.declaration.femaleEnrolment");
+            student = BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                    "label.academicDocument.enrolment.declaration.femaleEnrolment");
         }
 
         addParameter("enrolmentsInfo", getEnrolmentsInfo());
@@ -109,12 +108,10 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
         String stringTemplate =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.firstParagraph");
 
-        addParameter(
-                "firstParagraph",
-                "     "
-                        + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
-                                adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
-                                universityName.toUpperCase(getLocale())));
+        addParameter("firstParagraph",
+                "     " + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
+                        adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
+                        universityName.toUpperCase(getLocale())));
 
         addParameter("certificate", BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                 "label.academicDocument.standaloneEnrolmentCertificate.secondParagraph"));
@@ -123,23 +120,21 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
     private void fillthirdthParagraph(Registration registration, EnrolmentCertificateRequest request, String student) {
         String situation = "";
         if (request.getExecutionYear() != null) {
-            situation =
-                    BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                            getExecutionYear().containsDate(new DateTime()) ? "label.is" : "label.was");
+            situation = BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                    getExecutionYear().containsDate(new DateTime()) ? "label.is" : "label.was");
 
         }
 
-        String detailed =
-                request.getDetailed() ? BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                        "label.academicDocument.enrolmentCertificate.detailed") : ".";
+        String detailed = request.getDetailed() ? BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                "label.academicDocument.enrolmentCertificate.detailed") : ".";
         String executionYear =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "message.declaration.registration.execution.year.prefix");
         String stringTemplate1 =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "message.academicDocument.enrolmentCertificate");
-        addParameter(
-                "secondParagraph",
-                MessageFormat.format(stringTemplate1, situation, student, executionYear, getDocumentRequest().getExecutionYear()
-                        .getYear().toString(), getCurricularYear(), getDegreeDescription(), detailed));
+        addParameter("secondParagraph",
+                MessageFormat.format(stringTemplate1, situation, student, executionYear,
+                        getDocumentRequest().getExecutionYear().getYear().toString(), getCurricularYear(), getDegreeDescription(),
+                        detailed));
 
     }
 
@@ -166,9 +161,8 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
                     getLocale());
         } else {
             final DegreeType degreeType = registration.getDegreeType();
-            final CycleType cycleType =
-                    degreeType.hasExactlyOneCycleType() ? degreeType.getCycleType() : registration
-                            .getCycleType(getExecutionYear());
+            final CycleType cycleType = degreeType.hasExactlyOneCycleType() ? degreeType.getCycleType() : registration
+                    .getCycleType(getExecutionYear());
             return registration.getDegreeDescription(getExecutionYear(), cycleType, getLocale());
         }
     }
@@ -187,8 +181,8 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
             final Integer curricularYear =
                     Integer.valueOf(getDocumentRequest().getRegistration().getCurricularYear(getExecutionYear()));
 
-            result.append(BundleUtil.getString(Bundle.ENUMERATION, getLocale(), curricularYear.toString() + ".ordinal")
-                    .toUpperCase());
+            result.append(
+                    BundleUtil.getString(Bundle.ENUMERATION, getLocale(), curricularYear.toString() + ".ordinal").toUpperCase());
             result.append(BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                     "label.academicDocument.enrolment.declaration.curricularYear"));
         }
@@ -202,7 +196,7 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
 
         if (request.getDetailed()) {
             final Collection<Enrolment> enrolments =
-                    new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
+                    new TreeSet<Enrolment>(ICurriculumEntry.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
 
             enrolments.addAll(request.getEntriesToReport());
             reportEnrolments(result, enrolments);
@@ -242,17 +236,16 @@ public class EnrolmentCertificate extends AdministrativeOfficeDocument {
     }
 
     final private void reportEnrolment(final StringBuilder result, final Enrolment enrolment) {
-        result.append(
-                FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(), LINE_LENGTH,
-                        END_CHAR, getCreditsInfo(enrolment))).append(LINE_BREAK);
+        result.append(FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(),
+                LINE_LENGTH, END_CHAR, getCreditsInfo(enrolment))).append(LINE_BREAK);
     }
 
     final private String getCreditsInfo(final Enrolment enrolment) {
         final StringBuilder result = new StringBuilder();
 
         if (getDocumentRequest().isToShowCredits()) {
-            result.append(enrolment.getCurricularCourse().getEctsCredits(enrolment.getExecutionPeriod()).toString()).append(
-                    getCreditsDescription());
+            result.append(enrolment.getCurricularCourse().getEctsCredits(enrolment.getExecutionPeriod()).toString())
+                    .append(getCreditsDescription());
         }
 
         return result.toString();

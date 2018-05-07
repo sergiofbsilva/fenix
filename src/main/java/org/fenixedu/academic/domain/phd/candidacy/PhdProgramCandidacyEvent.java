@@ -64,9 +64,8 @@ public class PhdProgramCandidacyEvent extends PhdProgramCandidacyEvent_Base {
 
     protected void attachAvailablePaymentCode() {
         YearMonthDay candidacyDate = getCandidacyProcess().getCandidacyDate().toDateMidnight().toYearMonthDay();
-        IndividualCandidacyPaymentCode paymentCode =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodeAndUse(PaymentCodeType.PHD_PROGRAM_CANDIDACY_PROCESS,
-                        candidacyDate, this, getPerson());
+        IndividualCandidacyPaymentCode paymentCode = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodeAndUse(PaymentCodeType.PHD_PROGRAM_CANDIDACY_PROCESS, candidacyDate, this, getPerson());
         if (paymentCode == null) {
             throw new DomainException("error.IndividualCandidacyEvent.invalid.payment.code");
         }
@@ -92,8 +91,8 @@ public class PhdProgramCandidacyEvent extends PhdProgramCandidacyEvent_Base {
         final LabelFormatter labelFormatter = new LabelFormatter();
         final ExecutionYear executionYear = getPhdIndividualProgramProcess().getExecutionYear();
         labelFormatter.appendLabel(entryType.name(), Bundle.ENUMERATION).appendLabel(" (")
-        .appendLabel(getPhdProgram().getPresentationName(executionYear)).appendLabel(" - ").appendLabel(getExecutionYear().getYear())
-                .appendLabel(")");
+                .appendLabel(getPhdProgram().getPresentationName(executionYear)).appendLabel(" - ")
+                .appendLabel(getExecutionYear().getYear()).appendLabel(")");
 
         return labelFormatter;
 
@@ -103,7 +102,8 @@ public class PhdProgramCandidacyEvent extends PhdProgramCandidacyEvent_Base {
     public LabelFormatter getDescription() {
         final ExecutionYear executionYear = getPhdIndividualProgramProcess().getExecutionYear();
         return new LabelFormatter().appendLabel(AlertService.getMessageFromResource("label.phd.candidacy")).appendLabel(": ")
-                .appendLabel(getPhdProgram().getPresentationName(executionYear)).appendLabel(" - ").appendLabel(getExecutionYear().getYear());
+                .appendLabel(getPhdProgram().getPresentationName(executionYear)).appendLabel(" - ")
+                .appendLabel(getExecutionYear().getYear());
     }
 
     private ExecutionYear getExecutionYear() {

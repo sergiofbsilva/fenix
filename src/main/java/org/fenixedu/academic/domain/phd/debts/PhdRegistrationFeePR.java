@@ -48,9 +48,8 @@ public class PhdRegistrationFeePR extends PhdRegistrationFeePR_Base {
 
     @Override
     protected Money doCalculationForAmountToPay(Event event, DateTime when, boolean applyDiscount) {
-        Money total =
-                super.doCalculationForAmountToPay(event, when, applyDiscount).add(
-                        hasPenalty(event, when) ? getFixedAmountPenalty() : Money.ZERO);
+        Money total = super.doCalculationForAmountToPay(event, when, applyDiscount)
+                .add(hasPenalty(event, when) ? getFixedAmountPenalty() : Money.ZERO);
 
         return total;
     }

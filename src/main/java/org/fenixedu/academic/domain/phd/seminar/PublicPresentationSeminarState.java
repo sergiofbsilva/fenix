@@ -100,7 +100,8 @@ public class PublicPresentationSeminarState extends PublicPresentationSeminarSta
             stateDate = mostRecentState.getStateDate().plusMinutes(1);
             break;
         case REPORT_WAITING_FOR_VALIDATION:
-            if (process.getMostRecentStateByType(PublicPresentationSeminarProcessStateType.REPORT_WAITING_FOR_VALIDATION) != null) {
+            if (process
+                    .getMostRecentStateByType(PublicPresentationSeminarProcessStateType.REPORT_WAITING_FOR_VALIDATION) != null) {
                 stateDate = mostRecentState.getStateDate().plusMinutes(1);
                 break;
             }

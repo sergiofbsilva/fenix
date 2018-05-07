@@ -800,9 +800,9 @@ public class SecondCycleIndividualCandidacyProcess extends SecondCycleIndividual
 
             SecondCycleIndividualCandidacyProcessBean newBean = new SecondCycleIndividualCandidacyProcessBean(process);
             newBean.setCandidacyProcess(destinationCandidacyProcess);
-            newBean.setPublicCandidacyHashCode(DegreeOfficePublicCandidacyHashCode.getUnusedOrCreateNewHashCode(
-                    SecondCycleIndividualCandidacyProcess.class, destinationCandidacyProcess, process.getCandidacyHashCode()
-                            .getEmail()));
+            newBean.setPublicCandidacyHashCode(
+                    DegreeOfficePublicCandidacyHashCode.getUnusedOrCreateNewHashCode(SecondCycleIndividualCandidacyProcess.class,
+                            destinationCandidacyProcess, process.getCandidacyHashCode().getEmail()));
             newBean.setPersonBean(new PersonBean(process.getPersonalDetails()));
             newBean.setCandidacyDate(destinationCandidacyProcess.getCandidacyPeriod().getStart().toLocalDate());
             newBean.initializeDocumentUploadBeans();

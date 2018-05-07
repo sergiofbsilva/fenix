@@ -78,9 +78,8 @@ public class AnyCurricularCourseExecutor extends CurricularRuleExecutor {
             }
 
         } else if (sourceDegreeModuleToEvaluate.isEnroled()) {
-            curricularCourseToEnrol =
-                    (CurricularCourse) ((EnroledOptionalEnrolment) sourceDegreeModuleToEvaluate).getCurriculumModule()
-                            .getDegreeModule();
+            curricularCourseToEnrol = (CurricularCourse) ((EnroledOptionalEnrolment) sourceDegreeModuleToEvaluate)
+                    .getCurriculumModule().getDegreeModule();
         } else {
             throw new DomainException(
                     "error.curricularRules.executors.ruleExecutors.AnyCurricularCourseExecutor.unexpected.degree.module.to.evaluate");
@@ -91,15 +90,14 @@ public class AnyCurricularCourseExecutor extends CurricularRuleExecutor {
 
         boolean result = true;
 
-        result &=
-                rule.hasMinimumCredits() ? rule.getMinimumCredits() <= curricularCourseToEnrol.getEctsCredits(executionSemester) : true;
+        result &= rule.hasMinimumCredits() ? rule.getMinimumCredits() <= curricularCourseToEnrol
+                .getEctsCredits(executionSemester) : true;
 
-        result &=
-                rule.hasMaximumCredits() ? rule.getMaximumCredits() >= curricularCourseToEnrol.getEctsCredits(executionSemester) : true;
+        result &= rule.hasMaximumCredits() ? rule.getMaximumCredits() >= curricularCourseToEnrol
+                .getEctsCredits(executionSemester) : true;
 
-        result &=
-                rule.getDegree() != null ? rule.getDegree() == degree : rule.hasBolonhaDegreeType() ? degree.getDegreeType() == rule
-                        .getBolonhaDegreeType() : true;
+        result &= rule.getDegree() != null ? rule.getDegree() == degree : rule
+                .hasBolonhaDegreeType() ? degree.getDegreeType() == rule.getBolonhaDegreeType() : true;
 
         if (rule.getDepartmentUnit() != null) {
             final DepartmentUnit departmentUnit =

@@ -193,9 +193,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
 
     public ActionForward prepareCandidacyCreation(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        DegreeOfficePublicCandidacyHashCode candidacyHashCode =
-                (DegreeOfficePublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(request
-                        .getParameter("hash"));
+        DegreeOfficePublicCandidacyHashCode candidacyHashCode = (DegreeOfficePublicCandidacyHashCode) PublicCandidacyHashCode
+                .getPublicCandidacyCodeByHash(request.getParameter("hash"));
 
         if (candidacyHashCode.getIndividualCandidacyProcess() != null) {
             request.setAttribute("individualCandidacyProcess", candidacyHashCode.getIndividualCandidacyProcess());
@@ -242,7 +241,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
                 (MobilityIndividualApplicationProcessBean) getIndividualCandidacyProcessBean();
         request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
 
-        if (bean.getMobilityStudentDataBean().getDateOfDeparture().isBefore(bean.getMobilityStudentDataBean().getDateOfArrival())) {
+        if (bean.getMobilityStudentDataBean().getDateOfDeparture()
+                .isBefore(bean.getMobilityStudentDataBean().getDateOfArrival())) {
             addActionMessage("error", request, "mobility.error.date.of.departure.before.date.of.arrival");
             return mapping.findForward("candidacy-continue-creation");
         }
@@ -253,11 +253,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
 
         if (bean.getMobilityStudentDataBean().getApplyFor() != ErasmusApplyForSemesterType.SECOND_SEMESTER
                 && ExecutionYear.readCurrentExecutionYear().getNextExecutionYear() != null
-                && bean.getMobilityStudentDataBean()
-                        .getDateOfArrival()
-                        .isAfter(
-                                ExecutionYear.readCurrentExecutionYear().getNextExecutionYear().getLastExecutionPeriod()
-                                        .getBeginDateYearMonthDay())) {
+                && bean.getMobilityStudentDataBean().getDateOfArrival().isAfter(ExecutionYear.readCurrentExecutionYear()
+                        .getNextExecutionYear().getLastExecutionPeriod().getBeginDateYearMonthDay())) {
             addActionMessage("error", request, "mobility.error.wrong.period.for.spring.term.applications");
             return mapping.findForward("candidacy-continue-creation");
         }
@@ -456,10 +453,9 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
             if (bean.isToAccessFenix() && bean.getPublicCandidacyHashCode() == null) {
                 DegreeOfficePublicCandidacyHashCode candidacyHashCode = null;
                 try {
-                    candidacyHashCode =
-                            DegreeOfficePublicCandidacyHashCodeOperations
-                                    .getUnusedOrCreateNewHashCodeAndSendEmailForApplicationSubmissionToCandidate(
-                                            getProcessType(), getCurrentOpenParentProcess(), bean.getPersonBean().getEmail());
+                    candidacyHashCode = DegreeOfficePublicCandidacyHashCodeOperations
+                            .getUnusedOrCreateNewHashCodeAndSendEmailForApplicationSubmissionToCandidate(getProcessType(),
+                                    getCurrentOpenParentProcess(), bean.getPersonBean().getEmail());
                     bean.setPublicCandidacyHashCode(candidacyHashCode);
                 } catch (HashCodeForEmailAndProcessAlreadyBounded e) {
                     addActionMessage(request, "error.candidacy.hash.code.already.bounded");
@@ -645,9 +641,9 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
         MobilityIndividualApplicationProcessBean bean =
                 (MobilityIndividualApplicationProcessBean) getIndividualCandidacyProcessBean();
         request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
-        request.setAttribute("degreeCourseInformationBean", new DegreeCourseInformationBean(
-                (ExecutionYear) getCurrentOpenParentProcess().getCandidacyExecutionInterval(),
-                (MobilityApplicationProcess) getIndividualCandidacyProcessBean().getCandidacyProcess()));
+        request.setAttribute("degreeCourseInformationBean",
+                new DegreeCourseInformationBean((ExecutionYear) getCurrentOpenParentProcess().getCandidacyExecutionInterval(),
+                        (MobilityApplicationProcess) getIndividualCandidacyProcessBean().getCandidacyProcess()));
         request.setAttribute("mobilityIndividualApplicationProcessBean", bean);
         return mapping.findForward("edit-candidacy-degree-and-courses");
     }
@@ -790,7 +786,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
         final Set<Person> persons = new HashSet<Person>(Person.readByDocumentIdNumber(personBean.getDocumentIdNumber()));
 
         if (persons.size() > 1) {
-            addActionMessage("individualCandidacyMessages", request, "mobility.error.person.with.same.identifier.exists.multiple");
+            addActionMessage("individualCandidacyMessages", request,
+                    "mobility.error.person.with.same.identifier.exists.multiple");
             return executeCreateCandidacyPersonalInformationInvalid(mapping, form, request, response);
 
         } else if (persons.size() == 1) {
@@ -823,9 +820,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
 
         if (bean.isToAccessFenix() && bean.getPublicCandidacyHashCode() == null) {
             DegreeOfficePublicCandidacyHashCode candidacyHashCode = null;
-            candidacyHashCode =
-                    DegreeOfficePublicCandidacyHashCode.getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(bean
-                            .getPersonBean().getEmail(), getProcessType(), getCurrentOpenParentProcess());
+            candidacyHashCode = DegreeOfficePublicCandidacyHashCode.getPublicCandidacyHashCodeByEmailAndCandidacyProcessType(
+                    bean.getPersonBean().getEmail(), getProcessType(), getCurrentOpenParentProcess());
 
             if (candidacyHashCode != null && candidacyHashCode.getIndividualCandidacyProcess() != null) {
                 addActionMessage("individualCandidacyMessages", request, "mobility.error.email.is.bounded.to.candidacy");
@@ -853,8 +849,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
         return mapping.findForward("bind-link-submited-individual-candidacy-with-stork");
     }
 
-    public ActionForward answerNationalIdCardAvoidanceQuestion(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward answerNationalIdCardAvoidanceQuestion(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         MobilityIndividualApplicationProcessBean bean =
                 (MobilityIndividualApplicationProcessBean) getIndividualCandidacyProcessBean();
 
@@ -893,8 +889,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
 
     public static class StorkAttrStringTestBean implements java.io.Serializable {
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 1L;
 
         private String attrList;
@@ -993,8 +989,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
                 value.append("[");
                 value.append(curricularCourse.getDegree().getSigla());
                 value.append("] ");
-                value.append(StringUtils.isEmpty(curricularCourse.getNameI18N().getContent()) ? curricularCourse.getName() : curricularCourse
-                        .getNameI18N().getContent());
+                value.append(StringUtils.isEmpty(curricularCourse.getNameI18N().getContent()) ? curricularCourse
+                        .getName() : curricularCourse.getNameI18N().getContent());
                 value.append("; ");
             }
             if (value.length() > 0) {
@@ -1047,7 +1043,8 @@ public class ErasmusIndividualCandidacyProcessPublicDA extends RefactoredIndivid
         sb.append(reportAppenderAuxToStringable("Has Diploma/Degree", mobilityStudentDataBean.getHasDiplomaOrDegree()));
         sb.append(reportAppenderAuxString("Diploma Name", mobilityStudentDataBean.getDiplomaName()));
         sb.append(reportAppenderAuxToStringable("Diploma Year", mobilityStudentDataBean.getDiplomaConclusionYear()));
-        sb.append(reportAppenderAuxToStringable("Experience Research", mobilityStudentDataBean.getExperienceCarryingOutProject()));
+        sb.append(
+                reportAppenderAuxToStringable("Experience Research", mobilityStudentDataBean.getExperienceCarryingOutProject()));
 
         sb.append(reportAppenderAuxDate("Date of Arrival", mobilityStudentDataBean.getDateOfArrival()));
         sb.append(reportAppenderAuxDate("Date of Departure", mobilityStudentDataBean.getDateOfDeparture()));

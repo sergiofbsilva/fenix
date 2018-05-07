@@ -27,7 +27,7 @@ import org.fenixedu.academic.domain.ExecutionDegree;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.candidacyProcess.mobility.MobilityAgreement;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.academic.domain.organizationalStructure.Unit;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
@@ -35,8 +35,8 @@ import org.fenixedu.bennu.core.domain.Bennu;
 
 import pt.ist.fenixframework.Atomic;
 
-public class OutboundMobilityCandidacyContest extends OutboundMobilityCandidacyContest_Base implements
-        Comparable<OutboundMobilityCandidacyContest> {
+public class OutboundMobilityCandidacyContest extends OutboundMobilityCandidacyContest_Base
+        implements Comparable<OutboundMobilityCandidacyContest> {
 
     public OutboundMobilityCandidacyContest(final OutboundMobilityCandidacyPeriod outboundMobilityCandidacyPeriod,
             final OutboundMobilityCandidacyContestGroup mobilityGroup, final MobilityAgreement mobilityAgreement,
@@ -81,13 +81,13 @@ public class OutboundMobilityCandidacyContest extends OutboundMobilityCandidacyC
     }
 
     private int compareUniversities(final OutboundMobilityCandidacyContest o) {
-        return Unit.COMPARATOR_BY_NAME_AND_ID.compare(getMobilityAgreement().getUniversityUnit(), o.getMobilityAgreement()
-                .getUniversityUnit());
+        return Party.COMPARATOR_BY_NAME_AND_ID.compare(getMobilityAgreement().getUniversityUnit(),
+                o.getMobilityAgreement().getUniversityUnit());
     }
 
     private int compareDegrees(final OutboundMobilityCandidacyContest o) {
-        return executionDegreesCompareHash(o.getOutboundMobilityCandidacyContestGroup().getExecutionDegreeSet()).compareTo(
-                executionDegreesCompareHash(getOutboundMobilityCandidacyContestGroup().getExecutionDegreeSet()));
+        return executionDegreesCompareHash(o.getOutboundMobilityCandidacyContestGroup().getExecutionDegreeSet())
+                .compareTo(executionDegreesCompareHash(getOutboundMobilityCandidacyContestGroup().getExecutionDegreeSet()));
     }
 
     private String executionDegreesCompareHash(final Set<ExecutionDegree> executionDegreeSet) {
@@ -145,7 +145,8 @@ public class OutboundMobilityCandidacyContest extends OutboundMobilityCandidacyC
 
     public boolean hasCandidacy(final Student student) {
         for (final Registration registration : student.getRegistrationsSet()) {
-            for (final OutboundMobilityCandidacySubmission submission : registration.getOutboundMobilityCandidacySubmissionSet()) {
+            for (final OutboundMobilityCandidacySubmission submission : registration
+                    .getOutboundMobilityCandidacySubmissionSet()) {
                 for (final OutboundMobilityCandidacy candidacy : submission.getOutboundMobilityCandidacySet()) {
                     if (candidacy.getOutboundMobilityCandidacyContest() == this) {
                         return true;

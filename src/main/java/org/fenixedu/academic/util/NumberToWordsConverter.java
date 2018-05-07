@@ -28,15 +28,15 @@ public class NumberToWordsConverter {
 
     private static final Logger logger = LoggerFactory.getLogger(NumberToWordsConverter.class);
 
-    static private final String[] ONES = { "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove",
-            "dez", "onze", "doze", "treze", "catorze", "quinze", "dezasseis", "dezassete", "dezoito", "dezanove" };
+    static private final String[] ONES = { "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez",
+            "onze", "doze", "treze", "catorze", "quinze", "dezasseis", "dezassete", "dezoito", "dezanove" };
     static private final String[] ONES_EN = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
             "ten", "eleven", "twelve", "treze", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" };
 
-    static private final String[] TENS = { "", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta",
-            "noventa", "cem" };
-    static private final String[] TENS_EN = { "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
-            "ninety", "hundred" };
+    static private final String[] TENS =
+            { "", "", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa", "cem" };
+    static private final String[] TENS_EN =
+            { "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred" };
 
     static private final String[] HUNDREDS = { "", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos",
             "setecentos", "oitocentos", "novecentos", };
@@ -85,8 +85,8 @@ public class NumberToWordsConverter {
         int quotient = value / 1000;
         int remainder = value % 1000;
 
-        return (quotient == 1) ? THOUSAND_SINGLE[quotient] + ((remainder == 0) ? "" : SEPARATOR + hundreds(remainder)) : thousands(
-                value, 1);
+        return (quotient == 1) ? THOUSAND_SINGLE[quotient]
+                + ((remainder == 0) ? "" : SEPARATOR + hundreds(remainder)) : thousands(value, 1);
     }
 
     static private String thousands(final int value, final int level) {
@@ -117,8 +117,8 @@ public class NumberToWordsConverter {
         int quotient = value / 1000;
         int remainder = value % 1000;
 
-        return (quotient == 1) ? THOUSAND_EN[quotient] + ((remainder == 0) ? "" : SEPARATOR_EN + hundredsEn(remainder)) : thousandsEn(
-                value, 1);
+        return (quotient == 1) ? THOUSAND_EN[quotient]
+                + ((remainder == 0) ? "" : SEPARATOR_EN + hundredsEn(remainder)) : thousandsEn(value, 1);
     }
 
     static private String thousandsEn(final int value, final int level) {
@@ -155,9 +155,8 @@ public class NumberToWordsConverter {
     }
 
     public static void main(String[] args) {
-        int[] values =
-                new int[] { 1, 23, 52, 100, 102, 223, 1000, 1023, 2000, 2453, 9000, 10000, 10001, 11342, 100000, 1000000,
-                        2000000, 10000000, 100000000, 1000000000 };
+        int[] values = new int[] { 1, 23, 52, 100, 102, 223, 1000, 1023, 2000, 2453, 9000, 10000, 10001, 11342, 100000, 1000000,
+                2000000, 10000000, 100000000, 1000000000 };
 
         for (final int value : values) {
             int quotient = value / 1000;

@@ -67,9 +67,8 @@ public class ClassTimeTableWithoutLinksLessonContentRenderer extends LessonSlotC
                 }
             }
 
-            if (lessonSlot.isSinleSlot()
-                    || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended() && !lessonSlot.getInfoLessonWrapper()
-                            .isSecondRowAlreadyAppended())) {
+            if (lessonSlot.isSinleSlot() || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended()
+                    && !lessonSlot.getInfoLessonWrapper().isSecondRowAlreadyAppended())) {
                 lessonSlot.getInfoLessonWrapper().setSecondRowAlreadyAppended(true);
             }
 
@@ -88,9 +87,8 @@ public class ClassTimeTableWithoutLinksLessonContentRenderer extends LessonSlotC
                 strBuffer.append("<br/>");
             }
 
-            if (lessonSlot.isSinleSlot()
-                    || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended() && !lessonSlot.getInfoLessonWrapper()
-                            .isSecondRowAlreadyAppended())) {
+            if (lessonSlot.isSinleSlot() || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended()
+                    && !lessonSlot.getInfoLessonWrapper().isSecondRowAlreadyAppended())) {
 
                 strBuffer.append("(").append(lesson.getShiftTypeCodesPrettyPrint()).append(")&nbsp;");
 
@@ -99,9 +97,8 @@ public class ClassTimeTableWithoutLinksLessonContentRenderer extends LessonSlotC
                 }
             }
 
-            if (lessonSlot.isSinleSlot()
-                    || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended() && !lessonSlot.getInfoLessonWrapper()
-                            .isSecondRowAlreadyAppended())) {
+            if (lessonSlot.isSinleSlot() || (lessonSlot.getInfoLessonWrapper().isFirstRowAlreadyAppended()
+                    && !lessonSlot.getInfoLessonWrapper().isSecondRowAlreadyAppended())) {
                 lessonSlot.getInfoLessonWrapper().setSecondRowAlreadyAppended(true);
             }
 

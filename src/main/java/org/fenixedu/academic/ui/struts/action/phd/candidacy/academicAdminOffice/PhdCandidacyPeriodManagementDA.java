@@ -41,8 +41,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = AcademicAdminPhdApp.class, path = "candidacy-period-management",
         titleKey = "label.phd.candidacy.periods.management", accessGroup = "academic(MANAGE_PHD_PROCESSES)")
 @Mapping(path = "/phdCandidacyPeriodManagement", module = "academicAdministration")
-@Forwards({
-        @Forward(name = "list", path = "/phd/candidacy/academicAdminOffice/periods/list.jsp"),
+@Forwards({ @Forward(name = "list", path = "/phd/candidacy/academicAdminOffice/periods/list.jsp"),
         @Forward(name = "createPhdCandidacyPeriod",
                 path = "/phd/candidacy/academicAdminOffice/periods/createPhdCandidacyPeriod.jsp"),
         @Forward(name = "editPhdCandidacyPeriod", path = "/phd/candidacy/academicAdminOffice/periods/editPhdCandidacyPeriod.jsp"),

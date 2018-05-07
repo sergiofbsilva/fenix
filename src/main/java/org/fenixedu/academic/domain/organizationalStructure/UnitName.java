@@ -111,7 +111,8 @@ public class UnitName extends UnitName_Base implements Comparable<UnitName> {
 
         @Override
         public boolean add(final UnitName unitName) {
-            return (predicate == null || predicate.evaluate(unitName)) && unitName.getIsExternalUnit() ? super.add(unitName) : false;
+            return (predicate == null || predicate.evaluate(unitName))
+                    && unitName.getIsExternalUnit() ? super.add(unitName) : false;
         }
     }
 
@@ -275,7 +276,8 @@ public class UnitName extends UnitName_Base implements Comparable<UnitName> {
         return false;
     }
 
-    public static Collection<UnitName> findInternalUnitWithType(final String name, final int size, Class<? extends Unit> unitType) {
+    public static Collection<UnitName> findInternalUnitWithType(final String name, final int size,
+            Class<? extends Unit> unitType) {
         InternalUnitNameAndTypeLimitedOrderedSet internalUnitNameAndTypeLimitedOrderedSet =
                 new InternalUnitNameAndTypeLimitedOrderedSet(size, unitType);
         find(internalUnitNameAndTypeLimitedOrderedSet, name, size);

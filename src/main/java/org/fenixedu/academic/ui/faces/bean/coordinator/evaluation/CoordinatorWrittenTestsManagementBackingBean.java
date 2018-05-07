@@ -55,9 +55,9 @@ public class CoordinatorWrittenTestsManagementBackingBean extends CoordinatorWri
             executionCourseIDs.add(this.getExecutionCourseID().toString());
             final List<String> degreeModuleScopeIDs = getDegreeModuleScopeIDs(executionCourse);
 
-            CreateWrittenEvaluation.runCreateWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(), this
-                    .getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopeIDs, null, null, null,
-                    this.getDescription());
+            CreateWrittenEvaluation.runCreateWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(),
+                    this.getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopeIDs, null, null,
+                    null, this.getDescription());
 
         } catch (Exception e) {
             String errorMessage = e.getMessage();
@@ -81,9 +81,9 @@ public class CoordinatorWrittenTestsManagementBackingBean extends CoordinatorWri
             executionCourseIDs.add(this.getExecutionCourseID().toString());
             final List<String> degreeModuleScopeIDs = getDegreeModuleScopeIDs(executionCourse);
 
-            EditWrittenEvaluation.runEditWrittenEvaluation(executionCourse.getExternalId(), this.getBegin().getTime(), this
-                    .getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopeIDs, null, this
-                    .getEvaluationID(), null, this.getDescription(), null);
+            EditWrittenEvaluation.runEditWrittenEvaluation(executionCourse.getExternalId(), this.getBegin().getTime(),
+                    this.getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopeIDs, null,
+                    this.getEvaluationID(), null, this.getDescription(), null);
 
         } catch (Exception e) {
             String errorMessage = e.getMessage();

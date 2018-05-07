@@ -160,9 +160,8 @@ public class ProjectManagementBackingBean extends EvaluationManagementBackingBea
         if (this.associatedProjects == null) {
             final ExecutionCourse executionCourse = FenixFramework.getDomainObject(getExecutionCourseID());
             this.associatedProjects = executionCourse.getAssociatedProjects();
-            Comparator<Project> comparator =
-                    Comparator.comparing(Project::getProjectBeginDateTime).thenComparing(Project::getProjectEndDateTime)
-                            .thenComparing(Project::getName);
+            Comparator<Project> comparator = Comparator.comparing(Project::getProjectBeginDateTime)
+                    .thenComparing(Project::getProjectEndDateTime).thenComparing(Project::getName);
             Collections.sort(this.associatedProjects, comparator);
         }
         return associatedProjects;

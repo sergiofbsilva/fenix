@@ -31,8 +31,8 @@ public class InstallmentAccountingTransaction extends InstallmentAccountingTrans
         super();
     }
 
-    public InstallmentAccountingTransaction(User responsibleUser, Event event, Entry debit, Entry credit,
-            Installment installment, AccountingTransactionDetail transactionDetail) {
+    public InstallmentAccountingTransaction(User responsibleUser, Event event, Entry debit, Entry credit, Installment installment,
+            AccountingTransactionDetail transactionDetail) {
         this();
         init(responsibleUser, event, debit, credit, installment, transactionDetail);
     }

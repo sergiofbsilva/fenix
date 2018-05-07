@@ -33,7 +33,8 @@ public class ImprovementStudentCurriculumGroupBean extends StudentCurriculumGrou
 
     static private final long serialVersionUID = 1L;
 
-    public ImprovementStudentCurriculumGroupBean(final CurriculumGroup curriculumGroup, final ExecutionSemester executionSemester) {
+    public ImprovementStudentCurriculumGroupBean(final CurriculumGroup curriculumGroup,
+            final ExecutionSemester executionSemester) {
         super(curriculumGroup, executionSemester, null);
     }
 

@@ -51,8 +51,8 @@ public class CreditsDismissalLog extends CreditsDismissalLog_Base {
     }
 
     private CourseGroup findCourseGroup(final CurriculumGroup curriculumGroup) {
-        return curriculumGroup.isNoCourseGroupCurriculumGroup() ? curriculumGroup.getCurriculumGroup().getDegreeModule() : curriculumGroup
-                .getDegreeModule();
+        return curriculumGroup.isNoCourseGroupCurriculumGroup() ? curriculumGroup.getCurriculumGroup()
+                .getDegreeModule() : curriculumGroup.getDegreeModule();
     }
 
     @Override

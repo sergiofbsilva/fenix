@@ -76,9 +76,8 @@ public abstract class IndividualCandidacyEvent extends IndividualCandidacyEvent_
     abstract protected AdministrativeOffice readAdministrativeOffice();
 
     public PaymentCodeType getPaymentCodeType() {
-        PostingRule postingRule =
-                getAdministrativeOffice().getServiceAgreementTemplate().findPostingRuleByEventTypeAndDate(getEventType(),
-                        getWhenOccured());
+        PostingRule postingRule = getAdministrativeOffice().getServiceAgreementTemplate()
+                .findPostingRuleByEventTypeAndDate(getEventType(), getWhenOccured());
 
         return postingRule.calculatePaymentCodeTypeFromEvent(this, getWhenOccured(), false);
     }

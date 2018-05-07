@@ -66,8 +66,8 @@ public enum PhdSeminarPredicateContainer implements PredicateContainer<PhdIndivi
         }
     };
 
-    private static class PhdSeminarPredicate extends
-            InlinePredicate<PhdIndividualProgramProcess, PublicPresentationSeminarProcessStateType> {
+    private static class PhdSeminarPredicate
+            extends InlinePredicate<PhdIndividualProgramProcess, PublicPresentationSeminarProcessStateType> {
         public PhdSeminarPredicate(PublicPresentationSeminarProcessStateType seminarState) {
             super(seminarState);
         }

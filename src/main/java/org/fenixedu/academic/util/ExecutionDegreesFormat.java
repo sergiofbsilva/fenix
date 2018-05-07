@@ -45,9 +45,8 @@ public class ExecutionDegreesFormat {
             final String degreeType = executionDegree.getDegreeCurricularPlan().getDegreeType().getName().getContent();
 
             String name = degreeType + " em " + degreeName;
-            name +=
-                    (addDegreeCurricularPlanName(executionDegree, executionDegrees)) ? " - "
-                            + executionDegree.getDegreeCurricularPlan().getName() : "";
+            name += (addDegreeCurricularPlanName(executionDegree, executionDegrees)) ? " - "
+                    + executionDegree.getDegreeCurricularPlan().getName() : "";
 
             result.add(new LabelValueBean(name, executionDegree.getExternalId().toString()));
         }
@@ -59,7 +58,8 @@ public class ExecutionDegreesFormat {
             final List<ExecutionDegree> executionDegrees) {
 
         for (final ExecutionDegree executionDegree : executionDegrees) {
-            if (executionDegree.getDegree() == selectedExecutionDegree.getDegree() && executionDegree != selectedExecutionDegree) {
+            if (executionDegree.getDegree() == selectedExecutionDegree.getDegree()
+                    && executionDegree != selectedExecutionDegree) {
                 return true;
             }
         }

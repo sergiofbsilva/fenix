@@ -105,10 +105,7 @@ public class MarkSheetRectifyBean extends MarkSheetManagementBaseBean {
         if (getEnrolmentEvaluation() == null) {
             throw new InvalidArgumentsServiceException();
         }
-        return getEnrolmentEvaluation()
-                .getEnrolment()
-                .getCurricularCourse()
-                .rectifyOldEnrolmentEvaluation(getEnrolmentEvaluation(), getEvaluationSeason(), getEvaluationDate(),
-                        getRectifiedGrade(), getReason(), person);
+        return getEnrolmentEvaluation().getEnrolment().getCurricularCourse().rectifyOldEnrolmentEvaluation(
+                getEnrolmentEvaluation(), getEvaluationSeason(), getEvaluationDate(), getRectifiedGrade(), getReason(), person);
     }
 }

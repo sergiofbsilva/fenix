@@ -42,10 +42,10 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = GepRAIDESApp.class, path = "personal-ingression-data",
         titleKey = "link.personal.ingression.data.viewer")
 @Mapping(path = "/personalIngressionDataViewer", module = "gep")
-@Forwards({
-        @Forward(name = "chooseStudent", path = "/gep/student/candidacy/personal/ingression/data/chooseStudent.jsp"),
+@Forwards({ @Forward(name = "chooseStudent", path = "/gep/student/candidacy/personal/ingression/data/chooseStudent.jsp"),
         @Forward(name = "viewStudent", path = "/gep/student/candidacy/personal/ingression/data/viewStudent.jsp"),
-        @Forward(name = "viewStudentCandidacy", path = "/gep/student/candidacy/personal/ingression/data/viewStudentCandidacy.jsp"),
+        @Forward(name = "viewStudentCandidacy",
+                path = "/gep/student/candidacy/personal/ingression/data/viewStudentCandidacy.jsp"),
         @Forward(name = "viewPersonalIngressionData",
                 path = "/gep/student/candidacy/personal/ingression/data/viewPersonalIngressionData.jsp"),
         @Forward(name = "viewIndividualCandidacy",
@@ -54,8 +54,8 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 public class PersonalIngressionDataViewer extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward chooseStudent(final ActionMapping mapping, final ActionForm actionForm,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward chooseStudent(final ActionMapping mapping, final ActionForm actionForm, final HttpServletRequest request,
+            final HttpServletResponse response) {
         request.setAttribute("chooseStudentBean", new ChooseStudentBean());
 
         return mapping.findForward("chooseStudent");

@@ -30,8 +30,8 @@ public class SectionUnit extends SectionUnit_Base {
         super.setType(PartyTypeEnum.SECTION);
     }
 
-    public static Unit createNewSectionUnit(LocalizedString name, String unitNameCard, Integer costCenterCode,
-            String acronym, YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit, AccountabilityType accountabilityType,
+    public static Unit createNewSectionUnit(LocalizedString name, String unitNameCard, Integer costCenterCode, String acronym,
+            YearMonthDay beginDate, YearMonthDay endDate, Unit parentUnit, AccountabilityType accountabilityType,
             String webAddress, UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
 
         SectionUnit sectionUnit = new SectionUnit();

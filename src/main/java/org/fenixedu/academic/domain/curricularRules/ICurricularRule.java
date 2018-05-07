@@ -74,7 +74,8 @@ public interface ICurricularRule {
 
     public boolean isActive();
 
-    public RuleResult evaluate(final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate, final EnrolmentContext enrolmentContext);
+    public RuleResult evaluate(final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate,
+            final EnrolmentContext enrolmentContext);
 
     public RuleResult verify(final VerifyRuleLevel verifyRuleLevel, final EnrolmentContext enrolmentContext,
             final DegreeModule degreeModuleToVerify, final CourseGroup parentCourseGroup);

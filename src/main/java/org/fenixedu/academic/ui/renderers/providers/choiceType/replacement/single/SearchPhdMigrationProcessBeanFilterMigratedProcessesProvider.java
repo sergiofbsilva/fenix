@@ -28,8 +28,8 @@ public class SearchPhdMigrationProcessBeanFilterMigratedProcessesProvider implem
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        return Arrays.asList(org.fenixedu.academic.domain.phd.migration.SearchPhdMigrationProcessBean.FilterMigratedProcesses
-                .values());
+        return Arrays.asList(
+                org.fenixedu.academic.domain.phd.migration.SearchPhdMigrationProcessBean.FilterMigratedProcesses.values());
     }
 
     @Override

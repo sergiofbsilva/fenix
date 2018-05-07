@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.phd.candidacy.PhdProgramPublicCandidacyHashC
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -60,9 +60,8 @@ public class PublicPhdMissingCandidacyAlert extends PublicPhdMissingCandidacyAle
     private LocalizedString generateBody(final PhdProgramPublicCandidacyHashCode hashCode) {
         // TODO: if collaboration type change, then message must be different
         String submissionAccessURL = FenixEduAcademicConfiguration.getConfiguration().getPhdPublicCandidacySubmissionLink();
-        final String body =
-                String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.body.missing.candidacy"), submissionAccessURL,
-                        hashCode.getValue());
+        final String body = String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.body.missing.candidacy"),
+                submissionAccessURL, hashCode.getValue());
         return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.EN, body);
     }
 
@@ -86,8 +85,8 @@ public class PublicPhdMissingCandidacyAlert extends PublicPhdMissingCandidacyAle
      * previously created
      */
     private boolean candidacyPeriodIsOver() {
-        return new DateTime().isAfter(getCandidacyHashCode().getPhdProgramCandidacyProcess().getPublicPhdCandidacyPeriod()
-                .getEnd());
+        return new DateTime()
+                .isAfter(getCandidacyHashCode().getPhdProgramCandidacyProcess().getPublicPhdCandidacyPeriod().getEnd());
     }
 
     @Override

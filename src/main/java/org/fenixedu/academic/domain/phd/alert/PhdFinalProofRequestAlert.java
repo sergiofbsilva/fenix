@@ -26,8 +26,8 @@ import org.fenixedu.academic.domain.phd.PhdProgramCalendarUtil;
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.LocalDate;
 
 public class PhdFinalProofRequestAlert extends PhdFinalProofRequestAlert_Base {
@@ -44,13 +44,13 @@ public class PhdFinalProofRequestAlert extends PhdFinalProofRequestAlert_Base {
     }
 
     private LocalizedString buildSubject(final PhdIndividualProgramProcess process) {
-        return new LocalizedString(Locale.getDefault(), AlertService.getSubjectPrefixed(process,
-                "message.phd.alert.final.proof.request.subject"));
+        return new LocalizedString(Locale.getDefault(),
+                AlertService.getSubjectPrefixed(process, "message.phd.alert.final.proof.request.subject"));
     }
 
     private LocalizedString buildBody(final PhdIndividualProgramProcess process) {
-        return new LocalizedString(Locale.getDefault(), AlertService.getBodyText(process,
-                "message.phd.alert.final.proof.request.body"));
+        return new LocalizedString(Locale.getDefault(),
+                AlertService.getBodyText(process, "message.phd.alert.final.proof.request.body"));
     }
 
     @Override

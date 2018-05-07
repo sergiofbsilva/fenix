@@ -30,8 +30,7 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(path = "/curriculumLinesLocationManagement", module = "manager", functionality = BolonhaEnrolmentsManagementDA.class)
-@Forwards({
-        @Forward(name = "showCurriculum", path = "/manager/curriculum/curriculumLines/location/showCurriculum.jsp"),
+@Forwards({ @Forward(name = "showCurriculum", path = "/manager/curriculum/curriculumLines/location/showCurriculum.jsp"),
         @Forward(name = "chooseNewLocation", path = "/manager/curriculum/curriculumLines/location/chooseNewLocation.jsp"),
         @Forward(name = "backToChooseStudentCurricularPlan",
                 path = "/manager/bolonhaStudentEnrolment.do?method=showAllStudentCurricularPlans") })

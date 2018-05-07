@@ -87,14 +87,12 @@ public class PhdThesisJuryElementsDocument extends FenixReport {
             builder.append(element.getCategory());
 
             if (!StringUtils.isEmpty(element.getWorkLocation())) {
-                builder.append(" ")
-                        .append(BundleUtil.getString(Bundle.PHD, "label.phd.thesis.jury.elements.document.keyword.of"))
+                builder.append(" ").append(BundleUtil.getString(Bundle.PHD, "label.phd.thesis.jury.elements.document.keyword.of"))
                         .append(" ").append(element.getWorkLocation());
             }
 
             if (!StringUtils.isEmpty(element.getInstitution())) {
-                builder.append(" ")
-                        .append(BundleUtil.getString(Bundle.PHD, "label.phd.thesis.jury.elements.document.keyword.of"))
+                builder.append(" ").append(BundleUtil.getString(Bundle.PHD, "label.phd.thesis.jury.elements.document.keyword.of"))
                         .append(" ").append(element.getInstitution());
             }
 

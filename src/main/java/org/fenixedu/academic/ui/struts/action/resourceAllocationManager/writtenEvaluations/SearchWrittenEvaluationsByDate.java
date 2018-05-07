@@ -135,7 +135,8 @@ public class SearchWrittenEvaluationsByDate extends FenixDispatchAction {
                 if (evaluation instanceof WrittenEvaluation) {
                     final WrittenEvaluation writtenEvaluation = (WrittenEvaluation) evaluation;
                     final LocalDate evaluationDate = writtenEvaluation.getDayDateYearMonthDay().toLocalDate();
-                    if (evaluationDate != null && evaluationDate.equals(day) && isEvalBetweenDates(writtenEvaluation, begin, end)) {
+                    if (evaluationDate != null && evaluationDate.equals(day)
+                            && isEvalBetweenDates(writtenEvaluation, begin, end)) {
                         if (!writtenEvaluations.contains(writtenEvaluation)) {
                             totalOfStudents += writtenEvaluation.getCountStudentsEnroledAttendingExecutionCourses();
                         }
@@ -144,8 +145,7 @@ public class SearchWrittenEvaluationsByDate extends FenixDispatchAction {
                 }
             }
         }
-        request.setAttribute(
-                "availableRoomIndicationMsg",
+        request.setAttribute("availableRoomIndicationMsg",
                 BundleUtil.getString(Bundle.RESOURCE_ALLOCATION, "info.total.students.vs.available.seats",
                         totalOfStudents.toString(), SpaceUtils.countAllAvailableSeatsForExams().toString()));
         request.setAttribute("writtenEvaluations", writtenEvaluations);
@@ -175,8 +175,8 @@ public class SearchWrittenEvaluationsByDate extends FenixDispatchAction {
             throws ParseException {
         final String hourString = dynaActionForm.getString(hourField);
         final String minuteString = dynaActionForm.getString(minuteField);
-        return hourString == null || hourString.isEmpty() || minuteString == null || minuteString.isEmpty() ? null : getTimeDateFromForm(
-                hourString, minuteString);
+        return hourString == null || hourString.isEmpty() || minuteString == null
+                || minuteString.isEmpty() ? null : getTimeDateFromForm(hourString, minuteString);
     }
 
     private LocalTime getTimeDateFromForm(final String hourString, final String minuteString) throws ParseException {

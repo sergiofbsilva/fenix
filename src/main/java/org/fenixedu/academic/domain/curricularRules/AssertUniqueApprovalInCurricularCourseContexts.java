@@ -43,8 +43,8 @@ public class AssertUniqueApprovalInCurricularCourseContexts extends CurricularRu
 
     @Override
     public List<GenericPair<Object, Boolean>> getLabel() {
-        return Collections.singletonList(new GenericPair<Object, Boolean>("label.assertUniqueApprovalInCurricularCourseContexts",
-                true));
+        return Collections
+                .singletonList(new GenericPair<Object, Boolean>("label.assertUniqueApprovalInCurricularCourseContexts", true));
     }
 
     @Override

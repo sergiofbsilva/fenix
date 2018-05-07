@@ -61,53 +61,36 @@ public class DurationRenderer extends OutputRenderer {
                 MutablePeriod period = new MutablePeriod(Math.abs(duration.getMillis()), periodType);
 
                 if (period.isSupported(DurationFieldType.years())) {
-                    periodFormatterBuilder.appendYears().appendSuffix(
-                            RenderUtils.getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.years().getName()
-                                    + SHORT));
+                    periodFormatterBuilder.appendYears().appendSuffix(RenderUtils.getResourceString(enumerationBundle,
+                            CLASS_NAME + DurationFieldType.years().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.months())) {
-                    periodFormatterBuilder.appendMonths().appendSuffix(
-                            RenderUtils.getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.months().getName()
-                                    + SHORT));
+                    periodFormatterBuilder.appendMonths().appendSuffix(RenderUtils.getResourceString(enumerationBundle,
+                            CLASS_NAME + DurationFieldType.months().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.weeks())) {
-                    periodFormatterBuilder.appendWeeks().appendSuffix(
-                            RenderUtils.getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.weeks().getName()
-                                    + SHORT));
+                    periodFormatterBuilder.appendWeeks().appendSuffix(RenderUtils.getResourceString(enumerationBundle,
+                            CLASS_NAME + DurationFieldType.weeks().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.days())) {
-                    periodFormatterBuilder.appendDays().appendSuffix(
-                            RenderUtils.getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.days().getName()
-                                    + SHORT));
+                    periodFormatterBuilder.appendDays().appendSuffix(RenderUtils.getResourceString(enumerationBundle,
+                            CLASS_NAME + DurationFieldType.days().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.hours())) {
-                    periodFormatterBuilder.appendHours().appendSuffix(
-                            RenderUtils.getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.hours().getName()
-                                    + SHORT));
+                    periodFormatterBuilder.appendHours().appendSuffix(RenderUtils.getResourceString(enumerationBundle,
+                            CLASS_NAME + DurationFieldType.hours().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.minutes())) {
-                    periodFormatterBuilder
-                            .minimumPrintedDigits(2)
-                            .appendMinutes()
-                            .appendSuffix(
-                                    RenderUtils.getResourceString(enumerationBundle, CLASS_NAME
-                                            + DurationFieldType.minutes().getName() + SHORT));
+                    periodFormatterBuilder.minimumPrintedDigits(2).appendMinutes().appendSuffix(RenderUtils
+                            .getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.minutes().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.seconds())) {
-                    periodFormatterBuilder
-                            .minimumPrintedDigits(2)
-                            .appendSeconds()
-                            .appendSuffix(
-                                    RenderUtils.getResourceString(enumerationBundle, CLASS_NAME
-                                            + DurationFieldType.seconds().getName() + SHORT));
+                    periodFormatterBuilder.minimumPrintedDigits(2).appendSeconds().appendSuffix(RenderUtils
+                            .getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.seconds().getName() + SHORT));
                 }
                 if (period.isSupported(DurationFieldType.millis())) {
-                    periodFormatterBuilder
-                            .minimumPrintedDigits(2)
-                            .appendMillis()
-                            .appendSuffix(
-                                    RenderUtils.getResourceString(enumerationBundle, CLASS_NAME
-                                            + DurationFieldType.millis().getName() + SHORT));
+                    periodFormatterBuilder.minimumPrintedDigits(2).appendMillis().appendSuffix(RenderUtils
+                            .getResourceString(enumerationBundle, CLASS_NAME + DurationFieldType.millis().getName() + SHORT));
                 }
                 result.append(periodFormatterBuilder.toFormatter().print(period));
             }

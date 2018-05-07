@@ -23,8 +23,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.LabelFormatter;
 
-public class AdministrativeOfficeFeeAndInsuranceExemptionJustification extends
-        AdministrativeOfficeFeeAndInsuranceExemptionJustification_Base {
+public class AdministrativeOfficeFeeAndInsuranceExemptionJustification
+        extends AdministrativeOfficeFeeAndInsuranceExemptionJustification_Base {
 
     protected AdministrativeOfficeFeeAndInsuranceExemptionJustification() {
         super();

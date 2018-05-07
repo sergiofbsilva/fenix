@@ -53,7 +53,8 @@ public class Price extends Price_Base {
         return null;
     }
 
-    public static List<Price> readByGraduationTypeAndDocumentTypes(GraduationType graduationType, List<DocumentType> documentTypes) {
+    public static List<Price> readByGraduationTypeAndDocumentTypes(GraduationType graduationType,
+            List<DocumentType> documentTypes) {
         final List<Price> result = new ArrayList<Price>();
         for (final Price price : Bennu.getInstance().getPricesSet()) {
             if (price.getGraduationType() == graduationType && documentTypes.contains(price.getDocumentType())) {

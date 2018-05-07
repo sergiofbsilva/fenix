@@ -32,7 +32,8 @@ import org.fenixedu.academic.ui.struts.action.base.FenixDispatchAction;
 
 public abstract class AbstractBolonhaTransitionManagementDA extends FenixDispatchAction {
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final List<Registration> registrations = getRegistrations(request);
         if (registrations.size() == 1) {

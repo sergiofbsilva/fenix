@@ -406,14 +406,14 @@ public abstract class Event extends Event_Base {
             return calculatePayedAmountByPersonFor(civilYear);
         }
 
-        final Money maxAmountForCivilYear =
-                calculateTotalAmountToPay(getEventCloseDate()).subtract(getPayedAmountUntil(civilYear - 1)).subtract(
-                        calculatePayedAmountByOtherPartiesFor(civilYear));
+        final Money maxAmountForCivilYear = calculateTotalAmountToPay(getEventCloseDate())
+                .subtract(getPayedAmountUntil(civilYear - 1)).subtract(calculatePayedAmountByOtherPartiesFor(civilYear));
 
         if (maxAmountForCivilYear.isPositive()) {
             final Money payedAmoutForPersonOnCivilYear = calculatePayedAmountByPersonFor(civilYear);
 
-            return payedAmoutForPersonOnCivilYear.lessOrEqualThan(maxAmountForCivilYear) ? payedAmoutForPersonOnCivilYear : maxAmountForCivilYear;
+            return payedAmoutForPersonOnCivilYear
+                    .lessOrEqualThan(maxAmountForCivilYear) ? payedAmoutForPersonOnCivilYear : maxAmountForCivilYear;
 
         }
 
@@ -778,9 +778,8 @@ public abstract class Event extends Event_Base {
     public final AccountingTransaction depositAmount(final User responsibleUser, final Money amount,
             final AccountingTransactionDetailDTO transactionDetailDTO) {
 
-        final AccountingTransaction result =
-                getPostingRule().depositAmount(responsibleUser, this, getParty().getAccountBy(AccountType.EXTERNAL),
-                        getToAccount(), amount, transactionDetailDTO);
+        final AccountingTransaction result = getPostingRule().depositAmount(responsibleUser, this,
+                getParty().getAccountBy(AccountType.EXTERNAL), getToAccount(), amount, transactionDetailDTO);
 
         recalculateState(transactionDetailDTO.getWhenRegistered());
 
@@ -790,9 +789,8 @@ public abstract class Event extends Event_Base {
     public final AccountingTransaction depositAmount(final User responsibleUser, final Money amount, final EntryType entryType,
             final AccountingTransactionDetailDTO transactionDetailDTO) {
 
-        final AccountingTransaction result =
-                getPostingRule().depositAmount(responsibleUser, this, getParty().getAccountBy(AccountType.EXTERNAL),
-                        getToAccount(), amount, entryType, transactionDetailDTO);
+        final AccountingTransaction result = getPostingRule().depositAmount(responsibleUser, this,
+                getParty().getAccountBy(AccountType.EXTERNAL), getToAccount(), amount, entryType, transactionDetailDTO);
 
         recalculateState(transactionDetailDTO.getWhenRegistered());
 
@@ -1001,9 +999,8 @@ public abstract class Event extends Event_Base {
     }
 
     private AccountingTransactionDetailDTO createAccountingTransactionDetailForTransfer(final AccountingTransaction transaction) {
-        final String comments =
-                transaction.getEvent().getClass().getName() + ":" + transaction.getEvent().getExternalId() + ","
-                        + transaction.getClass().getName() + ":" + transaction.getExternalId();
+        final String comments = transaction.getEvent().getClass().getName() + ":" + transaction.getEvent().getExternalId() + ","
+                + transaction.getClass().getName() + ":" + transaction.getExternalId();
 
         return new AccountingTransactionDetailDTO(transaction.getTransactionDetail().getWhenRegistered(), PaymentMode.CASH,
                 comments);
@@ -1086,7 +1083,9 @@ public abstract class Event extends Event_Base {
         return false;
     }
 
-    public boolean isTransferable() { return false; }
+    public boolean isTransferable() {
+        return false;
+    }
 
     public abstract Unit getOwnerUnit();
 

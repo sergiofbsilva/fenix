@@ -53,13 +53,14 @@ public class PhdCandidacyRefereeAlert extends PhdCandidacyRefereeAlert_Base {
     }
 
     private LocalizedString generateSubject(final PhdCandidacyReferee referee) {
-        return new LocalizedString(I18N.getLocale(), String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.referee"),
-                referee.getCandidatePerson().getName(), referee.getCandidatePerson().getName()));
+        return new LocalizedString(I18N.getLocale(),
+                String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.referee"),
+                        referee.getCandidatePerson().getName(), referee.getCandidatePerson().getName()));
     }
 
     private LocalizedString generateBody(final PhdCandidacyReferee referee) {
-        return new LocalizedString(I18N.getLocale(), referee.getPhdProgramCandidacyProcess().getPublicPhdCandidacyPeriod()
-                .getEmailMessageBodyForRefereeForm(referee));
+        return new LocalizedString(I18N.getLocale(),
+                referee.getPhdProgramCandidacyProcess().getPublicPhdCandidacyPeriod().getEmailMessageBodyForRefereeForm(referee));
     }
 
     @Override

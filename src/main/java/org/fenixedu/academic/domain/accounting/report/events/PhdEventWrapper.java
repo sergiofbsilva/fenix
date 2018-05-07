@@ -74,7 +74,8 @@ public class PhdEventWrapper implements Wrapper {
 
     @Override
     public String getPhdProgramName() {
-        return event.getPhdIndividualProgramProcess().getPhdProgram().getName(getForExecutionYear()).getContent(org.fenixedu.academic.util.LocaleUtils.PT);
+        return event.getPhdIndividualProgramProcess().getPhdProgram().getName(getForExecutionYear())
+                .getContent(org.fenixedu.academic.util.LocaleUtils.PT);
     }
 
     @Override

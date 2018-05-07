@@ -49,8 +49,8 @@ import pt.ist.fenixframework.FenixFramework;
 public class CreateUnit {
 
     @Atomic
-    public static Unit run(Unit parentUnit, LocalizedString unitName, String unitNameCard, String unitCostCenter,
-            String acronym, YearMonthDay begin, YearMonthDay end, PartyTypeEnum type, String departmentID, String degreeID,
+    public static Unit run(Unit parentUnit, LocalizedString unitName, String unitNameCard, String unitCostCenter, String acronym,
+            YearMonthDay begin, YearMonthDay end, PartyTypeEnum type, String departmentID, String degreeID,
             String administrativeOfficeID, AccountabilityType accountabilityType, String webAddress,
             UnitClassification classification, Boolean canBeResponsibleOfSpaces, String campusID) throws FenixServiceException {
 
@@ -67,9 +67,8 @@ public class CreateUnit {
 
             case DEPARTMENT:
                 Department department = FenixFramework.getDomainObject(departmentID);
-                return DepartmentUnit.createNewInternalDepartmentUnit(unitName, unitNameCard, costCenterCode, acronym, begin,
-                        end, parentUnit, accountabilityType, webAddress, department, classification, canBeResponsibleOfSpaces,
-                        campus);
+                return DepartmentUnit.createNewInternalDepartmentUnit(unitName, unitNameCard, costCenterCode, acronym, begin, end,
+                        parentUnit, accountabilityType, webAddress, department, classification, canBeResponsibleOfSpaces, campus);
 
             case DEGREE_UNIT:
                 Degree degree = FenixFramework.getDomainObject(degreeID);
@@ -94,9 +93,8 @@ public class CreateUnit {
 
             case ADMINISTRATIVE_OFFICE_UNIT:
                 AdministrativeOffice office = FenixFramework.getDomainObject(administrativeOfficeID);
-                Unit unit =
-                        Unit.createNewUnit(unitName, unitNameCard, costCenterCode, acronym, begin, end, parentUnit,
-                                accountabilityType, webAddress, classification, office, canBeResponsibleOfSpaces, campus);
+                Unit unit = Unit.createNewUnit(unitName, unitNameCard, costCenterCode, acronym, begin, end, parentUnit,
+                        accountabilityType, webAddress, classification, office, canBeResponsibleOfSpaces, campus);
                 unit.setType(type);
                 return unit;
             case AGGREGATE_UNIT:
@@ -130,8 +128,8 @@ public class CreateUnit {
             }
 
         } else {
-            return Unit.createNewUnit(unitName, unitNameCard, costCenterCode, acronym, begin, end, parentUnit,
-                    accountabilityType, webAddress, classification, null, canBeResponsibleOfSpaces, campus);
+            return Unit.createNewUnit(unitName, unitNameCard, costCenterCode, acronym, begin, end, parentUnit, accountabilityType,
+                    webAddress, classification, null, canBeResponsibleOfSpaces, campus);
         }
 
         throw new FenixServiceException("createUnit.service.empty.unit.type");

@@ -141,9 +141,10 @@ public class ErasmusIndividualCandidacyProcessDA extends IndividualCandidacyProc
         MobilityIndividualApplicationProcessBean bean = getIndividualCandidacyProcessBean();
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
 
-        request.setAttribute("degreeCourseInformationBean", new DegreeCourseInformationBean(
-                (ExecutionYear) getIndividualCandidacyProcessBean().getCandidacyProcess().getCandidacyExecutionInterval(),
-                (MobilityApplicationProcess) getIndividualCandidacyProcessBean().getCandidacyProcess()));
+        request.setAttribute("degreeCourseInformationBean",
+                new DegreeCourseInformationBean(
+                        (ExecutionYear) getIndividualCandidacyProcessBean().getCandidacyProcess().getCandidacyExecutionInterval(),
+                        (MobilityApplicationProcess) getIndividualCandidacyProcessBean().getCandidacyProcess()));
         request.setAttribute("mobilityIndividualApplicationProcessBean", bean);
         return mapping.findForward("fill-degree-information");
     }
@@ -292,8 +293,8 @@ public class ErasmusIndividualCandidacyProcessDA extends IndividualCandidacyProc
         return mapping.findForward("edit-candidacy-information");
     }
 
-    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         try {
             executeActivity(getProcess(request), "EditCandidacyInformation", getIndividualCandidacyProcessBean());
         } catch (final DomainException e) {
@@ -314,8 +315,10 @@ public class ErasmusIndividualCandidacyProcessDA extends IndividualCandidacyProc
             HttpServletRequest request, HttpServletResponse response) {
         final MobilityIndividualApplicationProcessBean bean = new MobilityIndividualApplicationProcessBean(getProcess(request));
 
-        request.setAttribute("degreeCourseInformationBean", new DegreeCourseInformationBean((ExecutionYear) getProcess(request)
-                .getCandidacyProcess().getCandidacyExecutionInterval(), (MobilityApplicationProcess) bean.getCandidacyProcess()));
+        request.setAttribute("degreeCourseInformationBean",
+                new DegreeCourseInformationBean(
+                        (ExecutionYear) getProcess(request).getCandidacyProcess().getCandidacyExecutionInterval(),
+                        (MobilityApplicationProcess) bean.getCandidacyProcess()));
         request.setAttribute(getIndividualCandidacyProcessBeanName(), bean);
         request.setAttribute("mobilityIndividualApplicationProcessBean", bean);
         return mapping.findForward("edit-degree-courses-information");
@@ -406,13 +409,13 @@ public class ErasmusIndividualCandidacyProcessDA extends IndividualCandidacyProc
             HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
 
         ApprovedLearningAgreementDocumentUploadBean learningAgreementUploadBean =
-                (ApprovedLearningAgreementDocumentUploadBean) getObjectFromViewState("individualCandidacyProcessBean.document.file");
+                (ApprovedLearningAgreementDocumentUploadBean) getObjectFromViewState(
+                        "individualCandidacyProcessBean.document.file");
 
         try {
-            IndividualCandidacyDocumentFile documentFile =
-                    learningAgreementUploadBean.createIndividualCandidacyDocumentFile(getParentProcessType(),
-                            learningAgreementUploadBean.getIndividualCandidacyProcess().getPersonalDetails()
-                                    .getDocumentIdNumber());
+            IndividualCandidacyDocumentFile documentFile = learningAgreementUploadBean.createIndividualCandidacyDocumentFile(
+                    getParentProcessType(),
+                    learningAgreementUploadBean.getIndividualCandidacyProcess().getPersonalDetails().getDocumentIdNumber());
 
             executeActivity(learningAgreementUploadBean.getIndividualCandidacyProcess(), "UploadApprovedLearningAgreement",
                     documentFile);
@@ -465,9 +468,8 @@ public class ErasmusIndividualCandidacyProcessDA extends IndividualCandidacyProc
 
     public ActionForward prepareExecuteEnrolStudent(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        return redirect(
-                "/caseHandlingMobilityIndividualApplicationProcess.do?method=enrolStudent&processId="
-                        + getProcess(request).getExternalId().toString(), request);
+        return redirect("/caseHandlingMobilityIndividualApplicationProcess.do?method=enrolStudent&processId="
+                + getProcess(request).getExternalId().toString(), request);
     }
 
 }

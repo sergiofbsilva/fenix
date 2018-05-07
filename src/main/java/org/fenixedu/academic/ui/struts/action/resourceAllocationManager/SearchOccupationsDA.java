@@ -52,10 +52,10 @@ import org.fenixedu.spaces.domain.occupation.Occupation;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+
+import pt.ist.fenixframework.Atomic;
 
 @StrutsFunctionality(app = RAMEvaluationsApp.class, path = "search-occupations", titleKey = "title.search.occupations")
 @Mapping(module = "resourceAllocationManager", path = "/searchOccupations", parameter = "method")
@@ -139,9 +139,8 @@ public class SearchOccupationsDA extends FenixDispatchAction {
                         if (searchInterval.overlaps(durationInterval)) {
                             String desc;
                             if (eval instanceof WrittenTest) {
-                                desc =
-                                        String.format("(%s) %s - %s", eval.getEvaluationType(), eval.getName(),
-                                                ((WrittenTest) eval).getDescription());
+                                desc = String.format("(%s) %s - %s", eval.getEvaluationType(), eval.getName(),
+                                        ((WrittenTest) eval).getDescription());
                             } else {
                                 desc = String.format("(%s) %s", eval.getEvaluationType(), eval.getName());
                             }

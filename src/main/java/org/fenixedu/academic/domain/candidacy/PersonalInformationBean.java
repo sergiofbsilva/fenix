@@ -572,7 +572,8 @@ public class PersonalInformationBean implements Serializable {
 
         if (getDislocatedFromPermanentResidence() != null && getDislocatedFromPermanentResidence()
                 && getSchoolTimeDistrictSubdivisionOfResidence() == null) {
-            result.add("error.CandidacyInformationBean.schoolTimeDistrictSubdivisionOfResidence.is.required.for.dislocated.students");
+            result.add(
+                    "error.CandidacyInformationBean.schoolTimeDistrictSubdivisionOfResidence.is.required.for.dislocated.students");
         }
 
         if (getSchoolLevel() != null && getSchoolLevel() == SchoolLevelType.OTHER && StringUtils.isEmpty(getOtherSchoolLevel())) {
@@ -586,7 +587,8 @@ public class PersonalInformationBean implements Serializable {
 
         if (getGrantOwnerType() != null && getGrantOwnerType() == GrantOwnerType.OTHER_INSTITUTION_GRANT_OWNER
                 && getGrantOwnerProvider() == null) {
-            result.add("error.CandidacyInformationBean.grantOwnerProviderInstitutionUnitName.is.required.for.other.institution.grant.ownership");
+            result.add(
+                    "error.CandidacyInformationBean.grantOwnerProviderInstitutionUnitName.is.required.for.other.institution.grant.ownership");
         }
 
         return result;
@@ -832,7 +834,8 @@ public class PersonalInformationBean implements Serializable {
     }
 
     public String getPrecedentDegreeDesignation() {
-        return getPrecedentDegreeDesignationObject() != null ? getPrecedentDegreeDesignationObject().getDescription() : precedentDegreeDesignation;
+        return getPrecedentDegreeDesignationObject() != null ? getPrecedentDegreeDesignationObject()
+                .getDescription() : precedentDegreeDesignation;
     }
 
     public void setPrecedentDegreeDesignation(String precedentDegreeDesignation) {

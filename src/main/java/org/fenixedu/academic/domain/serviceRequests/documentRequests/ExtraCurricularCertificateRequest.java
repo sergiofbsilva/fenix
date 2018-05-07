@@ -60,7 +60,8 @@ public class ExtraCurricularCertificateRequest extends ExtraCurricularCertificat
 
     @Override
     public EventType getEventType() {
-        return getRegistration().getRegistrationProtocol().isExempted() ? null : EventType.EXTRA_CURRICULAR_APPROVEMENT_CERTIFICATE_REQUEST;
+        return getRegistration().getRegistrationProtocol()
+                .isExempted() ? null : EventType.EXTRA_CURRICULAR_APPROVEMENT_CERTIFICATE_REQUEST;
     }
 
     @Override

@@ -116,11 +116,10 @@ public abstract class ThesisDocument extends FenixReport {
 
     protected void fillOrientation() {
 
-        List<OrientationInfo> advisors =
-                thesis.getOrientation()
-                        .stream()
-                        .map(orientator -> new OrientationInfo(orientator.getName(), participantCategoryName(orientator),
-                                neverNull(orientator.getAffiliation()))).collect(Collectors.toList());
+        List<OrientationInfo> advisors = thesis
+                .getOrientation().stream().map(orientator -> new OrientationInfo(orientator.getName(),
+                        participantCategoryName(orientator), neverNull(orientator.getAffiliation())))
+                .collect(Collectors.toList());
 
         addParameter("advisors", advisors);
     }

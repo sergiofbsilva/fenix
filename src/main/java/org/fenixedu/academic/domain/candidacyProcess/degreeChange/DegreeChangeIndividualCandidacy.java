@@ -84,7 +84,8 @@ public class DegreeChangeIndividualCandidacy extends DegreeChangeIndividualCandi
         Degree selectedDegree = degreeChangeProcessBean.getSelectedDegree();
         PrecedentDegreeInformationBean precedentDegreeInformation = degreeChangeProcessBean.getPrecedentDegreeInformation();
 
-        checkParameters(person, degreeChangeIndividualCandidacyProcess, candidacyDate, selectedDegree, precedentDegreeInformation);
+        checkParameters(person, degreeChangeIndividualCandidacyProcess, candidacyDate, selectedDegree,
+                precedentDegreeInformation);
     }
 
     private void checkParameters(final Person person, final DegreeChangeIndividualCandidacyProcess process,
@@ -148,8 +149,8 @@ public class DegreeChangeIndividualCandidacy extends DegreeChangeIndividualCandi
         }
 
         if (personHasDegree(getPersonalDetails().getPerson(), selectedDegree)) {
-            throw new DomainException("error.DegreeChangeIndividualCandidacy.existing.degree", selectedDegree.getNameFor(
-                    getCandidacyExecutionInterval()).getContent());
+            throw new DomainException("error.DegreeChangeIndividualCandidacy.existing.degree",
+                    selectedDegree.getNameFor(getCandidacyExecutionInterval()).getContent());
         }
 
         if (precedentDegreeInformation == null) {
@@ -255,16 +256,15 @@ public class DegreeChangeIndividualCandidacy extends DegreeChangeIndividualCandi
 
         Formatter formatter = new Formatter(result);
 
-        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"), getCandidacyProcess()
-                .getProcessCode());
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"),
+                getCandidacyProcess().getProcessCode());
         PrecedentDegreeInformation precedentDegreeInformation = getCandidacyProcess().getPrecedentDegreeInformation();
         formatter.format("%s: %s\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.previous.degree"),
                 precedentDegreeInformation.getPrecedentDegreeDesignation());
         formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.institution"),
                 precedentDegreeInformation.getPrecedentInstitution().getName());
-        formatter.format("%s: %s\n",
-                BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.numberOfEnroledCurricularCourses"),
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.numberOfEnroledCurricularCourses"),
                 precedentDegreeInformation.getNumberOfEnroledCurricularCourses());
         formatter.format("%s: %s\n",
                 BundleUtil.getString(Bundle.APPLICATION, "label.candidacy.numberOfApprovedCurricularCourses"),

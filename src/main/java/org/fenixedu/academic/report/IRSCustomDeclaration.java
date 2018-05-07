@@ -231,8 +231,8 @@ public class IRSCustomDeclaration extends FenixReport {
         addParameter("personAddress", this.declaration.getPersonAddress());
         addParameter("personAddressArea", this.declaration.getPersonAddressArea());
         addParameter("personAddressPostalCode", this.declaration.getPersonAddressPostalCode());
-        addParameter("studentNumber", this.declaration.getStudentNumber() != null ? this.declaration.getStudentNumber()
-                .toString() : null);
+        addParameter("studentNumber",
+                this.declaration.getStudentNumber() != null ? this.declaration.getStudentNumber().toString() : null);
         addParameter("idDocumentType", this.declaration.getIdDocumentType().getLocalizedName());
         addParameter("documentIdNumber", this.declaration.getDocumentIdNumber());
 
@@ -253,8 +253,8 @@ public class IRSCustomDeclaration extends FenixReport {
 
     @Override
     public String getReportFileName() {
-        return MessageFormat.format("IRS-{0}-{1}-{2}", String.valueOf(this.declaration.getCivilYear()), this.declaration
-                .getDocumentIdNumber().trim().replace('/', '-').replace('\\', '-'),
+        return MessageFormat.format("IRS-{0}-{1}-{2}", String.valueOf(this.declaration.getCivilYear()),
+                this.declaration.getDocumentIdNumber().trim().replace('/', '-').replace('\\', '-'),
                 new DateTime().toString(YYYYMMMDD, getLocale()));
 
     }

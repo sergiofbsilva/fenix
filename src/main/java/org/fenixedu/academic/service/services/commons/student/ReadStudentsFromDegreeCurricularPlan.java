@@ -67,8 +67,8 @@ public class ReadStudentsFromDegreeCurricularPlan {
     private static final ReadStudentsFromDegreeCurricularPlan serviceInstance = new ReadStudentsFromDegreeCurricularPlan();
 
     @Atomic
-    public static List runReadStudentsFromDegreeCurricularPlan(String degreeCurricularPlanID) throws FenixServiceException,
-            NotAuthorizedException {
+    public static List runReadStudentsFromDegreeCurricularPlan(String degreeCurricularPlanID)
+            throws FenixServiceException, NotAuthorizedException {
         return serviceInstance.run(degreeCurricularPlanID);
     }
 

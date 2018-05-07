@@ -47,8 +47,8 @@ public class AccountingTransaction extends AccountingTransaction_Base {
         public int compare(AccountingTransaction leftAccountingTransaction, AccountingTransaction rightAccountingTransaction) {
             int comparationResult =
                     leftAccountingTransaction.getWhenRegistered().compareTo(rightAccountingTransaction.getWhenRegistered());
-            return (comparationResult == 0) ? leftAccountingTransaction.getExternalId().compareTo(
-                    rightAccountingTransaction.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftAccountingTransaction.getExternalId()
+                    .compareTo(rightAccountingTransaction.getExternalId()) : comparationResult;
         }
     };
 
@@ -188,7 +188,8 @@ public class AccountingTransaction extends AccountingTransaction_Base {
         return reimburse(responsibleUser, paymentMode, amountToReimburse, null);
     }
 
-    public AccountingTransaction reimburse(User responsibleUser, PaymentMode paymentMode, Money amountToReimburse, String comments) {
+    public AccountingTransaction reimburse(User responsibleUser, PaymentMode paymentMode, Money amountToReimburse,
+            String comments) {
         return reimburse(responsibleUser, paymentMode, amountToReimburse, comments, true);
     }
 
@@ -241,14 +242,14 @@ public class AccountingTransaction extends AccountingTransaction_Base {
 
         if (!getToAccountEntry().canApplyReimbursement(amountToReimburse)) {
             throw new DomainExceptionWithLabelFormatter(
-                    "error.accounting.AccountingTransaction.amount.to.reimburse.exceeds.entry.amount", getToAccountEntry()
-                            .getDescription());
+                    "error.accounting.AccountingTransaction.amount.to.reimburse.exceeds.entry.amount",
+                    getToAccountEntry().getDescription());
         }
 
-        final AccountingTransaction transaction =
-                new AccountingTransaction(responsibleUser, new Entry(EntryType.ADJUSTMENT, amountToReimburse.negate(),
-                        getToAccount()), new Entry(EntryType.ADJUSTMENT, amountToReimburse, getFromAccount()),
-                        new AccountingTransactionDetail(reimburseDate, paymentMode, comments), this);
+        final AccountingTransaction transaction = new AccountingTransaction(responsibleUser,
+                new Entry(EntryType.ADJUSTMENT, amountToReimburse.negate(), getToAccount()),
+                new Entry(EntryType.ADJUSTMENT, amountToReimburse, getFromAccount()),
+                new AccountingTransactionDetail(reimburseDate, paymentMode, comments), this);
 
         getEvent().recalculateState(getWhenRegistered());
 

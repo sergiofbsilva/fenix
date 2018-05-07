@@ -633,18 +633,16 @@ public class CompetenceCourseVersionList extends OutputRenderer {
 
         private HtmlComponent getFutureDepartmentMessage(CompetenceCourse course) {
             setFutureDepartmentMessageShown(true);
-            HtmlText text =
-                    new HtmlText(BundleUtil.getString(Bundle.BOLONHA, "future.department") + ": "
-                            + course.getDepartmentUnit(ExecutionSemester.readLastExecutionSemester()).getAcronym());
+            HtmlText text = new HtmlText(BundleUtil.getString(Bundle.BOLONHA, "future.department") + ": "
+                    + course.getDepartmentUnit(ExecutionSemester.readLastExecutionSemester()).getAcronym());
             text.setClasses(getMessageClass());
             return text;
         }
 
         private HtmlComponent getFutureGroupMessage(CompetenceCourse course) {
             setFutureGroupMessageShown(true);
-            HtmlText text =
-                    new HtmlText(BundleUtil.getString(Bundle.BOLONHA, "future.group") + ": "
-                            + course.getCompetenceCourseGroupUnit(ExecutionSemester.readLastExecutionSemester()).getName());
+            HtmlText text = new HtmlText(BundleUtil.getString(Bundle.BOLONHA, "future.group") + ": "
+                    + course.getCompetenceCourseGroupUnit(ExecutionSemester.readLastExecutionSemester()).getName());
             text.setClasses(getMessageClass());
             return text;
         }
@@ -676,9 +674,8 @@ public class CompetenceCourseVersionList extends OutputRenderer {
 
         private HtmlComponent getOldDepartmentMessage(CompetenceCourse course) {
             setOldDepartmentMessageShown(true);
-            HtmlText text =
-                    new HtmlText(BundleUtil.getString(Bundle.BOLONHA, "current.department") + ": "
-                            + course.getDepartmentUnit().getAcronym());
+            HtmlText text = new HtmlText(
+                    BundleUtil.getString(Bundle.BOLONHA, "current.department") + ": " + course.getDepartmentUnit().getAcronym());
             text.setClasses(getMessageClass());
             return text;
         }

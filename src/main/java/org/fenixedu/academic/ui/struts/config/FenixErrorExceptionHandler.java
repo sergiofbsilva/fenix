@@ -61,9 +61,8 @@ public class FenixErrorExceptionHandler extends ExceptionHandler {
             FenixActionException fenixActionException = (FenixActionException) ex;
             error = ((FenixActionException) ex).getError();
             property = ((FenixActionException) ex).getProperty();
-            forward =
-                    fenixActionException.getActionForward() != null ? fenixActionException.getActionForward() : mapping
-                            .getInputForward();
+            forward = fenixActionException.getActionForward() != null ? fenixActionException.getActionForward() : mapping
+                    .getInputForward();
         } else if (ex instanceof EmptyRequiredFieldServiceException) {
             error = new ActionError(ex.getMessage());
             property = error.getKey();

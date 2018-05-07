@@ -18,8 +18,6 @@
  */
 package org.fenixedu.academic.ui.struts.action.academicAdministration.curricularCourses;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +39,8 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 
 import com.google.common.collect.Lists;
 
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
+
 @Mapping(path = "/searchCurricularCourses", module = "academicAdministration", functionality = CurricularPlansManagement.class)
 @Forwards({ @Forward(name = "searchCurricularCourses",
         path = "/academicAdministration/bolonha/curricularCourses/search/searchCurricularCourses.jsp") })
@@ -60,7 +60,8 @@ public class SearchCurricularCoursesInDegreeCurricularPlan extends FenixDispatch
         return mapping.findForward("searchCurricularCourses");
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         DegreeCurricularPlan degreeCurricularPlan = getDomainObject(request, "dcpId");
         SearchCurricularCourseBean searchBean = getRenderedObject("searchBean");
 

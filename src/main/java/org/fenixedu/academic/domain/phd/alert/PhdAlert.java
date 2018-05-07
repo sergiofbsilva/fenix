@@ -47,7 +47,7 @@ abstract public class PhdAlert extends PhdAlert_Base {
     protected String buildMailBody() {
         final StringBuilder result = new StringBuilder();
 
-        getFormattedBody().forEach((l, s) ->  result.append(s).append("\n").append(" ------------------------- "));
+        getFormattedBody().forEach((l, s) -> result.append(s).append("\n").append(" ------------------------- "));
 
         result.delete(result.lastIndexOf("\n") + 1, result.length());
 

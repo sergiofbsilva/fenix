@@ -49,9 +49,8 @@ public class NotifyStudentGroup {
             recievers.add(attend.getRegistration().getStudent().getPerson());
         }
 
-        final String groupName =
-                BundleUtil.getString(Bundle.GLOBAL, "label.group", new String[] { submission.getStudentGroup().getGroupNumber()
-                        .toString() });
+        final String groupName = BundleUtil.getString(Bundle.GLOBAL, "label.group",
+                new String[] { submission.getStudentGroup().getGroupNumber().toString() });
         Sender sender = ExecutionCourseSender.newInstance(course);
         Recipient recipient = new Recipient(groupName, Person.convertToUserGroup(recievers));
         new Message(sender, sender.getConcreteReplyTos(), recipient.asCollection(), submission.getProject().getName(),

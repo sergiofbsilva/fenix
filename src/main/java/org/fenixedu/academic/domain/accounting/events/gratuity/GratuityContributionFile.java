@@ -9,9 +9,8 @@ public class GratuityContributionFile extends GratuityContributionFile_Base {
 
     public GratuityContributionFile(Party creditor, Event event, String fileName, byte[] content) {
         Student debtor = event.getPerson().getStudent();
-        String displayName =
-                event.getDescription().appendLabel(" - Transfer from " + debtor.getNumber() + " to " + creditor.getName())
-                        .toString();
+        String displayName = event.getDescription()
+                .appendLabel(" - Transfer from " + debtor.getNumber() + " to " + creditor.getName()).toString();
         init(displayName, fileName, content);
     }
 

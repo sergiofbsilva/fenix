@@ -68,7 +68,8 @@ public class Receipt extends Receipt_Base {
         @Override
         public int compare(Receipt leftReceipt, Receipt rightReceipt) {
             int comparationResult = leftReceipt.getReceiptNumber().compareTo(rightReceipt.getReceiptNumber());
-            return (comparationResult == 0) ? leftReceipt.getExternalId().compareTo(rightReceipt.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftReceipt.getExternalId()
+                    .compareTo(rightReceipt.getExternalId()) : comparationResult;
         }
     };
 
@@ -137,8 +138,8 @@ public class Receipt extends Receipt_Base {
         final YearMonthDay today = new YearMonthDay();
 
         if (year < FenixEduAcademicConfiguration.getConfiguration().getReceiptMinYearToCreate().intValue()) {
-            throw new DomainException("error.accounting.Receipt.invalid.receipt.year", FenixEduAcademicConfiguration
-                    .getConfiguration().getReceiptMinYearToCreate().toString());
+            throw new DomainException("error.accounting.Receipt.invalid.receipt.year",
+                    FenixEduAcademicConfiguration.getConfiguration().getReceiptMinYearToCreate().toString());
         }
 
         for (final Entry entry : entries) {

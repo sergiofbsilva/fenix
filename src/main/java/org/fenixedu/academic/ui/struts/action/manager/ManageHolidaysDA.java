@@ -109,7 +109,8 @@ public class ManageHolidaysDA extends FenixDispatchAction {
     }
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         final Set<Holiday> holidays = rootDomainObject.getHolidaysSet();
         request.setAttribute("holidays", holidays);
         return mapping.findForward("showHolidays");

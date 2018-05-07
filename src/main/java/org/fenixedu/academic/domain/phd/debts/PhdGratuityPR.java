@@ -158,8 +158,8 @@ public class PhdGratuityPR extends PhdGratuityPR_Base {
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
         return Collections.singletonList(new EntryDTO(EntryType.PHD_GRATUITY_FEE, event, calculateTotalAmountToPay(event, when),
-                event.getPayedAmount(), event.calculateAmountToPay(when), event
-                        .getDescriptionForEntryType(EntryType.PHD_GRATUITY_FEE), event.calculateAmountToPay(when)));
+                event.getPayedAmount(), event.calculateAmountToPay(when),
+                event.getDescriptionForEntryType(EntryType.PHD_GRATUITY_FEE), event.calculateAmountToPay(when)));
     }
 
     @Override

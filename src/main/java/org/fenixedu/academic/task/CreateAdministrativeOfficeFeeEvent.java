@@ -40,7 +40,6 @@ public class CreateAdministrativeOfficeFeeEvent extends CronTask {
     private int AdministrativeOfficeFee_TOTAL_CREATED = 0;
     private int InsuranceEvent_TOTAL_CREATED = 0;
 
-    
     private void createAdministrativeOfficeFeeEvent(StudentCurricularPlan scp, ExecutionYear executionYear) {
         try {
             createAdministrativeOfficeFeeEventAtomic(scp, executionYear);
@@ -49,7 +48,7 @@ public class CreateAdministrativeOfficeFeeEvent extends CronTask {
             e.printStackTrace();
         }
     }
-    
+
     @Atomic(mode = TxMode.WRITE)
     private void createAdministrativeOfficeFeeEventAtomic(StudentCurricularPlan scp, ExecutionYear executionYear) {
         final AccountingEventsManager manager = new AccountingEventsManager();
@@ -69,7 +68,6 @@ public class CreateAdministrativeOfficeFeeEvent extends CronTask {
         }
     }
 
-    
     private void createInsuranceEvent(Person person, ExecutionYear executionYear) {
         try {
             createInsuranceEventAtomic(person, executionYear);
@@ -78,7 +76,7 @@ public class CreateAdministrativeOfficeFeeEvent extends CronTask {
             e.printStackTrace();
         }
     }
-    
+
     @Atomic(mode = TxMode.WRITE)
     private void createInsuranceEventAtomic(Person person, ExecutionYear executionYear) {
         final AccountingEventsManager manager = new AccountingEventsManager();

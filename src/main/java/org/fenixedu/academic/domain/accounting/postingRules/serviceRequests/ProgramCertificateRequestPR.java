@@ -50,10 +50,11 @@ public class ProgramCertificateRequestPR extends ProgramCertificateRequestPR_Bas
         }
     }
 
-    public ProgramCertificateRequestPR edit(final Money certificateAmount, final Money amountFirstPage, final Money amountPerPage) {
+    public ProgramCertificateRequestPR edit(final Money certificateAmount, final Money amountFirstPage,
+            final Money amountPerPage) {
         deactivate();
-        return new ProgramCertificateRequestPR(getServiceAgreementTemplate(), new DateTime().minus(1000), null,
-                certificateAmount, amountFirstPage, amountPerPage);
+        return new ProgramCertificateRequestPR(getServiceAgreementTemplate(), new DateTime().minus(1000), null, certificateAmount,
+                amountFirstPage, amountPerPage);
     }
 
     @Override
@@ -61,8 +62,8 @@ public class ProgramCertificateRequestPR extends ProgramCertificateRequestPR_Bas
         final CertificateRequestEvent requestEvent = (CertificateRequestEvent) event;
         // remove certificate page number
         int extraPages = requestEvent.getNumberOfPages().intValue() - 1;
-        return (extraPages <= 0) ? Money.ZERO : getAmountFirstPage().add(
-                getAmountPerPage().multiply(BigDecimal.valueOf(--extraPages)));
+        return (extraPages <= 0) ? Money.ZERO : getAmountFirstPage()
+                .add(getAmountPerPage().multiply(BigDecimal.valueOf(--extraPages)));
     }
 
     @Override

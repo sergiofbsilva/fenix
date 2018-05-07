@@ -25,8 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.SortedSet;
-
 import java.util.stream.Collectors;
+
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,8 +64,7 @@ import com.google.common.base.Predicates;
         bundle = "ApplicationResources")
 @Mapping(path = "/caseHandlingSecondCycleCandidacyProcess", module = "academicAdministration",
         formBeanClass = SecondCycleCandidacyProcessDA.SecondCycleCandidacyProcessForm.class)
-@Forwards({
-        @Forward(name = "intro", path = "/candidacy/secondCycle/mainCandidacyProcess.jsp"),
+@Forwards({ @Forward(name = "intro", path = "/candidacy/secondCycle/mainCandidacyProcess.jsp"),
         @Forward(name = "prepare-create-new-process", path = "/candidacy/createCandidacyPeriod.jsp"),
         @Forward(name = "prepare-edit-candidacy-period", path = "/candidacy/editCandidacyPeriod.jsp"),
         @Forward(name = "send-to-coordinator", path = "/candidacy/sendToCoordinator.jsp"),
@@ -231,8 +230,8 @@ public class SecondCycleCandidacyProcessDA extends CandidacyProcessDA {
         return null;
     }
 
-    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareExecuteSendToCoordinator(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("send-to-coordinator");
     }
 
@@ -377,13 +376,15 @@ public class SecondCycleCandidacyProcessDA extends CandidacyProcessDA {
         row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
         row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
 
-        row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getCountry() != null ? secondCycleIndividualCandidacyProcess
-                .getPersonalDetails().getCountry().getCountryNationality().getContent() : "");
+        row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails()
+                .getCountry() != null ? secondCycleIndividualCandidacyProcess.getPersonalDetails().getCountry()
+                        .getCountryNationality().getContent() : "");
 
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getDegreeAndInstitutionName());
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getDegreeDesignation());
-        row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getConclusionDate() != null ? secondCycleIndividualCandidacyProcess
-                .getPrecedentDegreeInformation().getConclusionDate().toString(dateFormat) : "");
+        row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation()
+                .getConclusionDate() != null ? secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation()
+                        .getConclusionDate().toString(dateFormat) : "");
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getConclusionGrade());
 
         StringBuilder degreesSb = new StringBuilder();
@@ -429,8 +430,8 @@ public class SecondCycleCandidacyProcessDA extends CandidacyProcessDA {
 
     private Collection<IndividualCandidacyProcess> getChildsWithMissingRequiredDocuments(SecondCycleCandidacyProcess process) {
 
-        return process.getChildsWithMissingRequiredDocuments().stream().filter(CAN_EXECUTE_ACTIVITY_PREDICATE::apply).collect(
-                Collectors.toList());
+        return process.getChildsWithMissingRequiredDocuments().stream().filter(CAN_EXECUTE_ACTIVITY_PREDICATE::apply)
+                .collect(Collectors.toList());
     }
 
 }

@@ -78,11 +78,8 @@ public class SpecializationDegreeGratuityEvent extends SpecializationDegreeGratu
         final EntryDTO entryDTO = calculateEntries(new DateTime()).iterator().next();
 
         if (!getNonProcessedPaymentCodes().isEmpty()) {
-            getNonProcessedPaymentCodes()
-                    .iterator()
-                    .next()
-                    .update(new YearMonthDay(), calculatePaymentCodeEndDate(), entryDTO.getAmountToPay(),
-                            entryDTO.getAmountToPay());
+            getNonProcessedPaymentCodes().iterator().next().update(new YearMonthDay(), calculatePaymentCodeEndDate(),
+                    entryDTO.getAmountToPay(), entryDTO.getAmountToPay());
         }
 
         return getNonProcessedPaymentCodes();
@@ -93,8 +90,8 @@ public class SpecializationDegreeGratuityEvent extends SpecializationDegreeGratu
         final EntryDTO entryDTO = calculateEntries(new DateTime()).iterator().next();
 
         return Collections.singletonList(AccountingEventPaymentCode.create(PaymentCodeType.TOTAL_GRATUITY, new YearMonthDay(),
-                calculatePaymentCodeEndDate(), this, entryDTO.getAmountToPay(), entryDTO.getAmountToPay(), getStudent()
-                        .getPerson()));
+                calculatePaymentCodeEndDate(), this, entryDTO.getAmountToPay(), entryDTO.getAmountToPay(),
+                getStudent().getPerson()));
     }
 
     private Student getStudent() {

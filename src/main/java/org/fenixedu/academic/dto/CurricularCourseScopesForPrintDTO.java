@@ -136,8 +136,8 @@ public class CurricularCourseScopesForPrintDTO extends DataTranferObject {
                     @Override
                     public boolean evaluate(Object arg0) {
                         CurricularYearForPrintDTO curricularYearForPrintDTO = (CurricularYearForPrintDTO) arg0;
-                        if (curricularYearForPrintDTO.getYear().equals(
-                                scope.getInfoCurricularSemester().getInfoCurricularYear().getYear())) {
+                        if (curricularYearForPrintDTO.getYear()
+                                .equals(scope.getInfoCurricularSemester().getInfoCurricularYear().getYear())) {
                             return true;
                         }
 
@@ -162,8 +162,8 @@ public class CurricularCourseScopesForPrintDTO extends DataTranferObject {
                     @Override
                     public boolean evaluate(Object arg0) {
                         DegreeCurricularPlanForPrintDTO degreeCurricularPlanForPrintDTO = (DegreeCurricularPlanForPrintDTO) arg0;
-                        if (degreeCurricularPlanForPrintDTO.name.equals(scope.getInfoCurricularCourse()
-                                .getInfoDegreeCurricularPlan().getName())) {
+                        if (degreeCurricularPlanForPrintDTO.name
+                                .equals(scope.getInfoCurricularCourse().getInfoDegreeCurricularPlan().getName())) {
                             return true;
                         }
 
@@ -173,9 +173,8 @@ public class CurricularCourseScopesForPrintDTO extends DataTranferObject {
 
         if (selectedCurricularPlan == null) {
             InfoDegreeCurricularPlan degreeCurricularPlan = scope.getInfoCurricularCourse().getInfoDegreeCurricularPlan();
-            selectedCurricularPlan =
-                    new DegreeCurricularPlanForPrintDTO(degreeCurricularPlan.getName(), degreeCurricularPlan.getInfoDegree()
-                            .getNome(), degreeCurricularPlan.getAnotation());
+            selectedCurricularPlan = new DegreeCurricularPlanForPrintDTO(degreeCurricularPlan.getName(),
+                    degreeCurricularPlan.getInfoDegree().getNome(), degreeCurricularPlan.getAnotation());
             this.getDegreeCurricularPlans().add(selectedCurricularPlan);
         }
 

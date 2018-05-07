@@ -91,9 +91,8 @@ public class InfoCurriculumHistoricReport implements Serializable {
     }
 
     private void init() {
-        this.enrolments =
-                new TreeSet<InfoEnrolmentHistoricReport>(
-                        new BeanComparator("enrolment.studentCurricularPlan.registration.number"));
+        this.enrolments = new TreeSet<InfoEnrolmentHistoricReport>(
+                new BeanComparator("enrolment.studentCurricularPlan.registration.number"));
         for (final Enrolment enrolment : getCurricularCourse().getEnrolmentsByAcademicInterval(academicInterval)) {
             if (!enrolment.isAnnulled()) {
                 this.enrolments.add(new InfoEnrolmentHistoricReport(enrolment));

@@ -203,9 +203,8 @@ abstract public class PaymentPlan extends PaymentPlan_Base {
                 return true;
             }
 
-            Money installmentAmount =
-                    installment.calculateAmount(this.event, this.currentTransactionDate, this.discountPercentage,
-                            isToApplyPenalty(this.event, installment));
+            Money installmentAmount = installment.calculateAmount(this.event, this.currentTransactionDate,
+                    this.discountPercentage, isToApplyPenalty(this.event, installment));
 
             if (hasDiscountValue()) {
                 installmentAmount = installmentAmount.subtract(this.discountValue);
@@ -230,10 +229,9 @@ abstract public class PaymentPlan extends PaymentPlan_Base {
         }
 
         public Money subtractRemainingFor(final Installment installment) {
-            final Money result =
-                    installment
-                            .calculateAmount(this.event, this.when, this.discountPercentage,
-                                    isToApplyPenalty(this.event, installment)).subtract(this.discountValue).subtract(this.amount);
+            final Money result = installment
+                    .calculateAmount(this.event, this.when, this.discountPercentage, isToApplyPenalty(this.event, installment))
+                    .subtract(this.discountValue).subtract(this.amount);
             this.amount = this.discountValue = Money.ZERO;
             return result;
         }
@@ -244,15 +242,13 @@ abstract public class PaymentPlan extends PaymentPlan_Base {
                 if (usedDiscountValue) {
                     result = Money.ZERO;
                 } else {
-                    result =
-                            installment.calculateAmount(this.event, this.currentTransactionDate, this.discountPercentage,
-                                    isToApplyPenalty(this.event, installment)).subtract(this.discountedValue);
+                    result = installment.calculateAmount(this.event, this.currentTransactionDate, this.discountPercentage,
+                            isToApplyPenalty(this.event, installment)).subtract(this.discountedValue);
                     this.discountedValue = Money.ZERO;
                 }
             } else {
-                result =
-                        installment.calculateAmount(this.event, this.when, this.discountPercentage,
-                                isToApplyPenalty(this.event, installment)).subtract(this.discountedValue);
+                result = installment.calculateAmount(this.event, this.when, this.discountPercentage,
+                        isToApplyPenalty(this.event, installment)).subtract(this.discountedValue);
                 this.discountedValue = Money.ZERO;
             }
             usedDiscountValue = false;

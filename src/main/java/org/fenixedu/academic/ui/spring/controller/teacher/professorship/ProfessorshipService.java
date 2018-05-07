@@ -18,9 +18,6 @@
  */
 package org.fenixedu.academic.ui.spring.controller.teacher.professorship;
 
-import pt.ist.fenixframework.Atomic;
-import pt.ist.fenixframework.Atomic.TxMode;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -51,6 +48,9 @@ import org.springframework.stereotype.Service;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
+import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.Atomic.TxMode;
 
 @Service
 public class ProfessorshipService {
@@ -131,8 +131,8 @@ public class ProfessorshipService {
 
         SpreadsheetBuilder builder = new SpreadsheetBuilder();
 
-        Set<Professorship> professorships = authorizationService.searchAuthorizations
-                (search).stream().flatMap(a -> getProfessorships(a.getTeacher().getPerson().getUser(),search.getPeriod()).stream())
+        Set<Professorship> professorships = authorizationService.searchAuthorizations(search).stream()
+                .flatMap(a -> getProfessorships(a.getTeacher().getPerson().getUser(), search.getPeriod()).stream())
                 .collect(Collectors.toSet());
 
         builder.addSheet(getSheetName(search), new SheetData<Professorship>(professorships) {
@@ -146,8 +146,8 @@ public class ProfessorshipService {
                 addCell(message("teacher.professorships.csv.column.2.name"), user.getProfile().getDisplayName());
                 addCell(message("teacher.professorships.csv.column.3.courseCode"), GepReportFile.getExecutionCourseCode(course));
                 addCell(message("teacher.professorships.csv.column.4.courseName"), course.getNome());
-                addCell(message("teacher.professorships.csv.column.5.semester"), GepReportFile.getExecutionSemesterCode(course
-                        .getExecutionPeriod()));
+                addCell(message("teacher.professorships.csv.column.5.semester"),
+                        GepReportFile.getExecutionSemesterCode(course.getExecutionPeriod()));
                 addCell(message("teacher.authorizations.csv.column.6.responsible"), item.isResponsibleFor() ? "Y" : "N");
             }
         });
@@ -164,9 +164,9 @@ public class ProfessorshipService {
     public String getSheetName(SearchBean search) {
         List<String> parts = Lists.newArrayList("teacherProfessorships");
         Department department = search.getDepartment();
-        parts.add(department != null? department.getAcronym():message("label.all"));
+        parts.add(department != null ? department.getAcronym() : message("label.all"));
         ExecutionSemester period = search.getPeriod();
-        if(period!= null) {
+        if (period != null) {
             parts.add(period.getQualifiedName().replace(" ", "_"));
         }
         return Joiner.on("_").join(parts);

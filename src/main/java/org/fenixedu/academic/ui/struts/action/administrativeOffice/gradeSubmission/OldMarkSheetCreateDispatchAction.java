@@ -93,9 +93,8 @@ public class OldMarkSheetCreateDispatchAction extends MarkSheetCreateDispatchAct
     protected void prepareCreateEnrolmentEvaluationsForMarkSheet(MarkSheetManagementCreateBean createBean,
             HttpServletRequest request, ActionMessages actionMessages) {
 
-        final Collection<Enrolment> enrolments =
-                createBean.getCurricularCourse().getEnrolmentsNotInAnyMarkSheetForOldMarkSheets(createBean.getEvaluationSeason(),
-                        createBean.getExecutionPeriod());
+        final Collection<Enrolment> enrolments = createBean.getCurricularCourse().getEnrolmentsNotInAnyMarkSheetForOldMarkSheets(
+                createBean.getEvaluationSeason(), createBean.getExecutionPeriod());
 
         if (enrolments.isEmpty()) {
             addMessage(request, actionMessages, "error.allStudentsAreInMarkSheets");

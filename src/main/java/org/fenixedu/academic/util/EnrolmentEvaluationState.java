@@ -37,14 +37,14 @@ public class EnrolmentEvaluationState extends FenixUtil {
 
     public static final EnrolmentEvaluationState FINAL_OBJ = new EnrolmentEvaluationState(EnrolmentEvaluationState.FINAL, 2);
 
-    public static final EnrolmentEvaluationState TEMPORARY_OBJ = new EnrolmentEvaluationState(EnrolmentEvaluationState.TEMPORARY,
-            1);
+    public static final EnrolmentEvaluationState TEMPORARY_OBJ =
+            new EnrolmentEvaluationState(EnrolmentEvaluationState.TEMPORARY, 1);
 
-    public static final EnrolmentEvaluationState RECTIFIED_OBJ = new EnrolmentEvaluationState(EnrolmentEvaluationState.RECTIFIED,
-            3);
+    public static final EnrolmentEvaluationState RECTIFIED_OBJ =
+            new EnrolmentEvaluationState(EnrolmentEvaluationState.RECTIFIED, 3);
 
-    public static final EnrolmentEvaluationState RECTIFICATION_OBJ = new EnrolmentEvaluationState(
-            EnrolmentEvaluationState.RECTIFICATION, 4);
+    public static final EnrolmentEvaluationState RECTIFICATION_OBJ =
+            new EnrolmentEvaluationState(EnrolmentEvaluationState.RECTIFICATION, 4);
 
     public static final EnrolmentEvaluationState ANNULED_OBJ = new EnrolmentEvaluationState(EnrolmentEvaluationState.ANNULED, 0);
 

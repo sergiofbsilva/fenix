@@ -29,11 +29,11 @@ public class CurricularCourseExecutionScope extends FenixUtil {
 
     public static final int ANUAL = 2;
 
-    public static final CurricularCourseExecutionScope SEMESTRIAL_OBJ = new CurricularCourseExecutionScope(
-            CurricularCourseExecutionScope.SEMESTRIAL);
+    public static final CurricularCourseExecutionScope SEMESTRIAL_OBJ =
+            new CurricularCourseExecutionScope(CurricularCourseExecutionScope.SEMESTRIAL);
 
-    public static final CurricularCourseExecutionScope ANUAL_OBJ = new CurricularCourseExecutionScope(
-            CurricularCourseExecutionScope.ANUAL);
+    public static final CurricularCourseExecutionScope ANUAL_OBJ =
+            new CurricularCourseExecutionScope(CurricularCourseExecutionScope.ANUAL);
 
     private final Integer type;
 

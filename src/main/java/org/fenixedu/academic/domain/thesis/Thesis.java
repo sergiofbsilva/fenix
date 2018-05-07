@@ -295,8 +295,8 @@ public class Thesis extends Thesis_Base {
         if (getDiscussed() == null) {
             return false;
         }
-        return (getCreation() != null && getDiscussed().isBefore(getCreation())) || (getEnrolment() != null && getDiscussed()
-                .isBefore(getEnrolment().getCreationDateDateTime()));
+        return (getCreation() != null && getDiscussed().isBefore(getCreation()))
+                || (getEnrolment() != null && getDiscussed().isBefore(getEnrolment().getCreationDateDateTime()));
     }
 
     /**
@@ -320,10 +320,9 @@ public class Thesis extends Thesis_Base {
 
     public List<ThesisEvaluationParticipant> getOrientation() {
 
-        return getParticipationsSet()
-                .stream()
-                .filter(p -> p.getType() == ThesisParticipationType.ORIENTATOR
-                        || p.getType() == ThesisParticipationType.COORIENTATOR).collect(Collectors.toList());
+        return getParticipationsSet().stream().filter(
+                p -> p.getType() == ThesisParticipationType.ORIENTATOR || p.getType() == ThesisParticipationType.COORIENTATOR)
+                .collect(Collectors.toList());
     }
 
     public ThesisEvaluationParticipant getPresident() {
@@ -670,7 +669,8 @@ public class Thesis extends Thesis_Base {
         Set<Person> orientationPersons = getOrientationPersons();
         persons.addAll(orientationPersons);
 
-        final Recipient recipient = new Recipient("Membros da tese " + getTitle().getContent(), Person.convertToUserGroup(persons));
+        final Recipient recipient =
+                new Recipient("Membros da tese " + getTitle().getContent(), Person.convertToUserGroup(persons));
         final String studentNumber = getStudent().getNumber().toString();
         final String title = getFinalFullTitle().getContent();
         final String subject = getMessage("message.thesis.reject.submission.email.subject", studentNumber);

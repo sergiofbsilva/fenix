@@ -382,8 +382,8 @@ public class SibsPaymentFileProcessReportDTO {
             final AdministrativeOfficeFeeAndInsuranceEvent administrativeOfficeFeeAndInsuranceEvent) {
         if (detailLine.getAmount().greaterOrEqualThan(administrativeOfficeFeeAndInsuranceEvent.getAmountToPay())) {
             addGraduationInsuranceAmount(administrativeOfficeFeeAndInsuranceEvent.getInsuranceAmount());
-            addAdministrativeOfficeTaxAmount(detailLine.getAmount().subtract(
-                    administrativeOfficeFeeAndInsuranceEvent.getInsuranceAmount()));
+            addAdministrativeOfficeTaxAmount(
+                    detailLine.getAmount().subtract(administrativeOfficeFeeAndInsuranceEvent.getInsuranceAmount()));
         } else {
             addAdministrativeOfficeTaxAmount(detailLine.getAmount());
         }
@@ -403,8 +403,8 @@ public class SibsPaymentFileProcessReportDTO {
             addSpecializationGratuityAmount(detailLine.getAmount());
             break;
         default:
-            throw new RuntimeException("Unknown specialization "
-                    + gratuitySituation.getStudentCurricularPlan().getSpecialization().name());
+            throw new RuntimeException(
+                    "Unknown specialization " + gratuitySituation.getStudentCurricularPlan().getSpecialization().name());
         }
     }
 

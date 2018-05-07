@@ -44,12 +44,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import pt.ist.fenixframework.Atomic;
-import pt.ist.fenixframework.Atomic.TxMode;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.Atomic.TxMode;
 
 /***
  * Teacher authorization and categories service
@@ -310,7 +310,8 @@ public class AuthorizationService {
      */
     public List<TeacherAuthorization> importCSV(ExecutionSemester period, MultipartFile partFile) {
         try {
-            return importAuthorizations(period, csvService.readCsvFile(partFile.getInputStream(), ",", Charsets.UTF_8.toString()));
+            return importAuthorizations(period,
+                    csvService.readCsvFile(partFile.getInputStream(), ",", Charsets.UTF_8.toString()));
         } catch (IOException e) {
             throw new RuntimeException(message("teacher.authorizations.upload.parsing.failed"));
         }
@@ -328,59 +329,54 @@ public class AuthorizationService {
     @Atomic(mode = TxMode.WRITE)
     private List<TeacherAuthorization> importAuthorizations(ExecutionSemester period,
             List<Map<String, String>> authorizationEntries) {
-        return authorizationEntries
-                .stream()
-                .map(auth -> {
-                    String username = auth.get(message("teacher.authorizations.csv.column.1.username"));
-                    String categoryCode = auth.get(message("teacher.authorizations.csv.column.2.categoryCode"));
-                    String departmentAcronym = auth.get(message("teacher.authorizations.csv.column.3.departmentAcronym"));
-                    String hoursValue = auth.get(message("teacher.authorizations.csv.column.4.lessonHours"));
-                    String contractedValue = auth.get(message("teacher.authorizations.csv.column.5.contracted"));
+        return authorizationEntries.stream().map(auth -> {
+            String username = auth.get(message("teacher.authorizations.csv.column.1.username"));
+            String categoryCode = auth.get(message("teacher.authorizations.csv.column.2.categoryCode"));
+            String departmentAcronym = auth.get(message("teacher.authorizations.csv.column.3.departmentAcronym"));
+            String hoursValue = auth.get(message("teacher.authorizations.csv.column.4.lessonHours"));
+            String contractedValue = auth.get(message("teacher.authorizations.csv.column.5.contracted"));
 
-                    if (Strings.isNullOrEmpty(username) && Strings.isNullOrEmpty(categoryCode)
-                            && Strings.isNullOrEmpty(departmentAcronym) && Strings.isNullOrEmpty(hoursValue)
-                            && Strings.isNullOrEmpty(contractedValue)) {
-                        // ignore empty line
-                        return Optional.<TeacherAuthorization> empty();
-                    }
+            if (Strings.isNullOrEmpty(username) && Strings.isNullOrEmpty(categoryCode) && Strings.isNullOrEmpty(departmentAcronym)
+                    && Strings.isNullOrEmpty(hoursValue) && Strings.isNullOrEmpty(contractedValue)) {
+                // ignore empty line
+                return Optional.<TeacherAuthorization> empty();
+            }
 
-                    User user = User.findByUsername(username);
+            User user = User.findByUsername(username);
 
-                    if (user == null) {
-                        throw new RuntimeException(message("teacher.authorizations.csv.column.1.username.error", username));
-                    }
+            if (user == null) {
+                throw new RuntimeException(message("teacher.authorizations.csv.column.1.username.error", username));
+            }
 
-                    Optional<TeacherCategory> category = TeacherCategory.findByCode(categoryCode);
+            Optional<TeacherCategory> category = TeacherCategory.findByCode(categoryCode);
 
-                    if (!category.isPresent()) {
-                        throw new RuntimeException(
-                                message("teacher.authorizations.csv.column.2.categoryCode.error", categoryCode));
-                    }
+            if (!category.isPresent()) {
+                throw new RuntimeException(message("teacher.authorizations.csv.column.2.categoryCode.error", categoryCode));
+            }
 
-                    Department department = Department.find(departmentAcronym);
+            Department department = Department.find(departmentAcronym);
 
-                    if (department == null) {
-                        throw new RuntimeException(message("teacher.authorizations.csv.column.3.departmentAcronym.error",
-                                departmentAcronym));
-                    }
-                    Double lessonHours;
+            if (department == null) {
+                throw new RuntimeException(
+                        message("teacher.authorizations.csv.column.3.departmentAcronym.error", departmentAcronym));
+            }
+            Double lessonHours;
 
-                    try {
-                        lessonHours = Double.parseDouble(hoursValue);
-                    } catch (NumberFormatException nfe) {
-                        throw new RuntimeException(message("teacher.authorizations.csv.column.4.lessonHours.error", hoursValue));
-                    }
+            try {
+                lessonHours = Double.parseDouble(hoursValue);
+            } catch (NumberFormatException nfe) {
+                throw new RuntimeException(message("teacher.authorizations.csv.column.4.lessonHours.error", hoursValue));
+            }
 
-                    if (!"Y".equals(contractedValue) && !"N".equals(contractedValue)) {
-                        throw new RuntimeException(message("teacher.authorizations.csv.column.5.contracted.error",
-                                contractedValue));
-                    }
+            if (!"Y".equals(contractedValue) && !"N".equals(contractedValue)) {
+                throw new RuntimeException(message("teacher.authorizations.csv.column.5.contracted.error", contractedValue));
+            }
 
-                    Boolean contracted = new Boolean("Y".equals(contractedValue));
+            Boolean contracted = new Boolean("Y".equals(contractedValue));
 
-                    return Optional.<TeacherAuthorization> of(createTeacherAuthorization(user, department, period,
-                            category.get(), contracted, lessonHours));
+            return Optional.<TeacherAuthorization> of(
+                    createTeacherAuthorization(user, department, period, category.get(), contracted, lessonHours));
 
-                }).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        }).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
     }
 }

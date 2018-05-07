@@ -32,8 +32,8 @@ import pt.ist.fenixframework.Atomic;
 
 public class StatuteType extends StatuteType_Base {
 
-    public static Comparator<StatuteType> COMPARATOR_BY_NAME = Comparator.comparing(StatuteType::getName).thenComparing(
-            DomainObjectUtil.COMPARATOR_BY_ID);
+    public static Comparator<StatuteType> COMPARATOR_BY_NAME =
+            Comparator.comparing(StatuteType::getName).thenComparing(DomainObjectUtil.COMPARATOR_BY_ID);
 
     private StatuteType() {
         super();
@@ -66,7 +66,8 @@ public class StatuteType extends StatuteType_Base {
         if (code == null || code.trim().isEmpty()) {
             super.setCode(null);
         } else {
-            if (readAll().filter(statute -> code.equals(statute.getCode()) && statute != StatuteType.this).findAny().isPresent()) {
+            if (readAll().filter(statute -> code.equals(statute.getCode()) && statute != StatuteType.this).findAny()
+                    .isPresent()) {
                 throw new DomainException("error.StatuteType.code.alreadyUsed");
             }
             super.setCode(code);

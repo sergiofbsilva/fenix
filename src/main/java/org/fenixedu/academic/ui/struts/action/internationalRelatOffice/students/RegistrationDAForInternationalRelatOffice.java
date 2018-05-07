@@ -25,8 +25,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(module = "internationalRelatOffice", path = "/registration",
         functionality = SearchForStudentsForInternationalRelatOffice.class)
-@Forwards({
-        @Forward(name = "view-registration-curriculum", path = "/internationalRelatOffice/viewRegistrationCurriculum.jsp"),
+@Forwards({ @Forward(name = "view-registration-curriculum", path = "/internationalRelatOffice/viewRegistrationCurriculum.jsp"),
         @Forward(name = "chooseCycleForViewRegistrationCurriculum",
                 path = "/student/curriculum/chooseCycleForViewRegistrationCurriculum.jsp") })
 public class RegistrationDAForInternationalRelatOffice extends RegistrationDA {

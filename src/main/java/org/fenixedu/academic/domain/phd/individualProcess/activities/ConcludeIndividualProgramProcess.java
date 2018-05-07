@@ -51,8 +51,8 @@ public class ConcludeIndividualProgramProcess extends PhdIndividualProgramProces
             throw new PhdDomainOperationException("error.PhdIndividualProgramProcess.thesis.process.is.not.concluded");
         }
 
-        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.CONCLUDED,
-                userView.getPerson(), "", new DateTime());
+        PhdProgramProcessState.createWithGivenStateDate(process, PhdIndividualProgramProcessState.CONCLUDED, userView.getPerson(),
+                "", new DateTime());
 
         return process;
     }

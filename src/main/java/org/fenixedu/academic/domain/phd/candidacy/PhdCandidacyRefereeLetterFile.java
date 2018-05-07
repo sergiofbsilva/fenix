@@ -30,7 +30,8 @@ public class PhdCandidacyRefereeLetterFile extends PhdCandidacyRefereeLetterFile
         super();
     }
 
-    PhdCandidacyRefereeLetterFile(final PhdProgramCandidacyProcess candidacyProcess, final String filename, final byte[] content) {
+    PhdCandidacyRefereeLetterFile(final PhdProgramCandidacyProcess candidacyProcess, final String filename,
+            final byte[] content) {
         this();
         init(candidacyProcess, PhdIndividualProgramDocumentType.RECOMMENDATION_LETTER, null, content, filename, null);
     }

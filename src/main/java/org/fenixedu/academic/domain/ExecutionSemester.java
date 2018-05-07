@@ -318,7 +318,8 @@ public class ExecutionSemester extends ExecutionSemester_Base implements Compara
         final Collection<MarkSheet> markSheets = new HashSet<MarkSheet>();
         for (final MarkSheet sheet : getMarkSheetsSet()) {
             if (sheet.getSubmittedByTeacher() && !sheet.getPrinted()) {
-                if ((dcp == null || sheet.isFor(dcp)) && sheet.getCurricularCourse().hasAnyExecutionDegreeFor(getExecutionYear())) {
+                if ((dcp == null || sheet.isFor(dcp))
+                        && sheet.getCurricularCourse().hasAnyExecutionDegreeFor(getExecutionYear())) {
                     ExecutionDegree executionDegree =
                             sheet.getCurricularCourse().getExecutionDegreeFor(getExecutionYear().getAcademicInterval());
                     final Degree degree = executionDegree.getDegree();
@@ -333,7 +334,8 @@ public class ExecutionSemester extends ExecutionSemester_Base implements Compara
         return markSheets;
     }
 
-    public Collection<ExecutionCourse> getExecutionCoursesWithDegreeGradesToSubmit(final DegreeCurricularPlan degreeCurricularPlan) {
+    public Collection<ExecutionCourse> getExecutionCoursesWithDegreeGradesToSubmit(
+            final DegreeCurricularPlan degreeCurricularPlan) {
         final Collection<ExecutionCourse> executionCourses = new ArrayList<ExecutionCourse>();
         for (final ExecutionCourse executionCourse : getAssociatedExecutionCoursesSet()) {
             if (executionCourse.hasAnyDegreeGradeToSubmit(this, degreeCurricularPlan)) {
@@ -346,8 +348,8 @@ public class ExecutionSemester extends ExecutionSemester_Base implements Compara
     public Collection<MarkSheet> getMarkSheetsToConfirm(final DegreeCurricularPlan degreeCurricularPlan) {
         final Collection<MarkSheet> markSheets = new ArrayList<MarkSheet>();
         for (final MarkSheet markSheet : this.getMarkSheetsSet()) {
-            if ((degreeCurricularPlan == null || markSheet.getCurricularCourse().getDegreeCurricularPlan()
-                    .equals(degreeCurricularPlan))
+            if ((degreeCurricularPlan == null
+                    || markSheet.getCurricularCourse().getDegreeCurricularPlan().equals(degreeCurricularPlan))
                     && markSheet.isNotConfirmed()) {
                 markSheets.add(markSheet);
             }
@@ -392,12 +394,12 @@ public class ExecutionSemester extends ExecutionSemester_Base implements Compara
         for (ExecutionDegree executionDegree : degrees) {
             if (getSemester() == 1) {
                 OccupationPeriod lessonsPeriodFirstSemester = executionDegree.getPeriodLessonsFirstSemester();
-                lessonsPeriod =
-                        (lessonsPeriod == null || (lessonsPeriodFirstSemester != null && lessonsPeriodFirstSemester.isGreater(lessonsPeriod))) ? lessonsPeriodFirstSemester : lessonsPeriod;
+                lessonsPeriod = (lessonsPeriod == null || (lessonsPeriodFirstSemester != null
+                        && lessonsPeriodFirstSemester.isGreater(lessonsPeriod))) ? lessonsPeriodFirstSemester : lessonsPeriod;
             } else {
                 OccupationPeriod lessonsPeriodSecondSemester = executionDegree.getPeriodLessonsSecondSemester();
-                lessonsPeriod =
-                        (lessonsPeriod == null || (lessonsPeriodSecondSemester != null && lessonsPeriodSecondSemester.isGreater(lessonsPeriod))) ? lessonsPeriodSecondSemester : lessonsPeriod;
+                lessonsPeriod = (lessonsPeriod == null || (lessonsPeriodSecondSemester != null
+                        && lessonsPeriodSecondSemester.isGreater(lessonsPeriod))) ? lessonsPeriodSecondSemester : lessonsPeriod;
             }
         }
 
@@ -497,34 +499,30 @@ public class ExecutionSemester extends ExecutionSemester_Base implements Compara
     }
 
     public static ExecutionSemester readMarkSheetManagmentExecutionPeriod() {
-        markSheetManagmentExecutionPeriod =
-                readFromProperties(markSheetManagmentExecutionPeriod, FenixEduAcademicConfiguration.getConfiguration()
-                        .getYearForFromMarkSheetManagment(), FenixEduAcademicConfiguration.getConfiguration()
-                        .getSemesterForFromMarkSheetManagment());
+        markSheetManagmentExecutionPeriod = readFromProperties(markSheetManagmentExecutionPeriod,
+                FenixEduAcademicConfiguration.getConfiguration().getYearForFromMarkSheetManagment(),
+                FenixEduAcademicConfiguration.getConfiguration().getSemesterForFromMarkSheetManagment());
         return markSheetManagmentExecutionPeriod;
     }
 
     static public ExecutionSemester readFirstBolonhaExecutionPeriod() {
-        firstBolonhaExecutionPeriod =
-                readFromProperties(firstBolonhaExecutionPeriod, FenixEduAcademicConfiguration.getConfiguration()
-                        .getStartYearForBolonhaDegrees(), FenixEduAcademicConfiguration.getConfiguration()
-                        .getStartSemesterForBolonhaDegrees());
+        firstBolonhaExecutionPeriod = readFromProperties(firstBolonhaExecutionPeriod,
+                FenixEduAcademicConfiguration.getConfiguration().getStartYearForBolonhaDegrees(),
+                FenixEduAcademicConfiguration.getConfiguration().getStartSemesterForBolonhaDegrees());
         return firstBolonhaExecutionPeriod;
     }
 
     static public ExecutionSemester readFirstBolonhaTransitionExecutionPeriod() {
-        firstBolonhaTransitionExecutionPeriod =
-                readFromProperties(firstBolonhaTransitionExecutionPeriod, FenixEduAcademicConfiguration.getConfiguration()
-                        .getStartYearForBolonhaTransition(), FenixEduAcademicConfiguration.getConfiguration()
-                        .getStartSemesterForBolonhaTransition());
+        firstBolonhaTransitionExecutionPeriod = readFromProperties(firstBolonhaTransitionExecutionPeriod,
+                FenixEduAcademicConfiguration.getConfiguration().getStartYearForBolonhaTransition(),
+                FenixEduAcademicConfiguration.getConfiguration().getStartSemesterForBolonhaTransition());
         return firstBolonhaTransitionExecutionPeriod;
     }
 
     static public ExecutionSemester readFirstEnrolmentsExecutionPeriod() {
-        firstEnrolmentsExecutionPeriod =
-                readFromProperties(firstEnrolmentsExecutionPeriod, FenixEduAcademicConfiguration.getConfiguration()
-                        .getYearForFromEnrolments(), FenixEduAcademicConfiguration.getConfiguration()
-                        .getSemesterForFromEnrolments());
+        firstEnrolmentsExecutionPeriod = readFromProperties(firstEnrolmentsExecutionPeriod,
+                FenixEduAcademicConfiguration.getConfiguration().getYearForFromEnrolments(),
+                FenixEduAcademicConfiguration.getConfiguration().getSemesterForFromEnrolments());
         return firstEnrolmentsExecutionPeriod;
     }
 

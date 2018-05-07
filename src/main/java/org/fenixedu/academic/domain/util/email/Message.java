@@ -31,10 +31,10 @@ import org.fenixedu.academic.predicate.AccessControl;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.joda.time.DateTime;
 
+import com.google.common.base.Strings;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
-
-import com.google.common.base.Strings;
 
 public class Message extends Message_Base {
 
@@ -96,8 +96,8 @@ public class Message extends Message_Base {
     }
 
     public Message(final Sender sender, final Recipient recipient, final String subject, final String body) {
-        this(sender, sender.getConcreteReplyTos(), Collections.singleton(recipient), subject, body, new EmailAddressList(
-                Collections.EMPTY_LIST).toString());
+        this(sender, sender.getConcreteReplyTos(), Collections.singleton(recipient), subject, body,
+                new EmailAddressList(Collections.EMPTY_LIST).toString());
     }
 
     public Message(final Sender sender, final Collection<? extends ReplyTo> replyTos, final Collection<Recipient> recipients,

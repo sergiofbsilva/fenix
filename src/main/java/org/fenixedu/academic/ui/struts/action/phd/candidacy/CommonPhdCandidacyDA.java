@@ -58,8 +58,8 @@ abstract public class CommonPhdCandidacyDA extends PhdProcessDA {
     }
 
     protected ActionForward viewIndividualProgramProcess(HttpServletRequest request, final PhdProgramCandidacyProcess process) {
-        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s", process
-                .getIndividualProgramProcess().getExternalId()), request);
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=viewProcess&processId=%s",
+                process.getIndividualProgramProcess().getExternalId()), request);
     }
 
     public ActionForward manageCandidacyDocuments(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -138,8 +138,8 @@ abstract public class CommonPhdCandidacyDA extends PhdProcessDA {
         return mapping.findForward("rejectCandidacyProcess");
     }
 
-    public ActionForward prepareRejectCandidacyProcessPostback(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareRejectCandidacyProcessPostback(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdProgramCandidacyProcessStateBean bean = getRenderedObject("stateBean");
         request.setAttribute("stateBean", bean);

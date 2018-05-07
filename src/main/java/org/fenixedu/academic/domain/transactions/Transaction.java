@@ -34,7 +34,8 @@ public abstract class Transaction extends Transaction_Base {
         public int compare(Transaction leftTransaction, Transaction rightTransaction) {
             int comparationResult =
                     leftTransaction.getTransactionDateDateTime().compareTo(rightTransaction.getTransactionDateDateTime());
-            return (comparationResult == 0) ? leftTransaction.getExternalId().compareTo(rightTransaction.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftTransaction.getExternalId()
+                    .compareTo(rightTransaction.getExternalId()) : comparationResult;
         }
     };
 

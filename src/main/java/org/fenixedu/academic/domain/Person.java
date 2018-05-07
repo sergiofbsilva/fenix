@@ -399,11 +399,10 @@ public class Person extends Person_Base {
         getProfile().changeName(candidacyExternalDetails.getGivenNames(), candidacyExternalDetails.getFamilyNames(), null);
         this.setSocialSecurityNumber(candidacyExternalDetails.getSocialSecurityNumber());
 
-        final PhysicalAddressData physicalAddressData =
-                new PhysicalAddressData(candidacyExternalDetails.getAddress(), candidacyExternalDetails.getAreaCode(),
-                        getAreaOfAreaCode(), candidacyExternalDetails.getArea(), getParishOfResidence(),
-                        getDistrictSubdivisionOfResidence(), getDistrictOfResidence(),
-                        candidacyExternalDetails.getCountryOfResidence());
+        final PhysicalAddressData physicalAddressData = new PhysicalAddressData(candidacyExternalDetails.getAddress(),
+                candidacyExternalDetails.getAreaCode(), getAreaOfAreaCode(), candidacyExternalDetails.getArea(),
+                getParishOfResidence(), getDistrictSubdivisionOfResidence(), getDistrictOfResidence(),
+                candidacyExternalDetails.getCountryOfResidence());
         setDefaultPhysicalAddressData(physicalAddressData);
         setDefaultPhoneNumber(candidacyExternalDetails.getTelephoneContact());
         setDefaultEmailAddressValue(candidacyExternalDetails.getEmail());
@@ -633,9 +632,8 @@ public class Person extends Person_Base {
     }
 
     public SortedSet<StudentCurricularPlan> getActiveStudentCurricularPlansSortedByDegreeTypeAndDegreeName() {
-        final SortedSet<StudentCurricularPlan> studentCurricularPlans =
-                new TreeSet<StudentCurricularPlan>(
-                        StudentCurricularPlan.STUDENT_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_DEGREE_NAME);
+        final SortedSet<StudentCurricularPlan> studentCurricularPlans = new TreeSet<StudentCurricularPlan>(
+                StudentCurricularPlan.STUDENT_CURRICULAR_PLAN_COMPARATOR_BY_DEGREE_TYPE_AND_DEGREE_NAME);
         for (final Registration registration : getStudentsSet()) {
             final StudentCurricularPlan studentCurricularPlan = registration.getActiveStudentCurricularPlan();
             if (studentCurricularPlan != null) {
@@ -694,7 +692,8 @@ public class Person extends Person_Base {
         return result;
     }
 
-    public Set<Event> getNotPayedEventsPayableOn(final AdministrativeOffice administrativeOffice, final boolean withInstallments) {
+    public Set<Event> getNotPayedEventsPayableOn(final AdministrativeOffice administrativeOffice,
+            final boolean withInstallments) {
         return getNotPayedEventsPayableOn(administrativeOffice, AcademicEvent.class, withInstallments);
     }
 
@@ -709,7 +708,8 @@ public class Person extends Person_Base {
         return result;
     }
 
-    private boolean isPayableOnAnyOfAdministrativeOffices(final Set<AdministrativeOffice> administrativeOffices, final Event event) {
+    private boolean isPayableOnAnyOfAdministrativeOffices(final Set<AdministrativeOffice> administrativeOffices,
+            final Event event) {
 
         if (administrativeOffices == null) {
             return true;
@@ -911,7 +911,8 @@ public class Person extends Person_Base {
         return result;
     }
 
-    public AdministrativeOfficeFeeAndInsuranceEvent getAdministrativeOfficeFeeInsuranceEventFor(final ExecutionYear executionYear) {
+    public AdministrativeOfficeFeeAndInsuranceEvent getAdministrativeOfficeFeeInsuranceEventFor(
+            final ExecutionYear executionYear) {
         for (final Event event : getEventsByEventType(EventType.ADMINISTRATIVE_OFFICE_FEE_INSURANCE)) {
             final AdministrativeOfficeFeeAndInsuranceEvent administrativeOfficeFeeAndInsuranceEvent =
                     (AdministrativeOfficeFeeAndInsuranceEvent) event;
@@ -1135,7 +1136,8 @@ public class Person extends Person_Base {
     public static Collection<Person> findPersonMatchingFirstAndLastName(final String completeName) {
         if (completeName != null) {
             final String[] splittedName = completeName.split(" ");
-            return splittedName.length > 0 ? findPerson(splittedName[0] + " " + splittedName[splittedName.length - 1]) : Collections.EMPTY_LIST;
+            return splittedName.length > 0 ? findPerson(
+                    splittedName[0] + " " + splittedName[splittedName.length - 1]) : Collections.EMPTY_LIST;
         }
         return Collections.EMPTY_LIST;
     }
@@ -1525,13 +1527,13 @@ public class Person extends Person_Base {
      */
     public String getIdentificationDocumentSeriesNumber() {
         if (getIdDocumentType() == IDDocumentType.IDENTITY_CARD) {
-        	String seriesNumber = getIdentificationDocumentSeriesNumberValue();
-        	String extraDigit = getIdentificationDocumentExtraDigitValue();
-        	if (seriesNumber != null) {
-        		return seriesNumber;
-        	} else if (extraDigit != null) {
-        		return extraDigit;
-        	}
+            String seriesNumber = getIdentificationDocumentSeriesNumberValue();
+            String extraDigit = getIdentificationDocumentExtraDigitValue();
+            if (seriesNumber != null) {
+                return seriesNumber;
+            } else if (extraDigit != null) {
+                return extraDigit;
+            }
         }
         return "";
     }
@@ -1551,8 +1553,8 @@ public class Person extends Person_Base {
     public PersonIdentificationDocumentExtraInfo getPersonIdentificationDocumentExtraInfo(final Class clazz) {
         PersonIdentificationDocumentExtraInfo result = null;
         for (final PersonIdentificationDocumentExtraInfo info : getPersonIdentificationDocumentExtraInfoSet()) {
-            if (info.getClass() == clazz
-                    && (result == null || result.getRegisteredInSystemTimestamp().isBefore(info.getRegisteredInSystemTimestamp()))) {
+            if (info.getClass() == clazz && (result == null
+                    || result.getRegisteredInSystemTimestamp().isBefore(info.getRegisteredInSystemTimestamp()))) {
                 result = info;
             }
         }

@@ -352,24 +352,21 @@ public class SecondCycleCandidacyProcessDA extends CandidacyProcessDA {
         row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
         row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
 
-        row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails().getCountry() != null ? secondCycleIndividualCandidacyProcess
-                .getPersonalDetails().getCountry().getCountryNationality().getContent() : "");
+        row.setCell(secondCycleIndividualCandidacyProcess.getPersonalDetails()
+                .getCountry() != null ? secondCycleIndividualCandidacyProcess.getPersonalDetails().getCountry()
+                        .getCountryNationality().getContent() : "");
 
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getDegreeAndInstitutionName());
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getDegreeDesignation());
-        row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getConclusionDate() != null ? secondCycleIndividualCandidacyProcess
-                .getPrecedentDegreeInformation().getConclusionDate().toString(dateFormat) : "");
+        row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation()
+                .getConclusionDate() != null ? secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation()
+                        .getConclusionDate().toString(dateFormat) : "");
         row.setCell(secondCycleIndividualCandidacyProcess.getPrecedentDegreeInformation().getConclusionGrade());
 
-        String degrees =
-                String.join(
-                        "\n",
-                        secondCycleIndividualCandidacyProcess
-                                .getCandidacy()
-                                .getSelectedDegreesSet()
-                                .stream()
-                                .map(d -> d.getNameI18N(secondCycleIndividualCandidacyProcess.getCandidacyExecutionInterval())
-                                        .getContent()).collect(Collectors.toList()));
+        String degrees = String.join("\n",
+                secondCycleIndividualCandidacyProcess.getCandidacy().getSelectedDegreesSet().stream().map(
+                        d -> d.getNameI18N(secondCycleIndividualCandidacyProcess.getCandidacyExecutionInterval()).getContent())
+                        .collect(Collectors.toList()));
 
         row.setCell(degrees);
         row.setCell(BundleUtil.getString(Bundle.ENUMERATION, individualCandidacyProcess.getCandidacyState().getQualifiedName()));

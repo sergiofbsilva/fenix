@@ -118,8 +118,8 @@ public class ProgramConclusionController {
             @RequestParam(defaultValue = "#{new java.util.HashSet()}") Set<EventType> eventTypes) {
         try {
             service.editProgramConclusion(programConclusion, name, description, graduationTitle, graduationLevel,
-                    isAverageEditable, isAlumniProvider, isSkipValidation, getRegistrationStateType(targetState), new EventTypes(
-                            eventTypes));
+                    isAverageEditable, isAlumniProvider, isSkipValidation, getRegistrationStateType(targetState),
+                    new EventTypes(eventTypes));
             return "redirect:/program-conclusion-management";
         } catch (DomainException de) {
             model.addAttribute("error", de.getLocalizedMessage());

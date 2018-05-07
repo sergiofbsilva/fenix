@@ -143,32 +143,30 @@ public class InfoExecutionDegree extends InfoObject {
 
                 String degreeType = null;
                 if (messageResources != null) {
-                    degreeType =
-                            messageResources.getMessage(infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree()
-                                    .getDegreeType().toString());
+                    degreeType = messageResources.getMessage(
+                            infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getDegreeType().toString());
                 }
                 if (degreeType == null) {
                     degreeType = infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getDegreeType().toString();
                 }
 
-                result.add(new LabelValueBean(degreeType + "  "
-                        + infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getNome(), infoExecutionDegree
-                        .getExternalId().toString()));
+                result.add(new LabelValueBean(
+                        degreeType + "  " + infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getNome(),
+                        infoExecutionDegree.getExternalId().toString()));
             } else {
                 String degreeType = null;
                 if (messageResources != null) {
-                    degreeType =
-                            messageResources.getMessage(infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree()
-                                    .getDegreeType().toString());
+                    degreeType = messageResources.getMessage(
+                            infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getDegreeType().toString());
                 }
                 if (degreeType == null) {
                     degreeType = infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getDegreeType().toString();
                 }
 
-                result.add(new LabelValueBean(degreeType + "  "
-                        + infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getNome() + " - "
-                        + infoExecutionDegree.getInfoDegreeCurricularPlan().getName(), infoExecutionDegree.getExternalId()
-                        .toString()));
+                result.add(new LabelValueBean(
+                        degreeType + "  " + infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getNome() + " - "
+                                + infoExecutionDegree.getInfoDegreeCurricularPlan().getName(),
+                        infoExecutionDegree.getExternalId().toString()));
             }
         }
         return result;

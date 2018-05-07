@@ -19,8 +19,8 @@
 package org.fenixedu.academic.domain.student.curriculum;
 
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 import pt.ist.fenixframework.Atomic;
 

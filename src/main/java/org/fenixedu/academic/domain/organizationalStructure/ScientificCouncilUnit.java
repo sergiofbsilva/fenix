@@ -23,8 +23,8 @@ import java.util.Set;
 
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.person.RoleType;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.groups.Group;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.YearMonthDay;
 

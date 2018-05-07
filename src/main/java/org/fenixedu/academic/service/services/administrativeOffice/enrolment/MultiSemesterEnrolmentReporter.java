@@ -55,29 +55,30 @@ public class MultiSemesterEnrolmentReporter {
         if (semester.getSemester().intValue() == semesterToReport) {
             semester.getCurriculumLineLogsSet().stream()
 
-            .filter(l -> l instanceof EnrolmentLog)
+                    .filter(l -> l instanceof EnrolmentLog)
 
-            .filter(l -> !l.getDateDateTime().isBefore(enrolmentStartTime) && !l.getDateDateTime().isAfter(endTimeToReport))
+                    .filter(l -> !l.getDateDateTime().isBefore(enrolmentStartTime)
+                            && !l.getDateDateTime().isAfter(endTimeToReport))
 
-            .sorted((l1, l2) -> l1.getDateDateTime().compareTo(l2.getDateDateTime()))
+                    .sorted((l1, l2) -> l1.getDateDateTime().compareTo(l2.getDateDateTime()))
 
-            .forEach(l -> process(semester, enrolmentStartTime, l));
+                    .forEach(l -> process(semester, enrolmentStartTime, l));
 
             semester.getAssociatedExecutionCoursesSet().stream()
 
-            .flatMap(ec -> ec.getCourseLoadsSet().stream())
+                    .flatMap(ec -> ec.getCourseLoadsSet().stream())
 
-            .flatMap(cl -> cl.getShiftsSet().stream())
+                    .flatMap(cl -> cl.getShiftsSet().stream())
 
-            .flatMap(s -> s.getShiftEnrolmentsSet().stream())
+                    .flatMap(s -> s.getShiftEnrolmentsSet().stream())
 
-            .map(se -> se.getCreatedOn())
+                    .map(se -> se.getCreatedOn())
 
-            .filter(dt -> !dt.isBefore(enrolmentStartTime) && !dt.isAfter(endTimeToReport))
+                    .filter(dt -> !dt.isBefore(enrolmentStartTime) && !dt.isAfter(endTimeToReport))
 
-            .map(dt -> new Interval(enrolmentStartTime, dt).toDuration().getStandardSeconds())
+                    .map(dt -> new Interval(enrolmentStartTime, dt).toDuration().getStandardSeconds())
 
-            .forEach(seconds -> add(semester, seconds, new int[] { 0, 0, 1 }));
+                    .forEach(seconds -> add(semester, seconds, new int[] { 0, 0, 1 }));
         }
     }
 

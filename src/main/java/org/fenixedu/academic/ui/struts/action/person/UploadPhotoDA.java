@@ -46,9 +46,9 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.joda.time.DateTime;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import com.google.common.io.ByteStreams;
+
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 /**
  * Action to upload personal photographs.
@@ -57,7 +57,8 @@ import com.google.common.io.ByteStreams;
  */
 @Mapping(module = "person", path = "/uploadPhoto", functionality = VisualizePersonalInfo.class)
 @Forwards({ @Forward(name = "visualizePersonalInformation", path = "/person/visualizePersonalInfo.jsp"),
-        @Forward(name = "confirm", path = "/person/uploadPhoto.jsp"), @Forward(name = "upload", path = "/person/uploadPhoto.jsp") })
+        @Forward(name = "confirm", path = "/person/uploadPhoto.jsp"),
+        @Forward(name = "upload", path = "/person/uploadPhoto.jsp") })
 public class UploadPhotoDA extends FenixDispatchAction {
     private static final int MAX_RAW_SIZE = 1000000; // 2M
 

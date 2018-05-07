@@ -258,9 +258,8 @@ public class Lesson extends Lesson_Base {
                 if (newRoom == null) {
                     lessonInstance.setLessonInstanceSpaceOccupation(null);
                 } else {
-                    LessonInstanceSpaceOccupation allocation =
-                            (LessonInstanceSpaceOccupation) SpaceUtils.getFirstOccurrenceOfResourceAllocationByClass(newRoom,
-                                    this);
+                    LessonInstanceSpaceOccupation allocation = (LessonInstanceSpaceOccupation) SpaceUtils
+                            .getFirstOccurrenceOfResourceAllocationByClass(newRoom, this);
                     if (allocation == null) {
                         allocation = new LessonInstanceSpaceOccupation(newRoom);
                     }
@@ -501,9 +500,8 @@ public class Lesson extends Lesson_Base {
                     break;
 
                 } else {
-                    OccupationPeriod newNextPeriod =
-                            new OccupationPeriod(currentPeriod.getNextPeriod().getStartYearMonthDay(), currentPeriod
-                                    .getNextPeriod().getEndYearMonthDay());
+                    OccupationPeriod newNextPeriod = new OccupationPeriod(currentPeriod.getNextPeriod().getStartYearMonthDay(),
+                            currentPeriod.getNextPeriod().getEndYearMonthDay());
                     newPeriodPointer.setNextPeriod(newNextPeriod);
                     newPeriodPointer = newNextPeriod;
                     currentPeriod = currentPeriod.getNextPeriod();
@@ -538,8 +536,8 @@ public class Lesson extends Lesson_Base {
     }
 
     public BigDecimal getUnitHours() {
-        return BigDecimal.valueOf(getUnitMinutes())
-                .divide(BigDecimal.valueOf(NUMBER_OF_MINUTES_IN_HOUR), 2, RoundingMode.HALF_UP);
+        return BigDecimal.valueOf(getUnitMinutes()).divide(BigDecimal.valueOf(NUMBER_OF_MINUTES_IN_HOUR), 2,
+                RoundingMode.HALF_UP);
     }
 
     public String getInicioString() {
@@ -641,9 +639,8 @@ public class Lesson extends Lesson_Base {
     }
 
     private YearMonthDay getValidBeginDate(YearMonthDay startDate) {
-        YearMonthDay lessonBegin =
-                startDate.toDateTimeAtMidnight().withDayOfWeek(getDiaSemana().getDiaSemanaInDayOfWeekJodaFormat())
-                        .toYearMonthDay();
+        YearMonthDay lessonBegin = startDate.toDateTimeAtMidnight()
+                .withDayOfWeek(getDiaSemana().getDiaSemanaInDayOfWeekJodaFormat()).toYearMonthDay();
         if (lessonBegin.isBefore(startDate)) {
             lessonBegin = lessonBegin.plusDays(NUMBER_OF_DAYS_IN_WEEK);
         }
@@ -694,7 +691,8 @@ public class Lesson extends Lesson_Base {
             if (hasAnyLessonInstances()) {
                 nextPossibleDate = getFirstLessonInstance().getDay();
             } else {
-                SortedSet<YearMonthDay> validLessonDates = getAllValidLessonDatesWithoutInstancesDates(getLessonStartDay(), getLessonEndDay());
+                SortedSet<YearMonthDay> validLessonDates =
+                        getAllValidLessonDatesWithoutInstancesDates(getLessonStartDay(), getLessonEndDay());
                 nextPossibleDate = validLessonDates.size() > 0 ? validLessonDates.first() : null;
             }
             return isTimeValidToInsertSummary(now, nextPossibleDate) ? nextPossibleDate : null;
@@ -748,7 +746,8 @@ public class Lesson extends Lesson_Base {
             YearMonthDay endDateToSearch = getLessonEndDay();
             final HourMinuteSecond b = getBeginHourMinuteSecond();
             final HourMinuteSecond e = getEndHourMinuteSecond();
-            for (final YearMonthDay yearMonthDay : getAllValidLessonDatesWithoutInstancesDates(startDateToSearch, endDateToSearch)) {
+            for (final YearMonthDay yearMonthDay : getAllValidLessonDatesWithoutInstancesDates(startDateToSearch,
+                    endDateToSearch)) {
                 dates.add(new Interval(toDateTime(yearMonthDay, b), toDateTime(yearMonthDay, e)));
             }
         }
@@ -858,11 +857,11 @@ public class Lesson extends Lesson_Base {
         SortedSet<YearMonthDay> result = new TreeSet<YearMonthDay>();
         startDateToSearch = startDateToSearch != null ? getValidBeginDate(startDateToSearch) : null;
 
-        if (!wasFinished() && startDateToSearch != null && endDateToSearch != null && !startDateToSearch.isAfter(endDateToSearch)) {
+        if (!wasFinished() && startDateToSearch != null && endDateToSearch != null
+                && !startDateToSearch.isAfter(endDateToSearch)) {
             Space lessonCampus = getLessonCampus();
-            final int dayIncrement =
-                    getFrequency() == FrequencyType.BIWEEKLY ? FrequencyType.WEEKLY.getNumberOfDays() : getFrequency()
-                            .getNumberOfDays();
+            final int dayIncrement = getFrequency() == FrequencyType.BIWEEKLY ? FrequencyType.WEEKLY
+                    .getNumberOfDays() : getFrequency().getNumberOfDays();
             boolean shouldAdd = true;
             while (true) {
                 if (isDayValid(startDateToSearch, lessonCampus)) {
@@ -976,12 +975,10 @@ public class Lesson extends Lesson_Base {
         YearMonthDay intervalStartDate = interval.getStart().toYearMonthDay();
         YearMonthDay intervalEndDate = interval.getEnd().toYearMonthDay();
 
-        HourMinuteSecond intervalBegin =
-                new HourMinuteSecond(interval.getStart().getHourOfDay(), interval.getStart().getMinuteOfHour(), interval
-                        .getStart().getSecondOfMinute());
-        HourMinuteSecond intervalEnd =
-                new HourMinuteSecond(interval.getEnd().getHourOfDay(), interval.getEnd().getMinuteOfHour(), interval.getEnd()
-                        .getSecondOfMinute());
+        HourMinuteSecond intervalBegin = new HourMinuteSecond(interval.getStart().getHourOfDay(),
+                interval.getStart().getMinuteOfHour(), interval.getStart().getSecondOfMinute());
+        HourMinuteSecond intervalEnd = new HourMinuteSecond(interval.getEnd().getHourOfDay(), interval.getEnd().getMinuteOfHour(),
+                interval.getEnd().getSecondOfMinute());
 
         for (YearMonthDay day : allLessonDates) {
             if (intervalStartDate.isEqual(intervalEndDate)) {
@@ -990,8 +987,8 @@ public class Lesson extends Lesson_Base {
                     return true;
                 }
             } else {
-                if ((day.isAfter(intervalStartDate) && day.isBefore(intervalEndDate)) || day.isEqual(intervalStartDate)
-                        && !getEndHourMinuteSecond().isBefore(intervalBegin)
+                if ((day.isAfter(intervalStartDate) && day.isBefore(intervalEndDate))
+                        || day.isEqual(intervalStartDate) && !getEndHourMinuteSecond().isBefore(intervalBegin)
                         || (day.isEqual(intervalEndDate) && !getBeginHourMinuteSecond().isAfter(intervalEnd))) {
                     return true;
                 }
@@ -1112,10 +1109,9 @@ public class Lesson extends Lesson_Base {
         }
 
         for (YearMonthDay aDay : getAllLessonDates()) {
-            DateTime beginDate =
-                    new DateTime(aDay.getYear(), aDay.getMonthOfYear(), aDay.getDayOfMonth(), getBeginHourMinuteSecond()
-                            .getHour(), getBeginHourMinuteSecond().getMinuteOfHour(), getBeginHourMinuteSecond()
-                            .getSecondOfMinute(), 0);
+            DateTime beginDate = new DateTime(aDay.getYear(), aDay.getMonthOfYear(), aDay.getDayOfMonth(),
+                    getBeginHourMinuteSecond().getHour(), getBeginHourMinuteSecond().getMinuteOfHour(),
+                    getBeginHourMinuteSecond().getSecondOfMinute(), 0);
 
             LessonInstance lessonInstance = hashmap.get(beginDate);
             EventBean bean;
@@ -1140,17 +1136,15 @@ public class Lesson extends Lesson_Base {
                     summary = matcher.replaceAll(" ");
                 }
 
-                bean =
-                        new ClassEventBean(lessonInstance.getBeginDateTime(), lessonInstance.getEndDateTime(), false, location,
-                                url + "/sumarios", summary, getShift());
+                bean = new ClassEventBean(lessonInstance.getBeginDateTime(), lessonInstance.getEndDateTime(), false, location,
+                        url + "/sumarios", summary, getShift());
             } else {
                 if (getLessonSpaceOccupation() != null) {
                     location.add(getLessonSpaceOccupation().getRoom());
                 }
-                DateTime endDate =
-                        new DateTime(aDay.getYear(), aDay.getMonthOfYear(), aDay.getDayOfMonth(), getEndHourMinuteSecond()
-                                .getHour(), getEndHourMinuteSecond().getMinuteOfHour(), getEndHourMinuteSecond()
-                                .getSecondOfMinute(), 0);
+                DateTime endDate = new DateTime(aDay.getYear(), aDay.getMonthOfYear(), aDay.getDayOfMonth(),
+                        getEndHourMinuteSecond().getHour(), getEndHourMinuteSecond().getMinuteOfHour(),
+                        getEndHourMinuteSecond().getSecondOfMinute(), 0);
 
                 bean = new ClassEventBean(beginDate, endDate, false, location, url, null, getShift());
             }
@@ -1197,8 +1191,8 @@ public class Lesson extends Lesson_Base {
     }
 
     private static DateTime toDateTime(final YearMonthDay ymd, final HourMinuteSecond hms) {
-        return new DateTime(ymd.getYear(), ymd.getMonthOfYear(), ymd.getDayOfMonth(),
-                hms.getHour(), hms.getMinuteOfHour(), hms.getSecondOfMinute(), 0);
+        return new DateTime(ymd.getYear(), ymd.getMonthOfYear(), ymd.getDayOfMonth(), hms.getHour(), hms.getMinuteOfHour(),
+                hms.getSecondOfMinute(), 0);
     }
 
     public Set<Interval> getAllLessonIntervals() {
@@ -1210,7 +1204,8 @@ public class Lesson extends Lesson_Base {
             YearMonthDay startDateToSearch = getLessonStartDay();
             YearMonthDay endDateToSearch = getLessonEndDay();
             for (YearMonthDay day : getAllValidLessonDatesWithoutInstancesDates(startDateToSearch, endDateToSearch)) {
-                intervals.add(new Interval(toDateTime(day,  getBeginHourMinuteSecond()), toDateTime(day, getEndHourMinuteSecond())));
+                intervals.add(
+                        new Interval(toDateTime(day, getBeginHourMinuteSecond()), toDateTime(day, getEndHourMinuteSecond())));
             }
         }
         return intervals;

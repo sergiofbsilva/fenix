@@ -34,8 +34,8 @@ public class DistrictSubdivision extends DistrictSubdivision_Base {
         @Override
         public int compare(DistrictSubdivision leftDistrictSubdivision, DistrictSubdivision rightDistrictSubdivision) {
             int comparationResult = leftDistrictSubdivision.getName().compareTo(rightDistrictSubdivision.getName());
-            return (comparationResult == 0) ? leftDistrictSubdivision.getExternalId().compareTo(
-                    rightDistrictSubdivision.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftDistrictSubdivision.getExternalId()
+                    .compareTo(rightDistrictSubdivision.getExternalId()) : comparationResult;
         }
     };
 

@@ -98,15 +98,15 @@ public class AlumniReportFile extends AlumniReportFile_Base {
 
     @Override
     public String getFilename() {
-        return getFullReport() ? BundleUtil.getString(Bundle.GEP, "alumni.full.reports.name", getRequestDate().toString()) : BundleUtil
-                .getString(Bundle.GEP, "alumni.partial.reports.name", getRequestDate().toString());
+        return getFullReport() ? BundleUtil.getString(Bundle.GEP, "alumni.full.reports.name", getRequestDate()
+                .toString()) : BundleUtil.getString(Bundle.GEP, "alumni.partial.reports.name", getRequestDate().toString());
     }
 
     private List<Spreadsheet> buildReport() {
 
         final Spreadsheet curriculumData = new Spreadsheet("ALUMNI_CURRICULUM_DATA");
-        curriculumData.setHeaders(new String[] { "NOME", "NUMERO_ALUNO", "CURSO", "INICIO", "CONCLUSAO", "DESCRICAO",
-                "EMPREGADO ACTUALMENTE" });
+        curriculumData.setHeaders(
+                new String[] { "NOME", "NUMERO_ALUNO", "CURSO", "INICIO", "CONCLUSAO", "DESCRICAO", "EMPREGADO ACTUALMENTE" });
 
         final Spreadsheet personalData = new Spreadsheet("ALUMNI_PERSONAL_DATA");
         personalData.setHeaders(new String[] { "NOME", "NUMERO_ALUNO", "DATA_NASCIMENTO", "MORADA", "COD_POSTAL", "LOCALIDADE",
@@ -138,8 +138,8 @@ public class AlumniReportFile extends AlumniReportFile_Base {
                 continue;
             }
 
-            if (!getFullReport()
-                    && (person.getStudent().getAlumni() == null || person.getStudent().getAlumni().getUrlRequestToken() == null)) {
+            if (!getFullReport() && (person.getStudent().getAlumni() == null
+                    || person.getStudent().getAlumni().getUrlRequestToken() == null)) {
                 continue;
             }
 
@@ -186,13 +186,14 @@ public class AlumniReportFile extends AlumniReportFile_Base {
                     row.setCell(registration.getStartDate().toString(DATE_FORMAT));
                     final CycleCurriculumGroup lastConcludedCycle = concludeCycles.last();
                     try {
-                        row.setCell(lastConcludedCycle.isConclusionProcessed() ? lastConcludedCycle.getConclusionDate().toString(
-                                DATE_FORMAT) : lastConcludedCycle.calculateConclusionDate().toString(DATE_FORMAT));
+                        row.setCell(lastConcludedCycle.isConclusionProcessed() ? lastConcludedCycle.getConclusionDate()
+                                .toString(DATE_FORMAT) : lastConcludedCycle.calculateConclusionDate().toString(DATE_FORMAT));
                     } catch (Exception ex) {
                         row.setCell(NOT_AVAILABLE);
                     }
                     row.setCell("Bolonha");
-                    row.setCell(alumni != null && alumni.getIsEmployed() != null ? getApp("label." + alumni.getIsEmployed()) : NOT_AVAILABLE);
+                    row.setCell(alumni != null
+                            && alumni.getIsEmployed() != null ? getApp("label." + alumni.getIsEmployed()) : NOT_AVAILABLE);
                 }
             } else {
                 if (registration.isRegistrationConclusionProcessed()) {
@@ -201,9 +202,11 @@ public class AlumniReportFile extends AlumniReportFile_Base {
                     row.setCell(studentNumber);
                     row.setCell(registration.getDegreeName());
                     row.setCell(registration.getStartDate().toString(DATE_FORMAT));
-                    row.setCell(registration.getConclusionDate() != null ? registration.getConclusionDate().toString(DATE_FORMAT) : NOT_AVAILABLE);
+                    row.setCell(registration.getConclusionDate() != null ? registration.getConclusionDate()
+                            .toString(DATE_FORMAT) : NOT_AVAILABLE);
                     row.setCell("Pre-Bolonha");
-                    row.setCell(alumni != null && alumni.getIsEmployed() != null ? getApp("label." + alumni.getIsEmployed()) : NOT_AVAILABLE);
+                    row.setCell(alumni != null
+                            && alumni.getIsEmployed() != null ? getApp("label." + alumni.getIsEmployed()) : NOT_AVAILABLE);
                 }
             }
         }
@@ -248,9 +251,7 @@ public class AlumniReportFile extends AlumniReportFile_Base {
     }
 
     public EmailAddress getPersonalEmail(final Person person) {
-        return person.getEmailAddressStream()
-                .filter(e -> e.isPersonalType())
-                .findAny().orElse(null);
+        return person.getEmailAddressStream().filter(e -> e.isPersonalType()).findAny().orElse(null);
     }
 
     public Boolean hasPersonalEmail(final Person person) {
@@ -309,12 +310,14 @@ public class AlumniReportFile extends AlumniReportFile_Base {
         row.setCell(job.getBeginDate() != null ? job.getBeginDate().toString(DATE_FORMAT) : NOT_AVAILABLE);
         row.setCell(job.getEndDate() != null ? job.getEndDate().toString(DATE_FORMAT) : NOT_AVAILABLE);
         row.setCell(job.getContractType() != null ? getEnum(job.getContractType().getQualifiedName()) : NOT_AVAILABLE);
-        row.setCell(job.getJobApplicationType() != null ? getEnum(job.getJobApplicationType().getQualifiedName()) : NOT_AVAILABLE);
+        row.setCell(
+                job.getJobApplicationType() != null ? getEnum(job.getJobApplicationType().getQualifiedName()) : NOT_AVAILABLE);
         row.setCell(job.getSalary() != null ? job.getSalary().toString() : NOT_AVAILABLE);
         row.setCell(job.getSalaryType() != null ? getEnum(job.getSalaryType().getQualifiedName()) : NOT_AVAILABLE);
         row.setCell(job.getLastModifiedDate() != null ? job.getLastModifiedDate().toString(DATE_FORMAT) : NOT_AVAILABLE);
         AlumniIdentityCheckRequest lastIdentityRequest = job.getPerson().getStudent().getAlumni().getLastIdentityRequest();
-        row.setCell(lastIdentityRequest != null ? lastIdentityRequest.getCreationDateTime().toString(DATE_FORMAT) : NOT_AVAILABLE);
+        row.setCell(
+                lastIdentityRequest != null ? lastIdentityRequest.getCreationDateTime().toString(DATE_FORMAT) : NOT_AVAILABLE);
     }
 
     private void addFormationDataRow(Spreadsheet sheet, String alumniName, Integer studentNumber, Formation formation) {
@@ -327,19 +330,22 @@ public class AlumniReportFile extends AlumniReportFile_Base {
         row.setCell(formation.getExternalId());
         row.setCell(alumniName);
         row.setCell(studentNumber);
-        row.setCell(formation.getFormationType() != null ? getEnum(formation.getFormationType().getQualifiedName()) : NOT_AVAILABLE);
+        row.setCell(
+                formation.getFormationType() != null ? getEnum(formation.getFormationType().getQualifiedName()) : NOT_AVAILABLE);
         row.setCell(formation.getType() != null ? getEnum(formation.getType().getQualifiedName()) : NOT_AVAILABLE);
         row.setCell(formation.getInstitution() != null ? formation.getInstitution().getUnitName().getName() : NOT_AVAILABLE);
         row.setCell(formation.getEducationArea() != null ? formation.getEducationArea().getCode() : NOT_AVAILABLE);
-        row.setCell(formation.getEducationArea() != null ? formation.getEducationArea().getDescription().replace(';', '|') : NOT_AVAILABLE);
+        row.setCell(formation.getEducationArea() != null ? formation.getEducationArea().getDescription().replace(';',
+                '|') : NOT_AVAILABLE);
         row.setCell(formation.getBeginYear());
         row.setCell(formation.getYear());
         row.setCell(formation.getEctsCredits() != null ? formation.getEctsCredits().toString() : NOT_AVAILABLE);
         row.setCell(formation.getFormationHours() != null ? formation.getFormationHours().toString() : NOT_AVAILABLE);
-        row.setCell(formation.getLastModificationDateDateTime() != null ? formation.getLastModificationDateDateTime().toString(
-                DATE_FORMAT) : NOT_AVAILABLE);
+        row.setCell(formation.getLastModificationDateDateTime() != null ? formation.getLastModificationDateDateTime()
+                .toString(DATE_FORMAT) : NOT_AVAILABLE);
         AlumniIdentityCheckRequest lastIdentityRequest = formation.getPerson().getStudent().getAlumni().getLastIdentityRequest();
-        row.setCell(lastIdentityRequest != null ? lastIdentityRequest.getCreationDateTime().toString(DATE_FORMAT) : NOT_AVAILABLE);
+        row.setCell(
+                lastIdentityRequest != null ? lastIdentityRequest.getCreationDateTime().toString(DATE_FORMAT) : NOT_AVAILABLE);
     }
 
     public static AlumniReportFile launchJob(boolean fullReport, boolean onlyRegisteredAlumni) {
@@ -361,8 +367,8 @@ public class AlumniReportFile extends AlumniReportFile_Base {
     }
 
     public static List<AlumniReportFile> readUndoneJobs() {
-        return new ArrayList(CollectionUtils.subtract(ExecutionYear.readCurrentExecutionYear().getAlumniReportFilesSet(),
-                readDoneJobs()));
+        return new ArrayList(
+                CollectionUtils.subtract(ExecutionYear.readCurrentExecutionYear().getAlumniReportFilesSet(), readDoneJobs()));
     }
 
     public static List<AlumniReportFile> readPendingJobs() {

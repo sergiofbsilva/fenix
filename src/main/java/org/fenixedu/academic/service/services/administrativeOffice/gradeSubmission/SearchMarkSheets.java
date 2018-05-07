@@ -73,8 +73,8 @@ public class SearchMarkSheets {
         return result;
     }
 
-    private static int getNumberOfStudentsNotEnrolled(MarkSheetManagementSearchBean searchBean,
-            CurricularCourse curricularCourse, Entry<EvaluationSeason, MarkSheetSearchResultBean> entry) {
+    private static int getNumberOfStudentsNotEnrolled(MarkSheetManagementSearchBean searchBean, CurricularCourse curricularCourse,
+            Entry<EvaluationSeason, MarkSheetSearchResultBean> entry) {
         int studentsNotEnrolled =
                 curricularCourse.getEnrolmentsNotInAnyMarkSheet(entry.getKey(), searchBean.getExecutionPeriod()).size();
         return studentsNotEnrolled;

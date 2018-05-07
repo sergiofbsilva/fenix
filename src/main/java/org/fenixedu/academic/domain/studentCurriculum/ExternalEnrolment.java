@@ -39,6 +39,7 @@ import org.fenixedu.academic.domain.degreeStructure.RegimeType;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.thesis.Thesis;
 import org.fenixedu.academic.predicate.AccessControl;
@@ -63,8 +64,8 @@ public class ExternalEnrolment extends ExternalEnrolment_Base implements IEnrolm
                 @Override
                 public int compare(ExternalEnrolment o1, ExternalEnrolment o2) {
                     final ComparatorChain comparatorChain = new ComparatorChain();
-                    comparatorChain.addComparator(ExternalEnrolment.COMPARATOR_BY_EXECUTION_PERIOD_AND_ID);
-                    comparatorChain.addComparator(ExternalEnrolment.COMPARATOR_BY_APPROVEMENT_DATE);
+                    comparatorChain.addComparator(ICurriculumEntry.COMPARATOR_BY_EXECUTION_PERIOD_AND_ID);
+                    comparatorChain.addComparator(IEnrolment.COMPARATOR_BY_APPROVEMENT_DATE);
 
                     return comparatorChain.compare(o1, o2);
                 }
@@ -211,7 +212,8 @@ public class ExternalEnrolment extends ExternalEnrolment_Base implements IEnrolm
 
     @Override
     final public YearMonthDay getApprovementDate() {
-        return getEvaluationDate() == null && hasExecutionPeriod() ? getExecutionPeriod().getEndDateYearMonthDay() : getEvaluationDate();
+        return getEvaluationDate() == null && hasExecutionPeriod() ? getExecutionPeriod()
+                .getEndDateYearMonthDay() : getEvaluationDate();
     }
 
     @Override
@@ -239,11 +241,13 @@ public class ExternalEnrolment extends ExternalEnrolment_Base implements IEnrolm
     private Grade calculateNormalizedEctsGrade(final StudentCurricularPlan scp, final DateTime processingDate) {
         final Grade grade = getGrade();
         final EctsConversionTable table = getEctsConversionTable();
-        final EctsConversionTable tableForCalculation = table == null ? calculateEctsConversionTable(scp, processingDate, grade) : table;
+        final EctsConversionTable tableForCalculation =
+                table == null ? calculateEctsConversionTable(scp, processingDate, grade) : table;
         return tableForCalculation.convert(grade);
     }
 
-    private EctsConversionTable calculateEctsConversionTable(final StudentCurricularPlan scp, final DateTime processingDate, final Grade grade) {
+    private EctsConversionTable calculateEctsConversionTable(final StudentCurricularPlan scp, final DateTime processingDate,
+            final Grade grade) {
         Set<Dismissal> dismissals = new HashSet<Dismissal>();
         for (EnrolmentWrapper wrapper : getEnrolmentWrappersSet()) {
             if (wrapper.getCredits().getStudentCurricularPlan().equals(scp)) {

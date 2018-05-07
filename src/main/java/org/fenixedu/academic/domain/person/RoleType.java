@@ -60,7 +60,7 @@ public enum RoleType implements IPresentableEnum {
 
     /**
      * @deprecated Use {@link org.fenixedu.academic.domain.accessControl.AcademicAuthorizationGroup#get()} with
-     *      {@link org.fenixedu.academic.domain.accessControl.academicAdministration.AcademicOperationType#MANAGE_DEGREE_CURRICULAR_PLANS }instead
+     *             {@link org.fenixedu.academic.domain.accessControl.academicAdministration.AcademicOperationType#MANAGE_DEGREE_CURRICULAR_PLANS }instead
      */
     DEGREE_ADMINISTRATIVE_OFFICE_SUPER_USER("#degreeAdmOfficeSudo"),
 

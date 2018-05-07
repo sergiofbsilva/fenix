@@ -97,12 +97,10 @@ public class RegistrationCertificate extends AdministrativeOfficeDocument {
         String stringTemplate =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.firstParagraph");
 
-        addParameter(
-                "firstParagraph",
-                "     "
-                        + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
-                                adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
-                                universityName.toUpperCase(getLocale())));
+        addParameter("firstParagraph",
+                "     " + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
+                        adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
+                        universityName.toUpperCase(getLocale())));
 
         addParameter("certificate", BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
                 "label.academicDocument.standaloneEnrolmentCertificate.secondParagraph"));
@@ -123,9 +121,8 @@ public class RegistrationCertificate extends AdministrativeOfficeDocument {
 
     protected void fillSeventhParagraph(Registration registration, String studentRegistered) {
 
-        String situation =
-                BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                        getExecutionYear().containsDate(new DateTime()) ? "label.is" : "label.was");
+        String situation = BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                getExecutionYear().containsDate(new DateTime()) ? "label.is" : "label.was");
 
         String stringTemplate =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.seventhParagraph");

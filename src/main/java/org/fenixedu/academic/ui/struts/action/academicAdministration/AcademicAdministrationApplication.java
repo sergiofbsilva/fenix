@@ -78,11 +78,7 @@ public class AcademicAdministrationApplication extends ForwardAction {
     public static class AcademicAdminDocumentsApp {
     }
 
-    @StrutsApplication(
-            bundle = BUNDLE,
-            path = "candidacies",
-            titleKey = "label.candidacy.count",
-            hint = HINT,
+    @StrutsApplication(bundle = BUNDLE, path = "candidacies", titleKey = "label.candidacy.count", hint = HINT,
             accessGroup = "((academic(MANAGE_CANDIDACY_PROCESSES) | academic(MANAGE_INDIVIDUAL_CANDIDACIES)) | academic(MANAGE_MOBILITY_OUTBOUND))")
     public static class AcademicAdminCandidaciesApp {
     }
@@ -92,11 +88,7 @@ public class AcademicAdministrationApplication extends ForwardAction {
     public static class AcademicAdminPhdApp {
     }
 
-    @StrutsApplication(
-            bundle = "ManagerResources",
-            path = "executions",
-            titleKey = "title.executions",
-            hint = HINT,
+    @StrutsApplication(bundle = "ManagerResources", path = "executions", titleKey = "title.executions", hint = HINT,
             accessGroup = "(academic(VIEW_SCHEDULING_OVERSIGHT) | (academic(MANAGE_ENROLMENT_PERIODS) | academic(MANAGE_EXECUTION_COURSES)))")
     public static class AcademicAdminExecutionsApp {
     }
@@ -121,11 +113,7 @@ public class AcademicAdministrationApplication extends ForwardAction {
     public static class AcademicAdminEquivalencesApp {
     }
 
-    @StrutsApplication(
-            bundle = BUNDLE,
-            path = "payments",
-            hint = HINT,
-            titleKey = "label.payments.management",
+    @StrutsApplication(bundle = BUNDLE, path = "payments", hint = HINT, titleKey = "label.payments.management",
             accessGroup = "(academic(CREATE_SIBS_PAYMENTS_REPORT) | (academic(MANAGE_EVENT_REPORTS) | academic(MANAGE_STUDENT_PAYMENTS_ADV)))")
     public static class AcademicAdminPaymentsApp {
     }

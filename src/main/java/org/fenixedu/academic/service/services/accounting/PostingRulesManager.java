@@ -110,8 +110,8 @@ public class PostingRulesManager {
     @Atomic
     static public void createDFAGratuityPostingRule(final CreateDFAGratuityPostingRuleBean bean) {
         if (bean.getRule() == DFAGratuityByAmountPerEctsPR.class) {
-            new DFAGratuityByAmountPerEctsPR(bean.getStartDate(), null, bean.getServiceAgreementTemplate(),
-                    bean.getTotalAmount(), bean.getPartialAcceptedPercentage(), bean.getAmountPerEctsCredit());
+            new DFAGratuityByAmountPerEctsPR(bean.getStartDate(), null, bean.getServiceAgreementTemplate(), bean.getTotalAmount(),
+                    bean.getPartialAcceptedPercentage(), bean.getAmountPerEctsCredit());
         } else if (bean.getRule() == DFAGratuityByNumberOfEnrolmentsPR.class) {
             new DFAGratuityByNumberOfEnrolmentsPR(bean.getStartDate(), null, bean.getServiceAgreementTemplate(),
                     bean.getTotalAmount(), bean.getPartialAcceptedPercentage());
@@ -121,7 +121,8 @@ public class PostingRulesManager {
     }
 
     @Atomic
-    static public void createSpecializationDegreeGratuityPostingRule(final CreateSpecializationDegreeGratuityPostingRuleBean bean) {
+    static public void createSpecializationDegreeGratuityPostingRule(
+            final CreateSpecializationDegreeGratuityPostingRuleBean bean) {
         if (bean.getRule() == SpecializationDegreeGratuityByAmountPerEctsPR.class) {
             new SpecializationDegreeGratuityByAmountPerEctsPR(bean.getStartDate(), null, bean.getServiceAgreementTemplate(),
                     bean.getTotalAmount(), bean.getPartialAcceptedPercentage(), bean.getAmountPerEctsCredit());
@@ -184,7 +185,8 @@ public class PostingRulesManager {
             new StandaloneEnrolmentGratuityPR(startLocalDate.toDateTimeAtStartOfDay(), null, dcpSAT, ectsForYear, gratuityFactor,
                     ectsFactor);
         } else {
-            throw new DomainException("StandaloneEnrolmentGratuityPR.DegreeCurricularPlanServiceAgreementTemplate.cannot.be.null");
+            throw new DomainException(
+                    "StandaloneEnrolmentGratuityPR.DegreeCurricularPlanServiceAgreementTemplate.cannot.be.null");
         }
     }
 }

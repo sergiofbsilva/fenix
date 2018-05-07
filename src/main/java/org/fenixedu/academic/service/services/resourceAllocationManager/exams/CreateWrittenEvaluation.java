@@ -58,14 +58,12 @@ public class CreateWrittenEvaluation {
         // arguments
         WrittenEvaluation eval = null;
         if (examSeason != null) {
-            eval =
-                    new Exam(writtenEvaluationDate, writtenEvaluationStartTime, writtenEvaluationEndTime,
-                            executionCoursesToAssociate, degreeModuleScopesToAssociate, roomsToAssociate, gradeScale, examSeason);
+            eval = new Exam(writtenEvaluationDate, writtenEvaluationStartTime, writtenEvaluationEndTime,
+                    executionCoursesToAssociate, degreeModuleScopesToAssociate, roomsToAssociate, gradeScale, examSeason);
         } else if (writtenTestDescription != null) {
-            eval =
-                    new WrittenTest(writtenEvaluationDate, writtenEvaluationStartTime, writtenEvaluationEndTime,
-                            executionCoursesToAssociate, degreeModuleScopesToAssociate, roomsToAssociate, gradeScale,
-                            writtenTestDescription);
+            eval = new WrittenTest(writtenEvaluationDate, writtenEvaluationStartTime, writtenEvaluationEndTime,
+                    executionCoursesToAssociate, degreeModuleScopesToAssociate, roomsToAssociate, gradeScale,
+                    writtenTestDescription);
         } else {
             throw new InvalidArgumentsServiceException();
         }

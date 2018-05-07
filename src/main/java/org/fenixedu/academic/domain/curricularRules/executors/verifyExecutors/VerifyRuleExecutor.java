@@ -86,8 +86,8 @@ abstract public class VerifyRuleExecutor {
 
     protected boolean hasEnrolmentWithEnroledState(final EnrolmentContext enrolmentContext,
             final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
-        return enrolmentContext.getStudentCurricularPlan().getRoot()
-                .hasEnrolmentWithEnroledState(curricularCourse, executionSemester);
+        return enrolmentContext.getStudentCurricularPlan().getRoot().hasEnrolmentWithEnroledState(curricularCourse,
+                executionSemester);
     }
 
     protected RuleResult verifyDegreeConclusionWithRules(ICurricularRule curricularRule, EnrolmentContext enrolmentContext,

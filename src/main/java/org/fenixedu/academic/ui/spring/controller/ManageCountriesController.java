@@ -19,6 +19,8 @@
 
 package org.fenixedu.academic.ui.spring.controller;
 
+import java.util.Locale;
+
 import org.fenixedu.academic.domain.Country;
 import org.fenixedu.academic.ui.spring.controller.manager.CountryService;
 import org.fenixedu.bennu.spring.portal.SpringApplication;
@@ -32,8 +34,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Locale;
 
 @SpringApplication(path = "countries", hint = "Manager", group = "#managers", title = "title.manage.countries")
 @SpringFunctionality(app = ManageCountriesController.class, title = "title.manage.countries")
@@ -61,8 +61,7 @@ public class ManageCountriesController {
     @RequestMapping(value = "/{country}/edit", method = RequestMethod.POST)
     public String edit(Locale loc, @PathVariable Country country,
             @RequestParam(value = "localizedName") LocalizedString localizedName,
-            @RequestParam(value = "countryNationality") LocalizedString countryNationality,
-            RedirectAttributes attributes) {
+            @RequestParam(value = "countryNationality") LocalizedString countryNationality, RedirectAttributes attributes) {
         countryService.editCountry(country, localizedName, countryNationality);
         attributes.addFlashAttribute("success", messageService.getMessage("label.country.saved", null, loc));
         return "redirect:/country-management/" + country.getExternalId() + "/edit";

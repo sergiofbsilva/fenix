@@ -40,11 +40,11 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
 
     static final public List<RegistrationStateType> ALLOWED_TYPES = Arrays.asList(
 
-    RegistrationStateType.FLUNKED,
+            RegistrationStateType.FLUNKED,
 
-    RegistrationStateType.INTERRUPTED,
+            RegistrationStateType.INTERRUPTED,
 
-    RegistrationStateType.EXTERNAL_ABANDON);
+            RegistrationStateType.EXTERNAL_ABANDON);
 
     protected StudentReingressionRequest() {
         super();
@@ -163,7 +163,8 @@ public class StudentReingressionRequest extends StudentReingressionRequest_Base 
                             academicServiceRequestBean.getFinalSituationDate(), RegistrationStateType.REGISTERED);
 
             if (getRegistration().getActiveState() != state) {
-                throw new DomainException("StudentReingressionRequest.reingression.must.be.active.state.after.request.conclusion");
+                throw new DomainException(
+                        "StudentReingressionRequest.reingression.must.be.active.state.after.request.conclusion");
             }
         }
     }

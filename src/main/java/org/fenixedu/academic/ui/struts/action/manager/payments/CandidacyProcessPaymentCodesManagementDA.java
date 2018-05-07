@@ -49,39 +49,32 @@ public class CandidacyProcessPaymentCodesManagementDA extends FenixDispatchActio
     public ActionForward index(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
             final HttpServletResponse response) {
 
-        Integer over23Size =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(PaymentCodeType.OVER_23_INDIVIDUAL_CANDIDACY_PROCESS,
-                        new YearMonthDay()).size();
+        Integer over23Size = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodes(PaymentCodeType.OVER_23_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
 
-        Integer externalDegreeCandidacyForGraduatedPersonSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.EXTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS, new YearMonthDay())
-                        .size();
-        Integer internalDegreeCandidacyForGraduatedPersonSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.INTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS, new YearMonthDay())
-                        .size();
+        Integer externalDegreeCandidacyForGraduatedPersonSize = IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
+                PaymentCodeType.EXTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS, new YearMonthDay()).size();
+        Integer internalDegreeCandidacyForGraduatedPersonSize = IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
+                PaymentCodeType.INTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS, new YearMonthDay()).size();
 
-        Integer externalDegreeChangeSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.EXTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
-        Integer internalDegreeChangeSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.INTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
+        Integer externalDegreeChangeSize = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodes(PaymentCodeType.EXTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay())
+                .size();
+        Integer internalDegreeChangeSize = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodes(PaymentCodeType.INTERNAL_DEGREE_CHANGE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay())
+                .size();
 
-        Integer externalDegreeTransferSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.EXTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
-        Integer internalDegreeTransferSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.INTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
+        Integer externalDegreeTransferSize = IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
+                PaymentCodeType.EXTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
+        Integer internalDegreeTransferSize = IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
+                PaymentCodeType.INTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
 
-        Integer secondCycleSize =
-                IndividualCandidacyPaymentCode.getAvailablePaymentCodes(
-                        PaymentCodeType.SECOND_CYCLE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
+        Integer secondCycleSize = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodes(PaymentCodeType.SECOND_CYCLE_INDIVIDUAL_CANDIDACY_PROCESS, new YearMonthDay()).size();
 
-        Integer phdSize = IndividualCandidacyPaymentCode.getAvailablePaymentCodes(PaymentCodeType.PHD_PROGRAM_CANDIDACY_PROCESS, new YearMonthDay()).size();
-        
+        Integer phdSize = IndividualCandidacyPaymentCode
+                .getAvailablePaymentCodes(PaymentCodeType.PHD_PROGRAM_CANDIDACY_PROCESS, new YearMonthDay()).size();
+
         request.setAttribute("over23Size", over23Size);
         request.setAttribute("externalDegreeCandidacyForGraduatedPersonSize", externalDegreeCandidacyForGraduatedPersonSize);
         request.setAttribute("internalDegreeCandidacyForGraduatedPersonSize", internalDegreeCandidacyForGraduatedPersonSize);

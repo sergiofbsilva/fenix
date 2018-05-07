@@ -40,14 +40,13 @@ public class IMDCandidacy extends IMDCandidacy_Base {
         init(person, executionDegree);
     }
 
-    public IMDCandidacy(final Person person, final ExecutionDegree executionDegree, final Person creator,
-            final Double entryGrade, final String contigent, final IngressionType ingressionType, EntryPhase entryPhase) {
+    public IMDCandidacy(final Person person, final ExecutionDegree executionDegree, final Person creator, final Double entryGrade,
+            final String contigent, final IngressionType ingressionType, EntryPhase entryPhase) {
         this(person, executionDegree, creator, entryGrade, contigent, ingressionType, entryPhase, null);
     }
 
-    public IMDCandidacy(final Person person, final ExecutionDegree executionDegree, final Person creator,
-            final Double entryGrade, final String contigent, final IngressionType ingressionType, EntryPhase entryPhase,
-            Integer placingOption) {
+    public IMDCandidacy(final Person person, final ExecutionDegree executionDegree, final Person creator, final Double entryGrade,
+            final String contigent, final IngressionType ingressionType, EntryPhase entryPhase, Integer placingOption) {
         super();
         init(person, executionDegree, creator, entryGrade, contigent, ingressionType, entryPhase, placingOption);
     }

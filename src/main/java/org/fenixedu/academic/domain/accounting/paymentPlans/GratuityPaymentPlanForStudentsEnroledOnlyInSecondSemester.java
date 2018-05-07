@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRule;
 import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRuleFactory;
 import org.fenixedu.academic.domain.accounting.serviceAgreementTemplates.DegreeCurricularPlanServiceAgreementTemplate;
 
-public class GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester extends
-        GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester_Base {
+public class GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester
+        extends GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester_Base {
 
     protected GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester() {
         super();

@@ -95,10 +95,12 @@ public class RequestListByDegreeDA extends FenixDispatchAction {
 
     private DegreeByExecutionYearBean getOrCreateDegreeSearchBean() {
         DegreeByExecutionYearBean bean = getRenderedObject("degreeByExecutionYearBean");
-        return (bean != null) ? bean : new DegreeByExecutionYearBean(AcademicAccessRule.getDegreeTypesAccessibleToFunction(
-                AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser()).collect(Collectors.toSet()), AcademicAccessRule
-                .getDegreesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser()).collect(
-                        Collectors.toSet()));
+        return (bean != null) ? bean : new DegreeByExecutionYearBean(
+                AcademicAccessRule
+                        .getDegreeTypesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
+                        .collect(Collectors.toSet()),
+                AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
+                        .collect(Collectors.toSet()));
     }
 
     private DocumentRequestSearchBean getOrCreateRequestSearchBean() {
@@ -124,9 +126,8 @@ public class RequestListByDegreeDA extends FenixDispatchAction {
     private Set<RegistrationAcademicServiceRequest> search(DegreeByExecutionYearBean degreeSearchBean,
             DocumentRequestSearchBean requestSearchBean) {
         final ExecutionYear chosenExecutionYear = degreeSearchBean.getExecutionYear();
-        Set<RegistrationAcademicServiceRequest> resultList =
-                new TreeSet<RegistrationAcademicServiceRequest>(
-                        RegistrationAcademicServiceRequest.COMPARATOR_BY_SERVICE_REQUEST_NUMBER_AND_ID);
+        Set<RegistrationAcademicServiceRequest> resultList = new TreeSet<RegistrationAcademicServiceRequest>(
+                RegistrationAcademicServiceRequest.COMPARATOR_BY_SERVICE_REQUEST_NUMBER_AND_ID);
 
         ArrayList<AcademicServiceRequest> requestList = new ArrayList<AcademicServiceRequest>();
         requestList.addAll(AcademicServiceRequestYear.getAcademicServiceRequests(chosenExecutionYear.getBeginCivilYear()));
@@ -139,12 +140,11 @@ public class RequestListByDegreeDA extends FenixDispatchAction {
             final DocumentRequestSearchBean requestSearchBean, Set<RegistrationAcademicServiceRequest> resultList,
             final ArrayList<AcademicServiceRequest> requestList) {
         Set<AcademicProgram> accessiblePrograms =
-                AcademicAccessRule
-                        .getProgramsAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser()).collect(
-                                Collectors.toSet());
-        Set<DegreeType> accessibleDegreeTypes =
-                AcademicAccessRule.getDegreeTypesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS,
-                        Authenticate.getUser()).collect(Collectors.toSet());
+                AcademicAccessRule.getProgramsAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
+                        .collect(Collectors.toSet());
+        Set<DegreeType> accessibleDegreeTypes = AcademicAccessRule
+                .getDegreeTypesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
+                .collect(Collectors.toSet());
 
         final Degree chosenDegree = degreeSearchBean.getDegree();
         final DegreeType chosenDegreeType = degreeSearchBean.getDegreeType();
@@ -309,8 +309,8 @@ public class RequestListByDegreeDA extends FenixDispatchAction {
         spreadsheet.newHeaderRow();
         spreadsheet.addHeader(getResourceMessage("label.serviceRequestNumber"));
         spreadsheet.addHeader(getResourceMessage("label.requestDate"));
-        spreadsheet
-                .addHeader(getResourceMessage("label.org.fenixedu.academic.domain.serviceRequests.AcademicServiceRequest.description"));
+        spreadsheet.addHeader(
+                getResourceMessage("label.org.fenixedu.academic.domain.serviceRequests.AcademicServiceRequest.description"));
         spreadsheet.addHeader(getResourceMessage("label.studentNumber"));
         spreadsheet.addHeader(getResourceMessage("label.student.name"));
         spreadsheet.addHeader(getResourceMessage("degree.concluded"));

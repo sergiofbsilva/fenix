@@ -48,8 +48,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/createMarkSheet", module = "academicAdministration", formBean = "markSheetManagementForm",
         input = "/gradeSubmission/createMarkSheetStep1.jsp", functionality = MarkSheetSearchDispatchAction.class)
-@Forwards({
-        @Forward(name = "createMarkSheetStep1", path = "/academicAdministration/gradeSubmission/createMarkSheetStep1.jsp"),
+@Forwards({ @Forward(name = "createMarkSheetStep1", path = "/academicAdministration/gradeSubmission/createMarkSheetStep1.jsp"),
         @Forward(name = "createMarkSheetStep2", path = "/academicAdministration/gradeSubmission/createMarkSheetStep2.jsp"),
         @Forward(name = "searchMarkSheetFilled",
                 path = "/academicAdministration/markSheetManagement.do?method=prepareSearchMarkSheetFilled"),
@@ -113,9 +112,8 @@ public class MarkSheetCreateDispatchAction extends MarkSheetDispatchAction {
     protected void prepareCreateEnrolmentEvaluationsForMarkSheet(MarkSheetManagementCreateBean createBean,
             HttpServletRequest request, ActionMessages actionMessages) {
 
-        final Collection<Enrolment> enrolments =
-                createBean.getCurricularCourse().getEnrolmentsNotInAnyMarkSheet(createBean.getEvaluationSeason(),
-                        createBean.getExecutionPeriod());
+        final Collection<Enrolment> enrolments = createBean.getCurricularCourse()
+                .getEnrolmentsNotInAnyMarkSheet(createBean.getEvaluationSeason(), createBean.getExecutionPeriod());
 
         if (enrolments.isEmpty()) {
             addMessage(request, actionMessages, "error.allStudentsAreInMarkSheets");

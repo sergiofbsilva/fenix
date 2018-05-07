@@ -176,8 +176,8 @@ public class StudentGroup extends FenixGroup {
             if (degree == null && degreeType == null && campus == null) {
                 return registrationsToUsers(getCourseBasedRegistrations(executionCourse).stream());
             } else {
-                return registrationsToUsers(Sets.intersection(getCourseBasedRegistrations(executionCourse),
-                        getDegreeBasedRegistrations()).stream());
+                return registrationsToUsers(
+                        Sets.intersection(getCourseBasedRegistrations(executionCourse), getDegreeBasedRegistrations()).stream());
             }
         } else if (campus != null) {
             return registrationsToUsers(getCampusBasedRegistrations());
@@ -221,8 +221,8 @@ public class StudentGroup extends FenixGroup {
         });
     }
 
-    private static Stream<Registration> filterCycle(Stream<Registration> registrations,
-            final CycleType cycleType, final ExecutionYear executionYear) {
+    private static Stream<Registration> filterCycle(Stream<Registration> registrations, final CycleType cycleType,
+            final ExecutionYear executionYear) {
         if (cycleType == null) {
             return registrations;
         }
@@ -277,8 +277,7 @@ public class StudentGroup extends FenixGroup {
     }
 
     private static Stream<Registration> getRegistrations() {
-        return RoleType.STUDENT.actualGroup().getMembers()
-                .flatMap(u -> u.getPerson().getStudent().getActiveRegistrationStream());
+        return RoleType.STUDENT.actualGroup().getMembers().flatMap(u -> u.getPerson().getStudent().getActiveRegistrationStream());
     }
 
     private static Stream<User> registrationsToUsers(Stream<Registration> registrations) {

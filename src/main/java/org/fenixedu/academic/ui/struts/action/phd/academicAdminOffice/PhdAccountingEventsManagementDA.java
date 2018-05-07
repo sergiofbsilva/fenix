@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.exceptions.DomainExceptionWithInvocationResult;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
+import org.fenixedu.academic.domain.phd.PhdProcessState;
 import org.fenixedu.academic.domain.phd.PhdProgramProcessState;
 import org.fenixedu.academic.domain.phd.debts.PhdGratuityEvent;
 import org.fenixedu.academic.domain.phd.debts.PhdRegistrationFee;
@@ -124,7 +125,7 @@ public class PhdAccountingEventsManagementDA extends PhdProcessDA {
             int year = renderedObject.getYear();
             boolean yearWithinWorkingDevelopmentPeriod = false;
             TreeSet<PhdProgramProcessState> orderedStates =
-                    new TreeSet<PhdProgramProcessState>(Collections.reverseOrder(PhdProgramProcessState.COMPARATOR_BY_DATE));
+                    new TreeSet<PhdProgramProcessState>(Collections.reverseOrder(PhdProcessState.COMPARATOR_BY_DATE));
             orderedStates.addAll(process.getStatesSet());
             for (PhdProgramProcessState state : orderedStates) {
                 if (state.getType().equals(PhdIndividualProgramProcessState.WORK_DEVELOPMENT)) {
@@ -182,8 +183,8 @@ public class PhdAccountingEventsManagementDA extends PhdProcessDA {
             final PhdIndividualProgramProcess process = getProcess(request);
 
             if (process.getExecutionYear().isAfter(bean.getExecutionYear())) {
-                addActionMessage("error", request, "error.phd.accounting.events.insurance.invalid.execution.period", process
-                        .getExecutionYear().getQualifiedName());
+                addActionMessage("error", request, "error.phd.accounting.events.insurance.invalid.execution.period",
+                        process.getExecutionYear().getQualifiedName());
                 return prepareCreateInsuranceEvent(mapping, actionForm, request, response);
             }
 

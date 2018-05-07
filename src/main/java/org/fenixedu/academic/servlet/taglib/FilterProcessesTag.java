@@ -90,13 +90,13 @@ public class FilterProcessesTag extends TagSupport {
             throw new JspException("predicateContainer cannot be null");
         }
         if (!PredicateContainer.class.isAssignableFrom(predicateContainerObject.getClass())) {
-            throw new JspException("Specified predicateContainer does not correspond to a "
-                    + PredicateContainer.class.getSimpleName());
+            throw new JspException(
+                    "Specified predicateContainer does not correspond to a " + PredicateContainer.class.getSimpleName());
         }
         Object beanObject = TagUtils.getInstance().lookup(pageContext, getBean(), getScope());
         if (!SearchPhdIndividualProgramProcessBean.class.isAssignableFrom(beanObject.getClass())) {
-            throw new JspException("Specified bean does not correspond to a "
-                    + SearchPhdIndividualProgramProcessBean.class.getSimpleName());
+            throw new JspException(
+                    "Specified bean does not correspond to a " + SearchPhdIndividualProgramProcessBean.class.getSimpleName());
         }
         PredicateContainer<PhdIndividualProgramProcess> predicateContainer =
                 (PredicateContainer<PhdIndividualProgramProcess>) predicateContainerObject;

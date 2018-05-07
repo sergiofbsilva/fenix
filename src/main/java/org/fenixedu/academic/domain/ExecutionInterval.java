@@ -125,7 +125,8 @@ abstract public class ExecutionInterval extends ExecutionInterval_Base {
 
     public DegreeCandidacyForGraduatedPersonCandidacyPeriod getDegreeCandidacyForGraduatedPersonCandidacyPeriod() {
         final List<DegreeCandidacyForGraduatedPersonCandidacyPeriod> candidacyPeriods =
-                (List<DegreeCandidacyForGraduatedPersonCandidacyPeriod>) getCandidacyPeriods(DegreeCandidacyForGraduatedPersonCandidacyPeriod.class);
+                (List<DegreeCandidacyForGraduatedPersonCandidacyPeriod>) getCandidacyPeriods(
+                        DegreeCandidacyForGraduatedPersonCandidacyPeriod.class);
         return candidacyPeriods.isEmpty() ? null : candidacyPeriods.iterator().next();
     }
 
@@ -176,7 +177,8 @@ abstract public class ExecutionInterval extends ExecutionInterval_Base {
 
     // static information
 
-    static public List<ExecutionInterval> readExecutionIntervalsWithCandidacyPeriod(final Class<? extends CandidacyPeriod> clazz) {
+    static public List<ExecutionInterval> readExecutionIntervalsWithCandidacyPeriod(
+            final Class<? extends CandidacyPeriod> clazz) {
         final List<ExecutionInterval> result = new ArrayList<ExecutionInterval>();
         for (final ExecutionInterval executionInterval : Bennu.getInstance().getExecutionIntervalsSet()) {
             if (executionInterval.hasCandidacyPeriods(clazz)) {
@@ -228,12 +230,13 @@ abstract public class ExecutionInterval extends ExecutionInterval_Base {
      * Asserts that the objects being manipulated belong to the same type.
      * E.g: Avoids comparison of ExecutionYears with ExecutionSemesters
      */
-    public static <T extends ExecutionInterval> T assertExecutionIntervalType(final Class<T> clazz, final ExecutionInterval input) {
+    public static <T extends ExecutionInterval> T assertExecutionIntervalType(final Class<T> clazz,
+            final ExecutionInterval input) {
         T result = null;
         if (input != null) {
             if (!clazz.isAssignableFrom(input.getClass())) {
-                throw new DomainException("error.ExecutionInterval.unexpected", clazz.getSimpleName(), input.getClass()
-                        .getSimpleName());
+                throw new DomainException("error.ExecutionInterval.unexpected", clazz.getSimpleName(),
+                        input.getClass().getSimpleName());
             }
             result = (T) input;
         }

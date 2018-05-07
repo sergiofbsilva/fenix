@@ -37,7 +37,8 @@ public class Installment extends Installment_Base {
         @Override
         public int compare(Installment leftInstallment, Installment rightInstallment) {
             int comparationResult = leftInstallment.getEndDate().compareTo(rightInstallment.getEndDate());
-            return (comparationResult == 0) ? leftInstallment.getExternalId().compareTo(rightInstallment.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftInstallment.getExternalId()
+                    .compareTo(rightInstallment.getExternalId()) : comparationResult;
         }
     };
 
@@ -45,7 +46,8 @@ public class Installment extends Installment_Base {
         @Override
         public int compare(Installment leftInstallment, Installment rightInstallment) {
             int comparationResult = leftInstallment.getInstallmentOrder().compareTo(rightInstallment.getInstallmentOrder());
-            return (comparationResult == 0) ? leftInstallment.getExternalId().compareTo(rightInstallment.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftInstallment.getExternalId()
+                    .compareTo(rightInstallment.getExternalId()) : comparationResult;
         }
     };
 

@@ -48,16 +48,18 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.CV_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT);
             }
 
@@ -71,17 +73,19 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE).size() <= 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() <= 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE);
             }
 
@@ -112,29 +116,33 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.CV_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT).size() <= 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT)
+                    .size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() <= 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() <= 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE);
             }
 
@@ -164,12 +172,13 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.CV_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() < 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() < 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION).size() < 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION)
+                    .size() < 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION);
             }
 
@@ -177,12 +186,13 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.PAYMENT_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT).size() < 10) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT)
+                    .size() < 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() < 10) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE).size() < 10) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.FOREIGN_INSTITUTION_SCALE_CERTIFICATE);
             }
 
@@ -272,7 +282,8 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getActiveFileForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION) == null) {
+            if (individualCandidacyProcess
+                    .getActiveFileForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION) == null) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION);
             }
 
@@ -288,16 +299,18 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess.getActiveFileForType(IndividualCandidacyDocumentFileType.REGISTRATION_CERTIFICATE) == null) {
+            if (individualCandidacyProcess
+                    .getActiveFileForType(IndividualCandidacyDocumentFileType.REGISTRATION_CERTIFICATE) == null) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.REGISTRATION_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess.getActiveFileForType(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE) == null) {
+            if (individualCandidacyProcess
+                    .getActiveFileForType(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE) == null) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.NO_PRESCRIPTION_CERTIFICATE);
             }
 
-            if (individualCandidacyProcess
-                    .getActiveFileForType(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
+            if (individualCandidacyProcess.getActiveFileForType(
+                    IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE) == null) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.FIRST_CYCLE_ACCESS_HABILITATION_CERTIFICATE);
             }
 
@@ -340,12 +353,13 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.CV_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(
-                    IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() < 3) {
+            if (individualCandidacyProcess
+                    .getAllFilesForType(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT).size() < 3) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.HABILITATION_CERTIFICATE_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION).size() < 3) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION)
+                    .size() < 3) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DOCUMENT_IDENTIFICATION);
             }
 
@@ -357,7 +371,8 @@ public class IndividualCandidacyDocumentFileTypeEditProvider {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.VAT_CARD_DOCUMENT);
             }
 
-            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE).size() < 3) {
+            if (individualCandidacyProcess.getAllFilesForType(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE)
+                    .size() < 3) {
                 fileTypesList.add(IndividualCandidacyDocumentFileType.DEGREE_CERTIFICATE);
             }
 

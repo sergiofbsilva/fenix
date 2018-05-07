@@ -113,8 +113,8 @@ public class GratuityEventWithPaymentPlan extends GratuityEventWithPaymentPlan_B
         ensureServiceAgreement();
 
         if (getGratuityPaymentPlan() == null) {
-            super.setGratuityPaymentPlan(getDegreeCurricularPlanServiceAgreement().getGratuityPaymentPlanFor(
-                    getStudentCurricularPlan(), getExecutionYear()));
+            super.setGratuityPaymentPlan(getDegreeCurricularPlanServiceAgreement()
+                    .getGratuityPaymentPlanFor(getStudentCurricularPlan(), getExecutionYear()));
         }
 
         if (getGratuityPaymentPlan() == null) {
@@ -124,17 +124,16 @@ public class GratuityEventWithPaymentPlan extends GratuityEventWithPaymentPlan_B
 
     private void ensureServiceAgreement() {
         if (getDegreeCurricularPlanServiceAgreement() == null) {
-            new DegreeCurricularPlanServiceAgreement(getPerson(),
-                    DegreeCurricularPlanServiceAgreementTemplate.readByDegreeCurricularPlan(getStudentCurricularPlan()
-                            .getDegreeCurricularPlan()));
+            new DegreeCurricularPlanServiceAgreement(getPerson(), DegreeCurricularPlanServiceAgreementTemplate
+                    .readByDegreeCurricularPlan(getStudentCurricularPlan().getDegreeCurricularPlan()));
         }
     }
 
     public void configurateCustomPaymentPlan() {
         if (!hasCustomGratuityPaymentPlan()) {
             ensureServiceAgreement();
-            super.setGratuityPaymentPlan(new CustomGratuityPaymentPlan(getExecutionYear(),
-                    getDegreeCurricularPlanServiceAgreement()));
+            super.setGratuityPaymentPlan(
+                    new CustomGratuityPaymentPlan(getExecutionYear(), getDegreeCurricularPlanServiceAgreement()));
         }
     }
 
@@ -232,9 +231,8 @@ public class GratuityEventWithPaymentPlan extends GratuityEventWithPaymentPlan_B
     private YearMonthDay calculateFullPaymentCodeEndDate() {
         final YearMonthDay today = new YearMonthDay();
         final LocalDate endDate = getFirstInstallment().getEndDate(this);
-        final YearMonthDay totalEndDate =
-                new YearMonthDay(getFirstInstallment().getEndDate(this).getYear(), getFirstInstallment().getEndDate(this)
-                        .getMonthOfYear(), getFirstInstallment().getEndDate(this).getDayOfMonth());
+        final YearMonthDay totalEndDate = new YearMonthDay(getFirstInstallment().getEndDate(this).getYear(),
+                getFirstInstallment().getEndDate(this).getMonthOfYear(), getFirstInstallment().getEndDate(this).getDayOfMonth());
         return today.isBefore(totalEndDate) ? totalEndDate : calculateNextEndDate(today);
     }
 

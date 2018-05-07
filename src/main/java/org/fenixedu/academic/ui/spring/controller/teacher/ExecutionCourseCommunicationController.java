@@ -41,11 +41,11 @@ import pt.ist.fenixframework.Atomic;
 @Controller
 @RequestMapping("/teacher/{executionCourseId}/communication")
 public class ExecutionCourseCommunicationController extends StrutsFunctionalityController {
-    
+
     // hack
     @Autowired
     CSRFTokenBean csrfTokenBean;
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public TeacherView communication(Model model, @PathVariable String executionCourseId) {
         final ExecutionCourse executionCourse = getDomainObject(executionCourseId);

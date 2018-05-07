@@ -83,8 +83,8 @@ public class ReimbursementGuide extends ReimbursementGuide_Base {
     public static Integer generateReimbursementGuideNumber() {
         Collection<ReimbursementGuide> reimbursementGuides = Bennu.getInstance().getReimbursementGuidesSet();
 
-        return (reimbursementGuides.isEmpty()) ? Integer.valueOf(1) : Collections.max(reimbursementGuides, NUMBER_COMPARATOR)
-                .getNumber() + 1;
+        return (reimbursementGuides.isEmpty()) ? Integer
+                .valueOf(1) : Collections.max(reimbursementGuides, NUMBER_COMPARATOR).getNumber() + 1;
     }
 
     public boolean isPayed() {

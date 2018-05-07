@@ -31,7 +31,8 @@ public class RequestPublicPresentationSeminarComission extends PhdIndividualProg
 
     @Override
     protected void activityPreConditions(PhdIndividualProgramProcess process, User userView) {
-        if (process.getSeminarProcess() != null || process.getActiveState() != PhdIndividualProgramProcessState.WORK_DEVELOPMENT) {
+        if (process.getSeminarProcess() != null
+                || process.getActiveState() != PhdIndividualProgramProcessState.WORK_DEVELOPMENT) {
             throw new PreConditionNotValidException();
         }
 

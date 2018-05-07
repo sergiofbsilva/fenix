@@ -36,9 +36,9 @@ import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 
-import pt.ist.fenixWebFramework.rendererExtensions.util.IPresentableEnum;
-
 import com.google.common.collect.Sets;
+
+import pt.ist.fenixWebFramework.rendererExtensions.util.IPresentableEnum;
 
 public enum AcademicOperationType implements IPresentableEnum, AccessOperation<AcademicAccessRule, AcademicAccessTarget> {
     MANAGE_AUTHORIZATIONS(false, false, Scope.ADMINISTRATION),
@@ -223,35 +223,32 @@ public enum AcademicOperationType implements IPresentableEnum, AccessOperation<A
         if (whoCanAccess.equals(Group.nobody())) {
             return Optional.empty();
         }
-        Optional<AcademicAccessRule> match =
-                AcademicAccessRule
-                        .accessRules()
-                        .filter(r -> r.getOperation().equals(this) && r.getWhoCanAccess().equals(whoCanAccess)
-                                && Sets.symmetricDifference(r.getWhatCanAffect(), whatCanAffect).isEmpty()).findAny();
+        Optional<AcademicAccessRule> match = AcademicAccessRule.accessRules()
+                .filter(r -> r.getOperation().equals(this) && r.getWhoCanAccess().equals(whoCanAccess)
+                        && Sets.symmetricDifference(r.getWhatCanAffect(), whatCanAffect).isEmpty())
+                .findAny();
         return Optional.of(match.orElseGet(() -> new AcademicAccessRule(this, whoCanAccess, whatCanAffect)));
     }
 
-    public Optional<AcademicAccessRule> grant(Group whoCanAccess, Set<AcademicProgram> programs, Set<AdministrativeOffice> offices) {
-        Set<AcademicAccessTarget> targets =
-                Stream.concat(programs.stream().map(AcademicProgramAccessTarget::new),
-                        offices.stream().map(AdministrativeOfficeAccessTarget::new)).collect(Collectors.toSet());
+    public Optional<AcademicAccessRule> grant(Group whoCanAccess, Set<AcademicProgram> programs,
+            Set<AdministrativeOffice> offices) {
+        Set<AcademicAccessTarget> targets = Stream.concat(programs.stream().map(AcademicProgramAccessTarget::new),
+                offices.stream().map(AdministrativeOfficeAccessTarget::new)).collect(Collectors.toSet());
         return grant(whoCanAccess, targets);
     }
 
     @Override
     public Optional<AcademicAccessRule> grant(User user) {
-        Optional<AcademicAccessRule> match =
-                AcademicAccessRule.accessRules().filter(r -> r.getOperation().equals(this) && r.getWhatCanAffect().isEmpty())
-                        .findAny();
-        return match.map(r -> r.<AcademicAccessRule> grant(user)).orElseGet(
-                () -> Optional.of(new AcademicAccessRule(this, user.groupOf(), Collections.emptySet())));
+        Optional<AcademicAccessRule> match = AcademicAccessRule.accessRules()
+                .filter(r -> r.getOperation().equals(this) && r.getWhatCanAffect().isEmpty()).findAny();
+        return match.map(r -> r.<AcademicAccessRule> grant(user))
+                .orElseGet(() -> Optional.of(new AcademicAccessRule(this, user.groupOf(), Collections.emptySet())));
     }
 
     @Override
     public Optional<AcademicAccessRule> revoke(User user) {
-        Optional<AcademicAccessRule> match =
-                AcademicAccessRule.accessRules().filter(r -> r.getOperation().equals(this) && r.getWhatCanAffect().isEmpty())
-                        .findAny();
+        Optional<AcademicAccessRule> match = AcademicAccessRule.accessRules()
+                .filter(r -> r.getOperation().equals(this) && r.getWhatCanAffect().isEmpty()).findAny();
         return match.map(r -> r.<AcademicAccessRule> revoke(user)).orElse(Optional.empty());
     }
 }

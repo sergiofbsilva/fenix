@@ -609,9 +609,9 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
             }
             return "";
         } catch (IllegalDataAccessException idae) {
-            addErrorMessage(BundleUtil.getString(Bundle.APPLICATION, "message.teacher.evaluation.editMarks", ExecutionSemester
-                    .readActualExecutionSemester().getExecutionYear().getName(), ExecutionSemester.readActualExecutionSemester()
-                    .getName()));
+            addErrorMessage(BundleUtil.getString(Bundle.APPLICATION, "message.teacher.evaluation.editMarks",
+                    ExecutionSemester.readActualExecutionSemester().getExecutionYear().getName(),
+                    ExecutionSemester.readActualExecutionSemester().getName()));
             return "";
         }
         return getEvaluation().getClass().getSimpleName();
@@ -661,9 +661,9 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
 
         final Season season = (getSeason() != null) ? new Season(getSeason()) : null;
         try {
-            CreateWrittenEvaluation.runCreateWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(), this
-                    .getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopesIDs, null, this
-                    .getGradeScale(), season, this.getDescription());
+            CreateWrittenEvaluation.runCreateWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(),
+                    this.getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopesIDs, null,
+                    this.getGradeScale(), season, this.getDescription());
 
         } catch (Exception e) {
             String errorMessage = e.getMessage();
@@ -802,8 +802,8 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
         final Season season = (getSeason() != null) ? new Season(getSeason()) : null;
 
         try {
-            EditWrittenEvaluation.runEditWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(), this
-                    .getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopesIDs, null,
+            EditWrittenEvaluation.runEditWrittenEvaluation(this.getExecutionCourseID(), this.getBegin().getTime(),
+                    this.getBegin().getTime(), this.getEnd().getTime(), executionCourseIDs, degreeModuleScopesIDs, null,
                     this.evaluationID, season, this.getDescription(), this.getGradeScale());
         } catch (Exception e) {
             String errorMessage = e.getMessage();
@@ -821,8 +821,8 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
         if (originPage != null) {
             final StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(getApplicationContext());
-            stringBuilder
-                    .append("/resourceAllocationManager/searchWrittenEvaluationsByDate.do?method=returnToSearchPage&amp;page=0&date=");
+            stringBuilder.append(
+                    "/resourceAllocationManager/searchWrittenEvaluationsByDate.do?method=returnToSearchPage&amp;page=0&date=");
             stringBuilder.append(DateFormatUtil.format("yyyy/MM/dd", this.getBegin().getTime()));
             stringBuilder.append("&");
             stringBuilder.append(PresentationConstants.EXECUTION_PERIOD_OID);
@@ -912,10 +912,9 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
         final Map<String, Integer> evaluationRooms = new TreeMap();
         WrittenEvaluation writtenEvaluation = (WrittenEvaluation) getEvaluation();
 
-        final List<WrittenEvaluationSpaceOccupation> roomOccupations =
-                writtenEvaluation.getWrittenEvaluationSpaceOccupationsSet().stream()
-                        .sorted((o1, o2) -> getExamCapacity(o2.getRoom()).compareTo(getExamCapacity(o1.getRoom())))
-                        .collect(Collectors.toList());
+        final List<WrittenEvaluationSpaceOccupation> roomOccupations = writtenEvaluation.getWrittenEvaluationSpaceOccupationsSet()
+                .stream().sorted((o1, o2) -> getExamCapacity(o2.getRoom()).compareTo(getExamCapacity(o1.getRoom())))
+                .collect(Collectors.toList());
         int count = 0;
         for (final WrittenEvaluationSpaceOccupation roomOccupation : roomOccupations) {
             evaluationRooms.put(roomOccupation.getRoom().getExternalId(), Integer.valueOf(++count));
@@ -1079,9 +1078,8 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
 
     public String publishMarks() throws FenixServiceException {
         final MessageResources messages = MessageResources.getMessageResources(Bundle.APPLICATION);
-        final String announcementTitle =
-                (getPublishMarksMessage() != null && getPublishMarksMessage().length() > 0) ? messages
-                        .getMessage("message.publishment") : null;
+        final String announcementTitle = (getPublishMarksMessage() != null && getPublishMarksMessage().length() > 0) ? messages
+                .getMessage("message.publishment") : null;
 
         try {
             PublishMarks.runPublishMarks(this.getExecutionCourseID(), this.getEvaluationID(), this.getPublishMarksMessage(),
@@ -1326,9 +1324,8 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
     }
 
     public void exportToExcel() throws FenixServiceException {
-        String filename =
-                BundleUtil.getString(Bundle.APPLICATION, "title.enrolments") + "-"
-                        + getFileName(Calendar.getInstance().getTime());
+        String filename = BundleUtil.getString(Bundle.APPLICATION, "title.enrolments") + "-"
+                + getFileName(Calendar.getInstance().getTime());
         try {
             exportToXls(filename.replace(" ", "_"));
         } catch (IOException e) {
@@ -1406,8 +1403,8 @@ public class EvaluationManagementBackingBean extends FenixBackingBean {
         for (EvaluationSeason season : EvaluationConfiguration.getInstance().getEvaluationSeasonSet()) {
             options.add(new SelectItem(season.getExternalId(), season.getName().getContent()));
         }
-        options.add(new SelectItem(ENROLMENT_TYPE_FILTER_NOT_ENROLLED, BundleUtil.getString(Bundle.ENUMERATION,
-                "filter.not.enrolled")));
+        options.add(new SelectItem(ENROLMENT_TYPE_FILTER_NOT_ENROLLED,
+                BundleUtil.getString(Bundle.ENUMERATION, "filter.not.enrolled")));
 
         return options;
     }

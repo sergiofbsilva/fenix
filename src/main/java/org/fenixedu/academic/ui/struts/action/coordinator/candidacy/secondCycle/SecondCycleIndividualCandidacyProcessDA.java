@@ -42,8 +42,8 @@ import pt.ist.fenixframework.FenixFramework;
         @Forward(name = "list-allowed-activities",
                 path = "/coordinator/candidacy/secondCycle/listIndividualCandidacyActivities.jsp"),
         @Forward(name = "introduce-candidacy-result", path = "/coordinator/candidacy/secondCycle/introduceCandidacyResult.jsp") })
-public class SecondCycleIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleIndividualCandidacyProcessDA {
+public class SecondCycleIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.secondCycle.SecondCycleIndividualCandidacyProcessDA {
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -57,12 +57,13 @@ public class SecondCycleIndividualCandidacyProcessDA extends
             HttpServletResponse response) {
         final String degreeCurricularPlanOID = DegreeCoordinatorIndex.findDegreeCurricularPlanID(request);
         final DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(degreeCurricularPlanOID);
-        if (getProcess(request).getCandidacy().getSecondCycleIndividualCandidacySeriesGradeForDegree(
-                degreeCurricularPlan.getDegree()) != null) {
+        if (getProcess(request).getCandidacy()
+                .getSecondCycleIndividualCandidacySeriesGradeForDegree(degreeCurricularPlan.getDegree()) != null) {
             request.setAttribute("seriesGrade", getProcess(request).getCandidacy()
                     .getSecondCycleIndividualCandidacySeriesGradeForDegree(degreeCurricularPlan.getDegree()));
         } else {
-            request.setAttribute("seriesGrade", getProcess(request).getCandidacy().getSecondCycleIndividualCandidacySeriesGrade());
+            request.setAttribute("seriesGrade",
+                    getProcess(request).getCandidacy().getSecondCycleIndividualCandidacySeriesGrade());
         }
         return super.listProcessAllowedActivities(mapping, form, request, response);
     }
@@ -72,8 +73,8 @@ public class SecondCycleIndividualCandidacyProcessDA extends
             HttpServletRequest request, HttpServletResponse response) {
         final String degreeCurricularPlanOID = DegreeCoordinatorIndex.findDegreeCurricularPlanID(request);
         final DegreeCurricularPlan degreeCurricularPlan = FenixFramework.getDomainObject(degreeCurricularPlanOID);
-        request.setAttribute("secondCycleIndividualCandidacyResultBean", new SecondCycleIndividualCandidacyResultBean(
-                getProcess(request), degreeCurricularPlan.getDegree()));
+        request.setAttribute("secondCycleIndividualCandidacyResultBean",
+                new SecondCycleIndividualCandidacyResultBean(getProcess(request), degreeCurricularPlan.getDegree()));
         return mapping.findForward("introduce-candidacy-result");
     }
 

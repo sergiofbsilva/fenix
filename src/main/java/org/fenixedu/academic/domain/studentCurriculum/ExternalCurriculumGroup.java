@@ -72,9 +72,8 @@ public class ExternalCurriculumGroup extends ExternalCurriculumGroup_Base {
             final CourseGroup courseGroup) {
 
         final CycleCourseGroup cycleCourseGroup = (CycleCourseGroup) courseGroup;
-        final CycleCourseGroup sourceAffinityCycleCourseGroup =
-                studentCurricularPlan.getDegreeCurricularPlan().getCycleCourseGroup(
-                        cycleCourseGroup.getCycleType().getSourceCycleAffinity());
+        final CycleCourseGroup sourceAffinityCycleCourseGroup = studentCurricularPlan.getDegreeCurricularPlan()
+                .getCycleCourseGroup(cycleCourseGroup.getCycleType().getSourceCycleAffinity());
 
         if (!sourceAffinityCycleCourseGroup.getDestinationAffinitiesSet().contains(cycleCourseGroup)) {
             throw new DomainException(
@@ -97,15 +96,13 @@ public class ExternalCurriculumGroup extends ExternalCurriculumGroup_Base {
         LocalizedString LocalizedString = new LocalizedString();
 
         if (!StringUtils.isEmpty(getDegreeModule().getName())) {
-            LocalizedString =
-                    LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.PT, getDegreeModule().getName() + " ("
-                            + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
+            LocalizedString = LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.PT,
+                    getDegreeModule().getName() + " (" + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
         }
 
         if (!StringUtils.isEmpty(getDegreeModule().getNameEn())) {
-            LocalizedString =
-                    LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.EN, getDegreeModule().getNameEn() + " ("
-                            + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
+            LocalizedString = LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.EN,
+                    getDegreeModule().getNameEn() + " (" + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
         }
 
         return LocalizedString;
@@ -114,8 +111,8 @@ public class ExternalCurriculumGroup extends ExternalCurriculumGroup_Base {
     @Override
     public Set<ICurricularRule> getCurricularRules(ExecutionSemester executionSemester) {
         final Set<ICurricularRule> result = super.getCurricularRules(executionSemester);
-        result.add(new CreditsLimitInExternalCycle(getRootCurriculumGroup().getCycleCurriculumGroup(
-                getCycleType().getSourceCycleAffinity()), this));
+        result.add(new CreditsLimitInExternalCycle(
+                getRootCurriculumGroup().getCycleCurriculumGroup(getCycleType().getSourceCycleAffinity()), this));
 
         return result;
     }

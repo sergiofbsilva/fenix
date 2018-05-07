@@ -33,6 +33,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.fenixedu.academic.domain.ExternalUser;
 import org.fenixedu.academic.domain.Photograph;
+import org.fenixedu.academic.domain.PublicCandidacyHashCode;
 import org.fenixedu.academic.domain.phd.candidacy.PhdCandidacyReferee;
 import org.fenixedu.academic.domain.phd.candidacy.PhdProgramPublicCandidacyHashCode;
 import org.fenixedu.academic.ui.struts.action.base.FenixAction;
@@ -82,7 +83,7 @@ public class ExportPhdIndividualProgramProcessInformation extends FenixAction {
     private void displayCandidatePage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String hashCode = request.getParameter("process");
         final PhdProgramPublicCandidacyHashCode code =
-                (PhdProgramPublicCandidacyHashCode) PhdProgramPublicCandidacyHashCode.getPublicCandidacyCodeByHash(hashCode);
+                (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(hashCode);
         final byte[] candidatePage = ExportPhdIndividualProgramProcessesInHtml.drawCandidatePage(code);
         writeResponse(response, candidatePage, "text/html");
     }

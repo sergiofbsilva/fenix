@@ -61,8 +61,8 @@ public class StudentStatute extends StudentStatute_Base {
         this(student, statuteType, beginExecutionPeriod, endExecutionPeriod, beginDate, endDate, "");
     }
 
-    public StudentStatute(Student student, StatuteType statuteType, ExecutionSemester beginExecutionPeriod, ExecutionSemester
-                 endExecutionPeriod, LocalDate beginDate, LocalDate endDate, String comment) {
+    public StudentStatute(Student student, StatuteType statuteType, ExecutionSemester beginExecutionPeriod,
+            ExecutionSemester endExecutionPeriod, LocalDate beginDate, LocalDate endDate, String comment) {
         this();
         setType(statuteType);
         edit(student, beginExecutionPeriod, endExecutionPeriod, beginDate, endDate, comment);
@@ -166,12 +166,10 @@ public class StudentStatute extends StudentStatute_Base {
         if (statute == this) {
             return false;
         }
-        ExecutionSemester statuteBegin =
-                statute.getBeginExecutionPeriod() != null ? statute.getBeginExecutionPeriod() : ExecutionSemester
-                        .readFirstExecutionSemester();
-        ExecutionSemester statuteEnd =
-                statute.getEndExecutionPeriod() != null ? statute.getEndExecutionPeriod() : ExecutionSemester
-                        .readLastExecutionSemester();
+        ExecutionSemester statuteBegin = statute.getBeginExecutionPeriod() != null ? statute
+                .getBeginExecutionPeriod() : ExecutionSemester.readFirstExecutionSemester();
+        ExecutionSemester statuteEnd = statute.getEndExecutionPeriod() != null ? statute
+                .getEndExecutionPeriod() : ExecutionSemester.readLastExecutionSemester();
 
         return overlapsWith(statute.getType(), statuteBegin, statuteEnd);
 
@@ -195,9 +193,8 @@ public class StudentStatute extends StudentStatute_Base {
 
     public void add(StudentStatute statute) {
         if (this.overlapsWith(statute)) {
-            if (statute.getBeginExecutionPeriod() == null
-                    || (getBeginExecutionPeriod() != null && statute.getBeginExecutionPeriod()
-                            .isBefore(getBeginExecutionPeriod()))) {
+            if (statute.getBeginExecutionPeriod() == null || (getBeginExecutionPeriod() != null
+                    && statute.getBeginExecutionPeriod().isBefore(getBeginExecutionPeriod()))) {
                 setBeginExecutionPeriod(statute.getBeginExecutionPeriod());
             }
 

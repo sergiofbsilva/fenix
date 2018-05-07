@@ -89,9 +89,8 @@ public abstract class GepReportFile extends GepReportFile_Base {
     }
 
     public static String getWrittenEvaluationCode(WrittenEvaluation writtenEvaluation) {
-        StringBuilder code =
-                new StringBuilder().append(writtenEvaluation.getInterval().toString()).append(writtenEvaluation.getFullName())
-                        .append(writtenEvaluation.getEvaluationType().toString());
+        StringBuilder code = new StringBuilder().append(writtenEvaluation.getInterval().toString())
+                .append(writtenEvaluation.getFullName()).append(writtenEvaluation.getEvaluationType().toString());
         writtenEvaluation.getAssociatedExecutionCoursesSet().stream().forEach(ec -> code.append(getExecutionCourseCode(ec)));
         return Hashing.murmur3_128().hashBytes(code.toString().getBytes(StandardCharsets.UTF_8)).toString();
     }
@@ -160,7 +159,8 @@ public abstract class GepReportFile extends GepReportFile_Base {
         return degreeType == null || degree.getDegreeType() == degreeType;
     }
 
-    protected static boolean checkExecutionYear(final ExecutionYear executionYear, final DegreeCurricularPlan degreeCurricularPlan) {
+    protected static boolean checkExecutionYear(final ExecutionYear executionYear,
+            final DegreeCurricularPlan degreeCurricularPlan) {
         return executionYear == null || degreeCurricularPlan.hasExecutionDegreeFor(executionYear);
     }
 

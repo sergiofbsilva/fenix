@@ -66,11 +66,9 @@ public class ExternalScholarshipGratuityContributionEvent extends ExternalSchola
 
     @Override
     public LabelFormatter getDescriptionForEntryType(EntryType entryType) {
-        return new LabelFormatter()
-                .appendLabel(entryType.name(), Bundle.ENUMERATION)
-                .appendLabel(" (")
-                .appendLabel(
-                        ((GratuityEvent) getExternalScholarshipGratuityExemption().getEvent()).getStudentCurricularPlan().getName()).appendLabel(")");
+        return new LabelFormatter().appendLabel(entryType.name(), Bundle.ENUMERATION).appendLabel(" (").appendLabel(
+                ((GratuityEvent) getExternalScholarshipGratuityExemption().getEvent()).getStudentCurricularPlan().getName())
+                .appendLabel(")");
     }
 
     @Override

@@ -32,9 +32,9 @@ import org.fenixedu.academic.predicate.AcademicPredicates;
 import org.fenixedu.academic.service.services.ExcepcaoInexistente;
 import org.fenixedu.academic.util.ContentType;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.ByteStreams;
+
+import pt.ist.fenixframework.Atomic;
 
 /**
  * 
@@ -59,8 +59,8 @@ public class StorePersonalPhoto {
     }
 
     @Atomic
-    static public void uploadPhoto(final PhotographUploadBean photoBean, final Person person) throws FileNotFoundException,
-            IOException {
+    static public void uploadPhoto(final PhotographUploadBean photoBean, final Person person)
+            throws FileNotFoundException, IOException {
         check(AcademicPredicates.MANAGE_PHD_PROCESSES);
         try (InputStream stream = photoBean.getFileInputStream()) {
             person.setPersonalPhoto(new Photograph(PhotoType.INSTITUTIONAL,

@@ -340,7 +340,7 @@ public class AcademicSemesterOfAcademicYearDateTimeField extends DateTimeField {
     }
 
     private UnsupportedOperationException unsupported() {
-        return new UnsupportedOperationException(AcademicSemesterOfAcademicYearDateTimeFieldType.academicSemesterOfAcademicYear()
-                + " field is unsupported");
+        return new UnsupportedOperationException(
+                AcademicSemesterOfAcademicYearDateTimeFieldType.academicSemesterOfAcademicYear() + " field is unsupported");
     }
 }

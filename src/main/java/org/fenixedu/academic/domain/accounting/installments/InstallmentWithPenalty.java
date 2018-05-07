@@ -51,8 +51,8 @@ public abstract class InstallmentWithPenalty extends InstallmentWithPenalty_Base
 
     @Override
     public Money calculateAmount(Event event, DateTime when, BigDecimal discountPercentage, boolean applyPenalty) {
-        return super.calculateAmount(event, when, discountPercentage, applyPenalty).add(
-                (applyPenalty ? calculatePenaltyAmount(event, when, discountPercentage) : Money.ZERO));
+        return super.calculateAmount(event, when, discountPercentage, applyPenalty)
+                .add((applyPenalty ? calculatePenaltyAmount(event, when, discountPercentage) : Money.ZERO));
     }
 
     abstract protected Money calculatePenaltyAmount(Event event, DateTime when, BigDecimal discountPercentage);

@@ -48,8 +48,8 @@ public class AttendsJsonAdapter implements JsonViewer<Attends> {
             object.addProperty("enrolmentsInThisCourse", "--");
         }
         RegistrationState registrationState = attends.getRegistration().getLastRegistrationState(attends.getExecutionYear());
-        object.addProperty("registrationState", registrationState == null ? "" : registrationState.getStateType()
-                .getDescription());
+        object.addProperty("registrationState",
+                registrationState == null ? "" : registrationState.getStateType().getDescription());
 
         object.addProperty("enrolmentType",
                 BundleUtil.getString(Bundle.ENUMERATION, attends.getAttendsStateType().getQualifiedName()));
@@ -59,8 +59,9 @@ public class AttendsJsonAdapter implements JsonViewer<Attends> {
 
         JsonArray statutesArray = new JsonArray();
 
-        attends.getRegistration().getStudent().getStudentStatutesSet().stream().filter(s -> s.isValidInExecutionPeriod(attends.getExecutionPeriod())).forEach(ss ->
-        statutesArray.add(ctx.view(ss)));
+        attends.getRegistration().getStudent().getStudentStatutesSet().stream()
+                .filter(s -> s.isValidInExecutionPeriod(attends.getExecutionPeriod()))
+                .forEach(ss -> statutesArray.add(ctx.view(ss)));
 
         object.add("studentStatutes", statutesArray);
 

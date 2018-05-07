@@ -32,7 +32,8 @@ public class SkipScheduleFirstThesisMeeting extends PhdMeetingSchedulingActivity
     @Override
     protected void activityPreConditions(PhdMeetingSchedulingProcess process, User userView) {
 
-        if (!process.getThesisProcess().getActiveState().equals(PhdThesisProcessStateType.WAITING_FOR_THESIS_MEETING_SCHEDULING)) {
+        if (!process.getThesisProcess().getActiveState()
+                .equals(PhdThesisProcessStateType.WAITING_FOR_THESIS_MEETING_SCHEDULING)) {
             throw new PreConditionNotValidException();
         }
 

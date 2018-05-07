@@ -197,9 +197,9 @@ public class EnrolmentContext {
     static public EnrolmentContext createForNoCourseGroupCurriculumGroupEnrolment(
             final StudentCurricularPlan studentCurricularPlan, final NoCourseGroupEnrolmentBean bean) {
 
-        final IDegreeModuleToEvaluate moduleToEvaluate =
-                new ExternalCurricularCourseToEnrol(readOrCreateNoCourseGroupCurriculumGroup(studentCurricularPlan,
-                        bean.getGroupType()), bean.getSelectedCurricularCourse(), bean.getExecutionPeriod());
+        final IDegreeModuleToEvaluate moduleToEvaluate = new ExternalCurricularCourseToEnrol(
+                readOrCreateNoCourseGroupCurriculumGroup(studentCurricularPlan, bean.getGroupType()),
+                bean.getSelectedCurricularCourse(), bean.getExecutionPeriod());
 
         return new EnrolmentContext(studentCurricularPlan, bean.getExecutionPeriod(), Collections.singleton(moduleToEvaluate),
                 Collections.EMPTY_LIST, bean.getCurricularRuleLevel());

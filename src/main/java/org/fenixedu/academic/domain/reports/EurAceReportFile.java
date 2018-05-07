@@ -56,7 +56,8 @@ public class EurAceReportFile extends EurAceReportFile_Base {
                     if (checkExecutionYear(getExecutionYear(), degreeCurricularPlan)) {
                         for (final CurricularCourse curricularCourse : degreeCurricularPlan.getAllCurricularCourses()) {
                             if (checkExecutionYear(getExecutionYear(), curricularCourse)) {
-                                for (final ExecutionCourse executionCourse : curricularCourse.getAssociatedExecutionCoursesSet()) {
+                                for (final ExecutionCourse executionCourse : curricularCourse
+                                        .getAssociatedExecutionCoursesSet()) {
                                     if (checkExecutionYear(getExecutionYear(), executionCourse)) {
                                         for (final Professorship professorship : executionCourse.getProfessorshipsSet()) {
                                             if (professorship.hasTeacher()) {

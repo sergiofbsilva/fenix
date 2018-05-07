@@ -51,8 +51,7 @@ public class Holiday extends Holiday_Base {
         final Locality campusLocality = campus == null ? null : campus.getLocality();
         for (final Holiday holiday : Bennu.getInstance().getHolidaysSet()) {
             final Locality locality = holiday.getLocality();
-            if ((locality == null || (campus != null && locality == campusLocality))
-                    && holiday.getDate().isMatch(date)) {
+            if ((locality == null || (campus != null && locality == campusLocality)) && holiday.getDate().isMatch(date)) {
                 return true;
             }
         }

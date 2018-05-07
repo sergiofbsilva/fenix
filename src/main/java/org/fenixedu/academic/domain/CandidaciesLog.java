@@ -39,7 +39,8 @@ public class CandidaciesLog extends CandidaciesLog_Base {
         return new CandidaciesLog(degree, executionYear, description);
     }
 
-    public static CandidaciesLog createLog(Degree degree, ExecutionYear executionYear, String bundle, String key, String... args) {
+    public static CandidaciesLog createLog(Degree degree, ExecutionYear executionYear, String bundle, String key,
+            String... args) {
         final String label = generateLabelDescription(bundle, key, args);
         return createCandidaciesLog(degree, executionYear, label);
     }

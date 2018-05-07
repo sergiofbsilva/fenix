@@ -57,7 +57,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 public class ViewCandidaciesDispatchAction extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("view");
     }
 

@@ -279,7 +279,8 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
         }
     }
 
-    private void processCode(SibsIncommingPaymentFileDetailLine detailLine, Person person, ProcessResult result) throws Exception {
+    private void processCode(SibsIncommingPaymentFileDetailLine detailLine, Person person, ProcessResult result)
+            throws Exception {
 
         final PaymentCode paymentCode = getPaymentCode(detailLine, result);
 
@@ -288,8 +289,8 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
             throw new Exception();
         }
 
-        final PaymentCode codeToProcess =
-                getPaymentCodeToProcess(paymentCode, ExecutionYear.readByDateTime(detailLine.getWhenOccuredTransaction()), result);
+        final PaymentCode codeToProcess = getPaymentCodeToProcess(paymentCode,
+                ExecutionYear.readByDateTime(detailLine.getWhenOccuredTransaction()), result);
 
         if (codeToProcess.getState() == PaymentCodeState.INVALID) {
             result.addMessage("warning.manager.SIBS.invalidCode", codeToProcess.getCode());
@@ -315,7 +316,8 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
         result.addMessage("label.manager.SIBS.reportCreated");
     }
 
-    private PaymentCode getPaymentCodeToProcess(final PaymentCode paymentCode, ExecutionYear executionYear, ProcessResult result) {
+    private PaymentCode getPaymentCodeToProcess(final PaymentCode paymentCode, ExecutionYear executionYear,
+            ProcessResult result) {
 
         final PaymentCodeMapping mapping = paymentCode.getOldPaymentCodeMapping(executionYear);
 

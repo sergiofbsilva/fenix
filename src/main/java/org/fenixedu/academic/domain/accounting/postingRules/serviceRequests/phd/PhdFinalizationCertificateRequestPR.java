@@ -45,8 +45,8 @@ public class PhdFinalizationCertificateRequestPR extends PhdFinalizationCertific
         AcademicServiceRequestEvent academicServiceRequestEvent = (AcademicServiceRequestEvent) event;
         AcademicServiceRequest academicServiceRequest = academicServiceRequestEvent.getAcademicServiceRequest();
 
-        return super.doCalculationForAmountToPay(academicServiceRequestEvent, when, applyDiscount).multiply(
-                academicServiceRequest.isUrgentRequest() ? 2 : 1);
+        return super.doCalculationForAmountToPay(academicServiceRequestEvent, when, applyDiscount)
+                .multiply(academicServiceRequest.isUrgentRequest() ? 2 : 1);
     }
 
     @Override

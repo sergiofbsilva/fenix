@@ -43,12 +43,12 @@ public abstract class PartyContactValidation extends PartyContactValidation_Base
 
     }
 
-    public static final PartyContactValidationPredicate PREDICATE_INVALID = new PartyContactValidationPredicate(
-            PartyContactValidationState.INVALID);
-    public static final PartyContactValidationPredicate PREDICATE_VALID = new PartyContactValidationPredicate(
-            PartyContactValidationState.VALID);
-    public static final PartyContactValidationPredicate PREDICATE_REFUSED = new PartyContactValidationPredicate(
-            PartyContactValidationState.REFUSED);
+    public static final PartyContactValidationPredicate PREDICATE_INVALID =
+            new PartyContactValidationPredicate(PartyContactValidationState.INVALID);
+    public static final PartyContactValidationPredicate PREDICATE_VALID =
+            new PartyContactValidationPredicate(PartyContactValidationState.VALID);
+    public static final PartyContactValidationPredicate PREDICATE_REFUSED =
+            new PartyContactValidationPredicate(PartyContactValidationState.REFUSED);
 
     public PartyContactValidation() {
         super();

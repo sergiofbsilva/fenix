@@ -26,12 +26,12 @@ import java.util.function.Supplier;
 import org.fenixedu.academic.domain.DegreeCurricularPlan;
 import org.fenixedu.academic.domain.ExecutionSemester;
 
-import pt.ist.fenixframework.dml.runtime.Relation;
-
 import com.google.common.collect.Sets;
 
-public abstract class PersistentTeachersWithIncompleteEvaluationWorkGroup extends
-        PersistentTeachersWithIncompleteEvaluationWorkGroup_Base {
+import pt.ist.fenixframework.dml.runtime.Relation;
+
+public abstract class PersistentTeachersWithIncompleteEvaluationWorkGroup
+        extends PersistentTeachersWithIncompleteEvaluationWorkGroup_Base {
     protected PersistentTeachersWithIncompleteEvaluationWorkGroup() {
         super();
     }

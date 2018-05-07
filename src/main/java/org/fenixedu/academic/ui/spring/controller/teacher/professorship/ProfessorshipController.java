@@ -18,6 +18,11 @@
  */
 package org.fenixedu.academic.ui.spring.controller.teacher.professorship;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -43,11 +48,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @SpringFunctionality(app = AcademicAdministrationSpringApplication.class, title = "teacher.professorships.title",
         accessGroup = "academic(MANAGE_TEACHER_PROFESSORSHIPS)")
@@ -178,9 +178,8 @@ public class ProfessorshipController {
      * @throws IOException
      */
     @RequestMapping(method = GET, value = "/download")
-    public void download(@RequestParam Department department, @RequestParam ExecutionSemester period, HttpServletResponse
-            response)
-            throws IOException {
+    public void download(@RequestParam Department department, @RequestParam ExecutionSemester period,
+            HttpServletResponse response) throws IOException {
         response.setContentType("text/csv");
         SearchBean search = new SearchBean();
         search.setDepartment(department);

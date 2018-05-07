@@ -40,8 +40,8 @@ public class ReadStudentListByCurricularCourse {
             throws FenixServiceException {
 
         final CurricularCourse curricularCourse = (CurricularCourse) FenixFramework.getDomainObject(curricularCourseID);
-        return (executionYear != null) ? cleanList(curricularCourse.getEnrolmentsByYear(executionYear)) : cleanList(curricularCourse
-                .getEnrolments());
+        return (executionYear != null) ? cleanList(curricularCourse.getEnrolmentsByYear(executionYear)) : cleanList(
+                curricularCourse.getEnrolments());
     }
 
     private List cleanList(final List<Enrolment> enrolmentList) throws FenixServiceException {
@@ -54,8 +54,8 @@ public class ReadStudentListByCurricularCourse {
         final List<InfoEnrolment> result = new ArrayList<InfoEnrolment>();
         for (final Enrolment enrolment : enrolmentList) {
 
-            if (studentNumber == null
-                    || studentNumber.intValue() != enrolment.getStudentCurricularPlan().getRegistration().getNumber().intValue()) {
+            if (studentNumber == null || studentNumber.intValue() != enrolment.getStudentCurricularPlan().getRegistration()
+                    .getNumber().intValue()) {
                 studentNumber = enrolment.getStudentCurricularPlan().getRegistration().getNumber();
                 result.add(InfoEnrolment.newInfoFromDomain(enrolment));
             }

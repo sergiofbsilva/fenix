@@ -103,8 +103,8 @@ public class JsfTagUtils {
     }
 
     public static void setValidator(UIComponent component, String attributeValue) {
-        setMethodBinding(component, "validator", attributeValue, new Class[] { FacesContext.class, UIComponent.class,
-                Object.class });
+        setMethodBinding(component, "validator", attributeValue,
+                new Class[] { FacesContext.class, UIComponent.class, Object.class });
     }
 
     public static void setActionListener(UIComponent component, String attributeValue) {

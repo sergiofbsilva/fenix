@@ -85,7 +85,8 @@ public class SpecialSeasonStatusTrackerRegisterBean implements Serializable {
     private String degreeSigla;
     private String courseName;
 
-    public SpecialSeasonStatusTrackerRegisterBean(Integer studentNumber, String studentName, String degreeSigla, String courseName) {
+    public SpecialSeasonStatusTrackerRegisterBean(Integer studentNumber, String studentName, String degreeSigla,
+            String courseName) {
         this.studentNumber = studentNumber;
         this.studentName = studentName;
         this.degreeSigla = degreeSigla;

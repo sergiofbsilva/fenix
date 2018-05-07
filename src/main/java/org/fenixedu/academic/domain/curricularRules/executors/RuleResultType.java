@@ -26,25 +26,25 @@ public enum RuleResultType {
 
     static private final RuleResultType[][] AND_TABLE = new RuleResultType[][] {
 
-    { FALSE, FALSE, FALSE, FALSE },
+            { FALSE, FALSE, FALSE, FALSE },
 
-    { FALSE, TRUE, TRUE, WARNING },
+            { FALSE, TRUE, TRUE, WARNING },
 
-    { FALSE, TRUE, NA, WARNING },
+            { FALSE, TRUE, NA, WARNING },
 
-    { FALSE, WARNING, WARNING, WARNING }
+            { FALSE, WARNING, WARNING, WARNING }
 
     };
 
     static private final RuleResultType[][] OR_TABLE = new RuleResultType[][] {
 
-    { FALSE, TRUE, FALSE, WARNING },
+            { FALSE, TRUE, FALSE, WARNING },
 
-    { TRUE, TRUE, TRUE, TRUE },
+            { TRUE, TRUE, TRUE, TRUE },
 
-    { FALSE, TRUE, NA, WARNING },
+            { FALSE, TRUE, NA, WARNING },
 
-    { WARNING, TRUE, WARNING, WARNING }
+            { WARNING, TRUE, WARNING, WARNING }
 
     };
 

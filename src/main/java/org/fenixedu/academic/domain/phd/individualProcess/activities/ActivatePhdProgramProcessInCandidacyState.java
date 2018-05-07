@@ -58,8 +58,8 @@ public class ActivatePhdProgramProcessInCandidacyState extends PhdIndividualProg
                     "error.PhdIndividualProgramProcess.set.candidacy.state.previous.active.state.is.not.candidacy");
         }
 
-        PhdProgramProcessState.createWithGivenStateDate(process, process.getLastActiveState().getType(), userView.getPerson(),
-                "", bean.getStateDate().toDateTimeAtStartOfDay());
+        PhdProgramProcessState.createWithGivenStateDate(process, process.getLastActiveState().getType(), userView.getPerson(), "",
+                bean.getStateDate().toDateTimeAtStartOfDay());
 
         return process;
     }

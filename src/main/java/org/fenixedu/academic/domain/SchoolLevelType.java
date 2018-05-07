@@ -24,9 +24,9 @@ import java.util.List;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 
-import pt.ist.fenixWebFramework.rendererExtensions.util.IPresentableEnum;
-
 import com.google.common.collect.Lists;
+
+import pt.ist.fenixWebFramework.rendererExtensions.util.IPresentableEnum;
 
 public enum SchoolLevelType implements IPresentableEnum {
 

@@ -141,14 +141,15 @@ public class SearchExecutionCourseLogBean implements Serializable {
         Collection<Predicate<ExecutionCourseLog>> filters = new ArrayList<Predicate<ExecutionCourseLog>>();
 
         if (getExecutionCourseLogTypes().size() < ExecutionCourseLogTypes.values().length) {
-            filters.add(new InlinePredicate<ExecutionCourseLog, Collection<ExecutionCourseLogTypes>>(getExecutionCourseLogTypes()) {
+            filters.add(
+                    new InlinePredicate<ExecutionCourseLog, Collection<ExecutionCourseLogTypes>>(getExecutionCourseLogTypes()) {
 
-                @Override
-                public boolean test(ExecutionCourseLog executionCourseLog) {
-                    return getValue().contains(executionCourseLog.getExecutionCourseLogType());
-                }
+                        @Override
+                        public boolean test(ExecutionCourseLog executionCourseLog) {
+                            return getValue().contains(executionCourseLog.getExecutionCourseLogType());
+                        }
 
-            });
+                    });
         }
 
         if (months.size() < getExecutionCourse().getExecutionPeriod().getSemesterMonths().size()) {

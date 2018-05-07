@@ -93,15 +93,13 @@ public class ResidenceInformationForm extends Form {
         if (person.hasDefaultPhysicalAddress()) {
             final PhysicalAddress physicalAddress = person.getDefaultPhysicalAddress();
             final Country country = getCountryOfResidenceFromPhysicalAddress(physicalAddress);
-            final District districtOfResidence =
-                    physicalAddress.getDistrictOfResidence() != null ? District.readByName(physicalAddress
-                            .getDistrictOfResidence()) : null;
+            final District districtOfResidence = physicalAddress.getDistrictOfResidence() != null ? District
+                    .readByName(physicalAddress.getDistrictOfResidence()) : null;
 
             final DistrictSubdivision districtSubdivisionOfResidence;
             if (districtOfResidence != null) {
-                districtSubdivisionOfResidence =
-                        physicalAddress.getDistrictSubdivisionOfResidence() != null ? districtOfResidence
-                                .getDistrictSubdivisionByName(physicalAddress.getDistrictSubdivisionOfResidence()) : null;
+                districtSubdivisionOfResidence = physicalAddress.getDistrictSubdivisionOfResidence() != null ? districtOfResidence
+                        .getDistrictSubdivisionByName(physicalAddress.getDistrictSubdivisionOfResidence()) : null;
             } else {
                 districtSubdivisionOfResidence = null;
             }
@@ -261,54 +259,49 @@ public class ResidenceInformationForm extends Form {
 
     private void checkAddressInformationForForeignStudents(final List<LabelFormatter> result) {
         if (!getCountryOfResidence().isDefaultCountry() && !this.dislocatedFromPermanentResidence) {
-            result.add(new LabelFormatter()
-                    .appendLabel(
-                            "error.candidacy.workflow.ResidenceInformationForm.non.nacional.students.should.select.dislocated.option.and.fill.address",
-                            Bundle.CANDIDATE));
+            result.add(new LabelFormatter().appendLabel(
+                    "error.candidacy.workflow.ResidenceInformationForm.non.nacional.students.should.select.dislocated.option.and.fill.address",
+                    Bundle.CANDIDATE));
         }
     }
 
     private void checkAddressInformationForNationalStudents(final List<LabelFormatter> result) {
         if (getCountryOfResidence().isDefaultCountry() && !isResidenceInformationFilled()) {
-            result.add(new LabelFormatter()
-                    .appendLabel(
-                            "error.candidacy.workflow.ResidenceInformationForm.address.national.students.should.supply.complete.address.information",
-                            Bundle.CANDIDATE));
+            result.add(new LabelFormatter().appendLabel(
+                    "error.candidacy.workflow.ResidenceInformationForm.address.national.students.should.supply.complete.address.information",
+                    Bundle.CANDIDATE));
         }
     }
 
     private boolean isResidenceInformationFilled() {
         return !(getDistrictOfResidence() == null || getDistrictSubdivisionOfResidence() == null
                 || StringUtils.isEmpty(this.parishOfResidence) || StringUtils.isEmpty(this.address)
-                || StringUtils.isEmpty(this.areaCode) || StringUtils.isEmpty(this.areaOfAreaCode) || StringUtils
-                    .isEmpty(this.area));
+                || StringUtils.isEmpty(this.areaCode) || StringUtils.isEmpty(this.areaOfAreaCode)
+                || StringUtils.isEmpty(this.area));
     }
 
     private void checkAddressInformationForDislocatedStudents(final List<LabelFormatter> result) {
         if (isAnySchoolTimeAddressInformationFilled() && !this.dislocatedFromPermanentResidence) {
-            result.add(new LabelFormatter()
-                    .appendLabel(
-                            "error.candidacy.workflow.ResidenceInformationForm.only.dislocated.students.should.fill.school.time.address.information",
-                            Bundle.CANDIDATE));
+            result.add(new LabelFormatter().appendLabel(
+                    "error.candidacy.workflow.ResidenceInformationForm.only.dislocated.students.should.fill.school.time.address.information",
+                    Bundle.CANDIDATE));
         }
 
         if (this.dislocatedFromPermanentResidence) {
 
             if (!isSchoolTimeRequiredInformationAddressFilled()) {
-                result.add(new LabelFormatter()
-                        .appendLabel(
-                                "error.candidacy.workflow.ResidenceInformationForm.address.information.is.required.for.dislocated.students",
-                                Bundle.CANDIDATE));
+                result.add(new LabelFormatter().appendLabel(
+                        "error.candidacy.workflow.ResidenceInformationForm.address.information.is.required.for.dislocated.students",
+                        Bundle.CANDIDATE));
             } else {
                 if (isAnyFilled(this.schoolTimeAddress, this.schoolTimeAreaCode, this.schoolTimeAreaOfAreaCode,
                         this.schoolTimeArea, this.schoolTimeParishOfResidence)
                         && isAnyEmpty(this.schoolTimeAddress, this.schoolTimeAreaCode, this.schoolTimeAreaOfAreaCode,
                                 this.schoolTimeArea, this.schoolTimeParishOfResidence)) {
 
-                    result.add(new LabelFormatter()
-                            .appendLabel(
-                                    "error.candidacy.workflow.ResidenceInformationForm.school.time.address.must.be.filled.completly.otherwise.fill.minimun.required",
-                                    Bundle.CANDIDATE));
+                    result.add(new LabelFormatter().appendLabel(
+                            "error.candidacy.workflow.ResidenceInformationForm.school.time.address.must.be.filled.completly.otherwise.fill.minimun.required",
+                            Bundle.CANDIDATE));
                 }
             }
 
@@ -316,8 +309,7 @@ public class ResidenceInformationForm extends Form {
     }
 
     public boolean isAnySchoolTimeAddressInformationFilled() {
-        return getSchoolTimeDistrictOfResidence() != null
-                || getSchoolTimeDistrictSubdivisionOfResidence() != null
+        return getSchoolTimeDistrictOfResidence() != null || getSchoolTimeDistrictSubdivisionOfResidence() != null
                 || isAnyFilled(this.schoolTimeAddress, this.schoolTimeAreaCode, this.schoolTimeAreaOfAreaCode,
                         this.schoolTimeParishOfResidence, this.schoolTimeArea);
 
@@ -353,9 +345,8 @@ public class ResidenceInformationForm extends Form {
     }
 
     public boolean isSchoolTimeAddressComplete() {
-        return isSchoolTimeRequiredInformationAddressFilled()
-                && !isAnyEmpty(this.schoolTimeAddress, this.schoolTimeAreaCode, this.schoolTimeAreaOfAreaCode,
-                        this.schoolTimeParishOfResidence, this.schoolTimeArea);
+        return isSchoolTimeRequiredInformationAddressFilled() && !isAnyEmpty(this.schoolTimeAddress, this.schoolTimeAreaCode,
+                this.schoolTimeAreaOfAreaCode, this.schoolTimeParishOfResidence, this.schoolTimeArea);
     }
 
     @Override

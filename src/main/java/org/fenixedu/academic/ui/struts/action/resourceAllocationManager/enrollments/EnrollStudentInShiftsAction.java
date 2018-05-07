@@ -44,8 +44,8 @@ import org.slf4j.LoggerFactory;
 import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(module = "resourceAllocationManager", path = "/enrollStudentInShifts",
-        input = "/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment",
-        formBean = "studentShiftEnrollmentForm", validate = false, functionality = ExecutionPeriodDA.class)
+        input = "/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment", formBean = "studentShiftEnrollmentForm",
+        validate = false, functionality = ExecutionPeriodDA.class)
 @Forwards(@Forward(name = "enrollmentConfirmation",
         path = "/resourceAllocationManager/studentShiftEnrollmentManagerLookup.do?method=proceedToShiftEnrolment"))
 public class EnrollStudentInShiftsAction extends FenixAction {

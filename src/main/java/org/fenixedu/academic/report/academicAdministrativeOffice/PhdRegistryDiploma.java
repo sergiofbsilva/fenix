@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.phd.serviceRequests.documentRequests.PhdRegi
 import org.fenixedu.academic.domain.serviceRequests.IRegistryDiplomaRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.IDocumentRequest;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 public class PhdRegistryDiploma extends RegistryDiploma {
@@ -90,9 +90,10 @@ public class PhdRegistryDiploma extends RegistryDiploma {
     }
 
     private LocalizedString getThesisTitleI18N() {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, getDocumentRequest().getPhdIndividualProgramProcess()
-                .getThesisTitle()).with(org.fenixedu.academic.util.LocaleUtils.EN, getDocumentRequest().getPhdIndividualProgramProcess()
-                .getThesisTitleEn());
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT,
+                getDocumentRequest().getPhdIndividualProgramProcess().getThesisTitle()).with(
+                        org.fenixedu.academic.util.LocaleUtils.EN,
+                        getDocumentRequest().getPhdIndividualProgramProcess().getThesisTitleEn());
     }
 
     @Override
@@ -118,12 +119,10 @@ public class PhdRegistryDiploma extends RegistryDiploma {
         final ExecutionYear executionYear = phdRequest.getPhdIndividualProgramProcess().getExecutionYear();
         String secondParagraph =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.phd.registryDiploma.phdSecondParagraph");
-        addParameter(
-                "secondParagraph",
-                MessageFormat.format(secondParagraph, studentGender,
-                        BundleUtil.getString(Bundle.ENUMERATION, getLocale(), person.getIdDocumentType().getName()),
-                        person.getDocumentIdNumber(), country, phdRequest.getPhdIndividualProgramProcess().getPhdProgram()
-                            .getName(executionYear).getContent(getLanguage())));
+        addParameter("secondParagraph", MessageFormat.format(secondParagraph, studentGender,
+                BundleUtil.getString(Bundle.ENUMERATION, getLocale(), person.getIdDocumentType().getName()),
+                person.getDocumentIdNumber(), country,
+                phdRequest.getPhdIndividualProgramProcess().getPhdProgram().getName(executionYear).getContent(getLanguage())));
     }
 
     @Override

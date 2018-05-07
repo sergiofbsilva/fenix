@@ -79,27 +79,28 @@ import pt.ist.fenixframework.FenixFramework;
 @Forwards({
         @Forward(name = "editEnrolmentInstructions",
                 path = "/academicAdministration/enrolmentPeriodManagement/editEnrolmentInstructions.jsp"),
-        @Forward(name = "showEnrolementPeriods", path = "/academicAdministration/enrolmentPeriodManagement/enrolementPeriods.jsp"),
-        @Forward(name = "createPeriod", path = "/academicAdministration/enrolmentPeriodManagement/createPeriod.jsp"),
-        @Forward(name = "changePeriodValues", path = "/academicAdministration/enrolmentPeriodManagement/changePeriodValues.jsp") })
+        @Forward(name = "showEnrolementPeriods",
+                path = "/academicAdministration/enrolmentPeriodManagement/enrolementPeriods.jsp"),
+        @Forward(name = "createPeriod", path = "/academicAdministration/enrolmentPeriodManagement/createPeriod.jsp"), @Forward(
+                name = "changePeriodValues", path = "/academicAdministration/enrolmentPeriodManagement/changePeriodValues.jsp") })
 public class ManageEnrolementPeriodsDA extends FenixDispatchAction {
 
-    static List<Class<? extends EnrolmentPeriod>> VALID_ENROLMENT_PERIODS = Arrays.<Class<? extends EnrolmentPeriod>> asList(
-            EnrolmentPeriodInCurricularCourses.class,
+    static List<Class<? extends EnrolmentPeriod>> VALID_ENROLMENT_PERIODS =
+            Arrays.<Class<? extends EnrolmentPeriod>> asList(EnrolmentPeriodInCurricularCourses.class,
 
-            EnrolmentPeriodInSpecialSeasonEvaluations.class,
+                    EnrolmentPeriodInSpecialSeasonEvaluations.class,
 
-            EnrolmentPeriodInClasses.class,
+                    EnrolmentPeriodInClasses.class,
 
-            EnrolmentPeriodInClassesMobility.class,
+                    EnrolmentPeriodInClassesMobility.class,
 
-            EnrolmentPeriodInImprovementOfApprovedEnrolment.class,
+                    EnrolmentPeriodInImprovementOfApprovedEnrolment.class,
 
-            EnrolmentPeriodInCurricularCoursesSpecialSeason.class,
+                    EnrolmentPeriodInCurricularCoursesSpecialSeason.class,
 
-            EnrolmentPeriodInCurricularCoursesFlunkedSeason.class,
+                    EnrolmentPeriodInCurricularCoursesFlunkedSeason.class,
 
-            ReingressionPeriod.class);
+                    ReingressionPeriod.class);
 
     public static class EnrolmentPeriodBean implements Serializable {
         private ExecutionSemester semester;
@@ -289,8 +290,7 @@ public class ManageEnrolementPeriodsDA extends FenixDispatchAction {
 
                     if (EnrolmentPeriodType.REINGRESSION.equals(type)) {
                         Bennu.getInstance().getDegreeCurricularPlansSet().stream()
-                                .filter(dcp -> dcp.getDegreeType().equals(degreeType))
-                                .filter(dcp -> !possible.contains(dcp))
+                                .filter(dcp -> dcp.getDegreeType().equals(degreeType)).filter(dcp -> !possible.contains(dcp))
                                 .forEach(dcp -> addIfNotUsedInPeriod(possible, dcp));
                     }
                 } else {
@@ -373,7 +373,8 @@ public class ManageEnrolementPeriodsDA extends FenixDispatchAction {
     }
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         ExecutionSemester semester = getDomainObject(request, "semester");
         EnrolmentPeriodBean bean = new EnrolmentPeriodBean();
         if (semester != null) {

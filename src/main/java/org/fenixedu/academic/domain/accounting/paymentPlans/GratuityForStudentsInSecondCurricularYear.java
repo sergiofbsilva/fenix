@@ -51,7 +51,7 @@ public class GratuityForStudentsInSecondCurricularYear extends GratuityForStuden
     protected Collection<PaymentPlanRule> getSpecificPaymentPlanRules() {
         return Arrays.asList(PaymentPlanRuleFactory.create(StudentIsInSecondCurricularYearPaymentPlanRule.class),
 
-        PaymentPlanRuleFactory.create(HasEnrolmentsForExecutionSemesterPaymentPlanRule.class)
+                PaymentPlanRuleFactory.create(HasEnrolmentsForExecutionSemesterPaymentPlanRule.class)
 
         );
     }

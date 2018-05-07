@@ -36,8 +36,8 @@ import org.fenixedu.academic.service.services.commons.FactoryExecutor;
 
 import pt.ist.fenixframework.Atomic;
 
-public class RegistrationAcademicServiceRequestCreator extends RegistrationAcademicServiceRequestCreateBean implements
-        FactoryExecutor {
+public class RegistrationAcademicServiceRequestCreator extends RegistrationAcademicServiceRequestCreateBean
+        implements FactoryExecutor {
 
     public RegistrationAcademicServiceRequestCreator(final Registration registration) {
         super(registration);

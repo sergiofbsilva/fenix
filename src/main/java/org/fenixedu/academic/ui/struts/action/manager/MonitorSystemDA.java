@@ -88,12 +88,12 @@ public class MonitorSystemDA extends FenixDispatchAction {
 
         request.setAttribute("properties", System.getProperties());
 
-        request.setAttribute("startMillis", ""
-                + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getStartMillis());
-        request.setAttribute("endMillis", ""
-                + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getEndMillis());
-        request.setAttribute("chronology", ""
-                + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getChronology().toString());
+        request.setAttribute("startMillis",
+                "" + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getStartMillis());
+        request.setAttribute("endMillis",
+                "" + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getEndMillis());
+        request.setAttribute("chronology",
+                "" + ExecutionSemester.readActualExecutionSemester().getAcademicInterval().getChronology().toString());
         request.setAttribute("cacheSize", SharedIdentityMap.getCache().size());
 
         return mapping.findForward("Show");

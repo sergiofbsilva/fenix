@@ -30,8 +30,8 @@ public class StandaloneCandidacyPeriod extends StandaloneCandidacyPeriod_Base {
         super();
     }
 
-    public StandaloneCandidacyPeriod(final StandaloneCandidacyProcess candidacyProcess,
-            final ExecutionSemester executionSemester, final DateTime start, final DateTime end) {
+    public StandaloneCandidacyPeriod(final StandaloneCandidacyProcess candidacyProcess, final ExecutionSemester executionSemester,
+            final DateTime start, final DateTime end) {
         this();
         init(candidacyProcess, executionSemester, start, end);
     }
@@ -60,7 +60,8 @@ public class StandaloneCandidacyPeriod extends StandaloneCandidacyPeriod_Base {
     }
 
     public StandaloneCandidacyProcess getStandaloneCandidacyProcess() {
-        return (StandaloneCandidacyProcess) (!getCandidacyProcessesSet().isEmpty() ? getCandidacyProcessesSet().iterator().next() : null);
+        return (StandaloneCandidacyProcess) (!getCandidacyProcessesSet().isEmpty() ? getCandidacyProcessesSet().iterator()
+                .next() : null);
     }
 
     @Override

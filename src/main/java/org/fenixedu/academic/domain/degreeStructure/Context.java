@@ -59,7 +59,8 @@ public class Context extends Context_Base implements Comparable<Context> {
         @Override
         public int compare(Context leftContext, Context rightContext) {
             int comparationResult = leftContext.getCurricularYear().compareTo(rightContext.getCurricularYear());
-            return (comparationResult == 0) ? leftContext.getExternalId().compareTo(rightContext.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftContext.getExternalId()
+                    .compareTo(rightContext.getExternalId()) : comparationResult;
         }
     };
 
@@ -333,7 +334,8 @@ public class Context extends Context_Base implements Comparable<Context> {
 
     /**
      * 
-     * Beware of {@link #containsInterval(ExecutionInterval, ExecutionInterval)} method because it only checks for intersection, not a
+     * Beware of {@link #containsInterval(ExecutionInterval, ExecutionInterval)} method because it only checks for intersection,
+     * not a
      * full
      * contains.
      * 
@@ -466,8 +468,8 @@ public class Context extends Context_Base implements Comparable<Context> {
         @Override
         public boolean isActiveForExecutionPeriod(final ExecutionSemester executionSemester) {
             final ExecutionYear executionYear = executionSemester.getExecutionYear();
-            return getCurricularCourse().isAnual(executionYear) ? getContext().isValid(executionYear) : getContext().isValid(
-                    executionSemester);
+            return getCurricularCourse().isAnual(executionYear) ? getContext().isValid(executionYear) : getContext()
+                    .isValid(executionSemester);
         }
 
         @Override

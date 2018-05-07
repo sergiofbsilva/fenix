@@ -52,9 +52,9 @@ public class PastDegreeGratuityPR extends PastDegreeGratuityPR_Base {
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override
@@ -83,8 +83,8 @@ public class PastDegreeGratuityPR extends PastDegreeGratuityPR_Base {
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(Money amountToPay, Event event, DateTime when) {

@@ -184,8 +184,8 @@ public class ShiftStudentEnrollmentManagerDispatchAction extends FenixDispatchAc
         request.setAttribute("executionDegrees", ExecutionDegreesFormat.buildLabelValueBeansForExecutionDegree(executionDegrees));
 
         request.setAttribute("attendingExecutionCourses", registration.getAttendingExecutionCoursesFor(executionSemester));
-        request.setAttribute("executionCoursesFromExecutionDegree", selectedExecutionDegree.getDegreeCurricularPlan()
-                .getExecutionCoursesByExecutionPeriod(executionSemester));
+        request.setAttribute("executionCoursesFromExecutionDegree",
+                selectedExecutionDegree.getDegreeCurricularPlan().getExecutionCoursesByExecutionPeriod(executionSemester));
 
         return mapping.findForward("selectCourses");
     }

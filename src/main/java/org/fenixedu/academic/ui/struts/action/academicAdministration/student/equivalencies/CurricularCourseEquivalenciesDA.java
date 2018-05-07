@@ -67,8 +67,7 @@ import pt.ist.fenixframework.FenixFramework;
         titleKey = "label.studentDismissal.equivalences", accessGroup = "academic(MANAGE_EQUIVALENCES)")
 @Mapping(module = "academicAdministration", path = "/curricularCourseEquivalencies",
         input = "/curricularCourseEquivalencies.do?method=prepare&page=0", formBean = "curricularCourseEquivalenciesForm")
-@Forwards({
-        @Forward(name = "showEquivalencies", path = "/academicAdministration/equivalences/curricularCourseEquivalencies.jsp"),
+@Forwards({ @Forward(name = "showEquivalencies", path = "/academicAdministration/equivalences/curricularCourseEquivalencies.jsp"),
         @Forward(name = "showCreateEquivalencyForm",
                 path = "/academicAdministration/equivalences/createCurricularCourseEquivalencies.jsp") })
 @Exceptions(value = { @ExceptionHandling(type = DomainException.class, key = "error.exists.curricular.course.equivalency",
@@ -172,8 +171,9 @@ public class CurricularCourseEquivalenciesDA extends FenixDispatchAction {
     private void setInfoDegreesToManage(final HttpServletRequest request, final User userView) throws FenixServiceException {
 
         final SortedSet<Degree> degrees = new TreeSet<Degree>(Degree.COMPARATOR_BY_DEGREE_TYPE_AND_NAME_AND_ID);
-        degrees.addAll(AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_EQUIVALENCES,
-                Authenticate.getUser()).collect(Collectors.toSet()));
+        degrees.addAll(AcademicAccessRule
+                .getDegreesAccessibleToFunction(AcademicOperationType.MANAGE_EQUIVALENCES, Authenticate.getUser())
+                .collect(Collectors.toSet()));
         request.setAttribute("infoDegrees", degrees);
     }
 

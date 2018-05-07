@@ -57,7 +57,8 @@ abstract public class AbstractCurriculumLinesLocationManagementDA extends FenixD
         return prepare(mapping, request, false);
     }
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return prepare(mapping, request, true);
     }
 

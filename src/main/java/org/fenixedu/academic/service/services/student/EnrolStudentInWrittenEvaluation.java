@@ -54,7 +54,8 @@ public class EnrolStudentInWrittenEvaluation {
         enrolmentAction(writtenEvaluation, registration);
     }
 
-    private Registration findCorrectRegistration(final Student student, final Set<ExecutionCourse> associatedExecutionCoursesSet) {
+    private Registration findCorrectRegistration(final Student student,
+            final Set<ExecutionCourse> associatedExecutionCoursesSet) {
         for (final Registration registration : student.getRegistrationsSet()) {
             if (registration.isActive()) {
                 for (final Attends attends : registration.getAssociatedAttendsSet()) {

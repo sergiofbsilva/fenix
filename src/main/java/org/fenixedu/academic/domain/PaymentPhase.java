@@ -39,7 +39,8 @@ public class PaymentPhase extends PaymentPhase_Base {
         public int compare(PaymentPhase leftPaymentPhase, PaymentPhase rightPaymentPhase) {
             int comparationResult =
                     leftPaymentPhase.getEndDateYearMonthDay().compareTo(rightPaymentPhase.getEndDateYearMonthDay());
-            return (comparationResult == 0) ? leftPaymentPhase.getExternalId().compareTo(rightPaymentPhase.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPaymentPhase.getExternalId()
+                    .compareTo(rightPaymentPhase.getExternalId()) : comparationResult;
         }
     };
 

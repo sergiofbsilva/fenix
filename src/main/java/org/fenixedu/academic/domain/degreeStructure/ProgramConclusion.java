@@ -128,15 +128,16 @@ public class ProgramConclusion extends ProgramConclusion_Base {
         if (studentCurricularPlan == null) {
             return Optional.empty();
         }
-        return curriculumGroups(studentCurricularPlan).filter(
-                cg -> cg.getDegreeModule() != null && this.equals(cg.getDegreeModule().getProgramConclusion())).findAny();
+        return curriculumGroups(studentCurricularPlan)
+                .filter(cg -> cg.getDegreeModule() != null && this.equals(cg.getDegreeModule().getProgramConclusion())).findAny();
     }
 
     public Optional<CurriculumGroup> groupFor(Registration registration) {
         if (registration == null) {
             return Optional.empty();
         }
-        return registration.getStudentCurricularPlanStream().map(this::groupFor).filter(Optional::isPresent).findFirst().orElse(Optional.empty());
+        return registration.getStudentCurricularPlanStream().map(this::groupFor).filter(Optional::isPresent).findFirst()
+                .orElse(Optional.empty());
     }
 
     public Optional<CourseGroup> groupFor(DegreeCurricularPlan degreeCurricularPlan) {

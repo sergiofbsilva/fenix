@@ -72,7 +72,8 @@ import pt.ist.fenixframework.FenixFramework;
 @Forwards({
         @Forward(name = "chooseCycleForViewRegistrationCurriculum",
                 path = "/academicAdminOffice/student/registration/chooseCycleForViewRegistrationCurriculum.jsp"),
-        @Forward(name = "chooseProgramConclusion", path = "/academicAdminOffice/student/registration/chooseProgramConclusion.jsp"),
+        @Forward(name = "chooseProgramConclusion",
+                path = "/academicAdminOffice/student/registration/chooseProgramConclusion.jsp"),
         @Forward(name = "view-registration-curriculum",
                 path = "/academicAdminOffice/student/registration/viewRegistrationCurriculum.jsp"),
         @Forward(name = "registrationConclusion", path = "/academicAdminOffice/student/registration/registrationConclusion.jsp"),
@@ -227,7 +228,7 @@ public class RegistrationDA extends StudentRegistrationDA {
     }
 
     public ActionForward selectProgramConclusion(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-                                                 HttpServletResponse response) {
+            HttpServletResponse response) {
         Registration registration = getDomainObject(request, "registration");
         ProgramConclusion programConclusion = getDomainObject(request, "programConclusion");
         RegistrationConclusionBean registrationConclusionBean = new RegistrationConclusionBean(registration, programConclusion);

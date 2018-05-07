@@ -45,24 +45,20 @@ public class EnrolmentToBeApprovedByCoordinatorExecutor extends CurricularRuleEx
             IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate, EnrolmentContext enrolmentContext) {
 
         final Person responsiblePerson = enrolmentContext.getResponsiblePerson();
-        if (AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.STUDENT_ENROLMENTS, enrolmentContext
-                .getStudentCurricularPlan().getDegree(), responsiblePerson.getUser())) {
-            return RuleResult
-                    .createWarning(
-                            sourceDegreeModuleToEvaluate.getDegreeModule(),
-                            "curricularRules.ruleExecutors.EnrolmentToBeApprovedByCoordinatorExecutor.degree.module.needs.aproval.by.coordinator",
-                            sourceDegreeModuleToEvaluate.getName());
+        if (AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.STUDENT_ENROLMENTS,
+                enrolmentContext.getStudentCurricularPlan().getDegree(), responsiblePerson.getUser())) {
+            return RuleResult.createWarning(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                    "curricularRules.ruleExecutors.EnrolmentToBeApprovedByCoordinatorExecutor.degree.module.needs.aproval.by.coordinator",
+                    sourceDegreeModuleToEvaluate.getName());
         }
 
         if (sourceDegreeModuleToEvaluate.isEnroled()) {
             return RuleResult.createNA(sourceDegreeModuleToEvaluate.getDegreeModule());
         }
 
-        return RuleResult
-                .createFalse(
-                        sourceDegreeModuleToEvaluate.getDegreeModule(),
-                        "curricularRules.ruleExecutors.EnrolmentToBeApprovedByCoordinatorExecutor.degree.module.needs.aproval.by.coordinator",
-                        sourceDegreeModuleToEvaluate.getName());
+        return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                "curricularRules.ruleExecutors.EnrolmentToBeApprovedByCoordinatorExecutor.degree.module.needs.aproval.by.coordinator",
+                sourceDegreeModuleToEvaluate.getName());
     }
 
     @Override

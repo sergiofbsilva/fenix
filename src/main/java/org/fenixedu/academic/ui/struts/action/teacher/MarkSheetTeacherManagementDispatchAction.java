@@ -59,10 +59,10 @@ import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
+import com.google.common.base.Strings;
+
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.common.base.Strings;
 
 @Mapping(path = "/markSheetManagement", module = "teacher", functionality = ManageExecutionCourseDA.class)
 @Forwards(@Forward(name = "mainPage", path = "/teacher/evaluation/finalEvaluationIndex.faces"))
@@ -83,7 +83,8 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
         return doForward(request, "/teacher/evaluation/evaluationIndex.jsp");
     }
 
-    public ActionForward invalid(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward invalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("submissionBean", getObjectFromViewState("submissionBean-invisible"));
         RenderUtils.invalidateViewState();
         return doForward(request, "/teacher/evaluation/gradeSubmission/gradeSubmissionStepTwo.jsp");
@@ -113,14 +114,12 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
 
         ActionMessages actionMessages = new ActionMessages();
         boolean canSubmitMarksAnyCurricularCourse =
-                checkIfCanSubmitMarksToAnyCurricularCourse(submissionBean.getAllCurricularCourses(), submissionBean
-                        .getExecutionCourse().getExecutionPeriod(), request, actionMessages);
+                checkIfCanSubmitMarksToAnyCurricularCourse(submissionBean.getAllCurricularCourses(),
+                        submissionBean.getExecutionCourse().getExecutionPeriod(), request, actionMessages);
         calculateMarksToSubmit(request, submissionBean);
         request.setAttribute("executionCourse", submissionBean.getExecutionCourse());
         if (submissionBean.getMarksToSubmit().isEmpty()) {
-            addMessage(
-                    request,
-                    actionMessages,
+            addMessage(request, actionMessages,
                     (!canSubmitMarksAnyCurricularCourse) ? "error.teacher.gradeSubmission.noStudentsToSubmitMarksInPeriods" : "error.teacher.gradeSubmission.noStudentsToSubmitMarks");
             return doForward(request, "/teacher/evaluation/gradeSubmission/gradeSubmissionStepOne.jsp");
         }
@@ -132,9 +131,8 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
             HttpServletResponse response) throws FenixServiceException {
 
         User userView = getUserView(request);
-        MarkSheetTeacherGradeSubmissionBean submissionBean =
-                (MarkSheetTeacherGradeSubmissionBean) RenderUtils.getViewState("submissionBean-invisible").getMetaObject()
-                        .getObject();
+        MarkSheetTeacherGradeSubmissionBean submissionBean = (MarkSheetTeacherGradeSubmissionBean) RenderUtils
+                .getViewState("submissionBean-invisible").getMetaObject().getObject();
         submissionBean.setResponsibleTeacher(userView.getPerson().getTeacher());
 
         ActionMessages actionMessages = new ActionMessages();
@@ -161,7 +159,8 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
         return mapping.findForward("mainPage");
     }
 
-    private void calculateMarksToSubmit(final HttpServletRequest request, final MarkSheetTeacherGradeSubmissionBean submissionBean) {
+    private void calculateMarksToSubmit(final HttpServletRequest request,
+            final MarkSheetTeacherGradeSubmissionBean submissionBean) {
         final Collection<MarkSheetTeacherMarkBean> marksToSubmit = new HashSet<MarkSheetTeacherMarkBean>();
         final List<Student> studentsWithImpossibleEnrolments = new ArrayList<Student>();
 
@@ -199,9 +198,10 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
         Collection<Enrolment> enrolmentsNotInAnyMarkSheet = new HashSet<Enrolment>();
         for (CurricularCourse curricularCourse : submissionBean.getAllCurricularCourses()) {
             for (EvaluationSeason season : EvaluationConfiguration.getInstance().getEvaluationSeasonSet()) {
-                if (season.isGradeSubmissionAvailable(curricularCourse, submissionBean.getExecutionCourse().getExecutionPeriod())) {
-                    enrolmentsNotInAnyMarkSheet.addAll(curricularCourse.getEnrolmentsNotInAnyMarkSheet(season, submissionBean
-                            .getExecutionCourse().getExecutionPeriod()));
+                if (season.isGradeSubmissionAvailable(curricularCourse,
+                        submissionBean.getExecutionCourse().getExecutionPeriod())) {
+                    enrolmentsNotInAnyMarkSheet.addAll(curricularCourse.getEnrolmentsNotInAnyMarkSheet(season,
+                            submissionBean.getExecutionCourse().getExecutionPeriod()));
                 }
             }
         }
@@ -228,10 +228,9 @@ public class MarkSheetTeacherManagementDispatchAction extends ManageExecutionCou
 
     private void addMessageGradeSubmissionPeriods(HttpServletRequest request, ActionMessages actionMessages, String dateFormat,
             EvaluationSeason season, ExecutionDegree executionDegree) {
-        String period =
-                season.getGradeSubmissionPeriods(executionDegree, null)
-                        .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-"
-                                + o.getEndYearMonthDay().toString(dateFormat)).collect(Collectors.joining(", "));
+        String period = season.getGradeSubmissionPeriods(executionDegree, null)
+                .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-" + o.getEndYearMonthDay().toString(dateFormat))
+                .collect(Collectors.joining(", "));
         if (!Strings.isNullOrEmpty(period)) {
             addMessage(request, actionMessages, "error.teacher.gradeSubmission.dates", season.getName().getContent(), period);
         }

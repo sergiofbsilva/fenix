@@ -113,7 +113,8 @@ public class CycleCourseGroupInformationManagementBackingBean extends Curricular
     }
 
     public CycleCourseGroupInformation getInformation() {
-        return getInformationId() != null ? FenixFramework.<CycleCourseGroupInformation> getDomainObject(getInformationId()) : null;
+        return getInformationId() != null ? FenixFramework
+                .<CycleCourseGroupInformation> getDomainObject(getInformationId()) : null;
     }
 
     public void setInformationId(String informationId) {

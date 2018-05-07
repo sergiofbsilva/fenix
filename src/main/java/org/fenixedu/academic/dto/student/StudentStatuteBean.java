@@ -82,8 +82,7 @@ public class StudentStatuteBean implements Serializable {
     }
 
     public String getDescription() {
-        return getStatuteType().getName().getContent()
-                + (studentStatute instanceof SeniorStatute ? (" ("
-                        + ((SeniorStatute) studentStatute).getRegistration().getDegree().getPresentationName() + ") ") : "");
+        return getStatuteType().getName().getContent() + (studentStatute instanceof SeniorStatute ? (" ("
+                + ((SeniorStatute) studentStatute).getRegistration().getDegree().getPresentationName() + ") ") : "");
     }
 }

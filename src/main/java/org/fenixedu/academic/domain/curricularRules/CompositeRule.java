@@ -126,7 +126,8 @@ public abstract class CompositeRule extends CompositeRule_Base {
     }
 
     @Override
-    public RuleResult evaluate(final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate, final EnrolmentContext enrolmentContext) {
+    public RuleResult evaluate(final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate,
+            final EnrolmentContext enrolmentContext) {
         throw new DomainException("unsupported.composite.rule");
     }
 

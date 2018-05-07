@@ -148,7 +148,8 @@ public abstract class FenixDispatchAction extends DispatchAction implements Exce
         }
     }
 
-    protected Integer getIntegerFromRequestOrForm(final HttpServletRequest request, final DynaActionForm form, final String name) {
+    protected Integer getIntegerFromRequestOrForm(final HttpServletRequest request, final DynaActionForm form,
+            final String name) {
         final Integer value = getIntegerFromRequest(request, name);
 
         return (value != null) ? value : getInteger(form, name);
@@ -179,7 +180,8 @@ public abstract class FenixDispatchAction extends DispatchAction implements Exce
 
     protected Integer getIntegerFromRequest(HttpServletRequest request, String name) {
         final String requestParameter = request.getParameter(name);
-        return (!StringUtils.isEmpty(requestParameter) ? Integer.valueOf(requestParameter) : (Integer) request.getAttribute(name));
+        return (!StringUtils.isEmpty(requestParameter) ? Integer
+                .valueOf(requestParameter) : (Integer) request.getAttribute(name));
     }
 
     protected Long getLongFromRequest(HttpServletRequest request, String name) {
@@ -378,9 +380,8 @@ public abstract class FenixDispatchAction extends DispatchAction implements Exce
     }
 
     public List<IViewState> getViewStatesWithPrefixId(final String prefixId) {
-        final List<IViewState> viewStates =
-                (List<IViewState>) RenderersRequestProcessorImpl.getCurrentRequest().getAttribute(
-                        LifeCycleConstants.VIEWSTATE_PARAM_NAME);
+        final List<IViewState> viewStates = (List<IViewState>) RenderersRequestProcessorImpl.getCurrentRequest()
+                .getAttribute(LifeCycleConstants.VIEWSTATE_PARAM_NAME);
 
         final List<IViewState> result = new ArrayList<IViewState>();
 

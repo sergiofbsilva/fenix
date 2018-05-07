@@ -33,9 +33,8 @@ import org.joda.time.YearMonthDay;
 public class AlumniIdentityCheckRequest extends AlumniIdentityCheckRequest_Base {
 
     public AlumniIdentityCheckRequest(String contactEmail, String documentIdNumber, String fullName,
-            YearMonthDay dateOfBirthYearMonthDay, String districtOfBirth, String districtSubdivisionOfBirth,
-            String parishOfBirth, String socialSecurityNumber, String nameOfFather, String nameOfMother,
-            AlumniRequestType requestType) {
+            YearMonthDay dateOfBirthYearMonthDay, String districtOfBirth, String districtSubdivisionOfBirth, String parishOfBirth,
+            String socialSecurityNumber, String nameOfFather, String nameOfMother, AlumniRequestType requestType) {
         super();
 
         checkParameters(contactEmail, documentIdNumber, fullName, dateOfBirthYearMonthDay, districtOfBirth,
@@ -59,9 +58,8 @@ public class AlumniIdentityCheckRequest extends AlumniIdentityCheckRequest_Base 
     }
 
     private void checkParameters(String contactEmail, String documentIdNumber, String fullName,
-            YearMonthDay dateOfBirthYearMonthDay, String districtOfBirth, String districtSubdivisionOfBirth,
-            String parishOfBirth, String socialSecurityNumber, String nameOfFather, String nameOfMother,
-            AlumniRequestType requestType) {
+            YearMonthDay dateOfBirthYearMonthDay, String districtOfBirth, String districtSubdivisionOfBirth, String parishOfBirth,
+            String socialSecurityNumber, String nameOfFather, String nameOfMother, AlumniRequestType requestType) {
 
         if (StringUtils.isEmpty(contactEmail)) {
             throw new DomainException("alumni.identity.request.contactEmail.null");
@@ -121,11 +119,11 @@ public class AlumniIdentityCheckRequest extends AlumniIdentityCheckRequest_Base 
         return (!StringUtils.isEmpty(person.getName()) && person.getName().equals(getFullName()))
                 && (person.getDateOfBirthYearMonthDay().equals(getDateOfBirthYearMonthDay()))
                 && (!StringUtils.isEmpty(person.getDistrictOfBirth()) && person.getDistrictOfBirth().equals(getDistrictOfBirth()))
-                && (!StringUtils.isEmpty(person.getDistrictSubdivisionOfBirth()) && person.getDistrictSubdivisionOfBirth()
-                        .equals(getDistrictSubdivisionOfBirth()))
+                && (!StringUtils.isEmpty(person.getDistrictSubdivisionOfBirth())
+                        && person.getDistrictSubdivisionOfBirth().equals(getDistrictSubdivisionOfBirth()))
                 && (!StringUtils.isEmpty(person.getParishOfBirth()) && person.getParishOfBirth().equals(getParishOfBirth()))
-                && (!StringUtils.isEmpty(person.getSocialSecurityNumber()) && person.getSocialSecurityNumber().equals(
-                        getSocialSecurityNumber()))
+                && (!StringUtils.isEmpty(person.getSocialSecurityNumber())
+                        && person.getSocialSecurityNumber().equals(getSocialSecurityNumber()))
                 && (!StringUtils.isEmpty(person.getNameOfFather()) && person.getNameOfFather().equals(getNameOfFather()))
                 && (!StringUtils.isEmpty(person.getNameOfMother()) && person.getNameOfMother().equals(getNameOfMother()));
     }

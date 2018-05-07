@@ -65,8 +65,8 @@ public class PaymentCodesAttributionDA extends FenixDispatchAction {
         return mapping.findForward("viewCodes");
     }
 
-    public ActionForward prepareCreatePaymentCodeMapping(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareCreatePaymentCodeMapping(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         RenderUtils.invalidateViewState();
         final PaymentCodeMappingBean bean = new PaymentCodeMappingBean();
         bean.setExecutionInterval((ExecutionInterval) getDomainObject(request, "executionIntervalOid"));
@@ -93,8 +93,8 @@ public class PaymentCodesAttributionDA extends FenixDispatchAction {
         return mapping.findForward("viewCodes");
     }
 
-    public ActionForward createPaymentCodeMappingInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward createPaymentCodeMappingInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("paymentCodeMappingBean", getRenderedObject("paymentCodeMappingBean"));
         return mapping.findForward("createPaymentCodeMapping");
     }

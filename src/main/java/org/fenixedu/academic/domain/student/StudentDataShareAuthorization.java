@@ -18,11 +18,11 @@
  */
 package org.fenixedu.academic.domain.student;
 
-import jvstm.cps.ConsistencyPredicate;
-
 import org.fenixedu.academic.util.StudentPersonalDataAuthorizationChoice;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.joda.time.DateTime;
+
+import jvstm.cps.ConsistencyPredicate;
 
 public class StudentDataShareAuthorization extends StudentDataShareAuthorization_Base {
 

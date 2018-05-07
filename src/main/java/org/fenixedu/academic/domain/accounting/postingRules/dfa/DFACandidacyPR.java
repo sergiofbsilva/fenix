@@ -45,17 +45,16 @@ public class DFACandidacyPR extends DFACandidacyPR_Base {
     public DFACandidacyPR(DateTime startDate, DateTime endDate, ServiceAgreementTemplate serviceAgreementTemplate,
             Money fixedAmount, Money fixedAmountPenalty) {
         this();
-        super.init(EntryType.CANDIDACY_ENROLMENT_FEE, EventType.CANDIDACY_ENROLMENT, startDate, endDate,
-                serviceAgreementTemplate, fixedAmount, fixedAmountPenalty);
+        super.init(EntryType.CANDIDACY_ENROLMENT_FEE, EventType.CANDIDACY_ENROLMENT, startDate, endDate, serviceAgreementTemplate,
+                fixedAmount, fixedAmountPenalty);
 
     }
 
     @Override
     protected boolean hasPenalty(Event event, DateTime when) {
         final DFACandidacyEvent dfaCandidacyEvent = (DFACandidacyEvent) event;
-        return dfaCandidacyEvent.hasCandidacyPeriodInDegreeCurricularPlan()
-                && !dfaCandidacyEvent.getCandidacyPeriodInDegreeCurricularPlan().containsDate(
-                        dfaCandidacyEvent.getCandidacyDate());
+        return dfaCandidacyEvent.hasCandidacyPeriodInDegreeCurricularPlan() && !dfaCandidacyEvent
+                .getCandidacyPeriodInDegreeCurricularPlan().containsDate(dfaCandidacyEvent.getCandidacyDate());
 
     }
 

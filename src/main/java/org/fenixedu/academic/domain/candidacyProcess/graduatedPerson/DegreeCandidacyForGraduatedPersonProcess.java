@@ -57,8 +57,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class DegreeCandidacyForGraduatedPersonProcess extends DegreeCandidacyForGraduatedPersonProcess_Base {
 
     static {
-        getRelationCandidacyPeriodCandidacyProcess().addListener(
-                new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
+        getRelationCandidacyPeriodCandidacyProcess()
+                .addListener(new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
                     @Override
                     public void beforeAdd(CandidacyProcess candidacyProcess, CandidacyProcessCandidacyPeriod candidacyPeriod) {
                         super.beforeAdd(candidacyProcess, candidacyPeriod);
@@ -88,7 +88,8 @@ public class DegreeCandidacyForGraduatedPersonProcess extends DegreeCandidacyFor
         super();
     }
 
-    private DegreeCandidacyForGraduatedPersonProcess(final ExecutionYear executionYear, final DateTime start, final DateTime end) {
+    private DegreeCandidacyForGraduatedPersonProcess(final ExecutionYear executionYear, final DateTime start,
+            final DateTime end) {
         this();
         checkParameters(executionYear, start, end);
         setState(CandidacyProcessState.STAND_BY);
@@ -138,9 +139,9 @@ public class DegreeCandidacyForGraduatedPersonProcess extends DegreeCandidacyFor
             final DegreeCandidacyForGraduatedPersonIndividualProcess process) {
         SortedSet<DegreeCandidacyForGraduatedPersonIndividualProcess> values = result.get(process.getCandidacySelectedDegree());
         if (values == null) {
-            result.put(process.getCandidacySelectedDegree(), values =
-                    new TreeSet<DegreeCandidacyForGraduatedPersonIndividualProcess>(
-                            DegreeCandidacyForGraduatedPersonIndividualProcess.COMPARATOR_BY_CANDIDACY_PERSON));
+            result.put(process.getCandidacySelectedDegree(),
+                    values = new TreeSet<DegreeCandidacyForGraduatedPersonIndividualProcess>(
+                            IndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON));
         }
         values.add(process);
     }
@@ -177,12 +178,13 @@ public class DegreeCandidacyForGraduatedPersonProcess extends DegreeCandidacyFor
 
     // static methods
 
-    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES = DegreeType.oneOf(DegreeType::isBolonhaDegree,
-            DegreeType::isIntegratedMasterDegree);
+    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isIntegratedMasterDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }

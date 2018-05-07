@@ -53,8 +53,7 @@ import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/manageFinalDegreeWork", module = "coordinator", formBean = "finalDegreeWorkCandidacyRequirements",
         functionality = DegreeCoordinatorIndex.class)
-@Forwards({
-        @Forward(name = "show-final-degree-work-info", path = "/coordinator/finalDegreeWork/showFinalDegreeWorkInfo.jsp"),
+@Forwards({ @Forward(name = "show-final-degree-work-info", path = "/coordinator/finalDegreeWork/showFinalDegreeWorkInfo.jsp"),
         @Forward(name = "show-choose-execution-degree-page",
                 path = "/coordinator/finalDegreeWork/showFinalDegreeChooseExecutionDegree_bd.jsp") })
 public class ManageFinalDegreeWorkDispatchAction extends FenixDispatchAction {
@@ -110,10 +109,8 @@ public class ManageFinalDegreeWorkDispatchAction extends FenixDispatchAction {
     }
 
     public static List<InfoExecutionDegree> getExecutionCourses(final DegreeCurricularPlan degreeCurricularPlan) {
-        final Collection<ExecutionDegree> executionDegrees =
-                degreeCurricularPlan.getExecutionYears().stream()
-                        .map(executionYear -> degreeCurricularPlan.getExecutionDegreeByYear(executionYear))
-                        .collect(Collectors.toSet());
+        final Collection<ExecutionDegree> executionDegrees = degreeCurricularPlan.getExecutionYears().stream()
+                .map(executionYear -> degreeCurricularPlan.getExecutionDegreeByYear(executionYear)).collect(Collectors.toSet());
 
         final List<InfoExecutionDegree> result = new ArrayList<InfoExecutionDegree>(executionDegrees.size());
         for (final ExecutionDegree executionDegree : executionDegrees) {

@@ -76,42 +76,38 @@ public class RemindJuryReviewToReporters extends PhdThesisActivity {
 
     private void sendReminderToReporter(PhdIndividualProgramProcess process, PhdParticipant participant) {
         final ExecutionYear executionYear = process.getExecutionYear();
-        final AlertMessage subject =
-                AlertMessage
-                        .create(AlertMessage.get("message.phd.remind.jury.reviews.subject", process.getPhdProgram().getName(executionYear)))
-                        .isKey(false).withPrefix(false);
+        final AlertMessage subject = AlertMessage.create(
+                AlertMessage.get("message.phd.remind.jury.reviews.subject", process.getPhdProgram().getName(executionYear)))
+                .isKey(false).withPrefix(false);
 
         String partialBody = null;
 
         if (!hasExceededLimitForReview(process.getThesisProcess())) {
-            partialBody =
-                    AlertMessage.get("message.phd.remind.jury.reviews.body", process.getPerson().getName(),
-                            process.getProcessNumber(), daysLeftUntilDeadline(process.getThesisProcess()));
+            partialBody = AlertMessage.get("message.phd.remind.jury.reviews.body", process.getPerson().getName(),
+                    process.getProcessNumber(), daysLeftUntilDeadline(process.getThesisProcess()));
         } else {
-            partialBody =
-                    AlertMessage.get("message.phd.remind.jury.reviews.body.late", process.getPerson().getName(),
-                            process.getProcessNumber());
+            partialBody = AlertMessage.get("message.phd.remind.jury.reviews.body.late", process.getPerson().getName(),
+                    process.getProcessNumber());
         }
 
-        final AlertMessage body =
-                AlertMessage
-                        .create(partialBody
-                                + "\n\n"
-                                + getAccessInformation(process, participant,
-                                        "message.phd.request.jury.reviews.coordinator.access",
-                                        "message.phd.request.jury.reviews.teacher.access")).isKey(false).withPrefix(false);
+        final AlertMessage body = AlertMessage
+                .create(partialBody + "\n\n" + getAccessInformation(process, participant,
+                        "message.phd.request.jury.reviews.coordinator.access", "message.phd.request.jury.reviews.teacher.access"))
+                .isKey(false).withPrefix(false);
 
         AlertService.alertParticipants(process, subject, body, participant);
     }
 
     private boolean hasExceededLimitForReview(PhdThesisProcess process) {
-        return !(new LocalDate().isBefore(process.getWhenJuryValidated().plusDays(
-                PhdReporterReviewAlert.getReporterReviewDeadlineDays())));
+        return !(new LocalDate()
+                .isBefore(process.getWhenJuryValidated().plusDays(PhdReporterReviewAlert.getReporterReviewDeadlineDays())));
     }
 
     private int daysLeftUntilDeadline(PhdThesisProcess process) {
-        return Days.daysBetween(new LocalDate(),
-                process.getWhenJuryValidated().plusDays(PhdReporterReviewAlert.getReporterReviewDeadlineDays())).getDays();
+        return Days
+                .daysBetween(new LocalDate(),
+                        process.getWhenJuryValidated().plusDays(PhdReporterReviewAlert.getReporterReviewDeadlineDays()))
+                .getDays();
     }
 
 }

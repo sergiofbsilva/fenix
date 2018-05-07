@@ -48,9 +48,9 @@ import org.fenixedu.academic.domain.contacts.PhysicalAddress;
 import org.fenixedu.academic.domain.contacts.PhysicalAddressData;
 import org.fenixedu.academic.domain.contacts.WebAddress;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.commons.StringNormalizer;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 public abstract class Party extends Party_Base implements Comparable<Party> {
@@ -576,7 +576,8 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
         return false;
     }
 
-    public List<? extends PartyContact> getAllPartyContacts(final Class<? extends PartyContact> clazz, final PartyContactType type) {
+    public List<? extends PartyContact> getAllPartyContacts(final Class<? extends PartyContact> clazz,
+            final PartyContactType type) {
         final List<PartyContact> result = new ArrayList<PartyContact>();
         for (final PartyContact contact : getPartyContactsSet()) {
             if (clazz.isAssignableFrom(contact.getClass()) && (type == null || contact.getType() == type)) {
@@ -593,7 +594,8 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T extends PartyContact> Stream<T> getPartyContactStream(final Class<T> clazz, final PartyContactType type) {
         final Stream<PartyContact> stream = getPartyContactsSet().stream();
-        return (Stream) stream.filter(c -> clazz.isAssignableFrom(c.getClass()) && (type == null || c.getType() == type) && c.isActiveAndValid());
+        return (Stream) stream.filter(
+                c -> clazz.isAssignableFrom(c.getClass()) && (type == null || c.getType() == type) && c.isActiveAndValid());
     }
 
     public List<? extends PartyContact> getPartyContacts(final Class<? extends PartyContact> clazz, final PartyContactType type) {
@@ -888,7 +890,7 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
     }
 
     /**
-     * @deprecated  {@link getDefaultMobilePhoneNumber}
+     * @deprecated {@link getDefaultMobilePhoneNumber}
      */
     @Deprecated
     public String getMobile() {
@@ -896,7 +898,7 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
     }
 
     /**
-     * @deprecated  {@link setDefaultMobilePhoneNumber}
+     * @deprecated {@link setDefaultMobilePhoneNumber}
      */
     @Deprecated
     public void setMobile(String mobile) {
@@ -911,7 +913,7 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
     }
 
     /**
-     * @deprecated  Use {@link getEmailAddressStream} instead
+     * @deprecated Use {@link getEmailAddressStream} instead
      */
     @Deprecated
     public List<EmailAddress> getEmailAddresses() {
@@ -993,7 +995,7 @@ public abstract class Party extends Party_Base implements Comparable<Party> {
     }
 
     /**
-     * @deprecated  {@link #getDefaultEmailAddressValue()}
+     * @deprecated {@link #getDefaultEmailAddressValue()}
      */
     @Deprecated
     public String getEmail() {

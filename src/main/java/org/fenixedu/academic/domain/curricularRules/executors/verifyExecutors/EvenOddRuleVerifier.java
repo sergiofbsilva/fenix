@@ -35,7 +35,7 @@ public class EvenOddRuleVerifier extends VerifyRuleExecutor {
         if (evenOddRule.getCurricularPeriodOrder().equals(enrolmentContext.getExecutionPeriod().getSemester())) {
             if (evenOddRule.getEven() && ((enrolmentContext.getRegistration().getStudent().getNumber().intValue() & 1) == 0)
                     || !evenOddRule.getEven()
-                    && ((enrolmentContext.getRegistration().getStudent().getNumber().intValue() & 1) != 0)) {
+                            && ((enrolmentContext.getRegistration().getStudent().getNumber().intValue() & 1) != 0)) {
                 return RuleResult.createTrue(degreeModuleToVerify);
             }
 

@@ -50,25 +50,15 @@ public class AllAlumniGroup extends GroupStrategy {
      */
     private boolean isAlumni(Student student) {
 
-        return student
-                .getRegistrationsSet()
-                .stream()
-                .anyMatch(
-                        registration -> ProgramConclusion
-                                .conclusionsFor(registration)
-                                .filter(ProgramConclusion::isAlumniProvider)
-                                .anyMatch(
-                                        conclusion -> conclusion.groupFor(registration).isPresent()
-                                                && conclusion.groupFor(registration).get().isConclusionProcessed()));
+        return student.getRegistrationsSet().stream().anyMatch(registration -> ProgramConclusion.conclusionsFor(registration)
+                .filter(ProgramConclusion::isAlumniProvider).anyMatch(conclusion -> conclusion.groupFor(registration).isPresent()
+                        && conclusion.groupFor(registration).get().isConclusionProcessed()));
 
     }
 
     @Override
     public Stream<User> getMembers() {
-        return Bennu
-                .getInstance()
-                .getStudentsSet()
-                .stream()
+        return Bennu.getInstance().getStudentsSet().stream()
                 .filter(student -> student.getAlumni() != null
                         || student.hasAnyRegistrationInState(RegistrationStateType.CONCLUDED)
                         || student.hasAnyRegistrationInState(RegistrationStateType.STUDYPLANCONCLUDED) || isAlumni(student))
@@ -82,13 +72,11 @@ public class AllAlumniGroup extends GroupStrategy {
 
     @Override
     public boolean isMember(User user) {
-        return user != null
-                && user.getPerson() != null
-                && user.getPerson().getStudent() != null
+        return user != null && user.getPerson() != null && user.getPerson().getStudent() != null
                 && (user.getPerson().getStudent().getAlumni() != null
                         || user.getPerson().getStudent().hasAnyRegistrationInState(RegistrationStateType.CONCLUDED)
-                        || user.getPerson().getStudent().hasAnyRegistrationInState(RegistrationStateType.STUDYPLANCONCLUDED) || isAlumni(user
-                        .getPerson().getStudent()));
+                        || user.getPerson().getStudent().hasAnyRegistrationInState(RegistrationStateType.STUDYPLANCONCLUDED)
+                        || isAlumni(user.getPerson().getStudent()));
     }
 
     @Override

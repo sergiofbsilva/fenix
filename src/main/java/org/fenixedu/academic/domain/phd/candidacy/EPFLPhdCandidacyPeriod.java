@@ -23,11 +23,11 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.period.CandidacyPeriod;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.academic.util.phd.EPFLPhdCandidacyProcessProperties;
 import org.fenixedu.academic.util.phd.PhdProperties;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 import pt.ist.fenixframework.Atomic;
@@ -46,7 +46,8 @@ public class EPFLPhdCandidacyPeriod extends EPFLPhdCandidacyPeriod_Base {
     }
 
     @Override
-    protected void init(final ExecutionYear executionYear, final DateTime start, final DateTime end, PhdCandidacyPeriodType type) {
+    protected void init(final ExecutionYear executionYear, final DateTime start, final DateTime end,
+            PhdCandidacyPeriodType type) {
         checkIfCanCreate(start, end);
 
         if (!PhdCandidacyPeriodType.EPFL.equals(type)) {
@@ -125,8 +126,9 @@ public class EPFLPhdCandidacyPeriod extends EPFLPhdCandidacyPeriod_Base {
 
     @Override
     public String getEmailMessageBodyForRefereeForm(final PhdCandidacyReferee referee) {
-        return String.format(BundleUtil.getString(Bundle.PHD, "message.phd.epfl.email.body.referee"), referee
-                .getPhdProgramCandidacyProcess().getIndividualProgramProcess().getPhdProgramFocusArea().getName().getContent(),
+        return String.format(BundleUtil.getString(Bundle.PHD, "message.phd.epfl.email.body.referee"),
+                referee.getPhdProgramCandidacyProcess().getIndividualProgramProcess().getPhdProgramFocusArea().getName()
+                        .getContent(),
                 EPFLPhdCandidacyProcessProperties.getConfiguration().getPublicCandidacyRefereeFormLink(), referee.getValue(),
                 referee.getPhdProgramCandidacyProcess().getPublicPhdCandidacyPeriod().getEnd().toString("yyyy-MM-dd HH:mm"));
     }
@@ -139,10 +141,9 @@ public class EPFLPhdCandidacyPeriod extends EPFLPhdCandidacyPeriod_Base {
 
     @Override
     public LocalizedString getEmailMessageBodyForMissingCandidacyValidation(PhdIndividualProgramProcess process) {
-        final String body =
-                String.format(BundleUtil.getString(Bundle.PHD, "message.phd.epfl.email.body.missing.candidacy.validation"),
-                        PhdProperties.getPublicCandidacyAccessLink(), process.getCandidacyProcess().getCandidacyHashCode()
-                                .getValue());
+        final String body = String.format(
+                BundleUtil.getString(Bundle.PHD, "message.phd.epfl.email.body.missing.candidacy.validation"),
+                PhdProperties.getPublicCandidacyAccessLink(), process.getCandidacyProcess().getCandidacyHashCode().getValue());
         return new LocalizedString().with(org.fenixedu.academic.util.LocaleUtils.EN, body);
     }
 

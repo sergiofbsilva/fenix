@@ -44,10 +44,10 @@ public class CompetenceCourseInformationChangeRequest extends CompetenceCourseIn
     public CompetenceCourseInformationChangeRequest(CompetenceCourseInformation information, String justification,
             Person requester) {
         this(information.getName(), information.getNameEn(), justification, information.getRegime(), information.getObjectives(),
-                information.getObjectivesEn(), information.getProgram(), information.getProgramEn(), information
-                        .getEvaluationMethod(), information.getEvaluationMethodEn(), information.getCompetenceCourse(),
-                information.getCompetenceCourseLevel(), information.getExecutionPeriod(), requester, information
-                        .getTheoreticalHours(1), information.getProblemsHours(1), information.getLaboratorialHours(1),
+                information.getObjectivesEn(), information.getProgram(), information.getProgramEn(),
+                information.getEvaluationMethod(), information.getEvaluationMethodEn(), information.getCompetenceCourse(),
+                information.getCompetenceCourseLevel(), information.getExecutionPeriod(), requester,
+                information.getTheoreticalHours(1), information.getProblemsHours(1), information.getLaboratorialHours(1),
                 information.getSeminaryHours(1), information.getFieldWorkHours(1), information.getTrainingPeriodHours(1),
                 information.getTutorialOrientationHours(1), information.getAutonomousWorkHours(1), information.getEctsCredits(1),
                 information.getTheoreticalHours(2), information.getProblemsHours(2), information.getLaboratorialHours(2),
@@ -213,9 +213,8 @@ public class CompetenceCourseInformationChangeRequest extends CompetenceCourseIn
             createLoads(information);
 
         } else {
-            information =
-                    new CompetenceCourseInformation(getName(), getNameEn(), course.isBasic(), getRegime(),
-                            getCompetenceCourseLevel(), getExecutionPeriod(), getCompetenceCourseGroupUnit());
+            information = new CompetenceCourseInformation(getName(), getNameEn(), course.isBasic(), getRegime(),
+                    getCompetenceCourseLevel(), getExecutionPeriod(), getCompetenceCourseGroupUnit());
             information.edit(getObjectives(), getProgram(), getEvaluationMethod(), getObjectivesEn(), getProgramEn(),
                     getEvaluationMethodEn());
             information.setAcronym(course.getAcronym());
@@ -227,20 +226,18 @@ public class CompetenceCourseInformationChangeRequest extends CompetenceCourseIn
     }
 
     private void createLoads(CompetenceCourseInformation information) {
-        CompetenceCourseLoad courseLoad =
-                new CompetenceCourseLoad(getTheoreticalHours(), getProblemsHours(), getLaboratorialHours(), getSeminaryHours(),
-                        getFieldWorkHours(), getTrainingPeriodHours(), getTutorialOrientationHours(), getAutonomousWorkHours(),
-                        getEctsCredits(), Integer.valueOf(1),
-                        (getRegime() == RegimeType.SEMESTRIAL) ? AcademicPeriod.SEMESTER : AcademicPeriod.YEAR);
+        CompetenceCourseLoad courseLoad = new CompetenceCourseLoad(getTheoreticalHours(), getProblemsHours(),
+                getLaboratorialHours(), getSeminaryHours(), getFieldWorkHours(), getTrainingPeriodHours(),
+                getTutorialOrientationHours(), getAutonomousWorkHours(), getEctsCredits(), Integer.valueOf(1),
+                (getRegime() == RegimeType.SEMESTRIAL) ? AcademicPeriod.SEMESTER : AcademicPeriod.YEAR);
 
         information.addCompetenceCourseLoads(courseLoad);
 
         if (getRegime() == RegimeType.ANUAL) {
-            CompetenceCourseLoad secondCourseLoad =
-                    new CompetenceCourseLoad(getSecondTheoreticalHours(), getSecondProblemsHours(), getSecondLaboratorialHours(),
-                            getSecondSeminaryHours(), getSecondFieldWorkHours(), getSecondTrainingPeriodHours(),
-                            getSecondTutorialOrientationHours(), getSecondAutonomousWorkHours(), getSecondEctsCredits(),
-                            Integer.valueOf(2), AcademicPeriod.YEAR);
+            CompetenceCourseLoad secondCourseLoad = new CompetenceCourseLoad(getSecondTheoreticalHours(),
+                    getSecondProblemsHours(), getSecondLaboratorialHours(), getSecondSeminaryHours(), getSecondFieldWorkHours(),
+                    getSecondTrainingPeriodHours(), getSecondTutorialOrientationHours(), getSecondAutonomousWorkHours(),
+                    getSecondEctsCredits(), Integer.valueOf(2), AcademicPeriod.YEAR);
 
             information.addCompetenceCourseLoads(secondCourseLoad);
         }

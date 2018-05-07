@@ -96,19 +96,19 @@ public enum PhdIndividualProgramProcessState implements PhdProcessStateType {
 
         switch (activeState) {
         case CANDIDACY:
-            return Arrays.asList(new PhdIndividualProgramProcessState[] { WORK_DEVELOPMENT, NOT_ADMITTED, SUSPENDED, FLUNKED,
-                    CANCELLED });
+            return Arrays.asList(
+                    new PhdIndividualProgramProcessState[] { WORK_DEVELOPMENT, NOT_ADMITTED, SUSPENDED, FLUNKED, CANCELLED });
         case WORK_DEVELOPMENT:
             if (process.getThesisProcess() != null) {
-                return Arrays.asList(new PhdIndividualProgramProcessState[] { THESIS_DISCUSSION, NOT_ADMITTED, SUSPENDED,
-                        FLUNKED, CANCELLED, TRANSFERRED, ABANDON });
+                return Arrays.asList(new PhdIndividualProgramProcessState[] { THESIS_DISCUSSION, NOT_ADMITTED, SUSPENDED, FLUNKED,
+                        CANCELLED, TRANSFERRED, ABANDON });
             } else {
                 return Arrays.asList(new PhdIndividualProgramProcessState[] { NOT_ADMITTED, SUSPENDED, FLUNKED, CANCELLED,
                         TRANSFERRED, ABANDON });
             }
         case THESIS_DISCUSSION:
-            return Arrays.asList(new PhdIndividualProgramProcessState[] { NOT_ADMITTED, SUSPENDED, FLUNKED, CANCELLED, CONCLUDED,
-                    ABANDON });
+            return Arrays.asList(
+                    new PhdIndividualProgramProcessState[] { NOT_ADMITTED, SUSPENDED, FLUNKED, CANCELLED, CONCLUDED, ABANDON });
         case ABANDON:
         case SUSPENDED:
         case FLUNKED:
@@ -131,8 +131,8 @@ public enum PhdIndividualProgramProcessState implements PhdProcessStateType {
 
         switch (stateType) {
         case CANDIDACY:
-            return Arrays.asList(new PhdIndividualProgramProcessState[] { WORK_DEVELOPMENT, NOT_ADMITTED, SUSPENDED, FLUNKED,
-                    CANCELLED });
+            return Arrays.asList(
+                    new PhdIndividualProgramProcessState[] { WORK_DEVELOPMENT, NOT_ADMITTED, SUSPENDED, FLUNKED, CANCELLED });
         case WORK_DEVELOPMENT:
             return Arrays.asList(new PhdIndividualProgramProcessState[] { THESIS_DISCUSSION, NOT_ADMITTED, SUSPENDED, FLUNKED,
                     CANCELLED, TRANSFERRED });

@@ -55,17 +55,15 @@ import pt.ist.fenixframework.FenixFramework;
 public class SearchExecutionCourses {
 
     public List<InfoExecutionCourse> run(AcademicInterval academicInterval, ExecutionDegree executionDegree, String courseName) {
-        List<ExecutionCourse> executionCourses =
-                ExecutionCourse.searchByAcademicIntervalAndExecutionDegreeYearAndName(academicInterval, executionDegree, null,
-                        courseName);
+        List<ExecutionCourse> executionCourses = ExecutionCourse
+                .searchByAcademicIntervalAndExecutionDegreeYearAndName(academicInterval, executionDegree, null, courseName);
         return fillInfoExecutionCourses(academicInterval, executionCourses);
     }
 
     public List<InfoExecutionCourse> run(AcademicInterval academicInterval, ExecutionDegree executionDegree,
             CurricularYear curricularYear, String courseName) {
-        List<ExecutionCourse> executionCourses =
-                ExecutionCourse.searchByAcademicIntervalAndExecutionDegreeYearAndName(academicInterval, executionDegree,
-                        curricularYear, courseName);
+        List<ExecutionCourse> executionCourses = ExecutionCourse.searchByAcademicIntervalAndExecutionDegreeYearAndName(
+                academicInterval, executionDegree, curricularYear, courseName);
         return fillInfoExecutionCourses(academicInterval, executionCourses);
     }
 
@@ -88,9 +86,8 @@ public class SearchExecutionCourses {
 
         List<ExecutionCourse> executionCourses = new ArrayList<ExecutionCourse>();
         if (executionSemester != null) {
-            executionCourses =
-                    executionSemester.getExecutionCoursesByDegreeCurricularPlanAndSemesterAndCurricularYearAndName(
-                            executionDegree.getDegreeCurricularPlan(), curricularYear, executionCourseName);
+            executionCourses = executionSemester.getExecutionCoursesByDegreeCurricularPlanAndSemesterAndCurricularYearAndName(
+                    executionDegree.getDegreeCurricularPlan(), curricularYear, executionCourseName);
         }
 
         return fillInfoExecutionCourses(executionSemester.getAcademicInterval(), executionCourses);

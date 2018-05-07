@@ -88,9 +88,8 @@ public class CreateExecutionCoursesDispatchAction extends FenixDispatchAction {
                 throw new DomainException("error.selection.noDegreeType");
             }
 
-            Collection<InfoDegreeCurricularPlan> degreeCurricularPlans =
-                    ReadActiveDegreeCurricularPlansByDegreeType.runForAcademicAdmin(Predicate.isEqual(FenixFramework
-                            .getDomainObject(degreeType)));
+            Collection<InfoDegreeCurricularPlan> degreeCurricularPlans = ReadActiveDegreeCurricularPlansByDegreeType
+                    .runForAcademicAdmin(Predicate.isEqual(FenixFramework.getDomainObject(degreeType)));
             List<InfoExecutionPeriod> executionPeriods = ReadNotClosedExecutionPeriods.run();
 
             request.setAttribute("degreeCurricularPlans", degreeCurricularPlans);
@@ -112,9 +111,8 @@ public class CreateExecutionCoursesDispatchAction extends FenixDispatchAction {
         String[] degreeCurricularPlansIDs = (String[]) actionForm.get("degreeCurricularPlansIDs");
         String executionPeriodID = (String) actionForm.get("executionPeriodID");
         try {
-            HashMap<String, Pair<Integer, String>> result =
-                    CreateExecutionCoursesForDegreeCurricularPlansAndExecutionPeriod.run(degreeCurricularPlansIDs,
-                            executionPeriodID);
+            HashMap<String, Pair<Integer, String>> result = CreateExecutionCoursesForDegreeCurricularPlansAndExecutionPeriod
+                    .run(degreeCurricularPlansIDs, executionPeriodID);
 
             // avmc (ist150958): success messages: 1 line for each DCP
             final ExecutionSemester executionPeriod = FenixFramework.getDomainObject(executionPeriodID);

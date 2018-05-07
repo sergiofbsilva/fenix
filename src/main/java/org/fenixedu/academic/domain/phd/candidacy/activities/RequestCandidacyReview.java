@@ -36,15 +36,15 @@ public class RequestCandidacyReview extends PhdProgramCandidacyProcessActivity {
 
     static final private List<PhdProgramCandidacyProcessState> PREVIOUS_STATE = Arrays.asList(
 
-    PhdProgramCandidacyProcessState.PRE_CANDIDATE,
+            PhdProgramCandidacyProcessState.PRE_CANDIDATE,
 
-    PhdProgramCandidacyProcessState.STAND_BY_WITH_MISSING_INFORMATION,
+            PhdProgramCandidacyProcessState.STAND_BY_WITH_MISSING_INFORMATION,
 
-    PhdProgramCandidacyProcessState.STAND_BY_WITH_COMPLETE_INFORMATION,
+            PhdProgramCandidacyProcessState.STAND_BY_WITH_COMPLETE_INFORMATION,
 
-    PhdProgramCandidacyProcessState.REJECTED,
+            PhdProgramCandidacyProcessState.REJECTED,
 
-    PhdProgramCandidacyProcessState.WAITING_FOR_SCIENTIFIC_COUNCIL_RATIFICATION);
+            PhdProgramCandidacyProcessState.WAITING_FOR_SCIENTIFIC_COUNCIL_RATIFICATION);
 
     @Override
     protected void activityPreConditions(PhdProgramCandidacyProcess process, User userView) {
@@ -59,7 +59,8 @@ public class RequestCandidacyReview extends PhdProgramCandidacyProcessActivity {
 
         final PhdIndividualProgramProcess mainProcess = process.getIndividualProgramProcess();
         if (mainProcess.getPhdProgram() == null) {
-            throw new DomainException("error.phd.candidacy.PhdProgramCandidacyProcess.RequestCandidacyReview.invalid.phd.program");
+            throw new DomainException(
+                    "error.phd.candidacy.PhdProgramCandidacyProcess.RequestCandidacyReview.invalid.phd.program");
         }
 
         final PhdProgramCandidacyProcessStateBean bean = (PhdProgramCandidacyProcessStateBean) object;

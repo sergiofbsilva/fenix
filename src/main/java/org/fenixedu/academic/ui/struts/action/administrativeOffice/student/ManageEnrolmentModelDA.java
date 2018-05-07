@@ -73,7 +73,8 @@ public class ManageEnrolmentModelDA extends FenixDispatchAction {
                 + enrolmentModelFactoryEditor.getRegistration().getExternalId(), request);
     }
 
-    public ActionForward postback(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward postback(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         EnrolmentModelFactoryEditor enrolmentModelFactoryEditor =
                 (EnrolmentModelFactoryEditor) getObjectFromViewState("enrolmentModelBean");
         RenderUtils.invalidateViewState();

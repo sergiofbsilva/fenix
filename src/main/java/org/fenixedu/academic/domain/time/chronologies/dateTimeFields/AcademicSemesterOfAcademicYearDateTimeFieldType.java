@@ -30,13 +30,12 @@ public class AcademicSemesterOfAcademicYearDateTimeFieldType extends DateTimeFie
 
     private static final AcademicSemesterOfAcademicYearDateTimeFieldType ACADEMIC_SEMESTER_OF_ACADEMIC_YEAR;
     static {
-        ACADEMIC_SEMESTER_OF_ACADEMIC_YEAR =
-                new AcademicSemesterOfAcademicYearDateTimeFieldType("academicSemesterOfAcademicYear",
-                        AcademicSemestersDurationFieldType.ACADEMIC_SEMESTERS_TYPE,
-                        AcademicYearsDurationFieldType.ACADEMIC_YEARS_TYPE);
+        ACADEMIC_SEMESTER_OF_ACADEMIC_YEAR = new AcademicSemesterOfAcademicYearDateTimeFieldType("academicSemesterOfAcademicYear",
+                AcademicSemestersDurationFieldType.ACADEMIC_SEMESTERS_TYPE, AcademicYearsDurationFieldType.ACADEMIC_YEARS_TYPE);
     }
 
-    private AcademicSemesterOfAcademicYearDateTimeFieldType(String name, DurationFieldType unitType, DurationFieldType rangeType) {
+    private AcademicSemesterOfAcademicYearDateTimeFieldType(String name, DurationFieldType unitType,
+            DurationFieldType rangeType) {
         super(name);
     }
 

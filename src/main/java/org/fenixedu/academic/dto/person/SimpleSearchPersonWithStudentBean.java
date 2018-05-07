@@ -104,9 +104,8 @@ public class SimpleSearchPersonWithStudentBean implements Serializable {
             }
         }
 
-        Stream<Person> stream =
-                new PersonSearcher().name(name).username(username).documentIdNumber(documentIdNumber)
-                        .documentIdType(idDocumentType).search();
+        Stream<Person> stream = new PersonSearcher().name(name).username(username).documentIdNumber(documentIdNumber)
+                .documentIdType(idDocumentType).search();
 
         if (!Strings.isNullOrEmpty(paymentCode)) {
             stream = stream.filter(p -> p.getPaymentCodeBy(paymentCode) != null);

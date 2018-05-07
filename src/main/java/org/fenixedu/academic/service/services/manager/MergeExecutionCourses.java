@@ -128,13 +128,14 @@ public class MergeExecutionCourses {
         registerMergeHandler(MergeExecutionCourses::copyExecutionCourseLogs);
         registerMergeHandler(MergeExecutionCourses::copyPersistentGroups);
         registerMergeHandler(MergeExecutionCourses::copySenderMessages);
-        registerMergeHandler((from, to) -> to.getAssociatedCurricularCoursesSet()
-                .addAll(from.getAssociatedCurricularCoursesSet()));
+        registerMergeHandler(
+                (from, to) -> to.getAssociatedCurricularCoursesSet().addAll(from.getAssociatedCurricularCoursesSet()));
         registerMergeHandler((from, to) -> to.copyLessonPlanningsFrom(from));
     }
 
     @Atomic(mode = TxMode.WRITE)
-    public static void merge(ExecutionCourse executionCourseTo, ExecutionCourse executionCourseFrom) throws FenixServiceException {
+    public static void merge(ExecutionCourse executionCourseTo, ExecutionCourse executionCourseFrom)
+            throws FenixServiceException {
         if (executionCourseFrom == null) {
             throw new InvalidArgumentsServiceException();
         }
@@ -229,8 +230,8 @@ public class MergeExecutionCourses {
     private static void copyBibliographicReference(final ExecutionCourse executionCourseFrom,
             final ExecutionCourse executionCourseTo) {
         for (; !executionCourseFrom.getAssociatedBibliographicReferencesSet().isEmpty(); executionCourseTo
-                .getAssociatedBibliographicReferencesSet().add(
-                        executionCourseFrom.getAssociatedBibliographicReferencesSet().iterator().next())) {
+                .getAssociatedBibliographicReferencesSet()
+                .add(executionCourseFrom.getAssociatedBibliographicReferencesSet().iterator().next())) {
             ;
         }
     }
@@ -243,9 +244,8 @@ public class MergeExecutionCourses {
                 CourseLoad courseLoadFrom = iter.next();
                 CourseLoad courseLoadTo = executionCourseTo.getCourseLoadByShiftType(courseLoadFrom.getType());
                 if (courseLoadTo == null) {
-                    courseLoadTo =
-                            new CourseLoad(executionCourseTo, courseLoadFrom.getType(), courseLoadFrom.getUnitQuantity(),
-                                    courseLoadFrom.getTotalQuantity());
+                    courseLoadTo = new CourseLoad(executionCourseTo, courseLoadFrom.getType(), courseLoadFrom.getUnitQuantity(),
+                            courseLoadFrom.getTotalQuantity());
                 }
                 iter.remove();
                 shift.removeCourseLoads(courseLoadFrom);
@@ -261,9 +261,8 @@ public class MergeExecutionCourses {
             CourseLoad courseLoadFrom = lessonInstance.getCourseLoad();
             CourseLoad courseLoadTo = executionCourseTo.getCourseLoadByShiftType(courseLoadFrom.getType());
             if (courseLoadTo == null) {
-                courseLoadTo =
-                        new CourseLoad(executionCourseTo, courseLoadFrom.getType(), courseLoadFrom.getUnitQuantity(),
-                                courseLoadFrom.getTotalQuantity());
+                courseLoadTo = new CourseLoad(executionCourseTo, courseLoadFrom.getType(), courseLoadFrom.getUnitQuantity(),
+                        courseLoadFrom.getTotalQuantity());
             }
             lessonInstance.setCourseLoad(courseLoadTo);
         }
@@ -323,8 +322,8 @@ public class MergeExecutionCourses {
                 otherProfessorship =
                         Professorship.create(professorship.getResponsibleFor(), executionCourseTo, professorship.getPerson());
             }
-            for (; !professorship.getAssociatedSummariesSet().isEmpty(); otherProfessorship.addAssociatedSummaries(professorship
-                    .getAssociatedSummariesSet().iterator().next())) {
+            for (; !professorship.getAssociatedSummariesSet().isEmpty(); otherProfessorship
+                    .addAssociatedSummaries(professorship.getAssociatedSummariesSet().iterator().next())) {
                 ;
             }
             for (; !professorship.getAssociatedShiftProfessorshipSet().isEmpty(); otherProfessorship

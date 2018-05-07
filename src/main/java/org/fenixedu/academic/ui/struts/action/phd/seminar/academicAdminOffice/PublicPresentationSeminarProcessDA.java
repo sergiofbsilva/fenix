@@ -94,7 +94,8 @@ public class PublicPresentationSeminarProcessDA extends CommonPublicPresentation
         return mapping.findForward("manageStates");
     }
 
-    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         PublicPresentationSeminarProcessBean bean = getRenderedObject("processBean");
 
         try {

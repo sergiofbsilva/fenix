@@ -58,6 +58,7 @@ import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcessState;
 import org.fenixedu.academic.domain.serviceRequests.AcademicServiceRequest;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationState;
 import org.fenixedu.academic.domain.student.registrationStates.RegistrationStateType;
 import org.fenixedu.academic.domain.studentCurriculum.ExternalEnrolment;
@@ -162,9 +163,8 @@ public class Student extends Student_Base {
     }
 
     public Registration readRegistrationByDegreeCurricularPlan(DegreeCurricularPlan degreeCurricularPlan) {
-        return getRegistrationStream()
-            .filter(r -> r.getStudentCurricularPlan(degreeCurricularPlan) != null)
-            .findAny().orElse(null);
+        return getRegistrationStream().filter(r -> r.getStudentCurricularPlan(degreeCurricularPlan) != null).findAny()
+                .orElse(null);
     }
 
     public Registration readRegistrationByDegree(Degree degree) {
@@ -243,14 +243,14 @@ public class Student extends Student_Base {
 
     public Registration getLastConcludedRegistration() {
         List<Registration> concludedRegistrations = getConcludedRegistrations();
-        return concludedRegistrations.isEmpty() ? null : (Registration) Collections.max(concludedRegistrations,
-                Registration.COMPARATOR_BY_START_DATE);
+        return concludedRegistrations
+                .isEmpty() ? null : (Registration) Collections.max(concludedRegistrations, Registration.COMPARATOR_BY_START_DATE);
     }
 
     public Registration getLastRegistration() {
         Collection<Registration> activeRegistrations = getRegistrationsSet();
-        return activeRegistrations.isEmpty() ? null : (Registration) Collections.max(activeRegistrations,
-                Registration.COMPARATOR_BY_START_DATE);
+        return activeRegistrations
+                .isEmpty() ? null : (Registration) Collections.max(activeRegistrations, Registration.COMPARATOR_BY_START_DATE);
     }
 
     /**
@@ -285,9 +285,8 @@ public class Student extends Student_Base {
     }
 
     public boolean hasSpecialSeasonEnrolments(ExecutionSemester executionSemester) {
-        return getRegistrationStream()
-                .anyMatch(r -> (executionSemester.getExecutionYear().isAfter(r.getStartExecutionYear()))
-                        && (r.getStudentCurricularPlan(executionSemester).isEnroledInSpecialSeason(executionSemester)));
+        return getRegistrationStream().anyMatch(r -> (executionSemester.getExecutionYear().isAfter(r.getStartExecutionYear()))
+                && (r.getStudentCurricularPlan(executionSemester).isEnroledInSpecialSeason(executionSemester)));
     }
 
     public static Integer generateStudentNumber() {
@@ -358,9 +357,8 @@ public class Student extends Student_Base {
     }
 
     public boolean hasFilledAuthorizationInformationInCurrentExecutionYear() {
-        return getActivePersonalDataAuthorization() != null
-                && getActivePersonalDataAuthorization().getSince().isAfter(
-                        getCurrentExecutionYearDate().getBeginDateYearMonthDay().toDateTimeAtMidnight());
+        return getActivePersonalDataAuthorization() != null && getActivePersonalDataAuthorization().getSince()
+                .isAfter(getCurrentExecutionYearDate().getBeginDateYearMonthDay().toDateTimeAtMidnight());
     }
 
     private ExecutionYear getCurrentExecutionYearDate() {
@@ -391,8 +389,8 @@ public class Student extends Student_Base {
         StudentDataShareAuthorization authorization = getPersonalDataAuthorizationAt(new DateTime());
         return authorization != null
                 && (authorization.getAuthorizationChoice().equals(StudentPersonalDataAuthorizationChoice.PROFESSIONAL_ENDS)
-                        || authorization.getAuthorizationChoice().equals(StudentPersonalDataAuthorizationChoice.ALL_ENDS) || authorization
-                        .getAuthorizationChoice().equals(StudentPersonalDataAuthorizationChoice.SEVERAL_ENDS));
+                        || authorization.getAuthorizationChoice().equals(StudentPersonalDataAuthorizationChoice.ALL_ENDS)
+                        || authorization.getAuthorizationChoice().equals(StudentPersonalDataAuthorizationChoice.SEVERAL_ENDS));
     }
 
     private void createCurrentYearStudentData() {
@@ -698,7 +696,8 @@ public class Student extends Student_Base {
     }
 
     public Set<Enrolment> getDissertationEnrolments() {
-        final Set<Enrolment> result = new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_REVERSE_EXECUTION_PERIOD_AND_NAME_AND_ID);
+        final Set<Enrolment> result =
+                new TreeSet<Enrolment>(ICurriculumEntry.COMPARATOR_BY_REVERSE_EXECUTION_PERIOD_AND_NAME_AND_ID);
         for (final Registration registration : getRegistrationsSet()) {
             for (final StudentCurricularPlan studentCurricularPlan : registration.getStudentCurricularPlansSet()) {
                 result.addAll(studentCurricularPlan.getDissertationEnrolments());
@@ -712,14 +711,16 @@ public class Student extends Student_Base {
     }
 
     final public TreeSet<Enrolment> getDissertationEnrolments(DegreeCurricularPlan degreeCurricularPlan) {
-        final TreeSet<Enrolment> enrolments = new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_EXECUTION_PERIOD_AND_NAME_AND_ID);
+        final TreeSet<Enrolment> enrolments =
+                new TreeSet<Enrolment>(ICurriculumEntry.COMPARATOR_BY_EXECUTION_PERIOD_AND_NAME_AND_ID);
         for (final Registration registration : getRegistrationsSet()) {
             enrolments.addAll(registration.getDissertationEnrolments(degreeCurricularPlan));
         }
         return enrolments;
     }
 
-    final public Enrolment getDissertationEnrolment(DegreeCurricularPlan degreeCurricularPlan, final ExecutionYear executionYear) {
+    final public Enrolment getDissertationEnrolment(DegreeCurricularPlan degreeCurricularPlan,
+            final ExecutionYear executionYear) {
         TreeSet<Enrolment> enrolments = getDissertationEnrolments(degreeCurricularPlan);
         CollectionUtils.filter(enrolments, new Predicate() {
 
@@ -741,8 +742,7 @@ public class Student extends Student_Base {
     }
 
     public Stream<Registration> getRegistrationStream() {
-        return super.getRegistrationsSet().stream()
-                .filter(r -> !r.isTransition());
+        return super.getRegistrationsSet().stream().filter(r -> !r.isTransition());
     }
 
     /**
@@ -785,9 +785,8 @@ public class Student extends Student_Base {
         check(this, StudentPredicates.checkIfLoggedPersonIsCoordinator);
         final List<Registration> result = new ArrayList<Registration>();
         for (final Registration registration : super.getRegistrationsSet()) {
-            if (registration.isTransition()
-                    && coordinator.isCoordinatorFor(registration.getLastDegreeCurricularPlan(),
-                            ExecutionYear.readCurrentExecutionYear())) {
+            if (registration.isTransition() && coordinator.isCoordinatorFor(registration.getLastDegreeCurricularPlan(),
+                    ExecutionYear.readCurrentExecutionYear())) {
                 result.add(registration);
             }
         }
@@ -881,8 +880,8 @@ public class Student extends Student_Base {
     }
 
     public Registration getActiveRegistrationFor(final DegreeCurricularPlan degreeCurricularPlan) {
-        return getActiveRegistrationStream().filter(r -> r.getLastDegreeCurricularPlan() == degreeCurricularPlan)
-            .findAny().orElse(null);
+        return getActiveRegistrationStream().filter(r -> r.getLastDegreeCurricularPlan() == degreeCurricularPlan).findAny()
+                .orElse(null);
     }
 
     public boolean hasActiveRegistrationFor(final DegreeCurricularPlan degreeCurricularPlan) {
@@ -973,8 +972,8 @@ public class Student extends Student_Base {
 
     public void createEnrolmentOutOfPeriodEvent(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionSemester executionSemester, final Integer numberOfDelayDays) {
-        new AccountingEventsManager()
-                .createEnrolmentOutOfPeriodEvent(studentCurricularPlan, executionSemester, numberOfDelayDays);
+        new AccountingEventsManager().createEnrolmentOutOfPeriodEvent(studentCurricularPlan, executionSemester,
+                numberOfDelayDays);
     }
 
     public void createInsuranceEvent(final StudentCurricularPlan studentCurricularPlan, final ExecutionYear executionYear) {
@@ -1005,7 +1004,8 @@ public class Student extends Student_Base {
 
     public boolean hasWorkingStudentStatuteInPeriod(ExecutionSemester executionSemester) {
         for (StudentStatute studentStatute : getStudentStatutesSet()) {
-            if (studentStatute.getType().isWorkingStudentStatute() && studentStatute.isValidInExecutionPeriod(executionSemester)) {
+            if (studentStatute.getType().isWorkingStudentStatute()
+                    && studentStatute.isValidInExecutionPeriod(executionSemester)) {
                 return true;
             }
         }
@@ -1066,21 +1066,18 @@ public class Student extends Student_Base {
     }
 
     public Attends getAttends(final ExecutionCourse executionCourse) {
-        return getRegistrationStream()
-            .flatMap(r -> r.getAssociatedAttendsSet().stream())
-            .filter(a -> a.isFor(executionCourse))
-            .findAny().orElse(null);
+        return getRegistrationStream().flatMap(r -> r.getAssociatedAttendsSet().stream()).filter(a -> a.isFor(executionCourse))
+                .findAny().orElse(null);
     }
 
     public boolean hasAttends(final ExecutionCourse executionCourse) {
-        return getRegistrationStream(
-                ).flatMap(r -> r.getAssociatedAttendsSet().stream())
-                .anyMatch(a -> a.isFor(executionCourse));
+        return getRegistrationStream().flatMap(r -> r.getAssociatedAttendsSet().stream()).anyMatch(a -> a.isFor(executionCourse));
     }
 
     public boolean hasAnyMissingPersonalInformation() {
         final ExecutionYear currentExecutionYear = ExecutionYear.readCurrentExecutionYear();
-        if (getRegistrationStream().anyMatch(r -> r.isValidForRAIDES() && r.hasMissingPersonalInformation(currentExecutionYear))) {
+        if (getRegistrationStream()
+                .anyMatch(r -> r.isValidForRAIDES() && r.hasMissingPersonalInformation(currentExecutionYear))) {
             return true;
         }
 
@@ -1160,12 +1157,9 @@ public class Student extends Student_Base {
     }
 
     public boolean shouldHaveStudentRole() {
-        final boolean activeRegistration = getRegistrationStream()
-                .map(r -> r.getLastStateType())
-                .filter(st -> st != null)
+        final boolean activeRegistration = getRegistrationStream().map(r -> r.getLastStateType()).filter(st -> st != null)
                 .anyMatch(st -> (st.isActive() && st != RegistrationStateType.SCHOOLPARTCONCLUDED)
-                        || st == RegistrationStateType.FLUNKED
-                        || st == RegistrationStateType.INTERRUPTED
+                        || st == RegistrationStateType.FLUNKED || st == RegistrationStateType.INTERRUPTED
                         || st == RegistrationStateType.MOBILITY);
         if (activeRegistration) {
             return true;
@@ -1183,11 +1177,10 @@ public class Student extends Student_Base {
 
     public PersonalIngressionData getLatestPersonalIngressionData() {
         final ExecutionYear currentExecutionYear = ExecutionYear.readCurrentExecutionYear();
-        final Comparator<PersonalIngressionData> comparator = Collections.reverseOrder(PersonalIngressionData.COMPARATOR_BY_EXECUTION_YEAR);
-        return getPersonalIngressionsDataSet().stream()
-            .filter(pid -> !pid.getExecutionYear().isAfter(currentExecutionYear))
-            .sorted(comparator)
-            .findFirst().orElse(null);
+        final Comparator<PersonalIngressionData> comparator =
+                Collections.reverseOrder(PersonalIngressionData.COMPARATOR_BY_EXECUTION_YEAR);
+        return getPersonalIngressionsDataSet().stream().filter(pid -> !pid.getExecutionYear().isAfter(currentExecutionYear))
+                .sorted(comparator).findFirst().orElse(null);
     }
 
     public PersonalIngressionData getPersonalIngressionDataByExecutionYear(final ExecutionYear executionYear) {

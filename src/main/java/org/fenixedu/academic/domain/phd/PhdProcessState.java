@@ -77,9 +77,8 @@ abstract public class PhdProcessState extends PhdProcessState_Base {
 
             if (phdProcessState.getStateDate() != null && phdProcessState.getStateDate().isAfter(stateDate)) {
                 String newStateDate = stateDate.toString("dd/MM/yyyy") + " - " + type.getLocalizedName();
-                String actualStateDate =
-                        phdProcessState.getStateDate().toString("dd/MM/yyyy") + " - "
-                                + phdProcessState.getType().getLocalizedName();
+                String actualStateDate = phdProcessState.getStateDate().toString("dd/MM/yyyy") + " - "
+                        + phdProcessState.getType().getLocalizedName();
 
                 throw new PhdDomainOperationException("error.PhdProcessState.state.date.is.previous.of.actual.state.on.process",
                         newStateDate, actualStateDate);

@@ -57,9 +57,10 @@ public class EmailValidation extends EmailValidation_Base {
 
     private void sendValidationEmail() {
         final String token = getToken();
-        final String URL =
-                String.format(CoreConfiguration.getConfiguration().applicationUrl()
-                        + "/external/partyContactValidation.do?method=validate&validationOID=%s&token=%s", getExternalId(), token);
+        final String URL = String.format(
+                CoreConfiguration.getConfiguration().applicationUrl()
+                        + "/external/partyContactValidation.do?method=validate&validationOID=%s&token=%s",
+                getExternalId(), token);
 
         final SystemSender sender = Bennu.getInstance().getSystemSender();
         final String subject = "Sistema Fénix @ " + Unit.getInstitutionAcronym() + " : Validação de Email";

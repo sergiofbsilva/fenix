@@ -32,8 +32,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.time.calendarStructure.AcademicPeriod;
 import org.fenixedu.academic.dto.GenericPair;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class EvenOddRule extends EvenOddRule_Base {
 
@@ -103,8 +103,9 @@ public class EvenOddRule extends EvenOddRule_Base {
     }
 
     public String getEvenOddString() {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, BundleUtil.getString(Bundle.ACADEMIC, new Locale("pt", "PT"),
-                "label." + (getEven() ? "even" : "odd"))).getContent();
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT,
+                BundleUtil.getString(Bundle.ACADEMIC, new Locale("pt", "PT"), "label." + (getEven() ? "even" : "odd")))
+                        .getContent();
     }
 
 }

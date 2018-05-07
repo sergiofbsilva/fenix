@@ -89,7 +89,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
     }
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return mapping.findForward("showOperations");
     }
 
@@ -110,8 +111,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
 
     public ActionForward prepareJuryDocumentsDownload(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        request.setAttribute("operationBean", new PhdExternalOperationBean(getPhdParticipant(request),
-                PhdProcessAccessType.JURY_DOCUMENTS_DOWNLOAD));
+        request.setAttribute("operationBean",
+                new PhdExternalOperationBean(getPhdParticipant(request), PhdProcessAccessType.JURY_DOCUMENTS_DOWNLOAD));
 
         return mapping.findForward("juryDocumentsDownload");
     }
@@ -136,8 +137,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
 
             final PhdIndividualProgramProcess process = getProcess(request);
             ExecuteProcessActivity.run(process.getThesisProcess(), JuryDocumentsDownload.class, getOperationBean());
-            writeFile(response, getZipDocumentsFilename(process), PhdDocumentsZip.ZIP_MIME_TYPE, createZip(process
-                    .getThesisProcess().getThesisDocumentsToFeedback()));
+            writeFile(response, getZipDocumentsFilename(process), PhdDocumentsZip.ZIP_MIME_TYPE,
+                    createZip(process.getThesisProcess().getThesisDocumentsToFeedback()));
 
             return null;
 
@@ -162,8 +163,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
 
         request.setAttribute("operationBean", bean);
         request.setAttribute("lastReportFeedbackDocument", getThesisJuryElement(request, bean).getLastFeedbackDocument());
-        request.setAttribute("waitingForJuryReporterFeedback", getProcess(request).getThesisProcess()
-                .isWaitingForJuryReporterFeedback());
+        request.setAttribute("waitingForJuryReporterFeedback",
+                getProcess(request).getThesisProcess().isWaitingForJuryReporterFeedback());
 
         return mapping.findForward("juryReporterFeedbackUpload");
     }
@@ -174,8 +175,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
         final PhdExternalOperationBean bean = getOperationBean();
         request.setAttribute("operationBean", bean);
         request.setAttribute("lastReportFeedbackDocument", getThesisJuryElement(request, bean).getLastFeedbackDocument());
-        request.setAttribute("waitingForJuryReporterFeedback", getProcess(request).getThesisProcess()
-                .isWaitingForJuryReporterFeedback());
+        request.setAttribute("waitingForJuryReporterFeedback",
+                getProcess(request).getThesisProcess().isWaitingForJuryReporterFeedback());
 
         return mapping.findForward("juryReporterFeedbackUpload");
     }
@@ -315,8 +316,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
     public ActionForward prepareJuryReviewDocumentsDownload(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
 
-        request.setAttribute("operationBean", new PhdExternalOperationBean(getPhdParticipant(request),
-                PhdProcessAccessType.JURY_REVIEW_DOCUMENTS_DOWNLOAD));
+        request.setAttribute("operationBean",
+                new PhdExternalOperationBean(getPhdParticipant(request), PhdProcessAccessType.JURY_REVIEW_DOCUMENTS_DOWNLOAD));
 
         return mapping.findForward("juryReviewDocumentsDownload");
     }
@@ -336,8 +337,8 @@ public class PhdExternalAccessDA extends PhdProcessDA {
             final PhdIndividualProgramProcess process = getProcess(request);
             ExecuteProcessActivity.run(process.getThesisProcess(), JuryReviewDocumentsDownload.class, getOperationBean());
 
-            writeFile(response, getZipDocumentsFilename(process), PhdDocumentsZip.ZIP_MIME_TYPE, createZip(process
-                    .getThesisProcess().getReportThesisJuryElementDocuments()));
+            writeFile(response, getZipDocumentsFilename(process), PhdDocumentsZip.ZIP_MIME_TYPE,
+                    createZip(process.getThesisProcess().getReportThesisJuryElementDocuments()));
 
             return null;
 

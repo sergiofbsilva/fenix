@@ -91,9 +91,8 @@ public class ErasmusBolonhaStudentEnrolmentLayout extends BolonhaStudentEnrolmen
                 }
 
                 CurricularCourse curricularCourse = (CurricularCourse) degreeModuleToEvaluate.getDegreeModule();
-                degreeName +=
-                        " (" + BundleUtil.getString(Bundle.STUDENT, "label.grade.scale") + " - "
-                                + curricularCourse.getGradeScaleChain().getDescription() + ") ";
+                degreeName += " (" + BundleUtil.getString(Bundle.STUDENT, "label.grade.scale") + " - "
+                        + curricularCourse.getGradeScaleChain().getDescription() + ") ";
             }
 
             cellName.setBody(new HtmlText(degreeName));
@@ -136,8 +135,8 @@ public class ErasmusBolonhaStudentEnrolmentLayout extends BolonhaStudentEnrolmen
                 final HtmlActionLink actionLink = new HtmlActionLink();
                 actionLink.setText(BundleUtil.getString(Bundle.STUDENT, "label.chooseOptionalCurricularCourse"));
                 actionLink.setController(new OptionalCurricularCourseLinkController(degreeModuleToEvaluate));
-                actionLink
-                        .setOnClick("$(\\\"form[name='org.fenixedu.academic.ui.struts.FenixActionForm']\\\").method.value='prepareChooseOptionalCurricularCourseToEnrol';");
+                actionLink.setOnClick(
+                        "$(\\\"form[name='org.fenixedu.academic.ui.struts.FenixActionForm']\\\").method.value='prepareChooseOptionalCurricularCourseToEnrol';");
                 actionLink.setName("optionalCurricularCourseLink" + degreeModuleToEvaluate.getCurriculumGroup().getExternalId()
                         + "_" + degreeModuleToEvaluate.getContext().getExternalId());
                 linkTableCell.setBody(actionLink);
@@ -208,8 +207,9 @@ public class ErasmusBolonhaStudentEnrolmentLayout extends BolonhaStudentEnrolmen
         container.addChild(hiddenExtraCurricularEnrollments);
 
         generateGroup(container, getBolonhaStudentEnrollmentBean().getDegreeModulesToEvaluate(),
-                getBolonhaStudentEnrollmentBean().getStudentCurricularPlan(), getBolonhaStudentEnrollmentBean()
-                        .getRootStudentCurriculumGroupBean(), getBolonhaStudentEnrollmentBean().getExecutionPeriod(), 0);
+                getBolonhaStudentEnrollmentBean().getStudentCurricularPlan(),
+                getBolonhaStudentEnrollmentBean().getRootStudentCurriculumGroupBean(),
+                getBolonhaStudentEnrollmentBean().getExecutionPeriod(), 0);
 
         HtmlTable groupTable = createGroupTable(container, 0);
 
@@ -227,9 +227,8 @@ public class ErasmusBolonhaStudentEnrolmentLayout extends BolonhaStudentEnrolmen
 
         cell.setBody(checkBox);
         groupTable = createCoursesTable(container, 0);
-        NoCourseGroupCurriculumGroup group =
-                getBolonhaStudentEnrollmentBean().getStudentCurricularPlan().getNoCourseGroupCurriculumGroup(
-                        NoCourseGroupCurriculumGroupType.STANDALONE);
+        NoCourseGroupCurriculumGroup group = getBolonhaStudentEnrollmentBean().getStudentCurricularPlan()
+                .getNoCourseGroupCurriculumGroup(NoCourseGroupCurriculumGroupType.STANDALONE);
         HashSet<CurricularCourse> set = new HashSet<CurricularCourse>();
         ErasmusBolonhaStudentEnrollmentBean erasmusBolonhaStudentEnrollmentBean =
                 (ErasmusBolonhaStudentEnrollmentBean) getBolonhaStudentEnrollmentBean();
@@ -263,9 +262,8 @@ public class ErasmusBolonhaStudentEnrolmentLayout extends BolonhaStudentEnrolmen
                     degreeName = curricularCourse.getCode() + " - " + degreeName;
                 }
 
-                degreeName +=
-                        " (" + BundleUtil.getString(Bundle.STUDENT, "label.grade.scale") + " - "
-                                + curricularCourse.getGradeScaleChain().getDescription() + ") ";
+                degreeName += " (" + BundleUtil.getString(Bundle.STUDENT, "label.grade.scale") + " - "
+                        + curricularCourse.getGradeScaleChain().getDescription() + ") ";
             }
 
             cellName.setBody(new HtmlText(degreeName));

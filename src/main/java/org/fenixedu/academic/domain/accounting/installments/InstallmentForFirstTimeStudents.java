@@ -86,8 +86,8 @@ public class InstallmentForFirstTimeStudents extends InstallmentForFirstTimeStud
     @Override
     protected Money calculatePenaltyAmount(final Event event, final DateTime when, final BigDecimal discountPercentage) {
         if (when.toDateMidnight().compareTo(getWhenStartToApplyPenalty(event, when)) >= 0) {
-            return new Money(calculateMonthPenalty(event, discountPercentage).multiply(
-                    new BigDecimal(getNumberOfMonthsToChargePenalty(event, when))));
+            return new Money(calculateMonthPenalty(event, discountPercentage)
+                    .multiply(new BigDecimal(getNumberOfMonthsToChargePenalty(event, when))));
         } else {
             return Money.ZERO;
         }
@@ -113,8 +113,8 @@ public class InstallmentForFirstTimeStudents extends InstallmentForFirstTimeStud
     public LabelFormatter getDescription() {
         return new LabelFormatter().appendLabel(Bundle.APPLICATION, "label.InstallmentForFirstTimeStudents.description",
                 getInstallmentOrder().toString(), getStartDate().toString("dd/MM/yyyy"), getEndDate().toString("dd/MM/yyyy"),
-                getPenaltyPercentage().multiply(BigDecimal.valueOf(100)).toString(), getNumberOfDaysToStartApplyingPenalty()
-                        .toString());
+                getPenaltyPercentage().multiply(BigDecimal.valueOf(100)).toString(),
+                getNumberOfDaysToStartApplyingPenalty().toString());
 
     }
 

@@ -32,10 +32,10 @@ import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.HourMinuteSecond;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.signals.DomainObjectEvent;
 import org.fenixedu.bennu.core.signals.Signal;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
@@ -83,24 +83,24 @@ public class Summary extends Summary_Base {
 
         super();
         setRootDomainObject(Bennu.getInstance());
-        fillSummaryWithInfo(title, summaryText, studentsNumber, isExtraLesson, professorship, teacherName, teacher, shift,
-                lesson, date, room, hour, type, taught);
+        fillSummaryWithInfo(title, summaryText, studentsNumber, isExtraLesson, professorship, teacherName, teacher, shift, lesson,
+                date, room, hour, type, taught);
 
         ContentManagementLog.createLog(shift.getExecutionCourse(), Bundle.MESSAGING, "log.executionCourse.content.summary.added",
-                title.getContent(), shift.getPresentationName(), shift.getExecutionCourse().getNome(), shift.getExecutionCourse()
-                        .getDegreePresentationString());
+                title.getContent(), shift.getPresentationName(), shift.getExecutionCourse().getNome(),
+                shift.getExecutionCourse().getDegreePresentationString());
     }
 
     public void edit(LocalizedString title, LocalizedString summaryText, Integer studentsNumber, Boolean isExtraLesson,
             Professorship professorship, String teacherName, Teacher teacher, Shift shift, Lesson lesson, YearMonthDay date,
             Space room, Partial hour, ShiftType type, Boolean taught) {
 
-        fillSummaryWithInfo(title, summaryText, studentsNumber, isExtraLesson, professorship, teacherName, teacher, shift,
-                lesson, date, room, hour, type, taught);
+        fillSummaryWithInfo(title, summaryText, studentsNumber, isExtraLesson, professorship, teacherName, teacher, shift, lesson,
+                date, room, hour, type, taught);
 
-        ContentManagementLog.createLog(shift.getExecutionCourse(), Bundle.MESSAGING,
-                "log.executionCourse.content.summary.edited", title.getContent(), shift.getPresentationName(), shift
-                        .getExecutionCourse().getNome(), shift.getExecutionCourse().getDegreePresentationString());
+        ContentManagementLog.createLog(shift.getExecutionCourse(), Bundle.MESSAGING, "log.executionCourse.content.summary.edited",
+                title.getContent(), shift.getPresentationName(), shift.getExecutionCourse().getNome(),
+                shift.getExecutionCourse().getDegreePresentationString());
 
         Signal.emit(EDIT_SIGNAL, new DomainObjectEvent<Summary>(this));
     }
@@ -334,8 +334,8 @@ public class Summary extends Summary_Base {
 
     public DateTime getSummaryDateTime() {
         HourMinuteSecond time = getSummaryHourHourMinuteSecond();
-        return getSummaryDateYearMonthDay().toDateTime(
-                new TimeOfDay(time.getHour(), time.getMinuteOfHour(), time.getSecondOfMinute(), 0));
+        return getSummaryDateYearMonthDay()
+                .toDateTime(new TimeOfDay(time.getHour(), time.getMinuteOfHour(), time.getSecondOfMinute(), 0));
     }
 
     @Deprecated

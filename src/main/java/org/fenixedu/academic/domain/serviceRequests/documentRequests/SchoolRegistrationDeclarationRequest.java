@@ -79,15 +79,14 @@ public class SchoolRegistrationDeclarationRequest extends SchoolRegistrationDecl
     protected boolean hasFreeDeclarationRequests() {
         final ExecutionYear currentExecutionYear = ExecutionYear.readCurrentExecutionYear();
 
-        final Set<DocumentRequest> schoolRegistrationDeclarations =
-                getRegistration().getSucessfullyFinishedDocumentRequestsBy(currentExecutionYear,
-                        DocumentRequestType.SCHOOL_REGISTRATION_DECLARATION, false);
+        final Set<DocumentRequest> schoolRegistrationDeclarations = getRegistration().getSucessfullyFinishedDocumentRequestsBy(
+                currentExecutionYear, DocumentRequestType.SCHOOL_REGISTRATION_DECLARATION, false);
 
-        final Set<DocumentRequest> enrolmentDeclarations =
-                getRegistration().getSucessfullyFinishedDocumentRequestsBy(currentExecutionYear,
-                        DocumentRequestType.ENROLMENT_DECLARATION, false);
+        final Set<DocumentRequest> enrolmentDeclarations = getRegistration()
+                .getSucessfullyFinishedDocumentRequestsBy(currentExecutionYear, DocumentRequestType.ENROLMENT_DECLARATION, false);
 
-        return ((schoolRegistrationDeclarations.size() + enrolmentDeclarations.size()) < MAX_FREE_DECLARATIONS_PER_EXECUTION_YEAR);
+        return ((schoolRegistrationDeclarations.size()
+                + enrolmentDeclarations.size()) < MAX_FREE_DECLARATIONS_PER_EXECUTION_YEAR);
     }
 
 }

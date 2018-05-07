@@ -130,7 +130,8 @@ public class DepartmentSummaryElement implements Serializable {
         return executionCoursesResume;
     }
 
-    public void setExecutionCoursesResume(Map<SummaryControlCategory, List<ExecutionCourseSummaryElement>> executionCoursesResume) {
+    public void setExecutionCoursesResume(
+            Map<SummaryControlCategory, List<ExecutionCourseSummaryElement>> executionCoursesResume) {
         this.executionCoursesResume = executionCoursesResume;
     }
 

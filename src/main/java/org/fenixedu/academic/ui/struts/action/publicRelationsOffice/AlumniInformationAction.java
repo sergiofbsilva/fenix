@@ -58,11 +58,11 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 import org.joda.time.DateTime;
 import org.joda.time.YearMonthDay;
 
-import pt.ist.fenixWebFramework.renderers.components.state.IViewState;
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
+
+import pt.ist.fenixWebFramework.renderers.components.state.IViewState;
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @StrutsFunctionality(app = PublicRelationsAlumniApp.class, path = "search", titleKey = "link.search.alumni")
 @Mapping(path = "/alumni", module = "publicRelations")

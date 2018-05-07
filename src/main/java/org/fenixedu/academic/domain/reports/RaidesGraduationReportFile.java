@@ -89,18 +89,18 @@ public class RaidesGraduationReportFile extends RaidesGraduationReportFile_Base 
                                 break;
                             }
                         }
-                        if (isToAddRegistration
-                                && (cycleCGroup.isConcluded(executionYear.getPreviousExecutionYear()) == ConclusionValue.CONCLUDED)) {
+                        if (isToAddRegistration && (cycleCGroup
+                                .isConcluded(executionYear.getPreviousExecutionYear()) == ConclusionValue.CONCLUDED)) {
                             reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
-                                    getFullRegistrationPath(registration), executionYear,
-                                    cycleType, true, registrationConclusionBean.getConclusionDate(), registrationConclusionBean
-                                            .getRawGrade().getNumericValue());
+                                    getFullRegistrationPath(registration), executionYear, cycleType, true,
+                                    registrationConclusionBean.getConclusionDate(),
+                                    registrationConclusionBean.getRawGrade().getNumericValue());
                         } else if (isToAddRegistration
-                                && (registration.getLastDegreeCurricularPlan().hasExecutionDegreeFor(executionYear) || registration
-                                        .hasAnyCurriculumLines(executionYear))) {
+                                && (registration.getLastDegreeCurricularPlan().hasExecutionDegreeFor(executionYear)
+                                        || registration.hasAnyCurriculumLines(executionYear))) {
                             reportRaidesGraduate(spreadsheet, registration, studentCurricularPlan,
-                                    getFullRegistrationPath(registration), executionYear,
-                                    cycleType, false, null, registrationConclusionBean.getRawGrade().getNumericValue());
+                                    getFullRegistrationPath(registration), executionYear, cycleType, false, null,
+                                    registrationConclusionBean.getRawGrade().getNumericValue());
                         }
                     }
                 }

@@ -56,15 +56,13 @@ public class DfaRegistrationPR extends DfaRegistrationPR_Base {
     }
 
     private boolean hasPenaltyForRegistration(final DfaRegistrationEvent dfaRegistrationEvent) {
-        return dfaRegistrationEvent.hasRegistrationPeriodInDegreeCurricularPlan()
-                && !dfaRegistrationEvent.getRegistrationPeriodInDegreeCurricularPlan().containsDate(
-                        dfaRegistrationEvent.getRegistrationDate());
+        return dfaRegistrationEvent.hasRegistrationPeriodInDegreeCurricularPlan() && !dfaRegistrationEvent
+                .getRegistrationPeriodInDegreeCurricularPlan().containsDate(dfaRegistrationEvent.getRegistrationDate());
     }
 
     private boolean hasPayedPenaltyForCandidacy(final DfaRegistrationEvent dfaRegistrationEvent) {
-        return dfaRegistrationEvent.hasCandidacyPeriodInDegreeCurricularPlan()
-                && !dfaRegistrationEvent.getCandidacyPeriodInDegreeCurricularPlan().containsDate(
-                        dfaRegistrationEvent.getCandidacyDate());
+        return dfaRegistrationEvent.hasCandidacyPeriodInDegreeCurricularPlan() && !dfaRegistrationEvent
+                .getCandidacyPeriodInDegreeCurricularPlan().containsDate(dfaRegistrationEvent.getCandidacyDate());
 
     }
 

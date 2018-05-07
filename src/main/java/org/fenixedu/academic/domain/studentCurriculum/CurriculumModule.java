@@ -46,9 +46,9 @@ import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.domain.student.Student;
 import org.fenixedu.academic.domain.student.curriculum.Curriculum;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.academic.util.predicates.ResultCollection;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 import org.joda.time.YearMonthDay;
 
@@ -197,14 +197,15 @@ abstract public class CurriculumModule extends CurriculumModule_Base {
     }
 
     public Set<ICurricularRule> getCurricularRules(ExecutionSemester executionSemester) {
-        final Set<ICurricularRule> result =
-                getCurriculumGroup() != null ? getCurriculumGroup().getCurricularRules(executionSemester) : new HashSet<ICurricularRule>();
+        final Set<ICurricularRule> result = getCurriculumGroup() != null ? getCurriculumGroup()
+                .getCurricularRules(executionSemester) : new HashSet<ICurricularRule>();
         result.addAll(getDegreeModule().getCurricularRules(executionSemester));
 
         return result;
     }
 
-    public ICurricularRule getMostRecentActiveCurricularRule(final CurricularRuleType ruleType, final ExecutionYear executionYear) {
+    public ICurricularRule getMostRecentActiveCurricularRule(final CurricularRuleType ruleType,
+            final ExecutionYear executionYear) {
         return getDegreeModule().getMostRecentActiveCurricularRule(ruleType, getCurriculumGroup().getDegreeModule(),
                 executionYear);
     }
@@ -335,7 +336,8 @@ abstract public class CurriculumModule extends CurriculumModule_Base {
 
     abstract public ExecutionYear getIEnrolmentsLastExecutionYear();
 
-    abstract public Enrolment findEnrolmentFor(final CurricularCourse curricularCourse, final ExecutionSemester executionSemester);
+    abstract public Enrolment findEnrolmentFor(final CurricularCourse curricularCourse,
+            final ExecutionSemester executionSemester);
 
     abstract public Set<IDegreeModuleToEvaluate> getDegreeModulesToEvaluate(final ExecutionSemester executionSemester);
 
@@ -355,7 +357,7 @@ abstract public class CurriculumModule extends CurriculumModule_Base {
 
     abstract public Set<CurriculumLine> getAllCurriculumLines();
 
-	abstract public Stream<CurriculumLine> getCurriculumLineStream();
+    abstract public Stream<CurriculumLine> getCurriculumLineStream();
 
     abstract public ConclusionValue isConcluded(ExecutionYear executionYear);
 

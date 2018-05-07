@@ -37,6 +37,7 @@ import org.fenixedu.academic.domain.CurricularCourse;
 import org.fenixedu.academic.domain.CurricularYear;
 import org.fenixedu.academic.domain.Degree;
 import org.fenixedu.academic.domain.ExecutionCourse;
+import org.fenixedu.academic.domain.ExecutionInterval;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.GradeScale;
@@ -117,8 +118,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
                 SheetData<?> builder = exportTemplate(request, filter);
                 response.setContentType("text/csv");
                 response.setHeader("Content-disposition", "attachment; filename=template.tsv");
-                new SpreadsheetBuilder().addSheet("template", builder)
-                        .build(WorkbookExportFormat.TSV, response.getOutputStream());
+                new SpreadsheetBuilder().addSheet("template", builder).build(WorkbookExportFormat.TSV,
+                        response.getOutputStream());
                 return null;
             } finally {
                 response.flushBuffer();
@@ -157,8 +158,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
         if (filter == null) {
             filter = new EctsTableFilter();
             if (request.getParameter("interval") != null) {
-                filter.setExecutionInterval(AcademicInterval.getAcademicIntervalFromResumedString(request
-                        .getParameter("interval")));
+                filter.setExecutionInterval(
+                        AcademicInterval.getAcademicIntervalFromResumedString(request.getParameter("interval")));
             }
             if (request.getParameter("type") != null) {
                 filter.setType(EctsTableType.valueOf(request.getParameter("type")));
@@ -276,7 +277,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
         }
     }
 
-    private void importGraduationTables(AcademicInterval executionInterval, EctsTableLevel level, String file) throws IOException {
+    private void importGraduationTables(AcademicInterval executionInterval, EctsTableLevel level, String file)
+            throws IOException {
         switch (level) {
         case DEGREE:
             importGraduationByDegreeTables(executionInterval, file);
@@ -288,10 +290,11 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
     }
 
     private Set<IEctsConversionTable> processEnrolmentByCompetenceCourseStatus(EctsTableFilter filter) {
-        ExecutionYear year = (ExecutionYear) ExecutionYear.getExecutionInterval(filter.getExecutionInterval());
+        ExecutionYear year = (ExecutionYear) ExecutionInterval.getExecutionInterval(filter.getExecutionInterval());
         Set<IEctsConversionTable> tables = new HashSet<IEctsConversionTable>();
         for (CompetenceCourse competenceCourse : rootDomainObject.getCompetenceCoursesSet()) {
-            if ((competenceCourse.getCurricularStage() == CurricularStage.PUBLISHED || competenceCourse.getCurricularStage() == CurricularStage.APPROVED)
+            if ((competenceCourse.getCurricularStage() == CurricularStage.PUBLISHED
+                    || competenceCourse.getCurricularStage() == CurricularStage.APPROVED)
                     && competenceCourse.hasActiveScopesInExecutionYear(year)) {
                 EctsCompetenceCourseConversionTable table =
                         EctsTableIndex.readOrCreateByYear(filter.getExecutionInterval()).getEnrolmentTableBy(competenceCourse);
@@ -306,7 +309,7 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
     }
 
     private SheetData<IEctsConversionTable> exportEnrolmentByCompetenceCourseTemplate(EctsTableFilter filter) {
-        final ExecutionYear year = (ExecutionYear) ExecutionYear.getExecutionInterval(filter.getExecutionInterval());
+        final ExecutionYear year = (ExecutionYear) ExecutionInterval.getExecutionInterval(filter.getExecutionInterval());
         final ExecutionSemester querySemester = year.getFirstExecutionPeriod();
         SheetData<IEctsConversionTable> builder =
                 new SheetData<IEctsConversionTable>(processEnrolmentByCompetenceCourseStatus(filter)) {
@@ -314,8 +317,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
                     protected void makeLine(IEctsConversionTable table) {
                         CompetenceCourse competence = (CompetenceCourse) table.getTargetEntity();
                         addCell(BundleUtil.getString(Bundle.GEP, "label.externalId"), competence.getExternalId());
-                        addCell(BundleUtil.getString(Bundle.GEP, "label.departmentUnit.name"), competence.getDepartmentUnit()
-                                .getName());
+                        addCell(BundleUtil.getString(Bundle.GEP, "label.departmentUnit.name"),
+                                competence.getDepartmentUnit().getName());
                         addCell(BundleUtil.getString(Bundle.GEP, "label.competenceCourse.name"),
                                 competence.getName(querySemester));
                         addCell(BundleUtil.getString(Bundle.GEP, "label.acronym"), competence.getAcronym(querySemester));
@@ -368,13 +371,12 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
     }
 
     private Set<IEctsConversionTable> processEnrolmentByDegreeStatus(EctsTableFilter filter) {
-        ExecutionYear year = (ExecutionYear) ExecutionYear.getExecutionInterval(filter.getExecutionInterval());
+        ExecutionYear year = (ExecutionYear) ExecutionInterval.getExecutionInterval(filter.getExecutionInterval());
         Set<IEctsConversionTable> tables = new HashSet<IEctsConversionTable>();
         for (Degree degree : rootDomainObject.getDegreesSet()) {
-            if (degree.getDegreeCurricularPlansExecutionYears().contains(year)
-                    && (degree.getDegreeType().isBolonhaDegree() || degree.getDegreeType().isBolonhaMasterDegree()
-                            || degree.getDegreeType().isIntegratedMasterDegree() || degree.getDegreeType()
-                            .isAdvancedSpecializationDiploma())) {
+            if (degree.getDegreeCurricularPlansExecutionYears().contains(year) && (degree.getDegreeType().isBolonhaDegree()
+                    || degree.getDegreeType().isBolonhaMasterDegree() || degree.getDegreeType().isIntegratedMasterDegree()
+                    || degree.getDegreeType().isAdvancedSpecializationDiploma())) {
                 for (int i = 1; i <= degree.getMostRecentDegreeCurricularPlan().getDurationInYears(); i++) {
                     EctsDegreeByCurricularYearConversionTable table =
                             EctsTableIndex.readOrCreateByYear(filter.getExecutionInterval()).getEnrolmentTableBy(degree,
@@ -415,8 +417,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
                 String[] parts = fillArray(line.split(SEPARATOR), 15);
                 Degree degree = FenixFramework.getDomainObject(parts[0]);
                 if (!degree.getDegreeType().getName().getContent().equals(parts[1])) {
-                    throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[1], degree
-                            .getDegreeType().getName().getContent());
+                    throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[1],
+                            degree.getDegreeType().getName().getContent());
                 }
                 if (!degree.getName().equals(parts[2])) {
                     throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[2], degree.getName());
@@ -537,13 +539,12 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
     }
 
     private Set<IEctsConversionTable> processGraduationByDegreeStatus(EctsTableFilter filter) {
-        ExecutionYear year = (ExecutionYear) ExecutionYear.getExecutionInterval(filter.getExecutionInterval());
+        ExecutionYear year = (ExecutionYear) ExecutionInterval.getExecutionInterval(filter.getExecutionInterval());
         Set<IEctsConversionTable> tables = new HashSet<IEctsConversionTable>();
         for (Degree degree : rootDomainObject.getDegreesSet()) {
-            if (degree.getDegreeCurricularPlansExecutionYears().contains(year)
-                    && (degree.getDegreeType().isBolonhaDegree() || degree.getDegreeType().isBolonhaMasterDegree()
-                            || degree.getDegreeType().isIntegratedMasterDegree() || degree.getDegreeType()
-                            .isAdvancedSpecializationDiploma())) {
+            if (degree.getDegreeCurricularPlansExecutionYears().contains(year) && (degree.getDegreeType().isBolonhaDegree()
+                    || degree.getDegreeType().isBolonhaMasterDegree() || degree.getDegreeType().isIntegratedMasterDegree()
+                    || degree.getDegreeType().isAdvancedSpecializationDiploma())) {
                 for (CycleType cycle : degree.getDegreeType().getCycleTypes()) {
                     EctsDegreeGraduationGradeConversionTable table =
                             EctsTableIndex.readOrCreateByYear(filter.getExecutionInterval()).getGraduationTableBy(degree, cycle);
@@ -592,8 +593,8 @@ public class ManageEctsComparabilityTablesDispatchAction extends FenixDispatchAc
                 String[] parts = fillArray(line.split(SEPARATOR), 26);
                 Degree degree = FenixFramework.getDomainObject(parts[0]);
                 if (!degree.getDegreeType().getName().getContent().equals(parts[1])) {
-                    throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[1], degree
-                            .getDegreeType().getName().getContent());
+                    throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[1],
+                            degree.getDegreeType().getName().getContent());
                 }
                 if (!degree.getName().equals(parts[2])) {
                     throw new DomainException("error.ects.invalidLine.nonMatchingCourse", parts[0], parts[2], degree.getName());

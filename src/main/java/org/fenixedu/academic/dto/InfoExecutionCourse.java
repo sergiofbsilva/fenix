@@ -220,8 +220,8 @@ public class InfoExecutionCourse extends InfoObject {
 
         for (final CurricularCourse curricularCourse : getExecutionCourse().getAssociatedCurricularCoursesSet()) {
             final InfoCurricularCourse infoCurricularCourse = InfoCurricularCourse.newInfoFromDomain(curricularCourse);
-            infoCurricularCourse.setInfoScopes(getInfoScopes(curricularCourse.findCurricularCourseScopesIntersectingPeriod(
-                    executionYear.getBeginDate(), executionYear.getEndDate())));
+            infoCurricularCourse.setInfoScopes(getInfoScopes(curricularCourse
+                    .findCurricularCourseScopesIntersectingPeriod(executionYear.getBeginDate(), executionYear.getEndDate())));
 
             result.add(infoCurricularCourse);
         }

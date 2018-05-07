@@ -76,8 +76,9 @@ public class EquivalencePlanRequestPR extends EquivalencePlanRequestPR_Base {
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
         final Money calculateAmountToPay = event.calculateAmountToPay(when);
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), calculateAmountToPay, event.getDescriptionForEntryType(getEntryType()), calculateAmountToPay));
+        return Collections
+                .singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event.getPayedAmount(),
+                        calculateAmountToPay, event.getDescriptionForEntryType(getEntryType()), calculateAmountToPay));
     }
 
     @Override
@@ -121,8 +122,8 @@ public class EquivalencePlanRequestPR extends EquivalencePlanRequestPR_Base {
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(final Money amountToPay, final Event event, final DateTime whenRegistered) {

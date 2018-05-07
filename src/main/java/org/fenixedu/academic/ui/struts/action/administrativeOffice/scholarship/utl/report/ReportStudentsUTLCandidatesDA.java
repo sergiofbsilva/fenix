@@ -50,7 +50,8 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 public class ReportStudentsUTLCandidatesDA extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         ReportStudentsUTLCandidatesBean bean = new ReportStudentsUTLCandidatesBean();
         request.setAttribute("bean", bean);
 
@@ -159,13 +160,11 @@ public class ReportStudentsUTLCandidatesDA extends FenixDispatchAction {
 
         ReportStudentsUTLCandidates report = null;
         if (bean.getForFirstYear()) {
-            report =
-                    new ReportStudentsUTLCandidatesForOneStudentFirstYear(bean.getExecutionYear(),
-                            Student.readStudentByNumber(bean.getStudentNumber()));
+            report = new ReportStudentsUTLCandidatesForOneStudentFirstYear(bean.getExecutionYear(),
+                    Student.readStudentByNumber(bean.getStudentNumber()));
         } else {
-            report =
-                    new ReportStudentsUTLCandidatesForOneStudent(bean.getExecutionYear(), Student.readStudentByNumber(bean
-                            .getStudentNumber()));
+            report = new ReportStudentsUTLCandidatesForOneStudent(bean.getExecutionYear(),
+                    Student.readStudentByNumber(bean.getStudentNumber()));
         }
 
         request.setAttribute("report", report);

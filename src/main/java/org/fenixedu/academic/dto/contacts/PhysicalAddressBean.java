@@ -142,18 +142,19 @@ public class PhysicalAddressBean extends PartyContactBean {
     public Boolean edit() {
         final boolean isValueChanged = super.edit();
         if (isValueChanged) {
-            ((PhysicalAddress) getContact()).edit(new PhysicalAddressData(getAddress(), getAreaCode(), getAreaOfAreaCode(),
-                    getArea(), getParishOfResidence(), getDistrictSubdivisionOfResidence(), getDistrictOfResidence(),
-                    getCountryOfResidence()));
+            ((PhysicalAddress) getContact()).edit(
+                    new PhysicalAddressData(getAddress(), getAreaCode(), getAreaOfAreaCode(), getArea(), getParishOfResidence(),
+                            getDistrictSubdivisionOfResidence(), getDistrictOfResidence(), getCountryOfResidence()));
         }
         return isValueChanged;
     }
 
     @Override
     public PartyContact createNewContact() {
-        return PhysicalAddress.createPhysicalAddress(getParty(), new PhysicalAddressData(getAddress(), getAreaCode(),
-                getAreaOfAreaCode(), getArea(), getParishOfResidence(), getDistrictSubdivisionOfResidence(),
-                getDistrictOfResidence(), getCountryOfResidence()), getType(), getDefaultContact());
+        return PhysicalAddress.createPhysicalAddress(getParty(),
+                new PhysicalAddressData(getAddress(), getAreaCode(), getAreaOfAreaCode(), getArea(), getParishOfResidence(),
+                        getDistrictSubdivisionOfResidence(), getDistrictOfResidence(), getCountryOfResidence()),
+                getType(), getDefaultContact());
     }
 
     public PhysicalAddressValidationBean getValidationBean() {

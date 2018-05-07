@@ -21,8 +21,8 @@ package org.fenixedu.academic.domain.candidacyProcess.erasmus;
 public enum StorkAttributeType {
     STORK_EIDENTIFIER("eIdentificador"),
 
-    STORK_NAME("NomeProprio"), STORK_SURNAME("NomeApelido"), STORK_FAMILY_NAME("NomeFamilia"), STORK_ADOPTED_FAMILY_NAME(
-            "NomeAdoptado"),
+    STORK_NAME("NomeProprio"), STORK_SURNAME("NomeApelido"), STORK_FAMILY_NAME("NomeFamilia"),
+    STORK_ADOPTED_FAMILY_NAME("NomeAdoptado"),
 
     STORK_GENDER("Sexo"), STORK_BIRTHDATE("DataNascimento"),
 

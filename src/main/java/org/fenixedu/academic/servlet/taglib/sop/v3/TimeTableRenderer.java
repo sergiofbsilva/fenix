@@ -191,15 +191,15 @@ public class TimeTableRenderer {
                                         (LessonSlotContentRendererShift) this.lessonSlotContentRenderer;
                                 InfoLessonWrapper infoLessonWrapperHashMap =
                                         (InfoLessonWrapper) slotLessons.get(slotIndex + "-" + dayIndex);
-                                strBuffer.append(lessonSlotContentRendererShift.lastRender(
-                                        infoLessonWrapperHashMap.getLessonSlot(), contextPath));
+                                strBuffer.append(lessonSlotContentRendererShift
+                                        .lastRender(infoLessonWrapperHashMap.getLessonSlot(), contextPath));
                             } else {
                                 if (infoLessonWrapper != null
                                         && this.lessonSlotContentRenderer instanceof ClassTimeTableWithoutLinksLessonContentRenderer) {
                                     final HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
                                     final String context = request.getContextPath();
-                                    strBuffer.append(this.lessonSlotContentRenderer.render(context,
-                                            infoLessonWrapper.getLessonSlot()));
+                                    strBuffer.append(
+                                            this.lessonSlotContentRenderer.render(context, infoLessonWrapper.getLessonSlot()));
                                 }
 
                                 strBuffer.append("&nbsp;");
@@ -301,9 +301,8 @@ public class TimeTableRenderer {
         // strBuffer.append("<th width='15%'>horas/dias</th>\r\n");
         String hourDaysTitle;
         try {
-            hourDaysTitle =
-                    RequestUtils.message(pageContext, "PUBLIC_DEGREE_INFORMATION", Globals.LOCALE_KEY,
-                            "public.degree.information.label.timesAndDays");
+            hourDaysTitle = RequestUtils.message(pageContext, "PUBLIC_DEGREE_INFORMATION", Globals.LOCALE_KEY,
+                    "public.degree.information.label.timesAndDays");
         } catch (JspException e) {
             hourDaysTitle = "???label.timesAndDays???";
         }

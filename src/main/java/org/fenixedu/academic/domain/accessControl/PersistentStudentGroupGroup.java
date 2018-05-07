@@ -45,7 +45,7 @@ public class PersistentStudentGroupGroup extends PersistentStudentGroupGroup_Bas
     }
 
     public static PersistentStudentGroupGroup getInstance(final StudentGroup studentGroup) {
-        return singleton(() -> Optional.ofNullable(studentGroup.getStudentGroupGroup()), () -> new PersistentStudentGroupGroup(
-                studentGroup));
+        return singleton(() -> Optional.ofNullable(studentGroup.getStudentGroupGroup()),
+                () -> new PersistentStudentGroupGroup(studentGroup));
     }
 }

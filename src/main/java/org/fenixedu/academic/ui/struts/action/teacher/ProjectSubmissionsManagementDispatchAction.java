@@ -59,8 +59,8 @@ public class ProjectSubmissionsManagementDispatchAction extends ExecutionCourseB
         return new ActionForward("/evaluation/evaluationFrame.jsp");
     }
 
-    public ActionForward viewLastProjectSubmissionForEachGroup(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws FenixActionException {
+    public ActionForward viewLastProjectSubmissionForEachGroup(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixActionException {
 
         final Project project = getProject(request);
         final List<ProjectSubmission> projectSubmissions =
@@ -111,9 +111,8 @@ public class ProjectSubmissionsManagementDispatchAction extends ExecutionCourseB
 
             for (ProjectSubmission submission : projectSubmissions) {
                 StudentGroup group = submission.getStudentGroup();
-                ZipEntry zipEntry =
-                        new ZipEntry(group.getGroupNumber() + getStudentsISTID(group) + "/"
-                                + submission.getProjectSubmissionFile().getFilename());
+                ZipEntry zipEntry = new ZipEntry(group.getGroupNumber() + getStudentsISTID(group) + "/"
+                        + submission.getProjectSubmissionFile().getFilename());
                 stream.putNextEntry(zipEntry);
                 stream.write(submission.getProjectSubmissionFile().getContent());
                 stream.closeEntry();
@@ -160,14 +159,13 @@ public class ProjectSubmissionsManagementDispatchAction extends ExecutionCourseB
 
         try (ZipOutputStream stream = new ZipOutputStream(response.getOutputStream())) {
             response.setContentType("application/zip");
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + project.getName() + "-" + (startIndex + 1)
-                    + "-" + finishIndex + ".zip\"");
+            response.setHeader("Content-Disposition",
+                    "attachment; filename=\"" + project.getName() + "-" + (startIndex + 1) + "-" + finishIndex + ".zip\"");
 
             for (ProjectSubmission submission : subList) {
                 StudentGroup group = submission.getStudentGroup();
-                ZipEntry zipEntry =
-                        new ZipEntry(group.getGroupNumber() + getStudentsISTID(group) + "/"
-                                + submission.getProjectSubmissionFile().getFilename());
+                ZipEntry zipEntry = new ZipEntry(group.getGroupNumber() + getStudentsISTID(group) + "/"
+                        + submission.getProjectSubmissionFile().getFilename());
                 stream.putNextEntry(zipEntry);
                 stream.write(submission.getProjectSubmissionFile().getContent());
                 stream.closeEntry();

@@ -52,8 +52,7 @@ public class AccountingEventsManager {
         }
 
         final InvocationResult result = InvocationResult.createInsuccess();
-        result.addMessage(
-                Bundle.APPLICATION,
+        result.addMessage(Bundle.APPLICATION,
                 "error.accounting.events.AccountingEventsManager.registration.for.student.does.not.respect.requirements.to.create.standalone.gratuity.event");
 
         return result;
@@ -98,17 +97,16 @@ public class AccountingEventsManager {
     private InvocationResult createDfaGratuityEvent(StudentCurricularPlan studentCurricularPlan, ExecutionYear executionYear,
             boolean checkConditions) {
 
-        final InvocationResult result =
-                checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear, studentCurricularPlan) : InvocationResult
-                        .createSuccess();
+        final InvocationResult result = checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear,
+                studentCurricularPlan) : InvocationResult.createSuccess();
 
         if (result.isSuccess()) {
 
             if (studentCurricularPlan.getRegistration().hasGratuityEvent(executionYear, DfaGratuityEvent.class)) {
                 result.addMessage(Bundle.APPLICATION,
                         "error.accounting.events.AccountingEventsManager.student.already.has.gratuity.event.for.execution.year",
-                        studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                                .getRegistration().getDegree().getPresentationName(), executionYear.getYear());
+                        studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                        studentCurricularPlan.getRegistration().getDegree().getPresentationName(), executionYear.getYear());
 
                 result.setSuccess(false);
 
@@ -127,15 +125,14 @@ public class AccountingEventsManager {
     private InvocationResult createSpecializationDegreeGratuityEvent(StudentCurricularPlan studentCurricularPlan,
             ExecutionYear executionYear, boolean checkConditions) {
 
-        final InvocationResult result =
-                checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear, studentCurricularPlan) : InvocationResult
-                        .createSuccess();
+        final InvocationResult result = checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear,
+                studentCurricularPlan) : InvocationResult.createSuccess();
 
         if (result.isSuccess()) {
-            if (studentCurricularPlan.getRegistration().hasGratuityEvent(executionYear, SpecializationDegreeGratuityEvent.class)) {
-                result.addMessage(Bundle.APPLICATION,
-                        studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                                .getRegistration().getDegree().getPresentationName(), executionYear.getYear());
+            if (studentCurricularPlan.getRegistration().hasGratuityEvent(executionYear,
+                    SpecializationDegreeGratuityEvent.class)) {
+                result.addMessage(Bundle.APPLICATION, studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                        studentCurricularPlan.getRegistration().getDegree().getPresentationName(), executionYear.getYear());
 
                 result.setSuccess(false);
 
@@ -152,17 +149,16 @@ public class AccountingEventsManager {
     private InvocationResult createGratuityEventWithPaymentPlan(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionYear executionYear, final boolean checkConditions) {
 
-        final InvocationResult result =
-                checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear, studentCurricularPlan) : InvocationResult
-                        .createSuccess();
+        final InvocationResult result = checkConditions ? verifyConditionsToCreateGratuityEvent(executionYear,
+                studentCurricularPlan) : InvocationResult.createSuccess();
 
         if (result.isSuccess()) {
 
             if (studentCurricularPlan.getRegistration().hasGratuityEvent(executionYear, GratuityEventWithPaymentPlan.class)) {
                 result.addMessage(Bundle.APPLICATION,
                         "error.accounting.events.AccountingEventsManager.student.already.has.gratuity.event.for.execution.year",
-                        studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                                .getRegistration().getDegree().getPresentationName(), executionYear.getYear());
+                        studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                        studentCurricularPlan.getRegistration().getDegree().getPresentationName(), executionYear.getYear());
 
                 result.setSuccess(false);
 
@@ -189,11 +185,10 @@ public class AccountingEventsManager {
             result.setSuccess(true);
 
         } else {
-            result.addMessage(
-                    Bundle.APPLICATION,
+            result.addMessage(Bundle.APPLICATION,
                     "error.accounting.events.AccountingEventsManager.registration.for.student.does.not.respect.requirements.to.create.gratuity.event",
-                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                            .getDegree().getPresentationName());
+                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                    studentCurricularPlan.getDegree().getPresentationName());
 
         }
 
@@ -218,8 +213,7 @@ public class AccountingEventsManager {
             final Student student = studentCurricularPlan.getRegistration().getStudent();
 
             if (student.getPerson().hasAdministrativeOfficeFeeInsuranceEventFor(executionYear)) {
-                result.addMessage(
-                        Bundle.APPLICATION,
+                result.addMessage(Bundle.APPLICATION,
                         "error.accounting.events.AccountingEventsManager.student.already.has.administrativeoffice.fee.and.insurance.event.for.year",
                         student.getNumber().toString(), executionYear.getYear());
 
@@ -258,11 +252,10 @@ public class AccountingEventsManager {
             result.setSuccess(true);
 
         } else {
-            result.addMessage(
-                    Bundle.APPLICATION,
+            result.addMessage(Bundle.APPLICATION,
                     "error.accounting.events.AccountingEventsManager.registration.for.student.does.not.respect.requirements.to.create.administrativeoffice.fee.and.insurance.event",
-                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                            .getDegree().getPresentationName());
+                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                    studentCurricularPlan.getDegree().getPresentationName());
         }
 
         return result;
@@ -271,11 +264,10 @@ public class AccountingEventsManager {
 
     private boolean verifyCommonConditionsToCreateGratuityAndAdministrativeOfficeEvents(final ExecutionYear executionYear,
             final StudentCurricularPlan studentCurricularPlan, final Registration registration) {
-        return registration.hasToPayGratuityOrInsurance()
-                && registration.isActive()
+        return registration.hasToPayGratuityOrInsurance() && registration.isActive()
                 && studentCurricularPlan.getDegreeCurricularPlan().hasExecutionDegreeFor(executionYear)
-                && (registration.isInMobilityState() || registration.hasAnyEnrolmentsIn(executionYear) || isSecondCycleInternalCandidacyAndStartedOn(
-                        registration, executionYear));
+                && (registration.isInMobilityState() || registration.hasAnyEnrolmentsIn(executionYear)
+                        || isSecondCycleInternalCandidacyAndStartedOn(registration, executionYear));
 
     }
 
@@ -291,9 +283,8 @@ public class AccountingEventsManager {
 
     public InvocationResult createInsuranceEvent(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionYear executionYear, final boolean checkConditions) {
-        final InvocationResult result =
-                checkConditions ? verifyConditionsToCreateInsuranceEvent(studentCurricularPlan, executionYear) : InvocationResult
-                        .createSuccess();
+        final InvocationResult result = checkConditions ? verifyConditionsToCreateInsuranceEvent(studentCurricularPlan,
+                executionYear) : InvocationResult.createSuccess();
 
         if (result.isSuccess()) {
 
@@ -301,8 +292,8 @@ public class AccountingEventsManager {
 
             if (student.getPerson().hasInsuranceEventOrAdministrativeOfficeFeeInsuranceEventFor(executionYear)) {
                 result.addMessage(Bundle.APPLICATION,
-                        "error.accounting.events.AccountingEventsManager.student.already.has.insurance.event.for.year", student
-                                .getNumber().toString(), executionYear.getYear());
+                        "error.accounting.events.AccountingEventsManager.student.already.has.insurance.event.for.year",
+                        student.getNumber().toString(), executionYear.getYear());
 
                 result.setSuccess(false);
 
@@ -328,11 +319,10 @@ public class AccountingEventsManager {
             result.setSuccess(true);
 
         } else {
-            result.addMessage(
-                    Bundle.APPLICATION,
+            result.addMessage(Bundle.APPLICATION,
                     "error.accounting.events.AccountingEventsManager.registration.for.student.does.not.respect.requirements.to.create.insurance.event",
-                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(), studentCurricularPlan
-                            .getDegree().getPresentationName());
+                    studentCurricularPlan.getRegistration().getStudent().getNumber().toString(),
+                    studentCurricularPlan.getDegree().getPresentationName());
         }
 
         return result;
@@ -348,8 +338,8 @@ public class AccountingEventsManager {
 
             if (person.hasInsuranceEventOrAdministrativeOfficeFeeInsuranceEventFor(executionYear)) {
                 result.addMessage(Bundle.APPLICATION,
-                        "error.accounting.events.AccountingEventsManager.student.already.has.insurance.event.for.year", person
-                                .getStudent().getNumber().toString(), executionYear.getYear());
+                        "error.accounting.events.AccountingEventsManager.student.already.has.insurance.event.for.year",
+                        person.getStudent().getNumber().toString(), executionYear.getYear());
 
                 result.setSuccess(false);
 

@@ -21,8 +21,8 @@ package org.fenixedu.academic.ui.renderers.providers;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.LessonPlanning;
 
-public class ExecutionCourseShiftTypesToEditLessonPlanningProvider extends
-        ExecutionCourseShiftTypesToCreateLessonPlanningProvider {
+public class ExecutionCourseShiftTypesToEditLessonPlanningProvider
+        extends ExecutionCourseShiftTypesToCreateLessonPlanningProvider {
 
     @Override
     public ExecutionCourse getExecutionCourse(Object source) {

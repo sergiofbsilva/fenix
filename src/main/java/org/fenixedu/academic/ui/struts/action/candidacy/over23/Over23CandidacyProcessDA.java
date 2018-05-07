@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -136,7 +137,7 @@ public class Over23CandidacyProcessDA extends CandidacyProcessDA {
                     setCandidacyProcessInformation(actionForm, getProcess(request));
                     request.setAttribute("candidacyProcesses", candidacyProcesses);
                     ChooseDegreeBean chooseDegreeBean = getChooseDegreeBean(request);
-                    if(chooseDegreeBean != null) {                        
+                    if (chooseDegreeBean != null) {
                         chooseDegreeBean.setCandidacyProcess(process);
                     }
                     return;
@@ -270,14 +271,14 @@ public class Over23CandidacyProcessDA extends CandidacyProcessDA {
                 final int offset) {
 
             final HSSFRow row = sheet.createRow(sheet.getLastRowNum() + offset);
-            cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+            cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 
             int count = 0;
             for (final Object cellValue : cells) {
                 if (++count == 3) {
-                    cellStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+                    cellStyle.setAlignment(CellStyle.ALIGN_LEFT);
                 } else {
-                    cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+                    cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
                 }
                 addColumn(cellStyle, row, cellValue);
             }
@@ -336,21 +337,21 @@ public class Over23CandidacyProcessDA extends CandidacyProcessDA {
     @Override
     protected Spreadsheet buildIndividualCandidacyReport(Spreadsheet spreadsheet,
             IndividualCandidacyProcess individualCandidacyProcess) {
-            Over23IndividualCandidacyProcess over23IndividualCandidacyProcess =
-                    (Over23IndividualCandidacyProcess) individualCandidacyProcess;
+        Over23IndividualCandidacyProcess over23IndividualCandidacyProcess =
+                (Over23IndividualCandidacyProcess) individualCandidacyProcess;
 
-            final Row row = spreadsheet.addRow();
-            row.setCell(over23IndividualCandidacyProcess.getProcessCode());
-            row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getName());
-            row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
-            row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
-            row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getCountry() != null ? over23IndividualCandidacyProcess
-                    .getPersonalDetails().getCountry().getCountryNationality().getContent() : "");
-            row.setCell(BundleUtil.getString(Bundle.ENUMERATION, individualCandidacyProcess.getCandidacyState().getQualifiedName()));
-            row.setCell(BundleUtil.getString(Bundle.CANDIDATE, over23IndividualCandidacyProcess.getProcessChecked() != null
-                    && over23IndividualCandidacyProcess.getProcessChecked() ? MESSAGE_YES : MESSAGE_NO));
+        final Row row = spreadsheet.addRow();
+        row.setCell(over23IndividualCandidacyProcess.getProcessCode());
+        row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getName());
+        row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getIdDocumentType().getLocalizedName());
+        row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getDocumentIdNumber());
+        row.setCell(over23IndividualCandidacyProcess.getPersonalDetails().getCountry() != null ? over23IndividualCandidacyProcess
+                .getPersonalDetails().getCountry().getCountryNationality().getContent() : "");
+        row.setCell(BundleUtil.getString(Bundle.ENUMERATION, individualCandidacyProcess.getCandidacyState().getQualifiedName()));
+        row.setCell(BundleUtil.getString(Bundle.CANDIDATE, over23IndividualCandidacyProcess.getProcessChecked() != null
+                && over23IndividualCandidacyProcess.getProcessChecked() ? MESSAGE_YES : MESSAGE_NO));
 
-            return spreadsheet;
+        return spreadsheet;
     }
 
 }

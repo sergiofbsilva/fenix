@@ -37,9 +37,9 @@ public class DegreeCandidacyForGraduatedPersonDegreesProvider implements DataPro
     @Override
     public Object provide(Object source, Object currentValue) {
 
-        final Set<AcademicProgram> programs =
-                AcademicAccessRule.getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES,
-                        Authenticate.getUser()).collect(Collectors.toSet());
+        final Set<AcademicProgram> programs = AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES, Authenticate.getUser())
+                .collect(Collectors.toSet());
 
         return getDegrees(source).stream().filter(degree -> programs.contains(degree)).collect(Collectors.toList());
     }

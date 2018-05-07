@@ -81,8 +81,9 @@ public class Dismissal extends Dismissal_Base implements ICurriculumEntry {
             final CurricularCourse curricularCourse) {
         if (!(curriculumGroup instanceof NoCourseGroupCurriculumGroup)) {
             if (!curriculumGroup.getCurricularCoursesToDismissal(credits.getExecutionPeriod()).contains(curricularCourse)) {
-                throw new DomainException("error.dismissal.invalid.curricular.course.to.dismissal", curriculumGroup.getName()
-                        .getContent(), curricularCourse.getName(), credits.getExecutionPeriod().getQualifiedName());
+                throw new DomainException("error.dismissal.invalid.curricular.course.to.dismissal",
+                        curriculumGroup.getName().getContent(), curricularCourse.getName(),
+                        credits.getExecutionPeriod().getQualifiedName());
             }
         }
     }
@@ -169,8 +170,8 @@ public class Dismissal extends Dismissal_Base implements ICurriculumEntry {
     public Double getEctsCredits() {
         // FIXME must migrate Dismissal with optional curricular courses to
         // OptionalDismissal
-        return getCurricularCourse().isOptionalCurricularCourse() ? getEnrolmentsEcts() : getCurricularCourse().getEctsCredits(
-                getExecutionPeriod());
+        return getCurricularCourse().isOptionalCurricularCourse() ? getEnrolmentsEcts() : getCurricularCourse()
+                .getEctsCredits(getExecutionPeriod());
     }
 
     @Override
@@ -212,8 +213,8 @@ public class Dismissal extends Dismissal_Base implements ICurriculumEntry {
     }
 
     protected boolean hasSameDegreeModules(final Dismissal dismissal) {
-        return (getDegreeModule() == dismissal.getDegreeModule() || getCurricularCourse().isEquivalent(
-                dismissal.getCurricularCourse()));
+        return (getDegreeModule() == dismissal.getDegreeModule()
+                || getCurricularCourse().isEquivalent(dismissal.getCurricularCourse()));
     }
 
     protected boolean hasSameSourceIEnrolments(final Collection<IEnrolment> ienrolments, final Dismissal dismissal) {
@@ -349,7 +350,8 @@ public class Dismissal extends Dismissal_Base implements ICurriculumEntry {
 
     public Grade getEctsGrade(DateTime processingDate) {
         final Grade normalizedEctsGrade = getNormalizedEctsGrade();
-        return normalizedEctsGrade == null ? EctsTableIndex.convertGradeToEcts(getCurricularCourse(), this, getGrade(), processingDate) : normalizedEctsGrade;
+        return normalizedEctsGrade == null ? EctsTableIndex.convertGradeToEcts(getCurricularCourse(), this, getGrade(),
+                processingDate) : normalizedEctsGrade;
     }
 
     public EctsConversionTable getEctsConversionTable(final DateTime processingDate) {

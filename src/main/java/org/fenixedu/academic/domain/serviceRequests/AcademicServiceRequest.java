@@ -55,9 +55,9 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import org.joda.time.YearMonthDay;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.Atomic;
 
 abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base {
 
@@ -187,20 +187,21 @@ abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base
     abstract public boolean isPayedUponCreation();
 
     public boolean isPaymentsAccessible() {
-    	final AcademicProgram program = getAcademicProgram();
+        final AcademicProgram program = getAcademicProgram();
         return AcademicAccessRule
                 .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_STUDENT_PAYMENTS, Authenticate.getUser())
                 .anyMatch(p -> p == program);
     }
 
     public boolean isRegistrationAccessible() {
-    	final AcademicProgram program = getAcademicProgram();
+        final AcademicProgram program = getAcademicProgram();
         return AcademicAccessRule
                 .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_REGISTRATIONS, Authenticate.getUser())
                 .anyMatch(p -> p == program);
     }
 
-    protected String getDescription(final AcademicServiceRequestType academicServiceRequestType, final String specificServiceType) {
+    protected String getDescription(final AcademicServiceRequestType academicServiceRequestType,
+            final String specificServiceType) {
         final StringBuilder result = new StringBuilder();
         result.append(BundleUtil.getString(Bundle.ENUMERATION, academicServiceRequestType.getQualifiedName()));
         if (specificServiceType != null) {
@@ -481,7 +482,8 @@ abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base
         return finishedSuccessfully() && isToPrint();
     }
 
-    private List<AcademicServiceRequestSituationType> getAcceptedSituationTypes(AcademicServiceRequestSituationType situationType) {
+    private List<AcademicServiceRequestSituationType> getAcceptedSituationTypes(
+            AcademicServiceRequestSituationType situationType) {
 
         switch (situationType) {
 
@@ -521,8 +523,8 @@ abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base
     }
 
     protected List<AcademicServiceRequestSituationType> getSentToExternalEntitySituationAcceptedSituationsTypes() {
-        return Collections.unmodifiableList(Collections
-                .singletonList(AcademicServiceRequestSituationType.RECEIVED_FROM_EXTERNAL_ENTITY));
+        return Collections
+                .unmodifiableList(Collections.singletonList(AcademicServiceRequestSituationType.RECEIVED_FROM_EXTERNAL_ENTITY));
     }
 
     protected List<AcademicServiceRequestSituationType> getReceivedFromExternalEntitySituationAcceptedSituationsTypes() {
@@ -531,8 +533,8 @@ abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base
     }
 
     protected List<AcademicServiceRequestSituationType> getConcludedSituationAcceptedSituationsTypes() {
-        return Collections.unmodifiableList(Arrays.asList(AcademicServiceRequestSituationType.CANCELLED,
-                AcademicServiceRequestSituationType.DELIVERED));
+        return Collections.unmodifiableList(
+                Arrays.asList(AcademicServiceRequestSituationType.CANCELLED, AcademicServiceRequestSituationType.DELIVERED));
     }
 
     /** This method is overwritten in the subclasses */
@@ -666,8 +668,7 @@ abstract public class AcademicServiceRequest extends AcademicServiceRequest_Base
      */
     @Deprecated
     final public boolean getLoggedPersonCanCancel() {
-        return isCancelledSituationAccepted()
-                && (!isPayable() || getEvent() == null || !isPayed())
+        return isCancelledSituationAccepted() && (!isPayable() || getEvent() == null || !isPayed())
                 && (createdByStudent() && !isConcluded() || AcademicAccessRule.isProgramAccessibleToFunction(
                         AcademicOperationType.SERVICE_REQUESTS, this.getAcademicProgram(), Authenticate.getUser()));
     }

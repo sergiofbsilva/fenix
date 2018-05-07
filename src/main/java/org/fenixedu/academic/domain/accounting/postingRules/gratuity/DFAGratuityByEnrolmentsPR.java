@@ -65,8 +65,8 @@ public class DFAGratuityByEnrolmentsPR extends DFAGratuityByEnrolmentsPR_Base {
     protected Money calculateDFAGratuityTotalAmountToPay(Event event) {
         DfaGratuityEvent dfaGratuity = (DfaGratuityEvent) event;
 
-        return getDfaAmountPerEnrolment().multiply(
-                dfaGratuity.getRegistration().getEnrolments(dfaGratuity.getExecutionYear()).size());
+        return getDfaAmountPerEnrolment()
+                .multiply(dfaGratuity.getRegistration().getEnrolments(dfaGratuity.getExecutionYear()).size());
     }
 
     @Override
@@ -75,7 +75,8 @@ public class DFAGratuityByEnrolmentsPR extends DFAGratuityByEnrolmentsPR_Base {
                 "error.accounting.postingRules.gratuity.DFAGratuityByEnrolmentsPR.cannot.modify.dfaAmountPerEnrolment");
     }
 
-    public DFAGratuityByEnrolmentsPR edit(Money dfaTotalAmount, Money dfaAmountPerEnrolment, BigDecimal partialAcceptedPercentage) {
+    public DFAGratuityByEnrolmentsPR edit(Money dfaTotalAmount, Money dfaAmountPerEnrolment,
+            BigDecimal partialAcceptedPercentage) {
         return edit(new DateTime(), dfaTotalAmount, dfaAmountPerEnrolment, partialAcceptedPercentage);
     }
 

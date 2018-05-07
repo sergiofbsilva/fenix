@@ -226,13 +226,10 @@ public class StudentPortalBean implements Serializable {
             public void setRealization(WrittenEvaluation writtenEvaluation) {
                 this.realizationPast = writtenEvaluation.getBeginningDateTime().isBeforeNow();
 
-                this.realization =
-                        YearMonthDay.fromDateFields(writtenEvaluation.getBeginningDateTime().toDate()).toString()
-                                + " "
-                                + writtenEvaluation.getBeginningDateTime().getHourOfDay()
-                                + ":"
-                                + (writtenEvaluation.getBeginningDateTime().getMinuteOfHour() == 0 ? "00" : writtenEvaluation
-                                        .getBeginningDateTime().getMinuteOfHour());
+                this.realization = YearMonthDay.fromDateFields(writtenEvaluation.getBeginningDateTime().toDate()).toString() + " "
+                        + writtenEvaluation.getBeginningDateTime().getHourOfDay() + ":"
+                        + (writtenEvaluation.getBeginningDateTime().getMinuteOfHour() == 0 ? "00" : writtenEvaluation
+                                .getBeginningDateTime().getMinuteOfHour());
             }
 
             public void setRealization(Grouping grouping) {
@@ -252,10 +249,9 @@ public class StudentPortalBean implements Serializable {
                         && writtenEvaluation.getEnrollmentEndDayDateYearMonthDay() != null) {
                     this.enrolmentElapsing = new Interval(beginDateTime, endDateTime).containsNow();
 
-                    this.enrolment =
-                            writtenEvaluation.getEnrollmentBeginDayDateYearMonthDay().toString() + " "
-                                    + BundleUtil.getString(Bundle.STUDENT, "message.out.until") + " "
-                                    + writtenEvaluation.getEnrollmentEndDayDateYearMonthDay().toString();
+                    this.enrolment = writtenEvaluation.getEnrollmentBeginDayDateYearMonthDay().toString() + " "
+                            + BundleUtil.getString(Bundle.STUDENT, "message.out.until") + " "
+                            + writtenEvaluation.getEnrollmentEndDayDateYearMonthDay().toString();
                 } else {
                     this.enrolment = "-";
                     this.register = "-";
@@ -264,14 +260,12 @@ public class StudentPortalBean implements Serializable {
 
             public void setEnrolment(Grouping grouping) {
                 this.enrolmentPast = new DateTime(grouping.getEnrolmentEndDay()).isBeforeNow();
-                this.enrolmentElapsing =
-                        new DateTime(grouping.getEnrolmentBeginDay()).isBeforeNow()
-                                && new DateTime(grouping.getEnrolmentEndDay()).isAfterNow();
+                this.enrolmentElapsing = new DateTime(grouping.getEnrolmentBeginDay()).isBeforeNow()
+                        && new DateTime(grouping.getEnrolmentEndDay()).isAfterNow();
 
-                this.enrolment =
-                        YearMonthDay.fromDateFields(grouping.getEnrolmentBeginDayDate()).toString() + " "
-                                + BundleUtil.getString(Bundle.STUDENT, "message.out.until") + " "
-                                + YearMonthDay.fromDateFields(grouping.getEnrolmentEndDayDate()).toString();
+                this.enrolment = YearMonthDay.fromDateFields(grouping.getEnrolmentBeginDayDate()).toString() + " "
+                        + BundleUtil.getString(Bundle.STUDENT, "message.out.until") + " "
+                        + YearMonthDay.fromDateFields(grouping.getEnrolmentEndDayDate()).toString();
             }
 
             public void setRoom(WrittenEvaluation writtenEvaluation) {

@@ -57,9 +57,8 @@ public class CreateLesson {
 
         Space room = null;
         if (infoRoomOccupation != null) {
-            room =
-                    infoRoomOccupation.getInfoRoom() != null ? SpaceUtils
-                            .findAllocatableSpaceForEducationByName(infoRoomOccupation.getInfoRoom().getNome()) : null;
+            room = infoRoomOccupation.getInfoRoom() != null ? SpaceUtils
+                    .findAllocatableSpaceForEducationByName(infoRoomOccupation.getInfoRoom().getNome()) : null;
         }
 
         return new Lesson(weekDay, begin, end, shift, frequency, executionSemester, beginDate, endDate, room);

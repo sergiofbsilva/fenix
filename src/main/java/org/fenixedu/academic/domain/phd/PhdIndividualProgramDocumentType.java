@@ -122,7 +122,8 @@ public enum PhdIndividualProgramDocumentType {
         this(isVersioned, isAutomaticallyVisibleToStudent, false);
     }
 
-    private PhdIndividualProgramDocumentType(boolean isVersioned, boolean isAutomaticallyVisibleToStudent, boolean isForGuidance) {
+    private PhdIndividualProgramDocumentType(boolean isVersioned, boolean isAutomaticallyVisibleToStudent,
+            boolean isForGuidance) {
         this.isVersioned = isVersioned;
         this.isAutomaticallyVisibleToStudent = isAutomaticallyVisibleToStudent;
         this.isForGuidance = isForGuidance;

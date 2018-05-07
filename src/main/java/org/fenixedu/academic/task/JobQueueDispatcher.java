@@ -80,7 +80,8 @@ public class JobQueueDispatcher extends CronTask {
     }
 
     public String getQueueJobResponsibleName(final QueueJob queueJob) {
-        return queueJob.getPerson() != null ? queueJob.getPerson().getName() + "(" + queueJob.getPerson().getUsername() + ")" : "system";
+        return queueJob.getPerson() != null ? queueJob.getPerson().getName() + "(" + queueJob.getPerson().getUsername()
+                + ")" : "system";
     }
 
     @Atomic(mode = TxMode.WRITE)
@@ -114,10 +115,9 @@ public class JobQueueDispatcher extends CronTask {
             PrintWriter pw = new PrintWriter(sw);
             t.printStackTrace(pw);
             String subject = "Job " + job.getClass().getName() + "failed 3 times";
-            String body =
-                    "Viva\n\n" + "O trabalho com o externalId de " + job.getExternalId() + " falhou mais de 3 vezes.\n\n"
-                            + "Request Time : " + job.getRequestDate() + "\n" + "Start Time : " + job.getJobStartTime() + "\n"
-                            + "User : " + getQueueJobResponsibleName(job) + "\n" + "\n\n Error Stack Trace:\n" + sw.toString();
+            String body = "Viva\n\n" + "O trabalho com o externalId de " + job.getExternalId() + " falhou mais de 3 vezes.\n\n"
+                    + "Request Time : " + job.getRequestDate() + "\n" + "Start Time : " + job.getJobStartTime() + "\n" + "User : "
+                    + getQueueJobResponsibleName(job) + "\n" + "\n\n Error Stack Trace:\n" + sw.toString();
             new Message(Bennu.getInstance().getSystemSender(),
                     Bennu.getInstance().getSystemSender().getGroupRecipient(Group.managers()), subject, body);
         }

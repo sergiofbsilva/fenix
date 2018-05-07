@@ -37,6 +37,7 @@ import org.fenixedu.academic.domain.accounting.paymentPlans.GratuityPaymentPlanF
 import org.fenixedu.academic.domain.accounting.paymentPlans.GratuityPaymentPlanForStudentsEnroledOnlyInSecondSemester;
 import org.fenixedu.academic.dto.accounting.paymentPlan.InstallmentBean;
 import org.fenixedu.academic.dto.accounting.paymentPlan.PaymentPlanBean;
+
 import pt.ist.fenixframework.Atomic;
 
 public class GratuityPaymentPlanManager {
@@ -107,8 +108,8 @@ public class GratuityPaymentPlanManager {
 
                 } else {
                     new PartialRegimeInstallment((FullGratuityPaymentPlanForPartialRegime) paymentPlan, each.getAmount(),
-                            each.getStartDate(), each.getEndDate(), each.getEctsForAmount(), new ArrayList<>(
-                                    each.getExecutionSemesters()));
+                            each.getStartDate(), each.getEndDate(), each.getEctsForAmount(),
+                            new ArrayList<>(each.getExecutionSemesters()));
                 }
 
             } else if (paymentPlan.isForFirstTimeInstitutionStudents() && each.isForFirstTimeInstitutionStudents()) {

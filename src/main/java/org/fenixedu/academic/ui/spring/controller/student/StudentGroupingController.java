@@ -60,7 +60,7 @@ public class StudentGroupingController extends JsonAwareResource {
 
     @Autowired
     StudentGroupingService studentGroupingService;
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public String home() {
         return "student/groupings/showGroupings";
@@ -68,20 +68,16 @@ public class StudentGroupingController extends JsonAwareResource {
 
     @RequestMapping(value = "/groupings", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<String> getOpenEnrollmentGroupings() {
-        return new ResponseEntity<>(view(AccessControl
-                .getPerson()
-                .getStudent()
-                .getRegistrationsSet()
-                .stream()
-                .flatMap(registration -> registration.getAssociatedAttendsSet().stream())
-                .map(Attends::getExecutionCourse)
-                .filter(executionCourse -> executionCourse.getExecutionPeriod() == ExecutionSemester
-                        .readActualExecutionSemester())
-                .flatMap(executionCourse -> executionCourse.getGroupings().stream())
-                .filter(grouping -> grouping.getAttendsSet().stream()
-                        .anyMatch(attends -> attends.getRegistration().getPerson() == AccessControl.getPerson()))
-                .filter(grouping -> checkEnrolmentDate(grouping)).collect(Collectors.toList()))
-                .toString(), HttpStatus.OK);
+        return new ResponseEntity<>(
+                view(AccessControl.getPerson().getStudent().getRegistrationsSet().stream()
+                        .flatMap(registration -> registration.getAssociatedAttendsSet().stream()).map(Attends::getExecutionCourse)
+                        .filter(executionCourse -> executionCourse.getExecutionPeriod() == ExecutionSemester
+                                .readActualExecutionSemester())
+                        .flatMap(executionCourse -> executionCourse.getGroupings().stream())
+                        .filter(grouping -> grouping.getAttendsSet().stream()
+                                .anyMatch(attends -> attends.getRegistration().getPerson() == AccessControl.getPerson()))
+                        .filter(grouping -> checkEnrolmentDate(grouping)).collect(Collectors.toList())).toString(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(value = "/grouping/{grouping}", method = RequestMethod.GET)
@@ -104,8 +100,7 @@ public class StudentGroupingController extends JsonAwareResource {
         if (shift.getAssociatedStudentGroupsSet().stream().map(StudentGroup::getGrouping)
                 .noneMatch(grouping -> personInGroupingAttends(grouping, AccessControl.getPerson()))) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
 
         }
@@ -117,8 +112,7 @@ public class StudentGroupingController extends JsonAwareResource {
     public @ResponseBody ResponseEntity<String> getStudentGroup(StudentGroup studentGroup) {
         if (!personInGroupingAttends(studentGroup.getGrouping(), AccessControl.getPerson())) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
 
         }
@@ -144,7 +138,8 @@ public class StudentGroupingController extends JsonAwareResource {
         //because the existing domain might still be in use, otherwise we could just got grouping.getShiftGroupingProperties
         return new ResponseEntity<>(view(grouping.getExportGroupingsSet().stream().map(ExportGrouping::getExecutionCourse)
                 .flatMap(executionCourse -> executionCourse.getAssociatedShifts().stream())
-                .filter(shift -> shift.getTypes().contains(grouping.getShiftType())).collect(Collectors.toList())).toString(), HttpStatus.OK);
+                .filter(shift -> shift.getTypes().contains(grouping.getShiftType())).collect(Collectors.toList())).toString(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(value = "{grouping}/studentGroupsEnrolledByStudent")
@@ -157,23 +152,20 @@ public class StudentGroupingController extends JsonAwareResource {
         }
         if (!personInGroupingAttends(grouping, AccessControl.getPerson())) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(view(grouping
-                .getStudentGroupsSet()
-                .stream()
+        return new ResponseEntity<>(view(grouping.getStudentGroupsSet().stream()
                 .filter(studentGroup -> studentGroup.getAttendsSet().stream()
-                        .anyMatch(attends -> attends.getRegistration().getPerson() == AccessControl.getPerson()))).toString(), HttpStatus.OK);
+                        .anyMatch(attends -> attends.getRegistration().getPerson() == AccessControl.getPerson()))).toString(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(value = "{grouping}/studentGroups")
     public @ResponseBody ResponseEntity<String> getStudentGroups(@PathVariable Grouping grouping) {
         if (!personInGroupingAttends(grouping, AccessControl.getPerson())) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
         }
         if (!groupingIsOpenForEnrollment(grouping)) {
@@ -189,8 +181,7 @@ public class StudentGroupingController extends JsonAwareResource {
     public @ResponseBody ResponseEntity<String> getStudentsToEnroll(@PathVariable Grouping grouping) {
         if (!personInGroupingAttends(grouping, AccessControl.getPerson())) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
         }
         if (!groupingIsOpenForEnrollment(grouping)) {
@@ -199,20 +190,19 @@ public class StudentGroupingController extends JsonAwareResource {
                     createErrorJson((new DomainException("error.studentGroupShift.notOpen")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(view(grouping
-                .getAttendsSet()
-                .stream()
-                .filter(attends -> grouping.getStudentGroupsSet().stream()
-                        .noneMatch(sg -> sg.getAttendsSet().stream().anyMatch(at -> at.equals(attends))))
-                .map(Attends::getRegistration).map(Registration::getPerson).collect(Collectors.toList())).toString(), HttpStatus.OK);
+        return new ResponseEntity<>(
+                view(grouping.getAttendsSet().stream()
+                        .filter(attends -> grouping.getStudentGroupsSet().stream()
+                                .noneMatch(sg -> sg.getAttendsSet().stream().anyMatch(at -> at.equals(attends))))
+                        .map(Attends::getRegistration).map(Registration::getPerson).collect(Collectors.toList())).toString(),
+                HttpStatus.OK);
     }
 
     @RequestMapping(value = "/studentGroup/{studentGroup}/enrolled")
     public @ResponseBody ResponseEntity<String> getStudentsEnrolled(@PathVariable StudentGroup studentGroup) {
         if (!personInGroupingAttends(studentGroup.getGrouping(), AccessControl.getPerson())) {
 //            throw new DomainException("error.grouping.notEnroled");
-            return new ResponseEntity<>(
-                    createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
+            return new ResponseEntity<>(createErrorJson((new DomainException("error.grouping.notEnroled")).getLocalizedMessage()),
                     HttpStatus.FORBIDDEN);
         }
         if (!groupingIsOpenForEnrollment(studentGroup.getGrouping())) {
@@ -266,8 +256,7 @@ public class StudentGroupingController extends JsonAwareResource {
     }
 
     @RequestMapping(value = "/createStudentGroup/{grouping}/{shift}", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<String> createStudentGroup(@PathVariable Grouping grouping,
-            @PathVariable Shift shift,
+    public @ResponseBody ResponseEntity<String> createStudentGroup(@PathVariable Grouping grouping, @PathVariable Shift shift,
             @RequestBody String studentsToEnrollJson) {
         try {
 
@@ -284,7 +273,7 @@ public class StudentGroupingController extends JsonAwareResource {
             return new ResponseEntity<>(createErrorJson(dme.getLocalizedMessage()), HttpStatus.FORBIDDEN);
         }
     }
-    
+
     private String createErrorJson(String message) {
         JsonObject object = new JsonObject();
         object.addProperty("message", message);

@@ -30,6 +30,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @Mapping(module = "gep", path = "/chooseExecutionYearAndDegreeCurricularPlan",
         input = "/chooseExecutionYearAndDegreeCurricularPlan.do?method=prepare&page=0")
 @Forwards({ @Forward(name = "chooseExecutionYear", path = "/commons/curriculumHistoric/chooseDegreeCPlanExecutionYear.jsp"),
-        @Forward(name = "showActiveCurricularCourses", path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
+        @Forward(name = "showActiveCurricularCourses",
+                path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
 public class DegreeCurricularPlanExecutionYearDispacthActionForGep extends DegreeCurricularPlanExecutionYearDispacthAction {
 }

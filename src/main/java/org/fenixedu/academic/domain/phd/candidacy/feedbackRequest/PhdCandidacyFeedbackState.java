@@ -65,7 +65,8 @@ public class PhdCandidacyFeedbackState extends PhdCandidacyFeedbackState_Base {
     private void checkType(final PhdCandidacyFeedbackRequestProcess process, final PhdCandidacyFeedbackStateType type) {
         final PhdCandidacyFeedbackStateType currentType = process.getActiveState();
         if (currentType != null && currentType.equals(type)) {
-            throw new PhdDomainOperationException("error.PhdCandidacyProcessState.equals.previous.state", type.getLocalizedName());
+            throw new PhdDomainOperationException("error.PhdCandidacyProcessState.equals.previous.state",
+                    type.getLocalizedName());
         }
     }
 
@@ -75,7 +76,8 @@ public class PhdCandidacyFeedbackState extends PhdCandidacyFeedbackState_Base {
         super.disconnect();
     }
 
-    static public PhdCandidacyFeedbackState create(PhdCandidacyFeedbackRequestProcess process, PhdCandidacyFeedbackStateType type) {
+    static public PhdCandidacyFeedbackState create(PhdCandidacyFeedbackRequestProcess process,
+            PhdCandidacyFeedbackStateType type) {
         final PhdCandidacyFeedbackState result = new PhdCandidacyFeedbackState();
 
         result.check(process, type);

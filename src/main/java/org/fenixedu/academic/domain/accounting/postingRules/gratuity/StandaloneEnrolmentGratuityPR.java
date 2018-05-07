@@ -108,15 +108,16 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
      */
     private void checkGratuityPR(ServiceAgreementTemplate serviceAgreementTemplate) {
         if (!serviceAgreementTemplate.hasActivePostingRuleFor(EventType.GRATUITY)) {
-            throw new DomainException("error.accounting.postingRules.gratuity.StandaloneEnrolmentGratuityPR.must.have.gratuityPR");
+            throw new DomainException(
+                    "error.accounting.postingRules.gratuity.StandaloneEnrolmentGratuityPR.must.have.gratuityPR");
         }
     }
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override
@@ -124,7 +125,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
         final GratuityEvent gratuityEvent = (GratuityEvent) event;
 
         Money result = Money.ZERO;
-        for (final Map.Entry<DegreeCurricularPlan, BigDecimal> entry : groupEctsByDegreeCurricularPlan(gratuityEvent).entrySet()) {
+        for (final Map.Entry<DegreeCurricularPlan, BigDecimal> entry : groupEctsByDegreeCurricularPlan(gratuityEvent)
+                .entrySet()) {
             result = result.add(calculateAmountForDegreeCurricularPlan(entry.getKey(), entry.getValue(), gratuityEvent));
         }
 
@@ -135,11 +137,11 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
     protected Money subtractFromExemptions(Event event, DateTime when, boolean applyDiscount, Money amountToPay) {
         final GratuityEvent gratuityEvent = (GratuityEvent) event;
 
-        if(gratuityEvent.hasExternalScholarshipGratuityExemption()) {
+        if (gratuityEvent.hasExternalScholarshipGratuityExemption()) {
             amountToPay = amountToPay.subtract(gratuityEvent.getExternalScholarshipGratuityExemption().getValue());
         }
 
-        if(gratuityEvent.hasGratuityExemption()){
+        if (gratuityEvent.hasGratuityExemption()) {
             GratuityExemption gratuityExemption = gratuityEvent.getGratuityExemption();
             if (gratuityExemption.isValueExemption()) {
                 amountToPay = amountToPay.subtract(((ValueGratuityExemption) gratuityExemption).getValue());
@@ -168,9 +170,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
     private Money calculateAmountForDegreeCurricularPlan(DegreeCurricularPlan degreeCurricularPlan, BigDecimal enroledEcts,
             GratuityEvent gratuityEvent) {
 
-        final IGratuityPR gratuityPR =
-                (IGratuityPR) degreeCurricularPlan.getServiceAgreementTemplate().findPostingRuleBy(EventType.GRATUITY,
-                        gratuityEvent.getStartDate(), gratuityEvent.getEndDate());
+        final IGratuityPR gratuityPR = (IGratuityPR) degreeCurricularPlan.getServiceAgreementTemplate()
+                .findPostingRuleBy(EventType.GRATUITY, gratuityEvent.getStartDate(), gratuityEvent.getEndDate());
 
         final Money degreeGratuityAmount = gratuityPR.getDefaultGratuityAmount(gratuityEvent.getExecutionYear());
         final BigDecimal creditsProporcion = enroledEcts.divide(getEctsForYear());
@@ -196,7 +197,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
                 continue;
             }
 
-            if (registration.isDegreeAdministrativeOffice() && registration.hasAnyEnrolmentsIn(gratuityEvent.getExecutionYear())) {
+            if (registration.isDegreeAdministrativeOffice()
+                    && registration.hasAnyEnrolmentsIn(gratuityEvent.getExecutionYear())) {
                 return true;
             }
         }
@@ -230,7 +232,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
         }
     }
 
-    private void addEctsToDegree(final Map<DegreeCurricularPlan, BigDecimal> result, DegreeCurricularPlan degree, BigDecimal ects) {
+    private void addEctsToDegree(final Map<DegreeCurricularPlan, BigDecimal> result, DegreeCurricularPlan degree,
+            BigDecimal ects) {
         if (result.containsKey(degree)) {
             result.put(degree, result.get(degree).add(ects));
         } else {
@@ -249,8 +252,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(Money amountToPay, Event event, DateTime whenRegistered) {
@@ -265,8 +268,8 @@ public class StandaloneEnrolmentGratuityPR extends StandaloneEnrolmentGratuityPR
 
     @Override
     public String getFormulaDescription() {
-        return MessageFormat.format(super.getFormulaDescription(), getGratuityFactor().toPlainString(), getEctsFactor()
-                .toPlainString(), getEctsForYear().toPlainString());
+        return MessageFormat.format(super.getFormulaDescription(), getGratuityFactor().toPlainString(),
+                getEctsFactor().toPlainString(), getEctsForYear().toPlainString());
     }
 
     public StandaloneEnrolmentGratuityPR edit(final BigDecimal ectsForYear, final BigDecimal gratuityFactor,

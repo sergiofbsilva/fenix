@@ -48,8 +48,8 @@ import org.slf4j.LoggerFactory;
 
 import pt.ist.fenixframework.Atomic;
 
-public class OutboundMobilityCandidacyContestGroup extends OutboundMobilityCandidacyContestGroup_Base implements
-        Comparable<OutboundMobilityCandidacyContestGroup> {
+public class OutboundMobilityCandidacyContestGroup extends OutboundMobilityCandidacyContestGroup_Base
+        implements Comparable<OutboundMobilityCandidacyContestGroup> {
 
     private static final Logger logger = LoggerFactory.getLogger(OutboundMobilityCandidacyContestGroup.class);
 
@@ -165,13 +165,12 @@ public class OutboundMobilityCandidacyContestGroup extends OutboundMobilityCandi
         final String filename = BundleUtil.getString(Bundle.ACADEMIC, "label.mobility.candidates.information.filename");
 
         final Spreadsheet spreadsheetCurricularInfo = new Spreadsheet(filename);
-        final Spreadsheet spreadsheetOptions =
-                spreadsheetCurricularInfo.addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC,
-                        "label.mobility.candidates.options"));
+        final Spreadsheet spreadsheetOptions = spreadsheetCurricularInfo
+                .addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.mobility.candidates.options"));
         final Spreadsheet spreadsheetContactInformation =
-            spreadsheetOptions.addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.contact.information"));
-        final Spreadsheet spreadsheetOtherCurricularInfo =
-            spreadsheetContactInformation.addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.other.curricular.info"));
+                spreadsheetOptions.addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.contact.information"));
+        final Spreadsheet spreadsheetOtherCurricularInfo = spreadsheetContactInformation
+                .addSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.other.curricular.info"));
 
         final Set<Registration> processed = new HashSet<Registration>();
         for (final OutboundMobilityCandidacyContest contest : getOutboundMobilityCandidacyContestSet()) {
@@ -194,8 +193,8 @@ public class OutboundMobilityCandidacyContestGroup extends OutboundMobilityCandi
 
                     row.setCell(getString("label.ects.first.cycle"), calculator.completedECTSCycle1.toString());
                     row.setCell(getString("label.ects.average"), calculator.getEctsAverage().toString());
-                    row.setCell(getString("label.ects.average.first.and.second.cycle"), calculator
-                            .getEctsEverateFirstAndSecondCycle().toString());
+                    row.setCell(getString("label.ects.average.first.and.second.cycle"),
+                            calculator.getEctsEverateFirstAndSecondCycle().toString());
                     row.setCell(getString("label.ects.completed"), calculator.completedECTS.toString());
                     //row.setCell(getString("label.ects.pending"), calculator.getPendingEcts().toString());
                     row.setCell(getString("label.ects.enrolled"), calculator.enrolledECTS.toString());
@@ -224,13 +223,14 @@ public class OutboundMobilityCandidacyContestGroup extends OutboundMobilityCandi
                         final Row row2 = spreadsheetOptions.addRow();
                         row2.setCell(getString("label.username"), person.getUsername());
                         row2.setCell(getString("label.preference.order"), c.getPreferenceOrder());
-                        row2.setCell(getString("label.degrees"), contestFromCandidacy.getOutboundMobilityCandidacyContestGroup()
-                                .getDescription());
-                        row2.setCell(getString("label.mobility.program"), mobilityAgreement.getMobilityProgram()
-                                .getRegistrationProtocol().getDescription().getContent());
+                        row2.setCell(getString("label.degrees"),
+                                contestFromCandidacy.getOutboundMobilityCandidacyContestGroup().getDescription());
+                        row2.setCell(getString("label.mobility.program"),
+                                mobilityAgreement.getMobilityProgram().getRegistrationProtocol().getDescription().getContent());
                         row2.setCell(getString("label.country"), country == null ? "" : country.getName());
                         row2.setCell(getString("label.university"), unit.getPresentationName());
-                        row2.setCell(getString("label.candidate.selected"), c.getSelected() == null ? "-" : (c.getSelected() ? getString("label.yes") : getString("label.no")));
+                        row2.setCell(getString("label.candidate.selected"), c.getSelected() == null ? "-" : (c
+                                .getSelected() ? getString("label.yes") : getString("label.no")));
                     }
 
                     final Row contactRow = spreadsheetContactInformation.addRow();

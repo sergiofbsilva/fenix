@@ -81,7 +81,7 @@ public class SearchCurricularCourseBean implements Serializable {
             nameI18N.forEach((l, s) -> {
                 if (searchPattern.matcher(s).matches()) {
                     result.add(context);
-                }                
+                }
             });
         }
     }

@@ -72,9 +72,8 @@ public class RegistrationFormalizationBean implements Serializable {
         }
 
         if (!process.getIndividualProgramProcess().getPhdConfigurationIndividualProgramProcess().isMigratedProcess()) {
-            final Registration registration =
-                    process.getPerson().getStudent()
-                            .getActiveRegistrationFor(process.getPhdProgramLastActiveDegreeCurricularPlan());
+            final Registration registration = process.getPerson().getStudent()
+                    .getActiveRegistrationFor(process.getPhdProgramLastActiveDegreeCurricularPlan());
 
             if (registration != null) {
                 return Collections.singleton(registration);

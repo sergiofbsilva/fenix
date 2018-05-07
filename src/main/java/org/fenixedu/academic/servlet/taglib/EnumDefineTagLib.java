@@ -31,8 +31,8 @@ import org.apache.struts.util.RequestUtils;
 
 /**
  * @author <a href="mailto:goncalo@ist.utl.pt">Goncalo Luiz</a> <br>
- * <br>
- * <br>
+ *         <br>
+ *         <br>
  *         Created on 16:13:53,23/Set/2005
  * @version $Id: EnumDefineTagLib.java 45653 2010-01-19 18:39:54Z
  *          ist148357@IST.UTL.PT $
@@ -46,8 +46,8 @@ public class EnumDefineTagLib extends BodyTagSupport {
 
     private String bundle;
 
-    protected static MessageResources messages = MessageResources
-            .getMessageResources("org.apache.struts.taglib.bean.LocalStrings");
+    protected static MessageResources messages =
+            MessageResources.getMessageResources("org.apache.struts.taglib.bean.LocalStrings");
 
     public String getBundle() {
         return bundle;

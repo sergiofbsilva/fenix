@@ -103,9 +103,8 @@ public class OutboundMobilityCandidacy extends OutboundMobilityCandidacy_Base im
             final Registration registration = getOutboundMobilityCandidacySubmission().getRegistration();
             final Recipient recipient = new Recipient(registration.getPerson().getUser().groupOf());
             new Message(sender, recipient, BundleUtil.getString(Bundle.STUDENT, "label.email.deleted.contest.subject"),
-                    BundleUtil.getString(Bundle.STUDENT, "label.email.deleted.contest.body",
-                            getOutboundMobilityCandidacyContest().getMobilityAgreement().getUniversityUnit()
-                                    .getPresentationName()));
+                    BundleUtil.getString(Bundle.STUDENT, "label.email.deleted.contest.body", getOutboundMobilityCandidacyContest()
+                            .getMobilityAgreement().getUniversityUnit().getPresentationName()));
         }
         delete();
     }
@@ -115,8 +114,8 @@ public class OutboundMobilityCandidacy extends OutboundMobilityCandidacy_Base im
         final OutboundMobilityCandidacySubmission submission = getOutboundMobilityCandidacySubmission();
         if (submission.getSelectedCandidacy() != this) {
             if (submission.getSelectedCandidacy() != null) {
-                throw new DomainException("error.message.cannot.select.multiple.candidacies", submission.getRegistration()
-                        .getPerson().getUsername());
+                throw new DomainException("error.message.cannot.select.multiple.candidacies",
+                        submission.getRegistration().getPerson().getUsername());
             }
 
             final OutboundMobilityCandidacyContest contest = getOutboundMobilityCandidacyContest();

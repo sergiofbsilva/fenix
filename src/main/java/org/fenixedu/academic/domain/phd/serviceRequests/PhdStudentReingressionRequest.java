@@ -113,12 +113,9 @@ public class PhdStudentReingressionRequest extends PhdStudentReingressionRequest
         if (academicServiceRequestBean.isToConclude()) {
             PhdIndividualProgramProcess process = getPhdIndividualProgramProcess();
             PhdProgramProcessState lastActiveState = process.getLastActiveState();
-            String remarks =
-                    String.format(
-                            BundleUtil
-                                    .getString(Bundle.PHD,
-                                            "message.org.fenixedu.academic.domain.phd.serviceRequests.PhdStudentReingressionRequest.conclusion.remark"),
-                            getServiceRequestNumberYear());
+            String remarks = String.format(BundleUtil.getString(Bundle.PHD,
+                    "message.org.fenixedu.academic.domain.phd.serviceRequests.PhdStudentReingressionRequest.conclusion.remark"),
+                    getServiceRequestNumberYear());
 
             process.createState(lastActiveState.getType(), AccessControl.getPerson(), remarks);
 

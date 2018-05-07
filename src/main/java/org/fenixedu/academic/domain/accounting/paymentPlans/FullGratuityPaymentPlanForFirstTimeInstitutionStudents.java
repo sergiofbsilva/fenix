@@ -27,8 +27,8 @@ import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRule;
 import org.fenixedu.academic.domain.accounting.paymentPlanRules.PaymentPlanRuleFactory;
 import org.fenixedu.academic.domain.accounting.serviceAgreementTemplates.DegreeCurricularPlanServiceAgreementTemplate;
 
-public class FullGratuityPaymentPlanForFirstTimeInstitutionStudents extends
-        FullGratuityPaymentPlanForFirstTimeInstitutionStudents_Base {
+public class FullGratuityPaymentPlanForFirstTimeInstitutionStudents
+        extends FullGratuityPaymentPlanForFirstTimeInstitutionStudents_Base {
 
     private FullGratuityPaymentPlanForFirstTimeInstitutionStudents() {
         super();

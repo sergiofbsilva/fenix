@@ -41,8 +41,8 @@ public class CurricularCourseScope extends CurricularCourseScope_Base {
 
     public static Comparator<CurricularCourseScope> CURRICULAR_COURSE_NAME_COMPARATOR = new ComparatorChain();
     static {
-        ((ComparatorChain) CURRICULAR_COURSE_NAME_COMPARATOR).addComparator(new BeanComparator("curricularCourse.name", Collator
-                .getInstance()));
+        ((ComparatorChain) CURRICULAR_COURSE_NAME_COMPARATOR)
+                .addComparator(new BeanComparator("curricularCourse.name", Collator.getInstance()));
         ((ComparatorChain) CURRICULAR_COURSE_NAME_COMPARATOR).addComparator(new BeanComparator("curricularCourse.externalId"));
     }
 
@@ -124,7 +124,8 @@ public class CurricularCourseScope extends CurricularCourseScope_Base {
         return getDeletionBlockers().isEmpty();
     }
 
-    public void edit(Branch branch, CurricularSemester curricularSemester, Calendar beginDate, Calendar endDate, String Annotation) {
+    public void edit(Branch branch, CurricularSemester curricularSemester, Calendar beginDate, Calendar endDate,
+            String Annotation) {
 
         setBranch(branch);
         setCurricularSemester(curricularSemester);

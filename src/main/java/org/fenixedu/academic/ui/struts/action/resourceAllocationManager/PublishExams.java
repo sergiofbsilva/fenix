@@ -44,9 +44,8 @@ public class PublishExams extends FenixAction {
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString(request
-                        .getParameter(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString(request.getParameter(PresentationConstants.ACADEMIC_INTERVAL));
         SwitchPublishedExamsFlag.run(academicInterval);
 
         request.setAttribute("academicInterval", academicInterval);

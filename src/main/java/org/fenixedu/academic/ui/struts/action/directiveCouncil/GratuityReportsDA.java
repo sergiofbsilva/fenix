@@ -116,10 +116,8 @@ public class GratuityReportsDA extends FenixDispatchAction {
                         ExecutionYear.readCurrentExecutionYear());
 
         request.setAttribute("reportParameters", parametersBean);
-        request.setAttribute(
-                "report",
-                new GratuityReportingService().createGratuityReport(parametersBean.getExecutionYear(),
-                        parametersBean.getStartDate(), parametersBean.getEndDate(), parametersBean.getDegreeTypes()));
+        request.setAttribute("report", new GratuityReportingService().createGratuityReport(parametersBean.getExecutionYear(),
+                parametersBean.getStartDate(), parametersBean.getEndDate(), parametersBean.getDegreeTypes()));
 
         return mapping.findForward("showReport");
     }
@@ -133,10 +131,8 @@ public class GratuityReportsDA extends FenixDispatchAction {
                 getGratuityReportParameters() != null ? getGratuityReportParameters() : new GratuityReportParametersBean(
                         ExecutionYear.readCurrentExecutionYear());
 
-        request.setAttribute(
-                "report",
-                new GratuityReportingService().createGratuityReport(parametersBean.getExecutionYear(),
-                        parametersBean.getStartDate(), parametersBean.getEndDate(), parametersBean.getDegreeTypes()));
+        request.setAttribute("report", new GratuityReportingService().createGratuityReport(parametersBean.getExecutionYear(),
+                parametersBean.getStartDate(), parametersBean.getEndDate(), parametersBean.getDegreeTypes()));
 
         return mapping.findForward("showReport");
     }

@@ -71,7 +71,8 @@ import pt.ist.fenixframework.FenixFramework;
 @Forwards({ @Forward(name = "manageCoordinators", path = "/manager/executionDegreesManagement/manageCoordinators.jsp"),
         @Forward(name = "insertCoordinator", path = "/manager/executionDegreesManagement/insertCoordinator.jsp"),
         @Forward(name = "editExecutionDegree", path = "/manager/executionDegreesManagement/editExecutionDegree.jsp"),
-        @Forward(name = "executionDegreeManagement", path = "/manager/executionDegreesManagement/executionDegreesManagement.jsp") })
+        @Forward(name = "executionDegreeManagement",
+                path = "/manager/executionDegreesManagement/executionDegreesManagement.jsp") })
 public class ExecutionDegreesManagementDispatchAction extends FenixDispatchAction {
 
     @EntryPoint
@@ -240,8 +241,9 @@ public class ExecutionDegreesManagementDispatchAction extends FenixDispatchActio
 
         final List<LabelValueBean> degreeCurricularPlans = new ArrayList<LabelValueBean>();
         for (final DegreeCurricularPlan degreeCurricularPlan : toShow) {
-            degreeCurricularPlans.add(new LabelValueBean(degreeCurricularPlan.getDegree().getName() + " > "
-                    + degreeCurricularPlan.getName(), degreeCurricularPlan.getExternalId().toString()));
+            degreeCurricularPlans
+                    .add(new LabelValueBean(degreeCurricularPlan.getDegree().getName() + " > " + degreeCurricularPlan.getName(),
+                            degreeCurricularPlan.getExternalId().toString()));
         }
 
         degreeCurricularPlans.add(0, new LabelValueBean(BundleUtil.getString(Bundle.ENUMERATION, "dropDown.Default"), ""));

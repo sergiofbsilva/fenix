@@ -59,8 +59,8 @@ public class OrRule extends OrRule_Base {
             DegreeModule degreeModuleToVerify, CourseGroup parentCourseGroup) {
         RuleResult resultOR = RuleResult.createFalse(EnrolmentResultType.NULL, degreeModuleToVerify);
         for (final CurricularRule curricularRule : getCurricularRulesSet()) {
-            resultOR =
-                    resultOR.or(curricularRule.verify(verifyRuleLevel, enrolmentContext, degreeModuleToVerify, parentCourseGroup));
+            resultOR = resultOR
+                    .or(curricularRule.verify(verifyRuleLevel, enrolmentContext, degreeModuleToVerify, parentCourseGroup));
             if (resultOR.isTrue() && resultOR.isValidated(degreeModuleToVerify)) {
                 return RuleResult.createTrue(degreeModuleToVerify);
             }

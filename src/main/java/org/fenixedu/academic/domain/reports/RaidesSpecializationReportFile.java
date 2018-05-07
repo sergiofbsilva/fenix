@@ -55,8 +55,9 @@ public class RaidesSpecializationReportFile extends RaidesSpecializationReportFi
 
     @Override
     public void setDegreeType(DegreeType type) {
-        if(!type.isSpecializationDegree()) {
-            throw new IllegalArgumentException(BundleUtil.getString(Bundle.GEP,"error.reports.raides.specialization.degree.type"));
+        if (!type.isSpecializationDegree()) {
+            throw new IllegalArgumentException(
+                    BundleUtil.getString(Bundle.GEP, "error.reports.raides.specialization.degree.type"));
         }
         super.setDegreeType(type);
     }
@@ -90,12 +91,10 @@ public class RaidesSpecializationReportFile extends RaidesSpecializationReportFi
 
                         if ((registration.isActive() || registration.isConcluded()) && conclusionYear != null) {
                             reportRaides(spreadsheet, registration, studentCurricularPlan, getFullRegistrationPath(registration),
-                                    executionYear,
-                                    cycleType, true, registrationConclusionBean.getConclusionDate());
+                                    executionYear, cycleType, true, registrationConclusionBean.getConclusionDate());
                         } else if (registration.isActive()) {
                             reportRaides(spreadsheet, registration, studentCurricularPlan, getFullRegistrationPath(registration),
-                                    executionYear,
-                                    cycleType, false, null);
+                                    executionYear, cycleType, false, null);
                         }
                     }
                 }
@@ -109,12 +108,11 @@ public class RaidesSpecializationReportFile extends RaidesSpecializationReportFi
     }
 
     private void reportRaides(final Spreadsheet sheet, final Registration registration,
-            StudentCurricularPlan studentCurricularPlan, List<Registration> registrationPath,
-            ExecutionYear executionYear, final CycleType cycleType, final boolean concluded, final YearMonthDay conclusionDate) {
+            StudentCurricularPlan studentCurricularPlan, List<Registration> registrationPath, ExecutionYear executionYear,
+            final CycleType cycleType, final boolean concluded, final YearMonthDay conclusionDate) {
 
-        final Row row =
-                RaidesCommonReportFieldsWrapper.reportRaidesFields(sheet, registration, studentCurricularPlan, registrationPath,
-                        executionYear, cycleType, concluded, conclusionDate, null, false);
+        final Row row = RaidesCommonReportFieldsWrapper.reportRaidesFields(sheet, registration, studentCurricularPlan,
+                registrationPath, executionYear, cycleType, concluded, conclusionDate, null, false);
 
         // Total de ECTS concluídos até ao fim do ano lectivo anterior ao que se referem os dados  no curso actual
         double totalEctsConcludedUntilPreviousYear = 0d;

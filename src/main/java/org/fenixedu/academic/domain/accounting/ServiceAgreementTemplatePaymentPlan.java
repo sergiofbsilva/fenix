@@ -26,8 +26,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public abstract class ServiceAgreementTemplatePaymentPlan extends ServiceAgreementTemplatePaymentPlan_Base {
 
     static {
-        getRelationServiceAgreementTemplateServiceAgreementTemplatePaymentPlan().addListener(
-                new RelationAdapter<ServiceAgreementTemplate, ServiceAgreementTemplatePaymentPlan>() {
+        getRelationServiceAgreementTemplateServiceAgreementTemplatePaymentPlan()
+                .addListener(new RelationAdapter<ServiceAgreementTemplate, ServiceAgreementTemplatePaymentPlan>() {
                     @Override
                     public void beforeAdd(ServiceAgreementTemplate serviceAgreementTemplate,
                             ServiceAgreementTemplatePaymentPlan paymentPlanToAdd) {

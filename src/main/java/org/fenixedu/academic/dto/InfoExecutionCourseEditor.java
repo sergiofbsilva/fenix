@@ -66,11 +66,10 @@ public class InfoExecutionCourseEditor extends InfoObject {
         boolean resultado = false;
         if (obj instanceof InfoExecutionCourseEditor) {
             InfoExecutionCourseEditor infoExecutionCourse = (InfoExecutionCourseEditor) obj;
-            resultado =
-                    (getExternalId() != null && infoExecutionCourse.getExternalId() != null && getExternalId().equals(
-                            infoExecutionCourse.getExternalId()))
-                            || (getSigla().equals(infoExecutionCourse.getSigla()) && getInfoExecutionPeriod().equals(
-                                    infoExecutionCourse.getInfoExecutionPeriod()));
+            resultado = (getExternalId() != null && infoExecutionCourse.getExternalId() != null
+                    && getExternalId().equals(infoExecutionCourse.getExternalId()))
+                    || (getSigla().equals(infoExecutionCourse.getSigla())
+                            && getInfoExecutionPeriod().equals(infoExecutionCourse.getInfoExecutionPeriod()));
         }
         return resultado;
     }

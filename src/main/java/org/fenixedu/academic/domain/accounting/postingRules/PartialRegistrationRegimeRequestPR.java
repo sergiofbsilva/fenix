@@ -36,8 +36,8 @@ public class PartialRegistrationRegimeRequestPR extends PartialRegistrationRegim
             Money fixedAmount) {
         this();
         init(EntryType.PARTIAL_REGISTRATION_REGIME_REQUEST_FEE, EventType.PARTIAL_REGISTRATION_REGIME_REQUEST, executionYear,
-                executionYear.getBeginDateYearMonthDay().toDateTimeAtMidnight(), executionYear.getEndDateYearMonthDay()
-                        .toDateTimeAtMidnight(), serviceAgreementTemplate, fixedAmount);
+                executionYear.getBeginDateYearMonthDay().toDateTimeAtMidnight(),
+                executionYear.getEndDateYearMonthDay().toDateTimeAtMidnight(), serviceAgreementTemplate, fixedAmount);
     }
 
     private void checkParameters(ExecutionYear executionYear) {
@@ -92,7 +92,8 @@ public class PartialRegistrationRegimeRequestPR extends PartialRegistrationRegim
     public static PartialRegistrationRegimeRequestPR readMostRecentPostingRuleForExecutionYear(ExecutionYear executionYear) {
         PartialRegistrationRegimeRequestPR mostRecent = null;
 
-        for (PartialRegistrationRegimeRequestPR postingRule : executionYear.getPartialRegistrationRegimeRequestPostingRulesSet()) {
+        for (PartialRegistrationRegimeRequestPR postingRule : executionYear
+                .getPartialRegistrationRegimeRequestPostingRulesSet()) {
             if (mostRecent == null) {
                 mostRecent = postingRule;
                 continue;

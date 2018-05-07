@@ -36,10 +36,10 @@ import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.Recipient;
 import org.fenixedu.academic.domain.util.email.ReplyTo;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
@@ -67,9 +67,11 @@ public class PhdPublicPresentationSeminarAlert extends PhdPublicPresentationSemi
 
     private LocalizedString buildBody(final PhdIndividualProgramProcess process) {
         int days = getDaysUntilNow(process.getWhenStartedStudies());
-        return new LocalizedString(Locale.getDefault(), AlertService.getBodyText(process, AlertMessage.create(
-                "message.phd.alert.public.presentation.seminar.body", process.getWhenStartedStudies().toString("dd/MM/yyyy"),
-                String.valueOf(days < 1 ? 1 : days), getGuidersNames(process))));
+        return new LocalizedString(Locale.getDefault(),
+                AlertService.getBodyText(process,
+                        AlertMessage.create("message.phd.alert.public.presentation.seminar.body",
+                                process.getWhenStartedStudies().toString("dd/MM/yyyy"), String.valueOf(days < 1 ? 1 : days),
+                                getGuidersNames(process))));
     }
 
     private int getDaysUntilNow(final LocalDate begin) {
@@ -151,14 +153,14 @@ public class PhdPublicPresentationSeminarAlert extends PhdPublicPresentationSemi
     }
 
     private void generateMessageForCoodinator() {
-        generateMessage(Person.convertToUserGroup(getProcess().getPhdProgram().getCoordinatorsFor(
-                ExecutionYear.readCurrentExecutionYear())));
+        generateMessage(Person
+                .convertToUserGroup(getProcess().getPhdProgram().getCoordinatorsFor(ExecutionYear.readCurrentExecutionYear())));
 
     }
 
     private void generateMessageForAcademicOffice() {
-        generateMessage(AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESSES, this.getProcess()
-                .getPhdProgram()));
+        generateMessage(
+                AcademicAuthorizationGroup.get(AcademicOperationType.MANAGE_PHD_PROCESSES, this.getProcess().getPhdProgram()));
     }
 
     private void generateMessageForStudent() {

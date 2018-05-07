@@ -35,7 +35,8 @@ public class AcademicSemestersDurationField extends BaseDurationField {
     }
 
     private UnsupportedOperationException unsupported() {
-        return new UnsupportedOperationException(AcademicSemestersDurationFieldType.academicSemesters() + " field is unsupported");
+        return new UnsupportedOperationException(
+                AcademicSemestersDurationFieldType.academicSemesters() + " field is unsupported");
     }
 
     @Override
@@ -45,9 +46,8 @@ public class AcademicSemestersDurationField extends BaseDurationField {
             AcademicSemesterCE academicSemesterCE = chronology.getAcademicSemesterIn(academicSemester);
             AcademicSemesterCE academicSemesterCEAfter = chronology.getAcademicSemesterIn(academicSemester + value);
             if (academicSemesterCEAfter != null) {
-                long result =
-                        academicSemesterCEAfter.getBegin().getMillis()
-                                + new Duration(academicSemesterCE.getBegin().getMillis(), instant).getMillis();
+                long result = academicSemesterCEAfter.getBegin().getMillis()
+                        + new Duration(academicSemesterCE.getBegin().getMillis(), instant).getMillis();
                 return result < academicSemesterCE.getEnd().getMillis() ? result : academicSemesterCE.getEnd().getMillis();
             }
         }
@@ -76,11 +76,10 @@ public class AcademicSemestersDurationField extends BaseDurationField {
             AcademicSemesterCE academicSemesterCE = chronology.getAcademicSemesterIn(academicSemester);
             AcademicSemesterCE academicSemesterCEAfter = chronology.getAcademicSemesterIn(academicSemester + value);
             if (academicSemesterCEAfter != null) {
-                long result =
-                        academicSemesterCEAfter.getBegin().getMillis()
-                                + new Duration(academicSemesterCE.getBegin().getMillis(), instant).getMillis();
-                return result < academicSemesterCE.getEnd().getMillis() ? result - instant : academicSemesterCE.getEnd()
-                        .getMillis() - instant;
+                long result = academicSemesterCEAfter.getBegin().getMillis()
+                        + new Duration(academicSemesterCE.getBegin().getMillis(), instant).getMillis();
+                return result < academicSemesterCE.getEnd().getMillis() ? result
+                        - instant : academicSemesterCE.getEnd().getMillis() - instant;
             }
         }
         throw unsupported();

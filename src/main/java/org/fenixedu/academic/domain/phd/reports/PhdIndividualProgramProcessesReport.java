@@ -71,7 +71,8 @@ public class PhdIndividualProgramProcessesReport extends PhdReport {
         String documentIdNumber = process.getPerson().getDocumentIdNumber();
         String documentIdTypeName = process.getPerson().getIdDocumentType().getLocalizedName();
         final ExecutionYear executionYear = process.getExecutionYear();
-        String phdProgramName = process.getPhdProgram() != null ? process.getPhdProgram().getName(executionYear).getContent() : "";
+        String phdProgramName =
+                process.getPhdProgram() != null ? process.getPhdProgram().getName(executionYear).getContent() : "";
         String focusArea =
                 process.getPhdProgramFocusArea() != null ? process.getPhdProgramFocusArea().getName().getContent() : "";
 

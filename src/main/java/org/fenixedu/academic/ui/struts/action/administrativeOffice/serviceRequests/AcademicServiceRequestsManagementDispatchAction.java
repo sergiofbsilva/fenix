@@ -79,7 +79,8 @@ import pt.ist.fenixframework.Atomic;
                 path = "/academicAdminOffice/serviceRequests/viewRegistrationAcademicServiceRequestsHistoric.jsp"),
         @Forward(name = "viewAcademicServiceRequest",
                 path = "/academicAdminOffice/serviceRequests/viewAcademicServiceRequest.jsp"),
-        @Forward(name = "viewRegistrationDetails", path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
+        @Forward(name = "viewRegistrationDetails",
+                path = "/academicAdminOffice/student/registration/viewRegistrationDetails.jsp"),
         @Forward(name = "confirmCreateServiceRequest",
                 path = "/academicAdminOffice/serviceRequests/confirmCreateServiceRequest.jsp"),
         @Forward(name = "prepareRejectAcademicServiceRequest",
@@ -92,7 +93,8 @@ import pt.ist.fenixframework.Atomic;
                 path = "/academicAdminOffice/serviceRequests/prepareCancelAcademicServiceRequest.jsp"),
         @Forward(name = "prepareConcludeDocumentRequest",
                 path = "/academicAdministration/documentRequestsManagement.do?method=prepareConcludeDocumentRequest"),
-        @Forward(name = "prepareConcludeServiceRequest", path = "/academicAdminOffice/serviceRequests/concludeServiceRequest.jsp"),
+        @Forward(name = "prepareConcludeServiceRequest",
+                path = "/academicAdminOffice/serviceRequests/concludeServiceRequest.jsp"),
         @Forward(name = "prepareCreateServiceRequest",
                 path = "/academicAdminOffice/serviceRequests/prepareCreateServiceRequest.jsp"),
         @Forward(name = "searchResults", path = "/academicAdminOffice/serviceRequests/searchResults.jsp"),
@@ -385,8 +387,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
         form.setSendEmailToStudent(Boolean.TRUE);
 
         if (academicServiceRequest.isDocumentRequest()) {
-            request.setAttribute("serviceRequestBean", new AcademicServiceRequestBean(academicServiceRequest,
-                    AcademicServiceRequestSituationType.CONCLUDED));
+            request.setAttribute("serviceRequestBean",
+                    new AcademicServiceRequestBean(academicServiceRequest, AcademicServiceRequestSituationType.CONCLUDED));
             return mapping.findForward("prepareConcludeDocumentRequest");
         } else {
             return mapping.findForward("prepareConcludeServiceRequest");
@@ -445,8 +447,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
         return requestBean == null ? null : requestBean.getJustification();
     }
 
-    public ActionForward deliveredAcademicServiceRequest(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward deliveredAcademicServiceRequest(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         final RegistrationAcademicServiceRequest academicServiceRequest = getAndSetAcademicServiceRequest(request);
 
@@ -472,7 +474,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
         return mapping.findForward("viewRegistrationDetails");
     }
 
-    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward search(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         final AcademicServiceRequestBean bean = getOrCreateAcademicServiceRequestBean(request);
         request.setAttribute("bean", bean);
 
@@ -505,22 +508,20 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
                 year = new YearMonthDay().getYear();
             }
 
-            bean =
-                    new AcademicServiceRequestBean(AcademicServiceRequestSituationType.valueOf(request
-                            .getParameter("academicSituationType")), AccessControl.getPerson(), year);
+            bean = new AcademicServiceRequestBean(
+                    AcademicServiceRequestSituationType.valueOf(request.getParameter("academicSituationType")),
+                    AccessControl.getPerson(), year);
         }
         return bean;
     }
 
     private Comparator getComparator(HttpServletRequest request) {
         final String orderParameter = request.getParameter(ORDER_PARAMETER);
-        final String orderGetter =
-                StringUtils.isEmpty(orderParameter) ? DEFAULT_ORDER_GETTER : orderParameter.substring(0,
-                        orderParameter.indexOf(ORDER_MARKER));
+        final String orderGetter = StringUtils.isEmpty(orderParameter) ? DEFAULT_ORDER_GETTER : orderParameter.substring(0,
+                orderParameter.indexOf(ORDER_MARKER));
 
-        final String orderDir =
-                StringUtils.isEmpty(orderParameter) ? DEFAULT_ORDER_DIR : orderParameter.substring(
-                        orderParameter.indexOf(ORDER_MARKER) + 1, orderParameter.length());
+        final String orderDir = StringUtils.isEmpty(orderParameter) ? DEFAULT_ORDER_DIR : orderParameter
+                .substring(orderParameter.indexOf(ORDER_MARKER) + 1, orderParameter.length());
         final boolean orderAsc = Arrays.asList(ASC_ORDER_DIR).contains(orderDir);
 
         if (orderGetter.equals(REQUEST_NUMBER_YEAR)) {
@@ -533,8 +534,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
                 || orderGetter.equals(URGENT_REQUEST) || orderGetter.equals(REGISTRATION_NUMBER)
                 || orderGetter.equals(REQUEST_DATE) || orderGetter.equals(ACTIVE_SITUATION_DATE)) {
             final ComparatorChain chain = new ComparatorChain();
-            chain.addComparator(orderAsc ? new BeanComparator(orderGetter) : new ReverseComparator(
-                    new BeanComparator(orderGetter)));
+            chain.addComparator(
+                    orderAsc ? new BeanComparator(orderGetter) : new ReverseComparator(new BeanComparator(orderGetter)));
             chain.addComparator(DomainObjectUtil.COMPARATOR_BY_ID);
             return chain;
         }
@@ -567,8 +568,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
 
     public ActionForward chooseServiceRequestType(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
             HttpServletResponse response) {
-        request.setAttribute("academicServiceRequestCreateBean", new RegistrationAcademicServiceRequestCreator(
-                getAndSetRegistration(request)));
+        request.setAttribute("academicServiceRequestCreateBean",
+                new RegistrationAcademicServiceRequestCreator(getAndSetRegistration(request)));
         return mapping.findForward("prepareCreateServiceRequest");
     }
 
@@ -579,8 +580,8 @@ public class AcademicServiceRequestsManagementDispatchAction extends FenixDispat
         return mapping.findForward("prepareCreateServiceRequest");
     }
 
-    public ActionForward chooseServiceRequestTypeInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward chooseServiceRequestTypeInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("academicServiceRequestCreateBean", getRenderedObject("academicServiceRequestCreateBean"));
         return mapping.findForward("prepareCreateServiceRequest");
     }

@@ -23,8 +23,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import java.util.stream.Collectors;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.RandomStringUtils;
@@ -106,12 +106,10 @@ abstract public class IndividualCandidacyProcess extends IndividualCandidacyProc
 
     protected void setProcessCodeForThisIndividualCandidacy(CandidacyProcess process) {
         CandidacyPeriod period = process.getCandidacyPeriod();
-        String beginExecutionYear =
-                String.valueOf(period.getExecutionInterval().getBeginDateYearMonthDay().get(DateTimeFieldType.year())).substring(
-                        2, 4);
-        String endExecutionYear =
-                String.valueOf(period.getExecutionInterval().getEndDateYearMonthDay().get(DateTimeFieldType.year())).substring(2,
-                        4);
+        String beginExecutionYear = String
+                .valueOf(period.getExecutionInterval().getBeginDateYearMonthDay().get(DateTimeFieldType.year())).substring(2, 4);
+        String endExecutionYear = String
+                .valueOf(period.getExecutionInterval().getEndDateYearMonthDay().get(DateTimeFieldType.year())).substring(2, 4);
         setProcessCode(beginExecutionYear + endExecutionYear + getExternalId());
     }
 
@@ -410,8 +408,8 @@ abstract public class IndividualCandidacyProcess extends IndividualCandidacyProc
 
     public IndividualCandidacyPaymentCode getAssociatedPaymentCode() {
         if (getCandidacy().getEvent() != null) {
-            return (IndividualCandidacyPaymentCode) (getCandidacy().getEvent().getAllPaymentCodes().isEmpty() ? null : getCandidacy()
-                    .getEvent().getAllPaymentCodes().iterator().next());
+            return (IndividualCandidacyPaymentCode) (getCandidacy().getEvent().getAllPaymentCodes()
+                    .isEmpty() ? null : getCandidacy().getEvent().getAllPaymentCodes().iterator().next());
         }
 
         return null;

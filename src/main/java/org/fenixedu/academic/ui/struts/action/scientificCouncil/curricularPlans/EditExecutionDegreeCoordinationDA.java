@@ -80,9 +80,8 @@ public class EditExecutionDegreeCoordinationDA extends FenixDispatchAction {
         String backTo = String.valueOf(request.getParameter("from"));
         String backPath;
         if (backTo.equals("byYears")) {
-            backPath =
-                    "/curricularPlans/editExecutionDegreeCoordination.do?method=editByYears&executionYearId="
-                            + executionDegree.getExecutionYear().getExternalId().toString();
+            backPath = "/curricularPlans/editExecutionDegreeCoordination.do?method=editByYears&executionYearId="
+                    + executionDegree.getExecutionYear().getExternalId().toString();
         } else {
             backPath =
                     "/curricularPlans/editExecutionDegreeCoordination.do?method=prepareEditCoordination&degreeCurricularPlanId="

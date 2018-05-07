@@ -111,12 +111,10 @@ public class SendReceptionEmailBean implements java.io.Serializable {
 
     public void setMobilityProgram(MobilityProgram mobilityProgram) {
         this.mobilityProgram = mobilityProgram;
-        emailSubject =
-                mobilityApplicationProcess.getCandidacyPeriod()
-                        .getEmailTemplateFor(mobilityProgram, MobilityEmailTemplateType.IST_RECEPTION).getSubject();
-        emailBody =
-                mobilityApplicationProcess.getCandidacyPeriod()
-                        .getEmailTemplateFor(mobilityProgram, MobilityEmailTemplateType.IST_RECEPTION).getBody();
+        emailSubject = mobilityApplicationProcess.getCandidacyPeriod()
+                .getEmailTemplateFor(mobilityProgram, MobilityEmailTemplateType.IST_RECEPTION).getSubject();
+        emailBody = mobilityApplicationProcess.getCandidacyPeriod()
+                .getEmailTemplateFor(mobilityProgram, MobilityEmailTemplateType.IST_RECEPTION).getBody();
     }
 
     public List<MobilityIndividualApplicationProcess> getSubjectProcesses() {

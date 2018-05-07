@@ -76,8 +76,8 @@ public class MaximumNumberOfEctsInStandaloneCurriculumGroup extends CurricularRu
 
     @Override
     public List<GenericPair<Object, Boolean>> getLabel() {
-        return Collections.singletonList(new GenericPair<Object, Boolean>("label.MaximumNumberOfEctsInStandaloneCurriculumGroup",
-                true));
+        return Collections
+                .singletonList(new GenericPair<Object, Boolean>("label.MaximumNumberOfEctsInStandaloneCurriculumGroup", true));
     }
 
     @Override

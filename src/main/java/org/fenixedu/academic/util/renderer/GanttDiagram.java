@@ -217,8 +217,8 @@ public class GanttDiagram {
 
         if (firstMonthDateTime != null && lastMontDateTime != null) {
             while ((firstMonthDateTime.getYear() < lastMontDateTime.getYear())
-                    || (firstMonthDateTime.getYear() == lastMontDateTime.getYear() && firstMonthDateTime.getDayOfYear() <= lastMontDateTime
-                            .getDayOfYear())) {
+                    || (firstMonthDateTime.getYear() == lastMontDateTime.getYear()
+                            && firstMonthDateTime.getDayOfYear() <= lastMontDateTime.getDayOfYear())) {
 
                 getDays().add(firstMonthDateTime);
 
@@ -248,8 +248,8 @@ public class GanttDiagram {
 
         if (firstMonthDateTime != null && lastMontDateTime != null) {
             while ((firstMonthDateTime.getYear() < lastMontDateTime.getYear())
-                    || (firstMonthDateTime.getYear() == lastMontDateTime.getYear() && firstMonthDateTime.getMonthOfYear() <= lastMontDateTime
-                            .getMonthOfYear())) {
+                    || (firstMonthDateTime.getYear() == lastMontDateTime.getYear()
+                            && firstMonthDateTime.getMonthOfYear() <= lastMontDateTime.getMonthOfYear())) {
 
                 getMonths().add(firstMonthDateTime);
 

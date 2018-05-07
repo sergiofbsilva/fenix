@@ -123,8 +123,8 @@ public class PaymentsManagementDTO implements Serializable {
     }
 
     public Party getContributorParty() {
-        return (this.contributorParty != null) ? this.contributorParty : StringUtils.isEmpty(this.contributorNumber) ? null : Party
-                .readByContributorNumber(this.contributorNumber);
+        return (this.contributorParty != null) ? this.contributorParty : StringUtils
+                .isEmpty(this.contributorNumber) ? null : Party.readByContributorNumber(this.contributorNumber);
     }
 
     public void setContributorParty(Party contributorParty) {
@@ -132,10 +132,9 @@ public class PaymentsManagementDTO implements Serializable {
         if (contributorParty != null) {
             this.contributorName = contributorParty.getName();
             this.contributorNumber = contributorParty.getSocialSecurityNumber();
-            this.contributorAddress =
-                    contributorParty.getAddress()
-                            + (!StringUtils.isEmpty(contributorParty.getAreaCode()) ? contributorParty.getAreaCode() + " "
-                                    + contributorParty.getAreaOfAreaCode() : null);
+            this.contributorAddress = contributorParty.getAddress()
+                    + (!StringUtils.isEmpty(contributorParty.getAreaCode()) ? contributorParty.getAreaCode() + " "
+                            + contributorParty.getAreaOfAreaCode() : null);
         }
     }
 

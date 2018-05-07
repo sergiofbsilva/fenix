@@ -31,10 +31,10 @@ public class CreditNoteEntry extends CreditNoteEntry_Base {
     public static Comparator<CreditNoteEntry> COMPARATOR_BY_WHEN_REGISTERED = new Comparator<CreditNoteEntry>() {
         @Override
         public int compare(CreditNoteEntry leftCreditNoteEntry, CreditNoteEntry rightCreditNoteEntry) {
-            int comparationResult =
-                    leftCreditNoteEntry.getAccountingEntry().getWhenRegistered()
-                            .compareTo(rightCreditNoteEntry.getAccountingEntry().getWhenRegistered());
-            return (comparationResult == 0) ? leftCreditNoteEntry.getExternalId().compareTo(rightCreditNoteEntry.getExternalId()) : comparationResult;
+            int comparationResult = leftCreditNoteEntry.getAccountingEntry().getWhenRegistered()
+                    .compareTo(rightCreditNoteEntry.getAccountingEntry().getWhenRegistered());
+            return (comparationResult == 0) ? leftCreditNoteEntry.getExternalId()
+                    .compareTo(rightCreditNoteEntry.getExternalId()) : comparationResult;
         }
     };
 
@@ -56,7 +56,8 @@ public class CreditNoteEntry extends CreditNoteEntry_Base {
     private void checkRulesToCreate(Entry accountingEntry, Money amount) {
         if (!accountingEntry.canApplyReimbursement(amount)) {
             throw new DomainExceptionWithLabelFormatter(
-                    "error.accounting.CreditNoteEntry.amount.to.reimburse.exceeds.entry.amount", accountingEntry.getDescription());
+                    "error.accounting.CreditNoteEntry.amount.to.reimburse.exceeds.entry.amount",
+                    accountingEntry.getDescription());
 
         }
     }

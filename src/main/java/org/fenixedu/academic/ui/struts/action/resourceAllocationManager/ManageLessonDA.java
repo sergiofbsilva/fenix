@@ -124,9 +124,8 @@ public class ManageLessonDA extends FenixShiftAndExecutionCourseAndExecutionDegr
 
         final InfoLesson infoLesson = (InfoLesson) request.getAttribute(PresentationConstants.LESSON);
         final Lesson lesson = infoLesson.getLesson();
-        final Set<NextPossibleSummaryLessonsAndDatesBean> lessonDatesBean =
-                new TreeSet<NextPossibleSummaryLessonsAndDatesBean>(
-                        NextPossibleSummaryLessonsAndDatesBean.COMPARATOR_BY_DATE_AND_HOUR);
+        final Set<NextPossibleSummaryLessonsAndDatesBean> lessonDatesBean = new TreeSet<NextPossibleSummaryLessonsAndDatesBean>(
+                NextPossibleSummaryLessonsAndDatesBean.COMPARATOR_BY_DATE_AND_HOUR);
 
         for (final LessonInstance instance : infoLesson.getLesson().getLessonInstancesSet()) {
             final NextPossibleSummaryLessonsAndDatesBean bean =
@@ -224,8 +223,8 @@ public class ManageLessonDA extends FenixShiftAndExecutionCourseAndExecutionDegr
 
         } else {
             ActionErrors actionErrors = new ActionErrors();
-            actionErrors.add("error.executionDegree.empty.lessonsPeriod", new ActionError(
-                    "error.executionDegree.empty.lessonsPeriod"));
+            actionErrors.add("error.executionDegree.empty.lessonsPeriod",
+                    new ActionError("error.executionDegree.empty.lessonsPeriod"));
             saveErrors(request, actionErrors);
             return mapping.findForward("EditShift");
         }
@@ -373,9 +372,8 @@ public class ManageLessonDA extends FenixShiftAndExecutionCourseAndExecutionDegr
                 Boolean createLessonInstances = (Boolean) manageLessonForm.get("createLessonInstances");
 
                 try {
-                    lesson =
-                            EditLesson.run(infoLessonOld, weekDay, inicio, fim, frequency, infoRoomOccupation, infoShift,
-                                    newBeginDate, newEndDate, createLessonInstances);
+                    lesson = EditLesson.run(infoLessonOld, weekDay, inicio, fim, frequency, infoRoomOccupation, infoShift,
+                            newBeginDate, newEndDate, createLessonInstances);
 
                 } catch (DomainException domainException) {
                     actionErrors.add(domainException.getMessage(),
@@ -385,9 +383,8 @@ public class ManageLessonDA extends FenixShiftAndExecutionCourseAndExecutionDegr
 
             } else {
                 try {
-                    lesson =
-                            CreateLesson.run(weekDay, inicio, fim, frequency, infoRoomOccupation, infoShift, newBeginDate,
-                                    newEndDate);
+                    lesson = CreateLesson.run(weekDay, inicio, fim, frequency, infoRoomOccupation, infoShift, newBeginDate,
+                            newEndDate);
 
                 } catch (DomainException domainException) {
                     actionErrors.add(domainException.getMessage(),
@@ -489,11 +486,10 @@ public class ManageLessonDA extends FenixShiftAndExecutionCourseAndExecutionDegr
         }
 
         if (begining.getTime().getTime() >= end.getTime().getTime()) {
-            actionErrors.add(
-                    INVALID_TIME_INTERVAL,
-                    new ActionError(INVALID_TIME_INTERVAL, "" + begining.get(Calendar.HOUR_OF_DAY) + ":"
-                            + begining.get(Calendar.MINUTE) + beginMinAppend + " - " + end.get(Calendar.HOUR_OF_DAY) + ":"
-                            + end.get(Calendar.MINUTE) + endMinAppend));
+            actionErrors.add(INVALID_TIME_INTERVAL,
+                    new ActionError(INVALID_TIME_INTERVAL,
+                            "" + begining.get(Calendar.HOUR_OF_DAY) + ":" + begining.get(Calendar.MINUTE) + beginMinAppend + " - "
+                                    + end.get(Calendar.HOUR_OF_DAY) + ":" + end.get(Calendar.MINUTE) + endMinAppend));
         }
 
         if (weekday.getDiaSemana().intValue() < 1 || weekday.getDiaSemana().intValue() > 7) {

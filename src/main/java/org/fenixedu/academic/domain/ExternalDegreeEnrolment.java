@@ -64,14 +64,12 @@ public class ExternalDegreeEnrolment extends ExternalDegreeEnrolment_Base {
         LocalizedString LocalizedString = new LocalizedString();
 
         if (!StringUtils.isEmpty(this.getDegreeModule().getName())) {
-            LocalizedString =
-                    LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.PT, getDegreeModule().getName() + " ("
-                            + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
+            LocalizedString = LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.PT,
+                    getDegreeModule().getName() + " (" + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
         }
         if (!StringUtils.isEmpty(this.getDegreeModule().getNameEn())) {
-            LocalizedString =
-                    LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.EN, getDegreeModule().getNameEn() + " ("
-                            + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
+            LocalizedString = LocalizedString.with(org.fenixedu.academic.util.LocaleUtils.EN,
+                    getDegreeModule().getNameEn() + " (" + getDegreeCurricularPlanOfDegreeModule().getName() + ")");
         }
         return LocalizedString;
     }

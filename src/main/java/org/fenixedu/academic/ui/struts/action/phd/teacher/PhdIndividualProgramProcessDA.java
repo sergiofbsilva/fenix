@@ -51,8 +51,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @StrutsFunctionality(app = TeacherPhdApp.class, path = "processes", titleKey = "label.phd.manageProcesses")
 @Mapping(path = "/phdIndividualProgramProcess", module = "teacher")
-@Forwards({
-        @Forward(name = "manageProcesses", path = "/phd/teacher/manageProcesses.jsp"),
+@Forwards({ @Forward(name = "manageProcesses", path = "/phd/teacher/manageProcesses.jsp"),
         @Forward(name = "viewProcess", path = "/phd/teacher/viewProcess.jsp"),
         @Forward(name = "viewInactiveProcesses", path = "/phd/teacher/viewInactiveProcesses.jsp"),
         @Forward(name = "searchResults", path = "/phd/teacher/searchResults.jsp"),
@@ -69,15 +68,15 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
         @Forward(name = "uploadGuidanceDocument", path = "/phd/teacher/uploadGuidanceDocument.jsp") })
 public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramProcessDA {
 
-    private static final PredicateContainer<?>[] CANDIDACY_CATEGORY = { PhdCandidacyPredicateContainer.DELIVERED,
-            PhdCandidacyPredicateContainer.PENDING, PhdCandidacyPredicateContainer.APPROVED,
-            PhdCandidacyPredicateContainer.CONCLUDED };
+    private static final PredicateContainer<?>[] CANDIDACY_CATEGORY =
+            { PhdCandidacyPredicateContainer.DELIVERED, PhdCandidacyPredicateContainer.PENDING,
+                    PhdCandidacyPredicateContainer.APPROVED, PhdCandidacyPredicateContainer.CONCLUDED };
 
-    private static final PredicateContainer<?>[] SEMINAR_CATEGORY = { PhdSeminarPredicateContainer.SEMINAR_PROCESS_STARTED,
-            PhdSeminarPredicateContainer.AFTER_FIRST_SEMINAR_REUNION };
+    private static final PredicateContainer<?>[] SEMINAR_CATEGORY =
+            { PhdSeminarPredicateContainer.SEMINAR_PROCESS_STARTED, PhdSeminarPredicateContainer.AFTER_FIRST_SEMINAR_REUNION };
 
-    private static final PredicateContainer<?>[] THESIS_CATEGORY = { PhdThesisPredicateContainer.PROVISIONAL_THESIS_DELIVERED,
-            PhdThesisPredicateContainer.DISCUSSION_SCHEDULED };
+    private static final PredicateContainer<?>[] THESIS_CATEGORY =
+            { PhdThesisPredicateContainer.PROVISIONAL_THESIS_DELIVERED, PhdThesisPredicateContainer.DISCUSSION_SCHEDULED };
 
     @Override
     protected SearchPhdIndividualProgramProcessBean initializeSearchBean(HttpServletRequest request) {

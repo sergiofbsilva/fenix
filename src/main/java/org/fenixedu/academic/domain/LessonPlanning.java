@@ -23,9 +23,9 @@ import java.util.List;
 
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class LessonPlanning extends LessonPlanning_Base {
 
@@ -60,9 +60,8 @@ public class LessonPlanning extends LessonPlanning_Base {
 
     public void deleteWithoutReOrder() {
         CurricularManagementLog.createLog(getExecutionCourse(), Bundle.MESSAGING,
-                "log.executionCourse.curricular.planning.removed", getTitle().getContent(),
-                getLessonType().getFullNameTipoAula(), getExecutionCourse().getNome(), getExecutionCourse()
-                        .getDegreePresentationString());
+                "log.executionCourse.curricular.planning.removed", getTitle().getContent(), getLessonType().getFullNameTipoAula(),
+                getExecutionCourse().getNome(), getExecutionCourse().getDegreePresentationString());
         super.setExecutionCourse(null);
         setRootDomainObject(null);
         deleteDomainObject();

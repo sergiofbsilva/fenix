@@ -46,13 +46,13 @@ public class DegreeModulesSelectionLimitExecutor extends CurricularRuleExecutor 
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
         if (rule.getMinimumLimit().equals(rule.getMaximumLimit())) {
             return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limit.exceded", rule
-                            .getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString());
+                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limit.exceded",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString());
         } else {
             return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limits.exceded", rule
-                            .getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString(), rule.getMaximumLimit()
-                            .toString());
+                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limits.exceded",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString(),
+                    rule.getMaximumLimit().toString());
         }
     }
 
@@ -60,13 +60,13 @@ public class DegreeModulesSelectionLimitExecutor extends CurricularRuleExecutor 
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
         if (rule.getMinimumLimit().equals(rule.getMaximumLimit())) {
             return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limit.exceded", rule
-                            .getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString());
+                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limit.exceded",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString());
         } else {
             return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
-                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limits.exceded", rule
-                            .getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString(), rule.getMaximumLimit()
-                            .toString());
+                    "curricularRules.ruleExecutors.DegreeModulesSelectionLimitExecutor.limits.exceded",
+                    rule.getDegreeModuleToApplyRule().getName(), rule.getMinimumLimit().toString(),
+                    rule.getMaximumLimit().toString());
         }
     }
 
@@ -112,8 +112,8 @@ public class DegreeModulesSelectionLimitExecutor extends CurricularRuleExecutor 
             total += curriculumGroup.getNumberOfChildEnrolments(executionSemester.getPreviousExecutionPeriod());
 
             return rule.numberOfDegreeModulesExceedMaximum(total) ? RuleResult.createTrue(EnrolmentResultType.TEMPORARY,
-                    sourceDegreeModuleToEvaluate.getDegreeModule()) : RuleResult.createTrue(sourceDegreeModuleToEvaluate
-                    .getDegreeModule());
+                    sourceDegreeModuleToEvaluate.getDegreeModule()) : RuleResult
+                            .createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
         }
         // is enrolling now
         return RuleResult.createNA(sourceDegreeModuleToEvaluate.getDegreeModule());

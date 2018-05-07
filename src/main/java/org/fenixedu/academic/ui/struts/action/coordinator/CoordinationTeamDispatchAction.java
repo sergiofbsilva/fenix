@@ -80,17 +80,16 @@ public class CoordinationTeamDispatchAction extends FenixDispatchAction {
             request.setAttribute("degreeCurricularPlanID", degreeCurricularPlanID);
         }
 
-        List<InfoExecutionDegree> executionDegrees =
-                ReadExecutionDegreesByDegreeCurricularPlanID
-                        .runReadExecutionDegreesByDegreeCurricularPlanID(degreeCurricularPlanID);
+        List<InfoExecutionDegree> executionDegrees = ReadExecutionDegreesByDegreeCurricularPlanID
+                .runReadExecutionDegreesByDegreeCurricularPlanID(degreeCurricularPlanID);
 
         request.setAttribute("executionDegrees", executionDegrees);
 
         return mapping.findForward("chooseExecutionYear");
     }
 
-    public ActionForward viewTeam(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-            throws FenixActionException, FenixServiceException {
+    public ActionForward viewTeam(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixActionException, FenixServiceException {
 
         User userView = getUserView(request);
 

@@ -60,9 +60,9 @@ public class AdministrativeOfficeFeeAndInsurancePR extends AdministrativeOfficeF
     protected Money doCalculationForAmountToPay(Event event, DateTime when, boolean applyDiscount) {
         final AnnualEvent annualEvent = (AnnualEvent) event;
         return getPostingRuleForAdministrativeOfficeFee(annualEvent.getStartDate(), annualEvent.getEndDate())
-                .calculateTotalAmountToPay(event, when, applyDiscount).add(
-                        getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate())
-                                .calculateTotalAmountToPay(event, when, applyDiscount));
+                .calculateTotalAmountToPay(event, when, applyDiscount)
+                .add(getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate())
+                        .calculateTotalAmountToPay(event, when, applyDiscount));
     }
 
     @Override
@@ -82,8 +82,8 @@ public class AdministrativeOfficeFeeAndInsurancePR extends AdministrativeOfficeF
                     .calculateEntries(event, when));
         }
         if (administrativeOfficeFeeAndInsuranceEvent.hasToPayInsurance()) {
-            result.addAll(getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate()).calculateEntries(
-                    event, when));
+            result.addAll(getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate()).calculateEntries(event,
+                    when));
         }
 
         return result;
@@ -100,13 +100,13 @@ public class AdministrativeOfficeFeeAndInsurancePR extends AdministrativeOfficeF
 
             if (entryDTO.getEntryType() == EntryType.INSURANCE_FEE) {
 
-                createdEntries.addAll(getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate()).process(
-                        user, Collections.singletonList(entryDTO), event, fromAccount, toAccount, transactionDetail));
+                createdEntries.addAll(getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate())
+                        .process(user, Collections.singletonList(entryDTO), event, fromAccount, toAccount, transactionDetail));
 
             } else if (entryDTO.getEntryType() == EntryType.ADMINISTRATIVE_OFFICE_FEE) {
-                createdEntries.addAll(getPostingRuleForAdministrativeOfficeFee(annualEvent.getStartDate(),
-                        annualEvent.getEndDate()).process(user, Collections.singletonList(entryDTO), event, fromAccount,
-                        toAccount, transactionDetail));
+                createdEntries.addAll(
+                        getPostingRuleForAdministrativeOfficeFee(annualEvent.getStartDate(), annualEvent.getEndDate()).process(
+                                user, Collections.singletonList(entryDTO), event, fromAccount, toAccount, transactionDetail));
             } else {
                 throw new DomainException(
                         "error.accounting.postingRules.AdministrativeOfficeFeeAndInsurancePR.invalid.entry.type");
@@ -165,12 +165,12 @@ public class AdministrativeOfficeFeeAndInsurancePR extends AdministrativeOfficeF
         final AnnualEvent annualEvent = (AnnualEvent) event;
 
         if (entryType == EntryType.INSURANCE_FEE) {
-            return getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate()).depositAmount(
-                    responsibleUser, event, fromAcount, toAccount, amount, transactionDetailDTO);
+            return getPostingRuleForInsurance(annualEvent.getStartDate(), annualEvent.getEndDate()).depositAmount(responsibleUser,
+                    event, fromAcount, toAccount, amount, transactionDetailDTO);
 
         } else if (entryType == EntryType.ADMINISTRATIVE_OFFICE_FEE) {
-            return getPostingRuleForAdministrativeOfficeFee(annualEvent.getStartDate(), annualEvent.getEndDate()).depositAmount(
-                    responsibleUser, event, fromAcount, toAccount, amount, transactionDetailDTO);
+            return getPostingRuleForAdministrativeOfficeFee(annualEvent.getStartDate(), annualEvent.getEndDate())
+                    .depositAmount(responsibleUser, event, fromAcount, toAccount, amount, transactionDetailDTO);
 
         } else {
             throw new DomainException("error.AdministrativeOfficeFeeAndInsurancePR.unsupported.entry.type");

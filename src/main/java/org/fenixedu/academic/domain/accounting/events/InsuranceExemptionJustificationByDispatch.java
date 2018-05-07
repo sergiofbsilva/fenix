@@ -47,7 +47,8 @@ public class InsuranceExemptionJustificationByDispatch extends InsuranceExemptio
 
     }
 
-    private void checkParameters(InsuranceExemptionJustificationType justificationType, String reason, YearMonthDay dispatchDate) {
+    private void checkParameters(InsuranceExemptionJustificationType justificationType, String reason,
+            YearMonthDay dispatchDate) {
         if (dispatchDate == null || StringUtils.isEmpty(reason)) {
             throw new DomainExceptionWithLabelFormatter(
                     "error.accounting.events.InsuranceExemptionJustificationByDispatch.dispatchDate.and.reason.are.required",

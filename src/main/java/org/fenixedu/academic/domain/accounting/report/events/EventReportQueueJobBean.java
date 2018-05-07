@@ -45,9 +45,8 @@ public class EventReportQueueJobBean implements Serializable {
     private LocalDate beginDate;
     private LocalDate endDate;
     private DateTime dateToConsiderInformation;
-    
 
-	private AdministrativeOffice administrativeOffice;
+    private AdministrativeOffice administrativeOffice;
 
     private ExecutionYear executionYear;
 
@@ -147,16 +146,17 @@ public class EventReportQueueJobBean implements Serializable {
     }
 
     public DateTime getDateToConsiderInformation() {
-		return dateToConsiderInformation;
-	}
+        return dateToConsiderInformation;
+    }
 
-	public void setDateToConsiderInformation(DateTime dateToConsiderInformation) {
-		this.dateToConsiderInformation = dateToConsiderInformation;
-	}
+    public void setDateToConsiderInformation(DateTime dateToConsiderInformation) {
+        this.dateToConsiderInformation = dateToConsiderInformation;
+    }
 
     public Set<AdministrativeOffice> getAvailableOffices() {
-        return AcademicAccessRule.getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS,
-                Authenticate.getUser()).collect(Collectors.toSet());
+        return AcademicAccessRule
+                .getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS, Authenticate.getUser())
+                .collect(Collectors.toSet());
     }
 
     public Set<AdministrativeOffice> getAvailableOfficesForManager() {

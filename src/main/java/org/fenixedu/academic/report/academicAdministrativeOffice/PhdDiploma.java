@@ -59,32 +59,30 @@ public class PhdDiploma extends AdministrativeOfficeDocument {
         String phdProgramConclusion =
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.phd.diploma.pdhProgramConclusion");
         ExecutionYear ingressionYear = diplomaRequest.getPhdIndividualProgramProcess().getExecutionYear();
-        String phdProgramDescription =
-                getDocumentRequest().getPhdIndividualProgramProcess().getPhdProgram().getName(ingressionYear)
-                        .getContent(getLanguage());
+        String phdProgramDescription = getDocumentRequest().getPhdIndividualProgramProcess().getPhdProgram()
+                .getName(ingressionYear).getContent(getLanguage());
         String phdConclusionDate = BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.phd.diploma.pdhConclusionDate");
 
         addParameter("conclusionMessage", phdProgramConclusion);
         addParameter("phdProgram", phdProgramDescription);
-        addParameter(
-                "conclusionDate",
-                MessageFormat.format(phdConclusionDate, diplomaRequest.getConclusionDate()
-                        .toString(getDatePattern(), getLocale()).toLowerCase()));
+        addParameter("conclusionDate", MessageFormat.format(phdConclusionDate,
+                diplomaRequest.getConclusionDate().toString(getDatePattern(), getLocale()).toLowerCase()));
 
         addParameter("documentNumber", BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.diploma.documentNumber"));
         addParameter("registryCode", diplomaRequest.hasRegistryCode() ? diplomaRequest.getRegistryCode().getCode() : null);
         addParameter("institutionName", Bennu.getInstance().getInstitutionUnit().getName());
-        addParameter("day", MessageFormat.format(
-                BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.diploma.university.actualDate"), universityName,
-                getFormatedCurrentDate()));
+        addParameter("day",
+                MessageFormat.format(BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.diploma.university.actualDate"),
+                        universityName, getFormatedCurrentDate()));
 
-        addParameter("classificationResult", MessageFormat.format(BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                "label.phd.Diploma.classificationResult"), diplomaRequest.getThesisFinalGrade().getLocalizedName(getLocale())));
+        addParameter("classificationResult",
+                MessageFormat.format(BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.phd.Diploma.classificationResult"),
+                        diplomaRequest.getThesisFinalGrade().getLocalizedName(getLocale())));
         addParameter("dissertationTitle", diplomaRequest.getDissertationThesisTitle());
         addParameter("graduateTitle", diplomaRequest.getGraduateTitle(getLocale()));
 
-        if (getUniversity(getDocumentRequest().getRequestDate()) != getUniversity(getDocumentRequest().getConclusionDate()
-                .toDateTimeAtCurrentTime())) {
+        if (getUniversity(getDocumentRequest().getRequestDate()) != getUniversity(
+                getDocumentRequest().getConclusionDate().toDateTimeAtCurrentTime())) {
             addParameter("UTLDescription", BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.diploma.UTLDescription"));
             addParameter("certification",
                     BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.diploma.phd.certification.UTL"));

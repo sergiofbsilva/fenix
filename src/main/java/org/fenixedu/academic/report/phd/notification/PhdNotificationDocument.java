@@ -106,13 +106,16 @@ public class PhdNotificationDocument extends FenixReport {
     }
 
     private void addGuidingsParameter(final PhdIndividualProgramProcess individualProgramProcess) {
-        if (!individualProgramProcess.getGuidingsSet().isEmpty() && !individualProgramProcess.getAssistantGuidingsSet().isEmpty()) {
-            addParameter("guidingsInformation", MessageFormat.format(getMessageFromResource(getClass().getName()
-                    + ".full.guidings.template"), buildGuidingsInformation(individualProgramProcess.getGuidingsSet()),
-                    buildGuidingsInformation(individualProgramProcess.getAssistantGuidingsSet())));
+        if (!individualProgramProcess.getGuidingsSet().isEmpty()
+                && !individualProgramProcess.getAssistantGuidingsSet().isEmpty()) {
+            addParameter("guidingsInformation",
+                    MessageFormat.format(getMessageFromResource(getClass().getName() + ".full.guidings.template"),
+                            buildGuidingsInformation(individualProgramProcess.getGuidingsSet()),
+                            buildGuidingsInformation(individualProgramProcess.getAssistantGuidingsSet())));
         } else if (!individualProgramProcess.getGuidingsSet().isEmpty()) {
-            addParameter("guidingsInformation", MessageFormat.format(getMessageFromResource(getClass().getName()
-                    + ".guidings.only.template"), buildGuidingsInformation(individualProgramProcess.getGuidingsSet())));
+            addParameter("guidingsInformation",
+                    MessageFormat.format(getMessageFromResource(getClass().getName() + ".guidings.only.template"),
+                            buildGuidingsInformation(individualProgramProcess.getGuidingsSet())));
         } else {
             addParameter("guidingsInformation", "");
         }
@@ -156,18 +159,15 @@ public class PhdNotificationDocument extends FenixReport {
     private String getRegistrationFee(final PhdIndividualProgramProcess individualProgramProcess, final LocalDate whenRatified) {
         return whenRatified != null ? ((FixedAmountPR) individualProgramProcess.getPhdProgram().getServiceAgreementTemplate()
                 .findPostingRuleByEventTypeAndDate(EventType.PHD_REGISTRATION_FEE, whenRatified.toDateTimeAtMidnight()))
-                .getFixedAmount().toPlainString() : "";
+                        .getFixedAmount().toPlainString() : "";
     }
 
     private String getInsuranceFee(final PhdIndividualProgramProcess individualProgramProcess) {
-        return ((FixedAmountPR) Bennu
-                .getInstance()
-                .getInstitutionUnit()
-                .getUnitServiceAgreementTemplate()
-                .findPostingRuleBy(EventType.INSURANCE,
-                        individualProgramProcess.getExecutionYear().getBeginDateYearMonthDay().toDateTimeAtMidnight(),
-                        individualProgramProcess.getExecutionYear().getEndDateYearMonthDay().toDateTimeAtMidnight()))
-                .getFixedAmount().toPlainString();
+        return ((FixedAmountPR) Bennu.getInstance().getInstitutionUnit().getUnitServiceAgreementTemplate().findPostingRuleBy(
+                EventType.INSURANCE,
+                individualProgramProcess.getExecutionYear().getBeginDateYearMonthDay().toDateTimeAtMidnight(),
+                individualProgramProcess.getExecutionYear().getEndDateYearMonthDay().toDateTimeAtMidnight())).getFixedAmount()
+                        .toPlainString();
     }
 
     @Override

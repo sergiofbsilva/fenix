@@ -79,9 +79,8 @@ public enum MobilityEmailTemplateType {
 
             String subject = mobilityEmailTemplate.getSubject();
             String body = mobilityEmailTemplate.getBody();
-            String link =
-                    String.format(BundleUtil.getString(Bundle.CANDIDATE, APPLICATION_ACCESS_LINK), hashCode.getValue(), I18N
-                            .getLocale().getLanguage());
+            String link = String.format(BundleUtil.getString(Bundle.CANDIDATE, APPLICATION_ACCESS_LINK), hashCode.getValue(),
+                    I18N.getLocale().getLanguage());
 
             String processCode = individualCandidacyProcess.getProcessCode();
             String endDate = individualCandidacyProcess.getCandidacyProcess().getCandidacyEnd().toString("dd/MM/yyyy");
@@ -122,13 +121,11 @@ public enum MobilityEmailTemplateType {
                 missingDocs.append("- ").append(missingDocumentType.localizedName(Locale.ENGLISH)).append("\n");
             }
 
-            String subject =
-                    StringUtils.isEmpty(mobilityEmailTemplate.getSubject()) ? MessageFormat.format(
-                            BundleUtil.getString(Bundle.CANDIDATE, "message.erasmus.missing.required.documents.email.subject"),
-                            Unit.getInstitutionAcronym()) : mobilityEmailTemplate.getSubject();
-            String body =
-                    StringUtils.isEmpty(mobilityEmailTemplate.getBody()) ? BundleUtil.getString(Bundle.CANDIDATE,
-                            "message.erasmus.missing.required.documents.email.body") : mobilityEmailTemplate.getBody();
+            String subject = StringUtils.isEmpty(mobilityEmailTemplate.getSubject()) ? MessageFormat.format(
+                    BundleUtil.getString(Bundle.CANDIDATE, "message.erasmus.missing.required.documents.email.subject"),
+                    Unit.getInstitutionAcronym()) : mobilityEmailTemplate.getSubject();
+            String body = StringUtils.isEmpty(mobilityEmailTemplate.getBody()) ? BundleUtil.getString(Bundle.CANDIDATE,
+                    "message.erasmus.missing.required.documents.email.body") : mobilityEmailTemplate.getBody();
 
             if (body.contains("[missing_documents]")) {
                 body = body.replace("[missing_documents]", missingDocs.toString());
@@ -166,13 +163,11 @@ public enum MobilityEmailTemplateType {
                 missingShifts.append("- ").append(course.getName()).append("\n");
             }
 
-            String subject =
-                    StringUtils.isEmpty(mobilityEmailTemplate.getSubject()) ? MessageFormat.format(
-                            BundleUtil.getString(Bundle.CANDIDATE, "message.erasmus.missing.shifts.email.subject"),
-                            Unit.getInstitutionAcronym()) : mobilityEmailTemplate.getSubject();
-            String body =
-                    StringUtils.isEmpty(mobilityEmailTemplate.getBody()) ? BundleUtil.getString(Bundle.CANDIDATE,
-                            "message.erasmus.missing.shifts.email.body") : mobilityEmailTemplate.getBody();
+            String subject = StringUtils.isEmpty(mobilityEmailTemplate.getSubject()) ? MessageFormat.format(
+                    BundleUtil.getString(Bundle.CANDIDATE, "message.erasmus.missing.shifts.email.subject"),
+                    Unit.getInstitutionAcronym()) : mobilityEmailTemplate.getSubject();
+            String body = StringUtils.isEmpty(mobilityEmailTemplate.getBody()) ? BundleUtil.getString(Bundle.CANDIDATE,
+                    "message.erasmus.missing.shifts.email.body") : mobilityEmailTemplate.getBody();
 
             if (body.contains("[missing_shifts]")) {
                 body = body.replace("[missing_shifts]", missingShifts.toString());

@@ -36,7 +36,8 @@ public class CountryService {
         return Bennu.getInstance().getCountrysSet().stream().sorted(Country.COMPARATOR_BY_NAME).collect(Collectors.toList());
     }
 
-    @Atomic public void editCountry(Country country, LocalizedString localizedName, LocalizedString countryNationality) {
+    @Atomic
+    public void editCountry(Country country, LocalizedString localizedName, LocalizedString countryNationality) {
         country.setCountryNationality(countryNationality);
         country.setLocalizedName(localizedName);
     }

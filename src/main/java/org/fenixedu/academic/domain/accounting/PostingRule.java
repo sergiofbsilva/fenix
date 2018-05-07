@@ -45,7 +45,8 @@ public abstract class PostingRule extends PostingRule_Base {
         @Override
         public int compare(PostingRule leftPostingRule, PostingRule rightPostingRule) {
             int comparationResult = leftPostingRule.getEventType().compareTo(rightPostingRule.getEventType());
-            return (comparationResult == 0) ? leftPostingRule.getExternalId().compareTo(rightPostingRule.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPostingRule.getExternalId()
+                    .compareTo(rightPostingRule.getExternalId()) : comparationResult;
         }
     };
 
@@ -53,7 +54,8 @@ public abstract class PostingRule extends PostingRule_Base {
         @Override
         public int compare(PostingRule leftPostingRule, PostingRule rightPostingRule) {
             int comparationResult = leftPostingRule.getStartDate().compareTo(rightPostingRule.getStartDate());
-            return (comparationResult == 0) ? leftPostingRule.getExternalId().compareTo(rightPostingRule.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPostingRule.getExternalId()
+                    .compareTo(rightPostingRule.getExternalId()) : comparationResult;
         }
     };
 
@@ -76,8 +78,8 @@ public abstract class PostingRule extends PostingRule_Base {
     };
 
     static {
-        getRelationServiceAgreementTemplatePostingRule().addListener(
-                new RelationAdapter<ServiceAgreementTemplate, PostingRule>() {
+        getRelationServiceAgreementTemplatePostingRule()
+                .addListener(new RelationAdapter<ServiceAgreementTemplate, PostingRule>() {
                     @Override
                     public void beforeAdd(ServiceAgreementTemplate serviceAgreementTemplate, PostingRule postingRule) {
                         checkIfPostingRuleOverlapsExisting(serviceAgreementTemplate, postingRule);
@@ -254,8 +256,8 @@ public abstract class PostingRule extends PostingRule_Base {
 
     protected AccountingTransaction makeAccountingTransaction(User responsibleUser, Event event, Account from, Account to,
             EntryType entryType, Money amount, AccountingTransactionDetailDTO transactionDetail) {
-        return new AccountingTransaction(responsibleUser, event, makeEntry(entryType, amount.negate(), from), makeEntry(
-                entryType, amount, to), makeAccountingTransactionDetail(transactionDetail));
+        return new AccountingTransaction(responsibleUser, event, makeEntry(entryType, amount.negate(), from),
+                makeEntry(entryType, amount, to), makeAccountingTransactionDetail(transactionDetail));
     }
 
     protected AccountingTransactionDetail makeAccountingTransactionDetail(AccountingTransactionDetailDTO transactionDetailDTO) {
@@ -337,8 +339,9 @@ public abstract class PostingRule extends PostingRule_Base {
     }
 
     public boolean isMostRecent() {
-        return Collections.max(getServiceAgreementTemplate().getAllPostingRulesFor(getEventType()),
-                PostingRule.COMPARATOR_BY_END_DATE).equals(this);
+        return Collections
+                .max(getServiceAgreementTemplate().getAllPostingRulesFor(getEventType()), PostingRule.COMPARATOR_BY_END_DATE)
+                .equals(this);
 
     }
 

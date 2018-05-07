@@ -62,15 +62,14 @@ public class PastCourseGroupChangeRequestPR extends PastCourseGroupChangeRequest
 
     @Override
     public List<EntryDTO> calculateEntries(final Event event, final DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override
-    protected Set<AccountingTransaction> internalProcess(final User user, final Collection<EntryDTO> entryDTOs,
-            final Event event, final Account fromAccount, final Account toAccount,
-            final AccountingTransactionDetailDTO transactionDetail) {
+    protected Set<AccountingTransaction> internalProcess(final User user, final Collection<EntryDTO> entryDTOs, final Event event,
+            final Account fromAccount, final Account toAccount, final AccountingTransactionDetailDTO transactionDetail) {
 
         if (entryDTOs.size() != 1) {
             throw new DomainException("error.accounting.postingRules.invalid.number.of.entryDTOs");
@@ -78,8 +77,8 @@ public class PastCourseGroupChangeRequestPR extends PastCourseGroupChangeRequest
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(final Money amountToPay, final Event event, final DateTime when) {

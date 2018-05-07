@@ -64,7 +64,8 @@ public class ProjectSubmission extends ProjectSubmission_Base {
         public int compare(ProjectSubmission projectSubmission, ProjectSubmission otherProjectSubmission) {
             int comparationResult =
                     projectSubmission.getSubmissionDateTime().compareTo(otherProjectSubmission.getSubmissionDateTime());
-            return (comparationResult == 0) ? projectSubmission.getExternalId().compareTo(otherProjectSubmission.getExternalId()) : -(comparationResult);
+            return (comparationResult == 0) ? projectSubmission.getExternalId()
+                    .compareTo(otherProjectSubmission.getExternalId()) : -(comparationResult);
         }
     };
 

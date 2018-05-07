@@ -197,7 +197,8 @@ public class UnitUtils {
         throw new DomainException("error.unitUtils.unit.full.path.has.more.than.one.parent");
     }
 
-    public static StringBuilder getUnitFullPathName(final Unit unit, final List<AccountabilityTypeEnum> validAccountabilityTypes) {
+    public static StringBuilder getUnitFullPathName(final Unit unit,
+            final List<AccountabilityTypeEnum> validAccountabilityTypes) {
         if (unit == readEarthUnit()) {
             return new StringBuilder(0);
         }
@@ -214,7 +215,8 @@ public class UnitUtils {
         throw new DomainException("error.unitUtils.unit.full.path.has.more.than.one.parent");
     }
 
-    public static List<Unit> readExternalUnitsByNameAndTypesStartingAtEarth(final String unitName, final List<PartyTypeEnum> types) {
+    public static List<Unit> readExternalUnitsByNameAndTypesStartingAtEarth(final String unitName,
+            final List<PartyTypeEnum> types) {
         if (unitName == null) {
             return Collections.emptyList();
         }

@@ -33,14 +33,14 @@ public abstract class PrecedenceRule extends PrecedenceRule_Base {
     }
 
     protected boolean appliesToPeriod(final Context context) {
-        return (hasNoCurricularPeriodOrder() || (this.getAcademicPeriod().equals(
-                context.getCurricularPeriod().getAcademicPeriod()) && this.getCurricularPeriodOrder().equals(
-                context.getCurricularPeriod().getChildOrder())));
+        return (hasNoCurricularPeriodOrder()
+                || (this.getAcademicPeriod().equals(context.getCurricularPeriod().getAcademicPeriod())
+                        && this.getCurricularPeriodOrder().equals(context.getCurricularPeriod().getChildOrder())));
     }
 
     protected boolean hasNoCurricularPeriodOrder() {
-        return (this.getAcademicPeriod() == null || this.getCurricularPeriodOrder() == null || (this.getAcademicPeriod().equals(
-                AcademicPeriod.SEMESTER) && this.getCurricularPeriodOrder().equals(0)));
+        return (this.getAcademicPeriod() == null || this.getCurricularPeriodOrder() == null
+                || (this.getAcademicPeriod().equals(AcademicPeriod.SEMESTER) && this.getCurricularPeriodOrder().equals(0)));
     }
 
     @Override

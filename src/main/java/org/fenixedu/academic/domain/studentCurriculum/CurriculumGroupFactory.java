@@ -40,9 +40,9 @@ public class CurriculumGroupFactory {
 
         return (executionSemester != null) ?
 
-        new RootCurriculumGroup(studentCurricularPlan, rootCourseGroup, executionSemester, cycleType) :
+                new RootCurriculumGroup(studentCurricularPlan, rootCourseGroup, executionSemester, cycleType) :
 
-        new RootCurriculumGroup(studentCurricularPlan, rootCourseGroup, cycleType);
+                new RootCurriculumGroup(studentCurricularPlan, rootCourseGroup, cycleType);
 
     }
 
@@ -59,25 +59,26 @@ public class CurriculumGroupFactory {
             if (isExternalCycle(parentGroup, cycleCourseGroup)) {
                 return (executionSemester != null) ?
 
-                new ExternalCurriculumGroup((RootCurriculumGroup) parentGroup, cycleCourseGroup, executionSemester) :
+                        new ExternalCurriculumGroup((RootCurriculumGroup) parentGroup, cycleCourseGroup, executionSemester) :
 
-                new ExternalCurriculumGroup((RootCurriculumGroup) parentGroup, cycleCourseGroup);
+                        new ExternalCurriculumGroup((RootCurriculumGroup) parentGroup, cycleCourseGroup);
 
             }
 
             return (executionSemester != null) ?
 
-            new CycleCurriculumGroup((RootCurriculumGroup) parentGroup, (CycleCourseGroup) courseGroup, executionSemester) :
+                    new CycleCurriculumGroup((RootCurriculumGroup) parentGroup, (CycleCourseGroup) courseGroup,
+                            executionSemester) :
 
-            new CycleCurriculumGroup((RootCurriculumGroup) parentGroup, (CycleCourseGroup) courseGroup);
+                    new CycleCurriculumGroup((RootCurriculumGroup) parentGroup, (CycleCourseGroup) courseGroup);
 
         } else if (courseGroup.isBranchCourseGroup()) {
 
             return (executionSemester != null) ?
 
-            new BranchCurriculumGroup(parentGroup, (BranchCourseGroup) courseGroup, executionSemester) :
+                    new BranchCurriculumGroup(parentGroup, (BranchCourseGroup) courseGroup, executionSemester) :
 
-            new BranchCurriculumGroup(parentGroup, (BranchCourseGroup) courseGroup);
+                    new BranchCurriculumGroup(parentGroup, (BranchCourseGroup) courseGroup);
 
         } else if (courseGroup.isRoot()) {
 
@@ -87,9 +88,9 @@ public class CurriculumGroupFactory {
 
             return (executionSemester != null) ?
 
-            new CurriculumGroup(parentGroup, courseGroup, executionSemester) :
+                    new CurriculumGroup(parentGroup, courseGroup, executionSemester) :
 
-            new CurriculumGroup(parentGroup, courseGroup);
+                    new CurriculumGroup(parentGroup, courseGroup);
 
         }
     }

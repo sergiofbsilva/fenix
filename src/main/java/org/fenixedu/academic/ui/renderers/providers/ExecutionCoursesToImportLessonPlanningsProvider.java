@@ -41,9 +41,8 @@ public class ExecutionCoursesToImportLessonPlanningsProvider implements DataProv
         CurricularYear curricularYear = bean.getCurricularYear();
         DegreeCurricularPlan degreeCurricularPlan = bean.getExecutionDegree().getDegreeCurricularPlan();
         if (degreeCurricularPlan != null && executionSemester != null && curricularYear != null) {
-            List<ExecutionCourse> executionCourses =
-                    degreeCurricularPlan.getExecutionCoursesByExecutionPeriodAndSemesterAndYear(executionSemester,
-                            curricularYear.getYear(), executionSemester.getSemester());
+            List<ExecutionCourse> executionCourses = degreeCurricularPlan.getExecutionCoursesByExecutionPeriodAndSemesterAndYear(
+                    executionSemester, curricularYear.getYear(), executionSemester.getSemester());
             Collections.sort(executionCourses, ExecutionCourse.EXECUTION_COURSE_NAME_COMPARATOR);
             return executionCourses;
         }

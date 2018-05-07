@@ -55,9 +55,8 @@ public class PhdProgramFocusAreasProvider extends AbstractDomainObjectProvider {
             PhdIndividualProgramProcessBean bean = (PhdIndividualProgramProcessBean) source;
             Set<PhdProgramFocusArea> focusAreaSet = new HashSet<PhdProgramFocusArea>();
 
-            InstitutionPhdCandidacyPeriod phdCandidacyPeriod =
-                    (InstitutionPhdCandidacyPeriod) bean.getIndividualProgramProcess().getCandidacyProcess()
-                            .getPublicPhdCandidacyPeriod();
+            InstitutionPhdCandidacyPeriod phdCandidacyPeriod = (InstitutionPhdCandidacyPeriod) bean.getIndividualProgramProcess()
+                    .getCandidacyProcess().getPublicPhdCandidacyPeriod();
 
             for (PhdProgram phdProgram : phdCandidacyPeriod.getPhdProgramsSet()) {
                 focusAreaSet.addAll(phdProgram.getPhdProgramFocusAreasSet());

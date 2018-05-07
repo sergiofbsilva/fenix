@@ -49,8 +49,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 public class CourseLoadOverviewDA extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward viewInconsistencies(final ActionMapping mapping, final ActionForm form,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward viewInconsistencies(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
+            final HttpServletResponse response) {
         CourseLoadOverviewBean bean = getRenderedObject("courseLoadOverviewBean");
         if (bean == null) {
             bean = new CourseLoadOverviewBean();
@@ -69,9 +69,8 @@ public class CourseLoadOverviewDA extends FenixDispatchAction {
         final StyledExcelSpreadsheet spreadsheet = bean.getInconsistencySpreadsheet();
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition",
-                "attachment; filename=" + BundleUtil.getString(Bundle.ACADEMIC, "label.course.load.inconsistency.filename")
-                        + ".xls");
+        response.setHeader("Content-disposition", "attachment; filename="
+                + BundleUtil.getString(Bundle.ACADEMIC, "label.course.load.inconsistency.filename") + ".xls");
 
         try {
             final ServletOutputStream writer = response.getOutputStream();

@@ -135,8 +135,7 @@ public class SearchParametersBean implements Serializable {
                         .filter(Objects::nonNull).filter(party -> party.isPerson()).map(Person.class::cast)
                         .filter(Objects::nonNull).filter(Objects::nonNull);
             } else {
-                return matches.filter(p -> p.getEmailAddressStream()
-                        .filter(emailAddress -> emailAddress.getValue().equals(email))
+                return matches.filter(p -> p.getEmailAddressStream().filter(emailAddress -> emailAddress.getValue().equals(email))
                         .filter(emailAddress -> emailAddress.isActiveAndValid()).findAny().isPresent());
             }
         }

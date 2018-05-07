@@ -73,8 +73,8 @@ public class InstallmentWithMonthlyPenalty extends InstallmentWithMonthlyPenalty
     @Override
     protected Money calculatePenaltyAmount(Event event, DateTime when, BigDecimal discountPercentage) {
         if (when.toDateMidnight().compareTo(getWhenStartToApplyPenalty().toDateMidnight()) >= 0) {
-            return new Money(calculateMonthPenalty(event, discountPercentage).multiply(
-                    new BigDecimal(getNumberOfMonthsToChargePenalty(when))));
+            return new Money(calculateMonthPenalty(event, discountPercentage)
+                    .multiply(new BigDecimal(getNumberOfMonthsToChargePenalty(when))));
         } else {
             return Money.ZERO;
         }
@@ -104,9 +104,10 @@ public class InstallmentWithMonthlyPenalty extends InstallmentWithMonthlyPenalty
     @Override
     public LabelFormatter getDescription() {
         final LabelFormatter labelFormatter = new LabelFormatter();
-        labelFormatter.appendLabel(Bundle.APPLICATION, "label.InstallmentWithMonthlyPenalty.description", getInstallmentOrder()
-                .toString(), getStartDate().toString("dd/MM/yyyy"), getEndDate().toString("dd/MM/yyyy"), getPenaltyPercentage()
-                .multiply(BigDecimal.valueOf(100)).toString(), getWhenStartToApplyPenalty().toString("dd/MM/yyyy"));
+        labelFormatter.appendLabel(Bundle.APPLICATION, "label.InstallmentWithMonthlyPenalty.description",
+                getInstallmentOrder().toString(), getStartDate().toString("dd/MM/yyyy"), getEndDate().toString("dd/MM/yyyy"),
+                getPenaltyPercentage().multiply(BigDecimal.valueOf(100)).toString(),
+                getWhenStartToApplyPenalty().toString("dd/MM/yyyy"));
 
         return labelFormatter;
     }

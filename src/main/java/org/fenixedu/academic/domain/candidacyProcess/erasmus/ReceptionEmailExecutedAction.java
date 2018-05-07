@@ -72,10 +72,10 @@ public class ReceptionEmailExecutedAction extends ReceptionEmailExecutedAction_B
                 subjectCandidacyProcesses, template);
     }
 
-    public static ReceptionEmailExecutedAction createAction(MobilityApplicationProcess process, final SendReceptionEmailBean bean) {
-        MobilityEmailTemplate receptionTemplate =
-                process.getCandidacyPeriod().getEmailTemplateFor(bean.getMobilityProgram(),
-                        MobilityEmailTemplateType.IST_RECEPTION);
+    public static ReceptionEmailExecutedAction createAction(MobilityApplicationProcess process,
+            final SendReceptionEmailBean bean) {
+        MobilityEmailTemplate receptionTemplate = process.getCandidacyPeriod().getEmailTemplateFor(bean.getMobilityProgram(),
+                MobilityEmailTemplateType.IST_RECEPTION);
         return createAction(bean.getMobilityApplicationProcess(), bean.getSubjectProcesses(), receptionTemplate);
     }
 

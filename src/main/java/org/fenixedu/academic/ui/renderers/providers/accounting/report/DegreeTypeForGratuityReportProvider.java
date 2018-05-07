@@ -32,19 +32,17 @@ public class DegreeTypeForGratuityReportProvider implements DataProvider {
 
     @Override
     public Object provide(Object source, Object currentValue) {
-        return DegreeType
-                .all()
-                .filter(DegreeType.oneOf(DegreeType::isPreBolonhaDegree, DegreeType::isBolonhaDegree,
-                        DegreeType::isIntegratedMasterDegree, DegreeType::isBolonhaMasterDegree,
-                        DegreeType::isAdvancedFormationDiploma)).collect(Collectors.toList());
+        return DegreeType.all().filter(DegreeType.oneOf(DegreeType::isPreBolonhaDegree, DegreeType::isBolonhaDegree,
+                DegreeType::isIntegratedMasterDegree, DegreeType::isBolonhaMasterDegree, DegreeType::isAdvancedFormationDiploma))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Converter getConverter() {
         return new Converter() {
             /**
-	     * 
-	     */
+            * 
+            */
             private static final long serialVersionUID = 1L;
 
             @Override

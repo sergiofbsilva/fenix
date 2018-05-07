@@ -923,8 +923,8 @@ public class CurriculumGroup extends CurriculumGroup_Base {
     @SuppressWarnings("unchecked")
     private boolean checkDegreeModulesSelectionLimit(ExecutionYear executionYear) {
         final DegreeModulesSelectionLimit degreeModulesSelectionLimit =
-                (DegreeModulesSelectionLimit) getMostRecentActiveCurricularRule(
-                        CurricularRuleType.DEGREE_MODULES_SELECTION_LIMIT, executionYear);
+                (DegreeModulesSelectionLimit) getMostRecentActiveCurricularRule(CurricularRuleType.DEGREE_MODULES_SELECTION_LIMIT,
+                        executionYear);
 
         if (degreeModulesSelectionLimit == null) {
             return false;
@@ -964,7 +964,8 @@ public class CurriculumGroup extends CurriculumGroup_Base {
             if (curriculumModule.isConcluded(getApprovedCurriculumLinesLastExecutionYear()).isValid()
                     && curriculumModule.hasAnyApprovedCurriculumLines()) {
                 final YearMonthDay curriculumModuleConclusionDate = curriculumModule.calculateConclusionDate();
-                if (curriculumModuleConclusionDate != null && (result == null || curriculumModuleConclusionDate.isAfter(result))) {
+                if (curriculumModuleConclusionDate != null
+                        && (result == null || curriculumModuleConclusionDate.isAfter(result))) {
                     result = curriculumModuleConclusionDate;
                 }
             }
@@ -1019,8 +1020,8 @@ public class CurriculumGroup extends CurriculumGroup_Base {
 
         if (curriculumLine.isEnrolment()) {
             if (curriculumLine instanceof OptionalEnrolment) {
-                return getDegreeModule().hasDegreeModuleOnChilds(
-                        ((OptionalEnrolment) curriculumLine).getOptionalCurricularCourse());
+                return getDegreeModule()
+                        .hasDegreeModuleOnChilds(((OptionalEnrolment) curriculumLine).getOptionalCurricularCourse());
             }
         }
 
@@ -1048,7 +1049,8 @@ public class CurriculumGroup extends CurriculumGroup_Base {
         }
 
         for (CurriculumGroup curriculumGroup : this.getCurriculumGroups()) {
-            result.addAll(curriculumGroup.getCurricularCoursePossibleGroupsWithoutNoCourseGroupCurriculumGroups(curricularCourse));
+            result.addAll(
+                    curriculumGroup.getCurricularCoursePossibleGroupsWithoutNoCourseGroupCurriculumGroups(curricularCourse));
         }
 
         return result;
@@ -1169,8 +1171,7 @@ public class CurriculumGroup extends CurriculumGroup_Base {
         for (final CurriculumModule curriculumModule : getCurriculumModulesSet()) {
             if (curriculumModule.isEnrolment()) {
                 final Enrolment enrolment = (Enrolment) curriculumModule;
-                if (!enrolment.isAnnulled()
-                        && enrolment.getExecutionPeriod().isBefore(executionSemester)
+                if (!enrolment.isAnnulled() && enrolment.getExecutionPeriod().isBefore(executionSemester)
                         && enrolment.getCurricularCourse().getCurricularCourseUniqueKeyForEnrollment()
                                 .equalsIgnoreCase(curricularCourse.getCurricularCourseUniqueKeyForEnrollment())) {
                     result++;
@@ -1317,9 +1318,9 @@ public class CurriculumGroup extends CurriculumGroup_Base {
         return super.getCreditsConcluded();
     }
 
-	@Override
-	public Stream<CurriculumLine> getCurriculumLineStream() {
-		return getCurriculumModulesSet().stream().flatMap(m -> m.getCurriculumLineStream());
-	}
+    @Override
+    public Stream<CurriculumLine> getCurriculumLineStream() {
+        return getCurriculumModulesSet().stream().flatMap(m -> m.getCurriculumLineStream());
+    }
 
 }

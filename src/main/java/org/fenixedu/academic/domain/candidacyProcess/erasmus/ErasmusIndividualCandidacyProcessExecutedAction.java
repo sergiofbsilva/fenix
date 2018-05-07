@@ -29,7 +29,8 @@ public class ErasmusIndividualCandidacyProcessExecutedAction extends ErasmusIndi
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public ErasmusIndividualCandidacyProcessExecutedAction(MobilityIndividualApplicationProcess process, ExecutedActionType type) {
+    public ErasmusIndividualCandidacyProcessExecutedAction(MobilityIndividualApplicationProcess process,
+            ExecutedActionType type) {
         this();
 
         if (type == null) {

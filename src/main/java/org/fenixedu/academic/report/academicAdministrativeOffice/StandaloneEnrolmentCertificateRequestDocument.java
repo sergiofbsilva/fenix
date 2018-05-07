@@ -28,6 +28,7 @@ import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.IDocumentRequest;
 import org.fenixedu.academic.domain.serviceRequests.documentRequests.StandaloneEnrolmentCertificateRequest;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.FenixStringTools;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
@@ -84,26 +85,20 @@ public class StandaloneEnrolmentCertificateRequestDocument extends Administrativ
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.firstParagraph");
         String coordinatorTitle = getCoordinatorGender(coordinator);
 
-        addParameter(
-                "firstParagraph",
-                "     "
-                        + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
-                                adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
-                                universityName.toUpperCase(getLocale())));
+        addParameter("firstParagraph",
+                "     " + MessageFormat.format(stringTemplate, coordinator.getName(), coordinatorTitle,
+                        adminOfficeName.toUpperCase(getLocale()), institutionName.toUpperCase(getLocale()),
+                        universityName.toUpperCase(getLocale())));
     }
 
     protected void fillSecondParagraph() {
-        addParameter(
-                "secondParagraph",
-                "      "
-                        + BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                                "label.academicDocument.standaloneEnrolmentCertificate.secondParagraph"));
+        addParameter("secondParagraph", "      " + BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                "label.academicDocument.standaloneEnrolmentCertificate.secondParagraph"));
     }
 
     protected void fillSeventhParagraph() {
-        String stringTemplate =
-                BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
-                        "label.academicDocument.standaloneEnrolmentCertificate.seventhParagraph");
+        String stringTemplate = BundleUtil.getString(Bundle.ACADEMIC, getLocale(),
+                "label.academicDocument.standaloneEnrolmentCertificate.seventhParagraph");
         addParameter("seventhParagraph", MessageFormat.format(stringTemplate, getDegreeDescription()));
     }
 
@@ -111,13 +106,13 @@ public class StandaloneEnrolmentCertificateRequestDocument extends Administrativ
         final StringBuilder result = new StringBuilder();
         StandaloneEnrolmentCertificateRequest request = getDocumentRequest();
 
-        final Collection<Enrolment> enrolments = new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
+        final Collection<Enrolment> enrolments =
+                new TreeSet<Enrolment>(ICurriculumEntry.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID);
         enrolments.addAll(request.getEnrolmentsSet());
 
         for (final Enrolment enrolment : enrolments) {
-            result.append(
-                    FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(), LINE_LENGTH,
-                            END_CHAR, getCreditsAndGradeInfo(enrolment, enrolment.getExecutionYear()))).append(LINE_BREAK);
+            result.append(FenixStringTools.multipleLineRightPadWithSuffix(getPresentationNameFor(enrolment).toUpperCase(),
+                    LINE_LENGTH, END_CHAR, getCreditsAndGradeInfo(enrolment, enrolment.getExecutionYear()))).append(LINE_BREAK);
         }
 
         result.append(generateEndLine());
@@ -160,7 +155,8 @@ public class StandaloneEnrolmentCertificateRequestDocument extends Administrativ
         addParameter("documentNumber",
                 MessageFormat.format(stringTemplate, getDocumentRequest().getServiceRequestNumber().toString().trim()));
 
-        addParameter("page", BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.footer.page"));
+        addParameter("page",
+                BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.footer.page"));
         addParameter("pageOf",
                 BundleUtil.getString(Bundle.ACADEMIC, getLocale(), "label.academicDocument.declaration.footer.pageOf"));
 

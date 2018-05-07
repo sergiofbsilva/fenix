@@ -96,15 +96,15 @@ import pt.ist.fenixframework.FenixFramework;
         @Forward(name = "viewLetter", path = "/phd/coordinator/referee/viewLetter.jsp") })
 public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramProcessDA {
 
-    private static final PredicateContainer<?>[] CANDIDACY_CATEGORY = { PhdCandidacyPredicateContainer.DELIVERED,
-            PhdCandidacyPredicateContainer.PENDING, PhdCandidacyPredicateContainer.APPROVED,
-            PhdCandidacyPredicateContainer.CONCLUDED };
+    private static final PredicateContainer<?>[] CANDIDACY_CATEGORY =
+            { PhdCandidacyPredicateContainer.DELIVERED, PhdCandidacyPredicateContainer.PENDING,
+                    PhdCandidacyPredicateContainer.APPROVED, PhdCandidacyPredicateContainer.CONCLUDED };
 
-    private static final PredicateContainer<?>[] SEMINAR_CATEGORY = { PhdSeminarPredicateContainer.SEMINAR_PROCESS_STARTED,
-            PhdSeminarPredicateContainer.AFTER_FIRST_SEMINAR_REUNION };
+    private static final PredicateContainer<?>[] SEMINAR_CATEGORY =
+            { PhdSeminarPredicateContainer.SEMINAR_PROCESS_STARTED, PhdSeminarPredicateContainer.AFTER_FIRST_SEMINAR_REUNION };
 
-    private static final PredicateContainer<?>[] THESIS_CATEGORY = { PhdThesisPredicateContainer.PROVISIONAL_THESIS_DELIVERED,
-            PhdThesisPredicateContainer.DISCUSSION_SCHEDULED };
+    private static final PredicateContainer<?>[] THESIS_CATEGORY =
+            { PhdThesisPredicateContainer.PROVISIONAL_THESIS_DELIVERED, PhdThesisPredicateContainer.DISCUSSION_SCHEDULED };
 
     static public class PhdEmailProgramForm extends FenixActionForm {
         private String[] selectedProcesses;
@@ -264,8 +264,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
         }
 
         RenderUtils.invalidateViewState();
-        return redirect(String.format("/phdIndividualProgramProcess.do?method=manageEnrolments&processId=%s", getProcess(request)
-                .getExternalId()), request);
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=manageEnrolments&processId=%s",
+                getProcess(request).getExternalId()), request);
     }
 
     public ActionForward rejectEnrolments(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -285,8 +285,8 @@ public class PhdIndividualProgramProcessDA extends CommonPhdIndividualProgramPro
 
         RenderUtils.invalidateViewState();
 
-        return redirect(String.format("/phdIndividualProgramProcess.do?method=manageEnrolments&processId=%s", getProcess(request)
-                .getExternalId()), request);
+        return redirect(String.format("/phdIndividualProgramProcess.do?method=manageEnrolments&processId=%s",
+                getProcess(request).getExternalId()), request);
     }
 
     // end of manage enrolments

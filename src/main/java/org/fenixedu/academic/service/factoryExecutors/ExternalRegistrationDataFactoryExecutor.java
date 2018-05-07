@@ -34,8 +34,8 @@ import org.fenixedu.academic.service.services.commons.FactoryExecutor;
 public class ExternalRegistrationDataFactoryExecutor {
 
     @SuppressWarnings("serial")
-    public static class ExternalRegistrationDataEditor extends ExternalRegistrationDataBean implements FactoryExecutor,
-            Serializable {
+    public static class ExternalRegistrationDataEditor extends ExternalRegistrationDataBean
+            implements FactoryExecutor, Serializable {
 
         public ExternalRegistrationDataEditor(ExternalRegistrationData externalRegistrationData) {
             super(externalRegistrationData);

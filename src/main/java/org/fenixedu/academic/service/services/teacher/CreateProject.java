@@ -51,9 +51,8 @@ public class CreateProject {
 
         final Grouping grouping = (groupingID != null) ? FenixFramework.<Grouping> getDomainObject(groupingID) : null;
 
-        final Project project =
-                new Project(name, begin, end, description, onlineSubmissionsAllowed, maxSubmissionsToKeep, grouping,
-                        executionCourse, gradeScale);
+        final Project project = new Project(name, begin, end, description, onlineSubmissionsAllowed, maxSubmissionsToKeep,
+                grouping, executionCourse, gradeScale);
         project.getDeparmentsSet().addAll(departments);
     }
 

@@ -74,7 +74,8 @@ public class PhdRegistryDiplomaRequestEvent extends PhdRegistryDiplomaRequestEve
     private void fillDescription(final LabelFormatter labelFormatter) {
         labelFormatter.appendLabel(" (");
         final PhdRegistryDiplomaRequest request = (PhdRegistryDiplomaRequest) getAcademicServiceRequest();
-        labelFormatter.appendLabel(request.getPhdIndividualProgramProcess().getPhdProgram().getName(getExecutionYear()).getContent());
+        labelFormatter
+                .appendLabel(request.getPhdIndividualProgramProcess().getPhdProgram().getName(getExecutionYear()).getContent());
         labelFormatter.appendLabel(")");
     }
 }

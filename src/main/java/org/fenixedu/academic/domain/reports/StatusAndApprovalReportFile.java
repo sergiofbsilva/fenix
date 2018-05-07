@@ -149,8 +149,8 @@ public class StatusAndApprovalReportFile extends StatusAndApprovalReportFile_Bas
                 if (isActive(degree)) {
                     for (final Registration registration : degree.getRegistrationsSet()) {
                         if (registration.isRegistered(getExecutionYear())) {
-                            final EnrolmentAndAprovalCounterMap map =
-                                    new EnrolmentAndAprovalCounterMap(firstExecutionSemester, lastExecutionSemester, registration);
+                            final EnrolmentAndAprovalCounterMap map = new EnrolmentAndAprovalCounterMap(firstExecutionSemester,
+                                    lastExecutionSemester, registration);
                             for (final Entry<ExecutionSemester, EnrolmentAndAprovalCounter> entry : map.entrySet()) {
                                 final ExecutionSemester executionSemester = entry.getKey();
                                 final EnrolmentAndAprovalCounter enrolmentAndAprovalCounter = entry.getValue();
@@ -161,8 +161,8 @@ public class StatusAndApprovalReportFile extends StatusAndApprovalReportFile_Bas
                                 row.setCell(executionSemester.getSemester().toString());
                                 setDegreeCells(row, degree);
                                 final StringBuilder stringBuilder = new StringBuilder();
-                                for (final StudentStatuteBean studentStatuteBean : registration.getStudent().getStatutes(
-                                        executionSemester)) {
+                                for (final StudentStatuteBean studentStatuteBean : registration.getStudent()
+                                        .getStatutes(executionSemester)) {
                                     if (stringBuilder.length() > 0) {
                                         stringBuilder.append(", ");
                                     }

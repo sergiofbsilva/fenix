@@ -133,8 +133,8 @@ public class EtiReportFile extends EtiReportFile_Base {
         row.setCell(enrolment.getGradeValue());
 
         for (EvaluationSeason season : seasons) {
-            row.setCell(enrolment.getFinalEnrolmentEvaluationBySeason(season).map(EnrolmentEvaluation::getGradeValue)
-                    .orElse(null));
+            row.setCell(
+                    enrolment.getFinalEnrolmentEvaluationBySeason(season).map(EnrolmentEvaluation::getGradeValue).orElse(null));
         }
 
         row.setCell(registration.getRegistrationProtocol().getCode());

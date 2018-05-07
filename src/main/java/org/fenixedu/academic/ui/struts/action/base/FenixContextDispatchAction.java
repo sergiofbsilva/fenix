@@ -67,11 +67,12 @@ public abstract class FenixContextDispatchAction extends FenixDispatchAction {
     }
 
     public static Boolean getFromRequestBoolean(String parameter, HttpServletRequest request) {
-        return (request.getParameter(parameter) != null) ? Boolean.valueOf(request.getParameter(parameter)) : (Boolean) request
-                .getAttribute(parameter);
+        return (request.getParameter(parameter) != null) ? Boolean
+                .valueOf(request.getParameter(parameter)) : (Boolean) request.getAttribute(parameter);
     }
 
-    protected List<LabelValueBean> buildExecutionPeriodsLabelValueList(String degreeCurricularPlanId) throws FenixActionException {
+    protected List<LabelValueBean> buildExecutionPeriodsLabelValueList(String degreeCurricularPlanId)
+            throws FenixActionException {
         List<InfoExecutionDegree> infoExecutionDegreeList = new ArrayList<InfoExecutionDegree>();
         try {
 
@@ -88,9 +89,9 @@ public abstract class FenixContextDispatchAction extends FenixDispatchAction {
                         ReadNotClosedPublicExecutionPeriodsByExecutionYear.run(infoExecutionDegree.getInfoExecutionYear());
 
                 for (InfoExecutionPeriod infoExecutionPeriodIter : infoExecutionPeriodsList) {
-                    result.add(new LabelValueBean(infoExecutionPeriodIter.getName() + " - "
-                            + infoExecutionPeriodIter.getInfoExecutionYear().getYear(), infoExecutionPeriodIter.getExternalId()
-                            .toString()));
+                    result.add(new LabelValueBean(
+                            infoExecutionPeriodIter.getName() + " - " + infoExecutionPeriodIter.getInfoExecutionYear().getYear(),
+                            infoExecutionPeriodIter.getExternalId().toString()));
                 }
             } catch (Exception e) {
                 throw new FenixActionException(e);

@@ -45,8 +45,8 @@ public class RestrictionBetweenDegreeModulesExecutor extends CurricularRuleExecu
         final DegreeModule precedenceDegreeModule = rule.getPrecedenceDegreeModule();
 
         if (isEnrolling(enrolmentContext, precedenceDegreeModule)) {
-            return rule.hasMinimumCredits() ? createFalseRuleResultWithInvalidEcts(rule, sourceDegreeModuleToEvaluate) : RuleResult
-                    .createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
+            return rule.hasMinimumCredits() ? createFalseRuleResultWithInvalidEcts(rule,
+                    sourceDegreeModuleToEvaluate) : RuleResult.createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
 
         } else if (isEnroled(enrolmentContext, precedenceDegreeModule)) {
 
@@ -81,8 +81,8 @@ public class RestrictionBetweenDegreeModulesExecutor extends CurricularRuleExecu
         final DegreeModule precedenceDegreeModule = rule.getPrecedenceDegreeModule();
 
         if (isEnrolling(enrolmentContext, precedenceDegreeModule)) {
-            return rule.hasMinimumCredits() ? createFalseRuleResultWithInvalidEcts(rule, sourceDegreeModuleToEvaluate) : RuleResult
-                    .createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
+            return rule.hasMinimumCredits() ? createFalseRuleResultWithInvalidEcts(rule,
+                    sourceDegreeModuleToEvaluate) : RuleResult.createTrue(sourceDegreeModuleToEvaluate.getDegreeModule());
 
         } else if (isEnroled(enrolmentContext, precedenceDegreeModule)) {
 
@@ -98,10 +98,8 @@ public class RestrictionBetweenDegreeModulesExecutor extends CurricularRuleExecu
             }
 
             final ExecutionSemester executionSemester = enrolmentContext.getExecutionPeriod();
-            ectsCredits =
-                    Double.valueOf(ectsCredits.doubleValue()
-                            + curriculumModule.getEnroledEctsCredits(executionSemester.getPreviousExecutionPeriod())
-                                    .doubleValue());
+            ectsCredits = Double.valueOf(ectsCredits.doubleValue()
+                    + curriculumModule.getEnroledEctsCredits(executionSemester.getPreviousExecutionPeriod()).doubleValue());
 
             if (rule.allowCredits(ectsCredits)) {
                 return RuleResult.createTrue(EnrolmentResultType.TEMPORARY, sourceDegreeModuleToEvaluate.getDegreeModule());
@@ -122,22 +120,18 @@ public class RestrictionBetweenDegreeModulesExecutor extends CurricularRuleExecu
 
     private RuleResult createFalseRuleResultWithInvalidEcts(final RestrictionBetweenDegreeModules rule,
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
-        return RuleResult
-                .createFalse(
-                        sourceDegreeModuleToEvaluate.getDegreeModule(),
-                        "curricularRules.ruleExecutors.RestrictionBetweenDegreeModulesExecutor.invalid.ects.credits.in.precedence.degreeModule",
-                        rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName(), rule
-                                .getMinimumCredits().toString());
+        return RuleResult.createFalse(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                "curricularRules.ruleExecutors.RestrictionBetweenDegreeModulesExecutor.invalid.ects.credits.in.precedence.degreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName(),
+                rule.getMinimumCredits().toString());
     }
 
     private RuleResult createImpossibleRuleResultWithInvalidEcts(final RestrictionBetweenDegreeModules rule,
             final IDegreeModuleToEvaluate sourceDegreeModuleToEvaluate) {
-        return RuleResult
-                .createImpossible(
-                        sourceDegreeModuleToEvaluate.getDegreeModule(),
-                        "curricularRules.ruleExecutors.RestrictionBetweenDegreeModulesExecutor.invalid.ects.credits.in.precedence.degreeModule",
-                        rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName(), rule
-                                .getMinimumCredits().toString());
+        return RuleResult.createImpossible(sourceDegreeModuleToEvaluate.getDegreeModule(),
+                "curricularRules.ruleExecutors.RestrictionBetweenDegreeModulesExecutor.invalid.ects.credits.in.precedence.degreeModule",
+                rule.getDegreeModuleToApplyRule().getName(), rule.getPrecedenceDegreeModule().getName(),
+                rule.getMinimumCredits().toString());
     }
 
     @Override

@@ -59,7 +59,8 @@ public class RectorateSubmissionBatch extends RectorateSubmissionBatch_Base {
     public RectorateSubmissionBatch getNextRectorateSubmissionBatch() {
         RectorateSubmissionBatch next = null;
         for (RectorateSubmissionBatch batch : getAdministrativeOffice().getRectorateSubmissionBatchSet()) {
-            if (batch.getCreation().isAfter(getCreation()) && (next == null || batch.getCreation().isBefore(next.getCreation()))) {
+            if (batch.getCreation().isAfter(getCreation())
+                    && (next == null || batch.getCreation().isBefore(next.getCreation()))) {
                 next = batch;
             }
         }

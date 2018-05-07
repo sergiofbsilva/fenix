@@ -35,8 +35,8 @@ public class ExternalScholarshipGratuityExemptionJustification extends ExternalS
         init(exemption, justificationType, reason);
     }
 
-    protected void init(ExternalScholarshipGratuityExemption exemption, ExternalScholarshipGratuityExemptionJustificationType justificationType,
-            String reason) {
+    protected void init(ExternalScholarshipGratuityExemption exemption,
+            ExternalScholarshipGratuityExemptionJustificationType justificationType, String reason) {
         super.init(exemption, reason);
         checkParameters(justificationType);
         super.setExternalScholarshipGratuityExemptionJustificationType(justificationType);
@@ -44,14 +44,16 @@ public class ExternalScholarshipGratuityExemptionJustification extends ExternalS
 
     private void checkParameters(ExternalScholarshipGratuityExemptionJustificationType justificationType) {
         if (justificationType == null) {
-            throw new DomainException("error.accounting.events.gratuity.ExternalScholarshipGratuityExemptionJustificationType.justificationType.cannot.be.null");
+            throw new DomainException(
+                    "error.accounting.events.gratuity.ExternalScholarshipGratuityExemptionJustificationType.justificationType.cannot.be.null");
         }
     }
 
     @Override
     public void setExternalScholarshipGratuityExemptionJustificationType(
             ExternalScholarshipGratuityExemptionJustificationType justificationType) {
-        throw new DomainException("error.accounting.events.gratuity.ExternalScholarshipGratuityExemptionJustificationType.cannot.modify.justificationType");
+        throw new DomainException(
+                "error.accounting.events.gratuity.ExternalScholarshipGratuityExemptionJustificationType.cannot.modify.justificationType");
     }
 
     @Override

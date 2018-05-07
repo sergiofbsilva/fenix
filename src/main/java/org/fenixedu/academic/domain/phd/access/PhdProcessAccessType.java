@@ -33,33 +33,33 @@ public enum PhdProcessAccessType {
 
     CANDIDACY_FEEDBACK_DOCUMENTS_DOWNLOAD(
 
-    "CandidacyFeedbackDocumentsDownload",
+            "CandidacyFeedbackDocumentsDownload",
 
-    PhdProgramCandidacyProcessState.PENDING_FOR_COORDINATOR_OPINION),
+            PhdProgramCandidacyProcessState.PENDING_FOR_COORDINATOR_OPINION),
 
     CANDIDACY_FEEDBACK_UPLOAD(
 
-    "CandidacyFeedbackUpload",
+            "CandidacyFeedbackUpload",
 
-    PhdProgramCandidacyProcessState.PENDING_FOR_COORDINATOR_OPINION),
+            PhdProgramCandidacyProcessState.PENDING_FOR_COORDINATOR_OPINION),
 
     JURY_DOCUMENTS_DOWNLOAD(
 
-    "JuryDocumentsDownload",
+            "JuryDocumentsDownload",
 
-    PhdThesisProcessStateType.WAITING_FOR_JURY_REPORTER_FEEDBACK),
+            PhdThesisProcessStateType.WAITING_FOR_JURY_REPORTER_FEEDBACK),
 
     JURY_REPORTER_FEEDBACK_UPLOAD(
 
-    "JuryReporterFeedbackUpload",
+            "JuryReporterFeedbackUpload",
 
-    PhdThesisProcessStateType.WAITING_FOR_JURY_REPORTER_FEEDBACK),
+            PhdThesisProcessStateType.WAITING_FOR_JURY_REPORTER_FEEDBACK),
 
     JURY_REVIEW_DOCUMENTS_DOWNLOAD(
 
-    "JuryReviewDocumentsDownload",
+            "JuryReviewDocumentsDownload",
 
-    PhdThesisProcessStateType.WAITING_FOR_THESIS_DISCUSSION_DATE_SCHEDULING);
+            PhdThesisProcessStateType.WAITING_FOR_THESIS_DISCUSSION_DATE_SCHEDULING);
 
     private String descriptor;
 

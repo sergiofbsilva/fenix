@@ -113,10 +113,8 @@ public class RoomSiteComponentBuilder {
     private static void getLessonOccupations(List<InfoObject> infoShowOccupations, YearMonthDay weekStartYearMonthDay,
             YearMonthDay weekEndYearMonthDay, Lesson lesson) {
 
-        if (lesson != null
-                && lesson.getShift() != null
-                && lesson.containsWithoutCheckInstanceDates(new Interval(weekStartYearMonthDay.toDateTimeAtMidnight(),
-                        weekEndYearMonthDay.toDateTimeAtMidnight()))) {
+        if (lesson != null && lesson.getShift() != null && lesson.containsWithoutCheckInstanceDates(
+                new Interval(weekStartYearMonthDay.toDateTimeAtMidnight(), weekEndYearMonthDay.toDateTimeAtMidnight()))) {
             infoShowOccupations.add(InfoLesson.newInfoFromDomain(lesson));
         }
     }

@@ -83,8 +83,8 @@ public class StudentGroup extends StudentGroup_Base {
         List<ExecutionCourse> ecs = getGrouping().getExecutionCourses();
         for (ExecutionCourse ec : ecs) {
             GroupsAndShiftsManagementLog.createLog(ec, Bundle.MESSAGING,
-                    "log.executionCourse.groupAndShifts.grouping.group.removed", getGroupNumber().toString(), getGrouping()
-                            .getName(), ec.getNome(), ec.getDegreePresentationString());
+                    "log.executionCourse.groupAndShifts.grouping.group.removed", getGroupNumber().toString(),
+                    getGrouping().getName(), ec.getNome(), ec.getDegreePresentationString());
 
         }
         // teacher type of deletion after project submission

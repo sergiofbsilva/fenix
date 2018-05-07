@@ -78,8 +78,9 @@ public class EventReportsDA extends FenixDispatchAction {
     }
 
     private Set<AdministrativeOffice> getOffices() {
-        return AcademicAccessRule.getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS,
-                Authenticate.getUser()).collect(Collectors.toSet());
+        return AcademicAccessRule
+                .getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS, Authenticate.getUser())
+                .collect(Collectors.toSet());
     }
 
     public ActionForward prepareCreateReportRequest(final ActionMapping mapping, final ActionForm form,
@@ -91,8 +92,8 @@ public class EventReportsDA extends FenixDispatchAction {
         return mapping.findForward("createReportRequest");
     }
 
-    public ActionForward createReportRequest(final ActionMapping mapping, final ActionForm form,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward createReportRequest(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
+            final HttpServletResponse response) {
         EventReportQueueJobBean bean = getRenderedObject("bean");
 
         try {
@@ -124,8 +125,8 @@ public class EventReportsDA extends FenixDispatchAction {
         return mapping.findForward("createReportRequest");
     }
 
-    public ActionForward cancelReportRequest(final ActionMapping mapping, final ActionForm form,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public ActionForward cancelReportRequest(final ActionMapping mapping, final ActionForm form, final HttpServletRequest request,
+            final HttpServletResponse response) {
         EventReportQueueJob job = readEventReportQueueJob(request);
 
         try {

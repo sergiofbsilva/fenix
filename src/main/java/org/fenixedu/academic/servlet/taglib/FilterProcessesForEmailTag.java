@@ -90,8 +90,8 @@ public class FilterProcessesForEmailTag extends TagSupport {
             throw new JspException("predicateContainer cannot be null");
         }
         if (!PredicateContainer.class.isAssignableFrom(predicateContainerObject.getClass())) {
-            throw new JspException("Specified predicateContainer does not correspond to a "
-                    + PredicateContainer.class.getSimpleName());
+            throw new JspException(
+                    "Specified predicateContainer does not correspond to a " + PredicateContainer.class.getSimpleName());
         }
         Object beanObject = TagUtils.getInstance().lookup(pageContext, getBean(), getScope());
         if (!PhdProgramEmailBean.class.isAssignableFrom(beanObject.getClass())) {

@@ -76,7 +76,8 @@ public class ICalStudentTimeTable extends FenixDispatchAction {
     @EntryPoint
     public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        List<Registration> registrations = getUserView(request).getPerson().getStudent().getActiveRegistrationStream().collect(Collectors.toList());
+        List<Registration> registrations =
+                getUserView(request).getPerson().getStudent().getActiveRegistrationStream().collect(Collectors.toList());
         if (registrations.size() == 1) {
             return forwardToShow(registrations.iterator().next(), mapping, request);
         } else {
@@ -140,13 +141,11 @@ public class ICalStudentTimeTable extends FenixDispatchAction {
             String scheme = request.getScheme();
             String serverName = request.getServerName();
             int serverPort = request.getServerPort();
-            String url =
-                    scheme + "://" + serverName + ((serverPort == 80 || serverPort == 443) ? "" : ":" + serverPort)
-                            + request.getContextPath();
-            url +=
-                    "/external/iCalendarSync.do?method=" + to + "&user=" + Authenticate.getUser().getUsername() + ""
-                            + "&registrationID=" + registration.getExternalId() + "&payload="
-                            + calculatePayload(to, registration, Authenticate.getUser());
+            String url = scheme + "://" + serverName + ((serverPort == 80 || serverPort == 443) ? "" : ":" + serverPort)
+                    + request.getContextPath();
+            url += "/external/iCalendarSync.do?method=" + to + "&user=" + Authenticate.getUser().getUsername() + ""
+                    + "&registrationID=" + registration.getExternalId() + "&payload="
+                    + calculatePayload(to, registration, Authenticate.getUser());
             return url;
         } catch (Exception e) {
             return null;

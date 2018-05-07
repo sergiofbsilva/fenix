@@ -73,9 +73,8 @@ public class PhdConclusionProcess extends PhdConclusionProcess_Base {
         }
 
         // TODO: phd-refactor
-        if (process.getRegistration() != null
-                && !process.getRegistration().getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                        .isConclusionProcessed()) {
+        if (process.getRegistration() != null && !process.getRegistration().getLastStudentCurricularPlan()
+                .getCycle(CycleType.THIRD_CYCLE).isConclusionProcessed()) {
             throw new DomainException("error.phd.PhdConclusionProcess.registration.must.be.concluded.first");
         }
 

@@ -130,7 +130,8 @@ public abstract class ForumService {
         final String emailSubject = getEmailFormattedSubject(conversationMessage.getConversationThread());
 
         sendEmailToPersons(teachers, getString("label.teachers"), emailSubject, getEmailFormattedBody(conversationMessage, true));
-        sendEmailToPersons(students, getString("label.students"), emailSubject, getEmailFormattedBody(conversationMessage, false));
+        sendEmailToPersons(students, getString("label.students"), emailSubject,
+                getEmailFormattedBody(conversationMessage, false));
     }
 
     private String getEmailFormattedSubject(ConversationThread conversationThread) {
@@ -142,10 +143,9 @@ public abstract class ForumService {
     private String getEmailFormattedBody(ConversationMessage conversationMessage, boolean isForTeacher) {
         String emailBodyAsText = HtmlToTextConverterUtil.convertToText(conversationMessage.getBody().getContent());
 
-        String emailFormattedBody =
-                MessageFormat.format(getString("forum.email.body"), conversationMessage.getCreator().getName(),
-                        conversationMessage.getConversationThread().getTitle(), conversationMessage.getConversationThread()
-                                .getForum().getName(), emailBodyAsText);
+        String emailFormattedBody = MessageFormat.format(getString("forum.email.body"),
+                conversationMessage.getCreator().getName(), conversationMessage.getConversationThread().getTitle(),
+                conversationMessage.getConversationThread().getForum().getName(), emailBodyAsText);
 
         return emailFormattedBody;
     }

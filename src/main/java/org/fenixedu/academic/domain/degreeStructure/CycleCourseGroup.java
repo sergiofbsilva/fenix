@@ -62,6 +62,7 @@ public class CycleCourseGroup extends CycleCourseGroup_Base {
         return true;
     }
 
+    @Override
     final public String getGraduateTitleSuffix(final ExecutionYear executionYear, final Locale locale) {
         CycleCourseGroupInformation courseGroupInformationForSuffix =
                 getMostRecentCycleCourseGroupInformation(executionYear, true);

@@ -33,7 +33,8 @@ public class InsurancePR extends InsurancePR_Base {
         super();
     }
 
-    public InsurancePR(DateTime startDate, DateTime endDate, ServiceAgreementTemplate serviceAgreementTemplate, Money fixedAmount) {
+    public InsurancePR(DateTime startDate, DateTime endDate, ServiceAgreementTemplate serviceAgreementTemplate,
+            Money fixedAmount) {
         this();
         init(EntryType.INSURANCE_FEE, EventType.INSURANCE, startDate, endDate, serviceAgreementTemplate, fixedAmount);
     }

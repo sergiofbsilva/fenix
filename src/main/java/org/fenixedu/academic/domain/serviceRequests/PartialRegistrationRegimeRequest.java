@@ -92,9 +92,8 @@ public class PartialRegistrationRegimeRequest extends PartialRegistrationRegimeR
         super.createAcademicServiceRequestSituations(academicServiceRequestBean);
 
         if (academicServiceRequestBean.isToProcess() && !isFree()) {
-            FixedAmountPR partialRegistrationPostingRule =
-                    (FixedAmountPR) getAdministrativeOffice().getServiceAgreementTemplate().findPostingRuleByEventTypeAndDate(
-                            EventType.PARTIAL_REGISTRATION_REGIME_REQUEST,
+            FixedAmountPR partialRegistrationPostingRule = (FixedAmountPR) getAdministrativeOffice().getServiceAgreementTemplate()
+                    .findPostingRuleByEventTypeAndDate(EventType.PARTIAL_REGISTRATION_REGIME_REQUEST,
                             getExecutionYear().getBeginDateYearMonthDay().toDateTimeAtMidnight());
 
             if (partialRegistrationPostingRule.getFixedAmount().greaterThan(Money.ZERO)) {

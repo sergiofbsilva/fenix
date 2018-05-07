@@ -42,9 +42,8 @@ public class PhdProgramsProviderForPublicCandidacy extends AbstractDomainObjectP
 
         } else if (source instanceof PhdIndividualProgramProcessBean) {
             PhdIndividualProgramProcessBean bean = (PhdIndividualProgramProcessBean) source;
-            InstitutionPhdCandidacyPeriod publicPhdCandidacyPeriod =
-                    (InstitutionPhdCandidacyPeriod) bean.getIndividualProgramProcess().getCandidacyProcess()
-                            .getPublicPhdCandidacyPeriod();
+            InstitutionPhdCandidacyPeriod publicPhdCandidacyPeriod = (InstitutionPhdCandidacyPeriod) bean
+                    .getIndividualProgramProcess().getCandidacyProcess().getPublicPhdCandidacyPeriod();
 
             return publicPhdCandidacyPeriod.getPhdProgramsSet();
         }

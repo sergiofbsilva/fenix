@@ -55,7 +55,8 @@ public class ImprovementOfApprovedEnrolmentPenaltyExemption extends ImprovementO
             final ImprovementOfApprovedEnrolmentEvent improvementOfApprovedEnrolmentEvent, final Person responsible,
             final String comments, final YearMonthDay directiveCouncilDispatchDate) {
         this();
-        super.init(penaltyExemptionType, improvementOfApprovedEnrolmentEvent, responsible, comments, directiveCouncilDispatchDate);
+        super.init(penaltyExemptionType, improvementOfApprovedEnrolmentEvent, responsible, comments,
+                directiveCouncilDispatchDate);
     }
 
 }

@@ -24,8 +24,8 @@ import java.util.Locale;
 import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.util.LocaleUtils;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class AccountabilityType extends AccountabilityType_Base {
 
@@ -90,8 +90,7 @@ public class AccountabilityType extends AccountabilityType_Base {
         }
 
         LocalizedString typeName = getTypeName();
-        typeName =
-                typeName == null ? new LocalizedString(Locale.getDefault(), name) : typeName.with(Locale.getDefault(), name);
+        typeName = typeName == null ? new LocalizedString(Locale.getDefault(), name) : typeName.with(Locale.getDefault(), name);
 
         setTypeName(typeName);
     }

@@ -18,6 +18,15 @@
  */
 package org.fenixedu.academic.ui.spring.controller.teacher;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.UriBuilder;
+
 import org.fenixedu.academic.domain.Attends;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.ExportGrouping;
@@ -46,15 +55,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.RedirectView;
-import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.UriBuilder;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
 
 @Controller
 @RequestMapping("/teacher/{executionCourse}/student-groups/{grouping}")
@@ -66,13 +68,11 @@ public class StudentGroupController extends ExecutionCourseController {
     public StudentGroupController(StudentGroupService studentGroupService) {
         this.studentGroupService = studentGroupService;
     }
-    
-    
+
     // hack
     @Autowired
     CSRFTokenBean csrfTokenBean;
-    
-    
+
     @Override
     protected Class<?> getFunctionalityType() {
         return ManageExecutionCourseDA.class;
@@ -93,8 +93,8 @@ public class StudentGroupController extends ExecutionCourseController {
     public AbstractUrlBasedView createStudentGroup(Model model, @PathVariable Grouping grouping, @PathVariable Shift shift,
             @ModelAttribute("addStudent") @Validated AttendsBean addStudents, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new RedirectView("/teacher/" + executionCourse.getExternalId() + "/student-groups/view/"
-                    + grouping.getExternalId(), true);
+            return new RedirectView(
+                    "/teacher/" + executionCourse.getExternalId() + "/student-groups/view/" + grouping.getExternalId(), true);
         }
 
         StudentGroup studentgroup = studentGroupService.createStudentGroup(grouping, shift);
@@ -104,7 +104,7 @@ public class StudentGroupController extends ExecutionCourseController {
 
     @RequestMapping(value = "/viewStudentGroup/{studentGroup}", method = RequestMethod.GET)
     public TeacherView viewStudentGroup(Model model, @PathVariable Grouping grouping, @PathVariable StudentGroup studentGroup) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("studentGroup", studentGroup);
 
         ArrayList<Shift> shiftList = new ArrayList<Shift>();
@@ -120,9 +120,7 @@ public class StudentGroupController extends ExecutionCourseController {
             }
         }
         ArrayList<Attends> studentsWithoutStudentGroup = new ArrayList<Attends>();
-        studentsWithoutStudentGroup.addAll(grouping
-                .getAttendsSet()
-                .stream()
+        studentsWithoutStudentGroup.addAll(grouping.getAttendsSet().stream()
                 .filter(attends -> grouping.getStudentGroupsSet().stream()
                         .noneMatch(sg -> sg.getAttendsSet().stream().anyMatch(at -> at.equals(attends))))
                 .collect(Collectors.toList()));
@@ -164,22 +162,17 @@ public class StudentGroupController extends ExecutionCourseController {
     @RequestMapping(value = "/sendEmail/{studentGroup}", method = RequestMethod.GET)
     public RedirectView sendEmail(Model model, HttpServletRequest request, HttpSession session,
             @PathVariable StudentGroup studentGroup) {
-        String label =
-                studentGroup.getGrouping().getName() + "-" + BundleUtil.getString(Bundle.APPLICATION, "label.group")
-                        + studentGroup.getGroupNumber();
+        String label = studentGroup.getGrouping().getName() + "-" + BundleUtil.getString(Bundle.APPLICATION, "label.group")
+                + studentGroup.getGroupNumber();
 
         ArrayList<Recipient> recipients = new ArrayList<Recipient>();
-        recipients.add(Recipient.newInstance(
-                label,
+        recipients.add(Recipient.newInstance(label,
                 Group.users(studentGroup.getAttendsSet().stream().map(Attends::getRegistration).map(Registration::getPerson)
                         .map(Person::getUser).filter(Objects::nonNull).sorted(User.COMPARATOR_BY_NAME))));
-        String sendEmailUrl =
-                UriBuilder
-                        .fromUri("/messaging/emails.do")
-                        .queryParam("method", "newEmail")
-                        .queryParam("sender", ExecutionCourseSender.newInstance(executionCourse).getExternalId())
-                        .queryParam("recipient", recipients.stream().filter(r -> r != null).map(r -> r.getExternalId()).toArray())
-                        .build().toString();
+        String sendEmailUrl = UriBuilder.fromUri("/messaging/emails.do").queryParam("method", "newEmail")
+                .queryParam("sender", ExecutionCourseSender.newInstance(executionCourse).getExternalId())
+                .queryParam("recipient", recipients.stream().filter(r -> r != null).map(r -> r.getExternalId()).toArray()).build()
+                .toString();
         String sendEmailWithChecksumUrl =
                 GenericChecksumRewriter.injectChecksumInUrl(request.getContextPath(), sendEmailUrl, session);
         return new RedirectView(sendEmailWithChecksumUrl, true);
@@ -194,7 +187,7 @@ public class StudentGroupController extends ExecutionCourseController {
             return viewStudentGroup(model, grouping, studentGroup);
         }
         studentGroupService.deleteStudentGroup(studentGroup);
-        return new RedirectView("/teacher/" + executionCourse.getExternalId() + "/student-groups/view/"
-                + grouping.getExternalId(), true);
+        return new RedirectView(
+                "/teacher/" + executionCourse.getExternalId() + "/student-groups/view/" + grouping.getExternalId(), true);
     }
 }

@@ -221,8 +221,7 @@ public class PhdProgramCandidacyProcess extends PhdProgramCandidacyProcess_Base 
 
     public boolean hasPaymentCodeToPay() {
         final IndividualCandidacyPaymentCode paymentCode = getAssociatedPaymentCode();
-        return paymentCode != null && paymentCode.getMinAmount().isPositive()
-                && paymentCode.getMaxAmount().isPositive();
+        return paymentCode != null && paymentCode.getMinAmount().isPositive() && paymentCode.getMaxAmount().isPositive();
     }
 
     private void checkCandidacyDate(ExecutionYear executionYear, LocalDate candidacyDate) {
@@ -363,7 +362,8 @@ public class PhdProgramCandidacyProcess extends PhdProgramCandidacyProcess_Base 
 
     }
 
-    public PhdProgramCandidacyProcess registrationFormalization(final RegistrationFormalizationBean bean, final Person responsible) {
+    public PhdProgramCandidacyProcess registrationFormalization(final RegistrationFormalizationBean bean,
+            final Person responsible) {
 
         if (!hasStudyPlan()) {
             throw new DomainException(

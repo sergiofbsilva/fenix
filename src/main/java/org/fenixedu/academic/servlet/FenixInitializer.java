@@ -39,12 +39,12 @@ import org.fenixedu.bennu.core.rest.Healthcheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sun.mail.smtp.SMTPTransport;
+
 import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.RequestChecksumFilter;
 import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.RequestChecksumFilter.ChecksumPredicate;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
-
-import com.sun.mail.smtp.SMTPTransport;
 
 @WebListener
 public class FenixInitializer implements ServletContextListener {
@@ -117,8 +117,8 @@ public class FenixInitializer implements ServletContextListener {
                 if (uri.indexOf("/student/fillInquiries.do") >= 0) {
                     return false;
                 }
-                if ((uri.indexOf("/teacher/executionCourseForumManagement.do") >= 0 || uri
-                        .indexOf("/student/viewExecutionCourseForuns.do") >= 0)
+                if ((uri.indexOf("/teacher/executionCourseForumManagement.do") >= 0
+                        || uri.indexOf("/student/viewExecutionCourseForuns.do") >= 0)
                         && request.getQueryString().indexOf("method=viewThread") >= 0) {
                     return false;
                 }

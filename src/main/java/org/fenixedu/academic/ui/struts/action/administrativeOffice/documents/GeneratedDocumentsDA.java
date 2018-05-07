@@ -48,8 +48,7 @@ import org.joda.time.LocalDate;
 @StrutsFunctionality(app = AcademicAdminDocumentsApp.class, path = "generated-documents", titleKey = "label.documents",
         accessGroup = "academic(MANAGE_DOCUMENTS)")
 @Mapping(path = "/generatedDocuments", module = "academicAdministration", formBeanClass = FenixActionForm.class)
-@Forwards({
-        @Forward(name = "searchPerson", path = "/academicAdminOffice/generatedDocuments/searchPerson.jsp"),
+@Forwards({ @Forward(name = "searchPerson", path = "/academicAdminOffice/generatedDocuments/searchPerson.jsp"),
         @Forward(name = "showAnnualIRSDocuments", path = "/academicAdminOffice/generatedDocuments/showAnnualIRSDocuments.jsp"),
         @Forward(name = "payments.manageIRSDocuments",
                 path = "/academicAdminOffice/generatedDocuments/payments/manageIRSDocuments.jsp") })
@@ -175,7 +174,8 @@ public class GeneratedDocumentsDA extends FenixDispatchAction {
                 customDeclaration.getDataSource()).getData();
     }
 
-    private void addPayedAmount(Person person, int civilYear, final IRSDeclarationDTO declarationDTO) throws FenixActionException {
+    private void addPayedAmount(Person person, int civilYear, final IRSDeclarationDTO declarationDTO)
+            throws FenixActionException {
         for (final Event event : person.getEventsSet()) {
             if (event.hasPaymentsByPersonForCivilYear(civilYear)
                     && event.getMaxDeductableAmountForLegalTaxes(civilYear).isPositive()) {

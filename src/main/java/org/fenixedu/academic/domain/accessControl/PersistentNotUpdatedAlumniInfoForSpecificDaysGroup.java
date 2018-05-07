@@ -50,6 +50,7 @@ public class PersistentNotUpdatedAlumniInfoForSpecificDaysGroup extends Persiste
         return filter(PersistentNotUpdatedAlumniInfoForSpecificDaysGroup.class).filter(
                 group -> group.getDaysNotUpdated() == daysNotUpdated && group.getCheckJobNotUpdated() == checkJobNotUpdated
                         && group.getCheckFormationNotUpdated() == checkFormationNotUpdated
-                        && group.getCheckPersonalDataNotUpdated() == checkPersonalDataNotUpdated).findAny();
+                        && group.getCheckPersonalDataNotUpdated() == checkPersonalDataNotUpdated)
+                .findAny();
     }
 }

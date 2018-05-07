@@ -41,11 +41,10 @@ public class MarkSheetPredicates {
 
         @Override
         public boolean evaluate(final MarkSheet markSheet) {
-            return hasScientificCouncilRole()
-                    || hasProfessorshipForMarkSheet(markSheet)
+            return hasScientificCouncilRole() || hasProfessorshipForMarkSheet(markSheet)
                     || (AcademicPredicates.MANAGE_MARKSHEETS.evaluate(null)
-                            && (!markSheet.isRectification() || checkRectification(markSheet.getCurricularCourse().getDegree())) && (!markSheet
-                            .isDissertation() || checkDissertation(markSheet.getCurricularCourse().getDegree())));
+                            && (!markSheet.isRectification() || checkRectification(markSheet.getCurricularCourse().getDegree()))
+                            && (!markSheet.isDissertation() || checkDissertation(markSheet.getCurricularCourse().getDegree())));
         }
 
     };
@@ -63,9 +62,9 @@ public class MarkSheetPredicates {
 
         @Override
         public boolean evaluate(final MarkSheet markSheet) {
-        	final Degree degree = markSheet.getCurricularCourse().getDegree();
+            final Degree degree = markSheet.getCurricularCourse().getDegree();
             return AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.REMOVE_GRADES, Authenticate.getUser())
-            		.anyMatch(d -> d == degree);
+                    .anyMatch(d -> d == degree);
         }
     };
 
@@ -87,7 +86,8 @@ public class MarkSheetPredicates {
 
     private static boolean hasProfessorshipForMarkSheet(MarkSheet markSheet) {
         Teacher teacher = Authenticate.getUser().getPerson().getTeacher();
-        return teacher != null && markSheet.getCurricularCourse().getExecutionCoursesByExecutionPeriod(markSheet
-                .getExecutionPeriod()).stream().anyMatch(teacher::hasProfessorshipForExecutionCourse);
+        return teacher != null
+                && markSheet.getCurricularCourse().getExecutionCoursesByExecutionPeriod(markSheet.getExecutionPeriod()).stream()
+                        .anyMatch(teacher::hasProfessorshipForExecutionCourse);
     }
 }

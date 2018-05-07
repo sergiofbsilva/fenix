@@ -44,8 +44,8 @@ public class ExemptionsManagement {
 
         switch (exemptionBean.getApplyExemptionOn()) {
         case ADMINISTRATIVE_OFFICE_FEE:
-            new AdministrativeOfficeFeeExemption(responsible, administrativeOfficeFeeAndInsuranceEvent, justificationType,
-                    reason, dispatchDate);
+            new AdministrativeOfficeFeeExemption(responsible, administrativeOfficeFeeAndInsuranceEvent, justificationType, reason,
+                    dispatchDate);
             return;
         case ADMINISTRATIVE_OFFICE_FEE_AND_INSURANCE:
             new AdministrativeOfficeFeeAndInsuranceExemption(responsible, administrativeOfficeFeeAndInsuranceEvent,

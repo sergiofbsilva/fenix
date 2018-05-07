@@ -83,8 +83,9 @@ public class GratuityEventWrapper implements Wrapper {
 
     @Override
     public String getEnrolledECTS() {
-        return new BigDecimal(event.getRegistration().getLastStudentCurricularPlan()
-                .getEnrolmentsEctsCredits(event.getExecutionYear())).toString();
+        return new BigDecimal(
+                event.getRegistration().getLastStudentCurricularPlan().getEnrolmentsEctsCredits(event.getExecutionYear()))
+                        .toString();
     }
 
     @Override

@@ -31,8 +31,8 @@ import org.joda.time.YearMonthDay;
 
 import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 
-public class AdministrativeOfficeFeeExemption extends AdministrativeOfficeFeeExemption_Base implements
-        IAdministrativeOfficeFeeEvent {
+public class AdministrativeOfficeFeeExemption extends AdministrativeOfficeFeeExemption_Base
+        implements IAdministrativeOfficeFeeEvent {
     static {
         getRelationExemptionEvent().addListener(new RelationAdapter<Exemption, Event>() {
             @Override

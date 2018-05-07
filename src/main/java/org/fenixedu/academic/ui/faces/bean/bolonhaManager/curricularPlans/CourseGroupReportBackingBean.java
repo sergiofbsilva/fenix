@@ -136,8 +136,8 @@ public class CourseGroupReportBackingBean extends FenixBackingBean {
             getContextPaths().put(context, previousPath);
         }
         for (final Context context : courseGroup.getSortedChildContextsWithCourseGroups()) {
-            collectChildDegreeModules(result, (CourseGroup) context.getChildDegreeModule(), previousPath + " > "
-                    + context.getChildDegreeModule().getName());
+            collectChildDegreeModules(result, (CourseGroup) context.getChildDegreeModule(),
+                    previousPath + " > " + context.getChildDegreeModule().getName());
         }
     }
 

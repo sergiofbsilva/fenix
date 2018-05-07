@@ -96,8 +96,8 @@ public class DegreeCandidacy extends DegreeCandidacy_Base {
 
     @Override
     public boolean isConcluded() {
-        return (getActiveCandidacySituation().getCandidacySituationType() == CandidacySituationType.REGISTERED || getActiveCandidacySituation()
-                .getCandidacySituationType() == CandidacySituationType.CANCELLED);
+        return (getActiveCandidacySituation().getCandidacySituationType() == CandidacySituationType.REGISTERED
+                || getActiveCandidacySituation().getCandidacySituationType() == CandidacySituationType.CANCELLED);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class PersistentCerimonyInquiryGroup extends PersistentCerimonyInquiryGro
     }
 
     public static PersistentCerimonyInquiryGroup getInstance(CerimonyInquiry cerimonyInquiry) {
-        return singleton(() -> Optional.ofNullable(cerimonyInquiry.getGroup()), () -> new PersistentCerimonyInquiryGroup(
-                cerimonyInquiry));
+        return singleton(() -> Optional.ofNullable(cerimonyInquiry.getGroup()),
+                () -> new PersistentCerimonyInquiryGroup(cerimonyInquiry));
     }
 }

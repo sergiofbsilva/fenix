@@ -32,8 +32,9 @@ public class PhdProgramsFilteredProvider implements DataProvider {
 
     @Override
     public Object provide(Object source, Object current) {
-        return AcademicAccessRule.getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES,
-                Authenticate.getUser()).collect(Collectors.toSet());
+        return AcademicAccessRule
+                .getPhdProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_PROCESSES, Authenticate.getUser())
+                .collect(Collectors.toSet());
     }
 
     @Override

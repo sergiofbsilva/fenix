@@ -124,8 +124,8 @@ public class EditCandidacyInformationDA extends FenixDispatchAction {
 
         if (personalInformationBean.getSchoolLevel() != null
                 && personalInformationBean.getSchoolLevel().isHighSchoolOrEquivalent()) {
-            personalInformationBean.setCountryWhereFinishedHighSchoolLevel(personalInformationBean
-                    .getCountryWhereFinishedPreviousCompleteDegree());
+            personalInformationBean.setCountryWhereFinishedHighSchoolLevel(
+                    personalInformationBean.getCountryWhereFinishedPreviousCompleteDegree());
         }
 
         final Set<String> messages = personalInformationBean.validateForAcademicService();

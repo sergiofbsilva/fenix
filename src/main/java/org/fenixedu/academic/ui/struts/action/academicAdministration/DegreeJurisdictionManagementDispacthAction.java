@@ -38,17 +38,18 @@ import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 import org.fenixedu.commons.StringNormalizer;
 
-import pt.ist.fenixframework.Atomic;
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.FenixFramework;
+
 @StrutsFunctionality(app = AcademicAdministrationApplication.class, path = "degree-jurisdiction",
         titleKey = "label.degreeJurisdiction.title", accessGroup = "academic(MANAGE_AUTHORIZATIONS)")
 @Mapping(path = "/degreeJurisdiction", module = "academicAdministration")
-@Forwards({ @Forward(name = "manageJurisdictions", path = "/academicAdministration/degreeJurisdictions/manageJurisdictions.jsp") })
+@Forwards({
+        @Forward(name = "manageJurisdictions", path = "/academicAdministration/degreeJurisdictions/manageJurisdictions.jsp") })
 public class DegreeJurisdictionManagementDispacthAction extends FenixDispatchAction {
 
     @EntryPoint

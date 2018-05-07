@@ -30,7 +30,8 @@ abstract public class CandidacyProcessCandidacyPeriod extends CandidacyProcessCa
         super();
     }
 
-    public boolean hasCandidacyProcesses(final Class<? extends CandidacyProcess> clazz, final ExecutionInterval executionInterval) {
+    public boolean hasCandidacyProcesses(final Class<? extends CandidacyProcess> clazz,
+            final ExecutionInterval executionInterval) {
         return hasExecutionInterval(executionInterval) && containsCandidacyProcess(clazz);
     }
 

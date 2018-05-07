@@ -351,8 +351,8 @@ public class Grouping extends Grouping_Base {
     }
 
     private boolean isShiftTypeDifferent(ShiftType shiftType) {
-        return (((shiftType == null && getShiftType() != null) || (shiftType != null && getShiftType() == null)) || getShiftType()
-                .compareTo(shiftType) != 0);
+        return (((shiftType == null && getShiftType() != null) || (shiftType != null && getShiftType() == null))
+                || getShiftType().compareTo(shiftType) != 0);
     }
 
     private Integer getMaxStudentGroupsCount() {

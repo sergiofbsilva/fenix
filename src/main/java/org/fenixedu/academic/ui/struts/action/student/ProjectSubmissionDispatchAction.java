@@ -51,10 +51,10 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
+import com.google.common.io.ByteStreams;
+
 import pt.ist.fenixWebFramework.renderers.components.state.IViewState;
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
-import com.google.common.io.ByteStreams;
 
 /**
  *
@@ -63,10 +63,9 @@ import com.google.common.io.ByteStreams;
  */
 @StrutsFunctionality(app = StudentSubmitApp.class, path = "projects", titleKey = "projects")
 @Mapping(module = "student", path = "/projectSubmission")
-@Forwards(value = {
-        @Forward(name = "viewProjectSubmissions", path = "/student/projectSubmissions/viewProjectSubmissions.jsp"),
+@Forwards(value = { @Forward(name = "viewProjectSubmissions", path = "/student/projectSubmissions/viewProjectSubmissions.jsp"),
         @Forward(name = "viewProjectsWithOnlineSubmission",
-        path = "/student/projectSubmissions/viewProjectsWithOnlineSubmission.jsp"),
+                path = "/student/projectSubmissions/viewProjectsWithOnlineSubmission.jsp"),
         @Forward(name = "submitProject", path = "/student/projectSubmissions/submitProject.jsp") })
 public class ProjectSubmissionDispatchAction extends FenixDispatchAction {
 
@@ -120,7 +119,8 @@ public class ProjectSubmissionDispatchAction extends FenixDispatchAction {
             Project project = getProject(request);
             StudentGroup studentGroup = project.getGrouping().getStudentGroupByAttends(attends);
             String rowClasses = "";
-            for (ProjectSubmission oneSubmission : getProjectSubmissionsForStudentGroupSortedByMostRecent(project, studentGroup)) {
+            for (ProjectSubmission oneSubmission : getProjectSubmissionsForStudentGroupSortedByMostRecent(project,
+                    studentGroup)) {
                 if (oneSubmission.equals(submission)) {
                     rowClasses += "selected,";
                 } else {

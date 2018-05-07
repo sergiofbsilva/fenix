@@ -41,9 +41,8 @@ public class DistrictSubdivisionForResidenceInformationFormProvider implements D
     public Object provide(Object source, Object currentValue) {
         final ResidenceInformationForm residenceInformationForm = (ResidenceInformationForm) source;
         if (residenceInformationForm.getDistrictOfResidence() != null) {
-            List<DistrictSubdivision> result =
-                    new ArrayList<DistrictSubdivision>(residenceInformationForm.getDistrictOfResidence()
-                            .getDistrictSubdivisionsSet());
+            List<DistrictSubdivision> result = new ArrayList<DistrictSubdivision>(
+                    residenceInformationForm.getDistrictOfResidence().getDistrictSubdivisionsSet());
             Collections.sort(result, new BeanComparator("name"));
             return result;
         }

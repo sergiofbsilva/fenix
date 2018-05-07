@@ -27,7 +27,8 @@ public class SecondCycleIndividualCandidacySeriesGrade extends SecondCycleIndivi
     public boolean isClean() {
         if (!(this.getAffinity() == null && this.getCandidacyGrade() == null && this.getDegreeNature() == null
                 && (this.getInterviewGrade() == null || this.getInterviewGrade().equals(""))
-                && this.getProfessionalExperience() == null && this.getSeriesCandidacyGrade() == null && this.getNotes() == null)) {
+                && this.getProfessionalExperience() == null && this.getSeriesCandidacyGrade() == null
+                && this.getNotes() == null)) {
             return false;
         } else {
             return true;

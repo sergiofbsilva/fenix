@@ -53,6 +53,7 @@ import org.fenixedu.academic.domain.caseHandling.Activity;
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
 import org.fenixedu.academic.domain.caseHandling.StartActivity;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
+import org.fenixedu.academic.domain.degreeStructure.DegreeModule;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.period.MobilityApplicationPeriod;
 import org.fenixedu.academic.domain.person.RoleType;
@@ -125,7 +126,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
         setValidatedByMobilityCoordinator(false);
         setValidatedByGri(false);
 
-        setPersonalFieldsFromStork(bean.getPersonalFieldsFromStork() != null ? bean.getPersonalFieldsFromStork() : StorkAttributesList.EMPTY);
+        setPersonalFieldsFromStork(
+                bean.getPersonalFieldsFromStork() != null ? bean.getPersonalFieldsFromStork() : StorkAttributesList.EMPTY);
     }
 
     @Override
@@ -141,9 +143,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             throw new DomainException("error.IndividualCandidacy.exists.for.same.document.id");
         }
 
-        if (!StringUtils.isEmpty(bean.getPersonBean().getEidentifier())
-                && existsIndividualCandidacyProcessForEidentifier(bean.getCandidacyProcess(), bean.getPersonBean()
-                        .getEidentifier())) {
+        if (!StringUtils.isEmpty(bean.getPersonBean().getEidentifier()) && existsIndividualCandidacyProcessForEidentifier(
+                bean.getCandidacyProcess(), bean.getPersonBean().getEidentifier())) {
             throw new DomainException("error.individualCandidacy.exists.for.same.eIdentifier");
         }
 
@@ -197,8 +198,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             return false;
         }
 
-        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES, process
-                .getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
+        return AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.MANAGE_INDIVIDUAL_CANDIDACIES,
+                process.getCandidacy().getSelectedDegree(), userView.getPerson().getUser());
     }
 
     static private boolean isInternationalRelationsOfficer(User userView) {
@@ -214,8 +215,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             return false;
         }
 
-        return ((MobilityApplicationProcess) getCandidacyProcess()).isTeacherErasmusCoordinatorForDegree(userView.getPerson()
-                .getTeacher(), getCandidacy().getSelectedDegree());
+        return ((MobilityApplicationProcess) getCandidacyProcess())
+                .isTeacherErasmusCoordinatorForDegree(userView.getPerson().getTeacher(), getCandidacy().getSelectedDegree());
     }
 
     @Override
@@ -316,7 +317,7 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
 
     public List<CurricularCourse> getSortedSelectedCurricularCourses() {
         List<CurricularCourse> curricularCourses = new ArrayList<CurricularCourse>(getCandidacy().getCurricularCoursesSet());
-        Collections.sort(curricularCourses, CurricularCourse.COMPARATOR_BY_NAME);
+        Collections.sort(curricularCourses, DegreeModule.COMPARATOR_BY_NAME);
         return curricularCourses;
     }
 
@@ -351,13 +352,10 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
     }
 
     public boolean isStudentAcceptedAtDate(final DateTime dateTime) {
-        return !isCandidacyCancelled()
-                && !isCandidacyRejected()
-                && getValidatedByMobilityCoordinator()
-                && getValidatedByGri()
-                && ((getCandidacy().getMostRecentApprovedLearningAgreement() != null && getCandidacy()
-                        .getMostRecentApprovedLearningAgreement().getCreationDate().isBefore(dateTime)) || getMobilityProgram()
-                        .getRegistrationProtocol().isOnlyAllowedDegreeEnrolment());
+        return !isCandidacyCancelled() && !isCandidacyRejected() && getValidatedByMobilityCoordinator() && getValidatedByGri()
+                && ((getCandidacy().getMostRecentApprovedLearningAgreement() != null
+                        && getCandidacy().getMostRecentApprovedLearningAgreement().getCreationDate().isBefore(dateTime))
+                        || getMobilityProgram().getRegistrationProtocol().isOnlyAllowedDegreeEnrolment());
     }
 
     public boolean isStudentAcceptedAndNotifiedAtDate(final DateTime dateTime) {
@@ -394,9 +392,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
     }
 
     public String getErasmusCandidacyStateDescription() {
-        String registeredMessage =
-                getCandidacy().getRegistration() != null ? "/"
-                        + BundleUtil.getString(Bundle.CANDIDATE, "label.erasmus.candidacy.state.registered") : "";
+        String registeredMessage = getCandidacy().getRegistration() != null ? "/"
+                + BundleUtil.getString(Bundle.CANDIDATE, "label.erasmus.candidacy.state.registered") : "";
         if (isCandidacyCancelled()) {
             return BundleUtil.getString(Bundle.CANDIDATE, "label.erasmus.candidacy.state.description.cancelled")
                     + registeredMessage;
@@ -631,9 +628,9 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             process.setValidatedByGri(bean.getValidatedByGri());
 
             if (bean.getCreateAlert()) {
-                ErasmusAlert alert =
-                        new ErasmusAlert(process, bean.getSendEmail(), new LocalDate(), new LocalizedString(I18N.getLocale(),
-                                bean.getAlertSubject()), new LocalizedString(I18N.getLocale(), bean.getAlertBody()), ErasmusAlertEntityType.GRI);
+                ErasmusAlert alert = new ErasmusAlert(process, bean.getSendEmail(), new LocalDate(),
+                        new LocalizedString(I18N.getLocale(), bean.getAlertSubject()),
+                        new LocalizedString(I18N.getLocale(), bean.getAlertBody()), ErasmusAlertEntityType.GRI);
                 alert.setFireDate(new DateTime());
             }
 
@@ -662,7 +659,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             process.setValidatedByMobilityCoordinator(bean.getValidatedByErasmusCoordinator());
 
             if (bean.getCreateAlert()) {
-                new ErasmusAlert(process, bean.getSendEmail(), new LocalDate(), new LocalizedString(I18N.getLocale(), bean.getAlertSubject()),
+                new ErasmusAlert(process, bean.getSendEmail(), new LocalDate(),
+                        new LocalizedString(I18N.getLocale(), bean.getAlertSubject()),
                         new LocalizedString(I18N.getLocale(), bean.getAlertBody()), ErasmusAlertEntityType.COORDINATOR);
             }
 
@@ -840,8 +838,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
 
     }
 
-    private static class BindLinkSubmitedIndividualCandidacyWithEidentifier extends
-            Activity<MobilityIndividualApplicationProcess> {
+    private static class BindLinkSubmitedIndividualCandidacyWithEidentifier
+            extends Activity<MobilityIndividualApplicationProcess> {
         @Override
         public void checkPreConditions(MobilityIndividualApplicationProcess process, User userView) {
             if (!StringUtils.isEmpty(process.getPersonalDetails().getEidentifier())) {
@@ -1020,9 +1018,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
             MobilityApplicationPeriod candidacyPeriod =
                     (MobilityApplicationPeriod) process.getCandidacyProcess().getCandidacyPeriod();
 
-            MobilityEmailTemplate emailTemplateFor =
-                    candidacyPeriod.getEmailTemplateFor(process.getMobilityProgram(),
-                            MobilityEmailTemplateType.CANDIDATE_ACCEPTED);
+            MobilityEmailTemplate emailTemplateFor = candidacyPeriod.getEmailTemplateFor(process.getMobilityProgram(),
+                    MobilityEmailTemplateType.CANDIDATE_ACCEPTED);
 
             emailTemplateFor.sendEmailFor(process.getCandidacyHashCode());
 
@@ -1262,7 +1259,8 @@ public class MobilityIndividualApplicationProcess extends MobilityIndividualAppl
 
     };
 
-    static private class AnswerNationalIdCardAvoidanceOnSubmissionQuestion extends Activity<MobilityIndividualApplicationProcess> {
+    static private class AnswerNationalIdCardAvoidanceOnSubmissionQuestion
+            extends Activity<MobilityIndividualApplicationProcess> {
 
         @Override
         public void checkPreConditions(MobilityIndividualApplicationProcess process, User userView) {

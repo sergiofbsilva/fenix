@@ -88,7 +88,8 @@ public class TeachersManagerDA extends ExecutionCourseBaseAction {
         final ExecutionCourse executionCourse = getExecutionCourse(request);
 
         if (person != null) {
-            if (person.getTeacher() != null && person.getTeacher().hasTeacherAuthorization(executionCourse.getAcademicInterval())) {
+            if (person.getTeacher() != null
+                    && person.getTeacher().hasTeacherAuthorization(executionCourse.getAcademicInterval())) {
                 Professorship professorship = Professorship.create(false, executionCourse, person);
                 request.setAttribute("teacherOID", professorship.getExternalId());
             } else {

@@ -40,9 +40,9 @@ public class StudentCurricularPlanPredicates {
                             || hasAuthorization(person, AcademicOperationType.STUDENT_ENROLMENTS,
                                     studentCurricularPlan.getDegree())
                             || RoleType.INTERNATIONAL_RELATION_OFFICE.isMember(person.getUser())
-                            /*
-                             * used in PhdIndividualProgramProcess enrolments management
-                             */
+                    /*
+                     * used in PhdIndividualProgramProcess enrolments management
+                     */
                             || person.isCoordinatorFor(studentCurricularPlan.getDegreeCurricularPlan(),
                                     ExecutionYear.readCurrentExecutionYear());
                 }

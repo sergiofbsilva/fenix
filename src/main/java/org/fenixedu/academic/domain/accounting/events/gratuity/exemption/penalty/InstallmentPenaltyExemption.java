@@ -55,7 +55,8 @@ public class InstallmentPenaltyExemption extends InstallmentPenaltyExemption_Bas
             final GratuityEventWithPaymentPlan gratuityEventWithPaymentPlan, final Person responsible,
             final Installment installment, final String comments, final YearMonthDay directiveCouncilDispatchDate) {
         this();
-        init(penaltyExemptionType, gratuityEventWithPaymentPlan, responsible, installment, comments, directiveCouncilDispatchDate);
+        init(penaltyExemptionType, gratuityEventWithPaymentPlan, responsible, installment, comments,
+                directiveCouncilDispatchDate);
 
     }
 
@@ -68,7 +69,8 @@ public class InstallmentPenaltyExemption extends InstallmentPenaltyExemption_Bas
         super.setInstallment(installment);
     }
 
-    private void checkRulesToCreate(final GratuityEventWithPaymentPlan gratuityEventWithPaymentPlan, final Installment installment) {
+    private void checkRulesToCreate(final GratuityEventWithPaymentPlan gratuityEventWithPaymentPlan,
+            final Installment installment) {
         if (gratuityEventWithPaymentPlan.hasPenaltyExemptionFor(installment)) {
             throw new DomainException(
                     "error.accounting.events.gratuity.exemption.penalty.InstallmentPenaltyExemption.event.already.has.penalty.exemption.for.installment");

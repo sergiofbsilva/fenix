@@ -21,8 +21,6 @@
  */
 package org.fenixedu.academic.ui.faces.bean.bolonhaManager.curricularPlans;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,6 +75,8 @@ import org.fenixedu.bennu.core.i18n.BundleUtil;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
+import pt.ist.fenixframework.FenixFramework;
+
 public class CurricularCourseManagementBackingBean extends FenixBackingBean {
 
     protected final String NO_SELECTION_STRING = "-1";
@@ -110,9 +110,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
 
     public CurricularCourseManagementBackingBean() {
         if (getCurricularCourse() != null && getExecutionYear() != null) {
-            curricularCourseSemesterBean =
-                    new CurricularCourseByExecutionSemesterBean(getCurricularCourse(),
-                            ExecutionSemester.readBySemesterAndExecutionYear(2, getExecutionYear().getYear()));
+            curricularCourseSemesterBean = new CurricularCourseByExecutionSemesterBean(getCurricularCourse(),
+                    ExecutionSemester.readBySemesterAndExecutionYear(2, getExecutionYear().getYear()));
         }
     }
 
@@ -169,8 +168,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         if (courseGroupID == null) {
             courseGroupID = getAndHoldStringParameter("courseGroupID");
             if (courseGroupID == null) {
-                courseGroupID =
-                        (getContext(getContextID()) != null) ? getContext(getContextID()).getParentCourseGroup().getExternalId() : courseGroupID;
+                courseGroupID = (getContext(getContextID()) != null) ? getContext(getContextID()).getParentCourseGroup()
+                        .getExternalId() : courseGroupID;
             }
         }
         return courseGroupID;
@@ -181,7 +180,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
     }
 
     public String getCurricularCourseID() {
-        return (curricularCourseID == null) ? (curricularCourseID = getAndHoldStringParameter("curricularCourseID")) : curricularCourseID;
+        return (curricularCourseID == null) ? (curricularCourseID =
+                getAndHoldStringParameter("curricularCourseID")) : curricularCourseID;
     }
 
     public void setCurricularCourseID(String curricularCourseID) {
@@ -189,7 +189,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
     }
 
     public String getExecutionPeriodOID() {
-        return (executionPeriodOID == null) ? (executionPeriodOID = getAndHoldStringParameter("executionPeriodOID")) : executionPeriodOID;
+        return (executionPeriodOID == null) ? (executionPeriodOID =
+                getAndHoldStringParameter("executionPeriodOID")) : executionPeriodOID;
     }
 
     public void setExecutionPeriodOID(String executionPeriodOID) {
@@ -244,8 +245,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         final List<SelectItem> result = new ArrayList<SelectItem>(years);
         result.add(new SelectItem(this.NO_SELECTION_INTEGER, BundleUtil.getString(Bundle.BOLONHA, "choose")));
         for (int i = 1; i <= years; i++) {
-            result.add(new SelectItem(Integer.valueOf(i), String.valueOf(i)
-                    + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
+            result.add(new SelectItem(Integer.valueOf(i),
+                    String.valueOf(i) + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
         }
         return result;
     }
@@ -254,10 +255,10 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         final List<SelectItem> result = new ArrayList<SelectItem>(2);
 
         result.add(new SelectItem(this.NO_SELECTION_INTEGER, BundleUtil.getString(Bundle.BOLONHA, "choose")));
-        result.add(new SelectItem(Integer.valueOf(1), String.valueOf(1)
-                + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
-        result.add(new SelectItem(Integer.valueOf(2), String.valueOf(2)
-                + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
+        result.add(new SelectItem(Integer.valueOf(1),
+                String.valueOf(1) + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
+        result.add(new SelectItem(Integer.valueOf(2),
+                String.valueOf(2) + BundleUtil.getString(Bundle.BOLONHA, "label.context.period.sign")));
         return result;
     }
 
@@ -271,8 +272,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
 
         Group curricularPlanMembersGroup = getDegreeCurricularPlan().getCurricularPlanMembersGroup();
         if (curricularPlanMembersGroup != null) {
-            curricularPlanMembersGroup.getMembers().forEach(
-                    user -> result.add(user.getPerson().getName() + " (" + user.getUsername() + ")"));
+            curricularPlanMembersGroup.getMembers()
+                    .forEach(user -> result.add(user.getPerson().getName() + " (" + user.getUsername() + ")"));
         }
 
         return result;
@@ -280,7 +281,7 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
 
     public CourseGroup getCourseGroup() {
         String cg = getCourseGroupID();
-        if(Strings.isNullOrEmpty(cg) || cg.equals("-1")) {
+        if (Strings.isNullOrEmpty(cg) || cg.equals("-1")) {
             return null;
         }
         return (CourseGroup) FenixFramework.getDomainObject(cg);
@@ -513,8 +514,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         final List<SelectItem> result = new ArrayList<SelectItem>();
         for (final ExecutionSemester notClosedExecutionPeriod : notClosedExecutionPeriods) {
             if (minimumExecutionPeriod == null || notClosedExecutionPeriod.isAfterOrEquals(minimumExecutionPeriod)) {
-                result.add(new SelectItem(notClosedExecutionPeriod.getExternalId(), notClosedExecutionPeriod.getName() + " "
-                        + notClosedExecutionPeriod.getExecutionYear().getYear()));
+                result.add(new SelectItem(notClosedExecutionPeriod.getExternalId(),
+                        notClosedExecutionPeriod.getName() + " " + notClosedExecutionPeriod.getExecutionYear().getYear()));
             }
         }
         return result;
@@ -558,10 +559,10 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         if (curricularCourseType.equals(CurricularCourseType.NORMAL_COURSE)) {
 
             checkCompetenceCourse();
-            CreateCurricularCourse.run(new CreateCurricularCourse.CreateCurricularCourseArgs(getWeight(), getPrerequisites(),
-                    getPrerequisitesEn(), getCompetenceCourseID(), getCourseGroupID(), getCurricularYearID(),
-                    getCurricularSemesterID(), getDegreeCurricularPlanID(), getBeginExecutionPeriodID(),
-                    getFinalEndExecutionPeriodID()));
+            CreateCurricularCourse.run(
+                    new CreateCurricularCourse.CreateCurricularCourseArgs(getWeight(), getPrerequisites(), getPrerequisitesEn(),
+                            getCompetenceCourseID(), getCourseGroupID(), getCurricularYearID(), getCurricularSemesterID(),
+                            getDegreeCurricularPlanID(), getBeginExecutionPeriodID(), getFinalEndExecutionPeriodID()));
 
         } else if (curricularCourseType.equals(CurricularCourseType.OPTIONAL_COURSE)) {
 
@@ -665,9 +666,9 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
     public String editContext() {
         try {
             checkCourseGroup();
-            EditContextFromCurricularCourse
-                    .run(getCurricularCourse(), getContext(getContextID()), getCourseGroup(), getCurricularYearID(),
-                            getCurricularSemesterID(), getBeginExecutionPeriodID(), getFinalEndExecutionPeriodID());
+            EditContextFromCurricularCourse.run(getCurricularCourse(), getContext(getContextID()), getCourseGroup(),
+                    getCurricularYearID(), getCurricularSemesterID(), getBeginExecutionPeriodID(),
+                    getFinalEndExecutionPeriodID());
             setContextID(""); //XXX not using null prevents getter calls to restore the value though getAndHoldRequestParameter
         } catch (IllegalDataAccessException e) {
             addErrorMessage(BundleUtil.getString(Bundle.BOLONHA, "error.notAuthorized"));
@@ -680,9 +681,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
     }
 
     protected String getFinalEndExecutionPeriodID() {
-        return (getViewState().getAttribute("endExecutionPeriodID") == null || getViewState()
-                .getAttribute("endExecutionPeriodID").equals(NO_SELECTION_STRING)) ? null : (String) getViewState().getAttribute(
-                "endExecutionPeriodID");
+        return (getViewState().getAttribute("endExecutionPeriodID") == null || getViewState().getAttribute("endExecutionPeriodID")
+                .equals(NO_SELECTION_STRING)) ? null : (String) getViewState().getAttribute("endExecutionPeriodID");
     }
 
     public void tryDeleteContext(ActionEvent event) {
@@ -763,8 +763,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
                         .getCompetenceCourseGroupUnits()) {
                     for (final CompetenceCourse competenceCourse : competenceCourseGroupUnit.getCompetenceCourses()) {
                         if (competenceCourse.getCurricularStage() != CurricularStage.DRAFT) {
-                            final String code =
-                                    !StringUtils.isEmpty(competenceCourse.getCode()) ? " [" + competenceCourse.getCode() + "]" : "";
+                            final String code = !StringUtils.isEmpty(competenceCourse.getCode()) ? " ["
+                                    + competenceCourse.getCode() + "]" : "";
                             result.add(new SelectItem(competenceCourse.getExternalId(), competenceCourse.getName() + " ("
                                     + BundleUtil.getString(Bundle.ENUMERATION, competenceCourse.getCurricularStage().getName())
                                     + ")" + code));
@@ -807,8 +807,8 @@ public class CurricularCourseManagementBackingBean extends FenixBackingBean {
         }
 
         for (ExecutionDegree executionDegree : executionDegrees) {
-            result.add(new SelectItem(executionDegree.getExecutionYear().getExternalId(), executionDegree.getExecutionYear()
-                    .getYear()));
+            result.add(new SelectItem(executionDegree.getExecutionYear().getExternalId(),
+                    executionDegree.getExecutionYear().getYear()));
         }
 
         if (getExecutionYearID() == null) {

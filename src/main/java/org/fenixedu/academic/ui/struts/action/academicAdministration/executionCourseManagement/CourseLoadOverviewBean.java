@@ -29,6 +29,7 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.fenixedu.academic.domain.CourseLoad;
 import org.fenixedu.academic.domain.CurricularCourse;
 import org.fenixedu.academic.domain.Department;
@@ -64,11 +65,11 @@ public class CourseLoadOverviewBean implements Serializable {
 
     public StyledExcelSpreadsheet getInconsistencySpreadsheet() {
         final StyledExcelSpreadsheet spreadsheet =
-                new StyledExcelSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.course.load.inconsistency.filename")
-                        + "_" + executionSemester.getExecutionYear().getYear().replace('/', '_') + "_"
+                new StyledExcelSpreadsheet(BundleUtil.getString(Bundle.ACADEMIC, "label.course.load.inconsistency.filename") + "_"
+                        + executionSemester.getExecutionYear().getYear().replace('/', '_') + "_"
                         + executionSemester.getSemester());
         HSSFCellStyle normalStyle = spreadsheet.getExcelStyle().getValueStyle();
-        normalStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        normalStyle.setAlignment(CellStyle.ALIGN_CENTER);
 
         HSSFWorkbook wb = spreadsheet.getWorkbook();
         HSSFFont font = wb.createFont();
@@ -76,14 +77,14 @@ public class CourseLoadOverviewBean implements Serializable {
         font.setFontHeightInPoints((short) 8);
         HSSFCellStyle redStyle = wb.createCellStyle();
         redStyle.setFont(font);
-        redStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        redStyle.setAlignment(CellStyle.ALIGN_CENTER);
         redStyle.setFillForegroundColor(HSSFColor.ORANGE.index);
-        redStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        redStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
         HSSFCellStyle yellowStyle = wb.createCellStyle();
         yellowStyle.setFont(font);
-        yellowStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        yellowStyle.setAlignment(CellStyle.ALIGN_CENTER);
         yellowStyle.setFillForegroundColor(HSSFColor.YELLOW.index);
-        yellowStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        yellowStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
 
         spreadsheet.newHeaderRow();
         spreadsheet.addHeader(BundleUtil.getString(Bundle.ACADEMIC, "label.department"));

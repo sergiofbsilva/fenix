@@ -377,7 +377,8 @@ public abstract class PartyContact extends PartyContact_Base {
                 personViewed);
     }
 
-    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact, String newValue) {
+    public void logEdit(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
+            String newValue) {
     }
 
     protected void logEditAux(Person person, boolean propertiesChanged, boolean valueChanged, boolean createdNewContact,
@@ -421,8 +422,8 @@ public abstract class PartyContact extends PartyContact_Base {
                         // new value differs from old, and a new temporary
                         // contact was created
                         PersonInformationLog.createLog(person, Bundle.MESSAGING,
-                                "log.personInformation.contact.generic.edit.need.valid.values", infoLabel, getPrevPartyContact()
-                                        .getPresentationValue(), newValue, personViewed);
+                                "log.personInformation.contact.generic.edit.need.valid.values", infoLabel,
+                                getPrevPartyContact().getPresentationValue(), newValue, personViewed);
                     } else if (createdNewContact) {
                         // only a new temporary contact was created
                         PersonInformationLog.createLog(person, Bundle.MESSAGING,
@@ -512,8 +513,8 @@ public abstract class PartyContact extends PartyContact_Base {
             } else {
                 // previous is different, display previous value
                 PersonInformationLog.createLog(person, Bundle.MESSAGING,
-                        "log.personInformation.contact.generic.edit.need.valid.values.accepted", infoLabel, getPrevPartyContact()
-                                .getPresentationValue(), this.getPresentationValue(), personViewed);
+                        "log.personInformation.contact.generic.edit.need.valid.values.accepted", infoLabel,
+                        getPrevPartyContact().getPresentationValue(), this.getPresentationValue(), personViewed);
             }
         }
     }
@@ -541,8 +542,8 @@ public abstract class PartyContact extends PartyContact_Base {
             } else {
                 // previous is different, display previous value
                 PersonInformationLog.createLog(person, Bundle.MESSAGING,
-                        "log.personInformation.contact.generic.edit.need.valid.values.rejected", infoLabel, getPrevPartyContact()
-                                .getPresentationValue(), this.getPresentationValue(), personViewed);
+                        "log.personInformation.contact.generic.edit.need.valid.values.rejected", infoLabel,
+                        getPrevPartyContact().getPresentationValue(), this.getPresentationValue(), personViewed);
             }
         }
     }

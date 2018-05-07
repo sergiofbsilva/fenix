@@ -52,9 +52,8 @@ public class SeparateSecondCycle extends CronTask {
                 if (studentCurricularPlan.isActive() && canSeparate(studentCurricularPlan)) {
 
                     if (studentAlreadyHasNewRegistration(studentCurricularPlan) && canRepeateSeparate(studentCurricularPlan)) {
-                        getLogger()
-                                .info("1 - Repeating separate for: "
-                                        + studentCurricularPlan.getRegistration().getStudent().getNumber());
+                        getLogger().info("1 - Repeating separate for: "
+                                + studentCurricularPlan.getRegistration().getStudent().getNumber());
 
                         try {
                             separateByStudentNumberProcedure(studentCurricularPlan.getRegistration().getStudent(),
@@ -64,8 +63,8 @@ public class SeparateSecondCycle extends CronTask {
                         }
                     } else {
 
-                        getLogger().info(
-                                "Separating Student: " + studentCurricularPlan.getRegistration().getStudent().getNumber());
+                        getLogger()
+                                .info("Separating Student: " + studentCurricularPlan.getRegistration().getStudent().getNumber());
 
                         try {
                             separateStudentProcedure(studentCurricularPlan);
@@ -77,9 +76,8 @@ public class SeparateSecondCycle extends CronTask {
                 } else if (studentCurricularPlan.hasRegistration() && studentCurricularPlan.getRegistration().isConcluded()) {
 
                     if (canRepeateSeparate(studentCurricularPlan)) {
-                        getLogger()
-                                .info("2 - Repeating separate for: "
-                                        + studentCurricularPlan.getRegistration().getStudent().getNumber());
+                        getLogger().info("2 - Repeating separate for: "
+                                + studentCurricularPlan.getRegistration().getStudent().getNumber());
                         try {
                             separateByStudentNumberProcedure(studentCurricularPlan.getRegistration().getStudent(),
                                     studentCurricularPlan.getDegreeCurricularPlan());

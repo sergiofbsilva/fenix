@@ -194,9 +194,8 @@ public class ShiftStudentEnrollmentManagerLookupDispatchAction extends FenixDisp
         final SchoolClass schoolClass = setSelectedSchoolClass(request, classIdSelected, schoolClassesToEnrol);
 
         final ExecutionSemester executionSemester = getDomainObject(request, "executionSemesterID");
-        final List<InfoShowOccupation> infoClasslessons =
-                ReadClassTimeTableByStudent.runReadClassTimeTableByStudent(registration, schoolClass, executionCourse,
-                        executionSemester);
+        final List<InfoShowOccupation> infoClasslessons = ReadClassTimeTableByStudent.runReadClassTimeTableByStudent(registration,
+                schoolClass, executionCourse, executionSemester);
 
         request.setAttribute("infoClasslessons", infoClasslessons);
         request.setAttribute("infoClasslessonsEndTime", Integer.valueOf(getEndTime(infoClasslessons)));
@@ -217,9 +216,8 @@ public class ShiftStudentEnrollmentManagerLookupDispatchAction extends FenixDisp
     private SchoolClass setSelectedSchoolClass(HttpServletRequest request, final String classIdSelected,
             final List<SchoolClass> schoolClassesToEnrol) {
 
-        final SchoolClass schoolClass =
-                (classIdSelected != null) ? searchSchoolClassFrom(schoolClassesToEnrol, classIdSelected) : schoolClassesToEnrol
-                        .iterator().next();
+        final SchoolClass schoolClass = (classIdSelected != null) ? searchSchoolClassFrom(schoolClassesToEnrol,
+                classIdSelected) : schoolClassesToEnrol.iterator().next();
         request.setAttribute("selectedSchoolClass", schoolClass);
 
         return schoolClass;

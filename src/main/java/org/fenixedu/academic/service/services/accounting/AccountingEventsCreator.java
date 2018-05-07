@@ -31,7 +31,8 @@ import pt.ist.fenixframework.Atomic;
 public class AccountingEventsCreator {
 
     @Atomic
-    static public void createInsuranceEvent(final StudentCurricularPlan studentCurricularPlan, final ExecutionYear executionYear) {
+    static public void createInsuranceEvent(final StudentCurricularPlan studentCurricularPlan,
+            final ExecutionYear executionYear) {
         check(AcademicPredicates.MANAGE_ACCOUNTING_EVENTS);
         studentCurricularPlan.getRegistration().getStudent().createInsuranceEvent(studentCurricularPlan, executionYear);
     }
@@ -46,16 +47,16 @@ public class AccountingEventsCreator {
     static public void createAdministrativeOfficeFeeAndInsuranceEvent(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionYear executionYear) {
         check(AcademicPredicates.MANAGE_ACCOUNTING_EVENTS);
-        studentCurricularPlan.getRegistration().getStudent()
-                .createAdministrativeOfficeFeeEvent(studentCurricularPlan, executionYear);
+        studentCurricularPlan.getRegistration().getStudent().createAdministrativeOfficeFeeEvent(studentCurricularPlan,
+                executionYear);
     }
 
     @Atomic
     static public void createEnrolmentOutOfPeriodEvent(final StudentCurricularPlan studentCurricularPlan,
             final ExecutionSemester executionSemester, final Integer numberOfDelayDays) {
         check(AcademicPredicates.MANAGE_ACCOUNTING_EVENTS);
-        studentCurricularPlan.getRegistration().getStudent()
-                .createEnrolmentOutOfPeriodEvent(studentCurricularPlan, executionSemester, numberOfDelayDays);
+        studentCurricularPlan.getRegistration().getStudent().createEnrolmentOutOfPeriodEvent(studentCurricularPlan,
+                executionSemester, numberOfDelayDays);
     }
 
     @Atomic

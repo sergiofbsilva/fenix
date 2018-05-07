@@ -111,8 +111,8 @@ public class OfficialPublicationBean implements Serializable {
     public class ReferenceName implements Serializable {
 
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 3L;
         private String newReference;
         private final DegreeOfficialPublication degreeOfficialPublication;
@@ -141,8 +141,8 @@ public class OfficialPublicationBean implements Serializable {
 
     public class SpecializationName implements Serializable {
         /**
-	 * 
-	 */
+        * 
+        */
         private static final long serialVersionUID = 2L;
 
         private String enName;

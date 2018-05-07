@@ -31,6 +31,7 @@ import org.fenixedu.academic.domain.accessControl.academicAdministration.Academi
 import org.fenixedu.academic.domain.accessControl.academicAdministration.AcademicOperationType;
 import org.fenixedu.academic.domain.degreeStructure.CycleType;
 import org.fenixedu.academic.domain.student.Registration;
+import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
 import org.fenixedu.academic.domain.studentCurriculum.CycleCurriculumGroup;
 import org.fenixedu.academic.domain.studentCurriculum.InternalEnrolmentWrapper;
 import org.fenixedu.academic.dto.serviceRequests.DocumentRequestCreateBean;
@@ -54,7 +55,7 @@ public class ApprovedEnrolmentsToCreateDocumentRequestProvider implements DataPr
         Set<Degree> degrees =
                 AcademicAccessRule.getDegreesAccessibleToFunction(AcademicOperationType.SERVICE_REQUESTS, Authenticate.getUser())
                         .collect(Collectors.toSet());
-        SortedSet<Enrolment> aprovedEnrolments = new TreeSet<Enrolment>(Enrolment.COMPARATOR_BY_NAME_AND_ID);
+        SortedSet<Enrolment> aprovedEnrolments = new TreeSet<Enrolment>(CurriculumModule.COMPARATOR_BY_NAME_AND_ID);
         for (Degree degree : degrees) {
             for (final Registration registration : documentRequestCreateBean.getStudent().getRegistrationsFor(degree)) {
                 aprovedEnrolments.addAll(registration.getApprovedEnrolments());

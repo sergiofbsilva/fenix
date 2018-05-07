@@ -75,8 +75,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 @StrutsFunctionality(app = AcademicAdminPaymentsApp.class, path = "manage-payments", titleKey = "label.payments.management",
         accessGroup = "academic(MANAGE_STUDENT_PAYMENTS_ADV)")
 @Mapping(path = "/paymentsManagement", module = "academicAdministration")
-@Forwards({
-        @Forward(name = "searchPersons", path = "/academicAdministration/payments/events/searchPersons.jsp"),
+@Forwards({ @Forward(name = "searchPersons", path = "/academicAdministration/payments/events/searchPersons.jsp"),
         @Forward(name = "transferDebt", path = "/academicAdministration/payments/events/transferDebt.jsp"),
         @Forward(name = "showEvents", path = "/academicAdministration/payments/events/showEvents.jsp"),
         @Forward(name = "editCancelEventJustification",
@@ -255,21 +254,20 @@ public class PaymentsManagementDA extends FenixDispatchAction {
         Party creditor = transferDebtBean.getCreditor();
         Event event = transferDebtBean.getEvent();
         Money value = event.getAmountToPay();
-        if(Bennu.getInstance().getExternalScholarshipProviderSet().stream().noneMatch(p->p == creditor)) {
+        if (Bennu.getInstance().getExternalScholarshipProviderSet().stream().noneMatch(p -> p == creditor)) {
             addActionMessage(request, "error.events.transfer.unauthorized.entity");
             request.setAttribute("transferDebtBean", transferDebtBean);
             request.setAttribute("entryDTOs", event.calculateEntries());
             return mapping.findForward("transferDebt");
         }
 
-        if(event instanceof  GratuityEvent) {
-            atomic(() -> new ExternalScholarshipGratuityExemption(Authenticate.getUser().getPerson(), (GratuityEvent) event, value,
-                    ExternalScholarshipGratuityExemptionJustificationType.THIRD_PARTY_CONTRIBUTION, transferDebtBean.getReason(),
-                    creditor, transferDebtBean.getFileName(), transferDebtBean.getFile()));
-        }else if(event instanceof PhdGratuityEvent) {
-            atomic(() -> new PhdGratuityExternalScholarshipExemption(Authenticate.getUser().getPerson(),
-                    event, creditor, value, transferDebtBean.getReason(), transferDebtBean.getFileName(), transferDebtBean
-                    .getFile()));
+        if (event instanceof GratuityEvent) {
+            atomic(() -> new ExternalScholarshipGratuityExemption(Authenticate.getUser().getPerson(), (GratuityEvent) event,
+                    value, ExternalScholarshipGratuityExemptionJustificationType.THIRD_PARTY_CONTRIBUTION,
+                    transferDebtBean.getReason(), creditor, transferDebtBean.getFileName(), transferDebtBean.getFile()));
+        } else if (event instanceof PhdGratuityEvent) {
+            atomic(() -> new PhdGratuityExternalScholarshipExemption(Authenticate.getUser().getPerson(), event, creditor, value,
+                    transferDebtBean.getReason(), transferDebtBean.getFileName(), transferDebtBean.getFile()));
         } else {
             addActionMessage(request, "error.events.transfer.unallowed.event");
         }
@@ -286,8 +284,8 @@ public class PaymentsManagementDA extends FenixDispatchAction {
         return getDomainObject(request, "eventId");
     }
 
-    public ActionForward showExternalEvents(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward showExternalEvents(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         Person person = getPerson(request);
 
@@ -296,12 +294,11 @@ public class PaymentsManagementDA extends FenixDispatchAction {
                 .map(ExternalScholarshipGratuityExemption::getExternalScholarshipGratuityContributionEvent).filter(Event::isOpen)
                 .collect(Collectors.toSet());
 
-        Set<Event> phdEvents =
-                person.getEventsByEventType(EventType.PHD_GRATUITY).stream().flatMap(e -> e.getExemptionsSet().stream())
-                        .filter(e -> e instanceof PhdGratuityExternalScholarshipExemption)
-                        .map(e -> (PhdGratuityExternalScholarshipExemption) e)
-                        .map(PhdGratuityExternalScholarshipExemption::getExternalScholarshipPhdGratuityContribuitionEvent)
-                        .filter(Event::isOpen).collect(Collectors.toSet());
+        Set<Event> phdEvents = person.getEventsByEventType(EventType.PHD_GRATUITY).stream()
+                .flatMap(e -> e.getExemptionsSet().stream()).filter(e -> e instanceof PhdGratuityExternalScholarshipExemption)
+                .map(e -> (PhdGratuityExternalScholarshipExemption) e)
+                .map(PhdGratuityExternalScholarshipExemption::getExternalScholarshipPhdGratuityContribuitionEvent)
+                .filter(Event::isOpen).collect(Collectors.toSet());
 
         request.setAttribute("person", person);
         request.setAttribute("events", events);
@@ -324,8 +321,8 @@ public class PaymentsManagementDA extends FenixDispatchAction {
 
     }
 
-    public ActionForward transferPaymentsToOtherEventAndCancel(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward transferPaymentsToOtherEventAndCancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         final TransferPaymentsToOtherEventAndCancelBean transferPaymentsBean =
                 (TransferPaymentsToOtherEventAndCancelBean) getObjectFromViewState("transferPaymentsBean");

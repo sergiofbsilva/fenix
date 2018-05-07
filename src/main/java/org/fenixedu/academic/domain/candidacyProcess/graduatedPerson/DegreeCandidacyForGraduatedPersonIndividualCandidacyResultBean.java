@@ -142,8 +142,8 @@ public class DegreeCandidacyForGraduatedPersonIndividualCandidacyResultBean impl
     public void graduatedPersonCandidacyLog() {
         ExecutionYear executionYear = ExecutionYear.readCurrentExecutionYear();
         CandidaciesLog.createLog(getDegree(), executionYear, Bundle.MESSAGING,
-                "log.degree.candidacies.introduceresultsforgraduatedperson", getCandidacyProcess().getPersonalDetails()
-                        .getPerson().getName());
+                "log.degree.candidacies.introduceresultsforgraduatedperson",
+                getCandidacyProcess().getPersonalDetails().getPerson().getName());
 
     }
 

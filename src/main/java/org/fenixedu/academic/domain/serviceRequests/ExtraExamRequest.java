@@ -62,8 +62,8 @@ public class ExtraExamRequest extends ExtraExamRequest_Base {
         }
 
         if (registrationAlreadyHasRequest(registration, enrolment, executionYear)) {
-            throw new DomainException("error.ExtraExamRequest.registration.already.has.same.request", enrolment.getName()
-                    .getContent(), executionYear.getYear());
+            throw new DomainException("error.ExtraExamRequest.registration.already.has.same.request",
+                    enrolment.getName().getContent(), executionYear.getYear());
         }
     }
 

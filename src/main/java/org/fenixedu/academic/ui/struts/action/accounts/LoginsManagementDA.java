@@ -66,9 +66,8 @@ public class LoginsManagementDA extends FenixDispatchAction {
         final IViewState viewState = RenderUtils.getViewState("personBeanID");
         PersonBean personBean = (PersonBean) viewState.getMetaObject().getObject();
 
-        SearchPerson.SearchParameters parameters =
-                new SearchParameters(personBean.getName(), null, personBean.getUsername(), personBean.getDocumentIdNumber(),
-                        null, null, null, null, null, null, null, (String) null);
+        SearchPerson.SearchParameters parameters = new SearchParameters(personBean.getName(), null, personBean.getUsername(),
+                personBean.getDocumentIdNumber(), null, null, null, null, null, null, null, (String) null);
         SearchPersonPredicate predicate = new SearchPerson.SearchPersonPredicate(parameters);
 
         CollectionPager<Person> persons = SearchPerson.runSearchPerson(parameters, predicate);
@@ -78,8 +77,8 @@ public class LoginsManagementDA extends FenixDispatchAction {
         return mapping.findForward("prepareSearchPerson");
     }
 
-    public ActionForward prepareManageLoginTimeIntervals(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward prepareManageLoginTimeIntervals(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
         Person person = getPersonFromParameter(request);
         request.setAttribute("person", person);
         return mapping.findForward("prepareManageLoginTimeIntervals");

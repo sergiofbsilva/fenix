@@ -137,8 +137,8 @@ public class CourseLoadAndResponsiblesReportFile extends CourseLoadAndResponsibl
         row.setCell(degree.getNome());
         row.setCell(degree.getSigla());
         row.setCell(curricularCourse.getName());
-        row.setCell(curricularCourse.getCompetenceCourse() != null ? GepReportFile.getCompetenceCourseCode(curricularCourse
-                .getCompetenceCourse()) : null);
+        row.setCell(curricularCourse.getCompetenceCourse() != null ? GepReportFile
+                .getCompetenceCourseCode(curricularCourse.getCompetenceCourse()) : null);
         row.setCell(executionCourse != null ? GepReportFile.getExecutionCourseCode(executionCourse) : "");
         row.setCell(executionPeriod.getExecutionYear().getName());
         row.setCell(degreeModuleScope != null ? degreeModuleScope.getCurricularYear().toString() : "");
@@ -166,13 +166,13 @@ public class CourseLoadAndResponsiblesReportFile extends CourseLoadAndResponsibl
         row.setCell(printBigDecimal(findCourseLoad(competenceCourseLoad, executionCourse, ShiftType.TRAINING_PERIOD)));
         row.setCell(printBigDecimal(findCourseLoad(competenceCourseLoad, executionCourse, ShiftType.TUTORIAL_ORIENTATION)));
         row.setCell(executionCourse != null ? GepReportFile.getExecutionCourseCode(executionCourse) : "");
-        row.setCell(curricularCourse.getCompetenceCourse() != null ? GepReportFile.getCompetenceCourseCode(curricularCourse
-                .getCompetenceCourse()) : "");
+        row.setCell(curricularCourse.getCompetenceCourse() != null ? GepReportFile
+                .getCompetenceCourseCode(curricularCourse.getCompetenceCourse()) : "");
 
-        row.setCell(executionCourse != null ? executionCourse.isDissertation() ? "DISS" : executionCourse
-                .getProjectTutorialCourse() ? "A" : "B" : "");
-        row.setCell(executionCourse != null && executionCourse.getUnitCreditValue() != null ? executionCourse
-                .getUnitCreditValue().toString() : "");
+        row.setCell(executionCourse != null ? executionCourse
+                .isDissertation() ? "DISS" : executionCourse.getProjectTutorialCourse() ? "A" : "B" : "");
+        row.setCell(executionCourse != null && executionCourse.getUnitCreditValue() != null ? executionCourse.getUnitCreditValue()
+                .toString() : "");
     }
 
     private CompetenceCourseLoad findCompetenceCourseLoad(final CurricularCourse curricularCourse,
@@ -182,7 +182,8 @@ public class CourseLoadAndResponsiblesReportFile extends CourseLoadAndResponsibl
             final CompetenceCourseInformation competenceCourseInformation =
                     competenceCourse.findCompetenceCourseInformationForExecutionPeriod(executionPeriod);
             if (competenceCourseInformation != null) {
-                for (final CompetenceCourseLoad competenceCourseLoad : competenceCourseInformation.getCompetenceCourseLoadsSet()) {
+                for (final CompetenceCourseLoad competenceCourseLoad : competenceCourseInformation
+                        .getCompetenceCourseLoadsSet()) {
                     return competenceCourseLoad;
                 }
             }
@@ -260,8 +261,8 @@ public class CourseLoadAndResponsiblesReportFile extends CourseLoadAndResponsibl
         return null;
     }
 
-    private BigDecimal findTotalCourseLoad(final CompetenceCourseLoad competenceCourseLoad,
-            final ExecutionCourse executionCourse, final ShiftType shiftType) {
+    private BigDecimal findTotalCourseLoad(final CompetenceCourseLoad competenceCourseLoad, final ExecutionCourse executionCourse,
+            final ShiftType shiftType) {
         if (competenceCourseLoad != null) {
             BigDecimal bigDecimal = BigDecimal.valueOf(0);
             // bigDecimal =
@@ -287,8 +288,8 @@ public class CourseLoadAndResponsiblesReportFile extends CourseLoadAndResponsibl
     }
 
     private BigDecimal findAutonomousCourseLoad(final CompetenceCourseLoad competenceCourseLoad) {
-        return competenceCourseLoad == null ? BigDecimal.valueOf(0) : BigDecimal.valueOf(competenceCourseLoad
-                .getAutonomousWorkHours());
+        return competenceCourseLoad == null ? BigDecimal.valueOf(0) : BigDecimal
+                .valueOf(competenceCourseLoad.getAutonomousWorkHours());
     }
 
     private BigDecimal findCourseLoad(final CompetenceCourseLoad competenceCourseLoad, final ExecutionCourse executionCourse,

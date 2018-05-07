@@ -91,9 +91,8 @@ public class SeperateExecutionCourseDispatchAction extends FenixDispatchAction {
         InfoExecutionCourse infoExecutionCourse = ReadExecutionCourseWithShiftsAndCurricularCoursesByOID.run(executionCourseId);
         request.setAttribute("infoExecutionCourse", infoExecutionCourse);
 
-        List executionDegrees =
-                ReadExecutionDegreesByExecutionPeriodId.runForAcademicAdminAdv(infoExecutionCourse.getInfoExecutionPeriod()
-                        .getExternalId());
+        List executionDegrees = ReadExecutionDegreesByExecutionPeriodId
+                .runForAcademicAdminAdv(infoExecutionCourse.getInfoExecutionPeriod().getExternalId());
         transformExecutionDegreesIntoLabelValueBean(executionDegrees);
         request.setAttribute("executionDegrees", executionDegrees);
 
@@ -192,9 +191,8 @@ public class SeperateExecutionCourseDispatchAction extends FenixDispatchAction {
                 label.append(infoExecutionDegree.getInfoDegreeCurricularPlan().getInfoDegree().getNome());
                 */
 
-                String label =
-                        infoExecutionDegree.getInfoDegreeCurricularPlan().getDegreeCurricularPlan()
-                                .getPresentationName(infoExecutionDegree.getInfoExecutionYear().getExecutionYear());
+                String label = infoExecutionDegree.getInfoDegreeCurricularPlan().getDegreeCurricularPlan()
+                        .getPresentationName(infoExecutionDegree.getInfoExecutionYear().getExecutionYear());
 
                 return new LabelValueBean(label, infoExecutionDegree.getExternalId().toString());
             }
@@ -230,8 +228,8 @@ public class SeperateExecutionCourseDispatchAction extends FenixDispatchAction {
         return mapping.findForward("showTransferPage");
     }
 
-    public ActionForward transfer(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-            throws FenixServiceException, FenixActionException {
+    public ActionForward transfer(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException, FenixActionException {
         DynaActionForm dynaActionForm = (DynaActionForm) form;
 
         String executionCourseId = RequestUtils.getAndSetStringToRequest(request, "executionCourseId");
@@ -254,9 +252,8 @@ public class SeperateExecutionCourseDispatchAction extends FenixDispatchAction {
                 throw new DomainException("error.selection.noDestinationExecutionCourse");
             }
 
-            ExecutionCourse destinationExecutionCourse =
-                    SeperateExecutionCourse.run(executionCourseId, destinationExecutionCourseId, shiftIdsToTransfer,
-                            curricularCourseIdsToTransfer);
+            ExecutionCourse destinationExecutionCourse = SeperateExecutionCourse.run(executionCourseId,
+                    destinationExecutionCourseId, shiftIdsToTransfer, curricularCourseIdsToTransfer);
 
             String destinationExecutionCourseName = destinationExecutionCourse.getNameI18N().getContent();
             if (StringUtils.isEmpty(destinationExecutionCourseName)) {
@@ -313,8 +310,8 @@ public class SeperateExecutionCourseDispatchAction extends FenixDispatchAction {
         return manageCurricularSeparation(mapping, dynaActionForm, request, response);
     }
 
-    public ActionForward separate(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-            throws FenixServiceException, FenixActionException {
+    public ActionForward separate(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException, FenixActionException {
 
         DynaActionForm dynaActionForm = (DynaActionForm) form;
 

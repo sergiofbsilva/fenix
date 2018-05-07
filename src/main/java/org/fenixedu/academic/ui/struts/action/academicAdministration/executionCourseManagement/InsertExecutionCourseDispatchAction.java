@@ -64,13 +64,12 @@ import pt.ist.fenixframework.FenixFramework;
         titleKey = "label.manager.executionCourseManagement.insert.executionCourse",
         accessGroup = "academic(MANAGE_EXECUTION_COURSES)")
 @Mapping(module = "academicAdministration", path = "/insertExecutionCourse", formBean = "insertExecutionCourseForm")
-@Forwards({
-        @Forward(name = "firstPage", path = "/academicAdministration/executionCourseManagement/welcomeScreen.jsp"),
-        @Forward(name = "insertExecutionCourse",
-                path = "/academicAdministration/executionCourseManagement/insertExecutionCourse.jsp") })
+@Forwards({ @Forward(name = "firstPage", path = "/academicAdministration/executionCourseManagement/welcomeScreen.jsp"), @Forward(
+        name = "insertExecutionCourse", path = "/academicAdministration/executionCourseManagement/insertExecutionCourse.jsp") })
 public class InsertExecutionCourseDispatchAction extends FenixDispatchAction {
 
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return prepareInsertExecutionCourse(mapping, form, request, response);
     }
 
@@ -105,10 +104,9 @@ public class InsertExecutionCourseDispatchAction extends FenixDispatchAction {
                 public Object transform(Object arg0) {
                     InfoExecutionPeriod infoExecutionPeriod = (InfoExecutionPeriod) arg0;
 
-                    LabelValueBean executionPeriod =
-                            new LabelValueBean(infoExecutionPeriod.getName() + " - "
-                                    + infoExecutionPeriod.getInfoExecutionYear().getYear(), infoExecutionPeriod.getExternalId()
-                                    .toString());
+                    LabelValueBean executionPeriod = new LabelValueBean(
+                            infoExecutionPeriod.getName() + " - " + infoExecutionPeriod.getInfoExecutionYear().getYear(),
+                            infoExecutionPeriod.getExternalId().toString());
                     return executionPeriod;
                 }
             }, executionPeriodLabels);
@@ -143,9 +141,9 @@ public class InsertExecutionCourseDispatchAction extends FenixDispatchAction {
         try {
             InsertExecutionCourseAtExecutionPeriod.run(infoExecutionCourse);
             addActionMessage("success", request, "message.manager.executionCourseManagement.insert.success",
-                    infoExecutionCourse.getNome(), infoExecutionCourse.getSigla(), infoExecutionCourse.getInfoExecutionPeriod()
-                            .getExecutionPeriod().getName(), infoExecutionCourse.getInfoExecutionPeriod().getExecutionPeriod()
-                            .getExecutionYear().getYear());
+                    infoExecutionCourse.getNome(), infoExecutionCourse.getSigla(),
+                    infoExecutionCourse.getInfoExecutionPeriod().getExecutionPeriod().getName(),
+                    infoExecutionCourse.getInfoExecutionPeriod().getExecutionPeriod().getExecutionYear().getYear());
         } catch (DomainException ex) {
             addActionMessage("error", request, ex.getMessage(), ex.getArgs());
             return prepareInsertExecutionCourse(mapping, form, request, response);

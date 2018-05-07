@@ -117,11 +117,10 @@ public class PartialRegimeInstallment extends PartialRegimeInstallment_Base {
     }
 
     private BigDecimal getEnroledEcts(GratuityEvent gratuityEvent) {
-    	return getExecutionSemestersSet().stream()
-        		.flatMap(es -> gratuityEvent.getStudentCurricularPlan().getCycleCurriculumGroups().stream()
-        						.flatMap(ccg -> ccg.getEnrolmentsBy(es).stream()))
-        		.map(e -> e.getEctsCreditsForCurriculum())
-        		.reduce(BigDecimal.ZERO, BigDecimal::add);
+        return getExecutionSemestersSet().stream()
+                .flatMap(es -> gratuityEvent.getStudentCurricularPlan().getCycleCurriculumGroups().stream()
+                        .flatMap(ccg -> ccg.getEnrolmentsBy(es).stream()))
+                .map(e -> e.getEctsCreditsForCurriculum()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Override
@@ -172,7 +171,7 @@ public class PartialRegimeInstallment extends PartialRegimeInstallment_Base {
 
     @Override
     public void edit(final InstallmentBean bean) {
-    	final Collection<ExecutionSemester> executionSemesters = bean.getExecutionSemesters();
+        final Collection<ExecutionSemester> executionSemesters = bean.getExecutionSemesters();
         final BigDecimal ectsForAmount = bean.getEctsForAmount();
 
         checkParameters(ectsForAmount, executionSemesters);

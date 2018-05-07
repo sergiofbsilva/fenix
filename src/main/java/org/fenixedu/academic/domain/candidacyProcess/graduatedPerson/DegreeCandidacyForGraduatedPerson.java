@@ -191,8 +191,8 @@ public class DegreeCandidacyForGraduatedPerson extends DegreeCandidacyForGraduat
 
         Formatter formatter = new Formatter(result);
 
-        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"), getCandidacyProcess()
-                .getProcessCode());
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.CANDIDATE, "label.process.id"),
+                getCandidacyProcess().getProcessCode());
         PrecedentDegreeInformation precedentDegreeInformation = getCandidacyProcess().getPrecedentDegreeInformation();
         formatter.format("%s: %s\n",
                 BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.previous.degree"),
@@ -208,8 +208,7 @@ public class DegreeCandidacyForGraduatedPerson extends DegreeCandidacyForGraduat
                 getAffinity() != null ? getAffinity() : BigDecimal.ZERO);
         formatter.format("%s: %d\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.degreeNature"),
                 getDegreeNature() != null ? getDegreeNature() : 0);
-        formatter.format("%s: %f\n",
-                BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.candidacyGrade"),
+        formatter.format("%s: %f\n", BundleUtil.getString(Bundle.ACADEMIC, "label.SecondCycleIndividualCandidacy.candidacyGrade"),
                 getCandidacyGrade() != null ? getCandidacyGrade() : BigDecimal.ZERO);
         formatter.close();
     }

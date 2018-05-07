@@ -29,6 +29,7 @@ import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.degree.DegreeType;
 import org.fenixedu.academic.domain.student.Registration;
 import org.fenixedu.academic.dto.InfoStudentCurricularPlan;
+
 import pt.ist.fenixframework.Atomic;
 
 /**

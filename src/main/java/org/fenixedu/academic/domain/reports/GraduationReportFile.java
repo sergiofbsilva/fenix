@@ -71,9 +71,8 @@ public class GraduationReportFile extends GraduationReportFile_Base {
         spreadsheet.setHeader("sexo");
         spreadsheet.setHeader("data nascimento");
 
-        final Set<ExecutionYear> toInspectSet =
-                getExecutionYear() == null ? getRootDomainObject().getExecutionYearsSet() : Collections
-                        .singleton(getExecutionYear());
+        final Set<ExecutionYear> toInspectSet = getExecutionYear() == null ? getRootDomainObject()
+                .getExecutionYearsSet() : Collections.singleton(getExecutionYear());
 
         for (final ExecutionYear toInspect : toInspectSet) {
             for (final ConclusionProcess conclusionProcess : toInspect.getConclusionProcessesConcludedSet()) {
@@ -129,6 +128,7 @@ public class GraduationReportFile extends GraduationReportFile_Base {
         row.setCell(person.getDefaultMobilePhoneNumber());
         row.setCell(person.getInstitutionalOrDefaultEmailAddressValue());
         row.setCell(person.getGender().toLocalizedString());
-        row.setCell(person.getDateOfBirthYearMonthDay() != null ? person.getDateOfBirthYearMonthDay().toString("yyyy-MM-dd") : StringUtils.EMPTY);
+        row.setCell(person.getDateOfBirthYearMonthDay() != null ? person.getDateOfBirthYearMonthDay()
+                .toString("yyyy-MM-dd") : StringUtils.EMPTY);
     }
 }

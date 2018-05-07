@@ -23,6 +23,7 @@ import org.fenixedu.academic.domain.CurricularCourse;
 import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 
@@ -63,11 +64,11 @@ public class TransferEnrollments {
         }
     }
 
-    private static void fixEnrolmentCurricularCourse(final StudentCurricularPlan studentCurricularPlan, final Enrolment enrollment) {
+    private static void fixEnrolmentCurricularCourse(final StudentCurricularPlan studentCurricularPlan,
+            final Enrolment enrollment) {
         if (enrollment.getCurricularCourse().getDegreeCurricularPlan() != studentCurricularPlan.getDegreeCurricularPlan()) {
-            CurricularCourse curricularCourse =
-                    studentCurricularPlan.getDegreeCurricularPlan().getCurricularCourseByCode(
-                            enrollment.getCurricularCourse().getCode());
+            CurricularCourse curricularCourse = studentCurricularPlan.getDegreeCurricularPlan()
+                    .getCurricularCourseByCode(enrollment.getCurricularCourse().getCode());
             if (curricularCourse != null) {
                 enrollment.setCurricularCourse(curricularCourse);
             }

@@ -83,7 +83,8 @@ public class AcademicEventExemption extends AcademicEventExemption_Base {
 
     private void checkRulesToDelete() {
         if (getEvent().hasAnyPayments()) {
-            throw new DomainException("error.accounting.events.candidacy.AcademicEventExemption.cannot.delete.event.has.payments");
+            throw new DomainException(
+                    "error.accounting.events.candidacy.AcademicEventExemption.cannot.delete.event.has.payments");
         }
     }
 

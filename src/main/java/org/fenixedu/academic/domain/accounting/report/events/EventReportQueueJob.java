@@ -125,9 +125,9 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
             throw new DomainException("error.EventReportQueueJob.permission.denied");
         }
 
-        final Set<AdministrativeOffice> offices =
-                AcademicAccessRule.getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS,
-                        loggedPerson.getUser()).collect(Collectors.toSet());
+        final Set<AdministrativeOffice> offices = AcademicAccessRule
+                .getOfficesAccessibleToFunction(AcademicOperationType.MANAGE_EVENT_REPORTS, loggedPerson.getUser())
+                .collect(Collectors.toSet());
 
         if (!offices.contains(bean.getAdministrativeOffice())) {
             throw new DomainException("error.EventReportQueueJob.permission.denied");
@@ -309,7 +309,8 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
                     for (InstallmentWrapper installment : list) {
                         addCell(installment.getExpirationDateLabel(), installment.getExpirationDate());
                         addCell(installment.getAmountToPayLabel(), installment.getAmountToPay());
-                        addCell(installment.getRemainingAmountLabel(), installment.getRemainingAmount(getDateToConsiderInformation()));
+                        addCell(installment.getRemainingAmountLabel(),
+                                installment.getRemainingAmount(getDateToConsiderInformation()));
                     }
                 }
             }
@@ -359,8 +360,7 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
 
             for (AccountingTransaction adjustment : transaction.getAdjustmentTransactionsSet()) {
                 if (adjustment.getWhenRegistered() != null) {
-                    if (adjustment.getWhenRegistered()
-                            .isBefore(getEndDate().toDateTimeAtStartOfDay().plusDays(1).minusSeconds(1))
+                    if (adjustment.getWhenRegistered().isBefore(getEndDate().toDateTimeAtStartOfDay().plusDays(1).minusSeconds(1))
                             && adjustment.getWhenRegistered().isAfter(getBeginDate().toDateTimeAtStartOfDay())) {
                         return true;
                     }
@@ -492,11 +492,11 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
     }
 
     private String uVatNumberFor(final Event event) {
-    	final Person person = event.getPerson();
-    	return VatNumberResolver.RESOLVER.uVATNumberFor(person);
-	}
+        final Person person = event.getPerson();
+        return VatNumberResolver.RESOLVER.uVATNumberFor(person);
+    }
 
-	private static class EventBean {
+    private static class EventBean {
         public String externalId;
         public String studentNumber;
         public String uVatNumber;
@@ -607,8 +607,8 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
                         .append(FIELD_SEPARATOR);
                 errorLine.append(event.getPerson().getName()).append(FIELD_SEPARATOR).append(event.getWhenOccured())
                         .append(FIELD_SEPARATOR);
-                errorLine.append(event.getDescription().toString()).append(FIELD_SEPARATOR)
-                        .append(event.getOriginalAmountToPay()).append(FIELD_SEPARATOR);
+                errorLine.append(event.getDescription().toString()).append(FIELD_SEPARATOR).append(event.getOriginalAmountToPay())
+                        .append(FIELD_SEPARATOR);
             } else {
                 errorLine.append(FIELD_SEPARATOR).append(FIELD_SEPARATOR).append(FIELD_SEPARATOR).append(FIELD_SEPARATOR)
                         .append(FIELD_SEPARATOR);
@@ -628,7 +628,7 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
         e.printStackTrace(printWriter);
         String[] exceptionLines = result.toString().split(LINE_BREAK);
         exceptionLine.append(exceptionLines[0]).append(" - ")
-        	.append(exceptionLines.length > 1 ? exceptionLines[1].replace(FIELD_SEPARATOR, "") : "");
+                .append(exceptionLines.length > 1 ? exceptionLines[1].replace(FIELD_SEPARATOR, "") : "");
         return exceptionLine;
     }
 
@@ -753,14 +753,14 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
                 bean.eventExternalId = valueOrNull(event.getExternalId());
                 bean.whenRegistered = valueOrNull(transaction.getWhenRegistered());
                 bean.whenProcessed = valueOrNull(transaction.getWhenProcessed());
-                bean.debtPartyName =
-                        internalEntry != null ? valueOrNull(internalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
-                bean.debtSocialSecurityNumber =
-                        internalEntry != null ? valueOrNull(internalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
-                bean.credPartyName =
-                        externalEntry != null ? valueOrNull(externalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
-                bean.credSocialSecurityNumber =
-                        externalEntry != null ? valueOrNull(externalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
+                bean.debtPartyName = internalEntry != null ? valueOrNull(
+                        internalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
+                bean.debtSocialSecurityNumber = internalEntry != null ? valueOrNull(
+                        internalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
+                bean.credPartyName = externalEntry != null ? valueOrNull(
+                        externalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
+                bean.credSocialSecurityNumber = externalEntry != null ? valueOrNull(
+                        externalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
                 bean.originalAmount = valueOrNull(transaction.getOriginalAmount().toPlainString());
                 bean.amountWithAdjustment = valueOrNull(transaction.getAmountWithAdjustment().toPlainString());
                 bean.paymentMode = valueOrNull(transaction.getPaymentMode().getLocalizedName());
@@ -781,14 +781,14 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
                 bean.eventExternalId = event.getExternalId();
                 bean.whenRegistered = valueOrNull(transaction.getWhenRegistered());
                 bean.whenProcessed = valueOrNull(transaction.getWhenProcessed());
-                bean.debtPartyName =
-                        internalEntry != null ? valueOrNull(internalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
-                bean.debtSocialSecurityNumber =
-                        internalEntry != null ? valueOrNull(internalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
-                bean.credPartyName =
-                        externalEntry != null ? valueOrNull(externalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
-                bean.credSocialSecurityNumber =
-                        externalEntry != null ? valueOrNull(externalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
+                bean.debtPartyName = internalEntry != null ? valueOrNull(
+                        internalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
+                bean.debtSocialSecurityNumber = internalEntry != null ? valueOrNull(
+                        internalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
+                bean.credPartyName = externalEntry != null ? valueOrNull(
+                        externalEntry.getAccount().getParty().getPartyName().getContent()) : "-";
+                bean.credSocialSecurityNumber = externalEntry != null ? valueOrNull(
+                        externalEntry.getAccount().getParty().getSocialSecurityNumber()) : "-";
                 bean.originalAmount = valueOrNull(transaction.getOriginalAmount().toPlainString());
                 bean.amountWithAdjustment = valueOrNull(transaction.getAmountWithAdjustment().toPlainString());
                 bean.paymentMode = valueOrNull(transaction.getPaymentMode().getLocalizedName());
@@ -843,7 +843,8 @@ public class EventReportQueueJob extends EventReportQueueJob_Base {
             return getExportAdministrativeOfficeFeeAndInsuranceEvents() ? new AdminFeeAndInsuranceEventWrapper(
                     (AdministrativeOfficeFeeAndInsuranceEvent) event) : null;
         } else if (event.isIndividualCandidacyEvent()) {
-            return getExportIndividualCandidacyEvents() ? new IndividualCandidacyEventWrapper((IndividualCandidacyEvent) event) : null;
+            return getExportIndividualCandidacyEvents() ? new IndividualCandidacyEventWrapper(
+                    (IndividualCandidacyEvent) event) : null;
         } else if (event.isPhdEvent()) {
             return getExportPhdEvents() ? new PhdEventWrapper((PhdEvent) event) : null;
         } else if (event.isResidenceEvent()) {

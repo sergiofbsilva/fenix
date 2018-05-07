@@ -38,8 +38,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class PhdStudyPlan extends PhdStudyPlan_Base {
 
     static {
-        getRelationPhdStudyPlanPhdIndividualProgramProcess().addListener(
-                new RelationAdapter<PhdStudyPlan, PhdIndividualProgramProcess>() {
+        getRelationPhdStudyPlanPhdIndividualProgramProcess()
+                .addListener(new RelationAdapter<PhdStudyPlan, PhdIndividualProgramProcess>() {
                     @Override
                     public void beforeAdd(PhdStudyPlan studyPlan, PhdIndividualProgramProcess process) {
 

@@ -31,9 +31,9 @@ import org.fenixedu.academic.domain.ShiftType;
 import org.fenixedu.academic.util.DiaSemana;
 import org.joda.time.YearMonthDay;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixframework.FenixFramework;
 
 public class InfoLesson extends InfoShowOccupation implements Comparable<InfoLesson> {
 
@@ -161,16 +161,16 @@ public class InfoLesson extends InfoShowOccupation implements Comparable<InfoLes
         boolean resultado = false;
         if (obj instanceof InfoLesson) {
             InfoLesson infoAula = (InfoLesson) obj;
-            resultado =
-                    (getDiaSemana().equals(infoAula.getDiaSemana()))
-                            && (getInicio().get(Calendar.HOUR_OF_DAY) == infoAula.getInicio().get(Calendar.HOUR_OF_DAY))
-                            && (getInicio().get(Calendar.MINUTE) == infoAula.getInicio().get(Calendar.MINUTE))
-                            && (getFim().get(Calendar.HOUR_OF_DAY) == infoAula.getFim().get(Calendar.HOUR_OF_DAY))
-                            && (getFim().get(Calendar.MINUTE) == infoAula.getFim().get(Calendar.MINUTE))
-                            && ((getInfoSala() == null && infoAula.getInfoSala() == null) || (getInfoSala() != null && getInfoSala()
-                                    .equals(infoAula.getInfoSala())))
-                            && ((getInfoRoomOccupation() == null && infoAula.getInfoRoomOccupation() == null) || (getInfoRoomOccupation() != null && getInfoRoomOccupation()
-                                    .equals(infoAula.getInfoRoomOccupation())));
+            resultado = (getDiaSemana().equals(infoAula.getDiaSemana()))
+                    && (getInicio().get(Calendar.HOUR_OF_DAY) == infoAula.getInicio().get(Calendar.HOUR_OF_DAY))
+                    && (getInicio().get(Calendar.MINUTE) == infoAula.getInicio().get(Calendar.MINUTE))
+                    && (getFim().get(Calendar.HOUR_OF_DAY) == infoAula.getFim().get(Calendar.HOUR_OF_DAY))
+                    && (getFim().get(Calendar.MINUTE) == infoAula.getFim().get(Calendar.MINUTE))
+                    && ((getInfoSala() == null && infoAula.getInfoSala() == null)
+                            || (getInfoSala() != null && getInfoSala().equals(infoAula.getInfoSala())))
+                    && ((getInfoRoomOccupation() == null && infoAula.getInfoRoomOccupation() == null)
+                            || (getInfoRoomOccupation() != null
+                                    && getInfoRoomOccupation().equals(infoAula.getInfoRoomOccupation())));
         }
         return resultado;
     }

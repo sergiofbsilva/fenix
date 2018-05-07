@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.fenixedu.academic.domain.Enrolment;
+import org.fenixedu.academic.domain.studentCurriculum.CurriculumModule;
 import org.fenixedu.academic.dto.student.RegistrationSelectExecutionYearBean;
 
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyConverter;
@@ -34,10 +35,9 @@ public class EnrolmentsForRegistrationAcademicServiceRequestsProvider implements
     @Override
     public Object provide(Object source, Object currentValue) {
         final RegistrationSelectExecutionYearBean bean = ((RegistrationSelectExecutionYearBean) source);
-        final List<Enrolment> enrolments =
-                new ArrayList<Enrolment>(bean.getRegistration().getLastStudentCurricularPlan()
-                        .getStudentEnrollmentsWithEnrolledState());
-        Collections.sort(enrolments, Enrolment.COMPARATOR_BY_NAME_AND_ID);
+        final List<Enrolment> enrolments = new ArrayList<Enrolment>(
+                bean.getRegistration().getLastStudentCurricularPlan().getStudentEnrollmentsWithEnrolledState());
+        Collections.sort(enrolments, CurriculumModule.COMPARATOR_BY_NAME_AND_ID);
         return enrolments;
     }
 

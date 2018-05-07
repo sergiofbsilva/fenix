@@ -100,11 +100,10 @@ public class InfoSiteStudentInformation extends DataTranferObject {
     public boolean equals(Object arg0) {
         boolean result = false;
         if (arg0 instanceof InfoSiteStudentInformation) {
-            result =
-                    (getName().equals(((InfoSiteStudentInformation) arg0).getName()))
-                            && (getNumber().equals(((InfoSiteStudentInformation) arg0).getNumber()))
-                            && (getEmail().equals(((InfoSiteStudentInformation) arg0).getEmail()))
-                            && (getUsername().equals(((InfoSiteStudentInformation) arg0).getUsername()));
+            result = (getName().equals(((InfoSiteStudentInformation) arg0).getName()))
+                    && (getNumber().equals(((InfoSiteStudentInformation) arg0).getNumber()))
+                    && (getEmail().equals(((InfoSiteStudentInformation) arg0).getEmail()))
+                    && (getUsername().equals(((InfoSiteStudentInformation) arg0).getUsername()));
         }
         return result;
     }

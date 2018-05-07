@@ -68,13 +68,12 @@ public class ExternalScholarshipPhdGratuityContribuitionEvent extends ExternalSc
 
     @Override
     public LabelFormatter getDescriptionForEntryType(EntryType entryType) {
-        final ExecutionYear executionYear = ((PhdGratuityEvent) getPhdGratuityExternalScholarshipExemption().getEvent()).getPhdIndividualProgramProcess().getExecutionYear();
-        return new LabelFormatter()
-                .appendLabel(entryType.name(), Bundle.ENUMERATION)
-                .appendLabel(" (")
-                .appendLabel(
-                        ((PhdGratuityEvent) getPhdGratuityExternalScholarshipExemption().getEvent()).getPhdProgram().getName(executionYear)
-                                .getContent()).appendLabel(")");
+        final ExecutionYear executionYear = ((PhdGratuityEvent) getPhdGratuityExternalScholarshipExemption().getEvent())
+                .getPhdIndividualProgramProcess().getExecutionYear();
+        return new LabelFormatter().appendLabel(entryType.name(), Bundle.ENUMERATION).appendLabel(" (")
+                .appendLabel(((PhdGratuityEvent) getPhdGratuityExternalScholarshipExemption().getEvent()).getPhdProgram()
+                        .getName(executionYear).getContent())
+                .appendLabel(")");
     }
 
     @Override

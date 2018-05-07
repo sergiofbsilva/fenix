@@ -118,10 +118,8 @@ public class RegisteredDegreeCandidaciesWithApplyForResidence {
     }
 
     private String getPersonalEmailAddress(final Person person) {
-        return person.getEmailAddressStream()
-                .filter(e -> e.isPersonalType() && e.hasValue())
-                .map(e -> e.getValue())
-                .findAny().orElse("");
+        return person.getEmailAddressStream().filter(e -> e.isPersonalType() && e.hasValue()).map(e -> e.getValue()).findAny()
+                .orElse("");
     }
 
     private String getPhone(final Person person) {

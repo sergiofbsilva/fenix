@@ -32,8 +32,8 @@ import org.fenixedu.academic.domain.accessControl.UnitGroup;
 import org.fenixedu.academic.domain.administrativeOffice.AdministrativeOffice;
 import org.fenixedu.academic.domain.degreeStructure.Context;
 import org.fenixedu.academic.domain.exceptions.DomainException;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.groups.Group;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.YearMonthDay;
 
@@ -50,8 +50,8 @@ public class ScientificAreaUnit extends ScientificAreaUnit_Base {
             Boolean canBeResponsibleOfSpaces, Space campus) {
 
         ScientificAreaUnit scientificAreaUnit = new ScientificAreaUnit();
-        scientificAreaUnit.init(name, unitNameCard, costCenterCode, acronym, beginDate, endDate, webAddress, classification,
-                null, canBeResponsibleOfSpaces, campus);
+        scientificAreaUnit.init(name, unitNameCard, costCenterCode, acronym, beginDate, endDate, webAddress, classification, null,
+                canBeResponsibleOfSpaces, campus);
         scientificAreaUnit.addParentUnit(parentUnit, accountabilityType);
 
         checkIfAlreadyExistsOneScientificAreaUnitWithSameAcronymAndName(scientificAreaUnit);
@@ -109,7 +109,7 @@ public class ScientificAreaUnit extends ScientificAreaUnit_Base {
 
     public List<CompetenceCourseGroupUnit> getCompetenceCourseGroupUnits() {
         final SortedSet<CompetenceCourseGroupUnit> result =
-                new TreeSet<CompetenceCourseGroupUnit>(CompetenceCourseGroupUnit.COMPARATOR_BY_NAME_AND_ID);
+                new TreeSet<CompetenceCourseGroupUnit>(Party.COMPARATOR_BY_NAME_AND_ID);
         for (Unit unit : getSubUnits()) {
             if (unit.isCompetenceCourseGroupUnit()) {
                 result.add((CompetenceCourseGroupUnit) unit);
@@ -133,7 +133,8 @@ public class ScientificAreaUnit extends ScientificAreaUnit_Base {
         for (Context context : contexts) {
             if (context.getChildDegreeModule().isLeaf()) {
                 CurricularCourse curricularCourse = (CurricularCourse) context.getChildDegreeModule();
-                if (!curricularCourse.isOptional() && curricularCourse.getCompetenceCourse().getScientificAreaUnit().equals(this)) {
+                if (!curricularCourse.isOptional()
+                        && curricularCourse.getCompetenceCourse().getScientificAreaUnit().equals(this)) {
                     result += curricularCourse.getCompetenceCourse().getEctsCredits();
                 }
             }
@@ -144,9 +145,8 @@ public class ScientificAreaUnit extends ScientificAreaUnit_Base {
     private static void checkIfAlreadyExistsOneScientificAreaUnitWithSameAcronymAndName(ScientificAreaUnit scientificAreaUnit) {
         for (Unit parentUnit : scientificAreaUnit.getParentUnits()) {
             for (Unit unit : parentUnit.getAllSubUnits()) {
-                if (!unit.equals(scientificAreaUnit)
-                        && (scientificAreaUnit.getName().equalsIgnoreCase(unit.getName()) || scientificAreaUnit.getAcronym()
-                                .equalsIgnoreCase(unit.getAcronym()))) {
+                if (!unit.equals(scientificAreaUnit) && (scientificAreaUnit.getName().equalsIgnoreCase(unit.getName())
+                        || scientificAreaUnit.getAcronym().equalsIgnoreCase(unit.getAcronym()))) {
                     throw new DomainException("error.unit.already.exists.unit.with.same.name.or.acronym");
                 }
             }

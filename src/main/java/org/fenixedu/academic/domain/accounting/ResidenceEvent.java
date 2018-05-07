@@ -132,11 +132,8 @@ public class ResidenceEvent extends ResidenceEvent_Base {
     @Override
     protected List<AccountingEventPaymentCode> updatePaymentCodes() {
         final EntryDTO entryDTO = calculateEntries(new DateTime()).iterator().next();
-        getNonProcessedPaymentCodes()
-                .iterator()
-                .next()
-                .update(new YearMonthDay(), getPaymentLimitDate().toYearMonthDay(), entryDTO.getAmountToPay(),
-                        entryDTO.getAmountToPay());
+        getNonProcessedPaymentCodes().iterator().next().update(new YearMonthDay(), getPaymentLimitDate().toYearMonthDay(),
+                entryDTO.getAmountToPay(), entryDTO.getAmountToPay());
 
         return getNonProcessedPaymentCodes();
     }

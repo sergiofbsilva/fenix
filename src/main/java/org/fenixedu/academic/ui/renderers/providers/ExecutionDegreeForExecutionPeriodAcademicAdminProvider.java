@@ -41,12 +41,11 @@ public class ExecutionDegreeForExecutionPeriodAcademicAdminProvider implements D
         if (executionPeriod != null) {
             final ExecutionYear executionYear = executionPeriod.getExecutionYear();
 
-            return executionYear
-                    .getExecutionDegreesSet()
-                    .stream()
+            return executionYear.getExecutionDegreesSet().stream()
                     .filter(ed -> AcademicPredicates.MANAGE_EXECUTION_COURSES.evaluate(ed.getDegree()))
                     .sorted(Comparator.comparing(ExecutionDegree::getDegreeType).thenComparing(ExecutionDegree::getDegreeName)
-                            .thenComparing(ExecutionDegree::getExternalId)).collect(Collectors.toList());
+                            .thenComparing(ExecutionDegree::getExternalId))
+                    .collect(Collectors.toList());
         } else {
             return Collections.emptySet();
         }

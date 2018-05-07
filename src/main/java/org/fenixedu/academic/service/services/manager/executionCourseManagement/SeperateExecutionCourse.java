@@ -116,13 +116,13 @@ public class SeperateExecutionCourse {
     private static void handleEvaluations(ExecutionCourse originExecutionCourse, ExecutionCourse destinationExecutionCourse,
             List<CurricularCourse> curricularCourseToTransfer) {
         if (!originExecutionCourse.getAssociatedEvaluationsSet().isEmpty()) {
-            for(Evaluation evaluation : originExecutionCourse.getAssociatedEvaluationsSet()) {
-                if(evaluation instanceof WrittenEvaluation) {
+            for (Evaluation evaluation : originExecutionCourse.getAssociatedEvaluationsSet()) {
+                if (evaluation instanceof WrittenEvaluation) {
                     WrittenEvaluation writtenEvaluation = (WrittenEvaluation) evaluation;
                     boolean isToRemove = true;
-                    for(Context context : writtenEvaluation.getAssociatedContextsSet()) {
-                        if(curricularCourseToTransfer.contains(context.getChildDegreeModule())) {
-                            destinationExecutionCourse.getAssociatedEvaluationsSet().add(evaluation);                            
+                    for (Context context : writtenEvaluation.getAssociatedContextsSet()) {
+                        if (curricularCourseToTransfer.contains(context.getChildDegreeModule())) {
+                            destinationExecutionCourse.getAssociatedEvaluationsSet().add(evaluation);
                         }
                         if (originExecutionCourse.getAssociatedCurricularCoursesSet().contains(context.getChildDegreeModule())) {
                             isToRemove = false;
@@ -145,9 +145,8 @@ public class SeperateExecutionCourse {
                 CourseLoad courseLoad = iter.next();
                 CourseLoad newCourseLoad = destinationExecutionCourse.getCourseLoadByShiftType(courseLoad.getType());
                 if (newCourseLoad == null) {
-                    newCourseLoad =
-                            new CourseLoad(destinationExecutionCourse, courseLoad.getType(), courseLoad.getUnitQuantity(),
-                                    courseLoad.getTotalQuantity());
+                    newCourseLoad = new CourseLoad(destinationExecutionCourse, courseLoad.getType(), courseLoad.getUnitQuantity(),
+                            courseLoad.getTotalQuantity());
                 }
                 iter.remove();
                 shift.removeCourseLoads(courseLoad);
@@ -179,9 +178,8 @@ public class SeperateExecutionCourse {
     }
 
     private static ExecutionCourse createNewExecutionCourse(ExecutionCourse originExecutionCourse) {
-        final String sigla =
-                getUniqueExecutionCourseCode(originExecutionCourse.getNome(), originExecutionCourse.getExecutionPeriod(),
-                        originExecutionCourse.getSigla());
+        final String sigla = getUniqueExecutionCourseCode(originExecutionCourse.getNome(),
+                originExecutionCourse.getExecutionPeriod(), originExecutionCourse.getSigla());
 
         final ExecutionCourse destinationExecutionCourse =
                 new ExecutionCourse(originExecutionCourse.getNome(), sigla, originExecutionCourse.getExecutionPeriod(), null);

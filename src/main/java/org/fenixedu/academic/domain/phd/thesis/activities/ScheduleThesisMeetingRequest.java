@@ -48,15 +48,15 @@ public class ScheduleThesisMeetingRequest extends PhdThesisActivity {
         if (bean.isToNotify()) {
 
             // Alert president jury element
-            AlertService.alertParticipants(process.getIndividualProgramProcess(), AlertMessage
-                    .create("message.phd.request.schedule.meeting.president.notification.subject"), AlertMessage
-                    .create("message.phd.request.schedule.meeting.president.notification.body"), process
-                    .getPresidentJuryElement().getParticipant());
+            AlertService.alertParticipants(process.getIndividualProgramProcess(),
+                    AlertMessage.create("message.phd.request.schedule.meeting.president.notification.subject"),
+                    AlertMessage.create("message.phd.request.schedule.meeting.president.notification.body"),
+                    process.getPresidentJuryElement().getParticipant());
 
-            AlertService.alertResponsibleCoordinators(process.getIndividualProgramProcess(), AlertMessage
-                    .create("message.phd.request.schedule.meeting.coordinator.notification.subject"), AlertMessage.create(
-                    "message.phd.request.schedule.meeting.coordinator.notification.body", process.getPresidentJuryElement()
-                            .getNameWithTitle()));
+            AlertService.alertResponsibleCoordinators(process.getIndividualProgramProcess(),
+                    AlertMessage.create("message.phd.request.schedule.meeting.coordinator.notification.subject"),
+                    AlertMessage.create("message.phd.request.schedule.meeting.coordinator.notification.body",
+                            process.getPresidentJuryElement().getNameWithTitle()));
 
         }
 

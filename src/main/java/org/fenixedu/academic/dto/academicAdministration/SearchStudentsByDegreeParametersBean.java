@@ -116,18 +116,18 @@ public class SearchStudentsByDegreeParametersBean extends DegreeByExecutionYearB
     }
 
     public boolean hasAnyProgramConclusion() {
-    	return this.programConclusions != null && !this.programConclusions.isEmpty();
+        return this.programConclusions != null && !this.programConclusions.isEmpty();
     }
 
     public List<ProgramConclusion> getProgramConclusions() {
-		return programConclusions;
-	}
+        return programConclusions;
+    }
 
-	public void setProgramConclusions(List<ProgramConclusion> programConclusions) {
-		this.programConclusions = programConclusions;
-	}
+    public void setProgramConclusions(List<ProgramConclusion> programConclusions) {
+        this.programConclusions = programConclusions;
+    }
 
-	public boolean getActiveEnrolments() {
+    public boolean getActiveEnrolments() {
         return activeEnrolments;
     }
 

@@ -63,16 +63,16 @@ public class ProgramConclusionService {
 
     @Atomic
     public ProgramConclusion createProgramConclusion(LocalizedString name, LocalizedString description,
-            LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable,
-            boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
+            LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider,
+            boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
         return new ProgramConclusion(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider,
                 isSkipValidation, targetState, eventTypes);
     }
 
     @Atomic
     public void editProgramConclusion(ProgramConclusion programConclusion, LocalizedString name, LocalizedString description,
-            LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable,
-            boolean isAlumniProvider, boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
+            LocalizedString graduationTitle, LocalizedString graduationLevel, boolean isAverageEditable, boolean isAlumniProvider,
+            boolean isSkipValidation, RegistrationStateType targetState, EventTypes eventTypes) {
         programConclusion.edit(name, description, graduationTitle, graduationLevel, isAverageEditable, isAlumniProvider,
                 isSkipValidation, targetState, eventTypes);
     }

@@ -56,7 +56,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 @Mapping(path = "/chooseExecutionYearAndDegreeCurricularPlan", module = "academicAdministration",
         formBean = "executionYearDegreeCurricularPlanForm")
 @Forwards({ @Forward(name = "chooseExecutionYear", path = "/commons/curriculumHistoric/chooseDegreeCPlanExecutionYear.jsp"),
-        @Forward(name = "showActiveCurricularCourses", path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
+        @Forward(name = "showActiveCurricularCourses",
+                path = "/commons/curriculumHistoric/showActiveCurricularCourseScopes.jsp") })
 public class DegreeCurricularPlanExecutionYearDispacthAction extends FenixDispatchAction {
 
     @EntryPoint
@@ -93,8 +94,9 @@ public class DegreeCurricularPlanExecutionYearDispacthAction extends FenixDispat
         final ExecutionDegreeListBean executionDegreeBean = getRenderedObject("academicInterval");
         try {
             final SortedSet<DegreeModuleScope> degreeModuleScopes =
-                    ReadActiveCurricularCourseScopeByDegreeCurricularPlanAndExecutionYear.run(executionDegreeBean
-                            .getDegreeCurricularPlan().getExternalId(), executionDegreeBean.getAcademicInterval());
+                    ReadActiveCurricularCourseScopeByDegreeCurricularPlanAndExecutionYear.run(
+                            executionDegreeBean.getDegreeCurricularPlan().getExternalId(),
+                            executionDegreeBean.getAcademicInterval());
 
             final ActionErrors errors = new ActionErrors();
             if (degreeModuleScopes.isEmpty()) {

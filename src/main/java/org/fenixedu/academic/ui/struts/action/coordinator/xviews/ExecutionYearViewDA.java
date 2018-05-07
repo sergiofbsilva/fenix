@@ -51,10 +51,10 @@ import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
-import pt.ist.fenixframework.FenixFramework;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/analytics", module = "coordinator", functionality = DegreeCoordinatorIndex.class)
 @Forwards({ @Forward(name = "showHome", path = "/coordinator/analytics/home.jsp") })
@@ -87,7 +87,8 @@ public class ExecutionYearViewDA extends FenixDispatchAction {
         return executionYearJson;
     }
 
-    public ActionForward showHome(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward showHome(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         User userView = Authenticate.getUser();
 
         String degreeCurricularPlanID = request.getParameter("degreeCurricularPlanID");
@@ -117,8 +118,8 @@ public class ExecutionYearViewDA extends FenixDispatchAction {
         for (StudentCurricularPlan scp : degreeCurricularPlan.getStudentCurricularPlansSet()) {
             for (Enrolment enrol : scp.getEnrolmentsSet()) {
                 if (enrol.getExecutionPeriod().getExecutionYear() == executionYear
-                        && enrol.getParentCycleCurriculumGroup() != null
-                        && degreeCurricularPlan.getCycleCourseGroup(enrol.getParentCycleCurriculumGroup().getCycleType()) != null) {
+                        && enrol.getParentCycleCurriculumGroup() != null && degreeCurricularPlan
+                                .getCycleCourseGroup(enrol.getParentCycleCurriculumGroup().getCycleType()) != null) {
                     enrolments.add(enrol);
                 }
             }
@@ -288,8 +289,8 @@ public class ExecutionYearViewDA extends FenixDispatchAction {
             JsonObject year = new JsonObject();
             year.addProperty("year", i);
             JsonArray curricularCoursesArray = new JsonArray();
-            for (CurricularCourse curricularCourse : degreeCurricularPlan.getCurricularCoursesByExecutionYearAndCurricularYear(
-                    executionYear, i)) {
+            for (CurricularCourse curricularCourse : degreeCurricularPlan
+                    .getCurricularCoursesByExecutionYearAndCurricularYear(executionYear, i)) {
                 if (curricularCourseGradeMap.containsKey(curricularCourse)) {
                     CurricularCourseGradeEntry entry = curricularCourseGradeMap.get(curricularCourse);
 

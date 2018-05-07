@@ -60,10 +60,10 @@ public class InfoNotNeedToEnrollInCurricularCourse extends InfoObject {
         super.copyFromDomain(notNeedToEnrollInCurricularCourse);
 
         if (notNeedToEnrollInCurricularCourse != null) {
-            setInfoCurricularCourse(InfoCurricularCourse.newInfoFromDomain(notNeedToEnrollInCurricularCourse
-                    .getCurricularCourse()));
-            setInfoStudentCurricularPlan(InfoStudentCurricularPlan.newInfoFromDomain(notNeedToEnrollInCurricularCourse
-                    .getStudentCurricularPlan()));
+            setInfoCurricularCourse(
+                    InfoCurricularCourse.newInfoFromDomain(notNeedToEnrollInCurricularCourse.getCurricularCourse()));
+            setInfoStudentCurricularPlan(
+                    InfoStudentCurricularPlan.newInfoFromDomain(notNeedToEnrollInCurricularCourse.getStudentCurricularPlan()));
         }
     }
 

@@ -127,8 +127,8 @@ abstract public class IndividualCandidacy extends IndividualCandidacy_Base {
             throw new DomainException("error.IndividualCandidacy.invalid.process");
         }
         if (candidacyDate == null || !process.hasOpenCandidacyPeriod(candidacyDate.toDateTimeAtCurrentTime())) {
-            throw new DomainException("error.IndividualCandidacy.invalid.candidacyDate", process.getCandidacyStart().toString(
-                    "dd/MM/yyyy"), process.getCandidacyEnd().toString("dd/MM/yyyy"));
+            throw new DomainException("error.IndividualCandidacy.invalid.candidacyDate",
+                    process.getCandidacyStart().toString("dd/MM/yyyy"), process.getCandidacyEnd().toString("dd/MM/yyyy"));
         }
     }
 
@@ -465,8 +465,8 @@ abstract public class IndividualCandidacy extends IndividualCandidacy_Base {
 
         formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.IndividualCandidacy.candidacy"),
                 getCandidacyExecutionInterval().getName());
-        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.IndividualCandidacy.state"), getState()
-                .getLocalizedName());
+        formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.IndividualCandidacy.state"),
+                getState().getLocalizedName());
         formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.IndividualCandidacy.whenCreated"),
                 getWhenCreated().toString("yyy-MM-dd"));
         formatter.format("%s: %s\n", BundleUtil.getString(Bundle.ACADEMIC, "label.IndividualCandidacy.candidacyDate"),

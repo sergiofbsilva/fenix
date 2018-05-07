@@ -69,7 +69,8 @@ public class AcademicServiceRequestSituation extends AcademicServiceRequestSitua
         super.setAcademicServiceRequest(academicServiceRequest);
         super.setAcademicServiceRequestSituationType(academicServiceRequestBean.getAcademicServiceRequestSituationType());
         super.setCreator(academicServiceRequestBean.getResponsible());
-        super.setJustification(academicServiceRequestBean.hasJustification() ? academicServiceRequestBean.getJustification() : null);
+        super.setJustification(
+                academicServiceRequestBean.hasJustification() ? academicServiceRequestBean.getJustification() : null);
         super.setSituationDate(academicServiceRequestBean.getFinalSituationDate());
     }
 

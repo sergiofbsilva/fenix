@@ -47,8 +47,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/editMarkSheet", module = "academicAdministration", formBean = "markSheetManagementForm",
         input = "/markSheetManagement.do?method=prepareSearchMarkSheet", functionality = MarkSheetSearchDispatchAction.class)
-@Forwards({
-        @Forward(name = "editMarkSheet", path = "/academicAdministration/gradeSubmission/editMarkSheet.jsp"),
+@Forwards({ @Forward(name = "editMarkSheet", path = "/academicAdministration/gradeSubmission/editMarkSheet.jsp"),
         @Forward(name = "searchMarkSheetFilled",
                 path = "/academicAdministration/markSheetManagement.do?method=prepareSearchMarkSheetFilled") })
 public class MarkSheetEditDispatchAction extends MarkSheetDispatchAction {
@@ -145,9 +144,8 @@ public class MarkSheetEditDispatchAction extends MarkSheetDispatchAction {
     }
 
     private Collection<MarkSheetEnrolmentEvaluationBean> getEnrolmentEvaluationBeansToAppend(MarkSheet markSheet) {
-        Collection<Enrolment> enrolments =
-                markSheet.getCurricularCourse().getEnrolmentsNotInAnyMarkSheet(markSheet.getEvaluationSeason(),
-                        markSheet.getExecutionPeriod());
+        Collection<Enrolment> enrolments = markSheet.getCurricularCourse()
+                .getEnrolmentsNotInAnyMarkSheet(markSheet.getEvaluationSeason(), markSheet.getExecutionPeriod());
         Collection<MarkSheetEnrolmentEvaluationBean> enrolmentEvaluationBeansToAppend =
                 new HashSet<MarkSheetEnrolmentEvaluationBean>();
         for (Enrolment enrolment : enrolments) {

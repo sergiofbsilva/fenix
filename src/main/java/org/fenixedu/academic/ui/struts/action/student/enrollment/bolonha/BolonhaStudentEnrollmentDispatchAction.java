@@ -47,8 +47,7 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 @Mapping(module = "student", path = "/bolonhaStudentEnrollment", functionality = StudentEnrollmentManagementDA.class)
-@Forwards(value = {
-        @Forward(name = "notAuthorized", path = "/student/notAuthorized_bd.jsp"),
+@Forwards(value = { @Forward(name = "notAuthorized", path = "/student/notAuthorized_bd.jsp"),
         @Forward(name = "chooseOptionalCurricularCourseToEnrol",
                 path = "/student/enrollment/bolonha/chooseOptionalCurricularCourseToEnrol.jsp"),
         @Forward(name = "showDegreeModulesToEnrol", path = "/student/enrollment/bolonha/showDegreeModulesToEnrol.jsp"),
@@ -71,11 +70,9 @@ public class BolonhaStudentEnrollmentDispatchAction extends AbstractBolonhaStude
             Registration registration = bolonhaStudentEnrollmentBean.getRegistration();
             List<ExecutionSemester> openedEnrolmentPeriodsSemesters = Collections.EMPTY_LIST;
             if (registration != null) {
-                openedEnrolmentPeriodsSemesters =
-                        registration.getLastDegreeCurricularPlan().getEnrolmentPeriodsSet().stream()
-                                .filter(ep -> ep.isValid() && ep.isForCurricularCourses()).map(ep -> ep.getExecutionPeriod())
-                                .distinct().sorted(ExecutionSemester.COMPARATOR_BY_SEMESTER_AND_YEAR)
-                                .collect(Collectors.toList());
+                openedEnrolmentPeriodsSemesters = registration.getLastDegreeCurricularPlan().getEnrolmentPeriodsSet().stream()
+                        .filter(ep -> ep.isValid() && ep.isForCurricularCourses()).map(ep -> ep.getExecutionPeriod()).distinct()
+                        .sorted(ExecutionSemester.COMPARATOR_BY_SEMESTER_AND_YEAR).collect(Collectors.toList());
             }
             if (openedEnrolmentPeriodsSemesters.size() > 1) {
                 request.setAttribute("openedEnrolmentPeriodsSemesters", openedEnrolmentPeriodsSemesters);
@@ -111,7 +108,8 @@ public class BolonhaStudentEnrollmentDispatchAction extends AbstractBolonhaStude
     }
 
     @Override
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final Registration registration = getDomainObject(request, "registrationOid");
         final ExecutionSemester executionSemester = getDomainObject(request, "executionSemesterID");
@@ -120,9 +118,9 @@ public class BolonhaStudentEnrollmentDispatchAction extends AbstractBolonhaStude
                 executionSemester);
     }
 
-    private static final PeriodFormatter FORMATTER = new PeriodFormatterBuilder().printZeroAlways().appendHours()
-            .appendSuffix("h").appendSeparator(" ").appendMinutes().appendSuffix("m").appendSeparator(" ").appendSeconds()
-            .appendSuffix("s").toFormatter();
+    private static final PeriodFormatter FORMATTER =
+            new PeriodFormatterBuilder().printZeroAlways().appendHours().appendSuffix("h").appendSeparator(" ").appendMinutes()
+                    .appendSuffix("m").appendSeparator(" ").appendSeconds().appendSuffix("s").toFormatter();
 
     @Override
     protected ActionForward prepareShowDegreeModulesToEnrol(ActionMapping mapping, ActionForm form, HttpServletRequest request,

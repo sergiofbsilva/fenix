@@ -127,8 +127,8 @@ public class AcademicTrimesterDurationField extends DurationField {
     }
 
     private UnsupportedOperationException unsupported() {
-        return new UnsupportedOperationException(AcademicTrimestersDurationFieldType.academicTrimesters()
-                + " field is unsupported");
+        return new UnsupportedOperationException(
+                AcademicTrimestersDurationFieldType.academicTrimesters() + " field is unsupported");
     }
 
 }

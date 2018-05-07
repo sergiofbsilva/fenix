@@ -50,15 +50,13 @@ public class RegisteredDegreeCandidaciesSelectionBean implements Serializable {
         public int compare(StudentCandidacy o1, StudentCandidacy o2) {
             int result = o1.getEntryPhase().compareTo(o2.getEntryPhase());
             if (result == 0) {
-                result =
-                        o1.getActiveCandidacySituation().getSituationDate()
-                                .compareTo(o2.getActiveCandidacySituation().getSituationDate());
+                result = o1.getActiveCandidacySituation().getSituationDate()
+                        .compareTo(o2.getActiveCandidacySituation().getSituationDate());
             }
             if (result == 0) {
                 final ExecutionYear executionYear = ExecutionYear.readCurrentExecutionYear();
-                result =
-                        o1.getExecutionDegree().getDegree().getNameFor(executionYear)
-                                .compareTo(o2.getExecutionDegree().getDegree().getNameFor(executionYear));
+                result = o1.getExecutionDegree().getDegree().getNameFor(executionYear)
+                        .compareTo(o2.getExecutionDegree().getDegree().getNameFor(executionYear));
             }
             if (result == 0) {
                 result = o1.getRegistration().getNumber().compareTo(o2.getRegistration().getNumber());
@@ -218,10 +216,8 @@ public class RegisteredDegreeCandidaciesSelectionBean implements Serializable {
     }
 
     private String getPersonalEmailAddress(final Person person) {
-        return person.getEmailAddressStream()
-            .filter(e -> e.isPersonalType() && e.hasValue())
-            .map(e -> e.getValue())
-            .findAny().orElse("");
+        return person.getEmailAddressStream().filter(e -> e.isPersonalType() && e.hasValue()).map(e -> e.getValue()).findAny()
+                .orElse("");
     }
 
     private String getPhone(final Person person) {

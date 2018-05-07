@@ -62,8 +62,8 @@ public class ResidencePR extends ResidencePR_Base {
         if (residenceEvent.getPaymentLimitDate().isAfter(when)) {
             return baseValue;
         }
-        return baseValue.add(getPenaltyPerDay().multiply(
-                BigDecimal.valueOf(Days.daysBetween(residenceEvent.getPaymentLimitDate(), when).getDays())));
+        return baseValue.add(getPenaltyPerDay()
+                .multiply(BigDecimal.valueOf(Days.daysBetween(residenceEvent.getPaymentLimitDate(), when).getDays())));
     }
 
     @Override

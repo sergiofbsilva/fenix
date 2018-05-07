@@ -18,8 +18,6 @@
  */
 package org.fenixedu.academic.domain.accounting.events.gratuity;
 
-import pt.ist.fenixframework.dml.runtime.RelationAdapter;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -33,8 +31,9 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.util.Money;
 
-public class ExternalScholarshipGratuityExemption extends ExternalScholarshipGratuityExemption_Base {
+import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 
+public class ExternalScholarshipGratuityExemption extends ExternalScholarshipGratuityExemption_Base {
 
     static {
         getRelationExemptionEvent().addListener(new RelationAdapter<Exemption, Event>() {
@@ -43,8 +42,9 @@ public class ExternalScholarshipGratuityExemption extends ExternalScholarshipGra
             public void beforeAdd(Exemption exemption, Event event) {
                 if (event instanceof GratuityEvent) {
                     if (exemption instanceof ExternalScholarshipGratuityExemption) {
-                        if (event.getExemptionsSet().stream().anyMatch(e->e instanceof ExternalScholarshipGratuityExemption)) {
-                            throw new DomainException("error.accounting.events.gratuity.ExternalScholarshipGratuityExemption.event.already.has.scholarship.exemption");
+                        if (event.getExemptionsSet().stream().anyMatch(e -> e instanceof ExternalScholarshipGratuityExemption)) {
+                            throw new DomainException(
+                                    "error.accounting.events.gratuity.ExternalScholarshipGratuityExemption.event.already.has.scholarship.exemption");
                         }
                     }
                 }
@@ -52,10 +52,7 @@ public class ExternalScholarshipGratuityExemption extends ExternalScholarshipGra
         });
     }
 
-
-
-    public ExternalScholarshipGratuityExemption(Person responsible, GratuityEvent gratuityEvent,
-            Money value,
+    public ExternalScholarshipGratuityExemption(Person responsible, GratuityEvent gratuityEvent, Money value,
             ExternalScholarshipGratuityExemptionJustificationType justificationType, String reason, Party creditor,
             String fileName, InputStream file) {
         super();
@@ -65,7 +62,8 @@ public class ExternalScholarshipGratuityExemption extends ExternalScholarshipGra
         try {
             setDocument(new GratuityContributionFile(creditor, gratuityEvent, fileName, IOUtils.toByteArray(file)));
         } catch (IOException e) {
-            throw new DomainException("error.accounting.events.gratuity.ExternalScholarshipGratuityExemption.failed.to.read.file",e);
+            throw new DomainException("error.accounting.events.gratuity.ExternalScholarshipGratuityExemption.failed.to.read.file",
+                    e);
         }
         setExternalScholarshipGratuityContributionEvent(new ExternalScholarshipGratuityContributionEvent(creditor));
     }

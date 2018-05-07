@@ -127,7 +127,8 @@ public class StudentCurricularPlanEquivalencePlan extends StudentCurricularPlanE
         if (!curriculumModule.isLeaf()) {
             final CurriculumGroup curriculumGroup = (CurriculumGroup) curriculumModule;
             for (final CurriculumModule childCurriculumModule : curriculumGroup.getCurriculumModulesSet()) {
-                if (!childCurriculumModule.isLeaf() && ((CurriculumGroup) childCurriculumModule).isNoCourseGroupCurriculumGroup()) {
+                if (!childCurriculumModule.isLeaf()
+                        && ((CurriculumGroup) childCurriculumModule).isNoCourseGroupCurriculumGroup()) {
                     continue;
                 }
 

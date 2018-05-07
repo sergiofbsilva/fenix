@@ -144,15 +144,15 @@ public class StudentCurricularPlanEnrolmentPreConditions {
         if (semester.isFirstOfYear() && hasSpecialSeason(scp, semester)) {
 
             if (!scp.getDegreeCurricularPlan().getActiveEnrolmentPeriodInCurricularCoursesSpecialSeason(semester).isPresent()) {
-                return outOfPeriodResult("specialSeason", scp.getDegreeCurricularPlan()
-                        .getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
+                return outOfPeriodResult("specialSeason",
+                        scp.getDegreeCurricularPlan().getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
             }
 
         } else if (semester.isFirstOfYear() && hasPrescribed(scp, semester)) {
 
             if (!scp.getDegreeCurricularPlan().getActiveEnrolmentPeriodInCurricularCoursesFlunkedSeason(semester).isPresent()) {
-                return outOfPeriodResult("flunked", scp.getDegreeCurricularPlan()
-                        .getNextEnrolmentPeriodInCurricularCoursesFlunkedSeason());
+                return outOfPeriodResult("flunked",
+                        scp.getDegreeCurricularPlan().getNextEnrolmentPeriodInCurricularCoursesFlunkedSeason());
             }
 
         } else if (!scp.getDegreeCurricularPlan().getActiveCurricularCourseEnrolmentPeriod(semester).isPresent()) {
@@ -162,10 +162,11 @@ public class StudentCurricularPlanEnrolmentPreConditions {
         return createTrue();
     }
 
-    static EnrolmentPreConditionResult checkEnrolmentPeriodsForSpecialSeason(StudentCurricularPlan scp, ExecutionSemester semester) {
+    static EnrolmentPreConditionResult checkEnrolmentPeriodsForSpecialSeason(StudentCurricularPlan scp,
+            ExecutionSemester semester) {
         if (!scp.getDegreeCurricularPlan().hasOpenSpecialSeasonEnrolmentPeriod(semester)) {
-            return outOfPeriodResult("specialSeason", scp.getDegreeCurricularPlan()
-                    .getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
+            return outOfPeriodResult("specialSeason",
+                    scp.getDegreeCurricularPlan().getNextEnrolmentPeriodInCurricularCoursesSpecialSeason());
         }
         return createTrue();
     }

@@ -175,10 +175,10 @@ public class StudentsPerformanceReport extends StudentsPerformanceReport_Base {
     /* STUDY */
 
     private BigDecimal getApprovedECTS(final Student student) {
-        return student
-                .getLastActiveRegistration()
+        return student.getLastActiveRegistration()
                 .getCurriculum(getExecutionSemester().getEndDateYearMonthDay().toDateTimeAtCurrentTime(),
-                        getExecutionSemester().getExecutionYear(), null).getSumEctsCredits();
+                        getExecutionSemester().getExecutionYear(), null)
+                .getSumEctsCredits();
     }
 
     private BigDecimal getEnrolledECTS(final Student student) {
@@ -221,10 +221,10 @@ public class StudentsPerformanceReport extends StudentsPerformanceReport_Base {
     }
 
     private int getApprovedGradeValuesSum(final Student student) {
-        Collection<ICurriculumEntry> entries =
-                student.getLastActiveRegistration()
-                        .getCurriculum(getExecutionSemester().getEndDateYearMonthDay().toDateTimeAtCurrentTime(),
-                                getExecutionSemester().getExecutionYear(), null).getCurriculumEntries();
+        Collection<ICurriculumEntry> entries = student.getLastActiveRegistration()
+                .getCurriculum(getExecutionSemester().getEndDateYearMonthDay().toDateTimeAtCurrentTime(),
+                        getExecutionSemester().getExecutionYear(), null)
+                .getCurriculumEntries();
         BigDecimal sum = new BigDecimal(0d);
 
         for (final ICurriculumEntry entry : entries) {
@@ -240,17 +240,17 @@ public class StudentsPerformanceReport extends StudentsPerformanceReport_Base {
     }
 
     private int getNumberOfApprovedCourses(final Student student) {
-        Collection<ICurriculumEntry> entries =
-                student.getLastActiveRegistration()
-                        .getCurriculum(getExecutionSemester().getEndDateYearMonthDay().toDateTimeAtCurrentTime(),
-                                getExecutionSemester().getExecutionYear(), null).getCurriculumEntries();
+        Collection<ICurriculumEntry> entries = student.getLastActiveRegistration()
+                .getCurriculum(getExecutionSemester().getEndDateYearMonthDay().toDateTimeAtCurrentTime(),
+                        getExecutionSemester().getExecutionYear(), null)
+                .getCurriculumEntries();
 
         return entries.size() * 20;
     }
 
     private BigDecimal getA(final Student student) {
-        return BigDecimal.ZERO.equals(getEnrolledECTS(student)) ? BigDecimal.ZERO : getApprovedECTS(student).divide(
-                getEnrolledECTS(student), 2, RoundingMode.HALF_EVEN);
+        return BigDecimal.ZERO.equals(getEnrolledECTS(student)) ? BigDecimal.ZERO : getApprovedECTS(student)
+                .divide(getEnrolledECTS(student), 2, RoundingMode.HALF_EVEN);
     }
 
     private BigDecimal getB(final Student student) {
@@ -277,8 +277,8 @@ public class StudentsPerformanceReport extends StudentsPerformanceReport_Base {
     private Spreadsheet createSpreadsheet() {
         final Spreadsheet spreadsheet = new Spreadsheet("students");
 
-        spreadsheet.setHeaders(new String[] { "Num Aluno", "Nome", "Tipo Curso", "Curso", "Ciclo", "Ects Aprovados",
-                "Ects Total", "Soma classificacoes", "Num Aprovadas * 20", "A", "B", "100 * (A + B)" });
+        spreadsheet.setHeaders(new String[] { "Num Aluno", "Nome", "Tipo Curso", "Curso", "Ciclo", "Ects Aprovados", "Ects Total",
+                "Soma classificacoes", "Num Aprovadas * 20", "A", "B", "100 * (A + B)" });
 
         return spreadsheet;
     }
@@ -291,8 +291,8 @@ public class StudentsPerformanceReport extends StudentsPerformanceReport_Base {
         row.setCell(student.getPerson().getName());
         row.setCell(studentCurricularPlan.getDegreeType().getName().getContent());
         row.setCell(studentCurricularPlan.getName());
-        row.setCell(studentCurricularPlan.getRegistration().getCycleType(getExecutionSemester().getExecutionYear())
-                .getDescription());
+        row.setCell(
+                studentCurricularPlan.getRegistration().getCycleType(getExecutionSemester().getExecutionYear()).getDescription());
         row.setCell(getApprovedECTS(student).toPlainString());
         row.setCell(getEnrolledECTS(student).toPlainString());
         row.setCell(getApprovedGradeValuesSum(student));

@@ -23,7 +23,8 @@ import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.bennu.core.groups.Group;
 
 public class PersistentTeachersWithMarkSheetsToConfirmGroup extends PersistentTeachersWithMarkSheetsToConfirmGroup_Base {
-    protected PersistentTeachersWithMarkSheetsToConfirmGroup(ExecutionSemester period, DegreeCurricularPlan degreeCurricularPlan) {
+    protected PersistentTeachersWithMarkSheetsToConfirmGroup(ExecutionSemester period,
+            DegreeCurricularPlan degreeCurricularPlan) {
         super();
         init(period, degreeCurricularPlan);
     }

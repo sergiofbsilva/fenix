@@ -67,8 +67,9 @@ public abstract class PhdEmail extends PhdEmail_Base {
 
     @Override
     protected void generateMessage() {
-        new Message(getSender(), getReplyTos(), getRecipients(), getSubject().getContent(org.fenixedu.academic.util.LocaleUtils.PT), getBody()
-                .getContent(org.fenixedu.academic.util.LocaleUtils.PT), getBccs());
+        new Message(getSender(), getReplyTos(), getRecipients(),
+                getSubject().getContent(org.fenixedu.academic.util.LocaleUtils.PT),
+                getBody().getContent(org.fenixedu.academic.util.LocaleUtils.PT), getBccs());
     }
 
     @Override

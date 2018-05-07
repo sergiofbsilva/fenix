@@ -80,7 +80,8 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
     private Boolean showPhoto = null;
 
     public String getDegreeCurricularPlanID() {
-        return (degreeCurricularPlanID == null) ? degreeCurricularPlanID = getAndHoldStringParameter("degreeCurricularPlanID") : degreeCurricularPlanID;
+        return (degreeCurricularPlanID == null) ? degreeCurricularPlanID =
+                getAndHoldStringParameter("degreeCurricularPlanID") : degreeCurricularPlanID;
     }
 
     public void setDegreeCurricularPlanID(String degreeCurricularPlanID) {
@@ -88,7 +89,8 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
     }
 
     public String getExecutionDegreeId() {
-        return (this.executionDegreeId == null) ? this.executionDegreeId = getAndHoldStringParameter("executionDegreeId") : executionDegreeId;
+        return (this.executionDegreeId == null) ? this.executionDegreeId =
+                getAndHoldStringParameter("executionDegreeId") : executionDegreeId;
     }
 
     public void setExecutionDegreeId(String executionDegreeId) {
@@ -218,12 +220,14 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
 
     public Double getMinStudentNumber() {
         final String minStudentNumberString = getMinStudentNumberString();
-        return (minStudentNumberString != null && minStudentNumberString.length() > 0) ? Double.valueOf(minStudentNumberString) : null;
+        return (minStudentNumberString != null && minStudentNumberString.length() > 0) ? Double
+                .valueOf(minStudentNumberString) : null;
     }
 
     public Double getMaxStudentNumber() {
         final String maxStudentNumberString = getMaxStudentNumberString();
-        return (maxStudentNumberString != null && maxStudentNumberString.length() > 0) ? Double.valueOf(maxStudentNumberString) : null;
+        return (maxStudentNumberString != null && maxStudentNumberString.length() > 0) ? Double
+                .valueOf(maxStudentNumberString) : null;
     }
 
     public int getNumberResults() {
@@ -324,14 +328,16 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
 
     public StudentCurricularPlanState getStudentCurricularPlanState() {
         final String studentCurricularPlanStateString = getStudentCurricularPlanStateString();
-        return (studentCurricularPlanStateString != null && studentCurricularPlanStateString.length() > 0) ? StudentCurricularPlanState
-                .valueOf(studentCurricularPlanStateString) : null;
+        return (studentCurricularPlanStateString != null
+                && studentCurricularPlanStateString.length() > 0) ? StudentCurricularPlanState
+                        .valueOf(studentCurricularPlanStateString) : null;
     }
 
     public RegistrationStateType getRegistrationStateType() {
         final String registrationStateTypeString = getRegistrationStateTypeString();
-        return (registrationStateTypeString != null && registrationStateTypeString.length() > 0 && !registrationStateTypeString
-                .equals("SHOWALL")) ? RegistrationStateType.valueOf(registrationStateTypeString) : null;
+        return (registrationStateTypeString != null && registrationStateTypeString.length() > 0
+                && !registrationStateTypeString.equals("SHOWALL")) ? RegistrationStateType
+                        .valueOf(registrationStateTypeString) : null;
     }
 
     public Integer getMaxIndex() {
@@ -416,8 +422,8 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
         final Registration registration = studentCurricularPlan.getRegistration();
 
         if (registration.isConcluded()) {
-            if (registration.isRegistrationConclusionProcessed()
-                    && (!registration.isBolonha() || studentCurricularPlan.getInternalCycleCurriculumGroupsSize().intValue() == 1)) {
+            if (registration.isRegistrationConclusionProcessed() && (!registration.isBolonha()
+                    || studentCurricularPlan.getInternalCycleCurriculumGroupsSize().intValue() == 1)) {
                 return registration.getRawGrade().getValue();
             } else {
                 return " - ";
@@ -432,23 +438,23 @@ public class CoordinatorStudentsBackingBean extends FenixBackingBean {
 
         spreadsheet.setHeaders(new String[] {
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.number"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.number"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.name"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.name"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.email"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.email"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.plan.state"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.plan.state"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.number.approved.curricular.courses"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.number.approved.curricular.courses"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.ects"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.ects"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.aritmeticAverage"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.aritmeticAverage"),
 
-        BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.year"),
+                BundleUtil.getString(Bundle.APPLICATION, "label.student.curricular.year"),
 
-        " ", " " });
+                " ", " " });
 
         return spreadsheet;
     }

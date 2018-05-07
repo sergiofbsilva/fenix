@@ -159,8 +159,8 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
         return mapping.findForward("edit-candidacy-information");
     }
 
-    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeEditCandidacyInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
         try {
             DegreeChangeIndividualCandidacyProcessBean bean = getIndividualCandidacyProcessBean();
 
@@ -175,8 +175,8 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
 
     public ActionForward prepareExecuteEditCandidacyCurricularCoursesInformation(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new DegreeChangeIndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new DegreeChangeIndividualCandidacyProcessBean(getProcess(request)));
         return mapping.findForward("edit-candidacy-curricularCourses-information");
     }
 
@@ -189,7 +189,8 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
     public ActionForward executeEditCandidacyCurricularCoursesInformation(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
         try {
-            executeActivity(getProcess(request), "EditCandidacyCurricularCoursesInformation", getIndividualCandidacyProcessBean());
+            executeActivity(getProcess(request), "EditCandidacyCurricularCoursesInformation",
+                    getIndividualCandidacyProcessBean());
         } catch (final DomainException e) {
             addActionMessage(request, e.getMessage(), e.getArgs());
             request.setAttribute(getIndividualCandidacyProcessBeanName(), getIndividualCandidacyProcessBean());
@@ -203,11 +204,11 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
         DegreeChangeIndividualCandidacyResultBean bean = getRenderedObject();
         RenderUtils.invalidateViewState();
         if (bean == null || bean.getDegree() == null) {
-            request.setAttribute("individualCandidacyResultBean", new DegreeChangeIndividualCandidacyResultBean(
-                    getProcess(request)));
+            request.setAttribute("individualCandidacyResultBean",
+                    new DegreeChangeIndividualCandidacyResultBean(getProcess(request)));
         } else {
-            request.setAttribute("individualCandidacyResultBean", new DegreeChangeIndividualCandidacyResultBean(
-                    getProcess(request), bean.getDegree()));
+            request.setAttribute("individualCandidacyResultBean",
+                    new DegreeChangeIndividualCandidacyResultBean(getProcess(request), bean.getDegree()));
         }
 
         return mapping.findForward("introduce-candidacy-result");
@@ -239,8 +240,8 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
         return mapping.findForward("introduce-candidacy-result");
     }
 
-    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws FenixServiceException {
+    public ActionForward executeIntroduceCandidacyResult(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws FenixServiceException {
 
         try {
             executeActivity(getProcess(request), "IntroduceCandidacyResult", getCandidacyResultBean());
@@ -297,16 +298,16 @@ public class DegreeChangeIndividualCandidacyProcessDA extends IndividualCandidac
 
     public ActionForward prepareExecuteChangeProcessCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new DegreeChangeIndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new DegreeChangeIndividualCandidacyProcessBean(getProcess(request)));
 
         return mapping.findForward("change-process-checked-state");
     }
 
     public ActionForward prepareExecuteChangePaymentCheckedState(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(getIndividualCandidacyProcessBeanName(), new DegreeChangeIndividualCandidacyProcessBean(
-                getProcess(request)));
+        request.setAttribute(getIndividualCandidacyProcessBeanName(),
+                new DegreeChangeIndividualCandidacyProcessBean(getProcess(request)));
 
         return mapping.findForward("change-payment-checked-state");
     }

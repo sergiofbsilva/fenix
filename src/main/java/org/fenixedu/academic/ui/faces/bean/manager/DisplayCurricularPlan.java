@@ -103,9 +103,8 @@ public class DisplayCurricularPlan extends FenixBackingBean {
 
             for (final DegreeModuleScope degreeModuleScope : degreeModuleScopes) {
                 if (degreeModuleScope instanceof DegreeModuleScopeCurricularCourseScope) {
-                    scopes.add(InfoCurricularCourseScope
-                            .newInfoFromDomain(((DegreeModuleScopeCurricularCourseScope) degreeModuleScope)
-                                    .getCurricularCourseScope()));
+                    scopes.add(InfoCurricularCourseScope.newInfoFromDomain(
+                            ((DegreeModuleScopeCurricularCourseScope) degreeModuleScope).getCurricularCourseScope()));
                 }
             }
         }

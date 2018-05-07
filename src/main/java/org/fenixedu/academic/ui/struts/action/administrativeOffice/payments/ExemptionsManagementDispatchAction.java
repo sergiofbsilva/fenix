@@ -207,8 +207,8 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
     public ActionForward prepareCreateInstallmentPenaltyExemption(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) {
 
-        request.setAttribute("createInstallmentPenaltyExemptionBean", new CreateInstallmentPenaltyExemptionBean(
-                (GratuityEventWithPaymentPlan) getGratuityEvent(request)));
+        request.setAttribute("createInstallmentPenaltyExemptionBean",
+                new CreateInstallmentPenaltyExemptionBean((GratuityEventWithPaymentPlan) getGratuityEvent(request)));
 
         // Logic to decide the view to show based on gratuity event should
         // be placed here
@@ -367,13 +367,13 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
 
     public ActionForward prepareCreateSecondCycleIndividualCandidacyExemption(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("createPenaltyExemptionBean", new SecondCycleIndividualCandidacyExemptionBean(
-                (SecondCycleIndividualCandidacyEvent) getEvent(request)));
+        request.setAttribute("createPenaltyExemptionBean",
+                new SecondCycleIndividualCandidacyExemptionBean((SecondCycleIndividualCandidacyEvent) getEvent(request)));
         return mapping.findForward("createSecondCycleIndividualCandidacyExemption");
     }
 
-    public ActionForward prepareCreateSecondCycleIndividualCandidacyExemptionInvalid(ActionMapping mapping,
-            ActionForm actionForm, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareCreateSecondCycleIndividualCandidacyExemptionInvalid(ActionMapping mapping, ActionForm actionForm,
+            HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("createPenaltyExemptionBean", getRenderedObject("create-penalty-exemption-bean"));
         return mapping.findForward("createSecondCycleIndividualCandidacyExemption");
     }
@@ -414,8 +414,8 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
 
         try {
             final AcademicEventExemptionBean bean = getRenderedObject("exemptionBean");
-            AcademicEventExemption.create(getLoggedPerson(request), bean.getEvent(), bean.getValue(),
-                    bean.getJustificationType(), bean.getDispatchDate(), bean.getReason());
+            AcademicEventExemption.create(getLoggedPerson(request), bean.getEvent(), bean.getValue(), bean.getJustificationType(),
+                    bean.getDispatchDate(), bean.getReason());
 
         } catch (DomainExceptionWithLabelFormatter ex) {
             addActionMessage(request, ex.getKey(), solveLabelFormatterArgs(request, ex.getLabelFormatterArgs()));
@@ -489,8 +489,7 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
             } else if (bean.getJustificationType().equals(PhdEventExemptionJustificationType.THIRD_PARTY_CONTRIBUTION)) {
                 PhdGratuityEvent event = ((PhdGratuityEvent) bean.getEvent());
                 PhdGratuityExternalScholarshipExemption.createPhdGratuityExternalScholarshipExemption(getLoggedPerson(request),
-                        event.getAmountToPay(), bean.getProvider(), event, bean.getReason(),bean
-                                .getFileName(), bean.getFile());
+                        event.getAmountToPay(), bean.getProvider(), event, bean.getReason(), bean.getFileName(), bean.getFile());
             }
         } catch (DomainExceptionWithLabelFormatter ex) {
             addActionMessage(request, ex.getKey(), solveLabelFormatterArgs(request, ex.getLabelFormatterArgs()));
@@ -507,9 +506,9 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
     public ActionForward prepareCreateAdministrativeOfficeFeeAndInsuranceExemption(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response) {
 
-        request.setAttribute(
-                "createAdministrativeOfficeFeeAndInsuranceExemptionBean",
-                new AdministrativeOfficeFeeAndInsuranceExemptionBean((AdministrativeOfficeFeeAndInsuranceEvent) getEvent(request)));
+        request.setAttribute("createAdministrativeOfficeFeeAndInsuranceExemptionBean",
+                new AdministrativeOfficeFeeAndInsuranceExemptionBean(
+                        (AdministrativeOfficeFeeAndInsuranceEvent) getEvent(request)));
 
         return mapping.findForward("createAdministrativeOfficeFeeAndInsuranceExemption");
     }
@@ -527,10 +526,9 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
             HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            ExemptionsManagement
-                    .createAdministrativeOfficeFeeAndInsuranceExemption(
-                            getLoggedPerson(request),
-                            (AdministrativeOfficeFeeAndInsuranceExemptionBean) getRenderedObject("createAdministrativeOfficeFeeAndInsuranceExemptionBean"));
+            ExemptionsManagement.createAdministrativeOfficeFeeAndInsuranceExemption(getLoggedPerson(request),
+                    (AdministrativeOfficeFeeAndInsuranceExemptionBean) getRenderedObject(
+                            "createAdministrativeOfficeFeeAndInsuranceExemptionBean"));
 
         } catch (DomainExceptionWithLabelFormatter ex) {
             addActionMessage(request, ex.getKey(), solveLabelFormatterArgs(request, ex.getLabelFormatterArgs()));
@@ -546,8 +544,8 @@ public class ExemptionsManagementDispatchAction extends PaymentsManagementDispat
 
     public ActionForward prepareCreatePhdRegistrationFeePenaltyExemption(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("createPenaltyExemptionBean", new CreatePhdRegistrationFeePenaltyExemptionBean(
-                (PhdRegistrationFee) getEvent(request)));
+        request.setAttribute("createPenaltyExemptionBean",
+                new CreatePhdRegistrationFeePenaltyExemptionBean((PhdRegistrationFee) getEvent(request)));
         return mapping.findForward("createPhdRegistrationFeePenaltyExemption");
     }
 

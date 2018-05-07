@@ -59,9 +59,9 @@ public class Unit extends Unit_Base {
         super();
     }
 
-    protected void init(LocalizedString name, String unitNameCard, Integer costCenterCode, String acronym,
-            YearMonthDay beginDate, YearMonthDay endDate, String webAddress, UnitClassification classification,
-            AdministrativeOffice administrativeOffice, Boolean canBeResponsibleOfSpaces, Space campus) {
+    protected void init(LocalizedString name, String unitNameCard, Integer costCenterCode, String acronym, YearMonthDay beginDate,
+            YearMonthDay endDate, String webAddress, UnitClassification classification, AdministrativeOffice administrativeOffice,
+            Boolean canBeResponsibleOfSpaces, Space campus) {
 
         setPartyName(name);
         if (acronym != null) {
@@ -103,8 +103,7 @@ public class Unit extends Unit_Base {
         LocalizedString partyName = getPartyName();
 
         partyName =
-                partyName == null ? new LocalizedString(Locale.getDefault(), name) : partyName
-                        .with(Locale.getDefault(), name);
+                partyName == null ? new LocalizedString(Locale.getDefault(), name) : partyName.with(Locale.getDefault(), name);
 
         super.setPartyName(partyName);
 
@@ -246,8 +245,8 @@ public class Unit extends Unit_Base {
     }
 
     public boolean isActive(YearMonthDay currentDate) {
-        return (!this.getBeginDateYearMonthDay().isAfter(currentDate) && (this.getEndDateYearMonthDay() == null || !this
-                .getEndDateYearMonthDay().isBefore(currentDate)));
+        return (!this.getBeginDateYearMonthDay().isAfter(currentDate)
+                && (this.getEndDateYearMonthDay() == null || !this.getEndDateYearMonthDay().isBefore(currentDate)));
     }
 
     @Override
@@ -346,7 +345,8 @@ public class Unit extends Unit_Base {
         return getSubUnitsByState(currentDate, accountabilityTypeEnum, true);
     }
 
-    private List<Unit> getSubUnitsByState(YearMonthDay currentDate, AccountabilityTypeEnum accountabilityTypeEnum, boolean state) {
+    private List<Unit> getSubUnitsByState(YearMonthDay currentDate, AccountabilityTypeEnum accountabilityTypeEnum,
+            boolean state) {
         List<Unit> allSubUnits = new ArrayList<Unit>();
         for (Unit subUnit : getSubUnits(accountabilityTypeEnum)) {
             if (subUnit.isActive(currentDate) == state) {
@@ -585,9 +585,7 @@ public class Unit extends Unit_Base {
      * This method should be used only for Unit types where acronyms are unique.
      */
     public static Unit readUnitByAcronymAndType(String acronym, PartyTypeEnum partyTypeEnum) {
-        if (acronym != null
-                && !acronym.equals("")
-                && partyTypeEnum != null
+        if (acronym != null && !acronym.equals("") && partyTypeEnum != null
                 && (partyTypeEnum.equals(PartyTypeEnum.DEGREE_UNIT) || partyTypeEnum.equals(PartyTypeEnum.DEPARTMENT)
                         || partyTypeEnum.equals(PartyTypeEnum.PLANET) || partyTypeEnum.equals(PartyTypeEnum.COUNTRY)
                         || partyTypeEnum.equals(PartyTypeEnum.DEPARTMENT) || partyTypeEnum.equals(PartyTypeEnum.UNIVERSITY)
@@ -704,7 +702,8 @@ public class Unit extends Unit_Base {
     public String getPresentationNameWithParentsAndBreakLine() {
         String parentUnits = getParentUnitsPresentationNameWithBreakLine();
         return (!StringUtils.isEmpty(parentUnits.trim())) ? parentUnits
-                + BundleUtil.getString(Bundle.APPLICATION, "label.html.breakLine") + getPresentationName() : getPresentationName();
+                + BundleUtil.getString(Bundle.APPLICATION, "label.html.breakLine")
+                + getPresentationName() : getPresentationName();
     }
 
     public String getParentUnitsPresentationNameWithBreakLine() {
@@ -819,7 +818,7 @@ public class Unit extends Unit_Base {
     }
 
     public SortedSet<Unit> getSortedExternalChilds() {
-        final SortedSet<Unit> result = new TreeSet<Unit>(Unit.COMPARATOR_BY_NAME_AND_ID);
+        final SortedSet<Unit> result = new TreeSet<Unit>(Party.COMPARATOR_BY_NAME_AND_ID);
         for (final Unit unit : getSubUnits()) {
             if (!unit.isInternal()) {
                 result.add(unit);
@@ -861,12 +860,8 @@ public class Unit extends Unit_Base {
     }
 
     static public LocalizedString getInstitutionName() {
-        return Optional
-                .ofNullable(Bennu.getInstance().getInstitutionUnit())
-                .map(Unit::getNameI18n)
-                .orElseGet(
-                        () -> BundleUtil.getLocalizedString(Bundle.GLOBAL,
-                                "error.institutionUnit.notconfigured"));
+        return Optional.ofNullable(Bennu.getInstance().getInstitutionUnit()).map(Unit::getNameI18n)
+                .orElseGet(() -> BundleUtil.getLocalizedString(Bundle.GLOBAL, "error.institutionUnit.notconfigured"));
     }
 
     static public String getInstitutionAcronym() {

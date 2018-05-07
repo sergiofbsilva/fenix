@@ -33,6 +33,7 @@ import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.exceptions.EnrollmentDomainException;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.dto.student.OptionalCurricularCoursesLocationBean;
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.service.services.student.curriculumLines.MoveCurriculumLines;
@@ -48,8 +49,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/optionalCurricularCoursesLocation", module = "academicAdministration",
         formBeanClass = OptionalCurricularCoursesLocationForm.class, functionality = SearchForStudentsDA.class)
-@Forwards({
-        @Forward(name = "showEnrolments", path = "/academicAdminOffice/curriculum/enrolments/location/showEnrolments.jsp"),
+@Forwards({ @Forward(name = "showEnrolments", path = "/academicAdminOffice/curriculum/enrolments/location/showEnrolments.jsp"),
         @Forward(name = "chooseNewDestination",
                 path = "/academicAdminOffice/curriculum/enrolments/location/chooseNewDestination.jsp"),
         @Forward(name = "backToStudentEnrolments", path = "/academicAdministration/studentEnrolments.do?method=prepare") })
@@ -62,7 +62,7 @@ public class OptionalCurricularCoursesLocationManagementDA extends FenixDispatch
         request.setAttribute("studentCurricularPlan", studentCurricularPlan);
 
         final List<Enrolment> enrolments = new ArrayList<>(studentCurricularPlan.getEnrolmentsSet());
-        Collections.sort(enrolments, Enrolment.COMPARATOR_BY_EXECUTION_PERIOD_AND_NAME_AND_ID);
+        Collections.sort(enrolments, ICurriculumEntry.COMPARATOR_BY_EXECUTION_PERIOD_AND_NAME_AND_ID);
         request.setAttribute("enrolments", enrolments);
 
         return mapping.findForward("showEnrolments");

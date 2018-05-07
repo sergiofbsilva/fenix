@@ -110,7 +110,8 @@ public class AdministrativeOfficeFeePR extends AdministrativeOfficeFeePR_Base {
 
         final AdministrativeOfficeFeeAndInsuranceEvent administrativeOfficeFeeAndInsuranceEvent =
                 (AdministrativeOfficeFeeAndInsuranceEvent) event;
-        return administrativeOfficeFeeAndInsuranceEvent.hasAdministrativeOfficeFeeAndInsuranceExemption() ? Money.ZERO : amountToPay;
+        return administrativeOfficeFeeAndInsuranceEvent
+                .hasAdministrativeOfficeFeeAndInsuranceExemption() ? Money.ZERO : amountToPay;
     }
 
     @Override

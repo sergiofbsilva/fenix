@@ -57,9 +57,8 @@ public class InfoGuideSituation extends InfoObject {
         if (obj instanceof InfoGuideSituation) {
             InfoGuideSituation infoGuideSituation = (InfoGuideSituation) obj;
 
-            resultado =
-                    getInfoGuide().equals(infoGuideSituation.getInfoGuide())
-                            && getSituation().equals(infoGuideSituation.getSituation());
+            resultado = getInfoGuide().equals(infoGuideSituation.getInfoGuide())
+                    && getSituation().equals(infoGuideSituation.getSituation());
         }
 
         return resultado;

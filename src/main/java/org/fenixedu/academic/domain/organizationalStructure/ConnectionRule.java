@@ -27,7 +27,8 @@ public class ConnectionRule extends ConnectionRule_Base {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public ConnectionRule(PartyType allowedParentPartyType, PartyType allowedChildPartyType, AccountabilityType accountabilityType) {
+    public ConnectionRule(PartyType allowedParentPartyType, PartyType allowedChildPartyType,
+            AccountabilityType accountabilityType) {
         this();
         setAllowedParentPartyType(allowedParentPartyType);
         setAllowedChildPartyType(allowedChildPartyType);

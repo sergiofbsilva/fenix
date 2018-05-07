@@ -87,8 +87,8 @@ abstract public class CurricularRuleNotPersistent implements ICurricularRule {
 
     @Override
     public boolean isValid(ExecutionSemester executionSemester) {
-        return (getBegin().isBeforeOrEquals(executionSemester) && (getEnd() == null || getEnd()
-                .isAfterOrEquals(executionSemester)));
+        return (getBegin().isBeforeOrEquals(executionSemester)
+                && (getEnd() == null || getEnd().isAfterOrEquals(executionSemester)));
     }
 
     @Override

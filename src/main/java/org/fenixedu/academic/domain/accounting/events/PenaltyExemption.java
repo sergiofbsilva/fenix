@@ -42,7 +42,8 @@ abstract public class PenaltyExemption extends PenaltyExemption_Base {
     protected void init(PenaltyExemptionJustificationType justificationType, Event event, Person responsible, String reason,
             YearMonthDay dispatchDate) {
         checkParameters(justificationType);
-        super.init(responsible, event, PenaltyExemptionJustificationFactory.create(this, justificationType, reason, dispatchDate));
+        super.init(responsible, event,
+                PenaltyExemptionJustificationFactory.create(this, justificationType, reason, dispatchDate));
         event.recalculateState(new DateTime());
 
     }

@@ -50,19 +50,19 @@ public class CandidacyProcessSelectDegreesBean implements Serializable {
     }
 
     public Collection<Degree> getFirstCycleDegrees() {
-        return filterDegrees(Degree.readAllMatching(DegreeType.oneOf(DegreeType::isBolonhaDegree,
-                DegreeType::isIntegratedMasterDegree)));
+        return filterDegrees(
+                Degree.readAllMatching(DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isIntegratedMasterDegree)));
     }
 
     public Collection<Degree> getSecondCycleDegrees() {
-        return filterDegrees(Degree.readAllMatching(DegreeType.oneOf(DegreeType::isBolonhaMasterDegree,
-                DegreeType::isIntegratedMasterDegree)));
+        return filterDegrees(Degree
+                .readAllMatching(DegreeType.oneOf(DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree)));
     }
 
     protected Collection<Degree> filterDegrees(Collection<Degree> degrees) {
-        final Set<AcademicProgram> programs =
-                AcademicAccessRule.getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES,
-                        Authenticate.getUser()).collect(Collectors.toSet());
+        final Set<AcademicProgram> programs = AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, Authenticate.getUser())
+                .collect(Collectors.toSet());
         return degrees.stream().filter(degree -> programs.contains(degree)).collect(Collectors.toList());
     }
 

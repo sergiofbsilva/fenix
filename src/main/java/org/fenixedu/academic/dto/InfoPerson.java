@@ -40,8 +40,8 @@ public class InfoPerson extends InfoObject {
     @Override
     public boolean equals(Object o) {
         return ((o instanceof InfoPerson)
-                && (getNumeroDocumentoIdentificacao().equals(((InfoPerson) o).getNumeroDocumentoIdentificacao())) && (getTipoDocumentoIdentificacao()
-                    .equals(((InfoPerson) o).getTipoDocumentoIdentificacao())));
+                && (getNumeroDocumentoIdentificacao().equals(((InfoPerson) o).getNumeroDocumentoIdentificacao()))
+                && (getTipoDocumentoIdentificacao().equals(((InfoPerson) o).getTipoDocumentoIdentificacao())));
     }
 
     @Override

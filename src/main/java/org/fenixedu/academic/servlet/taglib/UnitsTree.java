@@ -33,6 +33,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.commons.lang.StringUtils;
 import org.fenixedu.academic.domain.organizationalStructure.AccountabilityTypeEnum;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.domain.organizationalStructure.Unit;
 import org.joda.time.YearMonthDay;
 import org.slf4j.Logger;
@@ -101,7 +102,7 @@ public class UnitsTree extends TagSupport {
                     .append("style='display:" + (getExpanded() != null && Boolean.valueOf(getExpanded()) ? "block" : "none"))
                     .append("'>\r\n");
 
-            Collections.sort(subUnits, Unit.COMPARATOR_BY_NAME_AND_ID);
+            Collections.sort(subUnits, Party.COMPARATOR_BY_NAME_AND_ID);
         }
 
         for (Unit subUnit : subUnits) {
@@ -131,10 +132,9 @@ public class UnitsTree extends TagSupport {
     }
 
     private void putImage(Unit parentUnit, Unit parentUnitParent, StringBuilder buffer, HttpServletRequest request) {
-        buffer.append("<img ")
-                .append("src='")
-                .append(request.getContextPath())
-                .append((getExpanded() != null && Boolean.valueOf(getExpanded()) ? "/images/toggle_minus10.gif" : "/images/toggle_plus10.gif"))
+        buffer.append("<img ").append("src='").append(request.getContextPath())
+                .append((getExpanded() != null
+                        && Boolean.valueOf(getExpanded()) ? "/images/toggle_minus10.gif" : "/images/toggle_plus10.gif"))
                 .append("' id=\"").append(parentUnit.getExternalId())
                 .append((parentUnitParent != null) ? parentUnitParent.getExternalId() : "").append("\" ")
                 .append("indexed='true' onClick=\"").append("check(document.getElementById('").append("aa")

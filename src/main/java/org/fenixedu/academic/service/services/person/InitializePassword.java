@@ -45,14 +45,16 @@ public class InitializePassword {
     private static final String ALREADY_INITIALIZED = "internationalRegistration.error.alreadyInitialized";
     private static final String KEY_RETURN = "key.return.argument";
 
-    private static final Map<String, String> ERRORS = new HashMap<String, String>() {{
-        put("NOT_ASCII_PASSWORD", "internationalRegistration.error.not.ascii");
-        put("CIISTADMIN_KERBEROS_PASSWORD_TOO_SHORT", "internationalRegistration.error.too.short");
-        put("CIISTADMIN_KERBEROS_PASSWORD_NOT_ENOUGH_CHARACTER_CLASSES",
-                "internationalRegistration.error.not.enough.character.classes");
-        put("CIISTADMIN_KERBEROS_PASSWORD_CANNOT_REUSE", "internationalRegistration.error.old.password");
-        put("CIISTADMIN_PASSWORD_LOW_QUALITY", "internationalRegistration.error.low.quality");
-    }};
+    private static final Map<String, String> ERRORS = new HashMap<String, String>() {
+        {
+            put("NOT_ASCII_PASSWORD", "internationalRegistration.error.not.ascii");
+            put("CIISTADMIN_KERBEROS_PASSWORD_TOO_SHORT", "internationalRegistration.error.too.short");
+            put("CIISTADMIN_KERBEROS_PASSWORD_NOT_ENOUGH_CHARACTER_CLASSES",
+                    "internationalRegistration.error.not.enough.character.classes");
+            put("CIISTADMIN_KERBEROS_PASSWORD_CANNOT_REUSE", "internationalRegistration.error.old.password");
+            put("CIISTADMIN_PASSWORD_LOW_QUALITY", "internationalRegistration.error.low.quality");
+        }
+    };
 
     public static void run(User user, String password) throws PasswordInitializationException {
         Form form = new Form().param("istid", user.getUsername()).param("password", password);
@@ -79,9 +81,8 @@ public class InitializePassword {
 
     private static String getServiceAuth() {
         ConfigurationProperties config = FenixEduAcademicConfiguration.getConfiguration();
-        String userpass =
-                config.getWebServicesInternationalRegistrationUsername() + ":"
-                        + config.getWebServicesInternationalRegistrationPassword();
+        String userpass = config.getWebServicesInternationalRegistrationUsername() + ":"
+                + config.getWebServicesInternationalRegistrationPassword();
         String encoding = new String(BaseEncoding.base64().encode(userpass.getBytes(StandardCharsets.UTF_8)));
         return "Basic " + encoding;
     }

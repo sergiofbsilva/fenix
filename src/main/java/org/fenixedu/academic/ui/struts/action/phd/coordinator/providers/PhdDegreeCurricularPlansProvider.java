@@ -48,9 +48,9 @@ public class PhdDegreeCurricularPlansProvider implements DataProvider {
     @Override
     public Object provide(Object source, Object currentValue) {
 
-        Set<AcademicProgram> programs =
-                AcademicAccessRule.getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_ENROLMENT_PERIODS,
-                        Authenticate.getUser()).collect(Collectors.toSet());
+        Set<AcademicProgram> programs = AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_PHD_ENROLMENT_PERIODS, Authenticate.getUser())
+                .collect(Collectors.toSet());
 
         final ManageEnrolmentsBean bean = (ManageEnrolmentsBean) source;
 

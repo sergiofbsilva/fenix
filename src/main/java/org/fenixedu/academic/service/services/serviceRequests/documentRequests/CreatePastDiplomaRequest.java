@@ -86,9 +86,8 @@ public class CreatePastDiplomaRequest {
 
     private static void createPaymentSituation(PastDiplomaRequest request, DocumentRequestCreateBean bean) {
         if (isPayed(bean)) {
-            PastDegreeDiplomaRequestEvent event =
-                    new PastDegreeDiplomaRequestEvent(request.getAdministrativeOffice(), request.getPerson(), request,
-                            bean.getPastPaymentAmount());
+            PastDegreeDiplomaRequestEvent event = new PastDegreeDiplomaRequestEvent(request.getAdministrativeOffice(),
+                    request.getPerson(), request, bean.getPastPaymentAmount());
 
             event.depositAmount(Authenticate.getUser(), bean.getPastPaymentAmount(), createTransactionDetailDTO(bean));
         }
@@ -103,28 +102,28 @@ public class CreatePastDiplomaRequest {
     }
 
     private static void process(PastDiplomaRequest request, LocalDate requestDate) {
-        editSituation(request, AcademicServiceRequestSituationType.PROCESSING, requestDate.toDateTimeAtStartOfDay()
-                .plusMinutes(1));
+        editSituation(request, AcademicServiceRequestSituationType.PROCESSING,
+                requestDate.toDateTimeAtStartOfDay().plusMinutes(1));
     }
 
     private static void send(PastDiplomaRequest request, LocalDate requestDate) {
-        editSituation(request, AcademicServiceRequestSituationType.SENT_TO_EXTERNAL_ENTITY, requestDate.toDateTimeAtStartOfDay()
-                .plusMinutes(2));
+        editSituation(request, AcademicServiceRequestSituationType.SENT_TO_EXTERNAL_ENTITY,
+                requestDate.toDateTimeAtStartOfDay().plusMinutes(2));
     }
 
     private static void receive(PastDiplomaRequest request, LocalDate requestDate) {
-        editSituation(request, AcademicServiceRequestSituationType.RECEIVED_FROM_EXTERNAL_ENTITY, requestDate
-                .toDateTimeAtStartOfDay().plusMinutes(3));
+        editSituation(request, AcademicServiceRequestSituationType.RECEIVED_FROM_EXTERNAL_ENTITY,
+                requestDate.toDateTimeAtStartOfDay().plusMinutes(3));
     }
 
     private static void conclude(PastDiplomaRequest request, LocalDate emissionDate) {
-        editSituation(request, AcademicServiceRequestSituationType.CONCLUDED, emissionDate.toDateTimeAtStartOfDay()
-                .plusMinutes(4));
+        editSituation(request, AcademicServiceRequestSituationType.CONCLUDED,
+                emissionDate.toDateTimeAtStartOfDay().plusMinutes(4));
     }
 
     private static void deliver(PastDiplomaRequest request, LocalDate dispatchDate) {
-        editSituation(request, AcademicServiceRequestSituationType.DELIVERED, dispatchDate.toDateTimeAtStartOfDay()
-                .plusMinutes(5));
+        editSituation(request, AcademicServiceRequestSituationType.DELIVERED,
+                dispatchDate.toDateTimeAtStartOfDay().plusMinutes(5));
     }
 
     private static void editSituation(PastDiplomaRequest request, AcademicServiceRequestSituationType situationType,

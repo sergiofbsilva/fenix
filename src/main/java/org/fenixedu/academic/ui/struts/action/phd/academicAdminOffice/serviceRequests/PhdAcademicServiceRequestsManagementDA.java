@@ -59,8 +59,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         request.setAttribute("phdIndividualProgramProcess", getPhdIndividualProgramProcess(request));
 
         if (getPhdAcademicServiceRequest(request) != null) {
-            request.setAttribute("phdIndividualProgramProcess", getPhdAcademicServiceRequest(request)
-                    .getPhdIndividualProgramProcess());
+            request.setAttribute("phdIndividualProgramProcess",
+                    getPhdAcademicServiceRequest(request).getPhdIndividualProgramProcess());
         }
 
         return super.execute(mapping, actionForm, request, response);
@@ -119,7 +119,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         return prepareProcessNewState(mapping, form, request, response, AcademicServiceRequestSituationType.PROCESSING);
     }
 
-    public ActionForward process(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward process(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -129,7 +130,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         return prepareProcessNewState(mapping, form, request, response, AcademicServiceRequestSituationType.CANCELLED);
     }
 
-    public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward cancel(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -139,7 +141,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         return prepareProcessNewState(mapping, form, request, response, AcademicServiceRequestSituationType.REJECTED);
     }
 
-    public ActionForward reject(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward reject(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -149,7 +152,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         return prepareProcessNewState(mapping, form, request, response, AcademicServiceRequestSituationType.CONCLUDED);
     }
 
-    public ActionForward conclude(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward conclude(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -160,7 +164,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
                 AcademicServiceRequestSituationType.RECEIVED_FROM_EXTERNAL_ENTITY);
     }
 
-    public ActionForward receive(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward receive(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -188,7 +193,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
         return prepareProcessNewState(mapping, form, request, response, AcademicServiceRequestSituationType.DELIVERED);
     }
 
-    public ActionForward deliver(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward deliver(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return handleNewSituation(mapping, form, request, response);
     }
 
@@ -197,8 +203,9 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
             HttpServletResponse response) throws IOException {
         PhdAcademicServiceRequest academicServiceRequest = getPhdAcademicServiceRequest(request);
 
-        writeFile(response, academicServiceRequest.getLastGeneratedDocument().getFilename(), academicServiceRequest
-                .getLastGeneratedDocument().getContentType(), academicServiceRequest.getLastGeneratedDocument().getContent());
+        writeFile(response, academicServiceRequest.getLastGeneratedDocument().getFilename(),
+                academicServiceRequest.getLastGeneratedDocument().getContentType(),
+                academicServiceRequest.getLastGeneratedDocument().getContent());
 
         return null;
     }
@@ -254,9 +261,8 @@ public class PhdAcademicServiceRequestsManagementDA extends PhdDA {
 
     private ActionForward viewPhdIndividualProgramProcess(HttpServletRequest request,
             IPhdAcademicServiceRequest phdAcademicServiceRequest) {
-        ActionForward forward =
-                redirect("/phdIndividualProgramProcess.do?method=viewProcess&processId="
-                        + phdAcademicServiceRequest.getPhdIndividualProgramProcess().getExternalId(), request);
+        ActionForward forward = redirect("/phdIndividualProgramProcess.do?method=viewProcess&processId="
+                + phdAcademicServiceRequest.getPhdIndividualProgramProcess().getExternalId(), request);
         return forward;
     }
 

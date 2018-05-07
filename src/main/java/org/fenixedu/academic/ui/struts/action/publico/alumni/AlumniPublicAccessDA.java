@@ -56,17 +56,17 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 @StrutsFunctionality(app = PublicApplication.class, path = "alumni", titleKey = "label.alumni.main.title",
         bundle = "AlumniResources")
 @Mapping(module = "publico", path = "/alumni")
-@Forwards({
-        @Forward(name = "alumniPublicAccessInner", path = "/publico/alumni/alumniPublicAccessInner.jsp"),
+@Forwards({ @Forward(name = "alumniPublicAccessInner", path = "/publico/alumni/alumniPublicAccessInner.jsp"),
         @Forward(name = "alumniCreatePasswordRequest", path = "/publico/alumni/alumniCreatePasswordRequest.jsp"),
-        @Forward(name = "alumniPublicAccessInformationInquiry", path = "/publico/alumni/alumniPublicAccessInformationInquiry.jsp"),
+        @Forward(name = "alumniPublicAccessInformationInquiry",
+                path = "/publico/alumni/alumniPublicAccessInformationInquiry.jsp"),
         @Forward(name = "alumniPublicAccessIdentityCheck", path = "/publico/alumni/alumniPublicAccessIdentityCheck.jsp"),
         @Forward(name = "alumniPublicAccess", path = "/publico/alumni/alumniPublicAccess.jsp"),
         @Forward(name = "alumniErrorSendMail", path = "/publico/alumni/alumniPublicAccessErrorSendMail.jsp"),
         @Forward(name = "alumniRegistrationResult", path = "/publico/alumni/alumniRegistrationResult.jsp"),
         @Forward(name = "alumniPasswordRequired", path = "/publico/alumni/alumniPasswordRequired.jsp"),
-        @Forward(name = "alumniPublicAccessMessage", path = "/publico/alumni/alumniPublicAccessMessage.jsp"),
-        @Forward(name = "alumniPublicAccessRegistrationEmail", path = "/publico/alumni/alumniPublicAccessRegistrationEmail.jsp") })
+        @Forward(name = "alumniPublicAccessMessage", path = "/publico/alumni/alumniPublicAccessMessage.jsp"), @Forward(
+                name = "alumniPublicAccessRegistrationEmail", path = "/publico/alumni/alumniPublicAccessRegistrationEmail.jsp") })
 public class AlumniPublicAccessDA extends FenixDispatchAction {
 
     private static final Logger logger = LoggerFactory.getLogger(AlumniPublicAccessDA.class);
@@ -155,9 +155,8 @@ public class AlumniPublicAccessDA extends FenixDispatchAction {
         }
 
         try {
-            final Alumni alumni =
-                    RegisterAlumniData.run(alumniBean.getStudentNumber(), alumniBean.getDocumentIdNumber().trim(),
-                            alumniBean.getEmail());
+            final Alumni alumni = RegisterAlumniData.run(alumniBean.getStudentNumber(), alumniBean.getDocumentIdNumber().trim(),
+                    alumniBean.getEmail());
             String url = AlumniNotificationService.getRegisterConclusionURL(alumni);
             request.setAttribute("alumniEmailSuccessMessage", "http" + url.split("http")[1]);
             request.setAttribute("alumni", alumni);

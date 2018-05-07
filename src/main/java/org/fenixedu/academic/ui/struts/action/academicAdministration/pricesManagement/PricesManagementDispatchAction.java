@@ -82,9 +82,8 @@ public class PricesManagementDispatchAction extends FenixDispatchAction {
             HttpServletResponse response) {
         ExecutionYearBean executionYearBean = (ExecutionYearBean) getObjectFromViewState("executionYearBean");
 
-        PostingRule postingRule =
-                PartialRegistrationRegimeRequestPR
-                        .readMostRecentPostingRuleForExecutionYear(executionYearBean.getExecutionYear());
+        PostingRule postingRule = PartialRegistrationRegimeRequestPR
+                .readMostRecentPostingRuleForExecutionYear(executionYearBean.getExecutionYear());
 
         request.setAttribute("postingRule", postingRule);
         request.setAttribute("executionYearBean", executionYearBean);

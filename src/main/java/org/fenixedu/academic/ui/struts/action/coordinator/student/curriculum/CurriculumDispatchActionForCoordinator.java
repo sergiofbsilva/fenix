@@ -31,8 +31,7 @@ import pt.ist.fenixframework.FenixFramework;
 
 @Mapping(path = "/viewStudentCurriculum", module = "coordinator", formBean = "studentCurricularPlanAndEnrollmentsSelectionForm",
         functionality = DegreeCoordinatorIndex.class)
-@Forwards({
-        @Forward(name = "ShowStudentCurricularPlans", path = "/coordinator/curriculum/viewCurricularPlans_bd.jsp"),
+@Forwards({ @Forward(name = "ShowStudentCurricularPlans", path = "/coordinator/curriculum/viewCurricularPlans_bd.jsp"),
         @Forward(name = "ShowStudentCurriculum", path = "/coordinator/student/displayStudentCurriculum_bd.jsp"),
         @Forward(name = "ShowStudentCurriculumForCoordinator",
                 path = "/coordinator/student/curriculum/displayStudentCurriculum_bd.jsp"),

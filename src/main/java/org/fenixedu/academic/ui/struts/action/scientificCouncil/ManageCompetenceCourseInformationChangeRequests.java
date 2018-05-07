@@ -115,9 +115,8 @@ public class ManageCompetenceCourseInformationChangeRequests extends FenixDispat
 
     private CompetenceCourseInformationChangeRequest getChangeRequest(HttpServletRequest request) {
         String competenceCourseInformationChangeRequestId = request.getParameter("changeRequestID");
-        CompetenceCourseInformationChangeRequest changeRequest =
-                (CompetenceCourseInformationChangeRequest) FenixFramework
-                        .getDomainObject(competenceCourseInformationChangeRequestId);
+        CompetenceCourseInformationChangeRequest changeRequest = (CompetenceCourseInformationChangeRequest) FenixFramework
+                .getDomainObject(competenceCourseInformationChangeRequestId);
         return changeRequest;
     }
 

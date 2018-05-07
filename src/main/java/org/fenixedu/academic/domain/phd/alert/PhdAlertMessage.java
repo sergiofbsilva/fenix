@@ -32,8 +32,8 @@ import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.domain.phd.PhdIndividualProgramProcess;
 import org.fenixedu.academic.domain.util.email.Message;
 import org.fenixedu.academic.domain.util.email.UnitBasedSender;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 
 import pt.ist.fenixframework.Atomic;
@@ -54,8 +54,7 @@ public class PhdAlertMessage extends PhdAlertMessage_Base {
         setWhenCreated(new DateTime());
     }
 
-    public PhdAlertMessage(PhdIndividualProgramProcess process, Person person, LocalizedString subject,
-            LocalizedString body) {
+    public PhdAlertMessage(PhdIndividualProgramProcess process, Person person, LocalizedString subject, LocalizedString body) {
         this();
         init(process, Collections.singletonList(person), subject, body);
     }
@@ -80,7 +79,8 @@ public class PhdAlertMessage extends PhdAlertMessage_Base {
             LocalizedString body) {
         String[] args = {};
         if (process == null) {
-            throw new DomainException("error.org.fenixedu.academic.domain.phd.alert.PhdAlertMessage.process.cannot.be.null", args);
+            throw new DomainException("error.org.fenixedu.academic.domain.phd.alert.PhdAlertMessage.process.cannot.be.null",
+                    args);
         }
         String[] args1 = {};
         if (persons == null) {

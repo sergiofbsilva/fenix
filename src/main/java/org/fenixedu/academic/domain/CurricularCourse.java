@@ -62,8 +62,8 @@ import org.fenixedu.academic.dto.degreeAdministrativeOffice.gradeSubmission.Mark
 import org.fenixedu.academic.predicate.MarkSheetPredicates;
 import org.fenixedu.academic.util.DateFormatUtil;
 import org.fenixedu.academic.util.EnrolmentEvaluationState;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.DateTime;
 
@@ -84,7 +84,7 @@ public class CurricularCourse extends CurricularCourse_Base {
                     if (degreeNameComp == 0) {
                         return degreeNameComp;
                     }
-                    return CurricularCourse.COMPARATOR_BY_NAME.compare(o1, o2);
+                    return DegreeModule.COMPARATOR_BY_NAME.compare(o1, o2);
                 }
             };
 
@@ -161,9 +161,8 @@ public class CurricularCourse extends CurricularCourse_Base {
         dcp.append(previousContext.getCurricularPeriod().getOrderByType(AcademicPeriod.YEAR)).append("Y,");
         dcp.append(previousContext.getCurricularPeriod().getOrderByType(AcademicPeriod.SEMESTER)).append("S]\t");
         dcp.append("[B:").append(previousContext.getBeginExecutionPeriod().getBeginDateYearMonthDay());
-        dcp.append(" E:").append(
-                previousContext.getEndExecutionPeriod() != null ? previousContext.getEndExecutionPeriod()
-                        .getEndDateYearMonthDay() : "          ");
+        dcp.append(" E:").append(previousContext.getEndExecutionPeriod() != null ? previousContext.getEndExecutionPeriod()
+                .getEndDateYearMonthDay() : "          ");
         dcp.append("]\t");
         dcp.append(getName()).append("\n");
     }
@@ -202,10 +201,12 @@ public class CurricularCourse extends CurricularCourse_Base {
     /**
      * - This method is used to edit a 'special' curricular course that will
      * represent any curricular course according to a rule
+     * 
      * @deprecated This method sets attributes that are no longer used in regular CurricularCourse objects.
-     * Use
-     * {@link org.fenixedu.academic.domain.degreeStructure.OptionalCurricularCourse#edit(String, String, CurricularStage) edit}
-     * instead.
+     *             Use
+     *             {@link org.fenixedu.academic.domain.degreeStructure.OptionalCurricularCourse#edit(String, String, CurricularStage)
+     *             edit}
+     *             instead.
      */
     @Deprecated
     public void edit(String name, String nameEn, CurricularStage curricularStage) {
@@ -216,11 +217,13 @@ public class CurricularCourse extends CurricularCourse_Base {
 
     /**
      * - Edit Pre-Bolonha CurricularCourse
+     * 
      * @deprecated This method sets attributes that are no longer used. Set the corresponding attributes in the
-     * appropriate
-     * {@link org.fenixedu.academic.domain.degreeStructure.CompetenceCourseInformation CompetenceCourseInformation}
-     * object.
+     *             appropriate
+     *             {@link org.fenixedu.academic.domain.degreeStructure.CompetenceCourseInformation CompetenceCourseInformation}
+     *             object.
      */
+    @Deprecated
     public void edit(String name, String nameEn, String code, String acronym, Double weigth, Double credits, Double ectsCredits,
             Integer enrolmentWeigth, Integer minimumValueForAcumulatedEnrollments, Integer maximumValueForAcumulatedEnrollments,
             final Double theoreticalHours, final Double labHours, final Double praticalHours, final Double theoPratHours,
@@ -512,10 +515,10 @@ public class CurricularCourse extends CurricularCourse_Base {
             @Override
             public boolean evaluate(Object obj) {
                 CurricularCourseScope curricularCourseScope = (CurricularCourseScope) obj;
-                return ((curricularCourseScope.getBranch().getBranchType().equals(BranchType.COMNBR) || curricularCourseScope
-                        .getBranch().equals(branch))
-                        && curricularCourseScope.getCurricularSemester().getSemester().equals(semester) && curricularCourseScope
-                        .isActive().booleanValue());
+                return ((curricularCourseScope.getBranch().getBranchType().equals(BranchType.COMNBR)
+                        || curricularCourseScope.getBranch().equals(branch))
+                        && curricularCourseScope.getCurricularSemester().getSemester().equals(semester)
+                        && curricularCourseScope.isActive().booleanValue());
             }
         });
 
@@ -661,16 +664,15 @@ public class CurricularCourse extends CurricularCourse_Base {
             String operacionalObjectives, String operacionalObjectivesEn, DateTime lastModification) {
         Curriculum curriculum = findLatestCurriculum();
         final ExecutionYear currentExecutionYear = ExecutionYear.readCurrentExecutionYear();
-        if (!curriculum.getLastModificationDateDateTime().isBefore(
-                currentExecutionYear.getBeginDateYearMonthDay().toDateMidnight())
-                && !curriculum.getLastModificationDateDateTime().isAfter(
-                        currentExecutionYear.getEndDateYearMonthDay().toDateMidnight())) {
+        if (!curriculum.getLastModificationDateDateTime()
+                .isBefore(currentExecutionYear.getBeginDateYearMonthDay().toDateMidnight())
+                && !curriculum.getLastModificationDateDateTime()
+                        .isAfter(currentExecutionYear.getEndDateYearMonthDay().toDateMidnight())) {
             curriculum.edit(generalObjectives, operacionalObjectives, program, generalObjectivesEn, operacionalObjectivesEn,
                     programEn);
         } else {
-            curriculum =
-                    insertCurriculum(program, programEn, operacionalObjectives, operacionalObjectivesEn, generalObjectives,
-                            generalObjectivesEn, lastModification);
+            curriculum = insertCurriculum(program, programEn, operacionalObjectives, operacionalObjectivesEn, generalObjectives,
+                    generalObjectivesEn, lastModification);
         }
         return curriculum;
     }
@@ -717,8 +719,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     public Curriculum findLatestCurriculum() {
         Curriculum latestCurriculum = null;
         for (final Curriculum curriculum : getAssociatedCurriculumsSet()) {
-            if (latestCurriculum == null
-                    || latestCurriculum.getLastModificationDateDateTime().isBefore(curriculum.getLastModificationDateDateTime())) {
+            if (latestCurriculum == null || latestCurriculum.getLastModificationDateDateTime()
+                    .isBefore(curriculum.getLastModificationDateDateTime())) {
                 latestCurriculum = curriculum;
             }
         }
@@ -778,9 +780,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     final public Double getLaboratorialHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getLaboratorialHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+        return getCompetenceCourse() != null ? getCompetenceCourse().getLaboratorialHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     final public Double getSeminaryHours() {
@@ -829,10 +830,10 @@ public class CurricularCourse extends CurricularCourse_Base {
         return getTrainingPeriodHours((CurricularPeriod) null, executionSemester);
     }
 
-    final public Double getTrainingPeriodHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getTrainingPeriodHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+    final public Double getTrainingPeriodHours(final CurricularPeriod curricularPeriod,
+            final ExecutionSemester executionSemester) {
+        return getCompetenceCourse() != null ? getCompetenceCourse().getTrainingPeriodHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     final public double getTutorialOrientationHours() {
@@ -847,10 +848,10 @@ public class CurricularCourse extends CurricularCourse_Base {
         return getTutorialOrientationHours((CurricularPeriod) null, executionSemester);
     }
 
-    final public Double getTutorialOrientationHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getTutorialOrientationHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+    final public Double getTutorialOrientationHours(final CurricularPeriod curricularPeriod,
+            final ExecutionSemester executionSemester) {
+        return getCompetenceCourse() != null ? getCompetenceCourse().getTutorialOrientationHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     final public double getAutonomousWorkHours() {
@@ -866,14 +867,14 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     final public Double getAutonomousWorkHours(final CurricularPeriod curricularPeriod, final ExecutionYear executionYear) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getAutonomousWorkHours(curricularPeriod.getChildOrder(), executionYear) : 0d;
+        return getCompetenceCourse() != null ? getCompetenceCourse().getAutonomousWorkHours(curricularPeriod.getChildOrder(),
+                executionYear) : 0d;
     }
 
-    final public Double getAutonomousWorkHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getAutonomousWorkHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+    final public Double getAutonomousWorkHours(final CurricularPeriod curricularPeriod,
+            final ExecutionSemester executionSemester) {
+        return getCompetenceCourse() != null ? getCompetenceCourse().getAutonomousWorkHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     final public double getContactLoad() {
@@ -932,9 +933,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     final public Double getLabHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getLaboratorialHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+        return getCompetenceCourse() != null ? getCompetenceCourse().getLaboratorialHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     @Override
@@ -951,9 +951,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     final public Double getTheoreticalHours(final CurricularPeriod curricularPeriod, final ExecutionSemester executionSemester) {
-        return getCompetenceCourse() != null ? getCompetenceCourse()
-                .getTheoreticalHours(curricularPeriod == null ? null : curricularPeriod.getChildOrder(),
-                        executionSemester) : 0.0d;
+        return getCompetenceCourse() != null ? getCompetenceCourse().getTheoreticalHours(
+                curricularPeriod == null ? null : curricularPeriod.getChildOrder(), executionSemester) : 0.0d;
     }
 
     @Override
@@ -1112,9 +1111,8 @@ public class CurricularCourse extends CurricularCourse_Base {
         for (final CurriculumModule curriculumModule : getCurriculumModulesSet()) {
             if (curriculumModule.isEnrolment()) {
                 final Enrolment enrolment = (Enrolment) curriculumModule;
-                if (!enrolment.isAnnulled()
-                        && (enrolment.getExecutionPeriod().getAcademicInterval().equals(academicInterval) || enrolment
-                                .getExecutionPeriod().getExecutionYear().getAcademicInterval().equals(academicInterval))) {
+                if (!enrolment.isAnnulled() && (enrolment.getExecutionPeriod().getAcademicInterval().equals(academicInterval)
+                        || enrolment.getExecutionPeriod().getExecutionYear().getAcademicInterval().equals(academicInterval))) {
                     enrolments.add(enrolment);
                 }
             }
@@ -1261,11 +1259,11 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     protected String getBaseName() {
-    	return super.getName();
+        return super.getName();
     }
 
     protected String getBaseNameEn() {
-    	return super.getNameEn();
+        return super.getNameEn();
     }
 
     @Override
@@ -1425,8 +1423,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     public LocalizedString getPrerequisitesI18N() {
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, getPrerequisites()).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                getPrerequisitesEn());
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, getPrerequisites())
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, getPrerequisitesEn());
     }
 
     public String getEvaluationMethod(ExecutionSemester period) {
@@ -1467,15 +1465,16 @@ public class CurricularCourse extends CurricularCourse_Base {
 
     public LocalizedString getEvaluationMethodI18N(ExecutionSemester period) {
         if (getCompetenceCourse() != null) {
-            return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, getCompetenceCourse().getEvaluationMethod(period))
-                    .with(org.fenixedu.academic.util.LocaleUtils.EN, getCompetenceCourse().getEvaluationMethodEn(period));
+            return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT,
+                    getCompetenceCourse().getEvaluationMethod(period)).with(org.fenixedu.academic.util.LocaleUtils.EN,
+                            getCompetenceCourse().getEvaluationMethodEn(period));
         }
         List<ExecutionCourse> courses = getExecutionCoursesByExecutionPeriod(period);
         if (courses.isEmpty()) {
             return new LocalizedString();
         }
-        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, courses.iterator().next().getEvaluationMethodText()).with(
-                org.fenixedu.academic.util.LocaleUtils.EN, courses.iterator().next().getEvaluationMethodTextEn());
+        return new LocalizedString(org.fenixedu.academic.util.LocaleUtils.PT, courses.iterator().next().getEvaluationMethodText())
+                .with(org.fenixedu.academic.util.LocaleUtils.EN, courses.iterator().next().getEvaluationMethodTextEn());
     }
 
     public RegimeType getRegime(final ExecutionSemester period) {
@@ -1550,9 +1549,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     }
 
     public boolean isEquivalent(CurricularCourse oldCurricularCourse) {
-        return equals(oldCurricularCourse)
-                || (getCompetenceCourse() != null && getCompetenceCourse().getAssociatedCurricularCoursesSet().contains(
-                        oldCurricularCourse));
+        return equals(oldCurricularCourse) || (getCompetenceCourse() != null
+                && getCompetenceCourse().getAssociatedCurricularCoursesSet().contains(oldCurricularCourse));
     }
 
     public boolean hasScopeForCurricularYear(final Integer curricularYear, final ExecutionSemester executionSemester) {
@@ -1588,8 +1586,8 @@ public class CurricularCourse extends CurricularCourse_Base {
     public Set<CurricularCourseScope> findCurricularCourseScopesIntersectingExecutionCourse(ExecutionCourse executionCourse) {
         AcademicInterval academicInterval = executionCourse.getAcademicInterval();
 
-        return findCurricularCourseScopesIntersectingPeriod(academicInterval.getStart().toDate(), academicInterval.getEnd()
-                .toDate());
+        return findCurricularCourseScopesIntersectingPeriod(academicInterval.getStart().toDate(),
+                academicInterval.getEnd().toDate());
     }
 
     public Set<Enrolment> getEnrolmentsNotInAnyMarkSheet(EvaluationSeason season, ExecutionSemester executionSemester) {
@@ -1601,8 +1599,8 @@ public class CurricularCourse extends CurricularCourse_Base {
                 final Enrolment enrolment = (Enrolment) curriculumModule;
 
                 if (enrolment.isValid(executionSemester)
-                        && (season.isSpecialAuthorization() || (season.equals(enrolment.getEvaluationSeason()) && !enrolment
-                                .hasAssociatedMarkSheetOrFinalGrade(season)))) {
+                        && (season.isSpecialAuthorization() || (season.equals(enrolment.getEvaluationSeason())
+                                && !enrolment.hasAssociatedMarkSheetOrFinalGrade(season)))) {
                     result.add(enrolment);
                 } else if (season.isImprovement()) {
                     if (enrolment.hasImprovementFor(executionSemester) && !enrolment.hasAssociatedMarkSheet(season)) {
@@ -1709,8 +1707,8 @@ public class CurricularCourse extends CurricularCourse_Base {
                 person);
     }
 
-    public MarkSheet rectifyEnrolmentEvaluation(MarkSheet markSheet, EnrolmentEvaluation enrolmentEvaluation,
-            Date evaluationDate, Grade grade, String reason, Person person) {
+    public MarkSheet rectifyEnrolmentEvaluation(MarkSheet markSheet, EnrolmentEvaluation enrolmentEvaluation, Date evaluationDate,
+            Grade grade, String reason, Person person) {
 
         if (markSheet == null || evaluationDate == null || grade.isEmpty()) {
             throw new DomainException("error.markSheet.invalid.arguments");
@@ -1725,17 +1723,16 @@ public class CurricularCourse extends CurricularCourse_Base {
         }
 
         if (enrolmentEvaluation.getRectification() != null) {
-            throw new DomainException("error.markSheet.student.alreadyRectified", enrolmentEvaluation.getEnrolment()
-                    .getStudentCurricularPlan().getRegistration().getNumber().toString());
+            throw new DomainException("error.markSheet.student.alreadyRectified",
+                    enrolmentEvaluation.getEnrolment().getStudentCurricularPlan().getRegistration().getNumber().toString());
         }
 
         enrolmentEvaluation.setEnrolmentEvaluationState(EnrolmentEvaluationState.TEMPORARY_OBJ);
         // enrolmentEvaluation.setWhenDateTime(new DateTime());
 
-        MarkSheet rectificationMarkSheet =
-                createRectificationMarkSheet(markSheet.getExecutionPeriod(), evaluationDate, markSheet.getResponsibleTeacher(),
-                        markSheet.getEvaluationSeason(), reason,
-                        new MarkSheetEnrolmentEvaluationBean(enrolmentEvaluation.getEnrolment(), evaluationDate, grade), person);
+        MarkSheet rectificationMarkSheet = createRectificationMarkSheet(markSheet.getExecutionPeriod(), evaluationDate,
+                markSheet.getResponsibleTeacher(), markSheet.getEvaluationSeason(), reason,
+                new MarkSheetEnrolmentEvaluationBean(enrolmentEvaluation.getEnrolment(), evaluationDate, grade), person);
 
         // Rectification MarkSheet MUST have only ONE EnrolmentEvaluation
         rectificationMarkSheet.getEnrolmentEvaluationsSet().iterator().next().setRectified(enrolmentEvaluation);
@@ -1750,16 +1747,15 @@ public class CurricularCourse extends CurricularCourse_Base {
         }
 
         if (enrolmentEvaluation.getRectification() != null) {
-            throw new DomainException("error.markSheet.student.alreadyRectified", enrolmentEvaluation.getEnrolment()
-                    .getStudentCurricularPlan().getRegistration().getNumber().toString());
+            throw new DomainException("error.markSheet.student.alreadyRectified",
+                    enrolmentEvaluation.getEnrolment().getStudentCurricularPlan().getRegistration().getNumber().toString());
         }
 
         enrolmentEvaluation.setEnrolmentEvaluationState(EnrolmentEvaluationState.TEMPORARY_OBJ);
 
-        MarkSheet rectificationMarkSheet =
-                createRectificationOldMarkSheet(enrolmentEvaluation.getExecutionPeriod(), evaluationDate, enrolmentEvaluation
-                        .getPersonResponsibleForGrade().getTeacher(), season, reason, new MarkSheetEnrolmentEvaluationBean(
-                        enrolmentEvaluation.getEnrolment(), evaluationDate, newGrade), person);
+        MarkSheet rectificationMarkSheet = createRectificationOldMarkSheet(enrolmentEvaluation.getExecutionPeriod(),
+                evaluationDate, enrolmentEvaluation.getPersonResponsibleForGrade().getTeacher(), season, reason,
+                new MarkSheetEnrolmentEvaluationBean(enrolmentEvaluation.getEnrolment(), evaluationDate, newGrade), person);
 
         // Rectification MarkSheet MUST have only ONE EnrolmentEvaluation
         rectificationMarkSheet.getEnrolmentEvaluationsSet().iterator().next().setRectified(enrolmentEvaluation);
@@ -1796,8 +1792,8 @@ public class CurricularCourse extends CurricularCourse_Base {
             if (teacher != null && markSheet.getResponsibleTeacher() != teacher) {
                 continue;
             }
-            if (evaluationDate != null
-                    && DateFormatUtil.compareDates(dateFormat, evaluationDate, markSheet.getEvaluationDateDateTime().toDate()) != 0) {
+            if (evaluationDate != null && DateFormatUtil.compareDates(dateFormat, evaluationDate,
+                    markSheet.getEvaluationDateDateTime().toDate()) != 0) {
                 continue;
             }
             if (markSheetState != null && markSheet.getMarkSheetState() != markSheetState) {
@@ -1965,7 +1961,8 @@ public class CurricularCourse extends CurricularCourse_Base {
         return result;
     }
 
-    public List<CurricularCourseEquivalence> getCurricularCourseEquivalencesFor(final CurricularCourse equivalentCurricularCourse) {
+    public List<CurricularCourseEquivalence> getCurricularCourseEquivalencesFor(
+            final CurricularCourse equivalentCurricularCourse) {
         final List<CurricularCourseEquivalence> result = new ArrayList<CurricularCourseEquivalence>();
         for (final CurricularCourseEquivalence curricularCourseEquivalence : getOldCurricularCourseEquivalencesSet()) {
             if (curricularCourseEquivalence.getEquivalentCurricularCourse() == equivalentCurricularCourse) {
@@ -1988,14 +1985,14 @@ public class CurricularCourse extends CurricularCourse_Base {
 
     @Override
     public Integer getMinimumValueForAcumulatedEnrollments() {
-        return super.getMinimumValueForAcumulatedEnrollments() == null ? Integer.valueOf(0) : super
-                .getMinimumValueForAcumulatedEnrollments();
+        return super.getMinimumValueForAcumulatedEnrollments() == null ? Integer
+                .valueOf(0) : super.getMinimumValueForAcumulatedEnrollments();
     }
 
     @Override
     public Integer getMaximumValueForAcumulatedEnrollments() {
-        return super.getMaximumValueForAcumulatedEnrollments() == null ? Integer.valueOf(0) : super
-                .getMaximumValueForAcumulatedEnrollments();
+        return super.getMaximumValueForAcumulatedEnrollments() == null ? Integer
+                .valueOf(0) : super.getMaximumValueForAcumulatedEnrollments();
     }
 
     public BigDecimal getTotalHoursByShiftType(ShiftType type, ExecutionSemester executionSemester) {
@@ -2032,7 +2029,8 @@ public class CurricularCourse extends CurricularCourse_Base {
             default:
                 break;
             }
-            return hours != null ? BigDecimal.valueOf(hours).multiply(BigDecimal.valueOf(CompetenceCourseLoad.NUMBER_OF_WEEKS)) : null;
+            return hours != null ? BigDecimal.valueOf(hours)
+                    .multiply(BigDecimal.valueOf(CompetenceCourseLoad.NUMBER_OF_WEEKS)) : null;
         }
         return null;
     }
@@ -2091,7 +2089,8 @@ public class CurricularCourse extends CurricularCourse_Base {
                 EnrolmentEvaluation latestEnrolmentEvaluationBy = enrolment.getLatestEnrolmentEvaluationBySeason(season);
                 if (latestEnrolmentEvaluationBy != null
                         && latestEnrolmentEvaluationBy.getExecutionPeriod().equals(executionSemester)
-                        && latestEnrolmentEvaluationBy.isFinal() && latestEnrolmentEvaluationBy.getExamDateYearMonthDay() != null) {
+                        && latestEnrolmentEvaluationBy.isFinal()
+                        && latestEnrolmentEvaluationBy.getExamDateYearMonthDay() != null) {
                     res.add(latestEnrolmentEvaluationBy);
                 }
             } else {
@@ -2143,7 +2142,7 @@ public class CurricularCourse extends CurricularCourse_Base {
 
     @Override
     public String getCode() {
-       return getCompetenceCourse() != null ? getCompetenceCourse().getCode() : null;
+        return getCompetenceCourse() != null ? getCompetenceCourse().getCode() : null;
     }
 
     public void setWeight(final BigDecimal input) {

@@ -109,8 +109,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
                     continue;
                 }
 
-                if (!PhdIndividualProgramCollaborationType.EPFL.equals(phdHashCode.getIndividualProgramProcess()
-                        .getCollaborationType())) {
+                if (!PhdIndividualProgramCollaborationType.EPFL
+                        .equals(phdHashCode.getIndividualProgramProcess().getCollaborationType())) {
                     continue;
                 }
 
@@ -139,8 +139,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
         }
 
         if (!candidates.containsKey(focusArea)) {
-            candidates.put(focusArea, new TreeSet<PhdProgramPublicCandidacyHashCode>(
-                    new Comparator<PhdProgramPublicCandidacyHashCode>() {
+            candidates.put(focusArea,
+                    new TreeSet<PhdProgramPublicCandidacyHashCode>(new Comparator<PhdProgramPublicCandidacyHashCode>() {
 
                         @Override
                         public int compare(PhdProgramPublicCandidacyHashCode o1, PhdProgramPublicCandidacyHashCode o2) {
@@ -218,7 +218,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
         page.rowStart().header("Area:").column(process.getPhdProgramFocusArea().getName().getContent()).rowEnd();
         final ExecutionYear executionYear = process.getExecutionYear();
         page.rowStart().header(Unit.getInstitutionAcronym() + " Phd Program:")
-                .column(process.getPhdProgram().getName(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.EN)).rowEnd();
+                .column(process.getPhdProgram().getName(executionYear).getContent(org.fenixedu.academic.util.LocaleUtils.EN))
+                .rowEnd();
         if (process.getExternalPhdProgram() != null) {
             page.rowStart().header("EPFL Phd Program:")
                     .column(process.getExternalPhdProgram().getName().getContent(org.fenixedu.academic.util.LocaleUtils.EN));
@@ -238,9 +239,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
         if (!process.getCandidacyProcessDocuments().isEmpty()) {
 
             final String documentName = folderName + "-documents.zip";
-            final String url =
-                    APPLICATION_PREFIX_LINK + "/phd/epfl/applications/candidateDocuments?candidateOid="
-                            + hashCode.getExternalId();
+            final String url = APPLICATION_PREFIX_LINK + "/phd/epfl/applications/candidateDocuments?candidateOid="
+                    + hashCode.getExternalId();
             page.pStart("mbottom0").link(url, documentName).pEnd();
 
             page.tableStart("tstyle2 thwhite thnowrap thlight thleft thtop ulnomargin ");
@@ -256,7 +256,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
         }
     }
 
-    private static void drawThesisRanking(Page page, PhdProgramPublicCandidacyHashCode hashCode, String email) throws IOException {
+    private static void drawThesisRanking(Page page, PhdProgramPublicCandidacyHashCode hashCode, String email)
+            throws IOException {
 
         page.h(3, "Thesis Rank", "mtop2");
         final PhdIndividualProgramProcess process = hashCode.getIndividualProgramProcess();
@@ -292,7 +293,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
             zip = new ZipOutputStream(outputStream);
 
             int count = 1;
-            for (final PhdProgramProcessDocument document : hashCode.getIndividualProgramProcess().getCandidacyProcessDocuments()) {
+            for (final PhdProgramProcessDocument document : hashCode.getIndividualProgramProcess()
+                    .getCandidacyProcessDocuments()) {
                 final ZipEntry zipEntry = new ZipEntry(count + "-" + document.getFilename());
                 zip.putNextEntry(zipEntry);
 
@@ -348,9 +350,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
 
         if (referee.isLetterAvailable()) {
             page.rowStart().header("Referee form submitted:");
-            final String url =
-                    APPLICATION_PREFIX_LINK + "/phd/epfl/applications/referee?refereeOid=" + referee.getExternalId()
-                            + "&amp;count=" + count;
+            final String url = APPLICATION_PREFIX_LINK + "/phd/epfl/applications/referee?refereeOid=" + referee.getExternalId()
+                    + "&amp;count=" + count;
             page.columnStart().link(url, "Yes").columnEnd().rowEnd();
         } else {
             page.rowStart().header("Referee form submitted:").column("No").rowEnd();
@@ -492,8 +493,8 @@ public class ExportPhdIndividualProgramProcessesInHtml {
         int BUFFER_SIZE = 1024 * 1024;
         try {
             final byte[] buffer = new byte[BUFFER_SIZE];
-            for (int numberOfBytesRead; (numberOfBytesRead = inputStream.read(buffer, 0, BUFFER_SIZE)) != -1; outputStream.write(
-                    buffer, 0, numberOfBytesRead)) {
+            for (int numberOfBytesRead; (numberOfBytesRead = inputStream.read(buffer, 0, BUFFER_SIZE)) != -1; outputStream
+                    .write(buffer, 0, numberOfBytesRead)) {
                 ;
             }
         } finally {

@@ -54,8 +54,8 @@ public class DegreeTransferIndividualCandidacyPR extends DegreeTransferIndividua
             final Money amountForExternalStudent) {
 
         this();
-        super.init(EntryType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_FEE, EventType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY, start,
-                end, agreementTemplate);
+        super.init(EntryType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_FEE, EventType.DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY, start, end,
+                agreementTemplate);
         checkParameters(amountForInstitutionStudent, amountForExternalStudent);
         super.setAmountForInstitutionStudent(amountForInstitutionStudent);
         super.setAmountForExternalStudent(amountForExternalStudent);
@@ -83,8 +83,8 @@ public class DegreeTransferIndividualCandidacyPR extends DegreeTransferIndividua
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
         final Money amountToPay = calculateTotalAmountToPay(event, when);
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay, event
-                .getDescriptionForEntryType(getEntryType()), amountToPay));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay,
+                event.getDescriptionForEntryType(getEntryType()), amountToPay));
     }
 
     @Override
@@ -117,7 +117,8 @@ public class DegreeTransferIndividualCandidacyPR extends DegreeTransferIndividua
         final PrecedentDegreeInformation information = individualCandidacy.getRefactoredPrecedentDegreeInformation();
 
         if (individualCandidacy.getUtlStudent() != null) {
-            return individualCandidacy.getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS;
+            return individualCandidacy
+                    .getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_TRANSFER_INDIVIDUAL_CANDIDACY_PROCESS;
         } else {
             if (information.isCandidacyInternal() || hasAnyValidRegistration((DegreeTransferIndividualCandidacyEvent) event)
                     || belongsToInstitutionGroup(information.getInstitution())) {
@@ -173,7 +174,8 @@ public class DegreeTransferIndividualCandidacyPR extends DegreeTransferIndividua
         }
     }
 
-    public DegreeTransferIndividualCandidacyPR edit(final Money amountForInstitutionStudent, final Money amountForExternalStudent) {
+    public DegreeTransferIndividualCandidacyPR edit(final Money amountForInstitutionStudent,
+            final Money amountForExternalStudent) {
         deactivate();
         return new DegreeTransferIndividualCandidacyPR(new DateTime(), null, getServiceAgreementTemplate(),
                 amountForInstitutionStudent, amountForExternalStudent);

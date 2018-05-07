@@ -49,8 +49,8 @@ public class DeleteBibliographicReference {
     private static final DeleteBibliographicReference serviceInstance = new DeleteBibliographicReference();
 
     @Atomic
-    public static Boolean runDeleteBibliographicReference(String bibliographicReferenceOID) throws FenixServiceException,
-            NotAuthorizedException {
+    public static Boolean runDeleteBibliographicReference(String bibliographicReferenceOID)
+            throws FenixServiceException, NotAuthorizedException {
         ExecutionCourseAndBibliographicReferenceLecturingTeacherAuthorizationFilter.instance.execute(bibliographicReferenceOID);
         return serviceInstance.run(bibliographicReferenceOID);
     }

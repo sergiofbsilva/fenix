@@ -18,9 +18,6 @@
  */
 package org.fenixedu.academic.service.services.enrollment.shift;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.student.Registration;
@@ -29,10 +26,10 @@ import org.fenixedu.academic.service.filter.enrollment.ClassEnrollmentAuthorizat
 import org.fenixedu.academic.service.services.exceptions.FenixServiceException;
 import org.fenixedu.academic.service.services.exceptions.NotAuthorizedException;
 
+import com.google.common.base.Strings;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.common.base.Strings;
 
 public class WriteStudentAttendingCourse {
 
@@ -46,7 +43,8 @@ public class WriteStudentAttendingCourse {
 
         ExecutionCourse executionCourse = readExecutionCourse(executionCourseId);
 
-        if (registration.getStudent().getRegistrationStream().filter(r -> !r.equals(registration)).anyMatch(r -> r.attends(executionCourse))) {
+        if (registration.getStudent().getRegistrationStream().filter(r -> !r.equals(registration))
+                .anyMatch(r -> r.attends(executionCourse))) {
             throw new FenixServiceException("error.registration.executionCourse.alreadyAttends");
         }
 

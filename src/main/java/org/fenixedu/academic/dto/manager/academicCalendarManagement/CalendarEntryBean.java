@@ -191,13 +191,13 @@ public class CalendarEntryBean implements Serializable {
     public static Partial getPartialFromString(String date) {
         Integer month = Integer.valueOf(date.substring(0, 2));
         Integer year = Integer.valueOf(date.substring(2));
-        return new Partial(new DateTimeFieldType[] { DateTimeFieldType.year(), DateTimeFieldType.monthOfYear() }, new int[] {
-                year.intValue(), month.intValue() });
+        return new Partial(new DateTimeFieldType[] { DateTimeFieldType.year(), DateTimeFieldType.monthOfYear() },
+                new int[] { year.intValue(), month.intValue() });
     }
 
     public static Partial getPartialFromYearMonthDay(YearMonthDay day) {
-        return new Partial(new DateTimeFieldType[] { DateTimeFieldType.year(), DateTimeFieldType.monthOfYear() }, new int[] {
-                day.getYear(), day.getMonthOfYear() });
+        return new Partial(new DateTimeFieldType[] { DateTimeFieldType.year(), DateTimeFieldType.monthOfYear() },
+                new int[] { day.getYear(), day.getMonthOfYear() });
     }
 
     private static YearMonthDay getDateFromPartial(Partial partial) {

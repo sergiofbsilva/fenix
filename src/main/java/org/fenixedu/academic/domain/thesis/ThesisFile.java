@@ -64,9 +64,8 @@ public class ThesisFile extends ThesisFile_Base {
     }
 
     private Set<User> getThesisMembers() {
-        Set<User> members =
-                getThesis().getParticipationsSet().stream().filter(p -> p.getPerson() != null)
-                        .map((p) -> p.getPerson().getUser()).collect(Collectors.toSet());
+        Set<User> members = getThesis().getParticipationsSet().stream().filter(p -> p.getPerson() != null)
+                .map((p) -> p.getPerson().getUser()).collect(Collectors.toSet());
         members.add(getThesis().getStudent().getPerson().getUser());
         return members;
     }

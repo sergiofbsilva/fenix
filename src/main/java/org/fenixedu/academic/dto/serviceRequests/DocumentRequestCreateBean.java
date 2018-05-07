@@ -368,9 +368,10 @@ public class DocumentRequestCreateBean extends RegistrationAcademicServiceReques
     }
 
     final public boolean getIsForProgramConclusionPurposes() {
-        return Stream.of(DocumentRequestType.DEGREE_FINALIZATION_CERTIFICATE, DocumentRequestType.REGISTRY_DIPLOMA_REQUEST,
-                DocumentRequestType.DIPLOMA_REQUEST, DocumentRequestType.DIPLOMA_SUPPLEMENT_REQUEST).anyMatch(
-                type -> type.equals(getChosenDocumentRequestType()));
+        return Stream
+                .of(DocumentRequestType.DEGREE_FINALIZATION_CERTIFICATE, DocumentRequestType.REGISTRY_DIPLOMA_REQUEST,
+                        DocumentRequestType.DIPLOMA_REQUEST, DocumentRequestType.DIPLOMA_SUPPLEMENT_REQUEST)
+                .anyMatch(type -> type.equals(getChosenDocumentRequestType()));
     }
 
     final public boolean getHasMobilityProgramDependency() {

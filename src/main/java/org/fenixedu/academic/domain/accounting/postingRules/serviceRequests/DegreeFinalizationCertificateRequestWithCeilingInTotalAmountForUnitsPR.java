@@ -26,8 +26,8 @@ import org.fenixedu.academic.domain.accounting.ServiceAgreementTemplate;
 import org.fenixedu.academic.util.Money;
 import org.joda.time.DateTime;
 
-public class DegreeFinalizationCertificateRequestWithCeilingInTotalAmountForUnitsPR extends
-        DegreeFinalizationCertificateRequestWithCeilingInTotalAmountForUnitsPR_Base {
+public class DegreeFinalizationCertificateRequestWithCeilingInTotalAmountForUnitsPR
+        extends DegreeFinalizationCertificateRequestWithCeilingInTotalAmountForUnitsPR_Base {
 
     private DegreeFinalizationCertificateRequestWithCeilingInTotalAmountForUnitsPR() {
         super();

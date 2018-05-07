@@ -73,20 +73,20 @@ public class ExternalUnitResultBean extends AbstractExternalUnitResultBean {
 
     @Override
     public String getNumberOfUniversities() {
-        return getUnit().isCountryUnit() ? String.valueOf(getUnit().getSubUnits(PartyTypeEnum.UNIVERSITY).size()) : super
-                .getNumberOfUniversities();
+        return getUnit().isCountryUnit() ? String
+                .valueOf(getUnit().getSubUnits(PartyTypeEnum.UNIVERSITY).size()) : super.getNumberOfUniversities();
     }
 
     @Override
     public String getNumberOfSchools() {
-        return (getUnit().isCountryUnit() || getUnit().isUniversityUnit()) ? String.valueOf(countNumberOfUnitsWithType(getUnit(),
-                PartyTypeEnum.SCHOOL)) : super.getNumberOfSchools();
+        return (getUnit().isCountryUnit() || getUnit().isUniversityUnit()) ? String
+                .valueOf(countNumberOfUnitsWithType(getUnit(), PartyTypeEnum.SCHOOL)) : super.getNumberOfSchools();
     }
 
     @Override
     public String getNumberOfDepartments() {
-        return (getUnit().isUniversityUnit() || getUnit().isSchoolUnit()) ? String.valueOf(countNumberOfUnitsWithType(getUnit(),
-                PartyTypeEnum.DEPARTMENT)) : super.getNumberOfDepartments();
+        return (getUnit().isUniversityUnit() || getUnit().isSchoolUnit()) ? String
+                .valueOf(countNumberOfUnitsWithType(getUnit(), PartyTypeEnum.DEPARTMENT)) : super.getNumberOfDepartments();
     }
 
     private int countNumberOfUnitsWithType(final Unit unit, final PartyTypeEnum unitTypeToSearch) {
@@ -125,8 +125,8 @@ public class ExternalUnitResultBean extends AbstractExternalUnitResultBean {
 
     @Override
     public String getNumberOfExternalCurricularCourses() {
-        return !getUnit().isCountryUnit() ? String.valueOf(countNumberOfExternalCurricularCourses(getUnit())) : super
-                .getNumberOfExternalCurricularCourses();
+        return !getUnit().isCountryUnit() ? String
+                .valueOf(countNumberOfExternalCurricularCourses(getUnit())) : super.getNumberOfExternalCurricularCourses();
     }
 
     private int countNumberOfExternalCurricularCourses(final Unit unit) {

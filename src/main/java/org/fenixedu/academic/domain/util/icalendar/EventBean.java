@@ -19,8 +19,8 @@
 package org.fenixedu.academic.domain.util.icalendar;
 
 import java.util.Set;
-
 import java.util.stream.Collectors;
+
 import org.fenixedu.spaces.domain.Space;
 import org.joda.time.DateTime;
 

@@ -30,8 +30,7 @@ import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(module = "coordinator", path = "/registration", functionality = DegreeCoordinatorIndex.class)
-@Forwards({
-        @Forward(name = "view-registration-curriculum", path = "/student/curriculum/viewRegistrationCurriculum.jsp"),
+@Forwards({ @Forward(name = "view-registration-curriculum", path = "/student/curriculum/viewRegistrationCurriculum.jsp"),
         @Forward(name = "chooseCycleForViewRegistrationCurriculum",
                 path = "/student/curriculum/chooseCycleForViewRegistrationCurriculum.jsp") })
 public class CoordinatorRegistrationDA extends RegistrationDA {

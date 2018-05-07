@@ -41,9 +41,8 @@ public class AcademicYearsDurationField extends BaseDurationField {
             AcademicYearCE academicYearCE = chronology.getAcademicYearIn(academicYear);
             AcademicYearCE academicYearCEAfter = chronology.getAcademicYearIn(academicYear + value);
             if (academicYearCEAfter != null) {
-                long result =
-                        academicYearCEAfter.getBegin().getMillis()
-                                + new Duration(academicYearCE.getBegin().getMillis(), instant).getMillis();
+                long result = academicYearCEAfter.getBegin().getMillis()
+                        + new Duration(academicYearCE.getBegin().getMillis(), instant).getMillis();
                 return result < academicYearCE.getEnd().getMillis() ? result : academicYearCE.getEnd().getMillis();
             }
         }
@@ -72,9 +71,8 @@ public class AcademicYearsDurationField extends BaseDurationField {
             AcademicYearCE academicYearCE = chronology.getAcademicYearIn(academicYear);
             AcademicYearCE academicYearCEAfter = chronology.getAcademicYearIn(academicYear + value);
             if (academicYearCEAfter != null) {
-                long result =
-                        academicYearCEAfter.getBegin().getMillis()
-                                + new Duration(academicYearCE.getBegin().getMillis(), instant).getMillis();
+                long result = academicYearCEAfter.getBegin().getMillis()
+                        + new Duration(academicYearCE.getBegin().getMillis(), instant).getMillis();
                 return result < academicYearCE.getEnd().getMillis() ? result - instant : academicYearCE.getEnd().getMillis()
                         - instant;
             }

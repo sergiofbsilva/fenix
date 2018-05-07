@@ -119,8 +119,8 @@ public class PrecedentDegreeInformationForIndividualCandidacyFactory {
 
         if (candidacyProcessWithPDIBean.isExternalPrecedentDegreeType()) {
             pdi.setPrecedentInstitution(getOrCreateInstitution(bean));
-            pdi.setNumberOfEnrolmentsInPreviousDegrees(candidacyProcessWithPDIBean
-                    .getNumberOfPreviousYearEnrolmentsInPrecedentDegree());
+            pdi.setNumberOfEnrolmentsInPreviousDegrees(
+                    candidacyProcessWithPDIBean.getNumberOfPreviousYearEnrolmentsInPrecedentDegree());
             pdi.setCandidacyInternal(false);
         } else {
             pdi.setCandidacyInternal(true);

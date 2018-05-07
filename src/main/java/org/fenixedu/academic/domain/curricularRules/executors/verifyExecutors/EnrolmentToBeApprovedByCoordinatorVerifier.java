@@ -36,8 +36,8 @@ public class EnrolmentToBeApprovedByCoordinatorVerifier extends VerifyRuleExecut
 
         if (AcademicAccessRule
                 .getProgramsAccessibleToFunction(AcademicOperationType.STUDENT_ENROLMENTS,
-                        enrolmentContext.getResponsiblePerson().getUser()).collect(Collectors.toSet())
-                .contains(enrolmentContext.getStudentCurricularPlan().getDegree())) {
+                        enrolmentContext.getResponsiblePerson().getUser())
+                .collect(Collectors.toSet()).contains(enrolmentContext.getStudentCurricularPlan().getDegree())) {
             return RuleResult.createTrue(degreeModuleToVerify);
         }
 

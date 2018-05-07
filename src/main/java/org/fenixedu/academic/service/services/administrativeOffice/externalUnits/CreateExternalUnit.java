@@ -40,9 +40,11 @@ public class CreateExternalUnit {
             return DepartmentUnit.createNewOfficialExternalDepartmentUnit(externalUnitBean.getUnitName(),
                     externalUnitBean.getUnitCode(), externalUnitBean.getParentUnit());
         } else {
-            return new CreateUnit().run(externalUnitBean.getParentUnit(), new LocalizedString(Locale.getDefault(),
-                    externalUnitBean.getUnitName()), null, null, externalUnitBean.getUnitCode(), new YearMonthDay(), null,
-                    externalUnitBean.getUnitType(), null, null, null, null, null, null, null, null);
+            new CreateUnit();
+            return CreateUnit.run(externalUnitBean.getParentUnit(),
+                    new LocalizedString(Locale.getDefault(), externalUnitBean.getUnitName()), null, null,
+                    externalUnitBean.getUnitCode(), new YearMonthDay(), null, externalUnitBean.getUnitType(), null, null, null,
+                    null, null, null, null, null);
         }
     }
 }

@@ -21,8 +21,8 @@ package org.fenixedu.academic.domain.messaging;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.accessControl.StudentGroup;
 import org.fenixedu.academic.domain.accessControl.TeacherGroup;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.groups.Group;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 public class ExecutionCourseForum extends ExecutionCourseForum_Base {
 

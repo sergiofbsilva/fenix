@@ -83,6 +83,6 @@ public class IdentificationDocumentSeriesNumber extends IdentificationDocumentSe
     }
 
     private static int toInt(final char c) {
-        return Character.isDigit(c) ? Character.getNumericValue(c) : ((int) c) - ((int) 'A') + 10;
+        return Character.isDigit(c) ? Character.getNumericValue(c) : (c) - ('A') + 10;
     }
 }

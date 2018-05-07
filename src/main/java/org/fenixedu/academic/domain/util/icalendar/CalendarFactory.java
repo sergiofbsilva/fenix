@@ -26,6 +26,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
 
+import org.fenixedu.academic.domain.organizationalStructure.Unit;
+
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.DateTime;
@@ -40,8 +42,6 @@ import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Url;
 import net.fortuna.ical4j.model.property.Version;
-
-import org.fenixedu.academic.domain.organizationalStructure.Unit;
 
 public class CalendarFactory {
     public static String PROD_ID_APPLICATION = "Sistema Fenix";

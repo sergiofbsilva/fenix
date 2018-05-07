@@ -167,7 +167,8 @@ public class SearchPhdMigrationProcessBean implements Serializable {
     public AndPredicate<PhdMigrationIndividualProcessData> getPredicates() {
         if (getSearchValue() != null && !getSearchValue().isEmpty()) {
             String searchValue = getSearchValue().trim();
-            setPhdStudentNumber((getSearchCriterion() == SearchCriterion.PHD_STUDENT_NUMBER) ? Integer.valueOf(searchValue) : null);
+            setPhdStudentNumber(
+                    (getSearchCriterion() == SearchCriterion.PHD_STUDENT_NUMBER) ? Integer.valueOf(searchValue) : null);
         }
 
         final AndPredicate<PhdMigrationIndividualProcessData> result = new AndPredicate<PhdMigrationIndividualProcessData>();
@@ -229,7 +230,8 @@ public class SearchPhdMigrationProcessBean implements Serializable {
             });
         }
 
-        if (getFilterNotMigratedProcesses() != null && !getFilterNotMigratedProcesses().equals(FilterMigratedProcesses.NO_FILTER)) {
+        if (getFilterNotMigratedProcesses() != null
+                && !getFilterNotMigratedProcesses().equals(FilterMigratedProcesses.NO_FILTER)) {
             result.add(new InlinePredicate<PhdMigrationIndividualProcessData, FilterMigratedProcesses>(
                     getFilterNotMigratedProcesses()) {
 

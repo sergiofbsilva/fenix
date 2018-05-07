@@ -111,22 +111,17 @@ public class UIAutoComplete extends UIInput {
     private void encodeAutoCompleteInitializationScript(ResponseWriter writer, String inputTextClientId, String divClientId,
             String contextPath, String serviceName, String serviceArgs, String labelField, String valueField,
             String autoCompleteItemsStyleClass, String className, String inputTextArgName) throws IOException {
-        String finalUri =
-                MessageFormat.format(contextPath + "/" + DEFAULT_AUTO_COMPLETE_SERVLET_URI
-                        + "?args={0}&labelField={1}&valueField={2}&styleClass={3}&class={4}&inputTextArgName={5}", new Object[] {
-                        "serviceName=" + serviceName + ",serviceArgs=" + URLEncoder.encode(serviceArgs, DEFAULT_ENCODING),
+        String finalUri = MessageFormat.format(
+                contextPath + "/" + DEFAULT_AUTO_COMPLETE_SERVLET_URI
+                        + "?args={0}&labelField={1}&valueField={2}&styleClass={3}&class={4}&inputTextArgName={5}",
+                new Object[] { "serviceName=" + serviceName + ",serviceArgs=" + URLEncoder.encode(serviceArgs, DEFAULT_ENCODING),
                         labelField, valueField, autoCompleteItemsStyleClass, className, inputTextArgName });
 
         String escapeId = escapeId(inputTextClientId);
-        String scriptText =
-                "$(\"input#"
-                        + escapeId
-                        + "\").autocomplete(\""
-                        + finalUri
-                        + "\", { minChars: 3"
-                        + ", validSelection: false"
-                        + ", cleanSelection: clearAutoComplete, select: selectElement, after: updateCustomValue, error:showError}); +\n"
-                        + "$(\"input[name='" + escapeId + "']\").val($(\"input#" + escapeId + "\").val());";
+        String scriptText = "$(\"input#" + escapeId + "\").autocomplete(\"" + finalUri + "\", { minChars: 3"
+                + ", validSelection: false"
+                + ", cleanSelection: clearAutoComplete, select: selectElement, after: updateCustomValue, error:showError}); +\n"
+                + "$(\"input[name='" + escapeId + "']\").val($(\"input#" + escapeId + "\").val());";
 
         writer.startElement("script", null);
         writer.writeAttribute("language", "JavaScript", null);
@@ -234,8 +229,8 @@ public class UIAutoComplete extends UIInput {
                 if (correctLabelForExternalId.equals(submittedInputTextValue) == false) {
                     String errorMessage = getMessageFromBundle(context, INVALID_AUTO_COMPLETE_INPUT);
 
-                    context.addMessage(getClientId(context), new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage,
-                            errorMessage));
+                    context.addMessage(getClientId(context),
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, errorMessage));
 
                     this.setValid(false);
                 }

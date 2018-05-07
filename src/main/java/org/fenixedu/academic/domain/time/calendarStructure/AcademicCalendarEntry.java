@@ -32,10 +32,10 @@ import org.fenixedu.academic.domain.time.chronologies.dateTimeFields.AcademicSem
 import org.fenixedu.academic.dto.GenericPair;
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.DayType;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.academic.util.renderer.GanttDiagramEvent;
 import org.fenixedu.bennu.core.domain.Bennu;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
@@ -215,8 +215,8 @@ public abstract class AcademicCalendarEntry extends AcademicCalendarEntry_Base i
             throw new DomainException("error.AcademicCalendarEntry.empty.parentEntry");
         }
         if (isParentEntryInvalid(parentEntry)) {
-            throw new DomainException("error.AcademicCalendarEntry.invalid.parent.entry", getClass().getSimpleName(), parentEntry
-                    .getClass().getSimpleName());
+            throw new DomainException("error.AcademicCalendarEntry.invalid.parent.entry", getClass().getSimpleName(),
+                    parentEntry.getClass().getSimpleName());
         }
         if (!virtualEntry && parentEntry.exceededNumberOfChildEntries(this)) {
             throw new DomainException("error.AcademicCalendarEntry.number.of.subEntries.exceeded");
@@ -328,8 +328,8 @@ public abstract class AcademicCalendarEntry extends AcademicCalendarEntry_Base i
                     }
 
                 } else if (changeBeginDate || changeEndDate) {
-                    throw new DomainException("error.AcademicCalendarEntry.impossible.refresh.time.interval", getClass()
-                            .getName());
+                    throw new DomainException("error.AcademicCalendarEntry.impossible.refresh.time.interval",
+                            getClass().getName());
                 }
             }
         }
@@ -439,7 +439,8 @@ public abstract class AcademicCalendarEntry extends AcademicCalendarEntry_Base i
     public LocalizedString getType() {
         LocalizedString type = new LocalizedString();
         String key = "label." + getClass().getSimpleName() + ".type";
-        type = type.with(org.fenixedu.academic.util.LocaleUtils.PT, BundleUtil.getString(Bundle.MANAGER, new Locale("pt", "PT"), key));
+        type = type.with(org.fenixedu.academic.util.LocaleUtils.PT,
+                BundleUtil.getString(Bundle.MANAGER, new Locale("pt", "PT"), key));
         return type;
     }
 
@@ -483,7 +484,8 @@ public abstract class AcademicCalendarEntry extends AcademicCalendarEntry_Base i
         return allChildEntries;
     }
 
-    public List<AcademicCalendarEntry> getAllChildEntriesWithTemplateEntries(Class<? extends AcademicCalendarEntry> subEntryClass) {
+    public List<AcademicCalendarEntry> getAllChildEntriesWithTemplateEntries(
+            Class<? extends AcademicCalendarEntry> subEntryClass) {
         if (subEntryClass == null) {
             return Collections.emptyList();
         }
@@ -622,8 +624,8 @@ public abstract class AcademicCalendarEntry extends AcademicCalendarEntry_Base i
     }
 
     public int getAcademicSemesterOfAcademicYear(final AcademicChronology academicChronology) {
-        return getBegin().withChronology(academicChronology).get(
-                AcademicSemesterOfAcademicYearDateTimeFieldType.academicSemesterOfAcademicYear());
+        return getBegin().withChronology(academicChronology)
+                .get(AcademicSemesterOfAcademicYearDateTimeFieldType.academicSemesterOfAcademicYear());
     }
 
     public boolean belongsToPeriod(DateTime begin, DateTime end) {

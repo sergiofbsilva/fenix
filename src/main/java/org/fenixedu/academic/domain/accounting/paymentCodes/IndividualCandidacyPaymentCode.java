@@ -44,9 +44,9 @@ public class IndividualCandidacyPaymentCode extends IndividualCandidacyPaymentCo
 
     public static IndividualCandidacyPaymentCode create(final PaymentCodeType paymentCodeType, final YearMonthDay startDate,
             final YearMonthDay endDate, final Money minAmount, final Money maxAmount) {
-        return PaymentCode.canGenerateNewCode(IndividualCandidacyPaymentCode.class, paymentCodeType, null) ? new IndividualCandidacyPaymentCode(
-                paymentCodeType, startDate, endDate, minAmount, maxAmount) : findAndReuseExistingCode(paymentCodeType, startDate,
-                endDate, minAmount, maxAmount);
+        return PaymentCode.canGenerateNewCode(IndividualCandidacyPaymentCode.class, paymentCodeType,
+                null) ? new IndividualCandidacyPaymentCode(paymentCodeType, startDate, endDate, minAmount,
+                        maxAmount) : findAndReuseExistingCode(paymentCodeType, startDate, endDate, minAmount, maxAmount);
 
     }
 
@@ -117,8 +117,7 @@ public class IndividualCandidacyPaymentCode extends IndividualCandidacyPaymentCo
     protected static IndividualCandidacyPaymentCode getAvailablePaymentCodeForReuse() {
         return (IndividualCandidacyPaymentCode) Bennu.getInstance().getPaymentCodesSet().stream()
                 .filter((IndividualCandidacyPaymentCode.class)::isInstance).filter(PaymentCode::isAvailableForReuse)
-                .sorted(PaymentCode.COMPARATOR_BY_END_DATE).findFirst()
-                .orElse(null);
+                .sorted(PaymentCode.COMPARATOR_BY_END_DATE).findFirst().orElse(null);
     }
 
     @Override
@@ -147,8 +146,8 @@ public class IndividualCandidacyPaymentCode extends IndividualCandidacyPaymentCo
 
         for (int i = 0; i < numberOfPaymentCodes; i++) {
 
-            result.add(IndividualCandidacyPaymentCode.create(type, beginDate.toDateTimeAtStartOfDay().toYearMonthDay(), endDate
-                    .toDateTimeAtStartOfDay().toYearMonthDay(), minimum, maximum));
+            result.add(IndividualCandidacyPaymentCode.create(type, beginDate.toDateTimeAtStartOfDay().toYearMonthDay(),
+                    endDate.toDateTimeAtStartOfDay().toYearMonthDay(), minimum, maximum));
         }
 
         return result;

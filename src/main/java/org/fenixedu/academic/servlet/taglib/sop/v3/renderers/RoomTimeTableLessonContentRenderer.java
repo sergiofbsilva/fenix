@@ -32,9 +32,9 @@ import org.fenixedu.academic.servlet.taglib.sop.v3.LessonSlotContentRenderer;
 import org.fenixedu.bennu.core.domain.User;
 import org.fenixedu.bennu.core.security.Authenticate;
 
-import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixWebFramework.servlets.filters.contentRewrite.GenericChecksumRewriter;
 
 /**
  * @author jpvl

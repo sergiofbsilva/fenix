@@ -51,8 +51,8 @@ public class DeleteEvaluation {
     private static final DeleteEvaluation serviceInstance = new DeleteEvaluation();
 
     @Atomic
-    public static void runDeleteEvaluation(String executionCourseID, String evaluationID) throws FenixServiceException,
-            NotAuthorizedException {
+    public static void runDeleteEvaluation(String executionCourseID, String evaluationID)
+            throws FenixServiceException, NotAuthorizedException {
         try {
             ExecutionCourseLecturingTeacherAuthorizationFilter.instance.execute(executionCourseID);
             serviceInstance.run(executionCourseID, evaluationID);

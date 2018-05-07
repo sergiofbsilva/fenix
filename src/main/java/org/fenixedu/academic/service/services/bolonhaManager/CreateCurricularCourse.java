@@ -51,8 +51,8 @@ public class CreateCurricularCourse {
         // TODO this is not generic thinking... must find a way to abstract from
         // years/semesters
         if (competenceCourse.isAnual()) {
-            degreeCurricularPlan
-                    .createCurricularPeriodFor(curricularCourseArgs.getYear(), curricularCourseArgs.getSemester() + 1);
+            degreeCurricularPlan.createCurricularPeriodFor(curricularCourseArgs.getYear(),
+                    curricularCourseArgs.getSemester() + 1);
         }
 
         degreeCurricularPlan.createCurricularCourse(curricularCourseArgs.getWeight(), curricularCourseArgs.getPrerequisites(),
@@ -106,9 +106,8 @@ public class CreateCurricularCourse {
         CurricularPeriod curricularPeriod =
                 degreeCurricularPlan.getCurricularPeriodFor(curricularCourseArgs.getYear(), curricularCourseArgs.getSemester());
         if (curricularPeriod == null) {
-            curricularPeriod =
-                    degreeCurricularPlan.createCurricularPeriodFor(curricularCourseArgs.getYear(),
-                            curricularCourseArgs.getSemester());
+            curricularPeriod = degreeCurricularPlan.createCurricularPeriodFor(curricularCourseArgs.getYear(),
+                    curricularCourseArgs.getSemester());
         }
         return curricularPeriod;
     }

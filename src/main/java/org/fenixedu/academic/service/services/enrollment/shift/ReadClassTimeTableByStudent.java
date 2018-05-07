@@ -93,8 +93,8 @@ public class ReadClassTimeTableByStudent {
 
     @Atomic
     public static List<InfoShowOccupation> runReadClassTimeTableByStudent(Registration registration, SchoolClass schoolClass,
-            ExecutionCourse executionCourse, ExecutionSemester executionSemester) throws FenixServiceException,
-            NotAuthorizedException {
+            ExecutionCourse executionCourse, ExecutionSemester executionSemester)
+            throws FenixServiceException, NotAuthorizedException {
         ClassEnrollmentAuthorizationFilter.instance.execute(registration, executionSemester);
         return serviceInstance.run(registration, schoolClass, executionCourse, executionSemester);
     }

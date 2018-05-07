@@ -48,8 +48,8 @@ public class AcademicAdminOfficeImprovementBolonhaStudentEnrolmentDA extends Aca
     protected ActionForward prepareShowDegreeModulesToEnrol(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response, StudentCurricularPlan studentCurricularPlan, ExecutionSemester executionSemester) {
         request.setAttribute("action", getAction());
-        request.setAttribute("bolonhaStudentEnrollmentBean", new ImprovementBolonhaStudentEnrolmentBean(studentCurricularPlan,
-                executionSemester));
+        request.setAttribute("bolonhaStudentEnrollmentBean",
+                new ImprovementBolonhaStudentEnrolmentBean(studentCurricularPlan, executionSemester));
 
         addDebtsWarningMessages(studentCurricularPlan.getRegistration().getStudent(), executionSemester, request);
 

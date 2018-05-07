@@ -38,8 +38,8 @@ import pt.ist.fenixframework.FenixFramework;
 
 public class EditCompetenceCourse {
 
-    protected void run(String competenceCourseID, String objectives, String program, String evaluationMethod,
-            String objectivesEn, String programEn, String evaluationMethodEn) throws FenixServiceException {
+    protected void run(String competenceCourseID, String objectives, String program, String evaluationMethod, String objectivesEn,
+            String programEn, String evaluationMethodEn) throws FenixServiceException {
         final CompetenceCourse competenceCourse = readCompetenceCourse(competenceCourseID);
         competenceCourse.edit(objectives, program, evaluationMethod, objectivesEn, programEn, evaluationMethodEn);
     }
@@ -163,8 +163,8 @@ public class EditCompetenceCourse {
     }
 
     @Atomic
-    public static void runEditCompetenceCourse(String competenceCourseID, String acronym) throws FenixServiceException,
-            NotAuthorizedException {
+    public static void runEditCompetenceCourse(String competenceCourseID, String acronym)
+            throws FenixServiceException, NotAuthorizedException {
         try {
             BolonhaManagerAuthorizationFilter.instance.execute();
             serviceInstance.run(competenceCourseID, acronym);

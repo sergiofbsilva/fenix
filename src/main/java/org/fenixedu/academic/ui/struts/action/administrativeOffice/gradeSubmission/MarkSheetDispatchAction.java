@@ -51,9 +51,9 @@ import org.fenixedu.academic.ui.struts.action.base.FenixDispatchAction;
 import org.fenixedu.bennu.core.domain.User;
 import org.joda.time.YearMonthDay;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import com.google.common.base.Strings;
+
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 abstract public class MarkSheetDispatchAction extends FenixDispatchAction {
 
@@ -66,7 +66,8 @@ abstract public class MarkSheetDispatchAction extends FenixDispatchAction {
         saveMessages(request, actionMessages);
     }
 
-    protected void fillMarkSheetBean(ActionForm actionForm, HttpServletRequest request, MarkSheetManagementBaseBean markSheetBean) {
+    protected void fillMarkSheetBean(ActionForm actionForm, HttpServletRequest request,
+            MarkSheetManagementBaseBean markSheetBean) {
         DynaActionForm form = (DynaActionForm) actionForm;
 
         final ExecutionSemester executionSemester = getDomainObject(form, "epID");
@@ -153,8 +154,8 @@ abstract public class MarkSheetDispatchAction extends FenixDispatchAction {
             ConfirmMarkSheet.run(markSheet, userView.getPerson());
         } catch (InDebtEnrolmentsException e) {
             for (Enrolment enrolment : e.getEnrolments()) {
-                addMessage(request, actionMessages, e.getMessage(), enrolment.getRegistration().getStudent().getNumber()
-                        .toString());
+                addMessage(request, actionMessages, e.getMessage(),
+                        enrolment.getRegistration().getStudent().getNumber().toString());
             }
             return prepareConfirmMarkSheet(mapping, actionForm, request, response);
         } catch (DomainException e) {
@@ -174,14 +175,13 @@ abstract public class MarkSheetDispatchAction extends FenixDispatchAction {
                 addMessage(request, actionMessages, "error.evaluationDateNotInExamsPeriod");
             }
 
-        } else if (!(season.isSpecialAuthorization() || (evaluationDate != null && season.getExamPeriods(executionDegree,
-                executionSemester).anyMatch(
-                o1 -> o1.nestedOccupationPeriodsContainsDay(YearMonthDay.fromDateFields(evaluationDate)))))) {
+        } else if (!(season.isSpecialAuthorization()
+                || (evaluationDate != null && season.getExamPeriods(executionDegree, executionSemester)
+                        .anyMatch(o1 -> o1.nestedOccupationPeriodsContainsDay(YearMonthDay.fromDateFields(evaluationDate)))))) {
             String dateFormat = "dd/MM/yyyy";
-            String period =
-                    season.getExamPeriods(executionDegree, executionSemester)
-                            .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-"
-                                    + o.getEndYearMonthDay().toString(dateFormat)).collect(Collectors.joining(", "));
+            String period = season.getExamPeriods(executionDegree, executionSemester)
+                    .map(o -> o.getStartYearMonthDay().toString(dateFormat) + "-" + o.getEndYearMonthDay().toString(dateFormat))
+                    .collect(Collectors.joining(", "));
             if (Strings.isNullOrEmpty(period)) {
                 addMessage(request, actionMessages, "error.evaluationDateNotInExamsPeriod");
             } else {
@@ -201,10 +201,8 @@ abstract public class MarkSheetDispatchAction extends FenixDispatchAction {
                     executionSemester.getPreviousExecutionPeriod())
                     && !teacher.getPerson().isResponsibleOrCoordinatorFor(curricularCourse,
                             executionSemester.getPreviousExecutionPeriod().getPreviousExecutionPeriod())
-                    && !teacher.getPerson().isResponsibleOrCoordinatorFor(
-                            curricularCourse,
-                            executionSemester.getPreviousExecutionPeriod().getPreviousExecutionPeriod()
-                                    .getPreviousExecutionPeriod())) {
+                    && !teacher.getPerson().isResponsibleOrCoordinatorFor(curricularCourse, executionSemester
+                            .getPreviousExecutionPeriod().getPreviousExecutionPeriod().getPreviousExecutionPeriod())) {
                 addMessage(request, actionMessages, "error.teacherNotResponsibleOrNotCoordinator");
             }
         } else if (!teacher.getPerson().isResponsibleOrCoordinatorFor(curricularCourse, executionSemester)) {

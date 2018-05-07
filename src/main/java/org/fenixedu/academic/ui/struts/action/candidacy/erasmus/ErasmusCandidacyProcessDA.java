@@ -49,21 +49,20 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 import org.fenixedu.commons.spreadsheet.Spreadsheet;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+
 import pt.ist.fenixWebFramework.rendererExtensions.converters.DomainObjectKeyConverter;
 import pt.ist.fenixWebFramework.renderers.DataProvider;
 import pt.ist.fenixWebFramework.renderers.components.converters.Converter;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 @StrutsFunctionality(app = AcademicAdminCandidaciesApp.class, path = "mobility", titleKey = "label.application.mobility",
         accessGroup = "(academic(MANAGE_CANDIDACY_PROCESSES) | academic(MANAGE_INDIVIDUAL_CANDIDACIES))")
 @Mapping(path = "/caseHandlingMobilityApplicationProcess", module = "academicAdministration",
         formBeanClass = ErasmusCandidacyProcessDA.ErasmusCandidacyProcessForm.class)
-@Forwards({
-        @Forward(name = "intro", path = "/candidacy/erasmus/mainCandidacyProcess.jsp"),
+@Forwards({ @Forward(name = "intro", path = "/candidacy/erasmus/mainCandidacyProcess.jsp"),
         @Forward(name = "prepare-create-new-process", path = "/candidacy/createCandidacyPeriod.jsp"),
         @Forward(name = "prepare-edit-candidacy-period", path = "/candidacy/editCandidacyPeriod.jsp"),
         @Forward(name = "view-child-process-with-missing.required-documents",
@@ -97,7 +96,8 @@ public class ErasmusCandidacyProcessDA extends CandidacyProcessDA {
     @Override
     public ActionForward prepareCreateNewProcess(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        request.setAttribute("candidacyProcessBean", new MobilityApplicationProcessBean(ExecutionYear.readCurrentExecutionYear()));
+        request.setAttribute("candidacyProcessBean",
+                new MobilityApplicationProcessBean(ExecutionYear.readCurrentExecutionYear()));
         return mapping.findForward("prepare-create-new-process");
     }
 
@@ -362,9 +362,8 @@ public class ErasmusCandidacyProcessDA extends CandidacyProcessDA {
 
         @Override
         public Object provide(Object source, Object currentValue) {
-            final List<Degree> degrees =
-                    new ArrayList<Degree>(Degree.readAllMatching(DegreeType.oneOf(DegreeType::isIntegratedMasterDegree,
-                            DegreeType::isBolonhaMasterDegree)));
+            final List<Degree> degrees = new ArrayList<Degree>(Degree
+                    .readAllMatching(DegreeType.oneOf(DegreeType::isIntegratedMasterDegree, DegreeType::isBolonhaMasterDegree)));
 
             degrees.remove(Degree.readBySigla("MSCIT"));
 

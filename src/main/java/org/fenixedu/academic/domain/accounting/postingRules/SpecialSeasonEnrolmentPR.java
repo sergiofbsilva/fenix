@@ -54,7 +54,8 @@ public class SpecialSeasonEnrolmentPR extends SpecialSeasonEnrolmentPR_Base {
 
     private void checkParameters(Money fixedAmount) {
         if (fixedAmount == null) {
-            throw new DomainException("error.accounting.postingRules.ImprovementOfApprovedEnrolmentPR.fixedAmount.cannot.be.null");
+            throw new DomainException(
+                    "error.accounting.postingRules.ImprovementOfApprovedEnrolmentPR.fixedAmount.cannot.be.null");
         }
     }
 

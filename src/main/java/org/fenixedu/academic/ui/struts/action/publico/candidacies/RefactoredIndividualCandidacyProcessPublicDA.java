@@ -50,6 +50,7 @@ import org.fenixedu.academic.domain.candidacyProcess.IndividualCandidacyProcessW
 import org.fenixedu.academic.domain.candidacyProcess.degreeChange.DegreeChangeIndividualCandidacyProcess.SendEmailForApplicationSubmission;
 import org.fenixedu.academic.domain.candidacyProcess.exceptions.HashCodeForEmailAndProcessAlreadyBounded;
 import org.fenixedu.academic.domain.exceptions.DomainException;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.domain.person.IDDocumentType;
 import org.fenixedu.academic.dto.candidacy.PrecedentDegreeInformationBean;
 import org.fenixedu.academic.dto.person.PersonBean;
@@ -144,8 +145,7 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
     protected CandidacyProcess getCurrentOpenParentProcess() {
         return Bennu.getInstance().getProcessesSet().stream().filter((getParentProcessType())::isInstance)
                 .filter(CandidacyProcess.class::isInstance).map(p -> (CandidacyProcess) p)
-                .filter(CandidacyProcess::hasOpenCandidacyPeriod)
-                .findFirst().orElse(null);
+                .filter(CandidacyProcess::hasOpenCandidacyPeriod).findFirst().orElse(null);
     }
 
     public ActionForward bindEmailWithHashCodeAndSendMailWithLink(ActionMapping mapping, ActionForm form,
@@ -166,14 +166,14 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
 
         try {
             String email = (String) getObjectFromViewState("PublicAccessCandidacy.preCreationForm");
-            DegreeOfficePublicCandidacyHashCode hash =
-                    DegreeOfficePublicCandidacyHashCodeOperations
-                            .getUnusedOrCreateNewHashCodeAndSendEmailForApplicationSubmissionToCandidate(getProcessType(),
-                                    getCurrentOpenParentProcess(), email);
+            DegreeOfficePublicCandidacyHashCode hash = DegreeOfficePublicCandidacyHashCodeOperations
+                    .getUnusedOrCreateNewHashCodeAndSendEmailForApplicationSubmissionToCandidate(getProcessType(),
+                            getCurrentOpenParentProcess(), email);
 
-            String link =
-                    String.format(BundleUtil.getString(Bundle.CANDIDATE, getProcessType().getSimpleName()
-                            + ".const.public.application.submission.link"), hash.getValue(), I18N.getLocale().getLanguage());
+            String link = String.format(
+                    BundleUtil.getString(Bundle.CANDIDATE,
+                            getProcessType().getSimpleName() + ".const.public.application.submission.link"),
+                    hash.getValue(), I18N.getLocale().getLanguage());
 
             request.setAttribute("link", link);
 
@@ -193,7 +193,7 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
 
         String hash = request.getParameter("hash");
         DegreeOfficePublicCandidacyHashCode candidacyHashCode =
-                (DegreeOfficePublicCandidacyHashCode) DegreeOfficePublicCandidacyHashCode.getPublicCandidacyCodeByHash(hash);
+                (DegreeOfficePublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(hash);
 
         if (candidacyHashCode == null) {
             return mapping.findForward("open-candidacy-processes-not-found");
@@ -285,7 +285,7 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
                 return executeCreateCandidacyPersonalInformationInvalid(mapping, form, request, response);
             }
         } else {
-            if (Person.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
+            if (Party.readByContributorNumber(personBean.getSocialSecurityNumber()) != null) {
                 // found person with same contributor number
                 addActionMessage("individualCandidacyMessages", request, getProcessType().getSimpleName()
                         + ".error.public.candidacies.fill.personal.information.and.institution.id.contributorNumber");
@@ -352,8 +352,8 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
                 getProcessType(), getCurrentOpenParentProcess(), degreeList) != null;
     }
 
-    protected IndividualCandidacyProcess createNewPublicProcess(IndividualCandidacyProcessBean bean) throws DomainException,
-            FenixServiceException {
+    protected IndividualCandidacyProcess createNewPublicProcess(IndividualCandidacyProcessBean bean)
+            throws DomainException, FenixServiceException {
         return (IndividualCandidacyProcess) CreateNewProcess.run(getProcessType(), bean,
                 buildActivitiesForApplicationSubmission(bean.getPublicCandidacyHashCode()));
     }
@@ -510,10 +510,8 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
     public ActionForward backToViewCandidacy(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
         IndividualCandidacyProcess individualCandidacyProcess = getDomainObject(request, "individualCandidacyProcess");
-        return forward(
-                request,
-                getLinkFromPublicCandidacyHashCodeForInternalUse(mapping, request,
-                        individualCandidacyProcess.getCandidacyHashCode()));
+        return forward(request, getLinkFromPublicCandidacyHashCodeForInternalUse(mapping, request,
+                individualCandidacyProcess.getCandidacyHashCode()));
     }
 
     protected String getLinkFromPublicCandidacyHashCodeForInternalUse(ActionMapping mapping, HttpServletRequest request,
@@ -542,9 +540,8 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
         CandidacyProcessDocumentUploadBean uploadBean =
                 (CandidacyProcessDocumentUploadBean) getObjectFromViewState("individualCandidacyProcessBean.document.file");
         try {
-            IndividualCandidacyDocumentFile documentFile =
-                    createIndividualCandidacyDocumentFile(uploadBean, uploadBean.getIndividualCandidacyProcess()
-                            .getPersonalDetails().getDocumentIdNumber());
+            IndividualCandidacyDocumentFile documentFile = createIndividualCandidacyDocumentFile(uploadBean,
+                    uploadBean.getIndividualCandidacyProcess().getPersonalDetails().getDocumentIdNumber());
             uploadBean.setDocumentFile(documentFile);
 
             executeActivity(uploadBean.getIndividualCandidacyProcess(), "EditPublicCandidacyDocumentFile", uploadBean);
@@ -589,8 +586,8 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
             HttpServletResponse response) {
         String email = (String) getObjectFromViewState("PublicAccessCandidacy.preCreationForm");
         DegreeOfficePublicCandidacyHashCode hash =
-                DegreeOfficePublicCandidacyHashCode.getPublicCandidacyHashCodeByEmailAndCandidacyProcessTypeOrNotAssociated(
-                        email, getProcessType(), getCurrentOpenParentProcess());
+                DegreeOfficePublicCandidacyHashCode.getPublicCandidacyHashCodeByEmailAndCandidacyProcessTypeOrNotAssociated(email,
+                        getProcessType(), getCurrentOpenParentProcess());
 
         if (hash != null) {
             hash.sendEmailFoAccessLinkRecovery();
@@ -622,9 +619,8 @@ public abstract class RefactoredIndividualCandidacyProcessPublicDA extends Indiv
         CandidacyProcessDocumentUploadBean uploadBean =
                 (CandidacyProcessDocumentUploadBean) getObjectFromViewState("individualCandidacyProcessBean.document.file");
         try {
-            IndividualCandidacyDocumentFile documentFile =
-                    createIndividualCandidacyDocumentFile(uploadBean, uploadBean.getIndividualCandidacyProcess()
-                            .getPersonalDetails().getDocumentIdNumber());
+            IndividualCandidacyDocumentFile documentFile = createIndividualCandidacyDocumentFile(uploadBean,
+                    uploadBean.getIndividualCandidacyProcess().getPersonalDetails().getDocumentIdNumber());
             uploadBean.setDocumentFile(documentFile);
 
             executeActivity(uploadBean.getIndividualCandidacyProcess(), "EditPublicCandidacyDocumentFile", uploadBean);

@@ -31,6 +31,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.fenixedu.academic.domain.Enrolment;
+import org.fenixedu.academic.domain.student.curriculum.ICurriculumEntry;
 import org.fenixedu.academic.domain.studentCurriculum.CurriculumGroup;
 import org.fenixedu.academic.domain.studentCurriculum.InternalCreditsSourceCurriculumGroup;
 import org.fenixedu.academic.dto.administrativeOffice.dismissal.DismissalBean;
@@ -44,8 +45,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(path = "/studentInternalSubstitutions", module = "academicAdministration", formBean = "studentDismissalForm",
         functionality = SearchForStudentsDA.class)
-@Forwards({
-        @Forward(name = "manage", path = "/academicAdminOffice/dismissal/managementDismissals.jsp"),
+@Forwards({ @Forward(name = "manage", path = "/academicAdminOffice/dismissal/managementDismissals.jsp"),
         @Forward(name = "chooseDismissalEnrolments",
                 path = "/academicAdminOffice/dismissal/chooseInternalSubstitutionEnrolments.jsp"),
         @Forward(name = "chooseEquivalents", path = "/academicAdminOffice/dismissal/chooseInternalSubstitutionEquivalents.jsp"),
@@ -71,7 +71,8 @@ public class StudentInternalSubstitutionsDA extends StudentDismissalsDA {
         Collections.sort(enrolments, new Comparator<SelectedEnrolment>() {
             @Override
             public int compare(SelectedEnrolment o1, SelectedEnrolment o2) {
-                return Enrolment.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID.compare(o1.getEnrolment(), o2.getEnrolment());
+                return ICurriculumEntry.COMPARATOR_BY_EXECUTION_YEAR_AND_NAME_AND_ID.compare(o1.getEnrolment(),
+                        o2.getEnrolment());
             }
         });
 

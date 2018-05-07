@@ -55,8 +55,8 @@ public class ConcludedState extends ConcludedState_Base {
 
     private void checkRulesToDelete() {
         final Person person = AccessControl.getPerson();
-        if (AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.REPEAT_CONCLUSION_PROCESS, getRegistration()
-                .getDegree(), person.getUser())) {
+        if (AcademicAccessRule.isProgramAccessibleToFunction(AcademicOperationType.REPEAT_CONCLUSION_PROCESS,
+                getRegistration().getDegree(), person.getUser())) {
             return;
         }
 

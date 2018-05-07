@@ -62,8 +62,8 @@ public class SchoolUnit extends SchoolUnit_Base {
             UnitClassification classification, Boolean canBeResponsibleOfSpaces, Space campus) {
 
         SchoolUnit schoolUnit = new SchoolUnit();
-        schoolUnit.init(schoolName, schoolNameCard, costCenterCode, schoolAcronym, beginDate, endDate, webAddress,
-                classification, null, canBeResponsibleOfSpaces, campus);
+        schoolUnit.init(schoolName, schoolNameCard, costCenterCode, schoolAcronym, beginDate, endDate, webAddress, classification,
+                null, canBeResponsibleOfSpaces, campus);
         return createNewUnit(parentUnit, schoolUnit, Boolean.TRUE);
     }
 
@@ -101,10 +101,9 @@ public class SchoolUnit extends SchoolUnit_Base {
     protected static void checkIfAlreadyExistsOneSchoolWithSameAcronymAndName(SchoolUnit schoolUnit) {
         for (Unit parentUnit : schoolUnit.getParentUnits()) {
             for (Unit unit : parentUnit.getAllSubUnits()) {
-                if (!unit.equals(schoolUnit)
-                        && unit.isSchoolUnit()
-                        && ((schoolUnit.getAcronym() != null && schoolUnit.getAcronym().equalsIgnoreCase(unit.getAcronym())) || schoolUnit
-                                .getName().equalsIgnoreCase(unit.getName()))) {
+                if (!unit.equals(schoolUnit) && unit.isSchoolUnit()
+                        && ((schoolUnit.getAcronym() != null && schoolUnit.getAcronym().equalsIgnoreCase(unit.getAcronym()))
+                                || schoolUnit.getName().equalsIgnoreCase(unit.getName()))) {
                     throw new DomainException("error.unit.already.exists.unit.with.same.name.or.acronym");
                 }
             }
@@ -124,9 +123,8 @@ public class SchoolUnit extends SchoolUnit_Base {
 
     @Override
     public Accountability addParentUnit(Unit parentUnit, AccountabilityType accountabilityType) {
-        if (parentUnit != null
-                && (!parentUnit.isOfficialExternal() || (!parentUnit.isPlanetUnit() && !parentUnit.isCountryUnit() && !parentUnit
-                        .isUniversityUnit()))) {
+        if (parentUnit != null && (!parentUnit.isOfficialExternal()
+                || (!parentUnit.isPlanetUnit() && !parentUnit.isCountryUnit() && !parentUnit.isUniversityUnit()))) {
             throw new DomainException("error.unit.invalid.parentUnit");
         }
         return super.addParentUnit(parentUnit, accountabilityType);

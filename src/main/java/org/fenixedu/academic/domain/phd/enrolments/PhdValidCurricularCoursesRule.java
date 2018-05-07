@@ -81,7 +81,7 @@ public class PhdValidCurricularCoursesRule extends CurricularRuleNotPersistent {
 
     @Override
     public List<GenericPair<Object, Boolean>> getLabel() {
-        return Collections.singletonList(new GenericPair<Object, Boolean>(AlertService
-                .getMessageFromResource("label.phd.enrolments.PhdValidCurricularCoursesRule"), false));
+        return Collections.singletonList(new GenericPair<Object, Boolean>(
+                AlertService.getMessageFromResource("label.phd.enrolments.PhdValidCurricularCoursesRule"), false));
     }
 }

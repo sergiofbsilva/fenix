@@ -64,8 +64,8 @@ public class AcademicAdminOfficeSpecialSeasonBolonhaStudentEnrolmentDA extends A
     protected ActionForward prepareShowDegreeModulesToEnrol(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response, StudentCurricularPlan studentCurricularPlan, ExecutionSemester executionSemester) {
         request.setAttribute("action", getAction());
-        request.setAttribute("bolonhaStudentEnrollmentBean", new SpecialSeasonBolonhaStudentEnrolmentBean(studentCurricularPlan,
-                executionSemester));
+        request.setAttribute("bolonhaStudentEnrollmentBean",
+                new SpecialSeasonBolonhaStudentEnrolmentBean(studentCurricularPlan, executionSemester));
 
         addDebtsWarningMessages(studentCurricularPlan.getRegistration().getStudent(), executionSemester, request);
 
@@ -95,7 +95,8 @@ public class AcademicAdminOfficeSpecialSeasonBolonhaStudentEnrolmentDA extends A
                 }
             }
 
-            if ((event instanceof AdministrativeOfficeFeeAndInsuranceEvent || event instanceof InsuranceEvent) && event.isOpen()) {
+            if ((event instanceof AdministrativeOfficeFeeAndInsuranceEvent || event instanceof InsuranceEvent)
+                    && event.isOpen()) {
                 return true;
             }
         }
@@ -139,8 +140,8 @@ public class AcademicAdminOfficeSpecialSeasonBolonhaStudentEnrolmentDA extends A
         }
 
         request.setAttribute("action", getAction());
-        request.setAttribute("bolonhaStudentEnrollmentBean", new SpecialSeasonBolonhaStudentEnrolmentBean(studentCurricularPlan,
-                executionSemester));
+        request.setAttribute("bolonhaStudentEnrollmentBean",
+                new SpecialSeasonBolonhaStudentEnrolmentBean(studentCurricularPlan, executionSemester));
 
         addDebtsWarningMessages(studentCurricularPlan.getRegistration().getStudent(), executionSemester, request);
         return mapping.findForward("showDegreeModulesToEnrol");

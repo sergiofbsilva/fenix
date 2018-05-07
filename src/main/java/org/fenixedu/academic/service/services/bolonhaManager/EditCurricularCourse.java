@@ -39,9 +39,9 @@ public class EditCurricularCourse {
 
     /**
      * @deprecated If CurricularCourse is not an OptionalCurricularCourse, this method edits fields that are no
-     * longer in use as they were moved to the
-     * {@link org.fenixedu.academic.domain.degreeStructure.CompetenceCourseInformation CompetenceCourseInformation}
-     * class
+     *             longer in use as they were moved to the
+     *             {@link org.fenixedu.academic.domain.degreeStructure.CompetenceCourseInformation CompetenceCourseInformation}
+     *             class
      */
     @Deprecated
     @Atomic

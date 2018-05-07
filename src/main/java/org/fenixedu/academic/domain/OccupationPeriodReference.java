@@ -29,8 +29,8 @@ public class OccupationPeriodReference extends OccupationPeriodReference_Base {
         setRootDomainObject(Bennu.getInstance());
     }
 
-    public OccupationPeriodReference(OccupationPeriod period, ExecutionDegree degree, OccupationPeriodType type,
-            Integer semester, CurricularYearList curricularYears) {
+    public OccupationPeriodReference(OccupationPeriod period, ExecutionDegree degree, OccupationPeriodType type, Integer semester,
+            CurricularYearList curricularYears) {
         this();
         if (period == null || degree == null) {
             throw new DomainException("exception.null.arguments");

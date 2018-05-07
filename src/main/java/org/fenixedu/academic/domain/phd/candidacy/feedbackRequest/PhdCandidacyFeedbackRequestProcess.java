@@ -151,10 +151,12 @@ public class PhdCandidacyFeedbackRequestProcess extends PhdCandidacyFeedbackRequ
 
     private void notifyCoordinationOfCandidacyFeedback(final PhdCandidacyFeedbackRequestElement element) {
 
-        AlertService.alertParticipants(getIndividualProgramProcess(), AlertMessage
-                .create("message.phd.candidacy.feedback.coordinator.notification.subject"), AlertMessage.create(
-                "message.phd.candidacy.feedback.coordinator.notification.body", element.getNameWithTitle(),
-                getIndividualProgramProcess().getPerson().getName()), getOrCreateParticipantsToNofify());
+        AlertService
+                .alertParticipants(getIndividualProgramProcess(),
+                        AlertMessage.create("message.phd.candidacy.feedback.coordinator.notification.subject"),
+                        AlertMessage.create("message.phd.candidacy.feedback.coordinator.notification.body",
+                                element.getNameWithTitle(), getIndividualProgramProcess().getPerson().getName()),
+                        getOrCreateParticipantsToNofify());
 
     }
 
@@ -168,7 +170,8 @@ public class PhdCandidacyFeedbackRequestProcess extends PhdCandidacyFeedbackRequ
             final PhdParticipant participant = mainProcess.getParticipant(person);
 
             if (participant == null) {
-                result.add(PhdParticipant.getUpdatedOrCreate(mainProcess, new PhdParticipantBean().setInternalParticipant(person)));
+                result.add(
+                        PhdParticipant.getUpdatedOrCreate(mainProcess, new PhdParticipantBean().setInternalParticipant(person)));
 
             } else if (participant.getCandidacyFeedbackRequestElementsSet().isEmpty()) {
                 result.add(participant);
@@ -314,9 +317,8 @@ public class PhdCandidacyFeedbackRequestProcess extends PhdCandidacyFeedbackRequ
         private void notifyElement(final PhdCandidacyFeedbackRequestProcess process,
                 final PhdCandidacyFeedbackRequestElement element, final PhdCandidacyFeedbackRequestElementBean bean) {
 
-            final String body =
-                    bean.getMailBody() + "\n\n"
-                            + getAccessInformation(process.getIndividualProgramProcess(), element.getParticipant()) + "\n\n";
+            final String body = bean.getMailBody() + "\n\n"
+                    + getAccessInformation(process.getIndividualProgramProcess(), element.getParticipant()) + "\n\n";
 
             email(element.getEmail(), bean.getMailSubject(), body);
         }

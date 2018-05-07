@@ -82,9 +82,9 @@ public class CompetenceCourseInformation extends CompetenceCourseInformation_Bas
     }
 
     public CompetenceCourseInformation(CompetenceCourseInformation existingInformation) {
-        this(existingInformation.getName(), existingInformation.getNameEn(), existingInformation.getBasic(), existingInformation
-                .getRegime(), existingInformation.getCompetenceCourseLevel(), existingInformation.getExecutionPeriod(),
-                existingInformation.getCompetenceCourseGroupUnit());
+        this(existingInformation.getName(), existingInformation.getNameEn(), existingInformation.getBasic(),
+                existingInformation.getRegime(), existingInformation.getCompetenceCourseLevel(),
+                existingInformation.getExecutionPeriod(), existingInformation.getCompetenceCourseGroupUnit());
         setCompetenceCourse(existingInformation.getCompetenceCourse());
         for (CompetenceCourseLoad load : existingInformation.getCompetenceCourseLoadsSet()) {
             CompetenceCourseLoad newLoad = new CompetenceCourseLoad(load);

@@ -34,8 +34,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 
 @Mapping(path = "/editOldMarkSheet", module = "academicAdministration", formBean = "markSheetManagementForm",
         input = "/markSheetManagement.do?method=prepareSearchMarkSheet", functionality = OldMarkSheetSearchDispatchAction.class)
-@Forwards({
-        @Forward(name = "editMarkSheet", path = "/academicAdministration/gradeSubmission/oldMarkSheets/editMarkSheet.jsp"),
+@Forwards({ @Forward(name = "editMarkSheet", path = "/academicAdministration/gradeSubmission/oldMarkSheets/editMarkSheet.jsp"),
         @Forward(name = "searchMarkSheetFilled",
                 path = "/academicAdministration/oldMarkSheetManagement.do?method=prepareSearchMarkSheetFilled") })
 public class OldMarkSheetEditDispatchAction extends MarkSheetEditDispatchAction {

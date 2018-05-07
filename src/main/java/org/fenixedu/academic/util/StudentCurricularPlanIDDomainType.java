@@ -27,11 +27,11 @@ public class StudentCurricularPlanIDDomainType extends FenixUtil {
 
     public static final String NEWEST_STRING = "Plano curricular mais recente";
 
-    public static final StudentCurricularPlanIDDomainType ALL = new StudentCurricularPlanIDDomainType(
-            StudentCurricularPlanIDDomainType.ALL_TYPE);
+    public static final StudentCurricularPlanIDDomainType ALL =
+            new StudentCurricularPlanIDDomainType(StudentCurricularPlanIDDomainType.ALL_TYPE);
 
-    public static final StudentCurricularPlanIDDomainType NEWEST = new StudentCurricularPlanIDDomainType(
-            StudentCurricularPlanIDDomainType.NEWEST_TYPE);
+    public static final StudentCurricularPlanIDDomainType NEWEST =
+            new StudentCurricularPlanIDDomainType(StudentCurricularPlanIDDomainType.NEWEST_TYPE);
 
     private String id;
 

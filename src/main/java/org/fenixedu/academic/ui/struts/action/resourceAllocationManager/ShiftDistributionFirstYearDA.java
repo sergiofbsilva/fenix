@@ -260,8 +260,8 @@ public class ShiftDistributionFirstYearDA extends FenixDispatchAction {
             final DegreeCurricularPlan mostRecentDegreeCurricularPlan = degree.getMostRecentDegreeCurricularPlan();
             if (mostRecentDegreeCurricularPlan == null) {
                 //Found NULL most recentDegreeCurricularPlan for
-                errorLog.add(new StringBuilder("** O plano curricular do curso mais recente está a null para ").append(
-                        degree.getSigla()).toString());
+                errorLog.add(new StringBuilder("** O plano curricular do curso mais recente está a null para ")
+                        .append(degree.getSigla()).toString());
                 continue;
             }
             for (; start <= maxLimit; start++) {
@@ -299,8 +299,8 @@ public class ShiftDistributionFirstYearDA extends FenixDispatchAction {
 
             final SchoolClass schoolClass = readSchoolClassFrom(degreeCurricularPlan, shiftDistributionDTO.getSchoolClassName());
             if (schoolClass == null) {
-                errorLog.add(new StringBuilder("Erro ao ler aula com o nome: '")
-                        .append(shiftDistributionDTO.getSchoolClassName()).append("' ignorando informação.").toString());
+                errorLog.add(new StringBuilder("Erro ao ler aula com o nome: '").append(shiftDistributionDTO.getSchoolClassName())
+                        .append("' ignorando informação.").toString());
                 continue;
             }
 
@@ -311,8 +311,8 @@ public class ShiftDistributionFirstYearDA extends FenixDispatchAction {
                 result.put(degreeCurricularPlan, schoolClassInformation = new ArrayList<SchoolClassDistributionInformation>());
             }
 
-            schoolClassInformation.add(new SchoolClassDistributionInformation(schoolClass, shiftDistributionDTO
-                    .getTemporarySchoolClass(), shiftDistributionDTO.getMaxCapacity(), shiftsToEnrol));
+            schoolClassInformation.add(new SchoolClassDistributionInformation(schoolClass,
+                    shiftDistributionDTO.getTemporarySchoolClass(), shiftDistributionDTO.getMaxCapacity(), shiftsToEnrol));
         }
 
         return result;
@@ -370,7 +370,8 @@ public class ShiftDistributionFirstYearDA extends FenixDispatchAction {
         return null;
     }
 
-    private DegreeCurricularPlan readDegreeCurricularPlanBy(String name, Map<String, DegreeCurricularPlan> degreeCurricularPlans) {
+    private DegreeCurricularPlan readDegreeCurricularPlanBy(String name,
+            Map<String, DegreeCurricularPlan> degreeCurricularPlans) {
 
         DegreeCurricularPlan curricularPlan = degreeCurricularPlans.get(name);
         if (curricularPlan != null) {
@@ -403,7 +404,8 @@ public class ShiftDistributionFirstYearDA extends FenixDispatchAction {
             Map<DegreeCurricularPlan, List<SchoolClassDistributionInformation>> processedInformation) {
         int numberOfEntries = 0;
         final StringBuilder buffer = new StringBuilder();
-        for (final Entry<DegreeCurricularPlan, List<SchoolClassDistributionInformation>> entry : processedInformation.entrySet()) {
+        for (final Entry<DegreeCurricularPlan, List<SchoolClassDistributionInformation>> entry : processedInformation
+                .entrySet()) {
             buffer.append("[Plano curricular: ").append(entry.getKey().getName()).append(" (\n");
             for (final SchoolClassDistributionInformation information : entry.getValue()) {
                 buffer.append(information.toString()).append("\n");

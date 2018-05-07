@@ -262,8 +262,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     public void edit(String name, CurricularStage curricularStage, DegreeCurricularPlanState state, GradeScale gradeScale,
             ExecutionYear beginExecutionYear) {
 
-        if (curricularStage.equals(CurricularStage.APPROVED) && !getAllCoursesGroups().stream()
-                .map(CourseGroup::getProgramConclusion).anyMatch(Objects::nonNull)) {
+        if (curricularStage.equals(CurricularStage.APPROVED)
+                && !getAllCoursesGroups().stream().map(CourseGroup::getProgramConclusion).anyMatch(Objects::nonNull)) {
             throw new DomainException("error.degreeCurricularPlan.missing.program.conclusion");
         }
 
@@ -362,8 +362,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
 
     private Boolean getCanBeDeleted() {
         return canDeleteRoot() && getStudentCurricularPlansSet().isEmpty() && getCurricularCourseEquivalencesSet().isEmpty()
-                && getEnrolmentPeriodsSet().isEmpty() && getCurricularCoursesSet().isEmpty()
-                && getExecutionDegreesSet().isEmpty() && getAreasSet().isEmpty() && canDeleteServiceAgreement()
+                && getEnrolmentPeriodsSet().isEmpty() && getCurricularCoursesSet().isEmpty() && getExecutionDegreesSet().isEmpty()
+                && getAreasSet().isEmpty() && canDeleteServiceAgreement()
                 && getTeachersWithIncompleteEvaluationWorkGroupSet().isEmpty() && getEquivalencePlan() == null
                 && getTargetEquivalencePlansSet().isEmpty() && getDegreeContextsSet().isEmpty();
     }
@@ -526,9 +526,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     }
 
     public SortedSet<DegreeModuleScope> getDegreeModuleScopes() {
-        final SortedSet<DegreeModuleScope> degreeModuleScopes =
-                new TreeSet<DegreeModuleScope>(
-                        DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
+        final SortedSet<DegreeModuleScope> degreeModuleScopes = new TreeSet<DegreeModuleScope>(
+                DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
         for (final CurricularCourse curricularCourse : this.getCurricularCoursesSet()) {
             degreeModuleScopes.addAll(curricularCourse.getDegreeModuleScopes());
         }
@@ -536,9 +535,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     }
 
     public Set<DegreeModuleScope> getDegreeModuleScopesFor(final Integer year, final Integer semester) {
-        final Set<DegreeModuleScope> result =
-                new TreeSet<DegreeModuleScope>(
-                        DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
+        final Set<DegreeModuleScope> result = new TreeSet<DegreeModuleScope>(
+                DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
 
         for (final DegreeModuleScope each : getDegreeModuleScopes()) {
             if (each.isActive(year, semester)) {
@@ -550,9 +548,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     }
 
     public Set<DegreeModuleScope> getDegreeModuleScopesFor(final ExecutionYear executionYear) {
-        final Set<DegreeModuleScope> result =
-                new TreeSet<DegreeModuleScope>(
-                        DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
+        final Set<DegreeModuleScope> result = new TreeSet<DegreeModuleScope>(
+                DegreeModuleScope.COMPARATOR_BY_CURRICULAR_YEAR_AND_SEMESTER_AND_CURRICULAR_COURSE_NAME);
 
         for (final DegreeModuleScope each : getDegreeModuleScopes()) {
             if (each.isActiveForExecutionYear(executionYear)) {
@@ -646,10 +643,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     }
 
     public Optional<EnrolmentPeriod> getActiveCurricularCourseEnrolmentPeriod(ExecutionSemester executionSemester) {
-        return getEnrolmentPeriodsSet()
-                .stream()
-                .filter(ep -> ep.getExecutionPeriod() == executionSemester && ep instanceof EnrolmentPeriodInCurricularCourses
-                        && ep.isValid()).findAny();
+        return getEnrolmentPeriodsSet().stream().filter(ep -> ep.getExecutionPeriod() == executionSemester
+                && ep instanceof EnrolmentPeriodInCurricularCourses && ep.isValid()).findAny();
     }
 
     public boolean hasActualEnrolmentPeriodInCurricularCourses() {
@@ -688,11 +683,10 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         return null;
     }
 
-    public Optional<EnrolmentPeriod> getActiveEnrolmentPeriodInCurricularCoursesSpecialSeason(ExecutionSemester executionSemester) {
-        return getEnrolmentPeriodsSet()
-                .stream()
-                .filter(ep -> ep.getExecutionPeriod() == executionSemester
-                        && ep instanceof EnrolmentPeriodInCurricularCoursesSpecialSeason && ep.isValid()).findAny();
+    public Optional<EnrolmentPeriod> getActiveEnrolmentPeriodInCurricularCoursesSpecialSeason(
+            ExecutionSemester executionSemester) {
+        return getEnrolmentPeriodsSet().stream().filter(ep -> ep.getExecutionPeriod() == executionSemester
+                && ep instanceof EnrolmentPeriodInCurricularCoursesSpecialSeason && ep.isValid()).findAny();
     }
 
     public boolean hasOpenEnrolmentPeriodInCurricularCoursesSpecialSeason(final ExecutionSemester executionSemester) {
@@ -719,11 +713,10 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         return null;
     }
 
-    public Optional<EnrolmentPeriod> getActiveEnrolmentPeriodInCurricularCoursesFlunkedSeason(ExecutionSemester executionSemester) {
-        return getEnrolmentPeriodsSet()
-                .stream()
-                .filter(ep -> ep.getExecutionPeriod() == executionSemester
-                        && ep instanceof EnrolmentPeriodInCurricularCoursesFlunkedSeason && ep.isValid()).findAny();
+    public Optional<EnrolmentPeriod> getActiveEnrolmentPeriodInCurricularCoursesFlunkedSeason(
+            ExecutionSemester executionSemester) {
+        return getEnrolmentPeriodsSet().stream().filter(ep -> ep.getExecutionPeriod() == executionSemester
+                && ep instanceof EnrolmentPeriodInCurricularCoursesFlunkedSeason && ep.isValid()).findAny();
     }
 
     public boolean hasOpenEnrolmentPeriodInCurricularCoursesFor(final ExecutionSemester executionSemester) {
@@ -835,7 +828,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
     public RegistrationPeriodInDegreeCurricularPlan getRegistrationPeriod(final ExecutionYear executionYear) {
         final List<EnrolmentPeriod> enrolmentPeriods =
                 getEnrolmentPeriodsBy(executionYear.getFirstExecutionPeriod(), RegistrationPeriodInDegreeCurricularPlan.class);
-        return (RegistrationPeriodInDegreeCurricularPlan) (!enrolmentPeriods.isEmpty() ? enrolmentPeriods.iterator().next() : null);
+        return (RegistrationPeriodInDegreeCurricularPlan) (!enrolmentPeriods.isEmpty() ? enrolmentPeriods.iterator()
+                .next() : null);
     }
 
     public boolean hasRegistrationPeriodFor(final ExecutionYear executionYear) {
@@ -1055,6 +1049,7 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
 
     /**
      * Used to create a CurricularCourse to non box structure
+     * 
      * @deprecated Curricular courses should no longer be created without a competence.
      */
     @Deprecated
@@ -1099,7 +1094,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
                 beginExecutionPeriod, endExecutionPeriod);
     }
 
-    private void checkIfAnualBeginsInFirstPeriod(final CompetenceCourse competenceCourse, final CurricularPeriod curricularPeriod) {
+    private void checkIfAnualBeginsInFirstPeriod(final CompetenceCourse competenceCourse,
+            final CurricularPeriod curricularPeriod) {
         if (competenceCourse.isAnual() && !curricularPeriod.hasChildOrderValue(1)) {
             throw new DomainException("competenceCourse.anual.but.trying.to.associate.curricular.course.not.to.first.period");
         }
@@ -1357,9 +1353,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         final CurricularPeriodInfoDTO[] curricularPeriodInfos;
         if (getDurationInYears() > 1) {
 
-            curricularPeriodInfos =
-                    new CurricularPeriodInfoDTO[] { new CurricularPeriodInfoDTO(year, AcademicPeriod.YEAR),
-                            new CurricularPeriodInfoDTO(semester, AcademicPeriod.SEMESTER) };
+            curricularPeriodInfos = new CurricularPeriodInfoDTO[] { new CurricularPeriodInfoDTO(year, AcademicPeriod.YEAR),
+                    new CurricularPeriodInfoDTO(semester, AcademicPeriod.SEMESTER) };
 
         } else {
             curricularPeriodInfos =
@@ -1707,7 +1702,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
         return registrations;
     }
 
-    public List<StudentCurricularPlan> getStudentsCurricularPlans(ExecutionYear executionYear, List<StudentCurricularPlan> result) {
+    public List<StudentCurricularPlan> getStudentsCurricularPlans(ExecutionYear executionYear,
+            List<StudentCurricularPlan> result) {
         for (final StudentCurricularPlan studentCurricularPlan : this.getStudentCurricularPlansSet()) {
             if (studentCurricularPlan.isActive(executionYear)) {
                 result.add(studentCurricularPlan);
@@ -1907,8 +1903,8 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
             return 0;
         }
 
-        return calculateCycleDuration(cycleType, ctx -> ctx.getCurricularPeriod().getParent(), cp -> cp.getAcademicPeriod()
-                .equals(AcademicPeriod.YEAR));
+        return calculateCycleDuration(cycleType, ctx -> ctx.getCurricularPeriod().getParent(),
+                cp -> cp.getAcademicPeriod().equals(AcademicPeriod.YEAR));
 
     }
 
@@ -1926,9 +1922,10 @@ public class DegreeCurricularPlan extends DegreeCurricularPlan_Base {
                     cycleType.getDescription());
         }
 
-        return Math.toIntExact(getAllCoursesGroups().stream().filter(cg -> cg.getParentCycleCourseGroups().contains(cycleCourseGroup))
-                .flatMap(cg -> cg.getChildContextsSet().stream()).filter(ctx -> ctx.getChildDegreeModule().isLeaf())
-                .map(curricularPeriodCollector).filter(curricularPeriodFilter).distinct().count());
+        return Math.toIntExact(
+                getAllCoursesGroups().stream().filter(cg -> cg.getParentCycleCourseGroups().contains(cycleCourseGroup))
+                        .flatMap(cg -> cg.getChildContextsSet().stream()).filter(ctx -> ctx.getChildDegreeModule().isLeaf())
+                        .map(curricularPeriodCollector).filter(curricularPeriodFilter).distinct().count());
 
     }
 

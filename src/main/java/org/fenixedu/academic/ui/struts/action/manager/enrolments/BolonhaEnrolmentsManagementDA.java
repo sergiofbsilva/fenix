@@ -58,8 +58,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @StrutsFunctionality(app = ManagerStudentsApp.class, path = "manage", titleKey = "label.manage")
 @Mapping(path = "/bolonhaStudentEnrolment", module = "manager", formBean = "bolonhaStudentEnrolmentForm")
-@Forwards({
-        @Forward(name = "viewStudentCurriculum", path = "/manager/bolonha/enrolments/displayStudentCurriculum.jsp"),
+@Forwards({ @Forward(name = "viewStudentCurriculum", path = "/manager/bolonha/enrolments/displayStudentCurriculum.jsp"),
         @Forward(name = "chooseStudentInformation", path = "/manager/bolonha/enrolments/chooseStudentInformation.jsp"),
         @Forward(name = "showExecutionPeriodToEnrol", path = "/manager/bolonha/enrolments/chooseExecutionPeriod.jsp"),
         @Forward(name = "showDegreeModulesToEnrol", path = "/manager/bolonha/enrolments/showDegreeModulesToEnrol.jsp"),
@@ -186,7 +185,8 @@ public class BolonhaEnrolmentsManagementDA extends AbstractBolonhaStudentEnrollm
     }
 
     @Override
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         // unnecessary method
         return null;
     }

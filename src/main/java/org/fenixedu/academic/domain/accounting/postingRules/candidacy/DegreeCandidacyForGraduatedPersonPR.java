@@ -82,8 +82,8 @@ public class DegreeCandidacyForGraduatedPersonPR extends DegreeCandidacyForGradu
     @Override
     public List<EntryDTO> calculateEntries(final Event event, final DateTime when) {
         final Money amountToPay = calculateTotalAmountToPay(event, when);
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay, event
-                .getDescriptionForEntryType(getEntryType()), amountToPay));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, amountToPay, Money.ZERO, amountToPay,
+                event.getDescriptionForEntryType(getEntryType()), amountToPay));
     }
 
     @Override
@@ -116,7 +116,8 @@ public class DegreeCandidacyForGraduatedPersonPR extends DegreeCandidacyForGradu
         final PrecedentDegreeInformation information = individualCandidacy.getRefactoredPrecedentDegreeInformation();
 
         if (individualCandidacy.getUtlStudent() != null) {
-            return individualCandidacy.getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS;
+            return individualCandidacy
+                    .getUtlStudent() ? PaymentCodeType.INTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS : PaymentCodeType.EXTERNAL_DEGREE_CANDIDACY_FOR_GRADUATED_PERSON_INDIVIDUAL_PROCESS;
         } else {
             if (information.isCandidacyInternal() || hasAnyValidRegistration((DegreeCandidacyForGraduatedPersonEvent) event)
                     || belongsToInstitutionGroup(information.getInstitution())) {
@@ -152,9 +153,8 @@ public class DegreeCandidacyForGraduatedPersonPR extends DegreeCandidacyForGradu
     }
 
     @Override
-    protected Set<AccountingTransaction> internalProcess(final User user, final Collection<EntryDTO> entryDTOs,
-            final Event event, final Account fromAccount, final Account toAccount,
-            final AccountingTransactionDetailDTO transactionDetail) {
+    protected Set<AccountingTransaction> internalProcess(final User user, final Collection<EntryDTO> entryDTOs, final Event event,
+            final Account fromAccount, final Account toAccount, final AccountingTransactionDetailDTO transactionDetail) {
 
         if (entryDTOs.size() != 1) {
             throw new DomainException("error.DegreeCandidacyForGraduatedPersonPR.invalid.number.of.entryDTOs");
@@ -175,7 +175,8 @@ public class DegreeCandidacyForGraduatedPersonPR extends DegreeCandidacyForGradu
         }
     }
 
-    public DegreeCandidacyForGraduatedPersonPR edit(final Money amountForInstitutionStudent, final Money amountForExternalStudent) {
+    public DegreeCandidacyForGraduatedPersonPR edit(final Money amountForInstitutionStudent,
+            final Money amountForExternalStudent) {
         deactivate();
         return new DegreeCandidacyForGraduatedPersonPR(new DateTime(), null, getServiceAgreementTemplate(),
                 amountForInstitutionStudent, amountForExternalStudent);

@@ -35,9 +35,8 @@ public class FenixDigestUtils {
     }
 
     public static void main(String[] args) {
-        String res =
-                FenixDigestUtils
-                        .createDigest("2qq asdsad1a zxfgsdf df 2s2ds2ah hdfg 18sgdyh12 12t rwdfg2sfg 5ty fdgh 13ert11yertyhsg  asdsadsa sdr sw1rt t s");
+        String res = FenixDigestUtils.createDigest(
+                "2qq asdsad1a zxfgsdf df 2s2ds2ah hdfg 18sgdyh12 12t rwdfg2sfg 5ty fdgh 13ert11yertyhsg  asdsadsa sdr sw1rt t s");
         String string = getPrettyCheckSum(res);
         logger.info(string);
 

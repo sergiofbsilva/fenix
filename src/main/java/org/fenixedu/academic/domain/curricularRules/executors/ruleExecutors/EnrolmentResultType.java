@@ -29,27 +29,27 @@ public enum EnrolmentResultType {
 
     NULL(3, EnrollmentCondition.INVISIBLE);
 
-    static private final EnrolmentResultType[][] AND_TABLE = new EnrolmentResultType[][] {
-            { TEMPORARY, TEMPORARY, IMPOSSIBLE, TEMPORARY },
+    static private final EnrolmentResultType[][] AND_TABLE =
+            new EnrolmentResultType[][] { { TEMPORARY, TEMPORARY, IMPOSSIBLE, TEMPORARY },
 
-            { TEMPORARY, VALIDATED, IMPOSSIBLE, VALIDATED },
+                    { TEMPORARY, VALIDATED, IMPOSSIBLE, VALIDATED },
 
-            { IMPOSSIBLE, IMPOSSIBLE, IMPOSSIBLE, IMPOSSIBLE },
+                    { IMPOSSIBLE, IMPOSSIBLE, IMPOSSIBLE, IMPOSSIBLE },
 
-            { TEMPORARY, VALIDATED, IMPOSSIBLE, NULL }
+                    { TEMPORARY, VALIDATED, IMPOSSIBLE, NULL }
 
-    };
+            };
 
-    static private final EnrolmentResultType[][] OR_TABLE = new EnrolmentResultType[][] {
-            { TEMPORARY, VALIDATED, TEMPORARY, TEMPORARY },
+    static private final EnrolmentResultType[][] OR_TABLE =
+            new EnrolmentResultType[][] { { TEMPORARY, VALIDATED, TEMPORARY, TEMPORARY },
 
-            { VALIDATED, VALIDATED, VALIDATED, VALIDATED },
+                    { VALIDATED, VALIDATED, VALIDATED, VALIDATED },
 
-            { TEMPORARY, VALIDATED, IMPOSSIBLE, IMPOSSIBLE, },
+                    { TEMPORARY, VALIDATED, IMPOSSIBLE, IMPOSSIBLE, },
 
-            { TEMPORARY, VALIDATED, IMPOSSIBLE, NULL }
+                    { TEMPORARY, VALIDATED, IMPOSSIBLE, NULL }
 
-    };
+            };
 
     private int order;
 

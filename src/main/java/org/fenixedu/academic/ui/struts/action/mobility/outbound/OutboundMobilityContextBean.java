@@ -42,9 +42,9 @@ import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
 import org.joda.time.DateTime;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.ByteStreams;
+
+import pt.ist.fenixframework.Atomic;
 
 public class OutboundMobilityContextBean implements Serializable {
 
@@ -336,8 +336,8 @@ public class OutboundMobilityContextBean implements Serializable {
                 }
             }
         } else {
-            throw new DomainException("error.mobility.outbound.unable.to.set.grades", BundleUtil.getString(Bundle.ACADEMIC,
-                    "error.mobility.outbound.null.file"));
+            throw new DomainException("error.mobility.outbound.unable.to.set.grades",
+                    BundleUtil.getString(Bundle.ACADEMIC, "error.mobility.outbound.null.file"));
         }
     }
 

@@ -29,7 +29,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
         @Forward(name = "intro", path = "/nape/caseHandlingDegreeChangeCandidacyProcess.do?method=listProcessAllowedActivities"),
         @Forward(name = "list-allowed-activities",
                 path = "/scientificCouncil/candidacy/degreeChange/listIndividualCandidacyActivities.jsp") })
-public class DegreeChangeIndividualCandidacyProcessDA extends
-        org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeIndividualCandidacyProcessDA {
+public class DegreeChangeIndividualCandidacyProcessDA
+        extends org.fenixedu.academic.ui.struts.action.candidacy.degreeChange.DegreeChangeIndividualCandidacyProcessDA {
 
 }

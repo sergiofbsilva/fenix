@@ -51,7 +51,6 @@ import org.fenixedu.academic.domain.candidacyProcess.erasmus.ErasmusVacancyBean;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.ReceptionEmailExecutedAction;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.SendReceptionEmailBean;
 import org.fenixedu.academic.domain.candidacyProcess.erasmus.reports.ErasmusCandidacyProcessReport;
-import org.fenixedu.academic.domain.candidacyProcess.secondCycle.SecondCycleIndividualCandidacyProcess;
 import org.fenixedu.academic.domain.caseHandling.Activity;
 import org.fenixedu.academic.domain.caseHandling.PreConditionNotValidException;
 import org.fenixedu.academic.domain.caseHandling.Process;
@@ -239,9 +238,8 @@ public class MobilityApplicationProcess extends MobilityApplicationProcess_Base 
             if (process.isCandidacyValid()) {
                 SortedSet<MobilityIndividualApplicationProcess> values = result.get(process.getCandidacySelectedDegree());
                 if (values == null) {
-                    result.put(process.getCandidacySelectedDegree(), values =
-                            new TreeSet<MobilityIndividualApplicationProcess>(
-                                    SecondCycleIndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON));
+                    result.put(process.getCandidacySelectedDegree(), values = new TreeSet<MobilityIndividualApplicationProcess>(
+                            IndividualCandidacyProcess.COMPARATOR_BY_CANDIDACY_PERSON));
                 }
                 values.add(process);
             }
@@ -266,12 +264,13 @@ public class MobilityApplicationProcess extends MobilityApplicationProcess_Base 
                 || RoleType.COORDINATOR.isMember(userView.getPerson().getUser());
     }
 
-    private static final java.util.function.Predicate<DegreeType> ALLOWED_DEGREE_TYPES = DegreeType.oneOf(
-            DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree);
+    private static final java.util.function.Predicate<DegreeType> ALLOWED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaMasterDegree, DegreeType::isIntegratedMasterDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }
@@ -537,8 +536,8 @@ public class MobilityApplicationProcess extends MobilityApplicationProcess_Base 
             ErasmusVacancyBean bean = (ErasmusVacancyBean) object;
 
             for (Degree degree : bean.getDegrees()) {
-                MobilityQuota.createVacancy(process.getCandidacyPeriod(), degree, bean.getMobilityProgram(),
-                        bean.getUniversity(), bean.getNumberOfVacancies());
+                MobilityQuota.createVacancy(process.getCandidacyPeriod(), degree, bean.getMobilityProgram(), bean.getUniversity(),
+                        bean.getNumberOfVacancies());
             }
 
             return process;
@@ -773,8 +772,8 @@ public class MobilityApplicationProcess extends MobilityApplicationProcess_Base 
                 for (MobilityProgram mobilityProgram : candidacyPeriod.getMobilityPrograms()) {
                     for (MobilityEmailTemplate mobilityEmailTemplate : mobilityProgram.getEmailTemplatesSet()) {
                         if (mobilityEmailTemplate.getType().equals(MobilityEmailTemplateType.MISSING_SHIFTS)) {
-                            throw new DomainException("error.missing.shifts.template.not.found", mobilityProgram.getName()
-                                    .getContent());
+                            throw new DomainException("error.missing.shifts.template.not.found",
+                                    mobilityProgram.getName().getContent());
                         }
                     }
                 }

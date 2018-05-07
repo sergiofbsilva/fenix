@@ -56,7 +56,8 @@ public enum ThesisPresentationState {
         }
         if (thesis.isWaitingConfirmation()) {
             if (thesis.getConfirmmedDocuments() == null) {
-                return areAllDocumentsSubmitted(thesis) ? ThesisPresentationState.DOCUMENTS_SUBMITTED : ThesisPresentationState.APPROVED;
+                return areAllDocumentsSubmitted(
+                        thesis) ? ThesisPresentationState.DOCUMENTS_SUBMITTED : ThesisPresentationState.APPROVED;
             } else {
                 return ThesisPresentationState.DOCUMENTS_CONFIRMED;
             }

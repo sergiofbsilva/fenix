@@ -116,15 +116,15 @@ public class PHDProgramCandidacy extends PHDProgramCandidacy_Base {
 
         getPrecedentDegreeInformation().setConclusionGrade(studentCandidacy.getPrecedentDegreeInformation().getConclusionGrade());
         getPrecedentDegreeInformation().setConclusionYear(studentCandidacy.getPrecedentDegreeInformation().getConclusionYear());
-        getPrecedentDegreeInformation().setDegreeDesignation(
-                studentCandidacy.getPrecedentDegreeInformation().getDegreeDesignation());
+        getPrecedentDegreeInformation()
+                .setDegreeDesignation(studentCandidacy.getPrecedentDegreeInformation().getDegreeDesignation());
         getPrecedentDegreeInformation().setSchoolLevel(studentCandidacy.getPrecedentDegreeInformation().getSchoolLevel());
-        getPrecedentDegreeInformation().setOtherSchoolLevel(
-                studentCandidacy.getPrecedentDegreeInformation().getOtherSchoolLevel());
+        getPrecedentDegreeInformation()
+                .setOtherSchoolLevel(studentCandidacy.getPrecedentDegreeInformation().getOtherSchoolLevel());
         getPrecedentDegreeInformation().setCountry(studentCandidacy.getPrecedentDegreeInformation().getCountry());
         getPrecedentDegreeInformation().setInstitution(studentCandidacy.getPrecedentDegreeInformation().getInstitution());
-        getPrecedentDegreeInformation().setSourceInstitution(
-                studentCandidacy.getPrecedentDegreeInformation().getSourceInstitution());
+        getPrecedentDegreeInformation()
+                .setSourceInstitution(studentCandidacy.getPrecedentDegreeInformation().getSourceInstitution());
 
         setExecutionDegree(studentCandidacy.getExecutionDegree());
         setRegistration(studentCandidacy.getRegistration());

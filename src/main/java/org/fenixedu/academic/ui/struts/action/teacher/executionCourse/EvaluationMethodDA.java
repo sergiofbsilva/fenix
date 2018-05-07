@@ -57,9 +57,8 @@ public class EvaluationMethodDA extends ManageExecutionCourseDA {
         if (executionCourse.getEvaluationMethod() != null) {
             return executionCourse.getEvaluationMethod().getEvaluationElements();
         } else {
-            String competenceMethod =
-                    !executionCourse.getCompetenceCourses().isEmpty() ? executionCourse.getCompetenceCourses().iterator().next()
-                            .getEvaluationMethod() : "";
+            String competenceMethod = !executionCourse.getCompetenceCourses().isEmpty() ? executionCourse.getCompetenceCourses()
+                    .iterator().next().getEvaluationMethod() : "";
             return new LocalizedString(Locale.getDefault(), competenceMethod);
         }
     }
@@ -77,9 +76,8 @@ public class EvaluationMethodDA extends ManageExecutionCourseDA {
                 final CompetenceCourse competenceCourse = competenceCourses.iterator().next();
                 final String pt = competenceCourse.getEvaluationMethod();
                 final String en = competenceCourse.getEvaluationMethodEn();
-                evaluationMethodMls =
-                        evaluationMethodMls.with(org.fenixedu.academic.util.LocaleUtils.PT, pt == null ? "" : pt).with(org.fenixedu.academic.util.LocaleUtils.EN,
-                                en == null ? "" : en);
+                evaluationMethodMls = evaluationMethodMls.with(org.fenixedu.academic.util.LocaleUtils.PT, pt == null ? "" : pt)
+                        .with(org.fenixedu.academic.util.LocaleUtils.EN, en == null ? "" : en);
             }
             EditEvaluation.runEditEvaluation(executionCourse, evaluationMethodMls);
             evaluationMethod = executionCourse.getEvaluationMethod();

@@ -45,7 +45,8 @@ public class RectoratePaymentCodeGenerator extends PaymentCodeGenerator {
 
             logger.info("left [{}], right [{}], result [{}]", leftSequentialNumber, rightSequentialNumber, comparationResult);
 
-            return (comparationResult == 0) ? leftPaymentCode.getExternalId().compareTo(rightPaymentCode.getExternalId()) : comparationResult;
+            return (comparationResult == 0) ? leftPaymentCode.getExternalId()
+                    .compareTo(rightPaymentCode.getExternalId()) : comparationResult;
         }
     };
 

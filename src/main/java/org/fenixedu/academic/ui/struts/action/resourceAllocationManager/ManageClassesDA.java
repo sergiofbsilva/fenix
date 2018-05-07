@@ -70,9 +70,8 @@ public class ManageClassesDA extends FenixExecutionDegreeAndCurricularYearContex
 
     public ActionForward listClasses(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString((String) request
-                        .getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString((String) request.getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
         InfoCurricularYear infoCurricularYear = (InfoCurricularYear) request.getAttribute(PresentationConstants.CURRICULAR_YEAR);
         InfoExecutionDegree infoExecutionDegree =
                 (InfoExecutionDegree) request.getAttribute(PresentationConstants.EXECUTION_DEGREE);
@@ -114,9 +113,8 @@ public class ManageClassesDA extends FenixExecutionDegreeAndCurricularYearContex
         InfoCurricularYear infoCurricularYear = (InfoCurricularYear) request.getAttribute(PresentationConstants.CURRICULAR_YEAR);
         InfoExecutionDegree infoExecutionDegree =
                 (InfoExecutionDegree) request.getAttribute(PresentationConstants.EXECUTION_DEGREE);
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString((String) request
-                        .getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString((String) request.getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
 
         Integer curricularYear = infoCurricularYear.getYear();
 

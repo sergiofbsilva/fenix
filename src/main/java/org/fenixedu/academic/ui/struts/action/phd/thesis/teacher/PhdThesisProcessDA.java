@@ -47,8 +47,7 @@ import org.fenixedu.bennu.struts.annotations.Mapping;
 public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
     private static final List<PhdIndividualProgramDocumentType> AVAILABLE_DOCUMENTS_TO_TEACHER = Arrays
-            .asList(new PhdIndividualProgramDocumentType[] {
-                    PhdIndividualProgramDocumentType.DISSERTATION_OR_FINAL_WORK_DOCUMENT,
+            .asList(new PhdIndividualProgramDocumentType[] { PhdIndividualProgramDocumentType.DISSERTATION_OR_FINAL_WORK_DOCUMENT,
                     PhdIndividualProgramDocumentType.FINAL_THESIS, PhdIndividualProgramDocumentType.JURY_PRESIDENT_ELEMENT,
                     PhdIndividualProgramDocumentType.JURY_REPORT_FEEDBACK,
                     PhdIndividualProgramDocumentType.MAXIMUM_GRADE_GUIDER_PROPOSAL,

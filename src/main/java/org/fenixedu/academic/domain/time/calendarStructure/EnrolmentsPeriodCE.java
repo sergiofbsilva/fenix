@@ -23,8 +23,8 @@ import org.joda.time.DateTime;
 
 public class EnrolmentsPeriodCE extends EnrolmentsPeriodCE_Base {
 
-    public EnrolmentsPeriodCE(AcademicCalendarEntry academicCalendarEntry, LocalizedString title,
-            LocalizedString description, DateTime begin, DateTime end, AcademicCalendarRootEntry rootEntry) {
+    public EnrolmentsPeriodCE(AcademicCalendarEntry academicCalendarEntry, LocalizedString title, LocalizedString description,
+            DateTime begin, DateTime end, AcademicCalendarRootEntry rootEntry) {
 
         super();
         super.initEntry(academicCalendarEntry, title, description, begin, end, rootEntry);

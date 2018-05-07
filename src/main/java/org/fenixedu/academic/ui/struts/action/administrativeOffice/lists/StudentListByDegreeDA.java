@@ -115,11 +115,11 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
     private SearchStudentsByDegreeParametersBean getOrCreateSearchParametersBean() {
         SearchStudentsByDegreeParametersBean bean = getRenderedObject("searchParametersBean");
         if (bean == null) {
-            Set<DegreeType> degreeTypesForOperation =
-                    AcademicAccessRule.getDegreeTypesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS,
-                            Authenticate.getUser()).collect(Collectors.toSet());
-            bean =
-                    new SearchStudentsByDegreeParametersBean(degreeTypesForOperation, AcademicAccessRule
+            Set<DegreeType> degreeTypesForOperation = AcademicAccessRule
+                    .getDegreeTypesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser())
+                    .collect(Collectors.toSet());
+            bean = new SearchStudentsByDegreeParametersBean(degreeTypesForOperation,
+                    AcademicAccessRule
                             .getDegreesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser())
                             .collect(Collectors.toSet()));
         }
@@ -146,9 +146,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         final Degree chosenDegree = searchbean.getDegree();
         final DegreeType chosenDegreeType = searchbean.getDegreeType();
         final ExecutionYear executionYear = searchbean.getExecutionYear();
-        Stream<DegreeCurricularPlan> stream = executionYear.getExecutionDegreesSet().stream().map
-                (ExecutionDegree::getDegreeCurricularPlan);
-
+        Stream<DegreeCurricularPlan> stream =
+                executionYear.getExecutionDegreesSet().stream().map(ExecutionDegree::getDegreeCurricularPlan);
 
         if (chosenDegreeType != null) {
             stream = stream.filter(dcp -> dcp.getDegreeType() == chosenDegreeType);
@@ -158,12 +157,9 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             stream = stream.filter(dcp -> dcp.getDegree() == chosenDegree);
         }
 
-
-        stream = stream.filter(dcp -> (!dcp.getDegreeType().isEmpty() && searchbean
-                .getAdministratedDegreeTypes()
-                .contains(dcp.getDegreeType())) || (dcp.getDegreeType()
-                .isEmpty() && searchbean.getAdministratedDegrees().contains(dcp.getDegree())));
-
+        stream = stream.filter(
+                dcp -> (!dcp.getDegreeType().isEmpty() && searchbean.getAdministratedDegreeTypes().contains(dcp.getDegreeType()))
+                        || (dcp.getDegreeType().isEmpty() && searchbean.getAdministratedDegrees().contains(dcp.getDegree())));
 
         stream.forEach(dcp -> {
             dcp.getRegistrations(executionYear, registrations);
@@ -185,8 +181,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         registrationStream = registrationStream.filter(r -> r.getLastRegistrationState(executionYear) != null);
 
         if (searchBean.hasAnyRegistrationProtocol()) {
-            registrationStream = registrationStream.filter(r -> searchBean.getRegistrationProtocols().contains(r
-                    .getRegistrationProtocol()));
+            registrationStream =
+                    registrationStream.filter(r -> searchBean.getRegistrationProtocols().contains(r.getRegistrationProtocol()));
         }
 
         if (searchBean.hasAnyStudentStatuteType()) {
@@ -194,8 +190,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         }
 
         if (searchBean.hasAnyRegistrationStateTypes()) {
-            registrationStream = registrationStream.filter(r -> searchBean.getRegistrationStateTypes().contains(r
-                    .getLastRegistrationState(executionYear).getStateType()));
+            registrationStream = registrationStream.filter(r -> searchBean.getRegistrationStateTypes()
+                    .contains(r.getLastRegistrationState(executionYear).getStateType()));
         }
 
         if (searchBean.isIngressedInChosenYear()) {
@@ -203,10 +199,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         }
 
         if (searchBean.hasAnyProgramConclusion()) {
-            registrationStream = registrationStream.filter(r -> hasProgramConclusion(r, searchBean
-                            .isIncludeConcludedWithoutConclusionProcess(), searchBean
-                            .getProgramConclusions(),
-                    executionYear));
+            registrationStream = registrationStream.filter(r -> hasProgramConclusion(r,
+                    searchBean.isIncludeConcludedWithoutConclusionProcess(), searchBean.getProgramConclusions(), executionYear));
         }
         if (searchBean.getActiveEnrolments()) {
             registrationStream = registrationStream.filter(r -> r.hasAnyEnrolmentsIn(executionYear));
@@ -228,29 +222,28 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             registrationStream = registrationStream.filter(r -> r.getIngressionType() == searchBean.getIngressionType());
         }
 
-        registrationStream.forEach(r -> result.add(new RegistrationWithStateForExecutionYearBean(r, r.getLastStateType(), executionYear)));
+        registrationStream
+                .forEach(r -> result.add(new RegistrationWithStateForExecutionYearBean(r, r.getLastStateType(), executionYear)));
 
         return result;
     }
 
     static private boolean hasStudentStatuteType(final SearchStudentsByDegreeParametersBean searchBean,
             final Registration registration) {
-        return CollectionUtils.containsAny(searchBean.getStudentStatuteTypes(), registration.getStudent()
-                .getStatutesTypesValidOnAnyExecutionSemesterFor(searchBean.getExecutionYear()));
+        return CollectionUtils.containsAny(searchBean.getStudentStatuteTypes(),
+                registration.getStudent().getStatutesTypesValidOnAnyExecutionSemesterFor(searchBean.getExecutionYear()));
     }
 
-
-    private static boolean hasProgramConclusion(final Registration registration, boolean includeConcludedWithoutConclusionProcess, final List<ProgramConclusion>
-            programConclusions, ExecutionYear executionYear) {
-        return programConclusions.stream().anyMatch(pc ->
-                pc.groupFor(registration).filter(curriculumGroup -> {
-                    if (includeConcludedWithoutConclusionProcess) {
-                        if (curriculumGroup.isConcluded() && curriculumGroup.calculateConclusionYear() == executionYear) {
-                            return true;
-                        }
-                    }
-                    return curriculumGroup.getConclusionYear() == executionYear;
-                }).isPresent());
+    private static boolean hasProgramConclusion(final Registration registration, boolean includeConcludedWithoutConclusionProcess,
+            final List<ProgramConclusion> programConclusions, ExecutionYear executionYear) {
+        return programConclusions.stream().anyMatch(pc -> pc.groupFor(registration).filter(curriculumGroup -> {
+            if (includeConcludedWithoutConclusionProcess) {
+                if (curriculumGroup.isConcluded() && curriculumGroup.calculateConclusionYear() == executionYear) {
+                    return true;
+                }
+            }
+            return curriculumGroup.getConclusionYear() == executionYear;
+        }).isPresent());
     }
 
     public ActionForward exportInfoToExcel(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -302,7 +295,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         spreadsheet.getWorkbook().write(outputStream);
     }
 
-    private void fillSpreadSheetFilters(SearchStudentsByDegreeParametersBean searchBean, final StyledExcelSpreadsheet spreadsheet) {
+    private void fillSpreadSheetFilters(SearchStudentsByDegreeParametersBean searchBean,
+            final StyledExcelSpreadsheet spreadsheet) {
         spreadsheet.newHeaderRow();
         if (searchBean.isIngressedInChosenYear()) {
             spreadsheet.addHeader(getResourceMessage("label.ingressedInChosenYear"));
@@ -354,7 +348,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         if (searchBean.hasAnyProgramConclusion()) {
             spreadsheet.addHeader(getResourceMessage("label.programConclusions") + ":");
             for (ProgramConclusion programConclusion : searchBean.getProgramConclusions()) {
-                spreadsheet.addHeader(programConclusion.getName().getContent() + "-" + programConclusion.getDescription().getContent());
+                spreadsheet.addHeader(
+                        programConclusion.getName().getContent() + "-" + programConclusion.getDescription().getContent());
             }
         }
     }
@@ -404,8 +399,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
 
                 fillSpreadSheetPreBolonhaInfo(spreadsheet, registration);
 
-                spreadsheet
-                        .addCell(getResourceMessage(registration.getStudent().isSenior(executionYear) ? "label.yes" : "label.no"));
+                spreadsheet.addCell(
+                        getResourceMessage(registration.getStudent().isSenior(executionYear) ? "label.yes" : "label.no"));
 
                 final StudentCurricularPlan studentCurricularPlan = registration.getLastStudentCurricularPlan();
 
@@ -487,9 +482,11 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
             if (individualCandidacyPersonalDetails.getCandidacy() == null) {
                 return EMPTY;
             }
-            if (individualCandidacyPersonalDetails.getCandidacy().getCandidacyProcess() instanceof MobilityIndividualApplicationProcess) {
+            if (individualCandidacyPersonalDetails.getCandidacy()
+                    .getCandidacyProcess() instanceof MobilityIndividualApplicationProcess) {
                 MobilityIndividualApplicationProcess mobilityIndividualApplicationProcess =
-                        (MobilityIndividualApplicationProcess) individualCandidacyPersonalDetails.getCandidacy().getCandidacyProcess();
+                        (MobilityIndividualApplicationProcess) individualCandidacyPersonalDetails.getCandidacy()
+                                .getCandidacyProcess();
                 return mobilityIndividualApplicationProcess.getCandidacy().getMobilityStudentData().getSelectedOpening()
                         .getMobilityAgreement().getUniversityUnit().getCountry().getLocalizedName().getContent();
             }
@@ -543,7 +540,8 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
         return EMPTY;
     }
 
-    private void addBranchsInformation(final StyledExcelSpreadsheet spreadsheet, final StudentCurricularPlan studentCurricularPlan) {
+    private void addBranchsInformation(final StyledExcelSpreadsheet spreadsheet,
+            final StudentCurricularPlan studentCurricularPlan) {
 
         final StringBuilder majorBranches = new StringBuilder();
         final StringBuilder minorBranches = new StringBuilder();
@@ -687,8 +685,9 @@ public class StudentListByDegreeDA extends FenixDispatchAction {
 
     protected Set<CycleType> getAdministratedCycleTypes() {
         Set<CycleType> cycles = new HashSet<CycleType>();
-        for (DegreeType degreeType : AcademicAccessRule.getDegreeTypesAccessibleToFunction(
-                AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser()).collect(Collectors.toSet())) {
+        for (DegreeType degreeType : AcademicAccessRule
+                .getDegreeTypesAccessibleToFunction(AcademicOperationType.STUDENT_LISTINGS, Authenticate.getUser())
+                .collect(Collectors.toSet())) {
             cycles.addAll(degreeType.getCycleTypes());
         }
         return cycles;

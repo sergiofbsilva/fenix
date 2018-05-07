@@ -88,8 +88,8 @@ public class PhdCandidacyReferee extends PhdCandidacyReferee_Base {
     }
 
     private String createSubject() {
-        return String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.referee"), getCandidatePerson()
-                .getName(), getCandidatePerson().getName());
+        return String.format(BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.referee"),
+                getCandidatePerson().getName(), getCandidatePerson().getName());
     }
 
     public Person getCandidatePerson() {

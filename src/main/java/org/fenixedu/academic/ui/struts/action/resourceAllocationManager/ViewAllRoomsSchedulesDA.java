@@ -71,9 +71,9 @@ import org.fenixedu.spaces.domain.Space;
 import org.fenixedu.spaces.domain.SpaceClassification;
 import org.joda.time.DateTime;
 
-import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
-
 import com.google.common.collect.Ordering;
+
+import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 /**
  * @author Luis Cruz e Sara Ribeiro
@@ -251,8 +251,8 @@ public class ViewAllRoomsSchedulesDA extends FenixDispatchAction {
         final ExecutionYear executionYear = executionSemester.getExecutionYear();
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename=occupationMap"
-                + executionYear.getYear().replace('/', '_') + "_" + executionSemester.getSemester() + ".xls");
+        response.setHeader("Content-disposition", "attachment; filename=occupationMap" + executionYear.getYear().replace('/', '_')
+                + "_" + executionSemester.getSemester() + ".xls");
 
         final RoomMap occupationMap = new RoomMap();
 
@@ -348,8 +348,8 @@ public class ViewAllRoomsSchedulesDA extends FenixDispatchAction {
         if (space == null) {
             return null;
         }
-        return space.getBlueprintNumber().isPresent() ? space.getBlueprintNumber().get() : findClosestBlueprintNumber(space
-                .getParent());
+        return space.getBlueprintNumber().isPresent() ? space.getBlueprintNumber()
+                .get() : findClosestBlueprintNumber(space.getParent());
     }
 
     private Space findSurroundingRoom(final Space space) {

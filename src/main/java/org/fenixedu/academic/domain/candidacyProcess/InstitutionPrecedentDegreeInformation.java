@@ -85,8 +85,8 @@ public class InstitutionPrecedentDegreeInformation extends InstitutionPrecedentD
     @Override
     public String getConclusionGrade() {
         final Grade result =
-                isBolonha() ? (getStudentCurricularPlan().getCycle(getCycleType()) != null ? getStudentCurricularPlan().getCycle(
-                        getCycleType()).getFinalGrade() : null) : getRegistration().getFinalGrade();
+                isBolonha() ? (getStudentCurricularPlan().getCycle(getCycleType()) != null ? getStudentCurricularPlan()
+                        .getCycle(getCycleType()).getFinalGrade() : null) : getRegistration().getFinalGrade();
         return (result == null) ? null : result.getValue();
     }
 

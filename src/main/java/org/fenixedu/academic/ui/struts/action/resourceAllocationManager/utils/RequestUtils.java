@@ -51,9 +51,8 @@ public abstract class RequestUtils {
     public static final InfoExecutionCourse getExecutionCourseBySigla(HttpServletRequest request,
             String infoExecutionCourseInitials) throws Exception {
 
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString((String) request
-                        .getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString((String) request.getAttribute(PresentationConstants.ACADEMIC_INTERVAL));
 
         final ExecutionCourse executionCourse =
                 ExecutionCourse.getExecutionCourseByInitials(academicInterval, infoExecutionCourseInitials);
@@ -74,8 +73,8 @@ public abstract class RequestUtils {
         return infoExecutionCourse;
     }
 
-    public static final InfoExecutionYear getExecutionYearFromRequest(HttpServletRequest request) throws FenixActionException,
-            FenixServiceException {
+    public static final InfoExecutionYear getExecutionYearFromRequest(HttpServletRequest request)
+            throws FenixActionException, FenixServiceException {
         InfoExecutionYear infoExecutionYear = null;
         String year = (String) request.getAttribute("eYName");
         if (year == null) {
@@ -89,7 +88,8 @@ public abstract class RequestUtils {
         return infoExecutionYear;
     }
 
-    public static final InfoExecutionPeriod getExecutionPeriodFromRequest(HttpServletRequest request) throws FenixActionException {
+    public static final InfoExecutionPeriod getExecutionPeriodFromRequest(HttpServletRequest request)
+            throws FenixActionException {
         InfoExecutionPeriod infoExecutionPeriod = null;
         InfoExecutionYear infoExecutionYear;
         try {
@@ -127,9 +127,8 @@ public abstract class RequestUtils {
             nameDegreeCurricularPlan = request.getParameter("nameDegreeCurricularPlan");
         }
 
-        infoExecutionDegree =
-                ReadExecutionDegreesByExecutionYearAndDegreeInitials.run(infoExecutionYear, degreeInitials,
-                        nameDegreeCurricularPlan);
+        infoExecutionDegree = ReadExecutionDegreesByExecutionYearAndDegreeInitials.run(infoExecutionYear, degreeInitials,
+                nameDegreeCurricularPlan);
 
         return infoExecutionDegree;
     }

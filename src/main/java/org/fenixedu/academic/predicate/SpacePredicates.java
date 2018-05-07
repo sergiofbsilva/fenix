@@ -39,7 +39,7 @@ public class SpacePredicates {
             new AccessControlPredicate<WrittenEvaluationSpaceOccupation>() {
                 @Override
                 public boolean evaluate(WrittenEvaluationSpaceOccupation spaceOccupation) {
-//                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
+        //                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
                     return checkPermissionsToManageOccupationsWithoutCheckSpaceManager.evaluate(spaceOccupation);
                 }
             };
@@ -48,7 +48,7 @@ public class SpacePredicates {
             new AccessControlPredicate<LessonSpaceOccupation>() {
                 @Override
                 public boolean evaluate(LessonSpaceOccupation spaceOccupation) {
-//                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
+        //                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
                     return checkPermissionsToManageOccupationsWithoutCheckSpaceManager.evaluate(spaceOccupation);
                 }
             };
@@ -73,7 +73,7 @@ public class SpacePredicates {
             new AccessControlPredicate<LessonInstanceSpaceOccupation>() {
                 @Override
                 public boolean evaluate(LessonInstanceSpaceOccupation lessonInstanceSpaceOccupation) {
-//                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
+        //                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(AccessControl.getPerson());
                     return true;
                 }
             };
@@ -89,7 +89,7 @@ public class SpacePredicates {
                         return true;
                     }
 
-//                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(loggedPerson);
+        //                    ResourceAllocationRole.checkIfPersonHasPermissionToManageSchedulesAllocation(loggedPerson);
                     return true;
                 }
             };

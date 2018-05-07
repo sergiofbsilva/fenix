@@ -36,8 +36,8 @@ import org.fenixedu.bennu.core.domain.Bennu;
 
 import pt.ist.fenixframework.Atomic;
 
-public class OutboundMobilityCandidacySubmission extends OutboundMobilityCandidacySubmission_Base implements
-        Comparable<OutboundMobilityCandidacySubmission> {
+public class OutboundMobilityCandidacySubmission extends OutboundMobilityCandidacySubmission_Base
+        implements Comparable<OutboundMobilityCandidacySubmission> {
 
     public OutboundMobilityCandidacySubmission(final OutboundMobilityCandidacyPeriod candidacyPeriod,
             final Registration registration) {
@@ -222,33 +222,25 @@ public class OutboundMobilityCandidacySubmission extends OutboundMobilityCandida
             }
 
             if (completedECTSCycle1.doubleValue() >= 120) {
-                final BigDecimal gradeForElimination =
-                        factoredECTS.doubleValue() > 0 ? factoredGradeSum.divide(factoredECTS, 2, RoundingMode.HALF_EVEN) : BigDecimal.ZERO;
+                final BigDecimal gradeForElimination = factoredECTS.doubleValue() > 0 ? factoredGradeSum.divide(factoredECTS, 2,
+                        RoundingMode.HALF_EVEN) : BigDecimal.ZERO;
                 if (gradeForElimination.doubleValue() >= 12.50) {
                     final BigDecimal d = factoredECTSCycle1.add(factoredECTSCycle2);
                     if (d.doubleValue() > 0) {
-                        this.grade =
-                                grade != null ? grade : factoredGradeSumCycle1.add(factoredGradeSumCycle2)
-                                        .divide(d, 2, RoundingMode.HALF_EVEN).multiply(new BigDecimal(5));
-                        gradeForSerialization =
-                                this.grade
-                                        .multiply(AVG_FACTOR)
-                                        .add(completedECTS.multiply(ECTS_FACTOR))
-                                        .add(new BigDecimal(9999).subtract(possibleECTS).add(completedECTS)
-                                                .multiply(PENDING_ECTS_FACTOR))
-                                        .add(completedECTS.divide(enrolledECTS, 4, RoundingMode.HALF_EVEN).multiply(
-                                                new BigDecimal(10000)));
+                        this.grade = grade != null ? grade : factoredGradeSumCycle1.add(factoredGradeSumCycle2)
+                                .divide(d, 2, RoundingMode.HALF_EVEN).multiply(new BigDecimal(5));
+                        gradeForSerialization = this.grade.multiply(AVG_FACTOR).add(completedECTS.multiply(ECTS_FACTOR))
+                                .add(new BigDecimal(9999).subtract(possibleECTS).add(completedECTS).multiply(PENDING_ECTS_FACTOR))
+                                .add(completedECTS.divide(enrolledECTS, 4, RoundingMode.HALF_EVEN)
+                                        .multiply(new BigDecimal(10000)));
                         return;
                     }
                 }
             }
             if (grade != null) {
                 this.grade = grade;
-                gradeForSerialization =
-                        this.grade
-                                .multiply(AVG_FACTOR)
-                                .add(completedECTS.multiply(ECTS_FACTOR))
-                                .add(new BigDecimal(9999).subtract(possibleECTS).add(completedECTS).multiply(PENDING_ECTS_FACTOR));
+                gradeForSerialization = this.grade.multiply(AVG_FACTOR).add(completedECTS.multiply(ECTS_FACTOR))
+                        .add(new BigDecimal(9999).subtract(possibleECTS).add(completedECTS).multiply(PENDING_ECTS_FACTOR));
             } else {
                 this.grade = BigDecimal.ZERO;
                 gradeForSerialization = BigDecimal.ZERO;
@@ -310,7 +302,8 @@ public class OutboundMobilityCandidacySubmission extends OutboundMobilityCandida
 
         public BigDecimal getEctsEverateFirstAndSecondCycle() {
             final BigDecimal d = factoredECTSCycle1.add(factoredECTSCycle2);
-            return d.doubleValue() > 0 ? factoredGradeSumCycle1.add(factoredGradeSumCycle2).divide(d, 2, RoundingMode.HALF_EVEN) : BigDecimal.ZERO;
+            return d.doubleValue() > 0 ? factoredGradeSumCycle1.add(factoredGradeSumCycle2).divide(d, 2,
+                    RoundingMode.HALF_EVEN) : BigDecimal.ZERO;
         }
 
     }

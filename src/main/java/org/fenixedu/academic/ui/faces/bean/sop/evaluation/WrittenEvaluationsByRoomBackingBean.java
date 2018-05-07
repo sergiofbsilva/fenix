@@ -44,6 +44,7 @@ import org.fenixedu.academic.domain.DegreeModuleScope;
 import org.fenixedu.academic.domain.Exam;
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.ExecutionDegree;
+import org.fenixedu.academic.domain.ExecutionInterval;
 import org.fenixedu.academic.domain.ExecutionSemester;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.WrittenEvaluation;
@@ -79,8 +80,8 @@ public class WrittenEvaluationsByRoomBackingBean extends EvaluationManagementBac
 
     private String examCapacity;
 
-    private String academicInterval = AcademicInterval.readDefaultAcademicInterval(AcademicPeriod.SEMESTER)
-            .getResumedRepresentationInStringFormat();
+    private String academicInterval =
+            AcademicInterval.readDefaultAcademicInterval(AcademicPeriod.SEMESTER).getResumedRepresentationInStringFormat();
 
     private String startDate;
 
@@ -220,7 +221,7 @@ public class WrittenEvaluationsByRoomBackingBean extends EvaluationManagementBac
                 matchesCriteria = false;
             } else if (normalCapacity != null && room.getCapacidadeNormal().intValue() < normalCapacity.intValue()) {
                 matchesCriteria = false;
-            } else if (examCapacity != null && (Integer) room.getCapacidadeExame() < examCapacity.intValue()) {
+            } else if (examCapacity != null && room.getCapacidadeExame() < examCapacity.intValue()) {
                 matchesCriteria = false;
             }
 
@@ -293,8 +294,8 @@ public class WrittenEvaluationsByRoomBackingBean extends EvaluationManagementBac
         final List<SelectItem> roomTypeSelectItems = new ArrayList<SelectItem>();
         for (SpaceClassification classification : SpaceUtils.sortByRoomClassificationAndCode(roomClassificationsForEducation)) {
             if (classification.getParent() != null) {
-                roomTypeSelectItems.add(new SelectItem(String.valueOf(classification.getExternalId()), classification
-                        .getAbsoluteCode() + " - " + classification.getName().getContent(I18N.getLocale())));
+                roomTypeSelectItems.add(new SelectItem(String.valueOf(classification.getExternalId()),
+                        classification.getAbsoluteCode() + " - " + classification.getName().getContent(I18N.getLocale())));
             }
         }
         return roomTypeSelectItems;
@@ -302,7 +303,7 @@ public class WrittenEvaluationsByRoomBackingBean extends EvaluationManagementBac
 
     @Deprecated
     public ExecutionSemester getExecutionPeriod() throws FenixServiceException {
-        return (ExecutionSemester) (getAcademicIntervalObject() != null ? ExecutionSemester
+        return (ExecutionSemester) (getAcademicIntervalObject() != null ? ExecutionInterval
                 .getExecutionInterval(getAcademicIntervalObject()) : null);
     }
 
@@ -457,7 +458,8 @@ public class WrittenEvaluationsByRoomBackingBean extends EvaluationManagementBac
     }
 
     public Boolean getIncludeEntireYear() {
-        return (includeEntireYear == null) ? includeEntireYear = getAndHoldBooleanParameter("includeEntireYear") : includeEntireYear;
+        return (includeEntireYear == null) ? includeEntireYear =
+                getAndHoldBooleanParameter("includeEntireYear") : includeEntireYear;
     }
 
     public void setIncludeEntireYear(Boolean includeEntireYear) {

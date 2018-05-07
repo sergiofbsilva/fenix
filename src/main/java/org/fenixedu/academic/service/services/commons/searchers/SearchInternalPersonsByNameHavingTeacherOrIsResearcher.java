@@ -38,7 +38,6 @@ public class SearchInternalPersonsByNameHavingTeacherOrIsResearcher extends Sear
         return Stream
                 .concat(personByUsername != null ? Stream.of(personByUsername) : Stream.empty(),
                         Person.findPersonStream(value, Integer.MAX_VALUE))
-                .filter(isTeacherOrResearcher).limit(size)
-                .collect(Collectors.toSet());
+                .filter(isTeacherOrResearcher).limit(size).collect(Collectors.toSet());
     }
 }

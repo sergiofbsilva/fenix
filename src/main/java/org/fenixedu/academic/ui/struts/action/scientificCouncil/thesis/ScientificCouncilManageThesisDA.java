@@ -72,11 +72,11 @@ import org.fenixedu.commons.spreadsheet.Spreadsheet;
 import org.fenixedu.commons.spreadsheet.Spreadsheet.Row;
 import org.joda.time.YearMonthDay;
 
+import com.google.common.io.ByteStreams;
+
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
-
-import com.google.common.io.ByteStreams;
 
 @StrutsFunctionality(app = ScientificDisserationsApp.class, path = "list", titleKey = "navigation.list.jury.proposals")
 @Mapping(path = "/scientificCouncilManageThesis", module = "scientificCouncil")
@@ -479,8 +479,8 @@ public class ScientificCouncilManageThesisDA extends AbstractManageThesisDA {
         }
     }
 
-    public ActionForward showMakeDocumentUnavailablePage(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ActionForward showMakeDocumentUnavailablePage(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
         request.setAttribute("showMakeDocumentUnavailablePage", Boolean.TRUE);
         return viewThesis(mapping, actionForm, request, response);
     }
@@ -673,8 +673,8 @@ public class ScientificCouncilManageThesisDA extends AbstractManageThesisDA {
         final ExecutionYear executionYear = FenixFramework.getDomainObject(executionYearIdString);
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename=dissertacoes" + executionYear.getYear().replace("/", "")
-                + ".xls");
+        response.setHeader("Content-disposition",
+                "attachment; filename=dissertacoes" + executionYear.getYear().replace("/", "") + ".xls");
         ServletOutputStream writer = response.getOutputStream();
 
         exportDissertations(writer, executionYear);
@@ -758,8 +758,8 @@ public class ScientificCouncilManageThesisDA extends AbstractManageThesisDA {
             if (numbers.length() > 0) {
                 numbers.append(" ");
             }
-            numbers.append(thesisEvaluationParticipant.getPerson() != null ? thesisEvaluationParticipant.getPerson()
-                    .getUsername() : "");
+            numbers.append(
+                    thesisEvaluationParticipant.getPerson() != null ? thesisEvaluationParticipant.getPerson().getUsername() : "");
 
             if (names.length() > 0) {
                 names.append(" ");

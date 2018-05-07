@@ -294,11 +294,11 @@ public class CurriculumRenderer extends InputRenderer {
             enrolmentRow.setClasses(getEnrolmentRowClass());
 
             generateCodeAndNameCell(enrolmentRow, entry, level, allowSelection);
-            
+
             if (entry instanceof ExternalEnrolment) {
                 generateExternalEnrolmentLabelCell(enrolmentRow, (ExternalEnrolment) entry, level);
             }
-            
+
             generateGradeCell(enrolmentRow, entry);
 
             if (isVisibleEctsConvertedGrade()) {
@@ -311,7 +311,7 @@ public class CurriculumRenderer extends InputRenderer {
                         Dismissal dismissal = (Dismissal) entry;
                         ectsGrade = dismissal.getEctsGrade(new DateTime()).getValue();
                     }
-                }catch(NoEctsComparabilityTableFound noEctsException) {
+                } catch (NoEctsComparabilityTableFound noEctsException) {
                     logger.warn("There is no ects table for {}", entry.getExternalId());
                 }
                 generateConvertedGradeCell(enrolmentRow, ectsGrade);
@@ -374,9 +374,8 @@ public class CurriculumRenderer extends InputRenderer {
         }
 
         private void generateSemesterCell(final HtmlTableRow enrolmentRow, final ICurriculumEntry entry) {
-            final String semester =
-                    entry.getExecutionPeriod() == null ? "-" : entry.getExecutionPeriod().getSemester().toString() + " "
-                            + BundleUtil.getString(Bundle.APPLICATION, "label.semester.short");
+            final String semester = entry.getExecutionPeriod() == null ? "-" : entry.getExecutionPeriod().getSemester().toString()
+                    + " " + BundleUtil.getString(Bundle.APPLICATION, "label.semester.short");
 
             generateCellWithText(enrolmentRow, semester, getEnrolmentSemesterCellClass());
         }

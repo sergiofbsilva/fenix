@@ -48,12 +48,11 @@ public class InsertExecutionCourseAtExecutionPeriod {
                 executionSemester.getExecutionCourseByInitials(infoExecutionCourse.getSigla());
         if (existentExecutionCourse != null) {
             throw new DomainException("error.manager.executionCourseManagement.acronym.exists",
-                    existentExecutionCourse.getSigla(), executionSemester.getName(), executionSemester.getExecutionYear()
-                            .getYear(), existentExecutionCourse.getName());
+                    existentExecutionCourse.getSigla(), executionSemester.getName(),
+                    executionSemester.getExecutionYear().getYear(), existentExecutionCourse.getName());
         }
 
-        final ExecutionCourse executionCourse =
-                new ExecutionCourse(infoExecutionCourse.getNome(), infoExecutionCourse.getSigla(), executionSemester,
-                        infoExecutionCourse.getEntryPhase());
+        final ExecutionCourse executionCourse = new ExecutionCourse(infoExecutionCourse.getNome(), infoExecutionCourse.getSigla(),
+                executionSemester, infoExecutionCourse.getEntryPhase());
     }
 }

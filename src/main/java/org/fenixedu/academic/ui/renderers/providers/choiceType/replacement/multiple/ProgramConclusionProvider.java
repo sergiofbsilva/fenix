@@ -11,9 +11,9 @@ import pt.ist.fenixWebFramework.renderers.components.converters.Converter;
 public class ProgramConclusionProvider extends AbstractDomainObjectProvider {
     @Override
     public Object provide(Object source, Object currentValue) {
-    	return Bennu.getInstance().getProgramConclusionSet().stream().collect(Collectors.toList());
+        return Bennu.getInstance().getProgramConclusionSet().stream().collect(Collectors.toList());
     }
-    
+
     @Override
     public Converter getConverter() {
         return new DomainObjectKeyArrayConverter();

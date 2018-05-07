@@ -18,6 +18,14 @@
  */
 package org.fenixedu.academic.ui.spring.controller.teacher;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import org.fenixedu.academic.domain.ExecutionCourse;
 import org.fenixedu.academic.domain.ExportGrouping;
 import org.fenixedu.academic.domain.Grouping;
@@ -40,15 +48,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.RedirectView;
-import pt.ist.fenixframework.FenixFramework;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
+import pt.ist.fenixframework.FenixFramework;
 
 @Controller
 @RequestMapping("/teacher/{executionCourse}/student-groups/")
@@ -60,7 +61,7 @@ public class GroupingController extends ExecutionCourseController {
     // hack
     @Autowired
     CSRFTokenBean csrfTokenBean;
-    
+
     @Override
     protected Class<?> getFunctionalityType() {
         return ManageExecutionCourseDA.class;
@@ -73,20 +74,20 @@ public class GroupingController extends ExecutionCourseController {
 
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     public TeacherView showStudentGroups(Model model) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         return new TeacherView("executionCourse/groupings/viewProjectsAndLink");
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public TeacherView create(Model model) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("projectGroup", new ProjectGroupBean(this.executionCourse));
         return new TeacherView("executionCourse/groupings/insertGroupProperties");
     }
 
     @RequestMapping(value = "/edit/{grouping}", method = RequestMethod.GET)
     public TeacherView edit(Model model, Grouping grouping) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("projectGroup", new ProjectGroupBean(grouping, this.executionCourse));
         return new TeacherView("executionCourse/groupings/insertGroupProperties");
     }
@@ -111,22 +112,18 @@ public class GroupingController extends ExecutionCourseController {
             errors.add("error.exception.existing.groupProperties");
         }
 
-        ShiftType shiftType =
-                projectGroup.getShiftType() == null || projectGroup.getShiftType().isEmpty() ? null : ShiftType
-                        .valueOf(projectGroup.getShiftType());
+        ShiftType shiftType = projectGroup.getShiftType() == null || projectGroup.getShiftType().isEmpty() ? null : ShiftType
+                .valueOf(projectGroup.getShiftType());
 
-        if (projectGroup.getDifferentiatedCapacity()
-                && projectGroup.getMaximumGroupCapacity() != null
-                && projectGroup
-                        .getDifferentiatedCapacityShifts()
-                        .entrySet()
-                        .stream()
-                        .anyMatch(
-                                entry -> ((Shift) FenixFramework.getDomainObject(entry.getKey())).getTypes().contains(shiftType)
-                                        && entry.getValue() != null
-                                        && ((Shift) FenixFramework.getDomainObject(entry.getKey())).getLotacao() != 0 /* it means it was locked from students enrolment only*/
-                                        && entry.getValue() * projectGroup.getMaximumGroupCapacity() > ((Shift) FenixFramework
-                                                .getDomainObject(entry.getKey())).getLotacao())) {
+        if (projectGroup.getDifferentiatedCapacity() && projectGroup.getMaximumGroupCapacity() != null
+                && projectGroup.getDifferentiatedCapacityShifts().entrySet().stream()
+                        .anyMatch(entry -> ((Shift) FenixFramework.getDomainObject(entry.getKey())).getTypes().contains(shiftType)
+                                && entry.getValue() != null
+                                && ((Shift) FenixFramework.getDomainObject(entry.getKey()))
+                                        .getLotacao() != 0 /* it means it was locked from students enrolment only*/
+                                && entry.getValue() * projectGroup
+                                        .getMaximumGroupCapacity() > ((Shift) FenixFramework.getDomainObject(entry.getKey()))
+                                                .getLotacao())) {
             errors.add("error.groupProperties.capacityOverflow");
         }
 
@@ -154,14 +151,13 @@ public class GroupingController extends ExecutionCourseController {
             errors.add("error.groupProperties.ideal.maximum");
         }
 
-        if(groupingWithSameName != null && !groupingWithSameName.getStudentGroupsSet().isEmpty()) {
+        if (groupingWithSameName != null && !groupingWithSameName.getStudentGroupsSet().isEmpty()) {
             Integer maxStudentGroupsOnShift = groupingWithSameName.getStudentGroupsSet().stream()
-                .filter(studentGroup -> !studentGroup.wasDeleted())
-                .filter(studentGroup -> studentGroup.getShift() != null)
-                .collect(Collectors.groupingBy(studentGroup -> studentGroup.getShift(), Collectors.counting()))
-                .values().stream().max(Comparator.naturalOrder()).orElseGet(()->new Long(0)).intValue();
+                    .filter(studentGroup -> !studentGroup.wasDeleted()).filter(studentGroup -> studentGroup.getShift() != null)
+                    .collect(Collectors.groupingBy(studentGroup -> studentGroup.getShift(), Collectors.counting())).values()
+                    .stream().max(Comparator.naturalOrder()).orElseGet(() -> new Long(0)).intValue();
 
-            if( smallerThan(projectGroup.getMaxGroupNumber(), maxStudentGroupsOnShift)){
+            if (smallerThan(projectGroup.getMaxGroupNumber(), maxStudentGroupsOnShift)) {
                 errors.add("error.groupProperties.many.shift.groups");
             }
         }
@@ -189,8 +185,8 @@ public class GroupingController extends ExecutionCourseController {
         }
 
         Grouping grouping = studentGroupService.createOrEditGrouping(projectGroup, executionCourse);
-        return new RedirectView("/teacher/" + executionCourse.getExternalId() + "/student-groups/view/"
-                + grouping.getExternalId(), true);
+        return new RedirectView(
+                "/teacher/" + executionCourse.getExternalId() + "/student-groups/view/" + grouping.getExternalId(), true);
     }
 
     private static Boolean smallerThan(Integer a, Integer b) {
@@ -200,12 +196,11 @@ public class GroupingController extends ExecutionCourseController {
     @RequestMapping(value = "/view/{grouping}", method = RequestMethod.GET)
     public TeacherView viewGrouping(Model model, @PathVariable Grouping grouping) {
         List<Shift> shiftList = new ArrayList<Shift>();
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         if (grouping.getShiftType() != null) {
-            shiftList =
-                    grouping.getExportGroupingsSet().stream().map(ExportGrouping::getExecutionCourse)
-                            .flatMap(ec -> ec.getAssociatedShifts().stream()).sorted(Shift.SHIFT_COMPARATOR_BY_NAME)
-                            .filter(shift -> shift.containsType(grouping.getShiftType())).collect(Collectors.toList());
+            shiftList = grouping.getExportGroupingsSet().stream().map(ExportGrouping::getExecutionCourse)
+                    .flatMap(ec -> ec.getAssociatedShifts().stream()).sorted(Shift.SHIFT_COMPARATOR_BY_NAME)
+                    .filter(shift -> shift.containsType(grouping.getShiftType())).collect(Collectors.toList());
         }
 
         HashMap<Shift, TreeSet<StudentGroup>> studentGroupsByShift = new HashMap<Shift, TreeSet<StudentGroup>>();
@@ -230,7 +225,7 @@ public class GroupingController extends ExecutionCourseController {
 
     @RequestMapping(value = "/viewAttends/{grouping}", method = RequestMethod.GET)
     public TeacherView viewAttends(Model model, @PathVariable Grouping grouping) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("grouping", grouping);
 
         ArrayList<Registration> studentsNotAttending = new ArrayList<Registration>();
@@ -271,7 +266,7 @@ public class GroupingController extends ExecutionCourseController {
 
     @RequestMapping(value = "/viewAllStudentsAndGroups/{grouping}", method = RequestMethod.GET)
     public TeacherView viewAllStudentsAndGroups(Model model, @PathVariable Grouping grouping) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("grouping", grouping);
         model.addAttribute("studentsInStudentGroupsSize",
                 grouping.getStudentGroupsSet().stream().mapToInt(sg -> sg.getAttendsSet().size()).sum());
@@ -281,7 +276,7 @@ public class GroupingController extends ExecutionCourseController {
 
     @RequestMapping(value = "/viewStudentsAndGroupsByShift/{grouping}", method = RequestMethod.GET)
     public TeacherView viewStudentsAndGroupsByShift(Model model, @PathVariable Grouping grouping) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("grouping", grouping);
 
         return new TeacherView("executionCourse/groupings/viewStudentsAndGroupsByShift");
@@ -289,7 +284,7 @@ public class GroupingController extends ExecutionCourseController {
 
     @RequestMapping(value = "/viewStudentsAndGroupsByShift/{grouping}/shift/{shift}", method = RequestMethod.GET)
     public TeacherView viewStudentsAndGroupsByShift(Model model, @PathVariable Grouping grouping, @PathVariable Shift shift) {
-        model.addAttribute("csrf",csrfTokenBean);
+        model.addAttribute("csrf", csrfTokenBean);
         model.addAttribute("shift", shift);
         model.addAttribute("grouping", grouping);
         TreeSet<StudentGroup> studentsByGroup = new TreeSet<StudentGroup>(StudentGroup.COMPARATOR_BY_GROUP_NUMBER);

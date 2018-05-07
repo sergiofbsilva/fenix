@@ -57,13 +57,10 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
                 path = "/academicAdministration/executionCourseManagement/chooseDegreesForExecutionCourseMerge.jsp"),
         @Forward(name = "chooseExecutionCourses",
                 path = "/academicAdministration/executionCourseManagement/chooseExecutionCoursesForExecutionCourseMerge.jsp"),
-        @Forward(
-                name = "sucess",
+        @Forward(name = "sucess",
                 path = "/academicAdministration/chooseDegreesForExecutionCourseMerge.do?method=prepareChooseDegreesAndExecutionPeriod") })
-@Exceptions({
-        @ExceptionHandling(type = MergeExecutionCourses.SourceAndDestinationAreTheSameException.class,
-                key = "error.cannot.merge.execution.course.with.itself", handler = FenixErrorExceptionHandler.class,
-                scope = "request"),
+@Exceptions({ @ExceptionHandling(type = MergeExecutionCourses.SourceAndDestinationAreTheSameException.class,
+        key = "error.cannot.merge.execution.course.with.itself", handler = FenixErrorExceptionHandler.class, scope = "request"),
         @ExceptionHandling(type = MergeExecutionCourses.DuplicateShiftNameException.class, key = "error.duplicate.shift.names",
                 handler = FenixErrorExceptionHandler.class, scope = "request") })
 public class MergeExecutionCourseDA extends FenixDispatchAction {

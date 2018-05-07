@@ -56,7 +56,8 @@ public class PhdCandidacyRefereeLetter extends PhdCandidacyRefereeLetter_Base {
             if (getFile() != null) {
                 getFile().delete();
             }
-            setFile(new PhdCandidacyRefereeLetterFile(getPhdProgramCandidacyProcess(), bean.getFilename(), bean.getFileContent()));
+            setFile(new PhdCandidacyRefereeLetterFile(getPhdProgramCandidacyProcess(), bean.getFilename(),
+                    bean.getFileContent()));
         }
 
         setRefereeName(bean.getRefereeName());

@@ -30,9 +30,8 @@ public class StandaloneEnrolmentCertificateRequestPR extends StandaloneEnrolment
         super();
     }
 
-    public StandaloneEnrolmentCertificateRequestPR(EntryType entryType, EventType eventType, DateTime startDate,
-            DateTime endDate, ServiceAgreementTemplate serviceAgreementTemplate, Money baseAmount, Money amountPerUnit,
-            Money amountPerPage) {
+    public StandaloneEnrolmentCertificateRequestPR(EntryType entryType, EventType eventType, DateTime startDate, DateTime endDate,
+            ServiceAgreementTemplate serviceAgreementTemplate, Money baseAmount, Money amountPerUnit, Money amountPerPage) {
         init(entryType, eventType, startDate, endDate, serviceAgreementTemplate, baseAmount, amountPerUnit, amountPerPage);
     }
 }

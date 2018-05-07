@@ -429,8 +429,8 @@ public class PhdMigrationIndividualProcessData extends PhdMigrationIndividualPro
 
         activeState = getMigrationStatus();
         if (!activeState.equals(estimatedFinalMigrationStatus())) {
-            throw new FinalEstimatedStateNotReachedException("Estimated: " + estimatedFinalMigrationStatus() + "\treached: "
-                    + activeState);
+            throw new FinalEstimatedStateNotReachedException(
+                    "Estimated: " + estimatedFinalMigrationStatus() + "\treached: " + activeState);
         }
 
         setMigrationDate(new DateTime());

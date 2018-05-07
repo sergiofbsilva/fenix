@@ -197,8 +197,7 @@ public class CoordinatorGroup extends FenixGroup {
     public boolean equals(Object object) {
         if (object instanceof CoordinatorGroup) {
             CoordinatorGroup other = (CoordinatorGroup) object;
-            return Objects.equal(degreeType, other.degreeType) 
- && Objects.equal(degree, other.degree)
+            return Objects.equal(degreeType, other.degreeType) && Objects.equal(degree, other.degree)
                     && Objects.equal(responsible, other.responsible);
         }
         return false;

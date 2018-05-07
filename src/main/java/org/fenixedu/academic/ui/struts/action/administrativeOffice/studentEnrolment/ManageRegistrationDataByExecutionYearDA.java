@@ -41,9 +41,8 @@ import pt.ist.fenixframework.Atomic;
         functionality = SearchForStudentsDA.class)
 @Forwards({
 
-@Forward(
-        name = "edit",
-        path = "/academicAdminOffice/student/registration/manageRegistrationDataByExecutionYear/editRegistrationDataByExecutionYear.jsp"), })
+        @Forward(name = "edit",
+                path = "/academicAdminOffice/student/registration/manageRegistrationDataByExecutionYear/editRegistrationDataByExecutionYear.jsp"), })
 public class ManageRegistrationDataByExecutionYearDA extends FenixDispatchAction {
 
     public static class RegistrationDataByYearBean implements Serializable {

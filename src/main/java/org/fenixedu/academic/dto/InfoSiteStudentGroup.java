@@ -114,9 +114,8 @@ public class InfoSiteStudentGroup extends DataTranferObject {
         }
 
         if (((InfoSiteStudentGroup) objectToCompare).getInfoSiteStudentInformationList() == null
-                || this.getInfoSiteStudentInformationList() == null
-                || ((InfoSiteStudentGroup) objectToCompare).getInfoSiteStudentInformationList().size() != this
-                        .getInfoSiteStudentInformationList().size()) {
+                || this.getInfoSiteStudentInformationList() == null || ((InfoSiteStudentGroup) objectToCompare)
+                        .getInfoSiteStudentInformationList().size() != this.getInfoSiteStudentInformationList().size()) {
 
             return false;
         }

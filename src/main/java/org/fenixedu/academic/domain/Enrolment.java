@@ -338,13 +338,11 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     }
 
     protected void createEnrolmentEvaluationWithoutGrade() {
-        boolean existing =
-                getEnrolmentEvaluationBySeason(EvaluationConfiguration.getInstance().getDefaultEvaluationSeason())
-                        .filter(e -> e.getGrade().equals(null)).findAny().isPresent();
+        boolean existing = getEnrolmentEvaluationBySeason(EvaluationConfiguration.getInstance().getDefaultEvaluationSeason())
+                .filter(e -> e.getGrade().equals(null)).findAny().isPresent();
         if (!existing) {
-            EnrolmentEvaluation evaluation =
-                    new EnrolmentEvaluation(this, EvaluationConfiguration.getInstance().getDefaultEvaluationSeason(),
-                            EnrolmentEvaluationState.TEMPORARY_OBJ);
+            EnrolmentEvaluation evaluation = new EnrolmentEvaluation(this,
+                    EvaluationConfiguration.getInstance().getDefaultEvaluationSeason(), EnrolmentEvaluationState.TEMPORARY_OBJ);
             evaluation.setWhenDateTime(new DateTime());
             addEvaluations(evaluation);
         }
@@ -394,9 +392,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
 
     final public EnrolmentEvaluation createEnrolmentEvaluationForImprovement(final Person person,
             final ExecutionSemester executionSemester) {
-        final EnrolmentEvaluation enrolmentEvaluation =
-                new EnrolmentEvaluation(this, EvaluationSeason.readImprovementSeason(), EnrolmentEvaluationState.TEMPORARY_OBJ,
-                        person, executionSemester);
+        final EnrolmentEvaluation enrolmentEvaluation = new EnrolmentEvaluation(this, EvaluationSeason.readImprovementSeason(),
+                EnrolmentEvaluationState.TEMPORARY_OBJ, person, executionSemester);
         createAttendForImprovement(executionSemester);
         return enrolmentEvaluation;
     }
@@ -464,7 +461,7 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
 
     final public boolean isImprovementForExecutionCourse(ExecutionCourse executionCourse) {
         return getExecutionPeriod() != executionCourse.getExecutionPeriod()
-        		&& getCurricularCourse().getAssociatedExecutionCoursesSet().contains(executionCourse);
+                && getCurricularCourse().getAssociatedExecutionCoursesSet().contains(executionCourse);
     }
 
     final public boolean isImprovingInExecutionPeriodFollowingApproval(final ExecutionSemester improvementExecutionPeriod) {
@@ -485,7 +482,7 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
 
         for (ExecutionSemester executionSemester = enrolmentNextExecutionPeriod; executionSemester != null
                 && executionSemester != improvementExecutionPeriod; executionSemester =
-                executionSemester.getNextExecutionPeriod()) {
+                        executionSemester.getNextExecutionPeriod()) {
             if (degreeModule.hasAnyParentContexts(executionSemester)) {
                 return false;
             }
@@ -500,7 +497,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
             setEnrollmentState(EnrollmentState.ENROLLED);
 
             if (person == null) {
-                return new EnrolmentEvaluation(this, EvaluationSeason.readSpecialSeason(), EnrolmentEvaluationState.TEMPORARY_OBJ);
+                return new EnrolmentEvaluation(this, EvaluationSeason.readSpecialSeason(),
+                        EnrolmentEvaluationState.TEMPORARY_OBJ);
             }
 
             return new EnrolmentEvaluation(this, EvaluationSeason.readSpecialSeason(), EnrolmentEvaluationState.TEMPORARY_OBJ,
@@ -515,18 +513,15 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
             setEnrolmentCondition(EnrollmentCondition.FINAL);
             setEvaluationSeason(EvaluationConfiguration.getInstance().getDefaultEvaluationSeason());
             getEnrolmentEvaluationBySeasonAndState(EnrolmentEvaluationState.TEMPORARY_OBJ, EvaluationSeason.readSpecialSeason())
-                    .ifPresent(
-                            ee -> {
-                                if (ee.getSpecialSeasonEnrolmentEvent() != null) {
-                                    ee.getSpecialSeasonEnrolmentEvent()
-                                            .cancel(Authenticate.getUser().getPerson(),
-                                                    BundleUtil.getString(Bundle.ACADEMIC,
-                                                            "enrolmentEvaluation.cancel.event.disenrolled"));
-                                    ee.setEnrolmentEvaluationState(EnrolmentEvaluationState.ANNULED_OBJ);
-                                } else {
-                                    ee.delete();
-                                }
-                            });
+                    .ifPresent(ee -> {
+                        if (ee.getSpecialSeasonEnrolmentEvent() != null) {
+                            ee.getSpecialSeasonEnrolmentEvent().cancel(Authenticate.getUser().getPerson(),
+                                    BundleUtil.getString(Bundle.ACADEMIC, "enrolmentEvaluation.cancel.event.disenrolled"));
+                            ee.setEnrolmentEvaluationState(EnrolmentEvaluationState.ANNULED_OBJ);
+                        } else {
+                            ee.delete();
+                        }
+                    });
 
             getEnrolmentEvaluationBySeasonAndState(EnrolmentEvaluationState.FINAL_OBJ, EvaluationSeason.readSpecialSeason())
                     .ifPresent(e -> setEnrollmentState(e.getEnrollmentStateByGrade()));
@@ -554,18 +549,18 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     final public boolean hasImprovementFor(ExecutionSemester executionSemester) {
         for (EnrolmentEvaluation enrolmentEvaluation : this.getEvaluationsSet()) {
             if (enrolmentEvaluation.getEvaluationSeason().isImprovement()) {
-            	final ExecutionSemester evalPeriod = enrolmentEvaluation.getExecutionPeriod();
-            	if (evalPeriod != null && evalPeriod == executionSemester) {
-            		return true;
-            	}
+                final ExecutionSemester evalPeriod = enrolmentEvaluation.getExecutionPeriod();
+                if (evalPeriod != null && evalPeriod == executionSemester) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
     final public boolean hasSpecialSeason() {
-        return getEnrolmentEvaluationBySeason(EvaluationSeason.readSpecialSeason()).anyMatch(
-                ee -> !ee.getEnrolmentEvaluationState().equals(EnrolmentEvaluationState.ANNULED_OBJ));
+        return getEnrolmentEvaluationBySeason(EvaluationSeason.readSpecialSeason())
+                .anyMatch(ee -> !ee.getEnrolmentEvaluationState().equals(EnrolmentEvaluationState.ANNULED_OBJ));
     }
 
     final public boolean hasSpecialSeasonInExecutionYear() {
@@ -673,11 +668,13 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     private Grade calculateNormalizedEctsGrade(final StudentCurricularPlan scp, final DateTime processingDate) {
         final Grade grade = getGrade();
         final EctsConversionTable table = getEctsConversionTable();
-        final EctsConversionTable tableForCalculation = table == null ? calculateEctsConversionTable(scp, processingDate, grade) : table;
+        final EctsConversionTable tableForCalculation =
+                table == null ? calculateEctsConversionTable(scp, processingDate, grade) : table;
         return tableForCalculation.convert(grade);
     }
 
-    private EctsConversionTable calculateEctsConversionTable(final StudentCurricularPlan scp, final DateTime processingDate, final Grade grade) {
+    private EctsConversionTable calculateEctsConversionTable(final StudentCurricularPlan scp, final DateTime processingDate,
+            final Grade grade) {
         final Set<InternalEnrolmentWrapper> wrappers = getEnrolmentWrappersSet();
         if (wrappers.size() > 0) {
             final Set<Dismissal> dismissals = new HashSet<Dismissal>();
@@ -808,8 +805,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     }
 
     final public int getNumberOfTotalEnrolmentsInThisCourse(ExecutionSemester untilExecutionPeriod) {
-        return this.getStudentCurricularPlan()
-                .countEnrolmentsByCurricularCourse(this.getCurricularCourse(), untilExecutionPeriod);
+        return this.getStudentCurricularPlan().countEnrolmentsByCurricularCourse(this.getCurricularCourse(),
+                untilExecutionPeriod);
     }
 
     @Override
@@ -831,9 +828,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
 
         final Grade grade = Grade.createGrade(gradeValue, gradeScale != null ? gradeScale : getGradeScale());
 
-        final EnrolmentEvaluation enrolmentEvaluation =
-                new EnrolmentEvaluation(this, enrolmentEvaluationState, evaluationSeason, responsibleFor, grade, availableDate,
-                        examDate, new DateTime());
+        final EnrolmentEvaluation enrolmentEvaluation = new EnrolmentEvaluation(this, enrolmentEvaluationState, evaluationSeason,
+                responsibleFor, grade, availableDate, examDate, new DateTime());
         if (evaluationSeason.isImprovement()) {
             enrolmentEvaluation.setExecutionPeriod(executionSemester);
         }
@@ -844,9 +840,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
             EvaluationSeason evaluationSeason, Person responsibleFor, String gradeValue, Date availableDate, Date examDate,
             ExecutionSemester executionSemester, String bookReference, String page, GradeScale gradeScale) {
 
-        EnrolmentEvaluation enrolmentEvaluation =
-                addNewEnrolmentEvaluation(enrolmentEvaluationState, evaluationSeason, responsibleFor, gradeValue, availableDate,
-                        examDate, executionSemester, gradeScale);
+        EnrolmentEvaluation enrolmentEvaluation = addNewEnrolmentEvaluation(enrolmentEvaluationState, evaluationSeason,
+                responsibleFor, gradeValue, availableDate, examDate, executionSemester, gradeScale);
         enrolmentEvaluation.setBookReference(bookReference);
         enrolmentEvaluation.setPage(page);
         enrolmentEvaluation.setContext(EnrolmentEvaluationContext.CURRICULUM_VALIDATION_EVALUATION);
@@ -975,7 +970,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     }
 
     @Override
-    public boolean isEnroledInExecutionPeriod(final CurricularCourse curricularCourse, final ExecutionSemester executionSemester) {
+    public boolean isEnroledInExecutionPeriod(final CurricularCourse curricularCourse,
+            final ExecutionSemester executionSemester) {
         return this.getCurricularCourse() == curricularCourse && isValid(executionSemester);
     }
 
@@ -983,7 +979,7 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
     public boolean isValid(final ExecutionSemester executionSemester) {
         return getExecutionPeriod() == executionSemester
                 || (getExecutionPeriod().getExecutionYear() == executionSemester.getExecutionYear()
-                	&& getCurricularCourse().isAnual());
+                        && getCurricularCourse().isAnual());
     }
 
     public boolean isValid(final ExecutionYear executionYear) {
@@ -1161,8 +1157,8 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
 
     @Override
     final public Collection<Enrolment> getSpecialSeasonEnrolments(final ExecutionYear executionYear) {
-        return getExecutionPeriod().getExecutionYear() == executionYear && isSpecialSeason() ?
-            Collections.singleton(this) : Collections.emptySet();
+        return getExecutionPeriod().getExecutionYear() == executionYear && isSpecialSeason() ? Collections
+                .singleton(this) : Collections.emptySet();
     }
 
     @Override
@@ -1277,10 +1273,9 @@ public class Enrolment extends Enrolment_Base implements IEnrolment {
         }
 
         for (EnrolmentEvaluation enrolmentEvaluation : getEvaluationsSet()) {
-            if (enrolmentEvaluation.getEvaluationSeason().equals(season)
-                    && enrolmentEvaluation.getMarkSheet() == null
-                    && (enrolmentEvaluation.isTemporary() || (enrolmentEvaluation.isNotEvaluated() && enrolmentEvaluation
-                            .getExamDateYearMonthDay() == null))) {
+            if (enrolmentEvaluation.getEvaluationSeason().equals(season) && enrolmentEvaluation.getMarkSheet() == null
+                    && (enrolmentEvaluation.isTemporary()
+                            || (enrolmentEvaluation.isNotEvaluated() && enrolmentEvaluation.getExamDateYearMonthDay() == null))) {
                 return true;
             }
         }

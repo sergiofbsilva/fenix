@@ -91,8 +91,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @StrutsFunctionality(app = PublicPhdApp.class, path = "candidacy", titleKey = "title.public.phd.program.candidacy")
 @Mapping(path = "/applications/phd/phdProgramApplicationProcess", module = "publico")
-@Forwards({
-        @Forward(name = "outOfCandidacyPeriod", path = "/phd/candidacy/publicProgram/institution/outOfCandidacyPeriod.jsp"),
+@Forwards({ @Forward(name = "outOfCandidacyPeriod", path = "/phd/candidacy/publicProgram/institution/outOfCandidacyPeriod.jsp"),
         @Forward(name = "createIdentification", path = "/phd/candidacy/publicProgram/institution/createIdentification.jsp"),
         @Forward(name = "createIdentificationSuccess",
                 path = "/phd/candidacy/publicProgram/institution/createIdentificationSuccess.jsp"),
@@ -121,15 +120,15 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
 
     static private final List<String> DO_NOT_VALIDATE_CANDIDACY_PERIOD_IN_METHODS = Arrays.asList(
 
-    "viewCandidacy",
+            "viewCandidacy",
 
-    "backToViewCandidacy",
+            "backToViewCandidacy",
 
-    "prepareCreateRefereeLetter",
+            "prepareCreateRefereeLetter",
 
-    "createRefereeLetterInvalid",
+            "createRefereeLetterInvalid",
 
-    "createRefereeLetter");
+            "createRefereeLetter");
 
     @Override
     protected ActionForward filterDispatchMethod(final PhdProgramCandidacyProcessBean bean, ActionMapping mapping,
@@ -155,9 +154,8 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
     }
 
     private PhdCandidacyPeriod getPhdCandidacyPeriod(final PhdProgramPublicCandidacyHashCode hashCode) {
-        final DateTime date =
-                (hashCode != null && hashCode.hasCandidacyProcess()) ? hashCode.getPhdProgramCandidacyProcess()
-                        .getCandidacyDate().toDateTimeAtCurrentTime() : new DateTime();
+        final DateTime date = (hashCode != null && hashCode.hasCandidacyProcess()) ? hashCode.getPhdProgramCandidacyProcess()
+                .getCandidacyDate().toDateTimeAtCurrentTime() : new DateTime();
 
         return InstitutionPhdCandidacyPeriod.readInstitutionPhdCandidacyPeriodForDate(date);
     }
@@ -195,19 +193,16 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
         final PhdProgramPublicCandidacyHashCode hashCode =
                 PhdProgramPublicCandidacyHashCode.getOrCreatePhdProgramCandidacyHashCode(bean.getEmail());
 
-        if (hashCode.hasCandidacyProcess()
-                && hashCode.getPhdProgramCandidacyProcess().getCandidacy().getDegreeCurricularPlan()
-                        .equals(bean.getProcess().getCandidacy().getDegreeCurricularPlan())) {
+        if (hashCode.hasCandidacyProcess() && hashCode.getPhdProgramCandidacyProcess().getCandidacy().getDegreeCurricularPlan()
+                .equals(bean.getProcess().getCandidacy().getDegreeCurricularPlan())) {
             addErrorMessage(request, "error.PhdProgramPublicCandidacyHashCode.already.has.candidacy");
             return prepareCreateIdentification(mapping, form, request, response);
         }
 
         sendSubmissionEmailForCandidacy(hashCode, request);
 
-        String url =
-                String.format("%s?hash=%s",
-                        InstitutionPhdCandidacyProcessProperties.getPublicCandidacySubmissionLink(I18N.getLocale()),
-                        hashCode.getValue());
+        String url = String.format("%s?hash=%s",
+                InstitutionPhdCandidacyProcessProperties.getPublicCandidacySubmissionLink(I18N.getLocale()), hashCode.getValue());
 
         request.setAttribute("processLink", url);
 
@@ -215,14 +210,13 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
     }
 
     private void sendSubmissionEmailForCandidacy(final PublicCandidacyHashCode hashCode, final HttpServletRequest request) {
-        final String subject =
-                BundleUtil.getString(Bundle.PHD, "message.phd.institution.application.email.subject.send.link.to.submission",
-                        Unit.getInstitutionAcronym());
-        final String body =
-                BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.send.link.to.submission",
-                        Unit.getInstitutionAcronym());
-        hashCode.sendEmail(subject, String.format(body,
-                InstitutionPhdCandidacyProcessProperties.getPublicCandidacySubmissionLink(I18N.getLocale()), hashCode.getValue()));
+        final String subject = BundleUtil.getString(Bundle.PHD,
+                "message.phd.institution.application.email.subject.send.link.to.submission", Unit.getInstitutionAcronym());
+        final String body = BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.send.link.to.submission",
+                Unit.getInstitutionAcronym());
+        hashCode.sendEmail(subject,
+                String.format(body, InstitutionPhdCandidacyProcessProperties.getPublicCandidacySubmissionLink(I18N.getLocale()),
+                        hashCode.getValue()));
     }
 
     /*
@@ -261,12 +255,11 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
     private void sendRecoveryEmailForCandidate(PhdProgramPublicCandidacyHashCode candidacyHashCode, HttpServletRequest request) {
         final String subject =
                 BundleUtil.getString(Bundle.PHD, "message.phd.email.subject.recovery.access", Unit.getInstitutionAcronym());
-        final String body =
-                BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.recovery.access",
-                        Unit.getInstitutionAcronym());
-        candidacyHashCode.sendEmail(subject, String.format(body,
-                InstitutionPhdCandidacyProcessProperties.getPublicCandidacyAccessLink(I18N.getLocale()),
-                candidacyHashCode.getValue()));
+        final String body = BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.recovery.access",
+                Unit.getInstitutionAcronym());
+        candidacyHashCode.sendEmail(subject,
+                String.format(body, InstitutionPhdCandidacyProcessProperties.getPublicCandidacyAccessLink(I18N.getLocale()),
+                        candidacyHashCode.getValue()));
     }
 
     /*
@@ -279,9 +272,8 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
 
     public ActionForward prepareFillPersonalData(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        final PhdProgramPublicCandidacyHashCode hashCode =
-                (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(request
-                        .getParameter("hash"));
+        final PhdProgramPublicCandidacyHashCode hashCode = (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode
+                .getPublicCandidacyCodeByHash(request.getParameter("hash"));
 
         if (hashCode == null) {
             return prepareCreateIdentification(mapping, form, request, response);
@@ -352,12 +344,10 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
         // TODO: if candidacy period exists, then change body message to send
         // candidacy limit end date
 
-        final String subject =
-                BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.subject.application.submited",
-                        Unit.getInstitutionAcronym());
-        final String body =
-                BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.application.submited",
-                        Unit.getInstitutionAcronym());
+        final String subject = BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.subject.application.submited",
+                Unit.getInstitutionAcronym());
+        final String body = BundleUtil.getString(Bundle.PHD, "message.phd.institution.email.body.application.submited",
+                Unit.getInstitutionAcronym());
         hashCode.sendEmail(subject, String.format(body, hashCode.getPhdProgramCandidacyProcess().getProcessNumber(),
                 InstitutionPhdCandidacyProcessProperties.getPublicCandidacyAccessLink(I18N.getLocale()), hashCode.getValue()));
     }
@@ -368,9 +358,8 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
 
     public ActionForward viewApplication(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
-        return viewCandidacy(mapping, form, request, response,
-                (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode.getPublicCandidacyCodeByHash(request
-                        .getParameter("hash")));
+        return viewCandidacy(mapping, form, request, response, (PhdProgramPublicCandidacyHashCode) PublicCandidacyHashCode
+                .getPublicCandidacyCodeByHash(request.getParameter("hash")));
     }
 
     private ActionForward viewCandidacy(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -444,16 +433,14 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
             numberOfDocumentsSubmitted = numberOfDocumentsSubmitted.add(new BigDecimal(1));
         }
 
-        if (process.getCandidacyProcessDocumentsCount(PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT) < process
-                .getQualifications().size()) {
+        if (process.getCandidacyProcessDocumentsCount(
+                PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT) < process.getQualifications().size()) {
             addValidationMessage(request, "message.validation.missing.qualification.documents",
                     String.valueOf(process.getQualifications().size()));
             result &= false;
         } else {
-            numberOfDocumentsSubmitted =
-                    numberOfDocumentsSubmitted
-                            .add(new BigDecimal(
-                                    process.getCandidacyProcessDocumentsCount(PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT)));
+            numberOfDocumentsSubmitted = numberOfDocumentsSubmitted.add(new BigDecimal(process
+                    .getCandidacyProcessDocumentsCount(PhdIndividualProgramDocumentType.HABILITATION_CERTIFICATE_DOCUMENT)));
         }
 
         if (!process.hasCandidacyProcessDocument(PhdIndividualProgramDocumentType.MOTIVATION_LETTER)) {
@@ -463,10 +450,8 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
             numberOfDocumentsSubmitted = numberOfDocumentsSubmitted.add(new BigDecimal(1));
         }
 
-        request.setAttribute(
-                "documentsSubmittedPercentage",
-                numberOfDocumentsSubmitted.divide(numberOfDocumentsToSubmit, 2, RoundingMode.HALF_EVEN)
-                        .multiply(new BigDecimal(100)).intValue());
+        request.setAttribute("documentsSubmittedPercentage", numberOfDocumentsSubmitted
+                .divide(numberOfDocumentsToSubmit, 2, RoundingMode.HALF_EVEN).multiply(new BigDecimal(100)).intValue());
         request.setAttribute("numberOfDocumentsToSubmit", numberOfDocumentsToSubmit.intValue());
         request.setAttribute("numberOfDocumentsSubmitted", numberOfDocumentsSubmitted.intValue());
 
@@ -517,8 +502,8 @@ public class PublicInstitutionPhdProgramsCandidacyProcessDA extends PublicPhdPro
         canEditPersonalInformation(request, process.getPerson());
 
         try {
-            ExecuteProcessActivity
-                    .run(process.getIndividualProgramProcess(), EditPersonalInformation.class, bean.getPersonBean());
+            ExecuteProcessActivity.run(process.getIndividualProgramProcess(), EditPersonalInformation.class,
+                    bean.getPersonBean());
         } catch (final DomainException e) {
             addErrorMessage(request, e.getKey(), e.getArgs());
             request.setAttribute("candidacyBean", bean);

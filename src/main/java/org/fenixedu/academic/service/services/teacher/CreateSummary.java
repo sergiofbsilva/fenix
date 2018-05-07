@@ -37,11 +37,10 @@ public class CreateSummary {
         ServiceMonitoring.logService(this.getClass(), bean);
 
         if (bean.isNewSummary()) {
-            Summary summary =
-                    new Summary(bean.getTitle(), bean.getSummaryText(), bean.getStudentsNumber(), bean.getSummaryType().equals(
-                            SummariesManagementBean.SummaryType.EXTRA_SUMMARY), bean.getProfessorship(), bean.getTeacherName(),
-                            bean.getTeacher(), bean.getShift(), bean.getLesson(), bean.getSummaryDate(), bean.getSummaryRoom(),
-                            bean.getSummaryTime(), bean.getLessonType(), bean.getTaught());
+            Summary summary = new Summary(bean.getTitle(), bean.getSummaryText(), bean.getStudentsNumber(),
+                    bean.getSummaryType().equals(SummariesManagementBean.SummaryType.EXTRA_SUMMARY), bean.getProfessorship(),
+                    bean.getTeacherName(), bean.getTeacher(), bean.getShift(), bean.getLesson(), bean.getSummaryDate(),
+                    bean.getSummaryRoom(), bean.getSummaryTime(), bean.getLessonType(), bean.getTaught());
             Signal.emit(Summary.CREATE_SIGNAL, new DomainObjectEvent<Summary>(summary));
         } else {
             bean.getSummary().edit(bean.getTitle(), bean.getSummaryText(), bean.getStudentsNumber(),

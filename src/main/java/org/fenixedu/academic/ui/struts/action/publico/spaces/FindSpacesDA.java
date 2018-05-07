@@ -106,8 +106,8 @@ public class FindSpacesDA extends FenixDispatchAction {
             List<FindSpacesBean> result = new ArrayList<FindSpacesBean>();
             Set<Space> resultSpaces = SpaceUtils.findSpaces(labelToSearch, campus, building, bean.getSearchType());
             for (Space space : resultSpaces) {
-                result.add(new FindSpacesBean(space, bean.getSearchType(), AcademicInterval
-                        .readDefaultAcademicInterval(AcademicPeriod.SEMESTER)));
+                result.add(new FindSpacesBean(space, bean.getSearchType(),
+                        AcademicInterval.readDefaultAcademicInterval(AcademicPeriod.SEMESTER)));
             }
 
             request.setAttribute("foundSpaces", result);
@@ -156,9 +156,8 @@ public class FindSpacesDA extends FenixDispatchAction {
     }
 
     private Boolean isToViewBlueprintNumbers(HttpServletRequest request) {
-        final String viewBlueprintNumbersString =
-                request.getParameterMap().containsKey("viewBlueprintNumbers") ? request.getParameter("viewBlueprintNumbers") : (String) request
-                        .getAttribute("viewBlueprintNumbers");
+        final String viewBlueprintNumbersString = request.getParameterMap().containsKey("viewBlueprintNumbers") ? request
+                .getParameter("viewBlueprintNumbers") : (String) request.getAttribute("viewBlueprintNumbers");
         return viewBlueprintNumbersString != null ? Boolean.valueOf(viewBlueprintNumbersString) : null;
     }
 
@@ -170,23 +169,20 @@ public class FindSpacesDA extends FenixDispatchAction {
     }
 
     private Boolean isToViewSpaceIdentifications(HttpServletRequest request) {
-        final String viewSpaceIdentificationsString =
-                request.getParameterMap().containsKey("viewSpaceIdentifications") ? request
-                        .getParameter("viewSpaceIdentifications") : (String) request.getAttribute("viewSpaceIdentifications");
+        final String viewSpaceIdentificationsString = request.getParameterMap().containsKey("viewSpaceIdentifications") ? request
+                .getParameter("viewSpaceIdentifications") : (String) request.getAttribute("viewSpaceIdentifications");
         return viewSpaceIdentificationsString != null ? Boolean.valueOf(viewSpaceIdentificationsString) : null;
     }
 
     private Boolean isToViewDoorNumbers(HttpServletRequest request) {
-        final String viewDoorNumbersString =
-                request.getParameterMap().containsKey("viewDoorNumbers") ? request.getParameter("viewDoorNumbers") : (String) request
-                        .getAttribute("viewDoorNumbers");
+        final String viewDoorNumbersString = request.getParameterMap().containsKey("viewDoorNumbers") ? request
+                .getParameter("viewDoorNumbers") : (String) request.getAttribute("viewDoorNumbers");
         return viewDoorNumbersString != null ? Boolean.valueOf(viewDoorNumbersString) : null;
     }
 
     private BigDecimal getScalePercentage(HttpServletRequest request) {
-        final String scalePercentageString =
-                request.getParameterMap().containsKey("scalePercentage") ? request.getParameter("scalePercentage") : (String) request
-                        .getAttribute("scalePercentage");
+        final String scalePercentageString = request.getParameterMap().containsKey("scalePercentage") ? request
+                .getParameter("scalePercentage") : (String) request.getAttribute("scalePercentage");
         return scalePercentageString != null ? BigDecimal.valueOf(Double.valueOf(scalePercentageString)) : null;
     }
 
@@ -252,9 +248,8 @@ public class FindSpacesDA extends FenixDispatchAction {
             try {
                 final byte[] blueprintBytes = mostRecentBlueprint.getContent();
                 final InputStream inputStream = new ByteArrayInputStream(blueprintBytes);
-                BlueprintTextRectangles blueprintTextRectangles =
-                        SpaceBlueprintsDWGProcessor.getBlueprintTextRectangles(inputStream, spaceWithBlueprint, now, false,
-                                false, true, false, null);
+                BlueprintTextRectangles blueprintTextRectangles = SpaceBlueprintsDWGProcessor
+                        .getBlueprintTextRectangles(inputStream, spaceWithBlueprint, now, false, false, true, false, null);
 
                 request.setAttribute("mostRecentBlueprint", mostRecentBlueprint);
                 request.setAttribute("blueprintTextRectangles", blueprintTextRectangles);

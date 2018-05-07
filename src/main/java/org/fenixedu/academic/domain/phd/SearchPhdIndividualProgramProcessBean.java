@@ -222,7 +222,8 @@ public class SearchPhdIndividualProgramProcessBean implements Serializable {
             String searchValue = getSearchValue().trim();
             setProcessNumber((getSearchCriterion() == SearchCriterion.PROCESS_NUMBER) ? searchValue : null);
             setStudentNumber((getSearchCriterion() == SearchCriterion.STUDENT_NUMBER) ? Integer.valueOf(searchValue) : null);
-            setPhdStudentNumber((getSearchCriterion() == SearchCriterion.PHD_STUDENT_NUMBER) ? Integer.valueOf(searchValue) : null);
+            setPhdStudentNumber(
+                    (getSearchCriterion() == SearchCriterion.PHD_STUDENT_NUMBER) ? Integer.valueOf(searchValue) : null);
             setName((getSearchCriterion() == SearchCriterion.NAME) ? searchValue : null);
         }
 

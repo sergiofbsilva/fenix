@@ -39,8 +39,8 @@ public class DFAGratuityPRTypeProvider implements DataProvider {
         return new BiDirectionalConverter() {
 
             /**
-	     * 
-	     */
+            * 
+            */
             private static final long serialVersionUID = 1L;
 
             @Override

@@ -50,8 +50,8 @@ import pt.ist.fenixframework.dml.runtime.RelationAdapter;
 public class Over23CandidacyProcess extends Over23CandidacyProcess_Base {
 
     static {
-        getRelationCandidacyPeriodCandidacyProcess().addListener(
-                new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
+        getRelationCandidacyPeriodCandidacyProcess()
+                .addListener(new RelationAdapter<CandidacyProcess, CandidacyProcessCandidacyPeriod>() {
                     @Override
                     public void beforeAdd(CandidacyProcess candidacyProcess, CandidacyProcessCandidacyPeriod candidacyPeriod) {
                         super.beforeAdd(candidacyProcess, candidacyPeriod);
@@ -79,7 +79,8 @@ public class Over23CandidacyProcess extends Over23CandidacyProcess_Base {
         super();
     }
 
-    private Over23CandidacyProcess(final ExecutionYear executionYear, final DateTime start, final DateTime end, final String name) {
+    private Over23CandidacyProcess(final ExecutionYear executionYear, final DateTime start, final DateTime end,
+            final String name) {
         this();
         checkParameters(executionYear, start, end);
         setState(CandidacyProcessState.STAND_BY);
@@ -135,12 +136,13 @@ public class Over23CandidacyProcess extends Over23CandidacyProcess_Base {
 
     // static information
 
-    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES = DegreeType.oneOf(DegreeType::isBolonhaDegree,
-            DegreeType::isIntegratedMasterDegree);
+    private static final Predicate<DegreeType> ALLOWED_DEGREE_TYPES =
+            DegreeType.oneOf(DegreeType::isBolonhaDegree, DegreeType::isIntegratedMasterDegree);
 
     static private boolean isAllowedToManageProcess(User userView) {
-        for (AcademicProgram program : AcademicAccessRule.getProgramsAccessibleToFunction(
-                AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser()).collect(Collectors.toSet())) {
+        for (AcademicProgram program : AcademicAccessRule
+                .getProgramsAccessibleToFunction(AcademicOperationType.MANAGE_CANDIDACY_PROCESSES, userView.getPerson().getUser())
+                .collect(Collectors.toSet())) {
             if (ALLOWED_DEGREE_TYPES.test(program.getDegreeType())) {
                 return true;
             }

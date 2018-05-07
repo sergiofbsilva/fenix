@@ -212,9 +212,8 @@ public class DiplomaSupplementRequest extends DiplomaSupplementRequest_Base impl
         ConclusionProcess conclusionProcess =
                 getProgramConclusion().groupFor(getRegistration()).map(cg -> cg.getConclusionProcess()).orElse(null);
 
-        DegreeOfficialPublication dr =
-                getRegistration().getDegree().getOfficialPublication(
-                        conclusionProcess.getConclusionDate().toDateTimeAtStartOfDay());
+        DegreeOfficialPublication dr = getRegistration().getDegree()
+                .getOfficialPublication(conclusionProcess.getConclusionDate().toDateTimeAtStartOfDay());
 
         return dr;
     }

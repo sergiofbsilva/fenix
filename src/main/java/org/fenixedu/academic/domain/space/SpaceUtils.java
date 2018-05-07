@@ -80,8 +80,8 @@ public class SpaceUtils {
         ((ComparatorChain) ROOM_COMPARATOR_BY_NAME).addComparator(new BeanComparator("externalId"));
     }
 
-    public static final Comparator<SpaceClassification> COMPARATORY_BY_PARENT_ROOM_CLASSIFICATION_AND_CODE = new BeanComparator(
-            "absoluteCode");
+    public static final Comparator<SpaceClassification> COMPARATORY_BY_PARENT_ROOM_CLASSIFICATION_AND_CODE =
+            new BeanComparator("absoluteCode");
 
     public static Space findAllocatableSpaceForEducationByName(String name) {
         return allocatableSpacesForEducation().filter(space -> space.getName().equalsIgnoreCase(name)).findAny().orElse(null);
@@ -107,7 +107,8 @@ public class SpaceUtils {
                 .map(space -> InfoRoom.newInfoFromDomain(space)).collect(Collectors.toList());
     }
 
-    public static List<Space> allocatableSpace(final Integer normalCapacity, final boolean withLabs, final Interval... intervals) {
+    public static List<Space> allocatableSpace(final Integer normalCapacity, final boolean withLabs,
+            final Interval... intervals) {
         return allocatableSpace(normalCapacity, withLabs).filter(space -> space.isFree(intervals)).collect(Collectors.toList());
     }
 
@@ -125,7 +126,7 @@ public class SpaceUtils {
     public static List<Space> buildings() {
         return Space.getSpaces().filter(space -> isBuilding(space)).sorted().collect(Collectors.toList());
     }
-    
+
     public static boolean isAllocatable(Space space) {
         return space.getClassification().isAllocatable();
     }
@@ -167,7 +168,8 @@ public class SpaceUtils {
         }
 
         final Group lessonGroup = space.getOccupationsGroupWithChainOfResponsability();
-        if (lessonGroup != null && lessonGroup.getMembers().findAny().isPresent() && (user == null || lessonGroup.isMember(user))) {
+        if (lessonGroup != null && lessonGroup.getMembers().findAny().isPresent()
+                && (user == null || lessonGroup.isMember(user))) {
             return true;
         }
         return false;
@@ -203,9 +205,8 @@ public class SpaceUtils {
 
             if (spaceOccupation.getClass().equals(Occupation.class)) {
                 if (intervals == null) {
-                    intervals =
-                            EventSpaceOccupation.generateEventSpaceOccupationIntervals(startDate, endDate, startTime, endTime,
-                                    frequency, dayOfWeek, dailyFrequencyMarkSaturday, dailyFrequencyMarkSunday, null, null);
+                    intervals = EventSpaceOccupation.generateEventSpaceOccupationIntervals(startDate, endDate, startTime, endTime,
+                            frequency, dayOfWeek, dailyFrequencyMarkSaturday, dailyFrequencyMarkSunday, null, null);
                 }
                 if (spaceOccupation.overlaps(intervals)) {
                     return false;
@@ -231,7 +232,8 @@ public class SpaceUtils {
 
     // This method is a hack because of a bad refactor. The new Occupation API does not allow sharing of occupation for different events.
     // TODO : remove this stuff in fenix v4 after refactor is complete.
-    public static Occupation getFirstOccurrenceOfResourceAllocationByClass(final Space space, final WrittenEvaluation evaluation) {
+    public static Occupation getFirstOccurrenceOfResourceAllocationByClass(final Space space,
+            final WrittenEvaluation evaluation) {
         for (final Occupation resourceAllocation : space.getOccupationSet()) {
             if (resourceAllocation instanceof WrittenEvaluationSpaceOccupation) {
                 final WrittenEvaluationSpaceOccupation evaluationSpaceOccupation =
@@ -377,8 +379,8 @@ public class SpaceUtils {
     };
 
     public static boolean personIsSpacesAdministrator(Person person) {
-        return (RoleType.SPACE_MANAGER_SUPER_USER.isMember(person.getUser())) && RoleType.SPACE_MANAGER
-                .isMember(person.getUser());
+        return (RoleType.SPACE_MANAGER_SUPER_USER.isMember(person.getUser()))
+                && RoleType.SPACE_MANAGER.isMember(person.getUser());
     }
 
     public static Space getSpaceBuilding(Space space) {
@@ -467,9 +469,8 @@ public class SpaceUtils {
 
     private static Set<ExecutionCourse> searchExecutionCoursesByName(SpacesSearchCriteriaType searchType, String[] labelWords) {
         Set<ExecutionCourse> executionCoursesToTest = null;
-        if (labelWords != null
-                && (searchType.equals(SpacesSearchCriteriaType.EXECUTION_COURSE) || searchType
-                        .equals(SpacesSearchCriteriaType.WRITTEN_EVALUATION))) {
+        if (labelWords != null && (searchType.equals(SpacesSearchCriteriaType.EXECUTION_COURSE)
+                || searchType.equals(SpacesSearchCriteriaType.WRITTEN_EVALUATION))) {
             executionCoursesToTest = new HashSet<ExecutionCourse>();
             for (ExecutionCourse executionCourse : ExecutionSemester.readActualExecutionSemester()
                     .getAssociatedExecutionCoursesSet()) {
@@ -482,7 +483,8 @@ public class SpaceUtils {
     }
 
     private static Collection<Person> searchPersonsByName(SpacesSearchCriteriaType searchType, String labelToSearch) {
-        if (labelToSearch != null && !Strings.isNullOrEmpty(labelToSearch) && searchType.equals(SpacesSearchCriteriaType.PERSON)) {
+        if (labelToSearch != null && !Strings.isNullOrEmpty(labelToSearch)
+                && searchType.equals(SpacesSearchCriteriaType.PERSON)) {
             return Person.findPerson(labelToSearch);
         }
         return Collections.EMPTY_LIST;
@@ -529,8 +531,8 @@ public class SpaceUtils {
 
         Set<Space> result = new TreeSet<Space>(COMPARATOR_BY_NAME_FLOOR_BUILDING_AND_CAMPUS);
 
-        if (searchType != null
-                && (campus != null || building != null || (labelToSearch != null && !Strings.isNullOrEmpty(labelToSearch.trim())))) {
+        if (searchType != null && (campus != null || building != null
+                || (labelToSearch != null && !Strings.isNullOrEmpty(labelToSearch.trim())))) {
 
             String[] labelWords = getIdentificationWords(labelToSearch);
             Set<ExecutionCourse> executionCoursesToTest = searchExecutionCoursesByName(searchType, labelWords);
@@ -551,9 +553,7 @@ public class SpaceUtils {
                             break;
 
                         case PERSON:
-                            toAdd = personsToTest.stream()
-                                    .map(Person::getUser)
-                                    .filter(Objects::nonNull)
+                            toAdd = personsToTest.stream().map(Person::getUser).filter(Objects::nonNull)
                                     .anyMatch(u -> u.getSharedOccupationSet().stream()
                                             .anyMatch(so -> so.isActive() && so.getSpaces().contains(space)));
                             break;

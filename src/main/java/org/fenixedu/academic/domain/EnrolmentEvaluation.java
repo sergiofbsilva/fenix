@@ -112,9 +112,8 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
         generateCheckSum();
     }
 
-
-    protected EnrolmentEvaluation(Enrolment enrolment, EnrolmentEvaluationState enrolmentEvaluationState,
-            EvaluationSeason season, Person responsibleFor, Grade grade, Date availableDate, Date examDate, DateTime when) {
+    protected EnrolmentEvaluation(Enrolment enrolment, EnrolmentEvaluationState enrolmentEvaluationState, EvaluationSeason season,
+            Person responsibleFor, Grade grade, Date availableDate, Date examDate, DateTime when) {
         this(enrolment, enrolmentEvaluationState, season, responsibleFor, grade, availableDate, examDate);
         setWhenDateTime(when);
     }
@@ -230,8 +229,8 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
             return;
         }
 
-        throw new DomainException("error.EnrolmentEvaluation.registration.with.invalid.state", getRegistration().getNumber()
-                .toString());
+        throw new DomainException("error.EnrolmentEvaluation.registration.with.invalid.state",
+                getRegistration().getNumber().toString());
     }
 
     private ExecutionYear getExecutionYear() {
@@ -245,7 +244,8 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
     public void confirmSubmission(EnrolmentEvaluationState enrolmentEvaluationState, Person person, String observation) {
 
         if (!isTemporary()) {
-            throw new DomainException("EnrolmentEvaluation.cannot.submit.not.temporary", getEnrolment().getStudent().getPerson().getUsername());
+            throw new DomainException("EnrolmentEvaluation.cannot.submit.not.temporary",
+                    getEnrolment().getStudent().getPerson().getUsername());
         }
 
         if (!hasGrade()) {
@@ -291,8 +291,8 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
     protected void checkForDeletionBlockers(Collection<String> blockers) {
         super.checkForDeletionBlockers(blockers);
         if (!isTemporary() || getMarkSheet() != null) {
-            blockers.add(BundleUtil.getString(Bundle.APPLICATION,
-                    "error.enrolmentEvaluation.isTemporary.or.hasConfirmedMarksheet"));
+            blockers.add(
+                    BundleUtil.getString(Bundle.APPLICATION, "error.enrolmentEvaluation.isTemporary.or.hasConfirmedMarksheet"));
         }
         if (getImprovementOfApprovedEnrolmentEvent() != null && getImprovementOfApprovedEnrolmentEvent().isPayed()) {
             blockers.add(BundleUtil.getString(Bundle.APPLICATION, "error.enrolmentEvaluation.has.been.payed"));
@@ -355,8 +355,8 @@ public class EnrolmentEvaluation extends EnrolmentEvaluation_Base {
 
     protected void generateCheckSum() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(getExamDateYearMonthDay() != null ? getExamDateYearMonthDay().toString() : "").append(
-                getGradeValue());
+        stringBuilder.append(getExamDateYearMonthDay() != null ? getExamDateYearMonthDay().toString() : "")
+                .append(getGradeValue());
         stringBuilder.append(getEvaluationSeason().getExternalId());
         stringBuilder.append(getEnrolment().getStudentCurricularPlan().getRegistration().getNumber());
         setCheckSum(FenixDigestUtils.createDigest(stringBuilder.toString()));

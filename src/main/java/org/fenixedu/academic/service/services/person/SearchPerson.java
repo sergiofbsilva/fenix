@@ -34,6 +34,7 @@ import org.fenixedu.academic.domain.StudentCurricularPlan;
 import org.fenixedu.academic.domain.Teacher;
 import org.fenixedu.academic.domain.accounting.PaymentCode;
 import org.fenixedu.academic.domain.degree.DegreeType;
+import org.fenixedu.academic.domain.organizationalStructure.Party;
 import org.fenixedu.academic.domain.person.IDDocumentType;
 import org.fenixedu.academic.domain.person.RoleType;
 import org.fenixedu.academic.domain.student.Registration;
@@ -302,7 +303,7 @@ public class SearchPerson implements Serializable {
             persons = new ArrayList<Person>(0);
         }
 
-        TreeSet<Person> result = new TreeSet<Person>(Person.COMPARATOR_BY_NAME_AND_ID);
+        TreeSet<Person> result = new TreeSet<Person>(Party.COMPARATOR_BY_NAME_AND_ID);
         result.addAll(CollectionUtils.select(persons, predicate));
         return new CollectionPager<Person>(result, 25);
     }
@@ -338,13 +339,13 @@ public class SearchPerson implements Serializable {
         }
 
         protected boolean verifyStudentNumber(Integer studentNumber, Person person) {
-            return (studentNumber == null || (person.getStudent() != null && person.getStudent().getNumber()
-                    .equals(studentNumber)));
+            return (studentNumber == null
+                    || (person.getStudent() != null && person.getStudent().getNumber().equals(studentNumber)));
         }
 
         protected boolean verifyActiveState(Boolean activePersons, Person person) {
-            return (activePersons == null || (person.getUser() != null && person.getUser().isLoginExpired() == !activePersons
-                    .booleanValue()));
+            return (activePersons == null
+                    || (person.getUser() != null && person.getUser().isLoginExpired() == !activePersons.booleanValue()));
         }
 
         protected boolean verifyUsernameEquality(String usernameToSearch, Person person) {

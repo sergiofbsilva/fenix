@@ -98,8 +98,8 @@ abstract public class DFAGratuityPR extends DFAGratuityPR_Base implements IGratu
 
         checkIfCanAddAmount(entryDTOs.iterator().next().getAmountToPay(), event, transactionDetail.getWhenRegistered());
 
-        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(), entryDTOs
-                .iterator().next().getAmountToPay(), transactionDetail));
+        return Collections.singleton(makeAccountingTransaction(user, event, fromAccount, toAccount, getEntryType(),
+                entryDTOs.iterator().next().getAmountToPay(), transactionDetail));
     }
 
     private void checkIfCanAddAmount(Money amountToAdd, Event event, DateTime when) {
@@ -122,8 +122,8 @@ abstract public class DFAGratuityPR extends DFAGratuityPR_Base implements IGratu
 
         if (hasAlreadyPayedAnyAmount(event, when)) {
             final Money totalFinalAmount = event.getPayedAmount().add(amountToAdd);
-            if (!(totalFinalAmount.greaterOrEqualThan(calculateTotalAmountToPay(event, when)) || totalFinalAmount
-                    .equals(getPartialPaymentAmount(event, when)))) {
+            if (!(totalFinalAmount.greaterOrEqualThan(calculateTotalAmountToPay(event, when))
+                    || totalFinalAmount.equals(getPartialPaymentAmount(event, when)))) {
                 throw new DomainExceptionWithLabelFormatter(
                         "error.accounting.postingRules.gratuity.DFAGratuityPR.amount.being.payed.must.be.equal.to.amout.in.debt",
                         event.getDescriptionForEntryType(getEntryType()));
@@ -131,8 +131,8 @@ abstract public class DFAGratuityPR extends DFAGratuityPR_Base implements IGratu
         } else {
             if (!isPayingTotalAmount(event, when, amountToAdd) && !isPayingPartialAmount(event, when, amountToAdd)) {
                 final LabelFormatter percentageLabelFormatter = new LabelFormatter();
-                percentageLabelFormatter.appendLabel(getDfaPartialAcceptedPercentage().multiply(BigDecimal.valueOf(100))
-                        .toString());
+                percentageLabelFormatter
+                        .appendLabel(getDfaPartialAcceptedPercentage().multiply(BigDecimal.valueOf(100)).toString());
 
                 throw new DomainExceptionWithLabelFormatter(
                         "error.accounting.postingRules.gratuity.DFAGratuityPR.invalid.partial.payment.value",
@@ -184,9 +184,9 @@ abstract public class DFAGratuityPR extends DFAGratuityPR_Base implements IGratu
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when), event
-                .getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()), event
-                .calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(getEntryType(), event, calculateTotalAmountToPay(event, when),
+                event.getPayedAmount(), event.calculateAmountToPay(when), event.getDescriptionForEntryType(getEntryType()),
+                event.calculateAmountToPay(when)));
     }
 
     @Override

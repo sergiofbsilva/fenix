@@ -70,10 +70,10 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/phdProgramCandidacyProcess", module = "academicAdministration",
         functionality = PhdIndividualProgramProcessDA.class)
-@Forwards({
-        @Forward(name = "searchPerson", path = "/phd/candidacy/academicAdminOffice/searchPerson.jsp"),
+@Forwards({ @Forward(name = "searchPerson", path = "/phd/candidacy/academicAdminOffice/searchPerson.jsp"),
         @Forward(name = "createCandidacy", path = "/phd/candidacy/academicAdminOffice/createCandidacy.jsp"),
-        @Forward(name = "manageProcesses", path = "/academicAdministration/phdIndividualProgramProcess.do?method=manageProcesses"),
+        @Forward(name = "manageProcesses",
+                path = "/academicAdministration/phdIndividualProgramProcess.do?method=manageProcesses"),
         @Forward(name = "editCandidacyInformation", path = "/phd/candidacy/academicAdminOffice/editCandidacyInformation.jsp"),
         @Forward(name = "manageCandidacyDocuments", path = "/phd/candidacy/academicAdminOffice/manageCandidacyDocuments.jsp"),
         @Forward(name = "requestCandidacyReview", path = "/phd/candidacy/academicAdminOffice/requestCandidacyReview.jsp"),
@@ -179,8 +179,9 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
         try {
 
             if (!validateAreaCodeAndAreaOfAreaCode(request, getCreateCandidacyProcessBean().getChoosePersonBean().getPerson(),
-                    getCreateCandidacyProcessBean().getPersonBean().getCountryOfResidence(), getCreateCandidacyProcessBean()
-                            .getPersonBean().getAreaCode(), getCreateCandidacyProcessBean().getPersonBean().getAreaOfAreaCode())) {
+                    getCreateCandidacyProcessBean().getPersonBean().getCountryOfResidence(),
+                    getCreateCandidacyProcessBean().getPersonBean().getAreaCode(),
+                    getCreateCandidacyProcessBean().getPersonBean().getAreaOfAreaCode())) {
 
                 request.setAttribute("createCandidacyBean", getCreateCandidacyProcessBean());
                 return mapping.findForward("createCandidacy");
@@ -219,9 +220,10 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
     }
 
     private void prepareDocumentsToUpload(HttpServletRequest request) {
-        request.setAttribute("documentsToUpload", Arrays.asList(new PhdProgramDocumentUploadBean(),
-                new PhdProgramDocumentUploadBean(), new PhdProgramDocumentUploadBean(), new PhdProgramDocumentUploadBean(),
-                new PhdProgramDocumentUploadBean()));
+        request.setAttribute("documentsToUpload",
+                Arrays.asList(new PhdProgramDocumentUploadBean(), new PhdProgramDocumentUploadBean(),
+                        new PhdProgramDocumentUploadBean(), new PhdProgramDocumentUploadBean(),
+                        new PhdProgramDocumentUploadBean()));
     }
 
     public ActionForward uploadDocumentsInvalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -242,10 +244,9 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
             return mapping.findForward("manageCandidacyDocuments");
         }
 
-        final ActionForward result =
-                executeActivity(org.fenixedu.academic.domain.phd.candidacy.activities.UploadDocuments.class,
-                        getDocumentsToUpload(), request, mapping, "manageCandidacyDocuments", "manageCandidacyDocuments",
-                        "message.documents.uploaded.with.success");
+        final ActionForward result = executeActivity(org.fenixedu.academic.domain.phd.candidacy.activities.UploadDocuments.class,
+                getDocumentsToUpload(), request, mapping, "manageCandidacyDocuments", "manageCandidacyDocuments",
+                "message.documents.uploaded.with.success");
 
         RenderUtils.invalidateViewState("documentsToUpload");
 
@@ -278,8 +279,8 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
         return mapping.findForward("requestCandidacyReview");
     }
 
-    public ActionForward prepareRequestCandidacyReviewPostback(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareRequestCandidacyReviewPostback(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("stateBean", getRenderedObject("stateBean"));
 
         RenderUtils.invalidateViewState();
@@ -379,9 +380,8 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
 
         final PhdNotificationBean bean = getRenderedObject("notificationBean");
 
-        final ActionForward result =
-                executeActivity(org.fenixedu.academic.domain.phd.candidacy.activities.AddNotification.class, bean, request,
-                        mapping, "createNotification", "manageNotifications", "message.notification.created.with.success");
+        final ActionForward result = executeActivity(org.fenixedu.academic.domain.phd.candidacy.activities.AddNotification.class,
+                bean, request, mapping, "createNotification", "manageNotifications", "message.notification.created.with.success");
 
         request.setAttribute("notificationBean", bean);
 
@@ -396,7 +396,8 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
             HttpServletResponse response) throws IOException {
 
         final PhdNotificationDocument report = new PhdNotificationDocument(getNotification(request), getLanguage(request));
-        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf", ReportsUtils.generateReport(report).getData());
+        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf",
+                ReportsUtils.generateReport(report).getData());
 
         return null;
 
@@ -420,7 +421,8 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
 
         final PhdCandidacyDeclarationDocument report =
                 new PhdCandidacyDeclarationDocument(getProcess(request), getLanguage(request));
-        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf", ReportsUtils.generateReport(report).getData());
+        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf",
+                ReportsUtils.generateReport(report).getData());
 
         return null;
 
@@ -557,7 +559,8 @@ public class PhdProgramCandidacyProcessDA extends CommonPhdCandidacyDA {
         return mapping.findForward("manageStates");
     }
 
-    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         try {
             PhdProgramCandidacyProcessBean bean = getRenderedObject("processBean");
             ExecuteProcessActivity.run(getProcess(request), org.fenixedu.academic.domain.phd.candidacy.activities.AddState.class,

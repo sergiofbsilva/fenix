@@ -149,8 +149,8 @@ public class PhdEnrolmentsManagementDA extends PhdProcessDA {
                 // TODO: add to phd resource bundle
                 addCell(getMessageFromResource("label.phd.number"), enrolment.getRegistration().getNumber());
                 addCell(getMessageFromResource("label.phd.name"), enrolment.getPerson().getName());
-                addCell(getMessageFromResource("label.phd.email"), enrolment.getPerson()
-                        .getInstitutionalOrDefaultEmailAddressValue());
+                addCell(getMessageFromResource("label.phd.email"),
+                        enrolment.getPerson().getInstitutionalOrDefaultEmailAddressValue());
             }
         });
 
@@ -180,8 +180,8 @@ public class PhdEnrolmentsManagementDA extends PhdProcessDA {
     }
 
     private void filterEnrolments(final ManageEnrolmentsBean bean) {
-        bean.setRemainingEnrolments(bean.getCurricularCourse().getEnrolmentsByAcademicInterval(
-                bean.getSemester().getAcademicInterval()));
+        bean.setRemainingEnrolments(
+                bean.getCurricularCourse().getEnrolmentsByAcademicInterval(bean.getSemester().getAcademicInterval()));
     }
 
 }

@@ -26,8 +26,8 @@ import java.io.Serializable;
  * particular data structure.
  * 
  * @author <a href="mailto:goncalo@ist.utl.pt">Goncalo Luiz</a> <br>
- * <br>
- * <br>
+ *         <br>
+ *         <br>
  *         Created on 13:27:42,31/Mar/2006
  * @version $Id: Pair.java 35158 2008-04-07 15:23:35Z nmgo $
  */

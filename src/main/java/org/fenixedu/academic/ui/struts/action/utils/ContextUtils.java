@@ -80,7 +80,8 @@ public class ContextUtils {
         }
 
         String executionPeriodOID = null;
-        if (executionPeriodOIDString != null && !executionPeriodOIDString.equals("") && !executionPeriodOIDString.equals("null")) {
+        if (executionPeriodOIDString != null && !executionPeriodOIDString.equals("")
+                && !executionPeriodOIDString.equals("null")) {
             executionPeriodOID = executionPeriodOIDString;
         }
 
@@ -173,7 +174,8 @@ public class ContextUtils {
         }
 
         String executionCourseOID = null;
-        if (executionCourseOIDString != null && !executionCourseOIDString.equals("") && !executionCourseOIDString.equals("null")) {
+        if (executionCourseOIDString != null && !executionCourseOIDString.equals("")
+                && !executionCourseOIDString.equals("null")) {
             executionCourseOID = executionCourseOIDString;
         }
 
@@ -393,8 +395,8 @@ public class ContextUtils {
             context.setCourseName(courseName);
         }
         request.setAttribute(PresentationConstants.CONTEXT_SELECTION_BEAN, context);
-        request.setAttribute(PresentationConstants.ACADEMIC_INTERVAL, context.getAcademicInterval()
-                .getResumedRepresentationInStringFormat());
+        request.setAttribute(PresentationConstants.ACADEMIC_INTERVAL,
+                context.getAcademicInterval().getResumedRepresentationInStringFormat());
 
         if (context.getExecutionDegree() != null) {
             request.setAttribute(PresentationConstants.EXECUTION_DEGREE, new InfoExecutionDegree(context.getExecutionDegree()));

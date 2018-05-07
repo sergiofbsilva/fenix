@@ -61,29 +61,25 @@ public class ActiveAndRecentRegistrationsAndPhds implements DataProvider {
                 }
             }
         }
-        student.getActiveRegistrationStream()
-            .filter(r -> !r.getDegreeType().isEmpty() && r.isAllowedToManageRegistration())
-            .forEach(r -> phdRegistrationWrapperResult.add(new PhdRegistrationWrapper(r)));
+        student.getActiveRegistrationStream().filter(r -> !r.getDegreeType().isEmpty() && r.isAllowedToManageRegistration())
+                .forEach(r -> phdRegistrationWrapperResult.add(new PhdRegistrationWrapper(r)));
 
         for (Registration concludedRegistration : student.getConcludedRegistrations()) {
             if (!concludedRegistration.getDegreeType().isEmpty() && concludedRegistration.isBolonha()
                     && concludedRegistration.isAllowedToManageRegistration()) {
 
-                ProgramConclusion
-                        .conclusionsFor(concludedRegistration)
-                        .filter(ProgramConclusion::isTerminal)
-                        .forEach(
-                                programConclusion -> {
-                                    RegistrationConclusionBean conclusionBean =
-                                            new RegistrationConclusionBean(concludedRegistration, programConclusion);
-                                    if(conclusionBean.isConcluded()) {
-                                        ExecutionYear conclusionYear = conclusionBean.getConclusionYear();
+                ProgramConclusion.conclusionsFor(concludedRegistration).filter(ProgramConclusion::isTerminal)
+                        .forEach(programConclusion -> {
+                            RegistrationConclusionBean conclusionBean =
+                                    new RegistrationConclusionBean(concludedRegistration, programConclusion);
+                            if (conclusionBean.isConcluded()) {
+                                ExecutionYear conclusionYear = conclusionBean.getConclusionYear();
 
-                                        if (matchesRecentExecutionYear(currentExecutionYear, conclusionYear)) {
-                                            phdRegistrationWrapperResult.add(new PhdRegistrationWrapper(concludedRegistration));
-                                        }
-                                    }
-                                });
+                                if (matchesRecentExecutionYear(currentExecutionYear, conclusionYear)) {
+                                    phdRegistrationWrapperResult.add(new PhdRegistrationWrapper(concludedRegistration));
+                                }
+                            }
+                        });
             }
         }
         return phdRegistrationWrapperResult;

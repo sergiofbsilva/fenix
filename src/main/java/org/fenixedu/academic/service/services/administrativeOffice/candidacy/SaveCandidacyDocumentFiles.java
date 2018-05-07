@@ -29,9 +29,9 @@ import org.fenixedu.academic.domain.candidacy.CandidacyDocument;
 import org.fenixedu.academic.domain.candidacy.CandidacyDocumentFile;
 import org.fenixedu.academic.dto.candidacy.CandidacyDocumentUploadBean;
 
-import pt.ist.fenixframework.Atomic;
-
 import com.google.common.io.Files;
+
+import pt.ist.fenixframework.Atomic;
 
 /**
  * @author - Shezad Anavarali (shezad@ist.utl.pt)

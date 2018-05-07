@@ -5,7 +5,8 @@ import org.fenixedu.academic.domain.Person;
 
 public class VatNumberResolver {
 
-	public static VatNumberResolver RESOLVER = new VatNumberResolver(){};
+    public static VatNumberResolver RESOLVER = new VatNumberResolver() {
+    };
 
     public String uVATNumberFor(final Person person) {
         final Country country = person.getCountry();

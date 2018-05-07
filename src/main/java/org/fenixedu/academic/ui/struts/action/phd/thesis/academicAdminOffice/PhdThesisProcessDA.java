@@ -84,8 +84,7 @@ import pt.ist.fenixWebFramework.renderers.components.state.IViewState;
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 
 @Mapping(path = "/phdThesisProcess", module = "academicAdministration", functionality = PhdIndividualProgramProcessDA.class)
-@Forwards({
-        @Forward(name = "requestJuryElements", path = "/phd/thesis/academicAdminOffice/requestJuryElements.jsp"),
+@Forwards({ @Forward(name = "requestJuryElements", path = "/phd/thesis/academicAdminOffice/requestJuryElements.jsp"),
         @Forward(name = "submitJuryElementsDocument", path = "/phd/thesis/academicAdminOffice/submitJuryElementsDocument.jsp"),
         @Forward(name = "manageThesisJuryElements", path = "/phd/thesis/academicAdminOffice/manageThesisJuryElements.jsp"),
         @Forward(name = "rejectJuryElements", path = "/phd/thesis/academicAdminOffice/rejectJuryElements.jsp"),
@@ -101,7 +100,8 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
         @Forward(name = "ratifyFinalThesis", path = "/phd/thesis/academicAdminOffice/ratifyFinalThesis.jsp"),
         @Forward(name = "setFinalGrade", path = "/phd/thesis/academicAdminOffice/setFinalGrade.jsp"),
         @Forward(name = "rejectJuryElementsDocuments", path = "/phd/thesis/academicAdminOffice/rejectJuryElementsDocuments.jsp"),
-        @Forward(name = "viewMeetingSchedulingProcess", path = "/phd/thesis/academicAdminOffice/viewMeetingSchedulingProcess.jsp"),
+        @Forward(name = "viewMeetingSchedulingProcess",
+                path = "/phd/thesis/academicAdminOffice/viewMeetingSchedulingProcess.jsp"),
         @Forward(name = "juryReporterFeedbackUpload", path = "/phd/thesis/academicAdminOffice/juryReporterFeedbackUpload.jsp"),
         @Forward(name = "replaceDocument", path = "/phd/thesis/academicAdminOffice/replaceDocument.jsp"),
         @Forward(name = "manageStates", path = "/phd/thesis/academicAdminOffice/manageStates.jsp"),
@@ -263,8 +263,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
             return editJuryElementInvalid(mapping, actionForm, request, response);
         }
 
-        return redirect(String.format("/phdThesisProcess.do?method=manageThesisJuryElements&processId=%s", getProcess(request)
-                .getExternalId()), request);
+        return redirect(String.format("/phdThesisProcess.do?method=manageThesisJuryElements&processId=%s",
+                getProcess(request).getExternalId()), request);
     }
 
     public ActionForward deleteJuryElement(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -278,8 +278,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
             addErrorMessage(request, e.getMessage(), e.getArgs());
         }
 
-        return redirect(String.format("/phdThesisProcess.do?method=manageThesisJuryElements&processId=%s", getProcess(request)
-                .getExternalId()), request);
+        return redirect(String.format("/phdThesisProcess.do?method=manageThesisJuryElements&processId=%s",
+                getProcess(request).getExternalId()), request);
     }
 
     private ThesisJuryElement getJuryElement(HttpServletRequest request) {
@@ -299,8 +299,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
     private void moveElement(HttpServletRequest request, ThesisJuryElement element, Integer position) {
         try {
-            ExecuteProcessActivity.run(getProcess(request), MoveJuryElementOrder.class, new Pair<ThesisJuryElement, Integer>(
-                    element, position));
+            ExecuteProcessActivity.run(getProcess(request), MoveJuryElementOrder.class,
+                    new Pair<ThesisJuryElement, Integer>(element, position));
             addSuccessMessage(request, "message.thesis.jury.element.swapped");
         } catch (final DomainException e) {
             addErrorMessage(request, e.getMessage(), e.getArgs());
@@ -369,8 +369,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
         return mapping.findForward("addPresidentJuryElement");
     }
 
-    public ActionForward prepareAddPresidentJuryElementInvalid(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareAddPresidentJuryElementInvalid(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("thesisJuryElementBean", getRenderedObject("thesisJuryElementBean"));
         return mapping.findForward("addPresidentJuryElement");
     }
@@ -433,7 +433,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
         final PhdThesisJuryElementsDocument report = new PhdThesisJuryElementsDocument(getProcess(request));
 
-        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf", ReportsUtils.generateReport(report).getData());
+        writeFile(response, report.getReportFileName() + ".pdf", "application/pdf",
+                ReportsUtils.generateReport(report).getData());
 
         return null;
     }
@@ -481,8 +482,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
     public ActionForward requestJuryReviews(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) {
         try {
-            ExecuteProcessActivity
-                    .run(getProcess(request), RequestJuryReviews.class, getRenderedObject("requestJuryReviewsBean"));
+            ExecuteProcessActivity.run(getProcess(request), RequestJuryReviews.class,
+                    getRenderedObject("requestJuryReviewsBean"));
         } catch (final DomainException e) {
             addErrorMessage(request, e.getMessage(), e.getArgs());
             return prepareRequestJuryReviewsInvalid(mapping, form, request, response);
@@ -527,8 +528,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
     // Schedule thesis discussion
 
-    public ActionForward prepareScheduleThesisDiscussion(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareScheduleThesisDiscussion(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdThesisProcessBean bean = new PhdThesisProcessBean();
         final PhdThesisProcess thesisProcess = getProcess(request);
@@ -542,13 +543,13 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
 
     private void setDefaultDiscussionMailInformation(final PhdThesisProcessBean bean, final PhdThesisProcess thesisProcess) {
         final PhdIndividualProgramProcess process = thesisProcess.getIndividualProgramProcess();
-        bean.setMailSubject(AlertService.getSubjectPrefixed(process,
-                "message.phd.thesis.schedule.thesis.discussion.default.subject"));
+        bean.setMailSubject(
+                AlertService.getSubjectPrefixed(process, "message.phd.thesis.schedule.thesis.discussion.default.subject"));
         bean.setMailBody(AlertService.getBodyText(process, "message.phd.thesis.schedule.thesis.discussion.default.body"));
     }
 
-    public ActionForward scheduleThesisDiscussionInvalid(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward scheduleThesisDiscussionInvalid(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
         request.setAttribute("thesisProcessBean", getThesisProcessBean());
         return mapping.findForward("scheduleThesisDiscussion");
     }
@@ -792,8 +793,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
     // jury report feedback operations
 
     @Override
-    public ActionForward prepareJuryReportFeedbackUpload(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepareJuryReportFeedbackUpload(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdThesisProcessBean bean = new PhdThesisProcessBean(getProcess(request).getIndividualProgramProcess());
         bean.addDocument(new PhdProgramDocumentUploadBean(PhdIndividualProgramDocumentType.JURY_REPORT_FEEDBACK));
@@ -820,7 +821,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
         return mapping.findForward("manageStates");
     }
 
-    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward addState(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         try {
             PhdThesisProcessBean bean = getRenderedObject("thesisProcessBean");
             ExecuteProcessActivity.run(getProcess(request), AddState.class, bean);
@@ -870,8 +872,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
         return mapping.findForward("editPhdThesisProcessInformation");
     }
 
-    public ActionForward editPhdThesisProcessInformation(ActionMapping mapping, ActionForm actionForm,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward editPhdThesisProcessInformation(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final PhdThesisProcessBean bean = getRenderedObject("phdThesisProcessBean");
         request.setAttribute("phdThesisProcessBean", bean);
@@ -904,9 +906,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
         LocalDate conclusionDate = null;
         if (!individualProgramProcess.getStudyPlan().isExempted()) {
             //TODO: phd-refactor this should be change to terminal program conclusion
-            conclusionDate =
-                    individualProgramProcess.getRegistration().getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                            .getConclusionDate().toDateMidnight().toLocalDate();
+            conclusionDate = individualProgramProcess.getRegistration().getLastStudentCurricularPlan()
+                    .getCycle(CycleType.THIRD_CYCLE).getConclusionDate().toDateMidnight().toLocalDate();
         } else {
             conclusionDate = bean.getConclusionDate();
         }
@@ -943,9 +944,8 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
         LocalDate conclusionDate = null;
         if (!individualProgramProcess.getStudyPlan().isExempted()) {
             //TODO: phd-refactor this should be change to terminal program conclusion
-            conclusionDate =
-                    individualProgramProcess.getRegistration().getLastStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                            .getConclusionDate().toDateMidnight().toLocalDate();
+            conclusionDate = individualProgramProcess.getRegistration().getLastStudentCurricularPlan()
+                    .getCycle(CycleType.THIRD_CYCLE).getConclusionDate().toDateMidnight().toLocalDate();
         } else {
             conclusionDate = bean.getConclusionDate();
         }
@@ -1074,10 +1074,9 @@ public class PhdThesisProcessDA extends CommonPhdThesisProcessDA {
             return mapping.findForward("manageThesisDocuments");
         }
 
-        final ActionForward result =
-                executeActivity(org.fenixedu.academic.domain.phd.thesis.activities.UploadDocuments.class, getDocumentsToUpload(),
-                        request, mapping, "manageThesisDocuments", "manageThesisDocuments",
-                        "message.documents.uploaded.with.success");
+        final ActionForward result = executeActivity(org.fenixedu.academic.domain.phd.thesis.activities.UploadDocuments.class,
+                getDocumentsToUpload(), request, mapping, "manageThesisDocuments", "manageThesisDocuments",
+                "message.documents.uploaded.with.success");
 
         RenderUtils.invalidateViewState("documentsToUpload");
 

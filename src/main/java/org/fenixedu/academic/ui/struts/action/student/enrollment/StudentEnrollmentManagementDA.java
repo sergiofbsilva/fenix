@@ -43,8 +43,7 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 
 @StrutsFunctionality(app = StudentEnrollApp.class, path = "courses", titleKey = "link.student.enrollment")
 @Mapping(module = "student", path = "/studentEnrollmentManagement")
-@Forwards(value = {
-        @Forward(name = "notAuthorized", path = "/student/notAuthorized_bd.jsp"),
+@Forwards(value = { @Forward(name = "notAuthorized", path = "/student/notAuthorized_bd.jsp"),
         @Forward(name = "chooseRegistration", path = "/student/enrollment/chooseRegistration.jsp"),
         @Forward(name = "choosePersonalDataAuthorizationChoice",
                 path = "/student/enrollment/choosePersonalDataAuthorizationChoice.jsp"),
@@ -54,7 +53,8 @@ import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 public class StudentEnrollmentManagementDA extends FenixDispatchAction {
 
     @EntryPoint
-    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward prepare(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
 
         final Student student = getLoggedStudent(request);
         if (!student.hasFilledAuthorizationInformationInCurrentExecutionYear()) {
@@ -151,8 +151,8 @@ public class StudentEnrollmentManagementDA extends FenixDispatchAction {
         return getDomainObject(request, parameterName);
     }
 
-    public ActionForward choosePersonalDataAuthorizationChoice(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) {
+    public ActionForward choosePersonalDataAuthorizationChoice(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+            HttpServletResponse response) {
         return prepare(mapping, form, request, response);
     }
 

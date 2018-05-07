@@ -137,7 +137,8 @@ public class AlumniFormation implements Serializable, IFormation {
                 }
                 break;
             case FOREIGN_INSTITUTION:
-                setNonNationalInstitution(bean, institution, "alumni.formation.foreign.institution", dbFormation.getCountryUnit());
+                setNonNationalInstitution(bean, institution, "alumni.formation.foreign.institution",
+                        dbFormation.getCountryUnit());
                 break;
             case OTHER_INSTITUTION:
                 setNonNationalInstitution(bean, institution, "alumni.formation.other.institution", dbFormation.getCountryUnit());
@@ -162,7 +163,8 @@ public class AlumniFormation implements Serializable, IFormation {
         }
     }
 
-    private static void setNonNationalInstitution(AlumniFormation bean, Unit institution, String schema, CountryUnit countryUnit) {
+    private static void setNonNationalInstitution(AlumniFormation bean, Unit institution, String schema,
+            CountryUnit countryUnit) {
         bean.setInstitutionSchema(schema);
         bean.setForeignUnit(institution.getName());
         bean.setChildInstitution((AcademicalInstitutionUnit) institution);

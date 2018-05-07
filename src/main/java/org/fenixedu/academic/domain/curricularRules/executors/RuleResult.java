@@ -43,7 +43,8 @@ public class RuleResult {
     }
 
     private RuleResult(final RuleResultType resultType,
-            final Map<DegreeModule, EnrolmentResultType> enrolmentResultTypeByDegreeModule, final Set<RuleResultMessage> messages) {
+            final Map<DegreeModule, EnrolmentResultType> enrolmentResultTypeByDegreeModule,
+            final Set<RuleResultMessage> messages) {
         this();
         this.result = resultType;
         this.enrolmentResultTypeByDegreeModule = enrolmentResultTypeByDegreeModule;
@@ -51,7 +52,8 @@ public class RuleResult {
 
     }
 
-    private RuleResult(final RuleResultType result, final EnrolmentResultType enrolmentResultType, final DegreeModule degreeModule) {
+    private RuleResult(final RuleResultType result, final EnrolmentResultType enrolmentResultType,
+            final DegreeModule degreeModule) {
         this();
 
         if (result == null) {
@@ -89,8 +91,8 @@ public class RuleResult {
         final Set<RuleResultMessage> messages = new HashSet<RuleResultMessage>(getMessages());
         messages.addAll(ruleResult.getMessages());
 
-        return new RuleResult(andResult, andMerge(this.enrolmentResultTypeByDegreeModule,
-                ruleResult.enrolmentResultTypeByDegreeModule), messages);
+        return new RuleResult(andResult,
+                andMerge(this.enrolmentResultTypeByDegreeModule, ruleResult.enrolmentResultTypeByDegreeModule), messages);
     }
 
     private Map<DegreeModule, EnrolmentResultType> andMerge(final Map<DegreeModule, EnrolmentResultType> left,
@@ -112,8 +114,8 @@ public class RuleResult {
         final Set<RuleResultMessage> messages = new HashSet<RuleResultMessage>(getMessages());
         messages.addAll(ruleResult.getMessages());
 
-        return new RuleResult(orResult, orMerge(this.enrolmentResultTypeByDegreeModule,
-                ruleResult.enrolmentResultTypeByDegreeModule), messages);
+        return new RuleResult(orResult,
+                orMerge(this.enrolmentResultTypeByDegreeModule, ruleResult.enrolmentResultTypeByDegreeModule), messages);
     }
 
     private Map<DegreeModule, EnrolmentResultType> orMerge(final Map<DegreeModule, EnrolmentResultType> left,

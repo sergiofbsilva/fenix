@@ -56,8 +56,8 @@ public class SpecializationDegreeRegistrationPR extends SpecializationDegreeRegi
 
     private boolean hasPenaltyForRegistration(final SpecializationDegreeRegistrationEvent specializationDegreeRegistrationEvent) {
         return specializationDegreeRegistrationEvent.hasRegistrationPeriodInDegreeCurricularPlan()
-                && !specializationDegreeRegistrationEvent.getRegistrationPeriodInDegreeCurricularPlan().containsDate(
-                        specializationDegreeRegistrationEvent.getRegistrationDate());
+                && !specializationDegreeRegistrationEvent.getRegistrationPeriodInDegreeCurricularPlan()
+                        .containsDate(specializationDegreeRegistrationEvent.getRegistrationDate());
     }
 
     public FixedAmountWithPenaltyPR edit(final Money fixedAmount, final Money penaltyAmount) {

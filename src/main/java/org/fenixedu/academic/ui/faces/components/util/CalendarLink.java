@@ -93,7 +93,8 @@ public class CalendarLink {
 
         if (this.linkParameters != null && !this.linkParameters.isEmpty()) {
             linkParameters.append(editLinkPage.indexOf('?') > 0 ? '&' : '?');
-            for (final Iterator<Entry<String, String>> iterator = this.linkParameters.entrySet().iterator(); iterator.hasNext();) {
+            for (final Iterator<Entry<String, String>> iterator = this.linkParameters.entrySet().iterator(); iterator
+                    .hasNext();) {
                 final Entry<String, String> entry = iterator.next();
                 linkParameters.append(entry.getKey());
                 linkParameters.append('=');
@@ -113,8 +114,8 @@ public class CalendarLink {
 
     private static final MessageResources messages = MessageResources.getMessageResources(Bundle.DEGREE);
 
-    private String constructCalendarPresentation(final ExecutionCourse executionCourse,
-            final WrittenEvaluation writtenEvaluation, final Locale locale) {
+    private String constructCalendarPresentation(final ExecutionCourse executionCourse, final WrittenEvaluation writtenEvaluation,
+            final Locale locale) {
         final StringBuilder stringBuilder = new StringBuilder();
         if (writtenEvaluation instanceof WrittenTest) {
             stringBuilder.append(messages.getMessage(locale, "label.evaluation.shortname.test"));

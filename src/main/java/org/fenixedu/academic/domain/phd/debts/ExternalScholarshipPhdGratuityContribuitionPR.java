@@ -61,9 +61,9 @@ public class ExternalScholarshipPhdGratuityContribuitionPR extends ExternalSchol
 
     @Override
     public List<EntryDTO> calculateEntries(Event event, DateTime when) {
-        return Collections.singletonList(new EntryDTO(EntryType.EXTERNAL_SCOLARSHIP_PAYMENT, event, calculateTotalAmountToPay(
-                event, when), event.getPayedAmount(), event.calculateAmountToPay(when), event
-                .getDescriptionForEntryType(EntryType.EXTERNAL_SCOLARSHIP_PAYMENT), event.calculateAmountToPay(when)));
+        return Collections.singletonList(new EntryDTO(EntryType.EXTERNAL_SCOLARSHIP_PAYMENT, event,
+                calculateTotalAmountToPay(event, when), event.getPayedAmount(), event.calculateAmountToPay(when),
+                event.getDescriptionForEntryType(EntryType.EXTERNAL_SCOLARSHIP_PAYMENT), event.calculateAmountToPay(when)));
     }
 
     @Override

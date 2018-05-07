@@ -33,10 +33,10 @@ import org.fenixedu.academic.domain.Holiday;
 import org.fenixedu.academic.domain.Lesson;
 import org.fenixedu.academic.util.DayType;
 import org.fenixedu.academic.util.Month;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.academic.util.renderer.GanttDiagram;
 import org.fenixedu.academic.util.renderer.GanttDiagram.ViewType;
 import org.fenixedu.academic.util.renderer.GanttDiagramEvent;
+import org.fenixedu.commons.i18n.LocalizedString;
 import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -153,7 +153,7 @@ public class GanttDiagramTagLib extends TagSupport {
         case MONTHLY:
             return generateGanttDiagramInTimeMode(
                     BigDecimal.valueOf(getGanttDiagramObject().getDays().size()).multiply(convertToEm(NUMBER_OF_DAY_HOURS)))
-                    .toString();
+                            .toString();
 
         case WEEKLY:
             return generateGanttDiagramInTimeMode(BigDecimal.valueOf(7).multiply(convertToEm(NUMBER_OF_DAY_HALF_HOURS)))
@@ -165,7 +165,7 @@ public class GanttDiagramTagLib extends TagSupport {
         case YEAR_DAILY:
             return generateGanttDiagramInTimeMode(
                     BigDecimal.valueOf(getGanttDiagramObject().getDays().size()).multiply(convertToEm(NUMBER_OF_DAY_HOURS)))
-                    .toString();
+                            .toString();
 
         default:
             return "";
@@ -192,9 +192,8 @@ public class GanttDiagramTagLib extends TagSupport {
 
             for (GanttDiagramEvent event : getEvents()) {
 
-                String eventUrl =
-                        getRequest().getContextPath() + getEventUrl() + "&amp;" + getEventParameter() + "="
-                                + event.getGanttDiagramEventIdentifier();
+                String eventUrl = getRequest().getContextPath() + getEventUrl() + "&amp;" + getEventParameter() + "="
+                        + event.getGanttDiagramEventIdentifier();
 
                 if (event.getGanttDiagramEventUrlAddOns() != null) {
                     eventUrl = eventUrl.concat(event.getGanttDiagramEventUrlAddOns());
@@ -204,9 +203,8 @@ public class GanttDiagramTagLib extends TagSupport {
                 String eventName = diagramEventName == null ? "" : diagramEventName.getContent();
                 String paddingStyle = "padding-left:" + event.getGanttDiagramEventOffset() * PADDING_LEFT_MULTIPLIER + "px";
 
-                if (event.getGanttDiagramEventIdentifier().equals(selectedEvent)
-                        || (selectedEventObject != null && event.getGanttDiagramEventIdentifier().equals(
-                                selectedEventObject.toString()))) {
+                if (event.getGanttDiagramEventIdentifier().equals(selectedEvent) || (selectedEventObject != null
+                        && event.getGanttDiagramEventIdentifier().equals(selectedEventObject.toString()))) {
                     builder.append("<tr class=\"selected\">");
                 } else {
                     builder.append("<tr>");
@@ -219,8 +217,8 @@ public class GanttDiagramTagLib extends TagSupport {
                             .append(Month.values()[event.getGanttDiagramEventMonth() - 1].toString()).append("\">")
                             .append(eventName);
                 } else {
-                    builder.append("<td class=\"padded\">").append(
-                            "<div style=\"overflow:hidden; width: 14.5em;\" class=\"nowrap\">");
+                    builder.append("<td class=\"padded\">")
+                            .append("<div style=\"overflow:hidden; width: 14.5em;\" class=\"nowrap\">");
                     builder.append("<span style=\"").append(paddingStyle).append("\" title=\"").append(eventName).append("\">");
                     builder.append("<a href=\"").append(eventUrl).append("\">").append(eventName);
                 }
@@ -356,8 +354,8 @@ public class GanttDiagramTagLib extends TagSupport {
                                                 && interval.getEnd().getDayOfMonth() >= dayOfMonth) {
 
                                             if (event.isGanttDiagramEventIntervalsLongerThanOneDay()
-                                                    && (interval.getStart().getDayOfMonth() == dayOfMonth || interval.getEnd()
-                                                            .getDayOfMonth() > dayOfMonth)) {
+                                                    && (interval.getStart().getDayOfMonth() == dayOfMonth
+                                                            || interval.getEnd().getDayOfMonth() > dayOfMonth)) {
                                                 startIndex = calculateTimeOfDay(interval.getStart());
                                                 addSpecialDiv(builder, convertToEm(numberOfUnits - (startIndex - 1)),
                                                         convertToEm(startIndex - 1));
@@ -448,15 +446,13 @@ public class GanttDiagramTagLib extends TagSupport {
 
             for (GanttDiagramEvent event : getEvents()) {
 
-                String eventUrl =
-                        getRequest().getContextPath() + getEventUrl() + "&amp;" + getEventParameter() + "="
-                                + event.getGanttDiagramEventIdentifier();
+                String eventUrl = getRequest().getContextPath() + getEventUrl() + "&amp;" + getEventParameter() + "="
+                        + event.getGanttDiagramEventIdentifier();
                 String eventName = event.getGanttDiagramEventName().getContent(getGanttDiagramObject().getLocale());
                 String paddingStyle = "padding-left:" + event.getGanttDiagramEventOffset() * PADDING_LEFT_MULTIPLIER + "px";
 
-                if (event.getGanttDiagramEventIdentifier().equals(selectedEvent)
-                        || (selectedEventObject != null && event.getGanttDiagramEventIdentifier().equals(
-                                selectedEventObject.toString()))) {
+                if (event.getGanttDiagramEventIdentifier().equals(selectedEvent) || (selectedEventObject != null
+                        && event.getGanttDiagramEventIdentifier().equals(selectedEventObject.toString()))) {
                     builder.append("<tr class=\"selected\">");
                 } else {
                     builder.append("<tr>");
@@ -496,9 +492,8 @@ public class GanttDiagramTagLib extends TagSupport {
 
                                     // Ended in the last day of this month
                                     if (intervalEnd.getDayOfMonth() == monthNumberOfDays) {
-                                        entryDays =
-                                                convertToEm((Days.daysBetween(intervalStart, lastDayOfMonth).getDays() + 1)
-                                                        * scale);
+                                        entryDays = convertToEm(
+                                                (Days.daysBetween(intervalStart, lastDayOfMonth).getDays() + 1) * scale);
                                         startDay = convertToEm((intervalStart.getDayOfMonth() - 1) * scale);
                                         addSpecialDiv(builder, entryDays, startDay);
                                     }
@@ -517,9 +512,8 @@ public class GanttDiagramTagLib extends TagSupport {
 
                                     // Ended in the last day of this month
                                     if (intervalEnd.getDayOfMonth() == monthNumberOfDays) {
-                                        entryDays =
-                                                convertToEm((Days.daysBetween(intervalStart, lastDayOfMonth).getDays() + 1)
-                                                        * scale);
+                                        entryDays = convertToEm(
+                                                (Days.daysBetween(intervalStart, lastDayOfMonth).getDays() + 1) * scale);
                                         startDay = convertToEm((intervalStart.getDayOfMonth() - 1) * scale);
                                         addSpecialDiv(builder, entryDays, startDay);
                                     }
@@ -545,17 +539,15 @@ public class GanttDiagramTagLib extends TagSupport {
                         } else {
 
                             // Started before this month
-                            if (intervalStart.getYear() < month.getYear()
-                                    || (intervalStart.getYear() == month.getYear() && intervalStart.getMonthOfYear() < month
-                                            .getMonthOfYear())) {
+                            if (intervalStart.getYear() < month.getYear() || (intervalStart.getYear() == month.getYear()
+                                    && intervalStart.getMonthOfYear() < month.getMonthOfYear())) {
 
                                 // Ended after this month
-                                if (intervalEnd.getYear() > month.getYear()
-                                        || (intervalEnd.getYear() == month.getYear() && intervalEnd.getMonthOfYear() > month
-                                                .getMonthOfYear())) {
+                                if (intervalEnd.getYear() > month.getYear() || (intervalEnd.getYear() == month.getYear()
+                                        && intervalEnd.getMonthOfYear() > month.getMonthOfYear())) {
 
-                                    entryDays =
-                                            convertToEm((Days.daysBetween(firstDayOfMonth, lastDayOfMonth).getDays() + 1) * scale);
+                                    entryDays = convertToEm(
+                                            (Days.daysBetween(firstDayOfMonth, lastDayOfMonth).getDays() + 1) * scale);
                                     startDay = convertToEm((firstDayOfMonth.getDayOfMonth() - 1) * scale);
                                     addSpecialDiv(builder, entryDays, startDay);
                                 } else {
@@ -563,9 +555,8 @@ public class GanttDiagramTagLib extends TagSupport {
                                     // Ended in this month
                                     if (intervalEnd.getMonthOfYear() == month.getMonthOfYear()
                                             && intervalEnd.getYear() == month.getYear()) {
-                                        entryDays =
-                                                convertToEm((Days.daysBetween(firstDayOfMonth, intervalEnd).getDays() + 1)
-                                                        * scale);
+                                        entryDays = convertToEm(
+                                                (Days.daysBetween(firstDayOfMonth, intervalEnd).getDays() + 1) * scale);
                                         startDay = convertToEm((firstDayOfMonth.getDayOfMonth() - 1) * scale);
                                         addSpecialDiv(builder, entryDays, startDay);
                                     }
@@ -820,18 +811,16 @@ public class GanttDiagramTagLib extends TagSupport {
             case WEEKLY:
 
                 if (!StringUtils.isEmpty(getWeeklyViewUrl())) {
-                    nextUrl =
-                            getRequest().getContextPath() + getWeeklyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.plusDays(Lesson.NUMBER_OF_DAYS_IN_WEEK).toString("ddMMyyyy");
-                    beforeUrl =
-                            getRequest().getContextPath() + getWeeklyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.minusDays(Lesson.NUMBER_OF_DAYS_IN_WEEK).toString("ddMMyyyy");
+                    nextUrl = getRequest().getContextPath() + getWeeklyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.plusDays(Lesson.NUMBER_OF_DAYS_IN_WEEK).toString("ddMMyyyy");
+                    beforeUrl = getRequest().getContextPath() + getWeeklyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.minusDays(Lesson.NUMBER_OF_DAYS_IN_WEEK).toString("ddMMyyyy");
                     builder.append(
                             "<tr><td class=\"tcalendarlinks\"></td><td colspan=\"7\" class=\"acenter tcalendarlinks\"> <span class=\"smalltxt\"><a href=\"")
                             .append(beforeUrl).append("\">").append("&lt;&lt; ").append(getMessage("label.previous.week"))
                             .append("</a>");
-                    builder.append(" , ").append("<a href=\"").append(nextUrl).append("\">")
-                            .append(getMessage("label.next.week")).append(" &gt;&gt;").append("</a>")
+                    builder.append(" , ").append("<a href=\"").append(nextUrl).append("\">").append(getMessage("label.next.week"))
+                            .append(" &gt;&gt;").append("</a>")
                             .append("</span></td><td class=\"tcalendarlinks\"></td><td class=\"tcalendarlinks\"></td></tr>");
                 }
                 break;
@@ -839,12 +828,10 @@ public class GanttDiagramTagLib extends TagSupport {
             case DAILY:
 
                 if (!StringUtils.isEmpty(getDailyViewUrl())) {
-                    nextUrl =
-                            getRequest().getContextPath() + getDailyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.plusDays(1).toString("ddMMyyyy");
-                    beforeUrl =
-                            getRequest().getContextPath() + getDailyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.minusDays(1).toString("ddMMyyyy");
+                    nextUrl = getRequest().getContextPath() + getDailyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.plusDays(1).toString("ddMMyyyy");
+                    beforeUrl = getRequest().getContextPath() + getDailyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.minusDays(1).toString("ddMMyyyy");
                     builder.append(
                             "<tr><td class=\"tcalendarlinks\"></td><td class=\"acenter tcalendarlinks\"><span class=\"smalltxt\"><a href=\"")
                             .append(beforeUrl).append("\">").append("&lt;&lt; ").append(getMessage("label.previous.day"))
@@ -862,12 +849,10 @@ public class GanttDiagramTagLib extends TagSupport {
                     DateTime firstDayOfMonth = (month.getDayOfMonth() != 1) ? month.withDayOfMonth(1) : month;
                     DateTime lastDayOfMonth = firstDayOfMonth.plusMonths(1).minusDays(1);
                     int monthNumberOfDays = Days.daysBetween(firstDayOfMonth, lastDayOfMonth).getDays() + 1;
-                    nextUrl =
-                            getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.plusMonths(1).toString("ddMMyyyy");
-                    beforeUrl =
-                            getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.minusMonths(1).toString("ddMMyyyy");
+                    nextUrl = getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.plusMonths(1).toString("ddMMyyyy");
+                    beforeUrl = getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.minusMonths(1).toString("ddMMyyyy");
                     builder.append("<tr><td class=\"tcalendarlinks\"></td><td colspan=\"").append(monthNumberOfDays)
                             .append("\" class=\"acenter tcalendarlinks\"><span class=\"smalltxt\"><a href=\"").append(beforeUrl)
                             .append("\">").append("&lt;&lt; ").append(getMessage("label.previous.month")).append("</a>");
@@ -884,12 +869,10 @@ public class GanttDiagramTagLib extends TagSupport {
                     DateTime firstDayOfMonth = (month.getDayOfMonth() != 1) ? month.withDayOfMonth(1) : month;
                     DateTime lastDayOfMonth = firstDayOfMonth.plusMonths(1).minusDays(1);
                     int monthNumberOfDays = Days.daysBetween(firstDayOfMonth, lastDayOfMonth).getDays() + 1;
-                    nextUrl =
-                            getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.plusMonths(1).toString("ddMMyyyy");
-                    beforeUrl =
-                            getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
-                                    + firstDay.minusMonths(1).toString("ddMMyyyy");
+                    nextUrl = getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.plusMonths(1).toString("ddMMyyyy");
+                    beforeUrl = getRequest().getContextPath() + getMonthlyViewUrl() + "&amp;" + getFirstDayParameter() + "="
+                            + firstDay.minusMonths(1).toString("ddMMyyyy");
                     builder.append("<tr><td class=\"tcalendarlinks\"></td><td colspan=\"").append(monthNumberOfDays)
                             .append("\" class=\"acenter tcalendarlinks\"><span class=\"smalltxt\"><a href=\"").append(beforeUrl)
                             .append("\">").append("&lt;&lt; ").append(getMessage("label.previous.month")).append("</a>");
@@ -1020,9 +1003,9 @@ public class GanttDiagramTagLib extends TagSupport {
     }
 
     private String getMessageFromBundle(String key) throws JspException {
-        return (getBundle() != null) ? ((TagUtils.getInstance().present(this.pageContext, getBundle(), getGanttDiagramObject()
-                .getLocale().toString(), key)) ? TagUtils.getInstance().message(this.pageContext, getBundle(),
-                getGanttDiagramObject().getLocale().toString(), key) : null) : null;
+        return (getBundle() != null) ? ((TagUtils.getInstance().present(this.pageContext, getBundle(),
+                getGanttDiagramObject().getLocale().toString(), key)) ? TagUtils.getInstance().message(this.pageContext,
+                        getBundle(), getGanttDiagramObject().getLocale().toString(), key) : null) : null;
     }
 
     public String getBundle() {

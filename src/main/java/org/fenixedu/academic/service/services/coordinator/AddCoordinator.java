@@ -54,8 +54,8 @@ public class AddCoordinator {
     // Service Invokers migrated from Berserk
 
     @Atomic
-    public static Boolean runAddCoordinator(String executionDegreeId, String username) throws FenixServiceException,
-            NotAuthorizedException {
+    public static Boolean runAddCoordinator(String executionDegreeId, String username)
+            throws FenixServiceException, NotAuthorizedException {
         ResponsibleDegreeCoordinatorAuthorizationFilter.instance.execute(executionDegreeId);
         return run(executionDegreeId, username);
     }

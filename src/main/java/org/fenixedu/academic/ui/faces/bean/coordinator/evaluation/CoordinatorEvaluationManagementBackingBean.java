@@ -153,10 +153,9 @@ public class CoordinatorEvaluationManagementBackingBean extends FenixBackingBean
             return this.executionCourses;
         }
         try {
-            this.executionCourses =
-                    ReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurricularYear
-                            .runReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurricularYear(
-                                    getDegreeCurricularPlanID(), getExecutionPeriodID(), getCurricularYearID());
+            this.executionCourses = ReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurricularYear
+                    .runReadExecutionCoursesByDegreeCurricularPlanAndExecutionPeriodAndCurricularYear(getDegreeCurricularPlanID(),
+                            getExecutionPeriodID(), getCurricularYearID());
             return this.executionCourses;
         } catch (NotAuthorizedException e) {
         } catch (FenixServiceException e) {
@@ -166,7 +165,8 @@ public class CoordinatorEvaluationManagementBackingBean extends FenixBackingBean
     }
 
     public ExecutionSemester getExecutionPeriod() {
-        return executionSemester == null ? FenixFramework.<ExecutionSemester> getDomainObject(getExecutionCourseID()) : this.executionSemester;
+        return executionSemester == null ? FenixFramework
+                .<ExecutionSemester> getDomainObject(getExecutionCourseID()) : this.executionSemester;
     }
 
     protected InfoExecutionPeriod getCurrentExecutionPeriod() {

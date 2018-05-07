@@ -255,9 +255,9 @@ public class PhdDiplomaRequest extends PhdDiplomaRequest_Base implements IDiplom
 
     @Override
     public String getReceivedActionLink() {
-        return String
-                .format("/phdAcademicServiceRequestManagement.do?method=prepareReceiveOnRectorate&amp;phdAcademicServiceRequestId=%s&amp;batchOid=%s",
-                        getExternalId(), getRectorateSubmissionBatch().getExternalId());
+        return String.format(
+                "/phdAcademicServiceRequestManagement.do?method=prepareReceiveOnRectorate&amp;phdAcademicServiceRequestId=%s&amp;batchOid=%s",
+                getExternalId(), getRectorateSubmissionBatch().getExternalId());
     }
 
     @Override

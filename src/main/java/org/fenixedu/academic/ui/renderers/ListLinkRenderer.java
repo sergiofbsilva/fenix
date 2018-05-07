@@ -104,8 +104,8 @@ public class ListLinkRenderer extends OutputRenderer {
                     linkRenderer.setModuleRelative(isModuleRelative());
                     linkRenderer.setContextRelative(isContextRelative());
 
-                    blockContainer.addChild(RenderKit.getInstance().renderUsing(linkRenderer, getContext(), each,
-                            LinkObject.class));
+                    blockContainer
+                            .addChild(RenderKit.getInstance().renderUsing(linkRenderer, getContext(), each, LinkObject.class));
                     blockContainer.addChild(iterator.hasNext() ? new HtmlText(getSeparator()) : new HtmlText());
                 }
                 return blockContainer;

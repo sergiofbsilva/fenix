@@ -24,8 +24,8 @@
 package org.fenixedu.academic.domain;
 
 import org.fenixedu.academic.util.Bundle;
-import org.fenixedu.commons.i18n.LocalizedString;
 import org.fenixedu.bennu.core.domain.Bennu;
+import org.fenixedu.commons.i18n.LocalizedString;
 
 /**
  * @author Jo�o Mota
@@ -56,8 +56,8 @@ public class EvaluationMethod extends EvaluationMethod_Base {
     @Override
     public void setEvaluationElements(LocalizedString evaluationElements) {
         ContentManagementLog.createLog(this.getExecutionCourse(), Bundle.MESSAGING,
-                "log.executionCourse.curricular.evaluation.method", this.getExecutionCourse().getNome(), this
-                        .getExecutionCourse().getDegreePresentationString());
+                "log.executionCourse.curricular.evaluation.method", this.getExecutionCourse().getNome(),
+                this.getExecutionCourse().getDegreePresentationString());
         super.setEvaluationElements(evaluationElements);
     }
 

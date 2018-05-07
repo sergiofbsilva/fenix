@@ -159,14 +159,14 @@ public class ExternalSupervisorViewStudentDA extends FenixDispatchAction {
                     if (enrolmentsByExecutionPeriod.containsKey(executionSemester)) {
                         ExecutionPeriodStatisticsBean executionPeriodStatisticsBean =
                                 enrolmentsByExecutionPeriod.get(executionSemester);
-                        executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(studentCurricularPlan
-                                .getEnrolmentsByExecutionPeriod(executionSemester));
+                        executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(
+                                studentCurricularPlan.getEnrolmentsByExecutionPeriod(executionSemester));
                         enrolmentsByExecutionPeriod.put(executionSemester, executionPeriodStatisticsBean);
                     } else {
                         ExecutionPeriodStatisticsBean executionPeriodStatisticsBean =
                                 new ExecutionPeriodStatisticsBean(executionSemester);
-                        executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(studentCurricularPlan
-                                .getEnrolmentsByExecutionPeriod(executionSemester));
+                        executionPeriodStatisticsBean.addEnrolmentsWithinExecutionPeriod(
+                                studentCurricularPlan.getEnrolmentsByExecutionPeriod(executionSemester));
                         enrolmentsByExecutionPeriod.put(executionSemester, executionPeriodStatisticsBean);
                     }
                 }

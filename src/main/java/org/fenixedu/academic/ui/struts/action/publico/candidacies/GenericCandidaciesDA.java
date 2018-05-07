@@ -231,11 +231,10 @@ public class GenericCandidaciesDA extends FenixDispatchAction {
         final GenericApplication application = getDomainObject(request, "applicationExternalId");
         final String confirmationCode = (String) getFromRequest(request, "confirmationCode");
         final GenericApplicationFile file = getDomainObject(request, "fileExternalId");
-        if (application != null
-                && file != null
-                && file.getGenericApplication() == application
-                && ((confirmationCode != null && application.getConfirmationCode() != null && application.getConfirmationCode()
-                        .equals(confirmationCode)) || application.getGenericApplicationPeriod().isCurrentUserAllowedToMange())) {
+        if (application != null && file != null && file.getGenericApplication() == application
+                && ((confirmationCode != null && application.getConfirmationCode() != null
+                        && application.getConfirmationCode().equals(confirmationCode))
+                        || application.getGenericApplicationPeriod().isCurrentUserAllowedToMange())) {
             response.setContentType(file.getContentType());
             response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getFilename() + "\"");
             response.setContentLength(file.getSize().intValue());
@@ -254,11 +253,9 @@ public class GenericCandidaciesDA extends FenixDispatchAction {
             HttpServletResponse response) throws IOException {
         final String confirmationCode = (String) getFromRequest(request, "confirmationCode");
         final GenericApplicationLetterOfRecomentation file = getDomainObject(request, "fileExternalId");
-        if (file != null
-                && file.getRecomentation() != null
-                && file.getRecomentation().getConfirmationCode() != null
-                && ((file.getRecomentation().getGenericApplication().getGenericApplicationPeriod().isCurrentUserAllowedToMange()) || file
-                        .getRecomentation().getConfirmationCode().equals(confirmationCode))) {
+        if (file != null && file.getRecomentation() != null && file.getRecomentation().getConfirmationCode() != null
+                && ((file.getRecomentation().getGenericApplication().getGenericApplicationPeriod().isCurrentUserAllowedToMange())
+                        || file.getRecomentation().getConfirmationCode().equals(confirmationCode))) {
             response.setContentType(file.getContentType());
             response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getFilename() + "\"");
             response.setContentLength(file.getSize().intValue());

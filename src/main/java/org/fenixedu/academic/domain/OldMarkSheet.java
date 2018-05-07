@@ -56,18 +56,15 @@ public class OldMarkSheet extends OldMarkSheet_Base {
             final MarkSheetEnrolmentEvaluationBean evaluationBean) {
         check(this, MarkSheetPredicates.editPredicate);
 
-        EnrolmentEvaluation enrolmentEvaluation =
-                evaluationBean
-                        .getEnrolment()
-                        .getEnrolmentEvaluationBySeason(getEvaluationSeason())
-                        .filter(e -> e.getEnrolmentEvaluationState().equals(EnrolmentEvaluationState.TEMPORARY_OBJ)
-                                || e.isNotEvaluated()).findAny().orElse(null);
+        EnrolmentEvaluation enrolmentEvaluation = evaluationBean.getEnrolment()
+                .getEnrolmentEvaluationBySeason(getEvaluationSeason())
+                .filter(e -> e.getEnrolmentEvaluationState().equals(EnrolmentEvaluationState.TEMPORARY_OBJ) || e.isNotEvaluated())
+                .findAny().orElse(null);
 
         if (enrolmentEvaluation == null) {
-            enrolmentEvaluation =
-                    evaluationBean.getEnrolment().addNewEnrolmentEvaluation(EnrolmentEvaluationState.TEMPORARY_OBJ,
-                            getEvaluationSeason(), responsibleTeacher.getPerson(), evaluationBean.getGradeValue(),
-                            getCreationDate(), evaluationBean.getEvaluationDate(), getExecutionPeriod(), null);
+            enrolmentEvaluation = evaluationBean.getEnrolment().addNewEnrolmentEvaluation(EnrolmentEvaluationState.TEMPORARY_OBJ,
+                    getEvaluationSeason(), responsibleTeacher.getPerson(), evaluationBean.getGradeValue(), getCreationDate(),
+                    evaluationBean.getEvaluationDate(), getExecutionPeriod(), null);
         } else {
             enrolmentEvaluation.setEnrolmentEvaluationState(EnrolmentEvaluationState.TEMPORARY_OBJ);
             enrolmentEvaluation.edit(responsibleTeacher.getPerson(), evaluationBean.getGradeValue(), getCreationDate(),
@@ -126,8 +123,8 @@ public class OldMarkSheet extends OldMarkSheet_Base {
             if (this.getEnrolmentEvaluationsSet().contains(enrolmentEvaluationBean.getEnrolmentEvaluation())) {
 
                 final EnrolmentEvaluation enrolmentEvaluation = enrolmentEvaluationBean.getEnrolmentEvaluation();
-                enrolmentEvaluation.edit(getResponsibleTeacher().getPerson(), enrolmentEvaluationBean.getGradeValue(),
-                        new Date(), enrolmentEvaluationBean.getEvaluationDate());
+                enrolmentEvaluation.edit(getResponsibleTeacher().getPerson(), enrolmentEvaluationBean.getGradeValue(), new Date(),
+                        enrolmentEvaluationBean.getEvaluationDate());
             } else {
                 // TODO:
                 throw new DomainException("error.markSheet");

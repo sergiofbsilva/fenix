@@ -66,8 +66,7 @@ import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
 @StrutsFunctionality(app = AcademicAdminInstitutionsApp.class, path = "external-units", titleKey = "label.externalUnits",
         accessGroup = "academic(MANAGE_EXTERNAL_UNITS)")
 @Mapping(path = "/externalUnits", module = "academicAdministration", formBean = "externalUnitsForm")
-@Forwards({
-        @Forward(name = "searchExternalUnits", path = "/academicAdminOffice/externalUnits/searchExternalUnit.jsp"),
+@Forwards({ @Forward(name = "searchExternalUnits", path = "/academicAdminOffice/externalUnits/searchExternalUnit.jsp"),
         @Forward(name = "viewCountryUnit", path = "/academicAdminOffice/externalUnits/viewCountryUnit.jsp"),
         @Forward(name = "viewUniversityUnit", path = "/academicAdminOffice/externalUnits/viewUniversityUnit.jsp"),
         @Forward(name = "viewSchoolUnit", path = "/academicAdminOffice/externalUnits/viewSchoolUnit.jsp"),
@@ -134,8 +133,8 @@ public class ExternalUnitsDispatchAction extends FenixDispatchAction {
     }
 
     private List<PartyTypeEnum> getUnitTypes(ExternalUnitsSearchBean searchBean) {
-        return (searchBean.getUnitType() == null) ? searchBean.getValidPartyTypes() : Collections.singletonList(searchBean
-                .getUnitType());
+        return (searchBean.getUnitType() == null) ? searchBean.getValidPartyTypes() : Collections
+                .singletonList(searchBean.getUnitType());
     }
 
     public ActionForward viewUnit(ActionMapping mapping, ActionForm actionForm, HttpServletRequest request,
@@ -238,9 +237,8 @@ public class ExternalUnitsDispatchAction extends FenixDispatchAction {
 
         try {
             final Unit unit = CreateExternalUnit.run(externalUnitBean);
-            final String oid =
-                    (!externalUnitBean.getParentUnit().isPlanetUnit()) ? externalUnitBean.getParentUnit().getExternalId() : unit
-                            .getExternalId();
+            final String oid = (!externalUnitBean.getParentUnit().isPlanetUnit()) ? externalUnitBean.getParentUnit()
+                    .getExternalId() : unit.getExternalId();
             request.setAttribute("oid", oid);
             return viewUnit(mapping, actionForm, request, response);
 
@@ -305,8 +303,8 @@ public class ExternalUnitsDispatchAction extends FenixDispatchAction {
     public ActionForward prepareEditExternalCurricularCourse(ActionMapping mapping, ActionForm actionForm,
             HttpServletRequest request, HttpServletResponse response) {
 
-        request.setAttribute("editExternalCurricularCourseBean", new EditExternalCurricularCourseBean(
-                getExternalCurricularCourse(request)));
+        request.setAttribute("editExternalCurricularCourseBean",
+                new EditExternalCurricularCourseBean(getExternalCurricularCourse(request)));
         return mapping.findForward("prepareEditExternalCurricularCourse");
     }
 

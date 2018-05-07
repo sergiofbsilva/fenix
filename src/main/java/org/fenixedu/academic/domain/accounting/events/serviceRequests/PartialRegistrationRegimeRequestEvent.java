@@ -61,17 +61,15 @@ public class PartialRegistrationRegimeRequestEvent extends PartialRegistrationRe
 
     @Override
     public PostingRule getPostingRule() {
-        Set<PostingRule> activePostingRules =
-                getAdministrativeOffice().getServiceAgreementTemplate().getActivePostingRules(
-                        getExecutionYear().getBeginDateYearMonthDay().toDateTimeAtMidnight());
+        Set<PostingRule> activePostingRules = getAdministrativeOffice().getServiceAgreementTemplate()
+                .getActivePostingRules(getExecutionYear().getBeginDateYearMonthDay().toDateTimeAtMidnight());
 
         return (PostingRule) CollectionUtils.find(activePostingRules, new Predicate() {
 
             @Override
             public boolean evaluate(Object arg0) {
-                return ((PostingRule) arg0).getEventType().equals(getEventType())
-                        && ((PartialRegistrationRegimeRequestPR) arg0).getExecutionYear().equals(
-                                getAcademicServiceRequest().getExecutionYear());
+                return ((PostingRule) arg0).getEventType().equals(getEventType()) && ((PartialRegistrationRegimeRequestPR) arg0)
+                        .getExecutionYear().equals(getAcademicServiceRequest().getExecutionYear());
             }
 
         });

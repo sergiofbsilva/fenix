@@ -91,13 +91,12 @@ public class ListExecutionCourseGroupingsDA extends FenixDispatchAction {
     public ActionForward downloadExecutionCourseGroupings(ActionMapping mapping, ActionForm form, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        AcademicInterval academicInterval =
-                AcademicInterval.getAcademicIntervalFromResumedString(request
-                        .getParameter(PresentationConstants.ACADEMIC_INTERVAL));
+        AcademicInterval academicInterval = AcademicInterval
+                .getAcademicIntervalFromResumedString(request.getParameter(PresentationConstants.ACADEMIC_INTERVAL));
 
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment; filename=executionCourseGroupings_"
-                + academicInterval.getPathName().replace(' ', '_') + "_.xls");
+        response.setHeader("Content-disposition",
+                "attachment; filename=executionCourseGroupings_" + academicInterval.getPathName().replace(' ', '_') + "_.xls");
 
         final ServletOutputStream servletOutputStream = response.getOutputStream();
         exportToXls(servletOutputStream, academicInterval);

@@ -77,9 +77,8 @@ public class ListMasterDegreeStudents {
             if (studentCurricularPlan.getSpecialization() != null
                     && studentCurricularPlan.getSpecialization().equals(Specialization.STUDENT_CURRICULAR_PLAN_MASTER_DEGREE)) {
 
-                Collection<StudentCurricularPlan> previousStudentCurricularPlans =
-                        studentCurricularPlan.getRegistration().getStudentCurricularPlansBySpecialization(
-                                Specialization.STUDENT_CURRICULAR_PLAN_MASTER_DEGREE);
+                Collection<StudentCurricularPlan> previousStudentCurricularPlans = studentCurricularPlan.getRegistration()
+                        .getStudentCurricularPlansBySpecialization(Specialization.STUDENT_CURRICULAR_PLAN_MASTER_DEGREE);
 
                 previousStudentCurricularPlans.remove(studentCurricularPlan);
                 for (StudentCurricularPlan previousStudentCurricularPlan : previousStudentCurricularPlans) {

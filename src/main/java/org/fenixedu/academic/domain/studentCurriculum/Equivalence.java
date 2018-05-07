@@ -66,8 +66,8 @@ public class Equivalence extends Equivalence_Base {
     }
 
     protected void init(StudentCurricularPlan studentCurricularPlan, CurriculumGroup curriculumGroup,
-            Collection<IEnrolment> enrolments, Collection<CurricularCourse> noEnrolCurricularCourses, Double credits,
-            Grade grade, ExecutionSemester executionSemester) {
+            Collection<IEnrolment> enrolments, Collection<CurricularCourse> noEnrolCurricularCourses, Double credits, Grade grade,
+            ExecutionSemester executionSemester) {
         initGrade(enrolments, grade);
         super.init(studentCurricularPlan, curriculumGroup, enrolments, noEnrolCurricularCourses, credits, executionSemester);
     }

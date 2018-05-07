@@ -43,10 +43,9 @@ public class InfoPaymentPhase extends InfoObject {
     @Override
     public String toString() {
         StringBuilder object = new StringBuilder();
-        object =
-                object.append("\n[InfoPaymentPhase: ").append("externalId= ").append(getExternalId()).append(" starDate= ")
-                        .append(startDate).append("; endDate= ").append(endDate).append("; value= ").append(value)
-                        .append("; description= ").append(description).append("\n");
+        object = object.append("\n[InfoPaymentPhase: ").append("externalId= ").append(getExternalId()).append(" starDate= ")
+                .append(startDate).append("; endDate= ").append(endDate).append("; value= ").append(value)
+                .append("; description= ").append(description).append("\n");
 
         return object.toString();
     }

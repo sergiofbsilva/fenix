@@ -49,13 +49,11 @@ public class DFAGratuityByNumberOfEnrolmentsPR extends DFAGratuityByNumberOfEnro
     protected Money calculateDFAGratuityTotalAmountToPay(final Event event) {
         final GratuityEvent gratuityEvent = (GratuityEvent) event;
         final BigDecimal numberOfEnrolments = BigDecimal.valueOf(gratuityEvent.getEnrolmentsEctsForRegistration());
-        final BigDecimal ectsCredits =
-                BigDecimal.valueOf(gratuityEvent.getStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
-                        .getDefaultEcts(gratuityEvent.getExecutionYear()));
+        final BigDecimal ectsCredits = BigDecimal.valueOf(gratuityEvent.getStudentCurricularPlan().getCycle(CycleType.THIRD_CYCLE)
+                .getDefaultEcts(gratuityEvent.getExecutionYear()));
 
-        final Money result =
-                getDfaTotalAmount().multiply(
-                        numberOfEnrolments.divide(ectsCredits, SCALE_FOR_INTERMEDIATE_CALCULATIONS, RoundingMode.HALF_EVEN));
+        final Money result = getDfaTotalAmount()
+                .multiply(numberOfEnrolments.divide(ectsCredits, SCALE_FOR_INTERMEDIATE_CALCULATIONS, RoundingMode.HALF_EVEN));
         return result.lessOrEqualThan(getDfaTotalAmount()) ? result : getDfaTotalAmount();
     }
 
@@ -63,7 +61,8 @@ public class DFAGratuityByNumberOfEnrolmentsPR extends DFAGratuityByNumberOfEnro
         return edit(new DateTime(), dfaTotalAmount, partialAcceptedPercentage);
     }
 
-    public DFAGratuityByNumberOfEnrolmentsPR edit(DateTime startDate, Money dfaTotalAmount, BigDecimal partialAcceptedPercentage) {
+    public DFAGratuityByNumberOfEnrolmentsPR edit(DateTime startDate, Money dfaTotalAmount,
+            BigDecimal partialAcceptedPercentage) {
         deactivate(startDate);
 
         return new DFAGratuityByNumberOfEnrolmentsPR(startDate, null, getServiceAgreementTemplate(), dfaTotalAmount,

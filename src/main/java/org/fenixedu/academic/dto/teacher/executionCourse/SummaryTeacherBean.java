@@ -72,13 +72,13 @@ public class SummaryTeacherBean implements Serializable {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof SummaryTeacherBean
-                && (getProfessorship() == null || getProfessorship().equals(((SummaryTeacherBean) obj).getProfessorship())) && (getOthers() == null || getOthers()
-                .equals(((SummaryTeacherBean) obj).getOthers())));
+                && (getProfessorship() == null || getProfessorship().equals(((SummaryTeacherBean) obj).getProfessorship()))
+                && (getOthers() == null || getOthers().equals(((SummaryTeacherBean) obj).getOthers())));
     }
 
     @Override
     public int hashCode() {
-        return 37 * (((getProfessorship() != null) ? getProfessorship().hashCode() : 37) + ((getOthers() != null) ? getOthers()
-                .hashCode() : 37));
+        return 37 * (((getProfessorship() != null) ? getProfessorship().hashCode() : 37)
+                + ((getOthers() != null) ? getOthers().hashCode() : 37));
     }
 }
