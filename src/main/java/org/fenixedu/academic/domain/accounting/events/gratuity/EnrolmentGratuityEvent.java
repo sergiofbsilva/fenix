@@ -9,6 +9,7 @@ import org.fenixedu.academic.domain.Enrolment;
 import org.fenixedu.academic.domain.ExecutionYear;
 import org.fenixedu.academic.domain.Person;
 import org.fenixedu.academic.domain.StudentCurricularPlan;
+import org.fenixedu.academic.domain.accounting.Account;
 import org.fenixedu.academic.domain.accounting.EntryType;
 import org.fenixedu.academic.domain.accounting.EventType;
 import org.fenixedu.academic.domain.accounting.PostingRule;
@@ -62,6 +63,14 @@ public class EnrolmentGratuityEvent extends EnrolmentGratuityEvent_Base {
         setEcts(enrolment.getEctsCreditsForCurriculum());
         setCourseName(enrolment.getName());
         setExecutionPeriodName(enrolment.getExecutionPeriod().getQualifiedName());
+    }
+
+    @Override
+    public Account getToAccount() {
+        if (getDegree().isEmpty()) {
+            return getAdministrativeOffice().getUnit().getInternalAccount();
+        }
+        return super.getToAccount();
     }
 
     private static DomainException cantCreateEvent(Enrolment enrolment) {
