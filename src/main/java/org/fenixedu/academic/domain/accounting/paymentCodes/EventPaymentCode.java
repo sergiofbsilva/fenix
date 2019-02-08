@@ -7,6 +7,7 @@ import org.fenixedu.academic.domain.accounting.Event;
 import org.fenixedu.academic.domain.accounting.PaymentCodeType;
 import org.fenixedu.academic.domain.exceptions.DomainException;
 import org.fenixedu.academic.dto.accounting.SibsTransactionDetailDTO;
+import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.Money;
 import org.fenixedu.academic.util.sibs.incomming.SibsIncommingPaymentFileDetailLine;
 import org.joda.time.DateTime;
@@ -50,7 +51,7 @@ public class EventPaymentCode extends EventPaymentCode_Base implements IEventPay
     }
 
     @Override protected void internalProcess(Person person, SibsIncommingPaymentFileDetailLine sibsDetailLine) {
-        final Event event = getEvent().orElseThrow(() -> new DomainException("invalid.payment.code.missing.event"));
+        final Event event = getEvent().orElseThrow(() -> new DomainException(Optional.of(Bundle.ACCOUNTING), "invalid.payment.code.missing.event", getExternalId()));
         event.process(person.getUser(), this, sibsDetailLine.getAmount(), new SibsTransactionDetailDTO(sibsDetailLine, sibsDetailLine.getWhenOccuredTransaction(), sibsDetailLine.getSibsTransactionId(), getCode(), ""));
     }
 }

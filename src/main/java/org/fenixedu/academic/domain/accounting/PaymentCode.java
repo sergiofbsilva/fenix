@@ -198,7 +198,7 @@ public abstract class PaymentCode extends PaymentCode_Base {
         super.setWhenUpdated(new DateTime());
     }
 
-    @Atomic
+    @Atomic(mode = Atomic.TxMode.WRITE)
     public final void process(Person responsiblePerson, SibsIncommingPaymentFileDetailLine sibsDetailLine) {
         if (isInvalid()) {
             throw new DomainException("error.accounting.PaymentCode.cannot.process.invalid.codes");
@@ -254,7 +254,7 @@ public abstract class PaymentCode extends PaymentCode_Base {
         }
         return Bennu.getInstance().getPaymentCodesSet().stream()
                 .filter(paymentCode -> paymentCode.getCode().equals(code))
-                .findFirst().orElse(null);
+                .findAny().orElse(null);
     }
 
     public boolean isInstallmentPaymentCode() {

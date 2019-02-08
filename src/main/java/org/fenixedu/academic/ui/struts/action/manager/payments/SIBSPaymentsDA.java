@@ -20,13 +20,14 @@ package org.fenixedu.academic.ui.struts.action.manager.payments;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,18 +51,23 @@ import org.fenixedu.academic.ui.struts.action.manager.ManagerApplications.Manage
 import org.fenixedu.academic.util.Bundle;
 import org.fenixedu.academic.util.sibs.incomming.SibsIncommingPaymentFile;
 import org.fenixedu.academic.util.sibs.incomming.SibsIncommingPaymentFileDetailLine;
+import org.fenixedu.bennu.core.groups.Group;
 import org.fenixedu.bennu.core.i18n.BundleUtil;
+import org.fenixedu.bennu.core.util.CoreConfiguration;
 import org.fenixedu.bennu.struts.annotations.Forward;
 import org.fenixedu.bennu.struts.annotations.Forwards;
 import org.fenixedu.bennu.struts.annotations.Mapping;
 import org.fenixedu.bennu.struts.portal.EntryPoint;
 import org.fenixedu.bennu.struts.portal.StrutsFunctionality;
 import org.fenixedu.commons.StringNormalizer;
+import org.fenixedu.commons.i18n.I18N;
+import org.fenixedu.messaging.core.domain.Message;
 
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Files;
-
 import pt.ist.fenixWebFramework.renderers.utils.RenderUtils;
+import pt.ist.fenixframework.Atomic;
+import pt.ist.fenixframework.FenixFramework;
 
 @StrutsFunctionality(app = ManagerPaymentsApp.class, path = "sibs-payments", titleKey = "label.payments.uploadPaymentsFile")
 @Mapping(path = "/SIBSPayments", module = "manager")
@@ -97,20 +103,25 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
 
     private class ProcessResult {
 
-        private final HttpServletRequest request;
+        private String requestorUsername;
         private boolean processFailed = false;
+        private List<String> messages = new ArrayList<>();
 
-        public ProcessResult(HttpServletRequest request) {
-            this.request = request;
+        public ProcessResult(String requestorUsername) {
+            this.requestorUsername = requestorUsername;
         }
 
         public void addMessage(String message, String... args) {
-            addActionMessage("message", request, message, args);
+            messages.add(BundleUtil.getString(Bundle.MANAGER, message, args));
         }
 
         public void addError(String message, String... args) {
-            addActionMessage("message", request, message, args);
+            messages.add(BundleUtil.getString(Bundle.MANAGER, message, args));
             reportFailure();
+        }
+
+        public String toString() {
+            return String.join("\n", messages);
         }
 
         protected void reportFailure() {
@@ -123,8 +134,7 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
     }
 
     @EntryPoint
-    public ActionForward prepareUploadSIBSPaymentFiles(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) {
+    public ActionForward prepareUploadSIBSPaymentFiles(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
         UploadBean bean = getRenderedObject("uploadBean");
         RenderUtils.invalidateViewState("uploadBean");
@@ -136,8 +146,8 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
         return mapping.findForward("prepareUploadSIBSPaymentFiles");
     }
 
-    public ActionForward uploadSIBSPaymentFiles(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response) throws IOException {
+    public ActionForward uploadSIBSPaymentFiles(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
 
         UploadBean bean = getRenderedObject("uploadBean");
         RenderUtils.invalidateViewState("uploadBean");
@@ -146,25 +156,7 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
             return prepareUploadSIBSPaymentFiles(mapping, form, request, response);
         }
 
-        if (StringUtils.endsWithIgnoreCase(bean.getFilename(), ZIP_FILE_EXTENSION)) {
-            File zipFile = org.fenixedu.academic.util.FileUtils.copyToTemporaryFile(bean.getInputStream());
-            File unzipDir = null;
-            try {
-                unzipDir = org.fenixedu.academic.util.FileUtils.unzipFile(zipFile);
-                if (!unzipDir.isDirectory()) {
-                    addActionMessage("error", request, "error.manager.SIBS.zipException", bean.getFilename());
-                    return prepareUploadSIBSPaymentFiles(mapping, form, request, response);
-                }
-            } catch (Exception e) {
-                addActionMessage("error", request, "error.manager.SIBS.zipException", getMessage(e));
-                return prepareUploadSIBSPaymentFiles(mapping, form, request, response);
-            } finally {
-                zipFile.delete();
-            }
-
-            recursiveZipProcess(unzipDir, request);
-
-        } else if (StringUtils.endsWithIgnoreCase(bean.getFilename(), PAYMENT_FILE_EXTENSION)) {
+        if (StringUtils.endsWithIgnoreCase(bean.getFilename(), PAYMENT_FILE_EXTENSION)) {
             InputStream inputStream = bean.getInputStream();
             File dir = Files.createTempDir();
             File tmp = new File(dir, bean.getFilename());
@@ -175,20 +167,15 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
             } finally {
                 inputStream.close();
             }
-            File file = tmp;
-            ProcessResult result = new ProcessResult(request);
-            result.addMessage("label.manager.SIBS.processingFile", file.getName());
-            try {
-                processFile(file, request);
-            } catch (FileNotFoundException e) {
-                addActionMessage("error", request, "error.manager.SIBS.zipException", getMessage(e));
-            } catch (IOException e) {
-                addActionMessage("error", request, "error.manager.SIBS.IOException", getMessage(e));
-            } catch (Exception e) {
-                addActionMessage("error", request, "error.manager.SIBS.fileException", getMessage(e));
-            } finally {
-                file.delete();
-            }
+
+            final Person requestor = AccessControl.getPerson();
+
+            Thread runner = new Thread(() -> {
+                processFile(tmp, requestor);
+            });
+
+            runner.start();
+            addActionMessage("message", request, "label.payments.uploadPaymentsFile.in.progress", bean.getFilename());
         } else {
             addActionMessage("error", request, "error.manager.SIBS.notSupportedExtension", bean.getFilename());
         }
@@ -198,65 +185,32 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
     private static String getMessage(Exception ex) {
         String message = (ex.getMessage() == null) ? ex.getClass().getSimpleName() : ex.getMessage();
         String[] args = null;
-        if (ex instanceof DomainException){
+        if (ex instanceof DomainException) {
             args = ((DomainException) ex).getArgs();
         }
         return BundleUtil.getString(Bundle.MANAGER, message, args);
     }
 
-    private void recursiveZipProcess(File unzipDir, HttpServletRequest request) {
-        File[] filesInZip = unzipDir.listFiles();
-        Arrays.sort(filesInZip);
-
-        for (File file : filesInZip) {
-
-            if (file.isDirectory()) {
-                recursiveZipProcess(file, request);
-
-            } else {
-
-                if (!StringUtils.endsWithIgnoreCase(file.getName(), PAYMENT_FILE_EXTENSION)) {
-                    file.delete();
-                    continue;
-                }
-
-                try {
-
-                    processFile(file, request);
-
-                } catch (FileNotFoundException e) {
-                    addActionMessage("message", request, "error.manager.SIBS.zipException", getMessage(e));
-                } catch (IOException e) {
-                    addActionMessage("message", request, "error.manager.SIBS.IOException", getMessage(e));
-                } catch (Exception e) {
-                    addActionMessage("message", request, "error.manager.SIBS.fileException", getMessage(e));
-                } finally {
-                    file.delete();
-                }
-            }
-        }
-
-        unzipDir.delete();
-    }
-
-    private void processFile(File file, HttpServletRequest request) throws IOException {
-        final ProcessResult result = new ProcessResult(request);
-        result.addMessage("label.manager.SIBS.processingFile", file.getName());
+    @Atomic(mode = Atomic.TxMode.READ)
+    private void processFile(final File file, Person requestorPerson) {
+        final ProcessResult result = new ProcessResult(requestorPerson.getUser().getUsername());
+        final String filename = file.getName();
+        
+        result.addMessage("label.manager.SIBS.processingFile", filename);
 
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
-            final Person person = AccessControl.getPerson();
-            final SibsIncommingPaymentFile sibsFile = SibsIncommingPaymentFile.parse(file.getName(), fileInputStream);
+            final SibsIncommingPaymentFile sibsFile = SibsIncommingPaymentFile.parse(filename, fileInputStream);
 
             result.addMessage("label.manager.SIBS.linesFound", String.valueOf(sibsFile.getDetailLines().size()));
             result.addMessage("label.manager.SIBS.startingProcess");
 
-            for (final SibsIncommingPaymentFileDetailLine detailLine : sibsFile.getDetailLines()) {
+            sibsFile.getDetailLines().forEach(detailLine -> {
                 try {
-                    processCode(detailLine, person, result);
+                    processCode(detailLine, requestorPerson, result);
                 } catch (Exception e) {
                     result.addError("error.manager.SIBS.processException", detailLine.getCode(), getMessage(e));
                 }
-            }
+            });
 
             result.addMessage("label.manager.SIBS.creatingReport");
 
@@ -273,10 +227,24 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
             }
 
             result.addMessage("label.manager.SIBS.done");
+
+        } catch (IOException ex) {
+            result.addError("error.manager.SIBS.reportException", getMessage(ex));
+        } finally {
+            FenixFramework.atomic(() -> {
+                Message.fromSystem().preferredLocale(I18N.getLocale())
+                        .subject(BundleUtil.getString(Bundle.MANAGER, "label.payments.uploadPaymentsFile.process.subject",
+                                filename))
+                        .textBody(result.toString())
+                        .to(Group.users(requestorPerson.getUser()))
+                        .singleBcc(CoreConfiguration.getConfiguration().defaultSupportEmailAddress())
+                        .send();
+            });
         }
     }
 
-    private void processCode(SibsIncommingPaymentFileDetailLine detailLine, Person person, ProcessResult result) throws Exception {
+    private void processCode(SibsIncommingPaymentFileDetailLine detailLine, Person person, ProcessResult result)
+            throws Exception {
 
         final PaymentCode paymentCode = getPaymentCode(detailLine, result);
 
@@ -289,7 +257,7 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
             result.addMessage("warning.manager.SIBS.outdated.code", paymentCode.getCode(), paymentCode.getExternalId());
             return;
         }
-        
+
         if (paymentCode.getState() == PaymentCodeState.INVALID) {
             result.addMessage("warning.manager.SIBS.invalidCode", paymentCode.getCode());
         }
@@ -343,11 +311,11 @@ public class SIBSPaymentsDA extends FenixDispatchAction {
     private PaymentCode getPaymentCode(final String code, ProcessResult result) {
         /*
          * TODO:
-         * 
+         *
          * 09/07/2009 - Payments are not related only to students. readAll() may
          * be heavy to get the PaymentCode.
-         * 
-         * 
+         *
+         *
          * Ask Nadir and Joao what is best way to deal with PaymentCode
          * retrieval.
          */

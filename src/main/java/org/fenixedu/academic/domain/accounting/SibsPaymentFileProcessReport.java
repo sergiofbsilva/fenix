@@ -135,7 +135,7 @@ public class SibsPaymentFileProcessReport extends SibsPaymentFileProcessReport_B
 
     }
 
-    @Atomic
+    @Atomic(mode = Atomic.TxMode.WRITE)
     static public SibsPaymentFileProcessReport create(SibsPaymentFileProcessReportDTO reportDTO) {
         return new SibsPaymentFileProcessReport(reportDTO);
     }
